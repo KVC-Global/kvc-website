@@ -1,19 +1,18 @@
-import { Button } from "@/components/ui/button"
+import { SiteAbout } from "@/components/site-about"
+import { SiteHero } from "@/components/site-hero"
+import { SitePartners } from "@/components/site-partners"
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
+    <>
+      <SiteHero />
+      <SitePartners />
+      <SiteAbout />
+      <div className="mx-auto w-full max-w-[1280px] px-6 py-16">
+        <div className="rounded-2xl border border-dashed border-border bg-white/60 p-10 text-center text-sm text-muted-foreground">
+          Nội dung trang chủ sẽ được bổ sung tại đây.
         </div>
       </div>
-    </div>
+    </>
   )
 }
