@@ -23,7 +23,7 @@ const SECONDARY_IMAGE =
 const CEO_AVATAR =
   "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop"
 
-const ACCENT = "#B0332A"
+const ACCENT = "#C8913C"
 
 function ProgressRing({ value }: { value: string }) {
   const size = 120
@@ -127,17 +127,17 @@ export function SiteAbout({ className }: { className?: string }) {
         </div>
 
         <div>
-          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.24em] text-[#B0332A]">
+          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.24em] text-[#C8913C]">
             Về công ty
           </p>
           <h2
             id="about-heading"
-            className="mt-3 font-display text-3xl font-bold leading-[1.1] text-[#0F1B2D] sm:text-4xl md:text-[44px]"
+            className="mt-3 font-display text-3xl font-bold leading-[1.1] text-foreground sm:text-4xl md:text-[44px]"
           >
             Chào mừng đến với KVC Global
           </h2>
 
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-[#1F2937]/80 sm:text-lg">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-foreground/80 sm:text-lg">
             KVC Global là đối tác đáng tin cậy của bạn trong việc cung cấp các
             giải pháp toàn diện về học tập, làm việc, kinh doanh và định cư tại
             Singapore.
@@ -163,7 +163,7 @@ export function SiteAbout({ className }: { className?: string }) {
                 className="flex shrink-0 items-center gap-4"
               >
                 <ProgressRing value={stat.value} />
-                <span className="max-w-[110px] text-[15px] font-semibold leading-snug text-[#0F1B2D]">
+                <span className="max-w-[110px] text-[15px] font-semibold leading-snug text-foreground">
                   {stat.label}
                 </span>
               </div>
@@ -174,9 +174,9 @@ export function SiteAbout({ className }: { className?: string }) {
             {BULLETS.map((item) => (
               <li
                 key={item}
-                className="flex items-center gap-3 text-[15px] font-medium text-[#0F1B2D]"
+                className="flex items-center gap-3 text-[15px] font-medium text-foreground"
               >
-                <span className="inline-flex h-6 w-6 items-center justify-center text-[#B0332A]">
+                <span className="inline-flex h-6 w-6 items-center justify-center text-[#C8913C]">
                   <Check className="h-5 w-5" strokeWidth={3} />
                 </span>
                 {item}
@@ -214,7 +214,7 @@ export function SiteAbout({ className }: { className?: string }) {
                 className="h-14 w-14 rounded-full object-cover ring-2 ring-white shadow-md"
               />
               <div className="leading-tight">
-                <div className="font-display text-base font-bold text-[#0F1B2D]">
+                <div className="font-display text-base font-bold text-foreground">
                   Salman Ahmed
                 </div>
                 <div

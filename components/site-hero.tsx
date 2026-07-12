@@ -64,13 +64,13 @@ export function SiteHero({ className }: { className?: string }) {
           <div className="max-w-2xl">
             <h1
               id="hero-heading"
-              className="font-display text-4xl leading-[1.05] font-bold tracking-tight text-[#0F1B2D] sm:text-5xl md:text-6xl"
+              className="font-display text-4xl leading-[1.05] font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl"
             >
               <span className="block">BEGIN SOMETHING</span>
-              <span className="block text-[#B0332A]">GREATER.</span>
+              <span className="block text-[#C8913C]">GREATER.</span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-[#1F2937]/85 sm:text-lg">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-foreground/85 sm:text-lg">
               KVC Global luôn đồng hành cùng cá nhân, gia đình và doanh nghiệp
               trong hành trình học tập, làm việc, kinh doanh và định cư tại
               Singapore. Chúng tôi cung cấp giải pháp toàn diện cho tương lai
@@ -80,7 +80,7 @@ export function SiteHero({ className }: { className?: string }) {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href="#du-hoc"
-                className="group inline-flex items-center justify-center gap-2 rounded-md bg-[#0F1B2D] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#1A2B3C] hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F1B2D]"
+                className="group inline-flex items-center justify-center gap-2 rounded-md bg-[#0A2540] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#1A2B3C] hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A2540]"
               >
                 Du học / Việc làm Singapore
                 <svg
@@ -99,7 +99,7 @@ export function SiteHero({ className }: { className?: string }) {
 
               <a
                 href="#mo-cong-ty"
-                className="group inline-flex items-center justify-center gap-2 rounded-md border border-[#0F1B2D] bg-white px-6 py-3 text-sm font-semibold text-[#0F1B2D] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#0F1B2D]/5 hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0F1B2D]"
+                className="group inline-flex items-center justify-center gap-2 rounded-md border border-[#0A2540] bg-white px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A2540]"
               >
                 Mở công ty tại VN - Singapore
                 <ArrowUpRight
@@ -122,13 +122,13 @@ export function SiteHero({ className }: { className?: string }) {
                 className="group flex flex-col items-center gap-3 bg-white px-4 py-7 text-center transition-colors duration-300 ease-out sm:px-6 sm:py-8"
               >
                 <Icon
-                  className="h-7 w-7 text-[#B0332A] transition-transform duration-300 ease-out"
+                  className="h-7 w-7 text-[#C8913C] transition-transform duration-300 ease-out"
                   strokeWidth={1.75}
                 />
-                <div className="font-display text-2xl font-bold text-[#0F1B2D] sm:text-3xl">
+                <div className="font-display text-2xl font-bold text-foreground sm:text-3xl">
                   {stat.value}
                 </div>
-                <div className="font-sans text-[11px] font-semibold tracking-[0.12em] text-[#1F2937]/70 uppercase sm:text-xs">
+                <div className="font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
                   {stat.label}
                 </div>
               </div>

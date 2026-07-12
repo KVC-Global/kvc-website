@@ -49,7 +49,7 @@ function FlagIcon({ code }: { code: (typeof LANGUAGES)[number]["flag"] }) {
 export function SiteHeaderActions() {
   const [open, setOpen] = React.useState(false)
   const [current, setCurrent] = React.useState<(typeof LANGUAGES)[number]>(
-    LANGUAGES[0],
+    LANGUAGES[0]
   )
   const ref = React.useRef<HTMLDivElement | null>(null)
 
@@ -76,29 +76,26 @@ export function SiteHeaderActions() {
   }, [open])
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-7">
       <div ref={ref} className="relative hidden md:block">
         <button
           type="button"
           aria-haspopup="listbox"
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
-          className="inline-flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium text-[#1F2937] transition-colors hover:bg-[#0F1B2D]/5"
+          className="inline-flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
         >
           <FlagIcon code={current.flag} />
           <span className="font-semibold">{current.code}</span>
           <ChevronDown
-            className={cn(
-              "h-4 w-4 transition-transform",
-              open && "rotate-180",
-            )}
+            className={cn("h-4 w-4 transition-transform", open && "rotate-180")}
           />
         </button>
 
         {open ? (
           <ul
             role="listbox"
-            className="absolute right-0 top-full z-50 mt-2 w-44 overflow-hidden rounded-md border border-border bg-white py-1 shadow-lg"
+            className="absolute top-full right-0 z-50 mt-2 w-44 overflow-hidden rounded-md border border-border bg-white py-1 shadow-lg"
           >
             {LANGUAGES.map((lang) => {
               const selected = lang.code === current.code
@@ -111,8 +108,8 @@ export function SiteHeaderActions() {
                       setOpen(false)
                     }}
                     className={cn(
-                      "flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors hover:bg-[#0F1B2D]/5",
-                      selected && "font-semibold text-[#0F1B2D]",
+                      "flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors hover:bg-muted",
+                      selected && "font-semibold text-foreground"
                     )}
                   >
                     <FlagIcon code={lang.flag} />
@@ -127,7 +124,7 @@ export function SiteHeaderActions() {
 
       <a
         href="#tu-van"
-        className="hidden items-center gap-2 rounded-md bg-[#B0332A] px-5 py-2.5 font-serif text-[15px] font-semibold text-white shadow-sm transition-colors hover:bg-[#8E2820] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#B0332A] sm:inline-flex"
+        className="hidden items-center gap-2 rounded-md bg-primary px-5 py-2.5 font-body text-[15px] font-semibold whitespace-nowrap text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:inline-flex"
       >
         <svg
           viewBox="0 0 24 24"
@@ -148,7 +145,7 @@ export function SiteHeaderActions() {
       <button
         type="button"
         aria-label="Chọn ngôn ngữ"
-        className="inline-flex h-10 w-10 items-center justify-center rounded-md text-[#0F1B2D] hover:bg-[#0F1B2D]/5 md:hidden"
+        className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-muted md:hidden"
         onClick={() => setOpen((value) => !value)}
       >
         <Globe className="h-5 w-5" />

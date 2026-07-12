@@ -17,10 +17,10 @@ export function SiteHeaderShell({ className }: { className?: string }) {
   return (
     <div className={cn("w-full", className)}>
       <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-6">
+        <div className="flex h-24 w-full items-center justify-between gap-6 md:px-8">
           <SiteHeaderLogo />
-          <SiteHeaderNav className="hidden flex-1 justify-center lg:flex" />
-          <div className="flex items-center gap-3">
+          <div className="flex gap-7">
+            <SiteHeaderNav className="hidden lg:flex" />
             <SiteHeaderActions />
             <SiteHeaderMobileToggle onOpen={() => setOpen(true)} />
           </div>

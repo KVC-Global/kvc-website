@@ -71,8 +71,8 @@ const PARTNERS: ReadonlyArray<Partner> = [
     name: "KVC Global",
     subtitle: "Your Future, Our Mission",
     mark: "k",
-    primary: "#0F1B2D",
-    accent: "#B0332A",
+    primary: "#0A2540",
+    accent: "#C8913C",
   },
 ]
 
@@ -198,7 +198,7 @@ function PartnerCard({ partner }: { partner: Partner }) {
           {partner.name}
         </div>
         {partner.subtitle ? (
-          <div className="mt-0.5 font-sans text-[9px] font-medium tracking-[0.12em] text-[#1F2937]/60 uppercase">
+          <div className="mt-0.5 font-sans text-[9px] font-medium tracking-[0.12em] text-foreground/60 uppercase">
             {partner.subtitle}
           </div>
         ) : null}
@@ -217,12 +217,12 @@ export function SitePartners({ className }: { className?: string }) {
     >
       <div className="mx-auto max-w-[1280px] px-6">
         <div className="text-center">
-          <p className="font-sans text-[11px] font-semibold tracking-[0.28em] text-[#B0332A] uppercase">
+          <p className="font-sans text-[11px] font-semibold tracking-[0.28em] text-[#C8913C] uppercase">
             Đối tác
           </p>
           <h2
             id="partners-heading"
-            className="mt-3 font-display text-2xl font-bold tracking-[0.18em] text-[#0F1B2D] uppercase sm:text-3xl"
+            className="mt-3 font-display text-2xl font-bold tracking-[0.18em] text-foreground uppercase sm:text-3xl"
           >
             Đối tác &amp; Trường liên kết hàng đầu
           </h2>
