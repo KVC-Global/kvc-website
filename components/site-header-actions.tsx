@@ -83,7 +83,7 @@ export function SiteHeaderActions() {
           aria-haspopup="listbox"
           aria-expanded={open}
           onClick={() => setOpen((value) => !value)}
-          className="inline-flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+          className="inline-flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-muted"
         >
           <FlagIcon code={current.flag} />
           <span className="font-semibold">{current.code}</span>
@@ -95,7 +95,7 @@ export function SiteHeaderActions() {
         {open ? (
           <ul
             role="listbox"
-            className="absolute top-full right-0 z-50 mt-2 w-44 overflow-hidden rounded-md border border-border bg-white py-1 shadow-lg"
+            className="absolute top-full right-0 z-50 mt-2 w-44 overflow-hidden rounded-sm border border-border bg-white py-1 shadow-lg"
           >
             {LANGUAGES.map((lang) => {
               const selected = lang.code === current.code
@@ -124,7 +124,7 @@ export function SiteHeaderActions() {
 
       <a
         href="#tu-van"
-        className="hidden items-center gap-2 rounded-md bg-primary px-5 py-2.5 font-body text-[15px] font-semibold whitespace-nowrap text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:inline-flex"
+        className="hidden items-center gap-2 rounded-sm bg-primary px-5 py-2.5 font-body text-[15px] font-semibold whitespace-nowrap text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:inline-flex"
       >
         <svg
           viewBox="0 0 24 24"
