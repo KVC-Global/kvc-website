@@ -2,8 +2,8 @@ import Image from "next/image"
 import {
   ArrowUpRight,
   CheckCircle2,
-  FileText,
-  FolderOpen,
+  Landmark,
+  Star,
   Users,
 } from "lucide-react"
 
@@ -16,19 +16,19 @@ const STATS = [
     label: "Khách hàng tin tưởng",
   },
   {
-    icon: FolderOpen,
-    value: "15,000+",
-    label: "Số hồ sơ xử lý",
-  },
-  {
-    icon: FileText,
-    value: "10+",
-    label: "Năm kinh nghiệm",
-  },
-  {
     icon: CheckCircle2,
     value: "98%",
     label: "Tỷ lệ thành công",
+  },
+  {
+    icon: Landmark,
+    value: "150+",
+    label: "Đối tác chiến lược",
+  },
+  {
+    icon: Star,
+    value: "10+",
+    label: "Năm kinh nghiệm",
   },
 ] as const
 
@@ -53,24 +53,20 @@ export function SiteHero({ className }: { className?: string }) {
 
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-white/10 sm:via-white/70"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-white/30 via-transparent to-transparent"
+          className="absolute inset-0 bg-linear-to-r from-white from-0% via-white via-46% to-transparent to-100%"
         />
 
         <div className="relative mx-auto flex h-full w-full max-w-[1280px] items-center px-6">
           <div className="max-w-2xl">
             <h1
               id="hero-heading"
-              className="font-display text-4xl leading-[1.05] font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl"
+              className="font-display text-3xl leading-[1.05] font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl"
             >
               <span className="block">BEGIN SOMETHING</span>
               <span className="block text-[#C8913C]">GREATER.</span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-foreground/85 sm:text-lg">
+            <p className="mt-5 max-w-md text-base leading-relaxed text-foreground/85 sm:text-lg">
               KVC Global luôn đồng hành cùng cá nhân, gia đình và doanh nghiệp
               trong hành trình học tập, làm việc, kinh doanh và định cư tại
               Singapore. Chúng tôi cung cấp giải pháp toàn diện cho tương lai
@@ -80,7 +76,7 @@ export function SiteHero({ className }: { className?: string }) {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href="#du-hoc"
-                className="group inline-flex items-center justify-center gap-2 rounded-md bg-[#0A2540] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#1A2B3C] hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A2540]"
+                className="group inline-flex items-center justify-center gap-2 rounded-sm bg-[#0A2540] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#1A2B3C] hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A2540]"
               >
                 Du học / Việc làm Singapore
                 <svg
@@ -99,7 +95,7 @@ export function SiteHero({ className }: { className?: string }) {
 
               <a
                 href="#mo-cong-ty"
-                className="group inline-flex items-center justify-center gap-2 rounded-md border border-[#0A2540] bg-white px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A2540]"
+                className="group inline-flex items-center justify-center gap-2 rounded-sm border border-[#0A2540] bg-white px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A2540]"
               >
                 Mở công ty tại VN - Singapore
                 <ArrowUpRight
@@ -117,21 +113,23 @@ export function SiteHero({ className }: { className?: string }) {
           {STATS.map((stat) => {
             const Icon = stat.icon
             return (
-              <div
-                key={stat.label}
-                className="group flex flex-col items-center gap-3 bg-white px-4 py-7 text-center transition-colors duration-300 ease-out sm:px-6 sm:py-8"
-              >
-                <Icon
-                  className="h-7 w-7 text-[#C8913C] transition-transform duration-300 ease-out"
-                  strokeWidth={1.75}
-                />
-                <div className="font-display text-2xl font-bold text-foreground sm:text-3xl">
-                  {stat.value}
+                <div
+                  key={stat.label}
+                  className="group flex items-center gap-4 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:px-6 sm:py-6"
+                >
+                  <Icon
+                    className="h-8 w-8 shrink-0 text-[#C8913C] transition-transform duration-300 ease-out sm:h-9 sm:w-9"
+                    strokeWidth={1.75}
+                  />
+                  <div className="flex flex-col">
+                    <div className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+                      {stat.value}
+                    </div>
+                    <div className="font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
+                      {stat.label}
+                    </div>
+                  </div>
                 </div>
-                <div className="font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
-                  {stat.label}
-                </div>
-              </div>
             )
           })}
         </div>
