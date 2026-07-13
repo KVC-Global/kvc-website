@@ -27,6 +27,24 @@ function MailIcon(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
+const SOCIAL_LINKS = [
+  {
+    href: "https://www.linkedin.com/company/kvcglobal/",
+    label: "LinkedIn",
+    Icon: LinkedinIcon,
+  },
+  {
+    href: "https://www.facebook.com/kvcglobal.vn/",
+    label: "Facebook",
+    Icon: FacebookIcon,
+  },
+  {
+    href: "mailto:info@kvcglobal.vn",
+    label: "Email",
+    Icon: MailIcon,
+  },
+] as const
+
 export default function ComingSoonPage() {
   return (
     <main className="relative isolate min-h-svh w-full overflow-hidden bg-black">
@@ -43,9 +61,7 @@ export default function ComingSoonPage() {
       {/* Dark overlay improves text contrast over the background image */}
       <div aria-hidden className="absolute inset-0 z-0 bg-black/55" />
 
-      {/* Chroma-key filter — drops the green background of the 3D gif.
-          Last feColorMatrix row sets alpha = R + B, so pure green (R=0, B=0)
-          becomes 0 (transparent) while white/gray text stays opaque. */}
+      {/* Chroma-key filter — drops the green background of the 3D gif. */}
       <svg
         aria-hidden
         focusable="false"
@@ -64,19 +80,31 @@ export default function ComingSoonPage() {
         </defs>
       </svg>
 
-      <div className="relative z-10 mx-auto grid min-h-svh w-full grid-cols-1 gap-y-10 px-6 py-8 sm:px-10 sm:py-10 md:grid-cols-2 md:items-stretch md:gap-x-10 md:px-14 md:py-12 lg:gap-x-16 2xl:px-20">
+      <div className="relative z-10 mx-auto grid min-h-svh w-full grid-cols-1 gap-y-8 px-6 py-6 sm:px-10 sm:py-8 md:grid-cols-2 md:items-stretch md:gap-x-8 md:px-12 md:py-8 lg:gap-x-12 lg:py-10 xl:px-16 2xl:px-20">
         {/* LEFT COLUMN — Logo, Title, Contact Us, Get Social */}
         <div className="flex flex-col">
-          <Image
-            src="/images/horizontal-logo/white-logo.png"
-            alt="KVC Global"
-            width={520}
-            height={260}
-            priority
-            className="h-20 w-auto max-w-[280px] shrink-0 object-contain sm:h-24 md:h-24 lg:h-28"
-          />
+          {/* Logo: icon + wordmark, aligned together */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Image
+              src="/images/icon-logo/white-logo.png"
+              alt="KVC Global"
+              width={200}
+              height={200}
+              priority
+              className="h-12 w-auto shrink-0 object-contain sm:h-14 md:h-14 lg:h-16"
+            />
+            <div className="flex flex-col leading-none">
+              <span className="font-display text-base font-bold tracking-[0.25em] text-white uppercase sm:text-lg md:text-lg lg:text-xl">
+                KVC Global
+              </span>
+              <span className="mt-1 text-[10px] font-medium tracking-[0.25em] text-white/80 uppercase sm:text-[11px] md:text-xs">
+                Begin Something Greater
+              </span>
+            </div>
+          </div>
 
-          <h1 className="mt-6 font-display text-[2.5rem] leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-5xl md:mt-8 md:text-5xl md:leading-[0.95] lg:mt-10 lg:text-[4.5rem] xl:text-[5.5rem] 2xl:text-[6rem]">
+          {/* Title — left-padded to align with "KVC Global" wordmark */}
+          <h1 className="mt-5 font-display text-[2.5rem] leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-5xl md:mt-6 md:text-[2.75rem] md:leading-[0.95] lg:mt-7 lg:text-[3.25rem] xl:text-[4rem] 2xl:text-[5rem]">
             <span className="whitespace-nowrap">We&apos;re Building</span>
             <br />
             Something
@@ -84,7 +112,8 @@ export default function ComingSoonPage() {
             <span style={{ color: ACCENT }}>Greater.</span>
           </h1>
 
-          <div className="mt-10 md:mt-12 lg:mt-48">
+          {/* Bottom of left col: Contact Us + Get Social, aligned with right col */}
+          <div className="mt-auto flex flex-col gap-10 pt-10 md:gap-14 md:pt-14">
             <Link
               href="mailto:info@kvcglobal.vn"
               className="inline-flex w-fit items-center justify-center border-2 px-7 py-3 text-sm font-bold tracking-wider text-white uppercase transition-opacity hover:opacity-80 sm:text-base"
@@ -92,52 +121,36 @@ export default function ComingSoonPage() {
             >
               Contact Us
             </Link>
-          </div>
 
-          <div className="mt-auto flex w-full max-w-xl flex-wrap items-center gap-4 pt-10 md:pt-14">
-            <h2 className="text-xl font-bold tracking-wider text-white uppercase sm:text-2xl">
-              Get Social
-            </h2>
-            <span
-              className="h-px w-16 sm:w-20"
-              style={{ backgroundColor: "white" }}
-              aria-hidden
-            />
-            <ul className="flex items-center gap-3">
-              {[
-                {
-                  href: "https://www.linkedin.com/company/kvcglobal/",
-                  label: "LinkedIn",
-                  Icon: LinkedinIcon,
-                },
-                {
-                  href: "https://www.facebook.com/kvcglobal.vn/",
-                  label: "Facebook",
-                  Icon: FacebookIcon,
-                },
-                {
-                  href: "mailto:info@kvcglobal.vn",
-                  label: "Email",
-                  Icon: MailIcon,
-                },
-              ].map(({ href, label, Icon }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    aria-label={label}
-                    target={href.startsWith("http") ? "_blank" : undefined}
-                    rel={
-                      href.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
-                    className="inline-flex h-11 w-11 items-center justify-center transition-opacity hover:opacity-80 sm:h-12 sm:w-12"
-                  >
-                    <Icon className="h-11 w-11 sm:h-12 sm:w-12" aria-hidden />
-                  </a>
-                </li>
-              ))}
-            </ul>
+            <div className="flex w-full max-w-xl flex-wrap items-center gap-4">
+              <h2 className="text-xl font-bold tracking-wider text-white uppercase sm:text-2xl">
+                Get Social
+              </h2>
+              <span
+                className="h-px w-16 sm:w-20"
+                style={{ backgroundColor: "white" }}
+                aria-hidden
+              />
+              <ul className="flex items-center gap-3">
+                {SOCIAL_LINKS.map(({ href, label, Icon }) => (
+                  <li key={label}>
+                    <a
+                      href={href}
+                      aria-label={label}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel={
+                        href.startsWith("http")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      className="inline-flex h-11 w-11 items-center justify-center transition-opacity hover:opacity-80 sm:h-12 sm:w-12"
+                    >
+                      <Icon className="h-11 w-11 sm:h-12 sm:w-12" aria-hidden />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -150,17 +163,20 @@ export default function ComingSoonPage() {
             height={1080}
             unoptimized
             style={{ filter: "url(#chroma-key-green)" }}
-            className="h-64 w-full shrink-0 object-contain sm:h-80 md:h-[26rem] lg:h-[32rem] xl:h-[36rem]"
+            className="h-56 w-full shrink-0 object-contain sm:h-64 md:h-72 lg:h-80 xl:h-[26rem] 2xl:h-[32rem]"
           />
 
-          <p className="mt-8 max-w-xl font-body text-lg leading-relaxed text-white sm:text-xl md:mt-12 lg:text-2xl">
-            Our website is coming soon. KVC Global continues to guide your
-            journey to study, work and grow in Singapore.
-          </p>
+          {/* Bottom of right col: Description + Stay tuned, aligned with left col */}
+          <div className="mt-auto flex flex-col gap-10 pt-10 md:gap-14 md:pt-14">
+            <p className="max-w-xl font-body text-lg leading-relaxed text-white sm:text-xl lg:text-xl xl:text-2xl">
+              Our website is coming soon. KVC Global continues to guide your
+              journey to study, work and grow in Singapore.
+            </p>
 
-          <p className="mt-auto pt-10 font-body text-2xl font-medium text-white sm:text-3xl md:pt-14">
-            Stay tuned.
-          </p>
+            <p className="font-body text-2xl font-medium text-white sm:text-3xl">
+              Stay tuned.
+            </p>
+          </div>
         </div>
       </div>
     </main>
