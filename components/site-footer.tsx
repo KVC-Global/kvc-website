@@ -165,7 +165,7 @@ function CtaBanner({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative isolate w-full overflow-hidden rounded-2xl",
+        "relative isolate w-full overflow-hidden rounded-lg",
         className
       )}
     >
@@ -206,7 +206,7 @@ function CtaBanner({ className }: { className?: string }) {
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
                 href="#dat-lich-tu-van"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="group inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 style={{ background: NAVY }}
               >
                 <CalendarCheck className="h-4 w-4" strokeWidth={2.25} />
@@ -219,7 +219,7 @@ function CtaBanner({ className }: { className?: string }) {
 
               <Link
                 href="#chat-chuyen-vien"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg border border-foreground/25 bg-white/90 px-5 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-white hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="group inline-flex items-center justify-center gap-2 rounded-sm border border-foreground/25 bg-white/90 px-5 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-white hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
                 Chat với chuyên viên
@@ -245,7 +245,7 @@ export function SiteFooter({ className }: { className?: string }) {
 
       <div className="w-full px-4 sm:px-6">
         <div className="mt-14 grid grid-cols-1 gap-10 pb-10 sm:mt-16 sm:grid-cols-2 sm:gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <Link
               href="/"
               aria-label="KVC Global — Trang chủ"
@@ -290,10 +290,10 @@ export function SiteFooter({ className }: { className?: string }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-full text-foreground/75 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-white focus-visible:-translate-y-0.5 focus-visible:text-white focus-visible:outline-none"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full text-primary transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-primary focus-visible:-translate-y-0.5 focus-visible:text-primary focus-visible:outline-none"
                       style={{ background: "rgba(10, 37, 64, 0.08)" }}
                     >
-                      <Icon className="h-4 w-4" aria-hidden="true" />
+                      <Icon className="h-5 w-5" aria-hidden="true" />
                     </a>
                   </li>
                 )
@@ -311,7 +311,7 @@ export function SiteFooter({ className }: { className?: string }) {
             <LinkList links={ABOUT_LINKS} className="mt-5" />
           </nav>
 
-          <nav aria-label="Hỗ trợ" className="lg:col-span-1">
+          <nav aria-label="Hỗ trợ" className="lg:col-span-2">
             <ColumnHeading>Hỗ trợ</ColumnHeading>
             <LinkList links={SUPPORT_LINKS} className="mt-5" />
           </nav>
