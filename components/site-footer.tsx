@@ -15,7 +15,7 @@ const ACCENT = "#C8913C"
 const NAVY = "#0A2540"
 
 const CTA_IMAGE =
-  "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=1920&q=80&auto=format&fit=crop"
+  "https://images.pexels.com/photos/35421791/pexels-photo-35421791.jpeg?auto=compress&w=1920&q=80"
 
 const SERVICES_LINKS = [
   { label: "Tư vấn du học", href: "#tu-van-du-hoc" },
@@ -176,7 +176,7 @@ function CtaBanner({ className }: { className?: string }) {
           fill
           loading="eager"
           sizes="(min-width: 1280px) 1280px, 100vw"
-          className="object-cover object-center"
+          className="object-cover object-[center_35%]"
         />
 
         <div
@@ -184,7 +184,7 @@ function CtaBanner({ className }: { className?: string }) {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(90deg, #FCE4C4 0%, #F8DCC2 35%, rgba(248,220,194,0.7) 55%, rgba(248,220,194,0.25) 75%, rgba(248,220,194,0) 100%)",
+              "linear-gradient(90deg, #FCE4C4 0%, #F8DCC2 25%, rgba(248,220,194,0.55) 45%, rgba(248,220,194,0.15) 60%, rgba(248,220,194,0) 72%)",
           }}
         />
 

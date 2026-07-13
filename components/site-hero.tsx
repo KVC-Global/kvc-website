@@ -108,8 +108,8 @@ export function SiteHero({ className }: { className?: string }) {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto -mt-20 w-full max-w-295 px-6 sm:-mt-24 md:-mt-28">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border shadow-[0_20px_60px_-15px_rgba(15,27,45,0.25)] ring-1 ring-black/5 md:grid-cols-4">
+      <div className="relative z-10 mx-auto -mt-12 w-full max-w-295 px-6 sm:-mt-16 md:-mt-20">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border shadow-[0_24px_60px_-12px_rgba(15,27,45,0.3)] ring-1 ring-black/5 md:grid-cols-4">
           {STATS.map((stat) => {
             const Icon = stat.icon
             return (

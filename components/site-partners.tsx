@@ -213,7 +213,7 @@ export function SitePartners({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="partners-heading"
-      className={cn("w-full bg-[#EDF5E5] py-16 sm:py-20", className)}
+      className={cn("w-full bg-brand-light py-16 sm:py-20", className)}
     >
       <div className="mx-auto max-w-[1280px] px-6">
         <div className="text-center">
