@@ -51,7 +51,7 @@ export default function ComingSoonPage() {
       <div className="absolute inset-0 z-10 flex flex-col p-6 sm:p-10">
         <div className="flex-[4_1_0]" aria-hidden />
 
-        <div>
+        <div className="xl:ml-20">
           <Link
             href="mailto:info@kvcglobal.vn"
             className="inline-flex items-center justify-center border-2 px-6 py-2.5 text-sm font-bold tracking-wider text-white uppercase transition-opacity hover:opacity-80 sm:text-base"
@@ -63,7 +63,7 @@ export default function ComingSoonPage() {
 
         <div className="flex-1" aria-hidden />
 
-        <div className="flex w-full max-w-2xl items-center gap-4">
+        <div className="flex w-full max-w-2xl items-center gap-4 xl:ml-20">
           <h2
             className="text-2xl font-bold tracking-wider uppercase sm:text-3xl"
             style={{ color: "white" }}
