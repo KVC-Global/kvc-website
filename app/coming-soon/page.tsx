@@ -53,7 +53,7 @@ export default function ComingSoonPage() {
 
         <div>
           <Link
-            href="#contact"
+            href="mailto:info@kvcglobal.vn"
             className="inline-flex items-center justify-center border-2 px-6 py-2.5 text-sm font-bold tracking-wider text-white uppercase transition-opacity hover:opacity-80 sm:text-base"
             style={{ borderColor: ACCENT }}
           >
@@ -77,27 +77,43 @@ export default function ComingSoonPage() {
           />
           <ul className="flex items-center gap-3">
             {[
-              { href: "#linkedin", label: "LinkedIn", Icon: LinkedinIcon },
-              { href: "#facebook", label: "Facebook", Icon: FacebookIcon },
               {
-                href: "mailto:hello@example.com",
+                href: "https://www.linkedin.com/company/kvcglobal/",
+                label: "LinkedIn",
+                Icon: LinkedinIcon,
+              },
+              {
+                href: "https://www.facebook.com/kvcglobal.vn/",
+                label: "Facebook",
+                Icon: FacebookIcon,
+              },
+              {
+                href: "mailto:info@kvcglobal.vn",
                 label: "Email",
                 Icon: MailIcon,
               },
             ].map(({ href, label, Icon }) => (
               <li key={label}>
-                {label === "Email" ? (
-                  <a
-                    href={href}
-                    aria-label={label}
-                    className="inline-flex h-12 w-12 items-center justify-center rounded-full"
-                    style={{ backgroundColor: ACCENT, color: "#000" }}
-                  >
-                    <Icon className="h-8 w-8" aria-hidden />
-                  </a>
-                ) : (
-                  <Icon className="h-12 w-12" aria-hidden fill="#f1d1a3" />
-                )}
+                <a
+                  href={href}
+                  aria-label={label}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    href.startsWith("http") ? "noopener noreferrer" : undefined
+                  }
+                  className="inline-flex h-12 w-12 items-center justify-center"
+                >
+                  {label === "Email" ? (
+                    <span
+                      className="inline-flex h-12 w-12 items-center justify-center rounded-full"
+                      style={{ backgroundColor: ACCENT, color: "#000" }}
+                    >
+                      <Icon className="h-9 w-9" aria-hidden />
+                    </span>
+                  ) : (
+                    <Icon className="h-12 w-12" aria-hidden fill="#f1d1a3" />
+                  )}
+                </a>
               </li>
             ))}
           </ul>
