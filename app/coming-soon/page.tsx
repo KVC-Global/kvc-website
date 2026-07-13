@@ -84,7 +84,7 @@ export default function ComingSoonPage() {
         {/* LEFT COLUMN — Logo, Title, Contact Us, Get Social */}
         <div className="flex flex-col">
           {/* Logo: icon + wordmark, aligned together */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="mt-10 flex items-center gap-3 sm:gap-4 2xl:mt-14">
             <Image
               src="/images/icon-logo/white-logo.png"
               alt="KVC Global"
