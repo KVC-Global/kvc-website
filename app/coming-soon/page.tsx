@@ -61,7 +61,7 @@ export default function ComingSoonPage() {
           </Link>
         </div>
 
-        <div className="flex-1" aria-hidden />
+        <div className="flex-[1_1_0]" aria-hidden />
 
         <div className="flex w-full max-w-2xl items-center gap-4 xl:ml-20">
           <h2
@@ -71,7 +71,7 @@ export default function ComingSoonPage() {
             Get Social
           </h2>
           <span
-            className="h-px flex-1"
+            className="h-px w-20 xl:w-25"
             style={{ backgroundColor: "white" }}
             aria-hidden
           />
