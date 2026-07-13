@@ -1,0 +1,32 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - img "KVC Global" [ref=e7]
+          - heading "We're Building Something Greater." [level=1] [ref=e8]
+        - img "Coming soon" [ref=e9]
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - link "Contact Us" [ref=e12] [cursor=pointer]:
+            - /url: mailto:info@kvcglobal.vn
+          - generic [ref=e13]:
+            - heading "Get Social" [level=2] [ref=e14]
+            - list [ref=e16]:
+              - listitem [ref=e17]:
+                - link "LinkedIn" [ref=e18] [cursor=pointer]:
+                  - /url: https://www.linkedin.com/company/kvcglobal/
+                  - img [ref=e19]
+              - listitem [ref=e21]:
+                - link "Facebook" [ref=e22] [cursor=pointer]:
+                  - /url: https://www.facebook.com/kvcglobal.vn/
+                  - img [ref=e23]
+              - listitem [ref=e25]:
+                - link "Email" [ref=e26] [cursor=pointer]:
+                  - /url: mailto:info@kvcglobal.vn
+                  - img [ref=e27]
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: Our website is coming soon. KVC Global continues to guide your journey to study, work and grow in Singapore.
+          - paragraph [ref=e31]: Stay tuned.
+  - button "Open Next.js Dev Tools" [ref=e37] [cursor=pointer]:
+    - img [ref=e38]

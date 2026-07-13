@@ -82,9 +82,9 @@ export default function ComingSoonPage() {
 
       <div className="relative z-10 mx-auto grid min-h-svh w-full grid-cols-1 gap-y-8 px-6 py-6 sm:px-10 sm:py-8 md:grid-cols-2 md:items-stretch md:gap-x-8 md:px-12 md:py-8 lg:gap-x-12 lg:py-10 xl:px-16 2xl:px-20">
         {/* LEFT COLUMN — Logo, Title, Contact Us, Get Social */}
-        <div className="flex flex-col">
+        <div className="contents md:flex md:flex-col">
           {/* Logo: icon + wordmark, aligned together */}
-          <div className="mt-10 flex items-center gap-3 sm:gap-4 2xl:mt-14">
+          <div className="order-1 mt-10 flex items-center gap-3 sm:gap-4 2xl:mt-14">
             <Image
               src="/images/icon-logo/white-logo.png"
               alt="KVC Global"
@@ -104,7 +104,7 @@ export default function ComingSoonPage() {
           </div>
 
           {/* Title — left-padded to align with "KVC Global" wordmark */}
-          <h1 className="mt-5 font-display text-[2.5rem] leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-5xl md:mt-6 md:text-[2.75rem] md:leading-[0.95] lg:mt-7 lg:text-[3.25rem] xl:text-[4rem] 2xl:text-[5rem]">
+          <h1 className="order-2 mt-5 font-display text-[2.5rem] leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-5xl md:mt-6 md:text-[2.75rem] md:leading-[0.95] lg:mt-7 lg:text-[3.25rem] xl:text-[4rem] 2xl:text-[5rem]">
             <span className="whitespace-nowrap">We&apos;re Building</span>
             <br />
             Something
@@ -113,7 +113,7 @@ export default function ComingSoonPage() {
           </h1>
 
           {/* Bottom of left col: Contact Us + Get Social, aligned with right col */}
-          <div className="mt-auto flex flex-col gap-10 pt-10 md:gap-14 md:pt-14">
+          <div className="order-7 mt-auto flex flex-col gap-10 pt-10 md:gap-14 md:pt-14">
             <Link
               href="mailto:info@kvcglobal.vn"
               className="inline-flex w-fit items-center justify-center border-2 px-7 py-3 text-sm font-bold tracking-wider text-white uppercase transition-opacity hover:opacity-80 sm:text-base"
@@ -122,16 +122,16 @@ export default function ComingSoonPage() {
               Contact Us
             </Link>
 
-            <div className="flex w-full max-w-xl flex-wrap items-center gap-4">
-              <h2 className="text-xl font-bold tracking-wider text-white uppercase sm:text-2xl">
+            <div className="flex w-full max-w-xl items-center gap-2 whitespace-nowrap sm:gap-4">
+              <h2 className="shrink-0 text-sm font-bold tracking-wider text-white uppercase sm:text-2xl">
                 Get Social
               </h2>
               <span
-                className="h-px w-16 sm:w-20"
+                className="h-px w-4 shrink sm:w-20"
                 style={{ backgroundColor: "white" }}
                 aria-hidden
               />
-              <ul className="flex items-center gap-3">
+              <ul className="flex shrink-0 items-center gap-1.5 sm:gap-3">
                 {SOCIAL_LINKS.map(({ href, label, Icon }) => (
                   <li key={label}>
                     <a
@@ -143,9 +143,9 @@ export default function ComingSoonPage() {
                           ? "noopener noreferrer"
                           : undefined
                       }
-                      className="inline-flex h-11 w-11 items-center justify-center transition-opacity hover:opacity-80 sm:h-12 sm:w-12"
+                      className="inline-flex h-8 w-8 items-center justify-center transition-opacity hover:opacity-80 sm:h-12 sm:w-12"
                     >
-                      <Icon className="h-11 w-11 sm:h-12 sm:w-12" aria-hidden />
+                      <Icon className="h-8 w-8 sm:h-12 sm:w-12" aria-hidden />
                     </a>
                   </li>
                 ))}
@@ -155,7 +155,7 @@ export default function ComingSoonPage() {
         </div>
 
         {/* RIGHT COLUMN — 3D GIF, Description, Stay tuned */}
-        <div className="flex flex-col">
+        <div className="contents md:flex md:flex-col">
           <Image
             src="/coming-soon-3d.gif"
             alt="Coming soon"
@@ -163,11 +163,11 @@ export default function ComingSoonPage() {
             height={1080}
             unoptimized
             style={{ filter: "url(#chroma-key-green)" }}
-            className="h-56 w-full shrink-0 object-contain sm:h-64 md:h-72 lg:h-80 xl:h-[26rem] 2xl:h-[32rem]"
+            className="order-3 h-56 w-full shrink-0 object-contain sm:h-64 md:h-72 lg:h-80 xl:h-[26rem] 2xl:h-[32rem]"
           />
 
           {/* Bottom of right col: Description + Stay tuned, aligned with left col */}
-          <div className="mt-auto flex flex-col gap-10 pt-10 md:gap-14 md:pt-14">
+          <div className="order-4 mt-auto flex flex-col gap-10 pt-10 md:gap-14 md:pt-14">
             <p className="max-w-xl font-body text-lg leading-relaxed text-white sm:text-xl lg:text-xl xl:text-2xl">
               Our website is coming soon. KVC Global continues to guide your
               journey to study, work and grow in Singapore.
