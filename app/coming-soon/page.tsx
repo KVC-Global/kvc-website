@@ -41,7 +41,7 @@ export default function ComingSoonPage() {
       <div className="absolute inset-0 z-10 flex flex-col p-6 sm:p-10">
         <div className="flex-[4_1_0]" aria-hidden />
 
-        <div className="2xl:ml-20">
+        <div className="mt-2 sm:mt-4 md:mt-6 lg:mt-8 xl:mt-14 2xl:mt-16 2xl:ml-20">
           <Link
             href="mailto:info@kvcglobal.vn"
             className="inline-flex items-center justify-center border-2 px-6 py-2.5 text-sm font-bold tracking-wider text-white uppercase transition-opacity hover:opacity-80 sm:text-base"
