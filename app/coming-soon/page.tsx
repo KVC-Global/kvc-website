@@ -80,7 +80,7 @@ export default function ComingSoonPage() {
         </defs>
       </svg>
 
-      <div className="relative z-10 mx-auto grid min-h-svh w-full grid-cols-1 gap-y-8 px-6 py-6 sm:px-10 sm:py-8 md:grid-cols-2 md:items-stretch md:gap-x-8 md:px-12 md:py-8 lg:gap-x-12 lg:py-10 xl:px-16 2xl:px-20">
+      <div className="relative z-10 mx-auto grid min-h-svh w-full grid-cols-1 gap-y-8 px-6 py-6 sm:px-10 sm:py-8 md:grid-cols-2 md:items-stretch md:gap-x-8 md:px-12 md:py-15 lg:gap-x-12 lg:py-20 xl:px-16 2xl:px-20">
         {/* LEFT COLUMN — Logo, Title, Contact Us, Get Social */}
         <div className="contents md:flex md:flex-col">
           {/* Logo: icon + wordmark, aligned together */}
@@ -113,7 +113,7 @@ export default function ComingSoonPage() {
           </h1>
 
           {/* Bottom of left col: Contact Us + Get Social, aligned with right col */}
-          <div className="order-7 mt-auto flex flex-col gap-10 pt-10 md:gap-14 md:pt-14">
+          <div className="order-7 mt-auto flex min-h-[12rem] flex-col justify-between gap-6 pt-4 md:min-h-[18rem] md:gap-10 md:pt-6">
             <Link
               href="mailto:info@kvcglobal.vn"
               className="inline-flex w-fit items-center justify-center border-2 px-7 py-3 text-sm font-bold tracking-wider text-white uppercase transition-opacity hover:opacity-80 sm:text-base"
@@ -167,7 +167,7 @@ export default function ComingSoonPage() {
           />
 
           {/* Bottom of right col: Description + Stay tuned, aligned with left col */}
-          <div className="order-4 mt-auto flex flex-col gap-10 pt-10 md:gap-14 md:pt-14">
+          <div className="order-4 mt-auto flex min-h-[12rem] flex-col justify-between gap-6 pt-4 md:min-h-[18rem] md:gap-10 md:pt-6">
             <p className="max-w-xl font-body text-lg leading-relaxed text-white sm:text-xl lg:text-xl xl:text-2xl">
               Our website is coming soon. KVC Global continues to guide your
               journey to study, work and grow in Singapore.
