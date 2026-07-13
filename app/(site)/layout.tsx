@@ -5,7 +5,7 @@ import {
   Montserrat,
 } from "next/font/google"
 
-import "./globals.css"
+import "../globals.css"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -37,7 +37,7 @@ const fontMono = JetBrains_Mono({
   display: "swap",
 })
 
-export default function RootLayout({
+export default function SiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
