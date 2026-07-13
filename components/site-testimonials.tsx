@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { ArrowRight, Quote, Star } from "lucide-react"
+import { ArrowRight, Star } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -98,7 +98,10 @@ const GOOGLE_REVIEWS: ReadonlyArray<GoogleReview> = [
 
 function Stars({ count = 5, size = 14 }: { count?: number; size?: number }) {
   return (
-    <div className="inline-flex items-center gap-0.5" aria-label={`${count} sao`}>
+    <div
+      className="inline-flex items-center gap-0.5"
+      aria-label={`${count} sao`}
+    >
       {Array.from({ length: count }).map((_, i) => (
         <Star
           key={i}
@@ -114,16 +117,8 @@ function Stars({ count = 5, size = 14 }: { count?: number; size?: number }) {
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-6 text-[#0A2540] shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:p-7">
-      <Quote
-        className="h-7 w-7 text-[#C8913C]"
-        strokeWidth={1.5}
-        aria-hidden="true"
-      />
-      <p className="mt-4 flex-1 text-[14.5px] leading-relaxed text-[#0A2540]/80 sm:text-[15px]">
-        &ldquo;{testimonial.quote}&rdquo;
-      </p>
-      <div className="mt-6 flex items-center gap-3 border-t border-[#0A2540]/10 pt-5">
+        <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-7 text-[#0A2540] shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:p-8 sm:min-h-[300px]">
+      <div className="flex items-center gap-3">
         <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-[#C8913C]/40">
           <Image
             src={testimonial.avatar}
@@ -141,6 +136,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             {testimonial.role}
           </div>
         </div>
+      </div>
+      <div className="mt-5 flex-1 border-t border-[#0A2540]/10 pt-5">
+        <p className="text-[14.5px] leading-relaxed text-[#0A2540]/80 sm:text-[15px]">
+          &ldquo;{testimonial.quote}&rdquo;
+        </p>
       </div>
     </article>
   )
@@ -193,27 +193,27 @@ export function SiteTestimonials({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className={cn("relative w-full bg-[#0A2540] py-20 sm:py-24", className)}
+      className={cn("mx-6 rounded-xl bg-[#0A2540] py-10 sm:py-15", className)}
     >
-      <div className="mx-auto w-full max-w-[1280px] px-6">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-10">
+      <div className="w-full px-10">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,65fr)_minmax(0,35fr)] lg:gap-10">
           {/* Left: testimonials carousel */}
           <div>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="font-sans text-[13px] font-bold uppercase tracking-[0.28em] text-[#C8913C]">
+                <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-[#C8913C] uppercase">
                   Câu chuyện thành công
                 </p>
                 <h2
                   id="testimonials-heading"
-                  className="mt-3 max-w-xl font-display text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl md:text-[40px]"
+                  className="mt-3 max-w-xl font-display text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[40px]"
                 >
                   Niềm tự hào của khách hàng là thành công của chúng tôi.
                 </h2>
               </div>
               <a
                 href="#testimonials"
-                className="hidden shrink-0 items-center gap-2 whitespace-nowrap pt-2 text-[13px] font-semibold uppercase tracking-[0.18em] text-white/80 transition-colors hover:text-[#C8913C] sm:inline-flex"
+                className="hidden shrink-0 items-center gap-2 pt-2 text-[13px] font-semibold tracking-[0.18em] whitespace-nowrap text-white/80 uppercase transition-colors hover:text-[#C8913C] sm:inline-flex"
               >
                 Xem tất cả câu chuyện
                 <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
@@ -254,7 +254,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
                       "h-2 rounded-full transition-all duration-300",
                       active === i
                         ? "w-8 bg-[#C8913C]"
-                        : "w-2 bg-white/30 hover:bg-white/50",
+                        : "w-2 bg-white/30 hover:bg-white/50"
                     )}
                   />
                 ))}
@@ -267,7 +267,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
             aria-label="Đánh giá trên Google"
             className="rounded-2xl bg-white/[0.04] p-6 ring-1 ring-white/10 sm:p-8"
           >
-            <p className="font-sans text-[12px] font-bold uppercase tracking-[0.28em] text-[#C8913C]">
+            <p className="font-sans text-[12px] font-bold tracking-[0.28em] text-[#C8913C] uppercase">
               Đánh giá trên Google
             </p>
 
@@ -276,14 +276,14 @@ export function SiteTestimonials({ className }: { className?: string }) {
             </div>
 
             <div className="mt-5 flex items-baseline gap-3">
-              <span className="font-display text-5xl font-bold leading-none text-white">
+              <span className="font-display text-5xl leading-none font-bold text-white">
                 4.9
               </span>
               <Stars size={16} />
             </div>
             <p className="mt-2 text-[13px] text-white/65">
-              Dựa trên{" "}
-              <span className="font-semibold text-white">328</span> đánh giá
+              Dựa trên <span className="font-semibold text-white">328</span>{" "}
+              đánh giá
             </p>
 
             <ul className="mt-7 space-y-5 border-t border-white/10 pt-6">
@@ -313,7 +313,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
 
             <a
               href="#google-reviews"
-              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#C8913C] px-5 py-3 text-[13px] font-semibold uppercase tracking-[0.16em] text-[#0A2540] shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#E0A956] hover:shadow-md"
+              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#C8913C] px-5 py-3 text-[13px] font-semibold tracking-[0.16em] text-[#0A2540] uppercase shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#E0A956] hover:shadow-md"
             >
               Xem tất cả đánh giá trên Google
               <ArrowRight className="h-4 w-4" strokeWidth={2.75} />
