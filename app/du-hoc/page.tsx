@@ -1,5 +1,6 @@
 import { Metadata } from "next"
 
+import { StudyAbroadDetails } from "@/components/study-abroad-details"
 import { StudyAbroadHero } from "@/components/study-abroad-hero"
 
 export const metadata: Metadata = {
@@ -11,6 +12,7 @@ export default function StudyAbroadPage() {
   return (
     <>
       <StudyAbroadHero />
+      <StudyAbroadDetails />
     </>
   )
 }
