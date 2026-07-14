@@ -186,7 +186,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           </h2>
 
           {/* Cards Grid */}
-          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid grid-cols-3 gap-8 sm:grid-cols-1 lg:grid-cols-6">
             {BENEFITS.map((benefit, index) => {
               return (
                 <div
@@ -214,7 +214,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
         </section>
 
         {/* Section 3: Popular Majors & Entry Requirements */}
-        <div className="mt-20 md:mt-28 grid grid-cols-1 gap-8 lg:grid-cols-12">
+        <div className="mt-8 md:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Popular Majors Column */}
           <section
             aria-labelledby="majors-heading"
@@ -230,7 +230,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               <div className="mx-auto mt-2 h-0.5 w-12 bg-brand-gold rounded-full" />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {MAJORS.map((major, idx) => {
                 const Icon = major.icon
                 return (
