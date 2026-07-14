@@ -148,7 +148,7 @@ export default function ComingSoonPage() {
 
         {/* RIGHT COLUMN — 3D GIF, Description, Stay tuned */}
         <div className="contents md:flex md:flex-col">
-          <div className="order-3 -ml-4 flex w-full items-center justify-end md:pl-8">
+          <div className="order-3 flex w-full items-center justify-end md:pl-8">
             <Image
               src="/coming-soon-3d.gif"
               alt="Coming soon"
