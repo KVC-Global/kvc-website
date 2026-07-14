@@ -84,7 +84,7 @@ export default function ComingSoonPage() {
         {/* LEFT COLUMN — Logo, Title, Contact Us, Get Social */}
         <div className="contents md:flex md:flex-col">
           {/* Logo: icon + wordmark, aligned together */}
-          <div className="order-1 mt-10 flex items-center gap-3 sm:mt-10 sm:gap-4 2xl:mt-14">
+          <div className="order-1 mt-4 flex items-center gap-3 sm:mt-10 sm:gap-4 2xl:mt-14">
             <Image
               src="/images/new-log.svg"
               alt="KVC Global"
@@ -148,7 +148,7 @@ export default function ComingSoonPage() {
 
         {/* RIGHT COLUMN — 3D GIF, Description, Stay tuned */}
         <div className="contents md:flex md:flex-col">
-          <div className="order-3 flex w-full items-center justify-end pl-8">
+          <div className="order-3 -ml-4 flex w-full items-center justify-end md:pl-8">
             <Image
               src="/coming-soon-3d.gif"
               alt="Coming soon"
