@@ -1,11 +1,5 @@
 import Image from "next/image"
-import {
-  ArrowUpRight,
-  CheckCircle2,
-  Landmark,
-  Star,
-  Users,
-} from "lucide-react"
+import { ArrowUpRight, CheckCircle2, Landmark, Star, Users } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -108,28 +102,28 @@ export function SiteHero({ className }: { className?: string }) {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto -mt-20 w-full max-w-295 px-6 sm:-mt-24 md:-mt-28">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border shadow-[0_20px_60px_-15px_rgba(15,27,45,0.25)] ring-1 ring-black/5 md:grid-cols-4">
+      <div className="relative z-10 mx-auto -mt-12 w-full max-w-295 px-6 sm:-mt-16 md:-mt-20">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border shadow-[0_24px_60px_-12px_rgba(15,27,45,0.3)] ring-1 ring-black/5 md:grid-cols-4">
           {STATS.map((stat) => {
             const Icon = stat.icon
             return (
-                <div
-                  key={stat.label}
-                  className="group flex items-center gap-4 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:px-6 sm:py-6"
-                >
-                  <Icon
-                    className="h-8 w-8 shrink-0 text-[#C8913C] transition-transform duration-300 ease-out sm:h-9 sm:w-9"
-                    strokeWidth={1.75}
-                  />
-                  <div className="flex flex-col">
-                    <div className="font-display text-2xl font-bold text-foreground sm:text-3xl">
-                      {stat.value}
-                    </div>
-                    <div className="font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
-                      {stat.label}
-                    </div>
+              <div
+                key={stat.label}
+                className="group flex items-center gap-4 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:px-6 sm:py-6"
+              >
+                <Icon
+                  className="h-8 w-8 shrink-0 text-[#C8913C] transition-transform duration-300 ease-out sm:h-9 sm:w-9"
+                  strokeWidth={1.75}
+                />
+                <div className="flex flex-col">
+                  <div className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+                    {stat.value}
+                  </div>
+                  <div className="font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
+                    {stat.label}
                   </div>
                 </div>
+              </div>
             )
           })}
         </div>

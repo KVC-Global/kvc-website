@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Our new website is coming soon">
+  <defs>
+    <filter id="sepia">
+      <feColorMatrix values="0.393 0.769 0.189 0 0
+                              0.349 0.686 0.168 0 0
+                              0.272 0.534 0.131 0 0
+                              0     0     0     1 0"/>
+    </filter>
+  </defs>
+  <image href="background.jpg" x="0" y="0" width="1440" height="810" preserveAspectRatio="xMidYMid slice"/>
+  <g transform="matrix(0.629599 0 0 0.628067 821.082277 60.714329)">
+    <image href="ribbon-1.png" x="0" y="0" width="897" height="652" filter="url(#sepia)"/>
+    <image href="ribbon-2.png" x="0" y="0" width="897" height="652"/>
+  </g>
+</svg>
