@@ -2,9 +2,9 @@ import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Container } from "@/components/ui/container"
 
-const ACCENT = "#C8913C"
-const NAVY = "#0A2540"
+const ACCENT = "var(--color-secondary)"
 
 type Service = {
   title: string
@@ -57,7 +57,7 @@ function ServiceCard({ service }: { service: Service }) {
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-sm bg-white p-5 text-foreground shadow-[0_18px_40px_-22px_rgba(10,37,64,0.35)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-[#0A2540] hover:text-white hover:shadow-[0_28px_60px_-22px_rgba(10,37,64,0.45)]",
+        "group relative flex h-full flex-col overflow-hidden rounded-sm bg-white p-5 text-foreground shadow-[0_18px_40px_-22px_rgba(10,37,64,0.35)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-brand-blue hover:text-white hover:shadow-[0_28px_60px_-22px_rgba(10,37,64,0.45)]",
       )}
     >
       <h3 className="font-display text-[22px] font-bold leading-tight tracking-tight text-foreground transition-colors duration-300 group-hover:text-white">
@@ -79,12 +79,12 @@ function ServiceCard({ service }: { service: Service }) {
 
       <a
         href={service.href}
-        className="mt-auto inline-flex items-center justify-between gap-3 pt-5 text-sm font-semibold uppercase tracking-[0.16em] text-foreground transition-colors duration-300 group-hover:text-[#C8913C]"
+        className="mt-auto inline-flex items-center justify-between gap-3 pt-5 text-sm font-semibold uppercase tracking-[0.16em] text-foreground transition-colors duration-300 group-hover:text-secondary"
       >
         <span>Read More</span>
         <span
           aria-hidden="true"
-          className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#C8913C] text-white transition-all duration-300 ease-out group-hover:translate-x-0.5 group-hover:bg-[#C8913C]"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-white transition-all duration-300 ease-out group-hover:translate-x-0.5 group-hover:bg-secondary"
         >
           <ArrowRight className="h-4 w-4" strokeWidth={2.75} />
         </span>
@@ -97,11 +97,11 @@ export function SiteServices({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="services-heading"
-      className={cn("w-full bg-[#F4F7FA] py-20 sm:py-24", className)}
+      className={cn("w-full bg-muted py-20 sm:py-24", className)}
     >
-      <div className="mx-auto w-full max-w-[1280px] px-6">
+      <Container>
         <div className="text-center">
-          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.28em] text-[#C8913C]">
+          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.28em] text-secondary">
             Dịch vụ của chúng tôi
           </p>
           <h2
@@ -112,8 +112,7 @@ export function SiteServices({ className }: { className?: string }) {
           </h2>
           <span
             aria-hidden="true"
-            className="mx-auto mt-5 block h-[3px] w-16 rounded-full"
-            style={{ background: ACCENT }}
+            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-secondary"
           />
         </div>
 
@@ -122,10 +121,10 @@ export function SiteServices({ className }: { className?: string }) {
             <ServiceCard key={service.title} service={service} />
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }
 
 // Expose brand tokens for cross-component consistency if needed elsewhere.
-export const SITE_SERVICES_BRAND = { ACCENT, NAVY } as const
+export const SITE_SERVICES_BRAND = { ACCENT } as const

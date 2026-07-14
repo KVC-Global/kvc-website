@@ -8,6 +8,7 @@ import {
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Container } from "@/components/ui/container"
 
 const STATS = [
   {
@@ -41,32 +42,32 @@ export function SiteHero({ className }: { className?: string }) {
       aria-labelledby="hero-heading"
       className={cn("relative isolate w-full overflow-hidden", className)}
     >
-      <div className="relative h-[560px] w-full sm:h-[600px] md:h-[640px] lg:h-[680px]">
+      <div className="relative min-h-[100dvh] w-full sm:min-h-[600px] md:min-h-[640px] lg:min-h-[680px]">
         <Image
           src={HERO_IMAGE}
           alt="Gia đình nhìn toàn cảnh thành phố Singapore lúc hoàng hôn"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-[center_30%] sm:object-center"
         />
 
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-linear-to-r from-white from-0% via-white via-46% to-transparent to-100%"
+          className="absolute inset-0 bg-gradient-to-r from-white from-0% via-white via-46% to-transparent to-100%"
         />
 
-        <div className="relative mx-auto flex h-full w-full max-w-[1280px] items-center px-6">
-          <div className="max-w-2xl">
+        <Container className="relative flex min-h-[inherit] items-center py-20 sm:py-24 md:py-0">
+          <div className="max-w-4xl">
             <h1
               id="hero-heading"
-              className="font-display text-3xl leading-[1.05] font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl"
+              className="font-display text-4xl leading-[1.1] font-bold tracking-[-0.01em] text-foreground sm:text-5xl sm:leading-[1.05] sm:tracking-normal md:text-6xl lg:text-7xl lg:leading-[1.02] lg:tracking-[-0.02em]"
             >
               <span className="block">BEGIN SOMETHING</span>
-              <span className="block text-[#C8913C]">GREATER.</span>
+              <span className="block text-secondary">GREATER.</span>
             </h1>
 
-            <p className="mt-5 max-w-md text-base leading-relaxed text-foreground/85 sm:text-lg">
+            <p className="mt-5 line-clamp-4 max-w-xl text-base leading-relaxed text-foreground/85 sm:text-lg">
               KVC Global luôn đồng hành cùng cá nhân, gia đình và doanh nghiệp
               trong hành trình học tập, làm việc, kinh doanh và định cư tại
               Singapore. Chúng tôi cung cấp giải pháp toàn diện cho tương lai
@@ -76,7 +77,7 @@ export function SiteHero({ className }: { className?: string }) {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href="#du-hoc"
-                className="group inline-flex items-center justify-center gap-2 rounded-sm bg-[#0A2540] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#1A2B3C] hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A2540]"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto"
               >
                 Du học / Việc làm Singapore
                 <svg
@@ -95,7 +96,7 @@ export function SiteHero({ className }: { className?: string }) {
 
               <a
                 href="#mo-cong-ty"
-                className="group inline-flex items-center justify-center gap-2 rounded-sm border border-[#0A2540] bg-white px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0A2540]"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-md border border-primary bg-white px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto"
               >
                 Mở công ty tại VN - Singapore
                 <ArrowUpRight
@@ -105,27 +106,27 @@ export function SiteHero({ className }: { className?: string }) {
               </a>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
 
-      <div className="relative z-10 mx-auto -mt-12 w-full max-w-295 px-6 sm:-mt-16 md:-mt-20">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border shadow-[0_24px_60px_-12px_rgba(15,27,45,0.3)] ring-1 ring-black/5 md:grid-cols-4">
+      <Container className="relative z-10 -mt-10 sm:-mt-16 md:-mt-20">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md bg-border shadow-[0_24px_60px_-12px_rgba(15,27,45,0.3)] ring-1 ring-black/5 md:grid-cols-4">
           {STATS.map((stat) => {
             const Icon = stat.icon
             return (
                 <div
                   key={stat.label}
-                  className="group flex items-center gap-4 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:px-6 sm:py-6"
+                  className="group flex items-center justify-center gap-3 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 md:h-[160px] md:py-7"
                 >
                   <Icon
-                    className="h-8 w-8 shrink-0 text-[#C8913C] transition-transform duration-300 ease-out sm:h-9 sm:w-9"
+                    className="h-7 w-7 shrink-0 text-secondary transition-transform duration-300 ease-out sm:h-9 sm:w-9"
                     strokeWidth={1.75}
                   />
-                  <div className="flex flex-col">
-                    <div className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+                  <div className="flex min-w-0 flex-col">
+                    <div className="font-display text-xl font-bold text-foreground sm:text-3xl">
                       {stat.value}
                     </div>
-                    <div className="font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
+                    <div className="truncate font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
                       {stat.label}
                     </div>
                   </div>
@@ -133,7 +134,7 @@ export function SiteHero({ className }: { className?: string }) {
             )
           })}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

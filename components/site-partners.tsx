@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils"
+import { Container } from "@/components/ui/container"
 
 type Partner = {
   name: string
@@ -71,8 +72,8 @@ const PARTNERS: ReadonlyArray<Partner> = [
     name: "KVC Global",
     subtitle: "Your Future, Our Mission",
     mark: "k",
-    primary: "#0A2540",
-    accent: "#C8913C",
+    primary: "var(--color-brand-blue)",
+    accent: "var(--color-secondary)",
   },
 ]
 
@@ -215,9 +216,9 @@ export function SitePartners({ className }: { className?: string }) {
       aria-labelledby="partners-heading"
       className={cn("w-full bg-brand-light py-16 sm:py-20", className)}
     >
-      <div className="mx-auto max-w-[1280px] px-6">
+      <Container>
         <div className="text-center">
-          <p className="font-sans text-[11px] font-semibold tracking-[0.28em] text-[#C8913C] uppercase">
+          <p className="font-sans text-[11px] font-semibold tracking-[0.28em] text-secondary uppercase">
             Đối tác
           </p>
           <h2
@@ -227,7 +228,7 @@ export function SitePartners({ className }: { className?: string }) {
             Đối tác &amp; Trường liên kết hàng đầu
           </h2>
         </div>
-      </div>
+      </Container>
 
       <div
         className="relative mt-12 w-full overflow-hidden"

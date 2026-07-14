@@ -11,8 +11,8 @@ import {
 
 import { cn } from "@/lib/utils"
 
-const ACCENT = "#C8913C"
-const NAVY = "#0A2540"
+const ACCENT = "var(--secondary)"
+const NAVY = "var(--color-brand-blue)"
 
 const CTA_IMAGE =
   "https://images.pexels.com/photos/35421791/pexels-photo-35421791.jpeg?auto=compress&w=1920&q=80"

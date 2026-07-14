@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Check } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Container } from "@/components/ui/container"
 
 const STATS = [
   { value: "98%", label: "Tỷ lệ thành công" },
@@ -23,7 +24,7 @@ const SECONDARY_IMAGE =
 const CEO_AVATAR =
   "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop"
 
-const ACCENT = "#C8913C"
+const ACCENT = "var(--color-secondary)"
 
 function ProgressRing({ value }: { value: string }) {
   const size = 120
@@ -65,10 +66,7 @@ function ProgressRing({ value }: { value: string }) {
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span
-          className="font-display text-2xl font-bold"
-          style={{ color: ACCENT }}
-        >
+        <span className="font-display text-2xl font-bold text-secondary">
           {value}
         </span>
       </div>
@@ -82,27 +80,23 @@ export function SiteAbout({ className }: { className?: string }) {
       aria-labelledby="about-heading"
       className={cn("w-full bg-white py-20 sm:py-24", className)}
     >
-      <div className="mx-auto grid w-full max-w-[1280px] gap-12 px-6 md:grid-cols-[9fr_11fr] md:gap-16 md:items-start">
+      <Container className="grid gap-12 md:grid-cols-[9fr_11fr] md:gap-16 md:items-start">
         <div className="relative">
           <div
             aria-hidden="true"
-            className="absolute right-[-18px] top-6 hidden h-[calc(100%-3rem)] w-px sm:block"
-            style={{ background: ACCENT }}
+            className="absolute right-[-18px] top-6 hidden h-[calc(100%-3rem)] w-px bg-secondary sm:block"
           />
           <div
             aria-hidden="true"
-            className="absolute -right-4 top-6 hidden h-px w-16 sm:block"
-            style={{ background: ACCENT }}
+            className="absolute -right-4 top-6 hidden h-px w-16 bg-secondary sm:block"
           />
           <div
             aria-hidden="true"
-            className="absolute -bottom-4 left-6 hidden h-px w-16 sm:block"
-            style={{ background: ACCENT }}
+            className="absolute -bottom-4 left-6 hidden h-px w-16 bg-secondary sm:block"
           />
           <div
             aria-hidden="true"
-            className="absolute bottom-6 left-[-18px] hidden h-24 w-px sm:block"
-            style={{ background: ACCENT }}
+            className="absolute bottom-6 left-[-18px] hidden h-24 w-px bg-secondary sm:block"
           />
 
           <div className="relative overflow-hidden rounded-xl shadow-[0_30px_60px_-20px_rgba(15,27,45,0.25)]">
@@ -127,7 +121,7 @@ export function SiteAbout({ className }: { className?: string }) {
         </div>
 
         <div>
-          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.24em] text-[#C8913C]">
+          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.24em] text-secondary">
             Về công ty
           </p>
           <h2
@@ -146,13 +140,11 @@ export function SiteAbout({ className }: { className?: string }) {
           <div className="mt-5 flex items-center gap-3">
             <span
               aria-hidden="true"
-              className="inline-block h-2 w-2 rounded-full"
-              style={{ background: ACCENT }}
+              className="inline-block h-2 w-2 rounded-full bg-secondary"
             />
             <span
               aria-hidden="true"
-              className="inline-block h-px w-12"
-              style={{ background: ACCENT }}
+              className="inline-block h-px w-12 bg-secondary"
             />
           </div>
 
@@ -176,7 +168,7 @@ export function SiteAbout({ className }: { className?: string }) {
                 key={item}
                 className="flex items-center gap-3 text-[15px] font-medium text-foreground"
               >
-                <span className="inline-flex h-6 w-6 items-center justify-center text-[#C8913C]">
+                <span className="inline-flex h-6 w-6 items-center justify-center text-secondary">
                   <Check className="h-5 w-5" strokeWidth={3} />
                 </span>
                 {item}
@@ -187,8 +179,7 @@ export function SiteAbout({ className }: { className?: string }) {
           <div className="mt-10 flex flex-wrap items-center gap-6">
             <a
               href="#gioi-thieu"
-              className="group inline-flex items-center justify-center gap-2 rounded-md px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-              style={{ background: ACCENT }}
+              className="group inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-7 py-3.5 text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
             >
               Giới thiệu về chúng tôi
               <svg
@@ -217,17 +208,14 @@ export function SiteAbout({ className }: { className?: string }) {
                 <div className="font-display text-base font-bold text-foreground">
                   Salman Ahmed
                 </div>
-                <div
-                  className="font-sans text-xs font-semibold uppercase tracking-wide"
-                  style={{ color: ACCENT }}
-                >
+                <div className="font-sans text-xs font-semibold uppercase tracking-wide text-secondary">
                   CEO &amp; Founder
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }

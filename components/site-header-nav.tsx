@@ -47,7 +47,7 @@ export function SiteHeaderNav({ className }: { className?: string }) {
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "absolute -bottom-1 left-1/2 h-[2px] w-full origin-center -translate-x-1/2 rounded-full bg-[#0A2540] transition-transform duration-300 ease-out",
+                      "absolute -bottom-1 left-1/2 h-[2px] w-full origin-center -translate-x-1/2 rounded-full bg-brand-blue transition-transform duration-300 ease-out",
                       active
                         ? "scale-x-100"
                         : "scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100"
@@ -127,7 +127,7 @@ export function SiteHeaderMobileMenu({
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-[#0A2540] transition-transform duration-300 ease-out",
+                      "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-brand-blue transition-transform duration-300 ease-out",
                       active
                         ? "scale-y-100"
                         : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"
