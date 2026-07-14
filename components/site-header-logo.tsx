@@ -18,7 +18,7 @@ export function SiteHeaderLogo({ className }: { className?: string }) {
         alt="KVC Global"
         width={150}
         height={150}
-        className="h-14 w-auto shrink-0"
+        className="h-8 w-auto shrink-0 md:h-12"
         priority
       />
     </Link>

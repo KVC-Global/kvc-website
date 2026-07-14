@@ -1,8 +1,13 @@
+"use client"
+
+import { useEffect, useState } from "react"
+
 import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
   CalendarCheck,
+  ChevronDown,
   Mail,
   MapPin,
   MessageCircle,
@@ -132,7 +137,7 @@ const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
 
 function ColumnHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="font-heading text-[15px] font-bold tracking-[0.18em] text-foreground uppercase">
+      <h3 className="font-heading text-[15px] font-semibold tracking-[0.18em] text-foreground uppercase">
       {children}
     </h3>
   )
@@ -236,6 +241,49 @@ function CtaBanner({ className }: { className?: string }) {
   )
 }
 
+function CollapsibleFooterSection({
+  heading,
+  className,
+  children,
+}: {
+  heading: string
+  className?: string
+  children: React.ReactNode
+}) {
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)")
+    const apply = () => setOpen(mq.matches)
+    apply()
+    mq.addEventListener("change", apply)
+    return () => mq.removeEventListener("change", apply)
+  }, [])
+
+  return (
+    <details
+      open={open}
+      onToggle={(event) =>
+        setOpen((event.target as HTMLDetailsElement).open)
+      }
+      className={cn("group", className)}
+    >
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-sm py-2 -mx-2 px-2 transition-colors duration-200 ease-out hover:bg-foreground/[0.03] lg:cursor-default lg:pointer-events-none lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
+        <ColumnHeading>{heading}</ColumnHeading>
+        <ChevronDown
+          aria-hidden="true"
+          className="h-4 w-4 shrink-0 text-foreground/70 transition-transform duration-300 ease-out group-open:rotate-180 lg:hidden"
+        />
+      </summary>
+      <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out group-open:grid-rows-[1fr]">
+        <div className="overflow-hidden">
+          <div className="mt-4 lg:mt-5">{children}</div>
+        </div>
+      </div>
+    </details>
+  )
+}
+
 export function SiteFooter({ className }: { className?: string }) {
   return (
     <footer className={cn("bg-white text-foreground", className)}>
@@ -256,7 +304,7 @@ export function SiteFooter({ className }: { className?: string }) {
                     alt="KVC Global"
                     width={200}
                     height={44}
-                    className="h-11 w-auto shrink-0"
+                    className="h-9 w-auto shrink-0 sm:h-11"
                     loading="lazy"
                   />
                 </Link>
@@ -287,24 +335,32 @@ export function SiteFooter({ className }: { className?: string }) {
             </ul>
           </div>
 
-          <nav aria-label="Dịch vụ" className="lg:col-span-2">
-            <ColumnHeading>Dịch vụ</ColumnHeading>
-            <LinkList links={SERVICES_LINKS} className="mt-5" />
-          </nav>
+              <CollapsibleFooterSection
+                heading="Dịch vụ"
+                className="lg:col-span-2"
+              >
+                <LinkList links={SERVICES_LINKS} />
+              </CollapsibleFooterSection>
 
-          <nav aria-label="Về chúng tôi" className="lg:col-span-2">
-            <ColumnHeading>Về chúng tôi</ColumnHeading>
-            <LinkList links={ABOUT_LINKS} className="mt-5" />
-          </nav>
+              <CollapsibleFooterSection
+                heading="Về chúng tôi"
+                className="lg:col-span-2"
+              >
+                <LinkList links={ABOUT_LINKS} />
+              </CollapsibleFooterSection>
 
-          <nav aria-label="Hỗ trợ" className="lg:col-span-2">
-            <ColumnHeading>Hỗ trợ</ColumnHeading>
-            <LinkList links={SUPPORT_LINKS} className="mt-5" />
-          </nav>
+              <CollapsibleFooterSection
+                heading="Hỗ trợ"
+                className="lg:col-span-2"
+              >
+                <LinkList links={SUPPORT_LINKS} />
+              </CollapsibleFooterSection>
 
-          <div className="lg:col-span-3">
-            <ColumnHeading>Liên hệ</ColumnHeading>
-            <ul className="mt-5 flex flex-col gap-3 text-[15px]">
+              <CollapsibleFooterSection
+                heading="Liên hệ"
+                className="lg:col-span-3"
+              >
+                <ul className="flex flex-col gap-3 text-[15px]">
               {CONTACT_ITEMS.map((item, index) => {
                 const Icon = item.icon
                 return (
@@ -336,9 +392,9 @@ export function SiteFooter({ className }: { className?: string }) {
                   </li>
                 )
               })}
-            </ul>
-          </div>
-        </div>
+                </ul>
+              </CollapsibleFooterSection>
+            </div>
 
         <div
           aria-hidden="true"

@@ -34,7 +34,10 @@ export function SiteHero({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className={cn("relative isolate w-full overflow-hidden", className)}
+      className={cn(
+        "relative isolate w-full overflow-hidden bg-brand-light",
+        className
+      )}
     >
       <div className="relative min-h-[100dvh] w-full sm:min-h-[600px] md:min-h-[640px] lg:min-h-[680px]">
         <Image
