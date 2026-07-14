@@ -28,8 +28,7 @@ const SERVICES: ReadonlyArray<Service> = [
     title: "Student Visa",
     description:
       "Hỗ trợ sinh viên quốc tế nhập học tại các trường hàng đầu Singapore và xử lý visa nhanh chóng, an toàn.",
-    image:
-      "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=720&h=540&q=80&auto=format&fit=crop",
+    image: "/images/singapore-student.jpeg",
     alt: "Sinh viên quốc tế trong lễ tốt nghiệp tại Singapore",
     href: "#student-visa",
   },
