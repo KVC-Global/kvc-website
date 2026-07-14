@@ -96,7 +96,7 @@ export default function ComingSoonPage() {
           </div>
 
           {/* Title — left-padded to align with "KVC Global" wordmark */}
-          <h1 className="order-2 mt-5 font-display text-[2.5rem] leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-5xl md:mt-6 md:text-[2.75rem] md:leading-[0.95] lg:mt-18 lg:text-[3.25rem] xl:text-[3.5rem] 2xl:text-[6rem]">
+          <h1 className="order-2 mt-5 font-display text-[2.5rem] leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-5xl md:mt-6 md:text-[2.75rem] md:leading-[0.95] lg:mt-18 lg:text-[3.25rem] 2xl:text-[6rem]">
             <span className="whitespace-nowrap">We&apos;re Building</span>
             <br />
             Something
