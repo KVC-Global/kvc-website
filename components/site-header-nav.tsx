@@ -127,7 +127,7 @@ export function SiteHeaderMobileMenu({
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-brand-blue transition-transform duration-300 ease-out",
+                      "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-secondary transition-transform duration-300 ease-out",
                       active
                         ? "scale-y-100"
                         : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"

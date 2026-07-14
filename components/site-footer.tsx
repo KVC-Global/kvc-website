@@ -246,34 +246,20 @@ export function SiteFooter({ className }: { className?: string }) {
       <div className="w-full px-4 sm:px-6">
         <div className="mt-14 grid grid-cols-1 gap-10 pb-10 sm:mt-16 sm:grid-cols-2 sm:gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-3">
-            <Link
-              href="/"
-              aria-label="KVC Global — Trang chủ"
-              className="inline-flex items-center gap-3 no-underline"
-            >
-              <Image
-                src="/images/icon-logo/blue-logo.png"
-                alt="KVC Global"
-                width={48}
-                height={48}
-                className="h-10 w-10 shrink-0"
-                loading="lazy"
-              />
-              <span className="flex flex-col leading-none">
-                <span
-                  className="font-heading text-[20px] font-extrabold tracking-[0.04em] uppercase"
-                  style={{ color: NAVY }}
+                <Link
+                  href="/"
+                  aria-label="KVC Global — Trang chủ"
+                  className="inline-flex items-center no-underline"
                 >
-                  KVC Global
-                </span>
-                <span
-                  className="mt-1 font-sans text-[10px] font-semibold tracking-[0.32em] uppercase"
-                  style={{ color: ACCENT }}
-                >
-                  Begin · Something · Greater
-                </span>
-              </span>
-            </Link>
+                  <Image
+                    src="/images/KVC_LOGO_SVG/Blue%20Horizontal%20Logo_KVC.svg.svg"
+                    alt="KVC Global"
+                    width={200}
+                    height={44}
+                    className="h-11 w-auto shrink-0"
+                    loading="lazy"
+                  />
+                </Link>
 
             <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-foreground/75">
               KVC Global — Đồng hành cùng bạn trên hành trình học tập, làm việc,

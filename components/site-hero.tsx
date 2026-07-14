@@ -1,11 +1,5 @@
 import Image from "next/image"
-import {
-  ArrowUpRight,
-  CheckCircle2,
-  Landmark,
-  Star,
-  Users,
-} from "lucide-react"
+import { ArrowUpRight, CheckCircle2, Landmark, Star, Users } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
@@ -110,27 +104,27 @@ export function SiteHero({ className }: { className?: string }) {
       </div>
 
       <Container className="relative z-10 -mt-10 sm:-mt-16 md:-mt-20">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md bg-border shadow-[0_24px_60px_-12px_rgba(15,27,45,0.3)] ring-1 ring-black/5 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md bg-border ring-1 ring-black/5 md:grid-cols-4">
           {STATS.map((stat) => {
             const Icon = stat.icon
             return (
-                <div
-                  key={stat.label}
-                  className="group flex items-center justify-center gap-3 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 md:h-[160px] md:py-7"
-                >
-                  <Icon
-                    className="h-7 w-7 shrink-0 text-secondary transition-transform duration-300 ease-out sm:h-9 sm:w-9"
-                    strokeWidth={1.75}
-                  />
-                  <div className="flex min-w-0 flex-col">
-                    <div className="font-display text-xl font-bold text-foreground sm:text-3xl">
-                      {stat.value}
-                    </div>
-                    <div className="truncate font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
-                      {stat.label}
-                    </div>
+              <div
+                key={stat.label}
+                className="group flex items-center justify-center gap-3 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 md:h-[160px] md:py-7"
+              >
+                <Icon
+                  className="h-7 w-7 shrink-0 text-secondary transition-transform duration-300 ease-out sm:h-9 sm:w-9"
+                  strokeWidth={1.75}
+                />
+                <div className="flex min-w-0 flex-col">
+                  <div className="font-display text-xl font-bold text-foreground sm:text-3xl">
+                    {stat.value}
+                  </div>
+                  <div className="truncate font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
+                    {stat.label}
                   </div>
                 </div>
+              </div>
             )
           })}
         </div>
