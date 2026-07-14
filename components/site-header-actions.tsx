@@ -145,7 +145,7 @@ export function SiteHeaderActions() {
       <button
         type="button"
         aria-label="Chọn ngôn ngữ"
-        className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-muted md:hidden"
+        className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground hover:bg-muted md:hidden"
         onClick={() => setOpen((value) => !value)}
       >
         <Globe className="h-5 w-5" />
