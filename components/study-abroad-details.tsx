@@ -17,6 +17,11 @@ import {
   ShieldCheck,
   PlusCircle,
   Lightbulb,
+  Compass,
+  ClipboardList,
+  FileSignature,
+  UserCheck,
+  Handshake,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -106,6 +111,36 @@ const REQUIREMENTS = [
   "18 - 35 tuổi",
   "Có khả năng giao tiếp tiếng Anh cơ bản (không bắt buộc IELTS/TOEFL ngay từ đầu)",
   "Đáp ứng các yêu cầu về sức khỏe và nhân thân theo quy định",
+] as const
+
+const GRADUATION_OPPORTUNITIES = [
+  "Nhận bằng Diploma quốc tế, có giá trị liên thông toàn cầu.",
+  "Tiếp tục học lên Cử nhân tại Singapore hoặc các nước khác.",
+  "Tìm kiếm cơ hội việc làm chính thức tại Singapore, tùy năng lực và cơ hội thực tế tại thời điểm tốt nghiệp.",
+  "Quay về Việt Nam làm việc với lợi thế bằng cấp quốc tế và kinh nghiệm thực tế.",
+] as const
+
+const SUPPORT_STEPS = [
+  {
+    icon: Compass,
+    text: "Tư vấn chọn trường, chọn ngành phù hợp",
+  },
+  {
+    icon: ClipboardList,
+    text: "Hỗ trợ chuẩn bị hồ sơ đầy đủ, đúng yêu cầu",
+  },
+  {
+    icon: FileSignature,
+    text: "Hỗ trợ thủ tục xin visa du học",
+  },
+  {
+    icon: UserCheck,
+    text: "Kết nối doanh nghiệp thực tập uy tín",
+  },
+  {
+    icon: Handshake,
+    text: "Đồng hành xuyên suốt từ khi nộp hồ sơ đến khi hoàn thành chương trình",
+  },
 ] as const
 
 export function StudyAbroadDetails({ className }: { className?: string }) {
@@ -320,6 +355,114 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 aria-hidden="true"
                 className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white via-white/40 to-transparent lg:w-28"
               />
+            </div>
+          </section>
+        </div>
+
+        {/* Section 4: Prospects & Support Journey */}
+        <div className="mt-8 md:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
+          {/* Prospects Column (lg:col-span-5) */}
+          <section
+            aria-labelledby="prospects-heading"
+            className="bg-white border border-border rounded-2xl p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-5 min-h-[380px]"
+          >
+            <div className="relative z-10 flex flex-col justify-between h-full max-w-[72%] sm:max-w-[75%]">
+              <div>
+                <h2
+                  id="prospects-heading"
+                  className="font-heading text-xl font-bold text-brand-blue sm:text-2xl text-left"
+                >
+                  Sau khi tốt nghiệp, học viên có thể làm gì?
+                </h2>
+                <div className="mt-2 h-0.5 w-12 bg-brand-gold rounded-full" />
+
+                <ul className="mt-8 space-y-4" aria-label="Cơ hội sau tốt nghiệp">
+                  {GRADUATION_OPPORTUNITIES.map((opp, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
+                        <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
+                      </div>
+                      <span className="font-body text-[14px] md:text-[15px] leading-relaxed text-brand-dark/90">
+                        {opp}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Graduation Cap illustration (absolute-positioned, vertically centered on the right, blurred) */}
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 h-[100px] w-[100px] sm:right-4 sm:h-[130px] sm:w-[130px] lg:right-6 lg:h-[140px] lg:w-[140px] pointer-events-none z-0 blur-[2px] opacity-85">
+              <Image
+                src="/images/graduation-cap.jpg"
+                alt="Bằng tốt nghiệp và mũ cử nhân"
+                fill
+                sizes="(max-w-768px) 100px, 140px"
+                className="object-contain"
+              />
+            </div>
+          </section>
+
+          {/* Support Journey Column (lg:col-span-7) */}
+          <section
+            aria-labelledby="journey-heading"
+            className="bg-white border border-border rounded-2xl p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-7"
+          >
+            <div className="text-center mb-8">
+              <h2
+                id="journey-heading"
+                className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
+              >
+                KVC Global đồng hành cùng bạn
+              </h2>
+              <div className="mx-auto mt-2 h-0.5 w-12 bg-brand-gold rounded-full" />
+            </div>
+
+            {/* Steps flow (horizontal on desktop/lg, vertical on mobile/md) */}
+            <div className="flex flex-col lg:flex-row items-stretch justify-between gap-2 mt-4">
+              {SUPPORT_STEPS.map((step, idx) => {
+                const Icon = step.icon
+                const isLast = idx === SUPPORT_STEPS.length - 1
+                return (
+                  <div key={idx} className="flex flex-col lg:flex-row items-center w-full lg:w-auto flex-1">
+                    {/* Step Card */}
+                    <div className="flex flex-col items-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-xl p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[160px] w-full flex-1 justify-center">
+                      <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-light group-hover:bg-white transition-colors shrink-0">
+                        <Icon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
+                      </div>
+                      <span className="font-body text-[12px] md:text-[13px] font-bold text-brand-blue leading-normal">
+                        {step.text}
+                      </span>
+                    </div>
+
+                    {/* Arrow connector */}
+                    {!isLast && (
+                      <div className="my-2 lg:my-0 lg:mx-2 shrink-0 self-center">
+                        {/* Downward arrow on mobile/tablet */}
+                        <svg
+                          className="h-5 w-5 text-muted-foreground/60 block lg:hidden animate-pulse"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                        {/* Rightward arrow on desktop */}
+                        <svg
+                          className="h-5 w-5 text-muted-foreground/60 hidden lg:block"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </section>
         </div>
