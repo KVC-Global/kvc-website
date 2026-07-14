@@ -47,7 +47,7 @@ const SOCIAL_LINKS = [
 
 export default function ComingSoonPage() {
   return (
-    <main className="relative isolate h-svh w-full overflow-hidden bg-black">
+    <main className="relative isolate min-h-svh w-full overflow-x-hidden bg-black md:h-svh md:overflow-hidden">
       {/* Background image */}
       <Image
         src="/images/coming-soon-bg.png"
@@ -56,7 +56,7 @@ export default function ComingSoonPage() {
         fill
         priority
         sizes="100vw"
-        className="scale-x-[-1] object-cover object-center opacity-80"
+        className="scale-x-[-1] bg-[left_-20px_center] bg-no-repeat object-cover object-[position:15%_center] opacity-80"
       />
       {/* Dark overlay improves text contrast over the background image */}
       <div aria-hidden className="absolute inset-0 z-0 bg-black/55" />
@@ -80,7 +80,7 @@ export default function ComingSoonPage() {
         </defs>
       </svg>
 
-      <div className="relative z-10 mx-auto grid h-svh w-full grid-cols-1 gap-y-8 px-6 py-6 sm:px-10 sm:py-8 md:grid-cols-2 md:items-stretch md:gap-x-8 md:px-12 md:py-15 md:pl-25 lg:gap-x-12 lg:py-24 lg:pl-28 xl:px-16 2xl:px-20 2xl:pl-35">
+      <div className="relative z-10 mx-auto grid min-h-svh w-full grid-cols-1 gap-y-8 px-6 py-6 sm:px-10 sm:py-8 md:h-svh md:grid-cols-2 md:items-stretch md:gap-x-8 md:px-12 md:py-15 md:pl-25 lg:gap-x-12 lg:py-10 lg:pl-28 xl:px-16 xl:pl-30 2xl:px-20 2xl:pl-35">
         {/* LEFT COLUMN — Logo, Title, Contact Us, Get Social */}
         <div className="contents md:flex md:flex-col">
           {/* Logo: icon + wordmark, aligned together */}
@@ -96,7 +96,7 @@ export default function ComingSoonPage() {
           </div>
 
           {/* Title — left-padded to align with "KVC Global" wordmark */}
-          <h1 className="order-2 mt-5 font-display text-[2.5rem] leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-5xl md:mt-6 md:text-[2.75rem] md:leading-[0.95] lg:mt-18 lg:text-[3.25rem] xl:text-[4rem] 2xl:text-[5rem]">
+          <h1 className="order-2 mt-5 font-display text-[2.5rem] leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-5xl md:mt-6 md:text-[2.75rem] md:leading-[0.95] lg:mt-18 lg:text-[3.25rem] xl:text-[4rem] 2xl:text-[6rem]">
             <span className="whitespace-nowrap">We&apos;re Building</span>
             <br />
             Something
@@ -115,7 +115,7 @@ export default function ComingSoonPage() {
             </Link>
 
             <div className="flex w-full max-w-xl items-center gap-2 whitespace-nowrap sm:gap-4">
-              <h2 className="shrink-0 text-sm font-bold tracking-wider text-white uppercase md:text-3xl">
+              <h2 className="shrink-0 text-xl font-bold tracking-wider text-white uppercase md:text-3xl">
                 Get Social
               </h2>
               <span
@@ -137,7 +137,7 @@ export default function ComingSoonPage() {
                       }
                       className="inline-flex h-8 w-8 items-center justify-center transition-opacity hover:opacity-80 sm:h-12 sm:w-12"
                     >
-                      <Icon className="h-7 w-7 sm:h-9 sm:w-9" aria-hidden />
+                      <Icon className="h-6 w-6 sm:h-9 sm:w-9" aria-hidden />
                     </a>
                   </li>
                 ))}
@@ -148,15 +148,17 @@ export default function ComingSoonPage() {
 
         {/* RIGHT COLUMN — 3D GIF, Description, Stay tuned */}
         <div className="contents md:flex md:flex-col">
-          <Image
-            src="/coming-soon-3d.gif"
-            alt="Coming soon"
-            width={1920}
-            height={1080}
-            unoptimized
-            style={{ filter: "url(#chroma-key-green)" }}
-            className="order-3 h-56 w-full shrink-0 object-contain sm:h-64 md:h-72 lg:h-80 xl:h-[26rem] 2xl:h-[32rem]"
-          />
+          <div className="order-3 flex w-full items-center justify-end pl-8">
+            <Image
+              src="/coming-soon-3d.gif"
+              alt="Coming soon"
+              width={1920}
+              height={1080}
+              unoptimized
+              style={{ filter: "url(#chroma-key-green)" }}
+              className="h-56 w-auto max-w-full shrink-0 object-contain sm:h-64 md:h-72 lg:h-80 xl:h-[24rem] 2xl:h-[30rem]"
+            />
+          </div>
 
           {/* Bottom of right col: Description + Stay tuned, aligned with left col */}
           <div className="order-4 mt-auto flex min-h-[12rem] flex-col items-start justify-between gap-6 pt-4 pb-4 text-left md:min-h-[18rem] md:gap-10 md:pt-6 md:pb-10 lg:ml-12 2xl:ml-30">
