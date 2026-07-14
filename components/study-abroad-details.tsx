@@ -8,6 +8,15 @@ import {
   Briefcase,
   TrendingUp,
   Check,
+  Hotel,
+  Utensils,
+  Truck,
+  Laptop,
+  Brain,
+  Bot,
+  ShieldCheck,
+  PlusCircle,
+  Lightbulb,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -57,10 +66,52 @@ const BENEFITS = [
   },
 ] as const
 
+const MAJORS = [
+  {
+    name: "Tourism & Hospitality Management",
+    icon: Hotel,
+  },
+  {
+    name: "Food & Beverage Management / Operations",
+    icon: Utensils,
+  },
+  {
+    name: "Logistics & Retail Management",
+    icon: Truck,
+  },
+  {
+    name: "Công nghệ Thông tin (IT)",
+    icon: Laptop,
+  },
+  {
+    name: "Trí tuệ nhân tạo (AI)",
+    icon: Brain,
+  },
+  {
+    name: "Robotics",
+    icon: Bot,
+  },
+  {
+    name: "An ninh mạng (Cybersecurity)",
+    icon: ShieldCheck,
+  },
+  {
+    name: "Và nhiều ngành hấp dẫn khác",
+    icon: PlusCircle,
+  },
+] as const
+
+const REQUIREMENTS = [
+  "Tốt nghiệp THPT",
+  "18 - 35 tuổi",
+  "Có khả năng giao tiếp tiếng Anh cơ bản (không bắt buộc IELTS/TOEFL ngay từ đầu)",
+  "Đáp ứng các yêu cầu về sức khỏe và nhân thân theo quy định",
+] as const
+
 export function StudyAbroadDetails({ className }: { className?: string }) {
   return (
     <div className={cn("w-full bg-brand-light py-16 md:py-24", className)}>
-      <div className="mx-auto w-full max-w-[1280px] px-6">
+      <div className="mx-auto w-full px-6">
         {/* Section 1: Introduction (Diploma 6+6 là gì?) */}
         <section
           aria-labelledby="intro-heading"
@@ -161,6 +212,100 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
             })}
           </div>
         </section>
+
+        {/* Section 3: Popular Majors & Entry Requirements */}
+        <div className="mt-20 md:mt-28 grid grid-cols-1 gap-8 lg:grid-cols-12">
+          {/* Popular Majors Column */}
+          <section
+            aria-labelledby="majors-heading"
+            className="bg-white border border-border rounded-2xl p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-6"
+          >
+            <div className="text-center mb-8">
+              <h2
+                id="majors-heading"
+                className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
+              >
+                Ngành học phổ biến
+              </h2>
+              <div className="mx-auto mt-2 h-0.5 w-12 bg-brand-gold rounded-full" />
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              {MAJORS.map((major, idx) => {
+                const Icon = major.icon
+                return (
+                  <div
+                    key={idx}
+                    className="flex flex-col items-center justify-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-xl p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[140px]"
+                  >
+                    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-light group-hover:bg-white transition-colors">
+                      <Icon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
+                    </div>
+                    <span className="font-heading text-[12px] md:text-[13px] font-bold text-brand-blue leading-tight">
+                      {major.name}
+                    </span>
+                  </div>
+                )
+              })}
+            </div>
+          </section>
+
+          {/* Entry Requirements Column */}
+          <section
+            aria-labelledby="reqs-heading"
+            className="bg-white border border-border rounded-2xl p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-6"
+          >
+            <div className="flex flex-col md:flex-row gap-6 relative h-full">
+              {/* Left Content Area */}
+              <div className="flex-1 z-10 flex flex-col justify-between gap-6 lg:max-w-[62%]">
+                <div>
+                  <div className="text-center md:text-left mb-8">
+                    <h2
+                      id="reqs-heading"
+                      className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
+                    >
+                      Điều kiện tham gia
+                    </h2>
+                    <div className="mt-2 h-0.5 w-12 bg-brand-gold rounded-full mx-auto md:mx-0" />
+                  </div>
+
+                  <ul className="space-y-4" aria-label="Điều kiện tham gia">
+                    {REQUIREMENTS.map((req, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-emerald-500 bg-emerald-50 text-emerald-600">
+                          <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                        </div>
+                        <span className="font-body text-[14px] md:text-[15px] leading-relaxed text-brand-dark/90">
+                          {req}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Info Tip Banner */}
+                <div className="bg-[#FFF8EE] border border-[#FFE7C4] rounded-xl p-4 flex gap-3 items-start mt-6">
+                  <Lightbulb className="h-5 w-5 text-brand-gold shrink-0 mt-0.5" strokeWidth={2} />
+                  <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal">
+                    KVC Global sẽ tư vấn chi tiết điều kiện đầu vào phù hợp với từng trường và ngành học học viên quan tâm.
+                  </p>
+                </div>
+              </div>
+
+              {/* Student Portrait Image */}
+              <div className="relative h-[250px] w-full shrink-0 flex items-end justify-center md:absolute md:bottom-0 md:right-0 md:h-[95%] md:w-[35%] md:pointer-events-none lg:w-[35%] lg:h-[102%] lg:-mr-4 lg:-mb-8">
+                <Image
+                  src="/images/student-portrait.jpg"
+                  alt="Du học sinh KVC Global"
+                  width={300}
+                  height={400}
+                  priority
+                  className="object-contain object-bottom h-full w-auto"
+                />
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   )
