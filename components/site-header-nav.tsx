@@ -47,7 +47,7 @@ export function SiteHeaderNav({ className }: { className?: string }) {
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "absolute -bottom-1 left-1/2 h-[2px] w-full origin-center -translate-x-1/2 rounded-full bg-brand-blue transition-transform duration-300 ease-out",
+                      "absolute -bottom-1 left-1/2 h-[2px] w-full origin-center -translate-x-1/2 rounded-full bg-secondary transition-transform duration-300 ease-out",
                       active
                         ? "scale-x-100"
                         : "scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100"
