@@ -255,7 +255,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
             aria-labelledby="reqs-heading"
             className="bg-white border border-border rounded-2xl p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-6"
           >
-            <div className="flex flex-col md:flex-row gap-6 relative h-full">
+            <div className="flex flex-col md:flex-row gap-6 h-full">
               {/* Left Content Area */}
               <div className="flex-1 z-10 flex flex-col justify-between gap-6 lg:max-w-[62%]">
                 <div>
@@ -292,17 +292,34 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 </div>
               </div>
 
-              {/* Student Portrait Image */}
-              <div className="relative h-[250px] w-full shrink-0 flex items-end justify-center md:absolute md:bottom-0 md:right-0 md:h-[95%] md:w-[35%] md:pointer-events-none lg:w-[35%] lg:h-[102%] lg:-mr-4 lg:-mb-8">
+              {/* Mobile Portrait Image Container (visible only on mobile) */}
+              <div className="relative h-[250px] w-full shrink-0 flex items-end justify-center overflow-hidden rounded-xl md:hidden">
                 <Image
                   src="/images/student-portrait.jpg"
                   alt="Du học sinh KVC Global"
-                  width={300}
-                  height={400}
+                  fill
                   priority
-                  className="object-contain object-bottom h-full w-auto"
+                  sizes="100vw"
+                  className="object-cover object-bottom"
                 />
               </div>
+            </div>
+
+            {/* Desktop Portrait Image Container (absolute positioned relative to section, visible only on desktop) */}
+            <div className="absolute inset-y-0 right-0 hidden md:block md:w-[38%] lg:w-[35%] overflow-hidden z-0 pointer-events-none">
+              <Image
+                src="/images/student-portrait.jpg"
+                alt="Du học sinh KVC Global"
+                fill
+                priority
+                sizes="25vw"
+                className="object-cover object-bottom"
+              />
+              {/* Faded overlay blending the image's left edge into the card's white background */}
+              <div
+                aria-hidden="true"
+                className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white via-white/40 to-transparent lg:w-28"
+              />
             </div>
           </section>
         </div>
