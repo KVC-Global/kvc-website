@@ -392,12 +392,12 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
             </div>
 
             {/* Graduation Cap illustration (absolute-positioned at bottom right corner, low opacity, transparent background) */}
-            <div className="absolute bottom-0 right-0 h-[110px] w-[110px] sm:h-[130px] sm:w-[130px] lg:h-[145px] lg:w-[145px] pointer-events-none z-0 opacity-40">
+            <div className="absolute bottom-0 right-0 h-[150px] w-[150px] sm:h-[180px] sm:w-[180px] lg:h-[205px] lg:w-[205px] pointer-events-none z-0 opacity-40">
               <Image
                 src="/images/graduation-cap-transparent.png"
                 alt="Bằng tốt nghiệp và mũ cử nhân"
                 fill
-                sizes="(max-w-768px) 110px, 145px"
+                sizes="(max-w-768px) 150px, 205px"
                 className="object-contain object-bottom object-right"
               />
             </div>
