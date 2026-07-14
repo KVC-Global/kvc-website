@@ -86,21 +86,13 @@ export default function ComingSoonPage() {
           {/* Logo: icon + wordmark, aligned together */}
           <div className="order-1 mt-10 flex items-center gap-3 sm:gap-4 2xl:mt-14">
             <Image
-              src="/images/icon-logo/white-logo.png"
+              src="/images/new-log.svg"
               alt="KVC Global"
-              width={200}
-              height={200}
+              width={240}
+              height={80}
               priority
-              className="h-12 w-auto shrink-0 object-contain sm:h-14 md:h-14 lg:h-16"
+              className="h-10 w-auto shrink-0 object-contain sm:h-12 md:h-12 lg:h-14"
             />
-            <div className="flex flex-col leading-none">
-              <span className="font-display text-base font-bold tracking-[0.25em] text-white uppercase sm:text-lg md:text-lg lg:text-xl">
-                KVC Global
-              </span>
-              <span className="mt-1 text-[10px] font-medium tracking-[0.25em] text-white/80 uppercase sm:text-[11px] md:text-xs">
-                Begin Something Greater
-              </span>
-            </div>
           </div>
 
           {/* Title — left-padded to align with "KVC Global" wordmark */}
