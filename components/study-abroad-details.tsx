@@ -26,6 +26,9 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronDown,
+  GraduationCap,
+  IdCard,
+  Building2,
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -216,6 +219,33 @@ const FAQS = [
   {
     question: "Có thể chuyển ngành khi đã nhập học không?",
     answer: "Trong thời gian học lý thuyết ở những tuần đầu tiên, học viên có thể làm đơn xin chuyển đổi ngành học nếu nhận thấy bản thân phù hợp hơn với ngành khác. KVC Global và nhà trường sẽ hướng dẫn các thủ tục hồ sơ cần thiết để chuyển đổi thuận tiện nhất mà không ảnh hưởng tới tiến độ visa du học.",
+  },
+] as const
+
+const RELATED_SERVICES = [
+  {
+    title: "Du học Singapore",
+    ctaText: "Tìm hiểu ngay",
+    icon: GraduationCap,
+    href: "#",
+  },
+  {
+    title: "Work Holiday Pass",
+    ctaText: "Khám phá ngay",
+    icon: Briefcase,
+    href: "#",
+  },
+  {
+    title: "Permanent Residency (PR)",
+    ctaText: "Tìm hiểu ngay",
+    icon: IdCard,
+    href: "#",
+  },
+  {
+    title: "Thành lập doanh nghiệp",
+    ctaText: "Tìm hiểu ngay",
+    icon: Building2,
+    href: "#",
   },
 ] as const
 
@@ -800,6 +830,52 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 )
               })}
             </div>
+          </div>
+        </section>
+
+        {/* Section 7: Related Services Section */}
+        <section
+          aria-labelledby="related-services-heading"
+          className="mt-20 md:mt-28"
+        >
+          <div className="text-center mb-10">
+            <h2
+              id="related-services-heading"
+              className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
+            >
+              Các dịch vụ liên quan
+            </h2>
+            <div className="mx-auto mt-2.5 h-0.5 w-12 bg-brand-gold rounded-full" />
+          </div>
+
+          {/* Related Services Grid */}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mt-8">
+            {RELATED_SERVICES.map((service, index) => {
+              const Icon = service.icon
+              return (
+                <a
+                  key={index}
+                  href={service.href}
+                  className="flex items-center gap-4 bg-white border border-border/60 rounded-2xl p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] hover:-translate-y-0.5 transition-all duration-300 group cursor-pointer"
+                >
+                  {/* Icon Container */}
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-light group-hover:bg-brand-blue/5 transition-colors duration-300">
+                    <Icon className="h-5 w-5 text-brand-blue group-hover:scale-105 transition-transform duration-300" strokeWidth={1.75} />
+                  </div>
+
+                  {/* Text Container */}
+                  <div className="flex flex-col">
+                    <span className="font-heading text-[14px] md:text-[15px] font-bold text-brand-blue leading-snug group-hover:text-brand-gold transition-colors duration-300">
+                      {service.title}
+                    </span>
+                    <span className="font-body text-xs font-semibold text-brand-gold flex items-center gap-1.5 mt-1 leading-none group-hover:translate-x-0.5 transition-transform duration-300">
+                      {service.ctaText}
+                      <span className="text-[10px]">→</span>
+                    </span>
+                  </div>
+                </a>
+              )
+            })}
           </div>
         </section>
       </div>
