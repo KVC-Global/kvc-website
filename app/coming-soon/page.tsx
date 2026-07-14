@@ -162,9 +162,12 @@ export default function ComingSoonPage() {
 
           {/* Bottom of right col: Description + Stay tuned, aligned with left col */}
           <div className="order-4 mt-auto flex min-h-[12rem] flex-col items-start justify-between gap-6 pt-4 pb-4 text-left md:min-h-[18rem] md:gap-10 md:pt-6 md:pb-10 lg:ml-12 2xl:ml-30">
-            <p className="max-w-md font-body text-lg leading-relaxed text-white sm:text-xl lg:text-xl xl:text-2xl">
-              Our website is coming soon. KVC Global continues to guide your
-              journey to study, work and grow in Singapore.
+            <p className="max-w-[500px] font-body text-lg leading-relaxed break-words text-white sm:text-xl lg:text-xl xl:text-2xl">
+              Our website is coming soon.{" "}
+              <span className="whitespace-nowrap">KVC Global,</span>
+              <br />
+              continues to guide your journey to study, work and grow in
+              Singapore.
             </p>
 
             <p className="font-body text-2xl font-medium text-white sm:text-3xl">
