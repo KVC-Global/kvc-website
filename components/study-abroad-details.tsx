@@ -209,7 +209,7 @@ const FAQS = [
     answer: "Sau khi kết thúc 6 tháng thực tập, nếu hoàn thành tốt công việc và doanh nghiệp có nhu cầu, học viên có thể được gia hạn hợp đồng làm việc chính thức dưới dạng visa S Pass hoặc EP. Ngoài ra, học viên cũng có thể lựa chọn học chuyển tiếp liên thông lên Cử nhân (1.5 - 2 năm nữa) để nhận bằng Đại học quốc tế.",
   },
   {
-    question: "Trợ cấp thực tập 800 - 1.500 SGD/tháng tại những doanh nghiệp nào?",
+    question: "Trợ cấp 800-1.500 SGD/tháng tại những doanh nghiệp nào?",
     answer: "Học viên được thực tập tại các đối tác liên kết uy tín của KVC Global và nhà trường tại Singapore, bao gồm các chuỗi khách sạn 4-5 sao quốc tế, các chuỗi nhà hàng ẩm thực lớn, các doanh nghiệp logistics hàng đầu hoặc các công ty dịch vụ/thương mại điện tử công nghệ.",
   },
   {
@@ -290,7 +290,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           className="grid grid-cols-1 items-center gap-10 md:gap-16 lg:grid-cols-12"
         >
           {/* Left Column: Image */}
-          <div className="relative aspect-16/10 w-full overflow-hidden rounded-xl shadow-lg lg:col-span-5">
+          <div className="relative aspect-16/10 w-full overflow-hidden rounded-lg shadow-lg lg:col-span-5">
             <Image
               src="/images/singapore-merlion-sunset.jpg"
               alt="Tượng Merlion và Marina Bay Sands tại Singapore"
@@ -363,7 +363,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               return (
                 <div
                   key={index}
-                  className="flex flex-col items-center rounded-xl border border-border bg-white p-8 text-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-10px_rgba(10,37,64,0.1)]"
+                  className="flex flex-col items-center rounded-lg border border-border bg-white p-8 text-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-10px_rgba(10,37,64,0.1)]"
                 >
                   {/* Icon Container */}
                   <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-brand-light">
@@ -390,7 +390,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           {/* Popular Majors Column */}
           <section
             aria-labelledby="majors-heading"
-            className="bg-white border border-border rounded-xl p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-6"
+            className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-6"
           >
             <div className="text-center mb-8">
               <h2
@@ -408,7 +408,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 return (
                   <div
                     key={idx}
-                    className="flex flex-col items-center justify-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-lg p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[140px]"
+                    className="flex flex-col items-center justify-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-md p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[140px]"
                   >
                     <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-light group-hover:bg-white transition-colors">
                       <Icon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
@@ -425,7 +425,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           {/* Entry Requirements Column */}
           <section
             aria-labelledby="reqs-heading"
-            className="bg-white border border-border rounded-xl p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-6"
+            className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-6"
           >
             <div className="flex flex-col md:flex-row gap-6 h-full">
               {/* Left Content Area */}
@@ -456,7 +456,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 </div>
 
                 {/* Info Tip Banner */}
-                <div className="bg-[#FFF8EE] border border-[#FFE7C4] rounded-lg p-4 flex gap-3 items-start mt-6">
+                <div className="bg-[#FFF8EE] border border-[#FFE7C4] rounded-md p-4 flex gap-3 items-start mt-6">
                   <Lightbulb className="h-5 w-5 text-brand-gold shrink-0 mt-0.5" strokeWidth={2} />
                   <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal">
                     KVC Global sẽ tư vấn chi tiết điều kiện đầu vào phù hợp với từng trường và ngành học học viên quan tâm.
@@ -465,7 +465,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               </div>
 
               {/* Mobile Portrait Image Container (visible only on mobile) */}
-              <div className="relative h-[250px] w-full shrink-0 flex items-end justify-center overflow-hidden rounded-lg md:hidden">
+              <div className="relative h-[250px] w-full shrink-0 flex items-end justify-center overflow-hidden rounded-md md:hidden">
                 <Image
                   src="/images/student-portrait.jpg"
                   alt="Du học sinh KVC Global"
@@ -501,7 +501,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           {/* Prospects Column (lg:col-span-5) */}
           <section
             aria-labelledby="prospects-heading"
-            className="bg-white border border-border rounded-xl p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-5 min-h-[380px]"
+            className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-5 min-h-[380px]"
           >
             <div className="relative z-10 flex flex-col justify-between h-full max-w-[72%] sm:max-w-[75%]">
               <div>
@@ -543,7 +543,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           {/* Support Journey Column (lg:col-span-7) */}
           <section
             aria-labelledby="journey-heading"
-            className="bg-white border border-border rounded-xl p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-7"
+            className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-7"
           >
             <div className="text-center mb-8">
               <h2
@@ -563,7 +563,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 return (
                   <div key={idx} className="flex flex-col lg:flex-row items-center w-full lg:w-auto flex-1">
                     {/* Step Card */}
-                    <div className="flex flex-col items-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-lg p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[160px] w-full flex-1 justify-center">
+                    <div className="flex flex-col items-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-md p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[160px] w-full flex-1 justify-center">
                       <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-light group-hover:bg-white transition-colors shrink-0">
                         <Icon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
                       </div>
@@ -638,7 +638,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               {TESTIMONIALS.map((testi, idx) => (
                 <div
                   key={idx}
-                  className="snap-start shrink-0 w-[90%] sm:w-[46%] lg:w-[31.5%] border border-border bg-white rounded-xl p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] transition-all duration-300 relative flex flex-col justify-between overflow-hidden min-h-[220px]"
+                  className="snap-start shrink-0 w-[90%] sm:w-[46%] lg:w-[31.5%] border border-border bg-white rounded-lg p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] transition-all duration-300 relative flex flex-col justify-between overflow-hidden min-h-[220px]"
                 >
                   {/* Large Quote symbol decoration in corner */}
                   <span
@@ -753,7 +753,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 return (
                   <div
                     key={globalIdx}
-                    className="bg-white border border-border/60 rounded-xl overflow-hidden transition-all duration-300 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]"
+                    className="bg-white border border-border/60 rounded-lg overflow-hidden transition-all duration-300 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]"
                   >
                     <button
                       onClick={() => toggleFaq(globalIdx)}
@@ -796,7 +796,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 return (
                   <div
                     key={globalIdx}
-                    className="bg-white border border-border/60 rounded-xl overflow-hidden transition-all duration-300 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]"
+                    className="bg-white border border-border/60 rounded-lg overflow-hidden transition-all duration-300 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)]"
                   >
                     <button
                       onClick={() => toggleFaq(globalIdx)}
@@ -856,7 +856,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 <a
                   key={index}
                   href={service.href}
-                  className="flex items-center gap-4 bg-white border border-border/60 rounded-xl p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] hover:-translate-y-0.5 transition-all duration-300 group cursor-pointer"
+                  className="flex items-center gap-4 bg-white border border-border/60 rounded-lg p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] hover:-translate-y-0.5 transition-all duration-300 group cursor-pointer"
                 >
                   {/* Icon Container */}
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-light group-hover:bg-brand-blue/5 transition-colors duration-300">

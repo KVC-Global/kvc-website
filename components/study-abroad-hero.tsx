@@ -78,7 +78,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
         </nav>
 
         {/* Mobile/Tablet Image Display (Shown only on small/medium screens) */}
-        <div className="relative mb-8 h-[240px] w-full overflow-hidden rounded-xl sm:h-[360px] md:h-[420px] lg:hidden">
+        <div className="relative mb-8 h-[240px] w-full overflow-hidden rounded-lg sm:h-[360px] md:h-[420px] lg:hidden">
           <Image
             src="/images/study-abroad-hero.jpg"
             alt="Nhóm du học sinh tại Singapore"
@@ -154,7 +154,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
 
         {/* Stats Grid Container */}
         <div className="relative z-20 mt-12 w-full lg:mt-16 xl:mt-20">
-          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border shadow-[0_12px_40px_-15px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:grid-cols-2 lg:grid-cols-4 lg:w-fit">
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border shadow-[0_12px_40px_-15px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:grid-cols-2 lg:grid-cols-4 lg:w-fit">
             {STATS.map((stat, idx) => {
               const Icon = stat.icon
               return (
@@ -162,7 +162,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
                   key={idx}
                   className="flex items-center gap-4 bg-white px-5 py-4 transition-all duration-300 ease-out hover:bg-brand-light sm:px-6 sm:py-5 lg:min-w-[240px]"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-light">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-light">
                     <Icon
                       className="h-5 w-5 text-brand-gold"
                       strokeWidth={2}
