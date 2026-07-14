@@ -84,7 +84,7 @@ export default function ComingSoonPage() {
         {/* LEFT COLUMN — Logo, Title, Contact Us, Get Social */}
         <div className="contents md:flex md:flex-col">
           {/* Logo: icon + wordmark, aligned together */}
-          <div className="order-1 mt-10 flex items-center gap-3 sm:gap-4 2xl:mt-14">
+          <div className="order-1 mt-10 flex items-center gap-3 sm:mt-10 sm:gap-4 2xl:mt-14">
             <Image
               src="/images/new-log.svg"
               alt="KVC Global"
@@ -105,7 +105,7 @@ export default function ComingSoonPage() {
           </h1>
 
           {/* Bottom of left col: Contact Us + Get Social, aligned with right col */}
-          <div className="order-7 mt-auto flex min-h-[12rem] flex-col justify-between gap-6 pt-4 pb-4 md:min-h-[18rem] md:gap-10 md:pt-6 md:pb-10">
+          <div className="order-7 mt-auto flex min-h-[12rem] flex-col justify-between gap-3 pt-4 pb-4 md:min-h-[18rem] md:gap-10 md:pt-6 md:pb-10">
             <Link
               href="mailto:info@kvcglobal.vn"
               className="inline-flex w-fit items-center justify-center border-2 px-10 py-3 text-sm font-bold tracking-wider text-white uppercase transition-opacity hover:opacity-80 sm:text-base"
@@ -161,7 +161,7 @@ export default function ComingSoonPage() {
           </div>
 
           {/* Bottom of right col: Description + Stay tuned, aligned with left col */}
-          <div className="order-4 mt-auto flex min-h-[12rem] flex-col items-start justify-between gap-6 pt-4 pb-4 text-left md:min-h-[18rem] md:gap-10 md:pt-6 md:pb-10 lg:ml-12 2xl:ml-30">
+          <div className="order-4 mt-auto flex min-h-[12rem] flex-col items-start justify-between gap-3 pt-4 pb-4 text-left md:min-h-[18rem] md:gap-10 md:pt-6 md:pb-10 lg:ml-12 2xl:ml-30">
             <p className="max-w-[500px] font-body text-lg leading-relaxed break-words text-white sm:text-xl lg:text-xl xl:text-2xl">
               Our website is coming soon.{" "}
               <span className="whitespace-nowrap">KVC Global,</span>
