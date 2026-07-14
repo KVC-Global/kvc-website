@@ -57,10 +57,10 @@ function ServiceCard({ service }: { service: Service }) {
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col overflow-hidden rounded-sm bg-white p-5 text-foreground shadow-[0_18px_40px_-22px_rgba(10,37,64,0.35)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-brand-blue hover:text-white hover:shadow-[0_28px_60px_-22px_rgba(10,37,64,0.45)]",
+        "group relative flex h-full flex-col overflow-hidden rounded-sm bg-white p-5 text-foreground shadow-[0_18px_40px_-22px_rgba(10,37,64,0.35)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-brand-blue hover:text-white hover:shadow-[0_28px_60px_-22px_rgba(10,37,64,0.45)]"
       )}
     >
-      <h3 className="font-display text-[22px] font-bold leading-tight tracking-tight text-foreground transition-colors duration-300 group-hover:text-white">
+      <h3 className="font-display text-[22px] leading-tight font-bold tracking-tight text-foreground transition-colors duration-300 group-hover:text-white">
         {service.title}
       </h3>
       <p className="mt-2.5 text-[15px] leading-relaxed text-foreground/75 transition-colors duration-300 group-hover:text-white/80">
@@ -79,7 +79,7 @@ function ServiceCard({ service }: { service: Service }) {
 
       <a
         href={service.href}
-        className="mt-auto inline-flex items-center justify-between gap-3 pt-5 text-sm font-semibold uppercase tracking-[0.16em] text-foreground transition-colors duration-300 group-hover:text-secondary"
+        className="mt-auto inline-flex items-center justify-between gap-3 pt-5 text-sm font-semibold tracking-[0.16em] text-foreground uppercase transition-colors duration-300 group-hover:text-secondary"
       >
         <span>Read More</span>
         <span
@@ -101,12 +101,12 @@ export function SiteServices({ className }: { className?: string }) {
     >
       <Container>
         <div className="text-center">
-          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.28em] text-secondary">
+          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-primary uppercase">
             Dịch vụ của chúng tôi
           </p>
           <h2
             id="services-heading"
-            className="mt-3 font-display text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-[40px]"
+            className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-foreground sm:text-4xl md:text-[40px]"
           >
             Giải pháp toàn diện cho tương lai của bạn
           </h2>

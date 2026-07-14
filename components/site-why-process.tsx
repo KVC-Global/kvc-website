@@ -69,20 +69,17 @@ const STEPS: ReadonlyArray<Step> = [
   {
     icon: FolderOpen,
     title: "Chuẩn bị hồ sơ",
-    description:
-      "Hỗ trợ chuẩn bị và hoàn thiện hồ sơ chỉn chu, đầy đủ.",
+    description: "Hỗ trợ chuẩn bị và hoàn thiện hồ sơ chỉn chu, đầy đủ.",
   },
   {
     icon: Send,
     title: "Nộp hồ sơ & theo dõi",
-    description:
-      "Nộp hồ sơ và theo dõi tiến độ xử lý trong suốt quá trình.",
+    description: "Nộp hồ sơ và theo dõi tiến độ xử lý trong suốt quá trình.",
   },
   {
     icon: BadgeCheck,
     title: "Nhận kết quả & hỗ trợ sau",
-    description:
-      "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài.",
+    description: "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài.",
   },
 ] as const
 
@@ -106,13 +103,7 @@ function ReasonItem({ reason }: { reason: Reason }) {
   )
 }
 
-function StepItem({
-  step,
-  index,
-}: {
-  step: Step
-  index: number
-}) {
+function StepItem({ step, index }: { step: Step; index: number }) {
   const Icon = step.icon
   const num = String(index + 1).padStart(2, "0")
   return (
@@ -144,12 +135,12 @@ export function SiteWhyProcess({ className }: { className?: string }) {
     >
       <Container>
         <div className="text-center">
-          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.28em] text-secondary">
+          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-primary uppercase">
             Vì sao chọn KVC Global?
           </p>
           <h2
             id="why-process-heading"
-            className="mt-3 font-display text-3xl font-bold leading-[1.15] tracking-tight text-brand-blue sm:text-4xl md:text-[40px]"
+            className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]"
           >
             Đối tác đáng tin cậy cho hành trình của bạn
           </h2>
@@ -166,10 +157,10 @@ export function SiteWhyProcess({ className }: { className?: string }) {
         </div>
 
         <div className="mt-20 text-center sm:mt-24">
-          <p className="font-sans text-[13px] font-bold uppercase tracking-[0.28em] text-secondary">
+          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-primary uppercase">
             Quy trình đồng hành
           </p>
-          <h3 className="mt-3 font-display text-3xl font-bold leading-[1.15] tracking-tight text-brand-blue sm:text-4xl md:text-[40px]">
+          <h3 className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]">
             5 bước đơn giản – Hành trình vững chắc
           </h3>
           <span
@@ -185,7 +176,7 @@ export function SiteWhyProcess({ className }: { className?: string }) {
         >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute left-[10%] right-[10%] top-[35px] hidden h-px bg-brand-blue/15 lg:block"
+            className="pointer-events-none absolute top-[35px] right-[10%] left-[10%] hidden h-px bg-brand-blue/15 lg:block"
           />
           {STEPS.map((step, index) => (
             <div key={step.title} role="listitem">

@@ -218,9 +218,6 @@ export function SitePartners({ className }: { className?: string }) {
     >
       <Container>
         <div className="text-center">
-          <p className="font-sans text-[11px] font-semibold tracking-[0.28em] text-secondary uppercase">
-            Đối tác
-          </p>
           <h2
             id="partners-heading"
             className="mt-3 font-display text-2xl font-bold tracking-[0.18em] text-foreground uppercase sm:text-3xl"

@@ -116,7 +116,7 @@ function Stars({ count = 5, size = 14 }: { count?: number; size?: number }) {
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-        <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-7 text-brand-blue shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:p-8 sm:min-h-[300px]">
+    <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-7 text-brand-blue shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:min-h-[300px] sm:p-8">
       <div className="flex items-center gap-3">
         <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/40">
           <Image
@@ -200,7 +200,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
           <div>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-secondary uppercase">
+                <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-white uppercase">
                   Câu chuyện thành công
                 </p>
                 <h2
