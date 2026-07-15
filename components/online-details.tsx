@@ -33,7 +33,7 @@ import {
 import { motion, useInView, Variants } from "framer-motion"
 
 import { cn } from "@/lib/utils"
-
+import { Container } from "@/components/ui/container"
 const ENIcon = (props: any) => (
   <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-brand-blue font-heading text-[11px] font-extrabold text-brand-blue tracking-tight select-none">
     EN
@@ -205,7 +205,7 @@ export function OnlineDetails({ className }: { className?: string }) {
 
   return (
     <div className={cn("w-full bg-brand-light py-16 md:py-24", className)}>
-      <div className="mx-auto w-full max-w-[1280px] px-6">
+      <Container>
         {/* Section 1: Introduction */}
         <motion.section
           variants={staggerContainer}
@@ -789,7 +789,7 @@ export function OnlineDetails({ className }: { className?: string }) {
             })}
           </div>
         </motion.section>
-      </div>
+      </Container>
     </div>
   )
 }

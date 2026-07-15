@@ -11,7 +11,7 @@ import {
 import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
-
+import { Container } from "@/components/ui/container"
 const STATS = [
   {
     icon: Clock,
@@ -59,7 +59,7 @@ export function OnlineHero({ className }: { className?: string }) {
       </div>
 
       {/* Main Content Container */}
-      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 py-8 md:py-16 lg:py-20">
+      <Container className="relative z-10 py-8 md:py-16 lg:py-20">
         {/* Breadcrumb Navigation */}
         <motion.nav
           initial={{ opacity: 0, y: -10 }}
@@ -209,7 +209,7 @@ export function OnlineHero({ className }: { className?: string }) {
             })}
           </div>
         </motion.div>
-      </div>
+      </Container>
     </section>
   )
 }
