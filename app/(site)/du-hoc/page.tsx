@@ -1,7 +1,7 @@
 import { Metadata } from "next"
 
-import { StudyAbroadDetails } from "@/components/study-abroad-details"
-import { StudyAbroadHero } from "@/components/study-abroad-hero"
+import { StudyAbroadDetails } from "@/components/study-abroad/study-abroad-details"
+import { StudyAbroadHero } from "@/components/study-abroad/study-abroad-hero"
 
 export const metadata: Metadata = {
   title: "Du học Singapore - KVC Global",
