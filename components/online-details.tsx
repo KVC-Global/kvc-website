@@ -30,6 +30,7 @@ import {
   IdCard,
   Building2,
 } from "lucide-react"
+import { motion, useInView, Variants } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
@@ -155,6 +156,21 @@ const RELATED_SERVICES = [
   { title: "Hỗ trợ doanh nghiệp", ctaText: "Tìm hiểu", icon: Building2, href: "#" },
 ] as const
 
+const fadeUpVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+}
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+}
+
 export function OnlineDetails({ className }: { className?: string }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [activeIdx, setActiveIdx] = useState(0)
@@ -191,11 +207,15 @@ export function OnlineDetails({ className }: { className?: string }) {
     <div className={cn("w-full bg-brand-light py-16 md:py-24", className)}>
       <div className="mx-auto w-full max-w-[1280px] px-6">
         {/* Section 1: Introduction */}
-        <section
+        <motion.section
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           aria-labelledby="intro-heading"
           className="grid grid-cols-1 items-center gap-10 md:gap-16 lg:grid-cols-12"
         >
-          <div className="relative aspect-16/10 w-full overflow-hidden rounded-lg shadow-lg lg:col-span-5">
+          <motion.div variants={fadeUpVariants} className="relative aspect-16/10 w-full overflow-hidden rounded-lg shadow-lg lg:col-span-5">
             <Image
               src="/images/singapore-merlion-sunset.jpg"
               alt="Học trực tuyến hiệu quả"
@@ -203,9 +223,9 @@ export function OnlineDetails({ className }: { className?: string }) {
               sizes="(max-w-1024px) 100vw, 42vw"
               className="object-cover object-center"
             />
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col lg:col-span-7">
+          <motion.div variants={fadeUpVariants} className="flex flex-col lg:col-span-7">
             <h2
               id="intro-heading"
               className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl"
@@ -241,24 +261,30 @@ export function OnlineDetails({ className }: { className?: string }) {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
             </div>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* Section 2: Benefits */}
-        <section
+        <motion.section
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           aria-labelledby="benefits-heading"
           className="mt-20 md:mt-28"
         >
-          <h2
+          <motion.h2
+            variants={fadeUpVariants}
             id="benefits-heading"
             className="text-center font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl"
           >
             Vì sao nên chọn Học Online?
-          </h2>
+          </motion.h2>
 
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
             {BENEFITS.map((benefit, index) => (
-              <div
+              <motion.div
+                variants={fadeUpVariants}
                 key={index}
                 className="flex flex-col items-center rounded-lg border border-border bg-white p-8 text-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-10px_rgba(10,37,64,0.1)]"
               >
@@ -271,14 +297,21 @@ export function OnlineDetails({ className }: { className?: string }) {
                 <p className="mt-3 font-body text-xs leading-relaxed text-muted-foreground sm:text-sm">
                   {benefit.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
         {/* Section 3: Majors & Requirements */}
-        <div className="mt-8 md:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
-          <section
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mt-8 md:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12"
+        >
+          <motion.section
+            variants={fadeUpVariants}
             aria-labelledby="majors-heading"
             className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-6"
           >
@@ -310,9 +343,10 @@ export function OnlineDetails({ className }: { className?: string }) {
                 )
               })}
             </div>
-          </section>
+          </motion.section>
 
-          <section
+          <motion.section
+            variants={fadeUpVariants}
             aria-labelledby="reqs-heading"
             className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-6"
           >
@@ -375,12 +409,19 @@ export function OnlineDetails({ className }: { className?: string }) {
                 className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white via-white/40 to-transparent lg:w-28"
               />
             </div>
-          </section>
-        </div>
+          </motion.section>
+        </motion.div>
 
         {/* Section 4: Prospects & Support Journey */}
-        <div className="mt-8 md:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
-          <section
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mt-8 md:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12"
+        >
+          <motion.section
+            variants={fadeUpVariants}
             aria-labelledby="prospects-heading"
             className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-5 min-h-[380px]"
           >
@@ -418,9 +459,10 @@ export function OnlineDetails({ className }: { className?: string }) {
                 className="object-contain object-bottom object-right"
               />
             </div>
-          </section>
+          </motion.section>
 
-          <section
+          <motion.section
+            variants={fadeUpVariants}
             aria-labelledby="journey-heading"
             className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-7"
           >
@@ -475,15 +517,19 @@ export function OnlineDetails({ className }: { className?: string }) {
                 )
               })}
             </div>
-          </section>
-        </div>
+          </motion.section>
+        </motion.div>
 
         {/* Section 5: Student Testimonials Slider */}
-        <section
+        <motion.section
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           aria-labelledby="testimonials-heading"
           className="mt-20 md:mt-28"
         >
-          <div className="text-center mb-10">
+          <motion.div variants={fadeUpVariants} className="text-center mb-10">
             <h2
               id="testimonials-heading"
               className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl"
@@ -491,9 +537,9 @@ export function OnlineDetails({ className }: { className?: string }) {
               Học viên nói gì về Khóa Học Online?
             </h2>
             <div className="mx-auto mt-2.5 h-0.5 w-12 bg-brand-gold rounded-full" />
-          </div>
+          </motion.div>
 
-          <div className="relative group/nav px-0 md:px-8">
+          <motion.div variants={fadeUpVariants} className="relative group/nav px-0 md:px-8">
             <button
               onClick={() => handleScroll("left")}
               aria-label="Previous testimonial"
@@ -564,9 +610,9 @@ export function OnlineDetails({ className }: { className?: string }) {
             >
               <ChevronRight className="h-5 w-5" strokeWidth={2.25} />
             </button>
-          </div>
+          </motion.div>
 
-          <div className="flex justify-center gap-2 mt-8" aria-hidden="true">
+          <motion.div variants={fadeUpVariants} className="flex justify-center gap-2 mt-8" aria-hidden="true">
             {TESTIMONIALS.map((_, idx) => {
               const isActive = activeIdx === idx
               return (
@@ -589,15 +635,19 @@ export function OnlineDetails({ className }: { className?: string }) {
                 />
               )
             })}
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* Section 6: FAQ Accordion Section */}
-        <section
+        <motion.section
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           aria-labelledby="faq-heading"
           className="mt-20 md:mt-28"
         >
-          <div className="text-left mb-8">
+          <motion.div variants={fadeUpVariants} className="text-left mb-8">
             <h2
               id="faq-heading"
               className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
@@ -605,10 +655,10 @@ export function OnlineDetails({ className }: { className?: string }) {
               Câu hỏi thường gặp
             </h2>
             <div className="mt-2 h-0.5 w-12 bg-brand-gold rounded-full" />
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 mt-8">
-            <div className="flex flex-col gap-4">
+            <motion.div variants={fadeUpVariants} className="flex flex-col gap-4">
               {FAQS.slice(0, 2).map((faq, index) => {
                 const globalIdx = index
                 const isOpen = !!openFaqs[globalIdx]
@@ -647,9 +697,9 @@ export function OnlineDetails({ className }: { className?: string }) {
                   </div>
                 )
               })}
-            </div>
+            </motion.div>
 
-            <div className="flex flex-col gap-4">
+            <motion.div variants={fadeUpVariants} className="flex flex-col gap-4">
               {FAQS.slice(2, 4).map((faq, index) => {
                 const globalIdx = index + 2
                 const isOpen = !!openFaqs[globalIdx]
@@ -688,16 +738,20 @@ export function OnlineDetails({ className }: { className?: string }) {
                   </div>
                 )
               })}
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Section 7: Related Services Section */}
-        <section
+        <motion.section
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
           aria-labelledby="related-services-heading"
           className="mt-20 md:mt-28"
         >
-          <div className="text-center mb-10">
+          <motion.div variants={fadeUpVariants} className="text-center mb-10">
             <h2
               id="related-services-heading"
               className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
@@ -705,13 +759,14 @@ export function OnlineDetails({ className }: { className?: string }) {
               Các dịch vụ liên quan
             </h2>
             <div className="mx-auto mt-2.5 h-0.5 w-12 bg-brand-gold rounded-full" />
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mt-8">
             {RELATED_SERVICES.map((service, index) => {
               const Icon = service.icon
               return (
-                <a
+                <motion.a
+                  variants={fadeUpVariants}
                   key={index}
                   href={service.href}
                   className="flex items-center gap-4 bg-white border border-border/60 rounded-lg p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] hover:-translate-y-0.5 transition-all duration-300 group cursor-pointer"
@@ -729,11 +784,11 @@ export function OnlineDetails({ className }: { className?: string }) {
                       <span className="text-[10px]">→</span>
                     </span>
                   </div>
-                </a>
+                </motion.a>
               )
             })}
           </div>
-        </section>
+        </motion.section>
       </div>
     </div>
   )

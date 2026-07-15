@@ -4,6 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, GraduationCap } from "lucide-react"
+import { motion, Variants } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 
@@ -170,6 +171,26 @@ function isSingleProgram(programs: Program[]): boolean {
 
 // ─── layout components ──────────────────────────────────────────────────────
 
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+}
+
+const fadeUpVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.21, 0.47, 0.32, 0.98],
+    },
+  },
+}
+
 /** Layout A — Vertical timeline for Level-based courses */
 function TimelineLayout({ programs }: { programs: Program[] }) {
   return (
@@ -177,7 +198,13 @@ function TimelineLayout({ programs }: { programs: Program[] }) {
       {/* Vertical rail */}
       <div className="absolute left-[30px] top-0 bottom-0 w-px bg-gradient-to-b from-[#0A2540]/20 via-[#C8913C]/30 to-transparent sm:left-[38px]" />
 
-      <ol className="space-y-1">
+      <motion.ol
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="space-y-1"
+      >
         {programs.map((program, index) => {
           const level = extractLevel(program.title)
           const rest = level
@@ -186,7 +213,7 @@ function TimelineLayout({ programs }: { programs: Program[] }) {
           const isLast = index === programs.length - 1
 
           return (
-            <li key={program.href}>
+            <motion.li key={program.href} variants={fadeUpVariants}>
               <Link
                 href={program.href}
                 className="group relative flex items-start gap-5 rounded-xl px-3 py-3.5 transition-all duration-200 ease-out hover:bg-[#F4F7FA] sm:gap-6 sm:px-4"
@@ -231,10 +258,10 @@ function TimelineLayout({ programs }: { programs: Program[] }) {
 
               {/* Connector spacing — subtle gap between items */}
               {!isLast && <div className="ml-[38px] h-1 sm:ml-[46px]" />}
-            </li>
+            </motion.li>
           )
         })}
-      </ol>
+      </motion.ol>
     </div>
   )
 }
@@ -242,11 +269,17 @@ function TimelineLayout({ programs }: { programs: Program[] }) {
 /** Layout B — Normal card grid for multi-programs without Level */
 function CardGridLayout({ programs }: { programs: Program[] }) {
   return (
-    <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <motion.div
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+    >
       {programs.map((program) => (
-        <Link
-          key={program.href}
-          href={program.href}
+        <motion.div key={program.href} variants={fadeUpVariants} className="h-full">
+          <Link
+            href={program.href}
           className="group flex h-full flex-col justify-between rounded-2xl border border-border bg-white p-6 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[#0A2540]/20 hover:shadow-[0_16px_36px_-14px_rgba(15,27,45,0.18)]"
         >
           <div>
@@ -264,9 +297,10 @@ function CardGridLayout({ programs }: { programs: Program[] }) {
               strokeWidth={2.5}
             />
           </span>
-        </Link>
+          </Link>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   )
 }
 
@@ -281,7 +315,13 @@ function ImageTextLayout({
   categoryLabel: string
 }) {
   return (
-    <div className="mt-6 overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-shadow duration-300 hover:shadow-[0_20px_50px_-15px_rgba(10,37,64,0.15)]">
+    <motion.div
+      variants={fadeUpVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-50px" }}
+      className="mt-6 overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-shadow duration-300 hover:shadow-[0_20px_50px_-15px_rgba(10,37,64,0.15)]"
+    >
       <div className="flex flex-col lg:flex-row lg:min-h-[320px]">
         {/* Image side */}
         <div className="relative h-56 w-full shrink-0 overflow-hidden bg-[#F4F7FA] lg:h-auto lg:w-[45%]">
@@ -333,7 +373,7 @@ function ImageTextLayout({
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -403,6 +443,7 @@ export function OnlineDirectory({ className }: { className?: string }) {
 
         {/* Panel */}
         <div
+          key={active.id}
           role="tabpanel"
           id={`panel-${active.id}`}
           aria-labelledby={`tab-${active.id}`}
