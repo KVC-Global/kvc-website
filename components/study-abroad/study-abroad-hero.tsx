@@ -10,6 +10,7 @@ import {
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Container } from "@/components/ui/container"
 
 const STATS = [
   {
@@ -58,7 +59,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
       </div>
 
       {/* Main Content Container */}
-      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 py-8 md:py-16 lg:py-20">
+      <Container className="relative z-10 py-8 md:py-16 lg:py-20">
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
@@ -91,7 +92,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
         {/* Content Box */}
         <div className="max-w-full lg:max-w-[55%]">
           {/* Subtitle / Tag */}
-          <span className="inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm mb-3">
+          <span className="inline-block font-heading text-xs font-bold tracking-wider text-secondary uppercase sm:text-sm mb-3">
             DIPLOMA 6+6 TẠI SINGAPORE
           </span>
 
@@ -114,7 +115,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
           <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
             <Link
               href="#dang-ky"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-gold px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#b07f32] hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-secondary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
             >
               Đăng ký tư vấn miễn phí
               <svg
@@ -133,7 +134,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
 
             <Link
               href="#chuong-trinh"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-light hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-secondary bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-light hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
             >
               Tìm hiểu chương trình
               <svg
@@ -164,7 +165,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-light">
                     <Icon
-                      className="h-5 w-5 text-brand-gold"
+                      className="h-5 w-5 text-secondary"
                       strokeWidth={2}
                     />
                   </div>
@@ -181,7 +182,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
             })}
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   )
 }
