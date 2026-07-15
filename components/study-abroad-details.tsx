@@ -32,6 +32,7 @@ import {
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { Container } from "@/components/ui/container"
 
 const ENIcon = (props: any) => (
   <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-brand-blue font-heading text-[11px] font-extrabold text-brand-blue tracking-tight select-none">
@@ -283,7 +284,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
 
   return (
     <div className={cn("w-full bg-brand-light py-16 md:py-24", className)}>
-      <div className="mx-auto w-full max-w-[1280px] px-6">
+      <Container>
         {/* Section 1: Introduction (Diploma 6+6 là gì?) */}
         <section
           aria-labelledby="intro-heading"
@@ -317,16 +318,16 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               {/* Bullet Points */}
               <ul className="mt-4 space-y-3.5" aria-label="Cấu trúc chương trình">
                 <li className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
-                    <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
+                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-secondary bg-secondary/10">
+                    <Check className="h-3 w-3 text-secondary" strokeWidth={3} />
                   </div>
                   <span>
                     <strong className="font-semibold text-brand-blue">6 tháng</strong> học lý thuyết tại trường
                   </span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
-                    <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
+                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-secondary bg-secondary/10">
+                    <Check className="h-3 w-3 text-secondary" strokeWidth={3} />
                   </div>
                   <span>
                     <strong className="font-semibold text-brand-blue">6 tháng</strong> thực tập hưởng lương tại các doanh nghiệp uy tín ở Singapore
@@ -351,13 +352,13 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           className="mt-20 md:mt-28"
         >
           <h2
-            id="benefits-heading"
+            id="why-heading"
             className="text-center font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl"
           >
             Vì sao nên chọn Diploma 6+6?
           </h2>
+          <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
 
-          {/* Cards Grid */}
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
             {BENEFITS.map((benefit, index) => {
               return (
@@ -365,17 +366,14 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                   key={index}
                   className="flex flex-col items-center rounded-lg border border-border bg-white p-8 text-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-10px_rgba(10,37,64,0.1)]"
                 >
-                  {/* Icon Container */}
                   <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-brand-light">
                     <benefit.icon className="h-7 w-7 text-brand-blue" strokeWidth={1.75} />
                   </div>
 
-                  {/* Title */}
                   <h3 className="font-heading text-[16px] font-bold text-brand-blue sm:text-[17px]">
                     {benefit.title}
                   </h3>
 
-                  {/* Description */}
                   <p className="mt-3 font-body text-xs leading-relaxed text-muted-foreground sm:text-sm">
                     {benefit.description}
                   </p>
@@ -385,9 +383,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           </div>
         </section>
 
-        {/* Section 3: Popular Majors & Entry Requirements */}
         <div className="mt-8 md:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
-          {/* Popular Majors Column */}
           <section
             aria-labelledby="majors-heading"
             className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-6"
@@ -399,7 +395,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               >
                 Ngành học phổ biến
               </h2>
-              <div className="mx-auto mt-2 h-0.5 w-12 bg-brand-gold rounded-full" />
+              <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -422,13 +418,11 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
             </div>
           </section>
 
-          {/* Entry Requirements Column */}
           <section
             aria-labelledby="reqs-heading"
             className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-6"
           >
             <div className="flex flex-col md:flex-row gap-6 h-full">
-              {/* Left Content Area */}
               <div className="flex-1 z-10 flex flex-col justify-between gap-6 lg:max-w-[62%]">
                 <div>
                   <div className="text-center md:text-left mb-8">
@@ -438,7 +432,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                     >
                       Điều kiện tham gia
                     </h2>
-                    <div className="mt-2 h-0.5 w-12 bg-brand-gold rounded-full mx-auto md:mx-0" />
+                    <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-secondary mx-auto md:mx-0" />
                   </div>
 
                   <ul className="space-y-4" aria-label="Điều kiện tham gia">
@@ -455,16 +449,14 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                   </ul>
                 </div>
 
-                {/* Info Tip Banner */}
                 <div className="bg-[#FFF8EE] border border-[#FFE7C4] rounded-md p-4 flex gap-3 items-start mt-6">
-                  <Lightbulb className="h-5 w-5 text-brand-gold shrink-0 mt-0.5" strokeWidth={2} />
+                  <Lightbulb className="h-5 w-5 text-secondary shrink-0 mt-0.5" strokeWidth={2} />
                   <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal">
                     KVC Global sẽ tư vấn chi tiết điều kiện đầu vào phù hợp với từng trường và ngành học học viên quan tâm.
                   </p>
                 </div>
               </div>
 
-              {/* Mobile Portrait Image Container (visible only on mobile) */}
               <div className="relative h-[250px] w-full shrink-0 flex items-end justify-center overflow-hidden rounded-md md:hidden">
                 <Image
                   src="/images/student-portrait.jpg"
@@ -477,7 +469,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               </div>
             </div>
 
-            {/* Desktop Portrait Image Container (absolute positioned relative to section, visible only on desktop) */}
             <div className="absolute inset-y-0 right-0 hidden md:block md:w-[38%] lg:w-[35%] overflow-hidden z-0 pointer-events-none">
               <Image
                 src="/images/student-portrait.jpg"
@@ -487,7 +478,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 sizes="25vw"
                 className="object-cover object-bottom"
               />
-              {/* Faded overlay blending the image's left edge into the card's white background */}
               <div
                 aria-hidden="true"
                 className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white via-white/40 to-transparent lg:w-28"
@@ -496,9 +486,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           </section>
         </div>
 
-        {/* Section 4: Prospects & Support Journey */}
         <div className="mt-8 md:mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
-          {/* Prospects Column (lg:col-span-5) */}
           <section
             aria-labelledby="prospects-heading"
             className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-5 min-h-[380px]"
@@ -511,13 +499,13 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                 >
                   Sau khi tốt nghiệp, học viên có thể làm gì?
                 </h2>
-                <div className="mt-2 h-0.5 w-12 bg-brand-gold rounded-full" />
+                <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
 
                 <ul className="mt-8 space-y-4" aria-label="Cơ hội sau tốt nghiệp">
                   {GRADUATION_OPPORTUNITIES.map((opp, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
-                        <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
+                      <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-secondary bg-secondary/10">
+                        <Check className="h-3 w-3 text-secondary" strokeWidth={3} />
                       </div>
                       <span className="font-body text-[14px] md:text-[15px] leading-relaxed text-brand-dark/90">
                         {opp}
@@ -528,7 +516,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               </div>
             </div>
 
-            {/* Graduation Cap illustration (absolute-positioned at bottom right corner, low opacity, transparent background) */}
             <div className="absolute bottom-0 right-0 h-[150px] w-[150px] sm:h-[180px] sm:w-[180px] lg:h-[205px] lg:w-[205px] pointer-events-none z-0 opacity-40">
               <Image
                 src="/images/graduation-cap-transparent.png"
@@ -540,7 +527,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
             </div>
           </section>
 
-          {/* Support Journey Column (lg:col-span-7) */}
           <section
             aria-labelledby="journey-heading"
             className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-7"
@@ -552,17 +538,15 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               >
                 KVC Global đồng hành cùng bạn
               </h2>
-              <div className="mx-auto mt-2 h-0.5 w-12 bg-brand-gold rounded-full" />
+              <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
             </div>
 
-            {/* Steps flow (horizontal on desktop/lg, vertical on mobile/md) */}
             <div className="flex flex-col lg:flex-row items-stretch justify-between gap-2 mt-4">
               {SUPPORT_STEPS.map((step, idx) => {
                 const Icon = step.icon
                 const isLast = idx === SUPPORT_STEPS.length - 1
                 return (
                   <div key={idx} className="flex flex-col lg:flex-row items-center w-full lg:w-auto flex-1">
-                    {/* Step Card */}
                     <div className="flex flex-col items-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-md p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[160px] w-full flex-1 justify-center">
                       <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-light group-hover:bg-white transition-colors shrink-0">
                         <Icon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
@@ -572,10 +556,8 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                       </span>
                     </div>
 
-                    {/* Arrow connector */}
                     {!isLast && (
                       <div className="my-2 lg:my-0 lg:mx-2 shrink-0 self-center">
-                        {/* Downward arrow on mobile/tablet */}
                         <svg
                           className="h-5 w-5 text-muted-foreground/60 block lg:hidden animate-pulse"
                           fill="none"
@@ -585,7 +567,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                         </svg>
-                        {/* Rightward arrow on desktop */}
                         <svg
                           className="h-5 w-5 text-muted-foreground/60 hidden lg:block"
                           fill="none"
@@ -604,7 +585,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           </section>
         </div>
 
-        {/* Section 5: Student Testimonials Slider */}
         <section
           aria-labelledby="testimonials-heading"
           className="mt-20 md:mt-28"
@@ -612,15 +592,14 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           <div className="text-center mb-10">
             <h2
               id="testimonials-heading"
-              className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl"
+              className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
             >
               Học viên nói gì về Diploma 6+6 tại KVC Global?
             </h2>
-            <div className="mx-auto mt-2.5 h-0.5 w-12 bg-brand-gold rounded-full" />
+            <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
           </div>
 
           <div className="relative group/nav px-0 md:px-8">
-            {/* Navigation Left Arrow (visible on desktop) */}
             <button
               onClick={() => handleScroll("left")}
               aria-label="Previous testimonial"
@@ -629,7 +608,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               <ChevronLeft className="h-5 w-5" strokeWidth={2.25} />
             </button>
 
-            {/* Testimonials horizontal scrolling view */}
             <div
               ref={scrollRef}
               onScroll={updateActiveDot}
@@ -640,7 +618,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                   key={idx}
                   className="snap-start shrink-0 w-[90%] sm:w-[46%] lg:w-[31.5%] border border-border bg-white rounded-lg p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] transition-all duration-300 relative flex flex-col justify-between overflow-hidden min-h-[220px]"
                 >
-                  {/* Large Quote symbol decoration in corner */}
                   <span
                     aria-hidden="true"
                     className="absolute top-2 right-4 font-serif text-[110px] leading-none text-brand-blue/5 select-none pointer-events-none"
@@ -649,7 +626,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                   </span>
 
                   <div className="flex gap-4 relative z-10">
-                    {/* Avatar Column */}
                     <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full border border-border/80 shadow-xs bg-brand-light">
                       <Image
                         src={testi.avatar}
@@ -660,23 +636,19 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                       />
                     </div>
 
-                    {/* Content Column */}
                     <div className="flex-1 flex flex-col justify-between">
                       <div>
-                        {/* Rating Stars */}
                         <div className="flex gap-0.5 mb-2.5" aria-label={`Đánh giá ${testi.rating} sao`}>
                           {Array.from({ length: testi.rating }).map((_, i) => (
                             <span key={i} className="text-amber-400 text-[14px]">★</span>
                           ))}
                         </div>
 
-                        {/* Testimonial Quote */}
                         <blockquote className="font-body text-[13px] sm:text-[14px] leading-relaxed text-brand-dark/85 mb-4 italic">
                           "{testi.quote}"
                         </blockquote>
                       </div>
 
-                      {/* Author Info */}
                       <div>
                         <cite className="font-heading text-sm font-bold text-brand-blue not-italic block">
                           {testi.name}
@@ -691,7 +663,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
               ))}
             </div>
 
-            {/* Navigation Right Arrow (visible on desktop) */}
             <button
               onClick={() => handleScroll("right")}
               aria-label="Next testimonial"
@@ -701,7 +672,6 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
             </button>
           </div>
 
-          {/* Dots Indicator Section */}
           <div className="flex justify-center gap-2 mt-8" aria-hidden="true">
             {TESTIMONIALS.map((_, idx) => {
               const isActive = activeIdx === idx
@@ -719,7 +689,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                   }}
                   className={cn(
                     "h-2 rounded-full transition-all duration-300 cursor-pointer",
-                    isActive ? "w-6 bg-brand-gold" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/60"
+                    isActive ? "w-6 bg-secondary" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/60"
                   )}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
@@ -728,24 +698,21 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
           </div>
         </section>
 
-        {/* Section 6: FAQ Accordion Section */}
         <section
           aria-labelledby="faq-heading"
           className="mt-20 md:mt-28"
         >
           <div className="text-left mb-8">
             <h2
-              id="faq-heading"
+              id="faqs-heading"
               className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
             >
               Câu hỏi thường gặp
             </h2>
-            <div className="mt-2 h-0.5 w-12 bg-brand-gold rounded-full" />
+            <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
           </div>
 
-          {/* FAQ Accordion Grid: 2 columns on desktop, 1 on mobile */}
           <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 mt-8">
-            {/* Left Column (FAQs 0, 1, 2) */}
             <div className="flex flex-col gap-4">
               {FAQS.slice(0, 3).map((faq, index) => {
                 const globalIdx = index
@@ -758,7 +725,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                     <button
                       onClick={() => toggleFaq(globalIdx)}
                       aria-expanded={isOpen}
-                      className="w-full text-left p-5 md:p-6 flex items-center justify-between gap-4 font-heading text-[14px] md:text-[15px] font-bold text-brand-blue hover:text-brand-gold transition-colors duration-200 cursor-pointer"
+                      className="w-full text-left p-5 md:p-6 flex items-center justify-between gap-4 font-heading text-[14px] md:text-[15px] font-bold text-brand-blue hover:text-secondary transition-colors duration-200 cursor-pointer"
                     >
                       <span>{faq.question}</span>
                       <ChevronDown
@@ -801,7 +768,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
                     <button
                       onClick={() => toggleFaq(globalIdx)}
                       aria-expanded={isOpen}
-                      className="w-full text-left p-5 md:p-6 flex items-center justify-between gap-4 font-heading text-[14px] md:text-[15px] font-bold text-brand-blue hover:text-brand-gold transition-colors duration-200 cursor-pointer"
+                      className="w-full text-left p-5 md:p-6 flex items-center justify-between gap-4 font-heading text-[14px] md:text-[15px] font-bold text-brand-blue hover:text-secondary transition-colors duration-200 cursor-pointer"
                     >
                       <span>{faq.question}</span>
                       <ChevronDown
@@ -845,7 +812,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
             >
               Các dịch vụ liên quan
             </h2>
-            <div className="mx-auto mt-2.5 h-0.5 w-12 bg-brand-gold rounded-full" />
+            <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
           </div>
 
           {/* Related Services Grid */}
@@ -865,10 +832,10 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
 
                   {/* Text Container */}
                   <div className="flex flex-col">
-                    <span className="font-heading text-[14px] md:text-[15px] font-bold text-brand-blue leading-snug group-hover:text-brand-gold transition-colors duration-300">
+                    <span className="font-heading text-[14px] md:text-[15px] font-bold text-brand-blue leading-snug group-hover:text-secondary transition-colors duration-300">
                       {service.title}
                     </span>
-                    <span className="font-body text-xs font-semibold text-brand-gold flex items-center gap-1.5 mt-1 leading-none group-hover:translate-x-0.5 transition-transform duration-300">
+                    <span className="font-body text-xs font-semibold text-secondary flex items-center gap-1.5 mt-1 leading-none group-hover:translate-x-0.5 transition-transform duration-300">
                       {service.ctaText}
                       <span className="text-[10px]">→</span>
                     </span>
@@ -878,7 +845,7 @@ export function StudyAbroadDetails({ className }: { className?: string }) {
             })}
           </div>
         </section>
-      </div>
+      </Container>
     </div>
   )
 }
