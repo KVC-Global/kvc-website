@@ -137,7 +137,7 @@ const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
 
 function ColumnHeading({ children }: { children: React.ReactNode }) {
   return (
-      <h3 className="font-heading text-[15px] font-semibold tracking-[0.18em] text-foreground uppercase">
+    <h3 className="font-heading text-[15px] font-semibold tracking-[0.18em] text-foreground uppercase">
       {children}
     </h3>
   )
@@ -197,7 +197,7 @@ function CtaBanner({ className }: { className?: string }) {
           <div className="max-w-xl">
             <h2
               id="footer-cta-heading"
-              className="font-heading text-2xl leading-[1.15] font-bold tracking-tight text-foreground sm:text-3xl md:text-[34px]"
+              className="font-heading text-2xl leading-[1.15] font-bold tracking-tight text-primary sm:text-3xl md:text-[34px]"
             >
               <span className="block uppercase">Sẵn sàng bắt đầu</span>
               <span className="block uppercase">hành trình của bạn?</span>
@@ -263,12 +263,10 @@ function CollapsibleFooterSection({
   return (
     <details
       open={open}
-      onToggle={(event) =>
-        setOpen((event.target as HTMLDetailsElement).open)
-      }
+      onToggle={(event) => setOpen((event.target as HTMLDetailsElement).open)}
       className={cn("group", className)}
     >
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-sm py-2 -mx-2 px-2 transition-colors duration-200 ease-out hover:bg-foreground/[0.03] lg:cursor-default lg:pointer-events-none lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
+      <summary className="-mx-2 flex cursor-pointer list-none items-center justify-between gap-3 rounded-sm px-2 py-2 transition-colors duration-200 ease-out hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
         <ColumnHeading>{heading}</ColumnHeading>
         <ChevronDown
           aria-hidden="true"
@@ -294,20 +292,20 @@ export function SiteFooter({ className }: { className?: string }) {
       <div className="w-full px-4 sm:px-6">
         <div className="mt-14 grid grid-cols-1 gap-10 pb-10 sm:mt-16 sm:grid-cols-2 sm:gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-3">
-                <Link
-                  href="/"
-                  aria-label="KVC Global — Trang chủ"
-                  className="inline-flex items-center no-underline"
-                >
-                  <Image
-                    src="/images/KVC_LOGO_SVG/Blue%20Horizontal%20Logo_KVC.svg.svg"
-                    alt="KVC Global"
-                    width={200}
-                    height={44}
-                    className="h-9 w-auto shrink-0 sm:h-11"
-                    loading="lazy"
-                  />
-                </Link>
+            <Link
+              href="/"
+              aria-label="KVC Global — Trang chủ"
+              className="inline-flex items-center no-underline"
+            >
+              <Image
+                src="/images/KVC_LOGO_SVG/Blue%20Horizontal%20Logo_KVC.svg.svg"
+                alt="KVC Global"
+                width={200}
+                height={44}
+                className="h-9 w-auto shrink-0 sm:h-11"
+                loading="lazy"
+              />
+            </Link>
 
             <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-foreground/75">
               KVC Global — Đồng hành cùng bạn trên hành trình học tập, làm việc,
@@ -335,32 +333,23 @@ export function SiteFooter({ className }: { className?: string }) {
             </ul>
           </div>
 
-              <CollapsibleFooterSection
-                heading="Dịch vụ"
-                className="lg:col-span-2"
-              >
-                <LinkList links={SERVICES_LINKS} />
-              </CollapsibleFooterSection>
+          <CollapsibleFooterSection heading="Dịch vụ" className="lg:col-span-2">
+            <LinkList links={SERVICES_LINKS} />
+          </CollapsibleFooterSection>
 
-              <CollapsibleFooterSection
-                heading="Về chúng tôi"
-                className="lg:col-span-2"
-              >
-                <LinkList links={ABOUT_LINKS} />
-              </CollapsibleFooterSection>
+          <CollapsibleFooterSection
+            heading="Về chúng tôi"
+            className="lg:col-span-2"
+          >
+            <LinkList links={ABOUT_LINKS} />
+          </CollapsibleFooterSection>
 
-              <CollapsibleFooterSection
-                heading="Hỗ trợ"
-                className="lg:col-span-2"
-              >
-                <LinkList links={SUPPORT_LINKS} />
-              </CollapsibleFooterSection>
+          <CollapsibleFooterSection heading="Hỗ trợ" className="lg:col-span-2">
+            <LinkList links={SUPPORT_LINKS} />
+          </CollapsibleFooterSection>
 
-              <CollapsibleFooterSection
-                heading="Liên hệ"
-                className="lg:col-span-3"
-              >
-                <ul className="flex flex-col gap-3 text-[15px]">
+          <CollapsibleFooterSection heading="Liên hệ" className="lg:col-span-3">
+            <ul className="flex flex-col gap-3 text-[15px]">
               {CONTACT_ITEMS.map((item, index) => {
                 const Icon = item.icon
                 return (
@@ -392,9 +381,9 @@ export function SiteFooter({ className }: { className?: string }) {
                   </li>
                 )
               })}
-                </ul>
-              </CollapsibleFooterSection>
-            </div>
+            </ul>
+          </CollapsibleFooterSection>
+        </div>
 
         <div
           aria-hidden="true"

@@ -60,7 +60,7 @@ export function SiteHero({ className }: { className?: string }) {
               id="hero-heading"
               className="font-display text-4xl leading-[1.1] font-bold tracking-[-0.01em] text-foreground sm:text-5xl sm:leading-[1.05] sm:tracking-normal md:text-6xl lg:text-7xl lg:leading-[1.02] lg:tracking-[-0.02em]"
             >
-              <span className="block">BEGIN SOMETHING</span>
+              <span className="block text-primary">BEGIN SOMETHING</span>
               <span className="block text-secondary">GREATER.</span>
             </h1>
 
@@ -120,7 +120,7 @@ export function SiteHero({ className }: { className?: string }) {
                   strokeWidth={1.75}
                 />
                 <div className="flex min-w-0 flex-col">
-                  <div className="font-display text-xl font-bold text-foreground sm:text-3xl">
+                  <div className="font-display text-xl font-bold text-primary sm:text-3xl">
                     {stat.value}
                   </div>
                   <div className="truncate font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
