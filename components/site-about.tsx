@@ -126,7 +126,7 @@ export function SiteAbout({ className }: { className?: string }) {
           </p>
           <h2
             id="about-heading"
-            className="mt-3 font-display text-3xl leading-[1.1] font-bold text-foreground sm:text-4xl md:text-[44px]"
+            className="mt-3 font-display text-3xl leading-[1.1] font-bold text-primary sm:text-4xl md:text-[44px]"
           >
             Chào mừng đến với KVC Global
           </h2>

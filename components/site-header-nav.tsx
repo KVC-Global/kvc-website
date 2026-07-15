@@ -29,7 +29,7 @@ export function SiteHeaderNav({ className }: { className?: string }) {
 
   return (
     <nav aria-label="Primary" className={className}>
-      <ul className="flex items-center gap-7 font-body text-[15px] font-medium text-foreground">
+      <ul className="flex items-center gap-7 font-body text-[15px] font-medium text-primary">
         {NAV_LINKS.map((link) => {
           const active = isActive(pathname, link.href)
           return (
