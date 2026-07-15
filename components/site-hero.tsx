@@ -60,7 +60,7 @@ export function SiteHero({ className }: { className?: string }) {
               id="hero-heading"
               className="font-display text-4xl leading-[1.1] font-bold tracking-[-0.01em] text-foreground sm:text-5xl sm:leading-[1.05] sm:tracking-normal md:text-6xl lg:text-7xl lg:leading-[1.02] lg:tracking-[-0.02em]"
             >
-              <span className="block">BEGIN SOMETHING</span>
+              <span className="block text-primary">BEGIN SOMETHING</span>
               <span className="block text-secondary">GREATER.</span>
             </h1>
 
@@ -74,7 +74,7 @@ export function SiteHero({ className }: { className?: string }) {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href="#du-hoc"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto"
               >
                 Du học / Việc làm Singapore
                 <svg
@@ -93,7 +93,7 @@ export function SiteHero({ className }: { className?: string }) {
 
               <a
                 href="#mo-cong-ty"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-sm border border-primary bg-white px-6 py-3.5 text-sm font-semibold text-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-md border border-primary bg-white px-6 py-3 text-sm font-semibold text-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto"
               >
                 Mở công ty tại VN - Singapore
                 <ArrowUpRight
@@ -120,7 +120,7 @@ export function SiteHero({ className }: { className?: string }) {
                   strokeWidth={1.75}
                 />
                 <div className="flex min-w-0 flex-col">
-                  <div className="font-display text-xl font-bold text-foreground sm:text-3xl">
+                  <div className="font-display text-xl font-bold text-primary sm:text-3xl">
                     {stat.value}
                   </div>
                   <div className="truncate font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">

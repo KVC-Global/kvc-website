@@ -220,7 +220,7 @@ export function SitePartners({ className }: { className?: string }) {
         <div className="text-center">
           <h2
             id="partners-heading"
-            className="mt-3 font-display text-2xl font-bold tracking-[0.18em] text-foreground uppercase sm:text-3xl"
+            className="mt-3 font-display text-2xl font-bold tracking-[0.18em] text-primary uppercase sm:text-3xl"
           >
             Đối tác &amp; Trường liên kết hàng đầu
           </h2>
