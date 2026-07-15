@@ -14,11 +14,11 @@ export function SiteHeaderLogo({ className }: { className?: string }) {
       )}
     >
       <Image
-        src="/images/horizontal-logo/blue-logo.png"
+        src="/images/KVC_LOGO_SVG/Blue%20Horizontal%20Logo_KVC.svg.svg"
         alt="KVC Global"
-        width={200}
-        height={100}
-        className="h-24 w-auto shrink-0"
+        width={150}
+        height={150}
+        className="h-8 w-auto shrink-0 md:h-12"
         priority
       />
     </Link>
