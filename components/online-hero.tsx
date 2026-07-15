@@ -2,16 +2,11 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import {
-  Clock,
-  Coins,
-  FileCheck,
-  GraduationCap,
-} from "lucide-react"
+import { Clock, Coins, FileCheck, GraduationCap } from "lucide-react"
 import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
-
+import { Container } from "@/components/ui/container"
 const STATS = [
   {
     icon: Clock,
@@ -39,7 +34,10 @@ export function OnlineHero({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="online-hero-heading"
-      className={cn("relative w-full overflow-hidden bg-white border-b border-border", className)}
+      className={cn(
+        "relative w-full overflow-hidden border-b border-border bg-white",
+        className
+      )}
     >
       {/* Desktop Background Image (Right side) */}
       <div className="absolute inset-y-0 right-0 z-0 hidden w-full lg:block lg:w-[52%]">
@@ -59,26 +57,32 @@ export function OnlineHero({ className }: { className?: string }) {
       </div>
 
       {/* Main Content Container */}
-      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-6 py-8 md:py-16 lg:py-20">
+      <Container className="relative z-10 py-8 md:py-16 lg:py-20">
         {/* Breadcrumb Navigation */}
         <motion.nav
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           aria-label="Breadcrumb"
-          className="mb-8 flex flex-wrap items-center gap-1.5 text-xs font-medium text-muted-foreground md:text-sm font-body"
+          className="mb-8 flex flex-wrap items-center gap-1.5 font-body text-xs font-medium text-muted-foreground md:text-sm"
         >
-          <Link href="/" className="hover:text-foreground transition-colors duration-200">
+          <Link
+            href="/"
+            className="transition-colors duration-200 hover:text-foreground"
+          >
             Trang chủ
           </Link>
           <span className="text-muted-foreground/60 select-none">&gt;</span>
-          <span className="text-foreground/80 font-semibold" aria-current="page">
+          <span
+            className="font-semibold text-foreground/80"
+            aria-current="page"
+          >
             Khóa Học Online
           </span>
         </motion.nav>
 
         {/* Mobile/Tablet Image Display (Shown only on small/medium screens) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
@@ -96,11 +100,11 @@ export function OnlineHero({ className }: { className?: string }) {
         {/* Content Box */}
         <div className="max-w-full lg:max-w-[55%]">
           {/* Subtitle / Tag */}
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm mb-3"
+            className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm"
           >
             ĐÀO TẠO TRỰC TUYẾN
           </motion.span>
@@ -114,26 +118,26 @@ export function OnlineHero({ className }: { className?: string }) {
             className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
           >
             Học tập linh hoạt,
-            <span className="block mt-1">phát triển sự nghiệp toàn cầu</span>
+            <span className="mt-1 block">phát triển sự nghiệp toàn cầu</span>
           </motion.h1>
 
           {/* Description Paragraph */}
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px] md:leading-relaxed"
           >
-            Các chương trình đào tạo trực tuyến chất lượng quốc tế,
-            giúp bạn vừa học vừa làm và lấy bằng cấp có giá trị toàn cầu.
+            Các chương trình đào tạo trực tuyến chất lượng quốc tế, giúp bạn vừa
+            học vừa làm và lấy bằng cấp có giá trị toàn cầu.
           </motion.p>
 
           {/* Call to Actions (CTAs) */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4"
+            className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center"
           >
             <Link
               href="#dang-ky"
@@ -162,7 +166,7 @@ export function OnlineHero({ className }: { className?: string }) {
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
-                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 text-brand-blue"
+                className="h-4 w-4 text-brand-blue transition-transform duration-300 ease-out group-hover:translate-x-0.5"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
@@ -176,13 +180,13 @@ export function OnlineHero({ className }: { className?: string }) {
         </div>
 
         {/* Stats Grid Container */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
           className="relative z-20 mt-12 w-full lg:mt-16 xl:mt-20"
         >
-          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border shadow-[0_12px_40px_-15px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:grid-cols-2 lg:grid-cols-4 lg:w-fit">
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border shadow-[0_12px_40px_-15px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:grid-cols-2 lg:w-fit lg:grid-cols-4">
             {STATS.map((stat, idx) => {
               const Icon = stat.icon
               return (
@@ -191,16 +195,13 @@ export function OnlineHero({ className }: { className?: string }) {
                   className="flex items-center gap-4 bg-white px-5 py-4 transition-all duration-300 ease-out hover:bg-brand-light sm:px-6 sm:py-5 lg:min-w-[240px]"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-light">
-                    <Icon
-                      className="h-5 w-5 text-brand-gold"
-                      strokeWidth={2}
-                    />
+                    <Icon className="h-5 w-5 text-brand-gold" strokeWidth={2} />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-heading text-sm font-bold text-brand-blue sm:text-[15px]">
                       {stat.value}
                     </span>
-                    <span className="font-body text-xs text-muted-foreground font-medium">
+                    <span className="font-body text-xs font-medium text-muted-foreground">
                       {stat.label}
                     </span>
                   </div>
@@ -209,7 +210,7 @@ export function OnlineHero({ className }: { className?: string }) {
             })}
           </div>
         </motion.div>
-      </div>
+      </Container>
     </section>
   )
 }

@@ -7,12 +7,14 @@ import { ArrowUpRight, GraduationCap } from "lucide-react"
 import { motion, Variants } from "framer-motion"
 
 import { cn } from "@/lib/utils"
+import { Container } from "@/components/ui/container"
 
 type Program = {
   title: string
   href: string
   tag?: string
   description?: string
+  image?: string
 }
 
 type Category = {
@@ -37,6 +39,8 @@ const CATEGORIES: Category[] = [
         tag: "Highlight",
         description:
           "Chương trình trung học Ontario chuẩn quốc tế, được hơn 1.500 trường đại học toàn cầu công nhận. Phù hợp cho học sinh muốn du học Canada, Mỹ, Úc và châu Âu.",
+        image:
+          "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=800&auto=format&fit=crop",
       },
     ],
   },
@@ -50,41 +54,57 @@ const CATEGORIES: Category[] = [
         title: "Level 3 Business Management",
         href: "/du-hoc/othm-level-3-business-management",
         description: "Nền tảng kinh doanh cơ bản, tương đương A-Level.",
+        image:
+          "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=800&auto=format&fit=crop",
       },
       {
         title: "Level 4 Business Management",
         href: "/du-hoc/othm-level-4-business-management",
         description: "Kiến thức quản trị năm nhất đại học.",
+        image:
+          "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=800&auto=format&fit=crop",
       },
       {
         title: "Level 5 Business Management",
         href: "/du-hoc/othm-level-5-business-management",
         description: "Chuyên sâu quản trị doanh nghiệp và chiến lược.",
+        image:
+          "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&auto=format&fit=crop",
       },
       {
         title: "Level 6 Extended Business Management",
         href: "/du-hoc/othm-level-6-extended-business-management",
         description: "Tương đương bằng cử nhân, chuẩn bị cho thạc sĩ.",
+        image:
+          "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop",
       },
       {
         title: "Level 6 Extended Logistics, Supply Chain & Management",
         href: "/du-hoc/othm-level-6-extended-logistics-supply-chain-management",
         description: "Chuyên ngành logistics và chuỗi cung ứng toàn cầu.",
+        image:
+          "https://images.unsplash.com/photo-1586528116311-ad8ed7c80a30?q=80&w=800&auto=format&fit=crop",
       },
       {
         title: "Level 7 Strategic Management & Leadership",
         href: "/du-hoc/othm-level-7-strategic-management-leadership",
         description: "Tư duy lãnh đạo chiến lược cấp cao.",
+        image:
+          "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800&auto=format&fit=crop",
       },
       {
         title: "Level 7 Logistics, Supply Chain & Management",
         href: "/du-hoc/othm-level-7-logistics-supply-chain-management",
         description: "Thạc sĩ logistics và vận hành chuỗi cung ứng.",
+        image:
+          "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?q=80&w=800&auto=format&fit=crop",
       },
       {
         title: "Level 7 Accounting & Finance",
         href: "/du-hoc/othm-level-7-accounting-finance",
         description: "Kế toán tài chính cấp độ thạc sĩ quốc tế.",
+        image:
+          "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=800&auto=format&fit=crop",
       },
     ],
   },
@@ -191,73 +211,116 @@ const fadeUpVariants: Variants = {
   },
 }
 
+const timelineItemVariants: Variants = {
+  hidden: { opacity: 0, y: 30, scale: 0.96, filter: "blur(4px)" },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 20,
+      mass: 1,
+    },
+  },
+}
+
 /** Layout A — Vertical timeline for Level-based courses */
 function TimelineLayout({ programs }: { programs: Program[] }) {
   return (
-    <div className="mt-8 relative">
-      {/* Vertical rail */}
-      <div className="absolute left-[30px] top-0 bottom-0 w-px bg-gradient-to-b from-[#0A2540]/20 via-[#C8913C]/30 to-transparent sm:left-[38px]" />
+    <div className="relative mt-16">
+      {/* Center rail (animated drawing down) */}
+      <motion.div
+        initial={{ height: 0 }}
+        whileInView={{ height: "100%" }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 1.2, ease: [0.21, 0.47, 0.32, 0.98] }}
+        className="absolute top-0 left-6 w-px bg-gradient-to-b from-[#0A2540]/20 via-[#0A2540]/40 to-transparent sm:left-1/2 sm:-translate-x-1/2"
+      />
 
       <motion.ol
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-50px" }}
-        className="space-y-1"
+        className="relative space-y-12 sm:space-y-16"
       >
         {programs.map((program, index) => {
           const level = extractLevel(program.title)
           const rest = level
             ? program.title.slice(level.length).trim()
             : program.title
-          const isLast = index === programs.length - 1
+          const isEven = index % 2 === 0
 
           return (
-            <motion.li key={program.href} variants={fadeUpVariants}>
-              <Link
-                href={program.href}
-                className="group relative flex items-start gap-5 rounded-xl px-3 py-3.5 transition-all duration-200 ease-out hover:bg-[#F4F7FA] sm:gap-6 sm:px-4"
-              >
-                {/* Step dot */}
-                <span
-                  className={cn(
-                    "relative z-10 mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold transition-all duration-200 ease-out sm:h-11 sm:w-11 sm:text-sm",
-                    index === 0
-                      ? "border-[#C8913C] bg-[#C8913C] text-white"
-                      : isLast
-                        ? "border-[#0A2540] bg-[#0A2540] text-white"
-                        : "border-[#0A2540]/25 bg-white text-[#0A2540] group-hover:border-[#0A2540] group-hover:bg-[#0A2540] group-hover:text-white",
-                  )}
-                >
-                  {level ? level.replace(/Level\s+/i, "") : index + 1}
-                </span>
+            <motion.li
+              key={program.href}
+              variants={timelineItemVariants}
+              className="group/timeline relative flex flex-col items-start justify-between sm:flex-row sm:items-center"
+            >
+              {/* Step dot (scales up nicely on hover) */}
+              <div className="absolute left-6 z-10 mt-12 flex h-4 w-4 -translate-x-1/2 items-center justify-center rounded-full border-2 border-white bg-[#0A2540] shadow-sm transition-transform duration-300 ease-out group-hover/timeline:scale-125 sm:left-1/2 sm:mt-0" />
 
-                {/* Content */}
-                <div className="flex min-w-0 flex-1 items-center justify-between gap-4">
-                  <div className="min-w-0">
+              {/* Tag for desktop (opposite side of the card) */}
+              <div
+                className={cn(
+                  "hidden w-full sm:block sm:w-[calc(50%-2.5rem)]",
+                  isEven ? "order-2 pl-10 text-left" : "pr-10 text-right"
+                )}
+              >
+                {level && (
+                  <span className="inline-block rounded-md bg-[#0A2540] px-3 py-1 font-sans text-sm font-semibold text-white shadow-sm">
+                    {level}
+                  </span>
+                )}
+              </div>
+
+              {/* Card */}
+              <div
+                className={cn(
+                  "w-full pl-16 sm:w-[calc(50%-2.5rem)] sm:pl-0",
+                  isEven ? "sm:pr-10" : "sm:order-2 sm:pl-10"
+                )}
+              >
+                <Link
+                  href={program.href}
+                  className="group block overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#0A2540]/20 hover:shadow-xl"
+                >
+                  {/* Card Image */}
+                  <div className="relative h-48 w-full overflow-hidden bg-[#F4F7FA]">
+                    <Image
+                      src={
+                        program.image ||
+                        "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop"
+                      }
+                      alt={rest}
+                      fill
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="p-6">
                     {level && (
-                      <span className="mb-0.5 block font-sans text-[10px] font-semibold tracking-[0.18em] text-[#C8913C] uppercase">
+                      <span className="mb-2 block font-sans text-[11px] font-semibold tracking-wider text-[#C8913C] uppercase sm:hidden">
                         {level}
                       </span>
                     )}
-                    <h3 className="font-display text-base font-bold leading-snug text-foreground sm:text-lg">
+                    <h3 className="font-display text-xl leading-snug font-bold text-foreground">
                       {rest}
                     </h3>
                     {program.description && (
-                      <p className="mt-1 text-sm leading-relaxed text-foreground/60">
+                      <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-foreground/70">
                         {program.description}
                       </p>
                     )}
                   </div>
-                  <ArrowUpRight
-                    className="h-4 w-4 shrink-0 text-[#C8913C] opacity-0 transition-all duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
-                    strokeWidth={2.5}
-                  />
-                </div>
-              </Link>
-
-              {/* Connector spacing — subtle gap between items */}
-              {!isLast && <div className="ml-[38px] h-1 sm:ml-[46px]" />}
+                </Link>
+              </div>
             </motion.li>
           )
         })}
@@ -277,26 +340,30 @@ function CardGridLayout({ programs }: { programs: Program[] }) {
       className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
     >
       {programs.map((program) => (
-        <motion.div key={program.href} variants={fadeUpVariants} className="h-full">
+        <motion.div
+          key={program.href}
+          variants={fadeUpVariants}
+          className="h-full"
+        >
           <Link
             href={program.href}
-          className="group flex h-full flex-col justify-between rounded-2xl border border-border bg-white p-6 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[#0A2540]/20 hover:shadow-[0_16px_36px_-14px_rgba(15,27,45,0.18)]"
-        >
-          <div>
-            <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#F4F7FA] text-[#0A2540] transition-colors duration-300 ease-out group-hover:bg-[#0A2540] group-hover:text-white">
-              <GraduationCap className="h-5 w-5" strokeWidth={1.75} />
+            className="group flex h-full flex-col justify-between rounded-2xl border border-border bg-white p-6 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[#0A2540]/20 hover:shadow-[0_16px_36px_-14px_rgba(15,27,45,0.18)]"
+          >
+            <div>
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#F4F7FA] text-[#0A2540] transition-colors duration-300 ease-out group-hover:bg-[#0A2540] group-hover:text-white">
+                <GraduationCap className="h-5 w-5" strokeWidth={1.75} />
+              </span>
+              <h3 className="mt-4 font-display text-lg leading-snug font-bold text-foreground">
+                {program.title}
+              </h3>
+            </div>
+            <span className="mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-[#C8913C]">
+              Xem chi tiết
+              <ArrowUpRight
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                strokeWidth={2.5}
+              />
             </span>
-            <h3 className="mt-4 font-display text-lg font-bold leading-snug text-foreground">
-              {program.title}
-            </h3>
-          </div>
-          <span className="mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-[#C8913C]">
-            Xem chi tiết
-            <ArrowUpRight
-              className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              strokeWidth={2.5}
-            />
-          </span>
           </Link>
         </motion.div>
       ))}
@@ -322,7 +389,7 @@ function ImageTextLayout({
       viewport={{ once: true, margin: "-50px" }}
       className="mt-6 overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-shadow duration-300 hover:shadow-[0_20px_50px_-15px_rgba(10,37,64,0.15)]"
     >
-      <div className="flex flex-col lg:flex-row lg:min-h-[320px]">
+      <div className="flex flex-col lg:min-h-[320px] lg:flex-row">
         {/* Image side */}
         <div className="relative h-56 w-full shrink-0 overflow-hidden bg-[#F4F7FA] lg:h-auto lg:w-[45%]">
           {image ? (
@@ -335,7 +402,10 @@ function ImageTextLayout({
             />
           ) : (
             <div className="flex h-full w-full items-center justify-center">
-              <GraduationCap className="h-20 w-20 text-[#0A2540]/15" strokeWidth={1} />
+              <GraduationCap
+                className="h-20 w-20 text-[#0A2540]/15"
+                strokeWidth={1}
+              />
             </div>
           )}
           {/* Subtle overlay */}
@@ -351,7 +421,7 @@ function ImageTextLayout({
             </span>
           )}
 
-          <h3 className="font-display text-2xl font-bold leading-snug text-foreground sm:text-3xl">
+          <h3 className="font-display text-2xl leading-snug font-bold text-foreground sm:text-3xl">
             {program.title}
           </h3>
 
@@ -394,7 +464,7 @@ export function OnlineDirectory({ className }: { className?: string }) {
       aria-labelledby="directory-heading"
       className={cn("w-full scroll-mt-28 bg-white py-20 sm:py-24", className)}
     >
-      <div className="mx-auto max-w-[1280px] px-6">
+      <Container>
         <div className="max-w-2xl">
           <p className="font-sans text-[11px] font-semibold tracking-[0.28em] text-[#C8913C] uppercase">
             Danh mục chương trình
@@ -432,7 +502,7 @@ export function OnlineDirectory({ className }: { className?: string }) {
                   "shrink-0 rounded-full border px-5 py-2.5 font-sans text-sm font-semibold transition-all duration-300 ease-out",
                   selected
                     ? "border-[#0A2540] bg-[#0A2540] text-white shadow-sm"
-                    : "border-border bg-white text-foreground/80 hover:border-[#0A2540]/40 hover:text-foreground",
+                    : "border-border bg-white text-foreground/80 hover:border-[#0A2540]/40 hover:text-foreground"
                 )}
               >
                 {category.label}
@@ -466,7 +536,7 @@ export function OnlineDirectory({ className }: { className?: string }) {
             <CardGridLayout programs={active.programs} />
           )}
         </div>
-      </div>
+      </Container>
     </section>
   )
 }
