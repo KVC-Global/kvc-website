@@ -33,8 +33,8 @@ function applyTheme(resolved: ResolvedTheme, disableTransition: boolean) {
     const style = document.createElement("style")
     style.appendChild(
       document.createTextNode(
-        "*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}",
-      ),
+        "*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}"
+      )
     )
     document.head.appendChild(style)
     // force reflow so the no-transition rule takes effect
@@ -47,7 +47,9 @@ function applyTheme(resolved: ResolvedTheme, disableTransition: boolean) {
   root.style.colorScheme = resolved
 }
 
-const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined)
+const ThemeContext = React.createContext<ThemeContextValue | undefined>(
+  undefined
+)
 
 function useTheme() {
   const ctx = React.useContext(ThemeContext)
@@ -153,12 +155,12 @@ function ThemeProvider({
         return resolved
       })
     },
-    [storageKey, disableTransitionOnChange],
+    [storageKey, disableTransitionOnChange]
   )
 
   const value = React.useMemo<ThemeContextValue>(
     () => ({ theme, resolvedTheme, systemTheme, setTheme }),
-    [theme, resolvedTheme, systemTheme, setTheme],
+    [theme, resolvedTheme, systemTheme, setTheme]
   )
 
   return (
