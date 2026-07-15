@@ -1,9 +1,7 @@
 import type { Metadata } from "next"
 
-import { OnlineBenefits } from "@/components/online-benefits"
-import { OnlineCta } from "@/components/online-cta"
+import { OnlineDetails } from "@/components/online-details"
 import { OnlineDirectory } from "@/components/online-directory"
-import { OnlineFaq } from "@/components/online-faq"
 import { OnlineHero } from "@/components/online-hero"
 
 export const metadata: Metadata = {
@@ -17,9 +15,7 @@ export default function KhoaHocOnlinePage() {
     <>
       <OnlineHero />
       <OnlineDirectory />
-      <OnlineBenefits />
-      <OnlineFaq />
-      <OnlineCta />
+      <OnlineDetails />
     </>
   )
 }
