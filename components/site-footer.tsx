@@ -6,7 +6,6 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
-  CalendarCheck,
   ChevronDown,
   Mail,
   MapPin,
@@ -193,47 +192,49 @@ function CtaBanner({ className }: { className?: string }) {
           }}
         />
 
-        <div className="relative mr-auto flex h-full w-full max-w-7xl items-center px-15">
-          <div className="max-w-xl">
-            <h2
-              id="footer-cta-heading"
-              className="font-heading text-2xl leading-[1.15] font-bold tracking-tight text-primary sm:text-3xl md:text-[34px]"
+        <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col items-center justify-center px-6 text-center">
+          <h2
+            id="footer-cta-heading"
+            className="font-heading text-2xl leading-[1.15] font-bold tracking-tight text-primary uppercase sm:text-3xl md:text-[34px]"
+          >
+            Bắt đầu hành trình của bạn?
+          </h2>
+          <span
+            aria-hidden="true"
+            className="mx-auto mt-4 block h-[3px] w-16 rounded-full bg-brand-gold"
+          />
+
+          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-foreground/80 sm:text-base">
+            Khởi đầu hành trình định cư, làm việc và kinh doanh tại Singapore
+            cùng đối tác tư vấn di trú hàng đầu. Chúng tôi biến giấc mơ toàn
+            cầu của bạn thành hiện thực bền vững.
+          </p>
+
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href="#dat-lich-tu-van"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              style={{ background: NAVY }}
             >
-              <span className="block uppercase">Sẵn sàng bắt đầu</span>
-              <span className="block uppercase">hành trình của bạn?</span>
-            </h2>
+              <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
+              Đặt lịch tư vấn ngay
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                strokeWidth={2.5}
+              />
+            </Link>
 
-            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-foreground/80 sm:text-base">
-              Đội ngũ KVC Global luôn sẵn sàng lắng nghe và tư vấn lộ trình phù
-              hợp nhất cho bạn và gia đình.
-            </p>
-
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link
-                href="#dat-lich-tu-van"
-                className="group inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                style={{ background: NAVY }}
-              >
-                <CalendarCheck className="h-4 w-4" strokeWidth={2.25} />
-                Đặt lịch tư vấn ngay
-                <ArrowRight
-                  className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
-                  strokeWidth={2.5}
-                />
-              </Link>
-
-              <Link
-                href="#chat-chuyen-vien"
-                className="group inline-flex items-center justify-center gap-2 rounded-sm border border-foreground/25 bg-white/90 px-5 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-white hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-              >
-                <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
-                Chat với chuyên viên
-                <ArrowRight
-                  className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
-                  strokeWidth={2.5}
-                />
-              </Link>
-            </div>
+            <Link
+              href="#chat-chuyen-vien"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-foreground/25 bg-white/90 px-5 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-white hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
+              Chat với chuyên viên
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                strokeWidth={2.5}
+              />
+            </Link>
           </div>
         </div>
       </div>
