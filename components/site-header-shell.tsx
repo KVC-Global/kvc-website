@@ -16,7 +16,7 @@ export function SiteHeaderShell({ className }: { className?: string }) {
 
   return (
     <div className={cn("w-full", className)}>
-      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+      <header className="absolute top-0 left-0 z-50 w-full bg-transparent">
         <div className="flex h-15 w-full items-center justify-between gap-6 px-3 md:h-24 md:px-8">
           <SiteHeaderLogo />
           <div className="flex gap-2 md:gap-7">
