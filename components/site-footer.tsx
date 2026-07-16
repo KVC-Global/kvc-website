@@ -15,7 +15,7 @@ import {
 
 import { cn } from "@/lib/utils"
 
-const ACCENT = "var(--secondary)"
+const ACCENT = "var(--color-brand-gold)"
 const NAVY = "var(--color-brand-blue-mid)"
 
 const CTA_IMAGE =
@@ -206,8 +206,8 @@ function CtaBanner({ className }: { className?: string }) {
 
           <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-foreground/80 sm:text-base">
             Khởi đầu hành trình định cư, làm việc và kinh doanh tại Singapore
-            cùng đối tác tư vấn di trú hàng đầu. Chúng tôi biến giấc mơ toàn
-            cầu của bạn thành hiện thực bền vững.
+            cùng đối tác tư vấn di trú hàng đầu. Chúng tôi biến giấc mơ toàn cầu
+            của bạn thành hiện thực bền vững.
           </p>
 
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -323,7 +323,7 @@ export function SiteFooter({ className }: { className?: string }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue-mid/10 text-primary transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-primary focus-visible:-translate-y-0.5 focus-visible:text-primary focus-visible:outline-none"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue-mid/10 text-primary transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-primary focus-visible:-translate-y-0.5 focus-visible:text-primary focus-visible:outline-none"
                     >
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </a>
@@ -385,10 +385,7 @@ export function SiteFooter({ className }: { className?: string }) {
           </CollapsibleFooterSection>
         </div>
 
-            <div
-              aria-hidden="true"
-              className="bg-brand-blue-mid/15 h-px w-full"
-            />
+        <div aria-hidden="true" className="h-px w-full bg-brand-blue-mid/15" />
 
         <div className="flex flex-col items-start justify-between gap-2 py-6 text-[13px] text-foreground/65 sm:flex-row sm:items-center">
           <p>© 2024 KVC Global. All rights reserved.</p>
