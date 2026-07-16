@@ -28,7 +28,7 @@ function GoogleIcon({ className }: { className?: string }) {
 
 export function WorkPassReview() {
   return (
-    <section aria-label="Đánh giá và Case Study" className="mt-20 md:mt-28 w-full">
+    <section aria-label="Đánh giá và Case Study" className="mt-8 md:mt-8 w-full">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
         {/* Column 1: Testimonial Card */}
         <div className="relative flex flex-col sm:flex-row gap-6 items-center sm:items-start border border-brand-blue/10 bg-brand-blue text-white rounded-[20px] p-6 md:p-8 shadow-[0_12px_40px_-15px_rgba(10,37,64,0.35)] overflow-hidden transition-all duration-300 hover:shadow-[0_20px_50px_-15px_rgba(10,37,64,0.45)]">
