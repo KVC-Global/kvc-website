@@ -22,7 +22,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
     >
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-white from-0% via-white via-55% to-white/60 to-100%"
+        className="absolute inset-0 bg-gradient-to-r from-white from-50% to-transparent to-100%"
       />
 
       <Container className="relative flex min-h-[600px] flex-col justify-center pt-28 pb-20 sm:pt-32 sm:pb-24 md:min-h-[640px] md:pt-36 md:pb-0">
