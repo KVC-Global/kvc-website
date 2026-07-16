@@ -25,30 +25,30 @@ export function WorkPassFees() {
             Chi phí tham khảo
           </h3>
 
-          <div className="overflow-hidden border border-border rounded-lg">
+          <div className="w-full mt-2">
             <table className="w-full border-collapse text-left text-sm">
               <thead>
-                <tr className="bg-[#FFF8EE] font-heading font-bold text-brand-blue border-b border-border">
-                  <th className="px-4 py-3.5">Hạng mục</th>
-                  <th className="px-4 py-3.5 text-right">Chi phí (SGD)</th>
+                <tr className="font-heading font-bold text-brand-blue">
+                  <th className="px-6 py-3.5 bg-[#FFF8EE] rounded-l-lg border-r border-border/60">Hạng mục</th>
+                  <th className="px-6 py-3.5 bg-[#FFF8EE] rounded-r-lg text-center">Chi phí (SGD)</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border font-body text-brand-dark/95">
-                <tr>
-                  <td className="px-4 py-3.5">Phi xin TEP (MOM)</td>
-                  <td className="px-4 py-3.5 text-right font-bold text-brand-blue">105</td>
+              <tbody className="divide-y divide-border/40 font-body text-brand-dark/95">
+                <tr className="border-b border-border/40">
+                  <td className="px-6 py-4 font-semibold text-brand-blue border-r border-border/60">Phi xin TEP (MOM)</td>
+                  <td className="px-6 py-4 text-center font-bold text-brand-blue">105</td>
                 </tr>
-                <tr>
-                  <td className="px-4 py-3.5">Phi Issuance (nếu áp dụng)</td>
-                  <td className="px-4 py-3.5 text-right font-bold text-brand-blue">185</td>
+                <tr className="border-b border-border/40">
+                  <td className="px-6 py-4 font-semibold text-brand-blue border-r border-border/60">Phi Issuance (nếu áp dụng)</td>
+                  <td className="px-6 py-4 text-center font-bold text-brand-blue">185</td>
                 </tr>
-                <tr>
-                  <td className="px-4 py-3.5">Phi dịch vụ tư vấn (KVC Global)</td>
-                  <td className="px-4 py-3.5 text-right font-semibold text-secondary">Liên hệ</td>
+                <tr className="border-b border-border/40">
+                  <td className="px-6 py-4 font-semibold text-brand-blue border-r border-border/60">Phi dịch vụ tư vấn (KVC Global)</td>
+                  <td className="px-6 py-4 text-center font-bold text-brand-blue">Liên hệ</td>
                 </tr>
-                <tr className="font-bold bg-brand-light/40">
-                  <td className="px-4 py-3.5 text-brand-blue">Tổng chi phí ước tính</td>
-                  <td className="px-4 py-3.5 text-right text-secondary">Liên hệ</td>
+                <tr className="font-bold">
+                  <td className="px-6 py-4 text-brand-blue border-r border-border/60">Tổng chi phí ước tính</td>
+                  <td className="px-6 py-4 text-center text-brand-blue">Liên hệ</td>
                 </tr>
               </tbody>
             </table>
