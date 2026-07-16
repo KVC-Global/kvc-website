@@ -6,6 +6,7 @@ import { WorkPassProcess } from "./work-pass-process"
 import { WorkPassRequirements } from "./work-pass-requirements"
 import { WorkPassFees } from "./work-pass-fees"
 import { WorkPassReview } from "./work-pass-review"
+import { WorkPassFaqs } from "./work-pass-faqs"
 
 export function WorkPassDetails({ className }: { className?: string }) {
   return (
@@ -16,6 +17,7 @@ export function WorkPassDetails({ className }: { className?: string }) {
         <WorkPassRequirements />
         <WorkPassFees />
         <WorkPassReview />
+        <WorkPassFaqs />
       </Container>
     </div>
   )
