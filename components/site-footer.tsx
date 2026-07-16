@@ -17,7 +17,7 @@ import {
 import { cn } from "@/lib/utils"
 
 const ACCENT = "var(--secondary)"
-const NAVY = "var(--color-brand-blue)"
+const NAVY = "var(--color-brand-blue-mid)"
 
 const CTA_IMAGE =
   "https://images.pexels.com/photos/35421791/pexels-photo-35421791.jpeg?auto=compress&w=1920&q=80"
@@ -322,8 +322,7 @@ export function SiteFooter({ className }: { className?: string }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full text-primary transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-primary focus-visible:-translate-y-0.5 focus-visible:text-primary focus-visible:outline-none"
-                      style={{ background: "rgba(10, 37, 64, 0.08)" }}
+                          className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue-mid/10 text-primary transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-primary focus-visible:-translate-y-0.5 focus-visible:text-primary focus-visible:outline-none"
                     >
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </a>
@@ -385,11 +384,10 @@ export function SiteFooter({ className }: { className?: string }) {
           </CollapsibleFooterSection>
         </div>
 
-        <div
-          aria-hidden="true"
-          className="h-px w-full"
-          style={{ background: "rgba(10, 37, 64, 0.12)" }}
-        />
+            <div
+              aria-hidden="true"
+              className="bg-brand-blue-mid/15 h-px w-full"
+            />
 
         <div className="flex flex-col items-start justify-between gap-2 py-6 text-[13px] text-foreground/65 sm:flex-row sm:items-center">
           <p>© 2024 KVC Global. All rights reserved.</p>

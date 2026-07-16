@@ -192,7 +192,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className={cn("mx-6 rounded-xl bg-brand-blue py-10 sm:py-15", className)}
+          className={cn("mx-6 rounded-xl bg-brand-blue-mid py-10 sm:py-15", className)}
     >
       <div className="w-full px-10">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,65fr)_minmax(0,35fr)] lg:gap-10">

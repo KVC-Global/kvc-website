@@ -108,7 +108,7 @@ function StepItem({ step, index }: { step: Step; index: number }) {
   const num = String(index + 1).padStart(2, "0")
   return (
     <div className="relative flex flex-col items-center text-center">
-      <div className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-blue shadow-[0_12px_28px_-12px_rgba(10,37,64,0.45)]">
+          <div className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-blue-mid shadow-[0_12px_28px_-12px_rgba(29,66,124,0.45)]">
         <Icon className="h-7 w-7 text-secondary" strokeWidth={1.6} />
       </div>
       <div
@@ -176,7 +176,7 @@ export function SiteWhyProcess({ className }: { className?: string }) {
         >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute top-[35px] right-[10%] left-[10%] hidden h-px bg-brand-blue/15 lg:block"
+                className="pointer-events-none absolute top-[35px] right-[10%] left-[10%] hidden h-px bg-secondary lg:block"
           />
           {STEPS.map((step, index) => (
             <div key={step.title} role="listitem">

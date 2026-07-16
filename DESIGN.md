@@ -57,7 +57,8 @@ The KVC Global logo stands for professionalism, architecture, and global connect
 
 | Color Identity    | Semantic Role      | HEX Code  | Intended UI & UX Application                                                                                                                                              |
 | :---------------- | :----------------- | :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `Dark Blue`       | Primary            | `#0A2540` | Main corporate brand identifier. Applied to Header backgrounds, Primary CTAs, Section Headings (`h1`, `h2`), and Dark Testimonial Blocks.                                 |
+| `Dark Blue`       | Primary            | `#0A2540` | Main corporate brand identifier. Reserved for Header, Footer, Primary CTAs, and Section Headings (`h1`, `h2`).                                                            |
+| `Mid Blue`        | Surface / Hover    | `#1D427C` | Mid-tone blue surface for dark content blocks, card hover/active states, icon containers, and secondary buttons. Use as `bg-brand-blue-mid` / `hover:bg-brand-blue-mid`.   |
 | `KVC Gold`        | Secondary / Accent | `#C8913C` | High-impact metallic gold accent tone. Applied to keyword highlights ("GREATER."), active menu state indicators, stat icons, slider arrows, and secondary CTA highlights. |
 | `Pure White`      | Background         | `#FFFFFF` | Primary canvas background for content sections (Hero, Cards, Forms).                                                                                                      |
 | `Soft Light Blue` | Background         | `#F4F7FA` | Alternative light section background to group structural layers (Partners, Office Cards).                                                                                 |
@@ -65,8 +66,8 @@ The KVC Global logo stands for professionalism, architecture, and global connect
 
 #### Color Constraints & Guardrails
 
-- **Background Rule:** Layout rows must alternate strictly between `Pure White` and `Soft Light Blue`. Dark Blue (`#0A2540`) is exclusively reserved for structural bookends (Header, Footer, Dark Review Section).
-- **Grid Card Highlighting:** When building grid components (e.g., Service Cards), the default state is light. The highlighted or active card state must shift to a full `Dark Blue` background with `KVC Gold` text links or active highlights. **Zero tolerance for red or generic orange accents.**
+- **Background Rule:** Layout rows must alternate strictly between `Pure White` and `Soft Light Blue`. Dark Blue (`#0A2540`) is reserved for structural bookends (Header, Footer, Primary CTAs). Mid Blue (`#1D427C`) is the dark surface tone for review sections, dark content blocks, and active/hover states.
+- **Grid Card Highlighting:** When building grid components (e.g., Service Cards), the default state is light. The highlighted or active card state must shift to `Mid Blue` (`#1D427C`) background with `Pure White` body text. **Zero tolerance for red or generic orange accents.**
 
 ---
 

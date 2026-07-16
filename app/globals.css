@@ -6,8 +6,9 @@
 
 /* KVC Global brand tokens — see DESIGN.md */
 @theme {
-    --color-brand-blue: #0a2540;
-    --color-brand-gold: #c8913c;
+        --color-brand-blue: #0a2540;
+        --color-brand-blue-mid: #1d427c;
+        --color-brand-gold: #c8913c;
     --color-brand-dark: #1a202c;
     --color-brand-light: #f4f7fa;
 
