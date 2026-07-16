@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import {
   Be_Vietnam_Pro,
   Inter,
@@ -10,6 +11,33 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://kvcglobal.com"),
+  title: {
+    default: "KVC Global",
+    template: "%s",
+  },
+  description:
+    "Định hướng tương lai của bạn với KVC Global — Du học Singapore, khóa học online quốc tế, Training Employment Pass.",
+  openGraph: {
+    type: "website",
+    locale: "vi_VN",
+    siteName: "KVC Global",
+    images: [
+      {
+        url: "/images/thumb-sharing.png",
+        width: 1200,
+        height: 630,
+        alt: "KVC Global",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/images/thumb-sharing.png"],
+  },
+}
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],

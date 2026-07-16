@@ -35,10 +35,31 @@ const fontMono = JetBrains_Mono({
 })
 
 export const metadata = {
+  metadataBase: new URL("https://kvcglobal.com"),
   title: "Coming Soon | KVC",
   description:
     "KVC is launching a new website. Stay tuned for our refreshed experience.",
   robots: { index: false, follow: true },
+  openGraph: {
+    title: "Coming Soon | KVC",
+    description:
+      "KVC is launching a new website. Stay tuned for our refreshed experience.",
+    images: [
+      {
+        url: "/images/thumb-sharing.png",
+        width: 1200,
+        height: 630,
+        alt: "Coming Soon | KVC",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Coming Soon | KVC",
+    description:
+      "KVC is launching a new website. Stay tuned for our refreshed experience.",
+    images: ["/images/thumb-sharing.png"],
+  },
 }
 
 export default function ComingSoonLayout({
