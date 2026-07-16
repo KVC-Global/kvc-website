@@ -78,15 +78,25 @@ function ServiceCard({ service }: { service: Service }) {
 
       <a
         href={service.href}
-        className="mt-auto inline-flex items-center justify-between gap-3 pt-5 text-sm font-semibold tracking-[0.16em] text-foreground uppercase transition-colors duration-300 group-hover:text-secondary"
+        className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold tracking-[0.16em] uppercase"
       >
-        <span>Read More</span>
-        <span
-          aria-hidden="true"
-          className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-white transition-all duration-300 ease-out group-hover:translate-x-0.5 group-hover:bg-secondary"
-        >
-          <ArrowRight className="h-4 w-4" strokeWidth={2.75} />
+        <span className="relative inline-block leading-none">
+          <span className="block pb-1 text-brand-gold transition-colors duration-300 group-hover:hidden">
+            Tìm hiểu thêm
+          </span>
+          <span className="hidden pb-1 text-white transition-colors duration-300 group-hover:block">
+            Đăng kí ngay
+          </span>
+          <span
+            aria-hidden="true"
+            className="absolute right-0 bottom-0 left-0 h-px bg-secondary transition-colors duration-300 group-hover:bg-white"
+          />
         </span>
+        <ArrowRight
+          aria-hidden="true"
+          className="h-4 w-4 text-secondary transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-white"
+          strokeWidth={2.75}
+        />
       </a>
     </article>
   )
@@ -119,6 +129,27 @@ export function SiteServices({ className }: { className?: string }) {
           {SERVICES.map((service) => (
             <ServiceCard key={service.title} service={service} />
           ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <a
+            href="#all-services"
+            className="group inline-flex items-center justify-center gap-2 rounded-md border-2 border-brand-gold px-7 py-3.5 text-sm font-semibold tracking-wide text-brand-gold uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+          >
+            Khám phá các dịch vụ khác
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </Container>
     </section>
