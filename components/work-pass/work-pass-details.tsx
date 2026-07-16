@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui/container"
 import { WorkPassTarget } from "./work-pass-target"
 import { WorkPassProcess } from "./work-pass-process"
+import { WorkPassRequirements } from "./work-pass-requirements"
 
 export function WorkPassDetails({ className }: { className?: string }) {
   return (
@@ -10,6 +11,7 @@ export function WorkPassDetails({ className }: { className?: string }) {
       <Container className={className}>
         <WorkPassTarget />
         <WorkPassProcess />
+        <WorkPassRequirements />
       </Container>
     </div>
   )
