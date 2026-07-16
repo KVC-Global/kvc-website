@@ -104,7 +104,7 @@ function Stars({ count = 5, size = 14 }: { count?: number; size?: number }) {
       {Array.from({ length: count }).map((_, i) => (
         <Star
           key={i}
-          className="text-secondary"
+          className="text-brand-gold"
           style={{ width: size, height: size }}
           strokeWidth={0}
           fill="currentColor"
@@ -192,7 +192,10 @@ export function SiteTestimonials({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="testimonials-heading"
-      className={cn("mx-6 rounded-xl bg-brand-blue py-10 sm:py-15", className)}
+      className={cn(
+        "mx-6 rounded-xl bg-brand-blue-mid py-10 sm:py-15",
+        className
+      )}
     >
       <div className="w-full px-10">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,65fr)_minmax(0,35fr)] lg:gap-10">
@@ -200,7 +203,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
           <div>
             <div className="flex items-start justify-between gap-4">
               <div>
-                <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-white uppercase">
+                <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
                   Câu chuyện thành công
                 </p>
                 <h2
@@ -212,7 +215,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
               </div>
               <a
                 href="#testimonials"
-                className="hidden shrink-0 items-center gap-2 pt-2 text-[13px] font-semibold tracking-[0.18em] whitespace-nowrap text-white/80 uppercase transition-colors hover:text-secondary sm:inline-flex"
+                className="hidden shrink-0 items-center gap-2 pt-2 text-[13px] font-semibold tracking-[0.18em] whitespace-nowrap text-white/80 uppercase transition-colors hover:text-brand-gold sm:inline-flex"
               >
                 Xem tất cả câu chuyện
                 <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
@@ -252,7 +255,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
                     className={cn(
                       "h-2 rounded-full transition-all duration-300",
                       active === i
-                        ? "w-8 bg-secondary"
+                        ? "w-8 bg-brand-gold"
                         : "w-2 bg-white/30 hover:bg-white/50"
                     )}
                   />
@@ -266,7 +269,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
             aria-label="Đánh giá trên Google"
             className="rounded-2xl bg-white/[0.04] p-6 ring-1 ring-white/10 sm:p-8"
           >
-            <p className="font-sans text-[12px] font-bold tracking-[0.28em] text-secondary uppercase">
+            <p className="font-sans text-[12px] font-bold tracking-[0.28em] text-brand-gold uppercase">
               Đánh giá trên Google
             </p>
 
@@ -312,7 +315,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
 
             <a
               href="#google-reviews"
-              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-md bg-secondary px-5 py-3 text-[13px] font-semibold tracking-[0.16em] text-brand-blue uppercase shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-md"
+              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand-gold px-5 py-3 text-[13px] font-semibold tracking-[0.16em] text-brand-blue uppercase shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-md"
             >
               Xem tất cả đánh giá trên Google
               <ArrowRight className="h-4 w-4" strokeWidth={2.75} />
