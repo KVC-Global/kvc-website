@@ -1,18 +1,44 @@
 import Image from "next/image"
-import { Check } from "lucide-react"
+import { Award, Handshake } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 
-const STATS = [
-  { value: "98%", label: "Tỷ lệ thành công" },
-  { value: "10+", label: "Năm kinh nghiệm" },
-] as const
+type Stat = { value: string; label: string; color?: string }
+const STATS: Stat[] = [
+  { value: "88%", label: "Tư vấn chiến lược kinh doanh" },
+  { value: "93%", label: "Mạng lưới giáo dục & công nghệ", color: "#F8BC62" },
+]
 
-const BULLETS = [
-  "Tư vấn Du học & Việc làm",
-  "Dịch vụ Doanh nghiệp",
-  "Định cư Singapore",
+const ICON_STATS = [
+  {
+    id: "exp-1",
+    icon: Handshake,
+    value: "15+ Năm",
+    sub: "Kinh nghiệm thực chiến",
+    tone: "blue" as const,
+  },
+  {
+    id: "acra-1",
+    icon: Award,
+    value: "Top 1%",
+    sub: "Đối tác ACRA Singapore",
+    tone: "gold" as const,
+  },
+  {
+    id: "exp-2",
+    icon: Handshake,
+    value: "15+ Năm",
+    sub: "Kinh nghiệm thực chiến",
+    tone: "blue" as const,
+  },
+  {
+    id: "acra-2",
+    icon: Award,
+    value: "Top 1%",
+    sub: "Đối tác ACRA Singapore",
+    tone: "gold" as const,
+  },
 ] as const
 
 const MAIN_IMAGE =
@@ -21,12 +47,15 @@ const MAIN_IMAGE =
 const SECONDARY_IMAGE =
   "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80&auto=format&fit=crop"
 
-const CEO_AVATAR =
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop"
-
 const ACCENT = "var(--color-secondary)"
 
-function ProgressRing({ value }: { value: string }) {
+function ProgressRing({
+  value,
+  color = ACCENT,
+}: {
+  value: string
+  color?: string
+}) {
   const size = 120
   const stroke = 6
   const radius = (size - stroke) / 2
@@ -59,14 +88,14 @@ function ProgressRing({ value }: { value: string }) {
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke={ACCENT}
+          stroke={color}
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={`${arc} ${circumference}`}
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
-        <span className="font-display text-2xl font-bold text-secondary">
+        <span className="font-display text-2xl font-bold" style={{ color }}>
           {value}
         </span>
       </div>
@@ -121,7 +150,7 @@ export function SiteAbout({ className }: { className?: string }) {
         </div>
 
         <div>
-          <p className="font-sans text-[13px] font-bold tracking-[0.24em] text-secondary uppercase">
+          <p className="font-sans text-[13px] font-bold tracking-[0.24em] text-brand-gold uppercase">
             Về công ty
           </p>
           <h2
@@ -154,7 +183,7 @@ export function SiteAbout({ className }: { className?: string }) {
                 key={stat.label}
                 className="flex shrink-0 items-center gap-4"
               >
-                <ProgressRing value={stat.value} />
+                <ProgressRing value={stat.value} color={stat.color} />
                 <span className="max-w-[110px] text-[15px] leading-snug font-semibold text-foreground">
                   {stat.label}
                 </span>
@@ -162,26 +191,53 @@ export function SiteAbout({ className }: { className?: string }) {
             ))}
           </div>
 
-          <ul className="mt-10 space-y-3">
-            {BULLETS.map((item) => (
-              <li
-                key={item}
-                className="flex items-center gap-3 text-[15px] font-medium text-foreground"
-              >
-                <span className="inline-flex h-6 w-6 items-center justify-center text-secondary">
-                  <Check className="h-5 w-5" strokeWidth={3} />
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
+          <div className="mt-10">
+            <div>
+              <h3 className="font-sans text-[13px] font-bold tracking-[0.24em] text-brand-gold uppercase">
+                Những con số chứng minh năng lực
+              </h3>
+              <span
+                aria-hidden="true"
+                className="mt-3 block h-px w-full bg-border"
+              />
+            </div>
 
-          <div className="mt-10 flex flex-wrap items-center gap-6">
+            <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2">
+              {ICON_STATS.map((item) => {
+                const Icon = item.icon
+                return (
+                  <div key={item.id} className="flex items-center gap-4">
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full",
+                        item.tone === "blue"
+                          ? "bg-brand-blue-mid text-white"
+                          : "bg-secondary text-[#000F22]"
+                      )}
+                    >
+                      <Icon className="h-5 w-5" strokeWidth={2} />
+                    </span>
+                    <div className="leading-tight">
+                      <dt className="font-display text-base font-bold text-foreground">
+                        {item.value}
+                      </dt>
+                      <dd className="font-sans text-[13px] text-foreground/70">
+                        {item.sub}
+                      </dd>
+                    </div>
+                  </div>
+                )
+              })}
+            </dl>
+          </div>
+
+          <div className="mt-10">
             <a
               href="#gioi-thieu"
-              className="group inline-flex items-center justify-center gap-2 rounded-md bg-secondary px-7 py-3.5 text-sm font-semibold tracking-wide text-white uppercase shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              className="group inline-flex items-center justify-center gap-2 rounded-md border-2 border-brand-gold px-7 py-3.5 text-sm font-semibold tracking-wide text-brand-gold uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
             >
-              Giới thiệu về chúng tôi
+              Về chúng tôi
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -195,24 +251,6 @@ export function SiteAbout({ className }: { className?: string }) {
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </a>
-
-            <div className="flex items-center gap-3">
-              <Image
-                src={CEO_AVATAR}
-                alt="Người sáng lập KVC Global"
-                width={56}
-                height={56}
-                className="h-14 w-14 rounded-full object-cover shadow-md ring-2 ring-white"
-              />
-              <div className="leading-tight">
-                <div className="font-display text-base font-bold text-foreground">
-                  Salman Ahmed
-                </div>
-                <div className="font-sans text-xs font-semibold tracking-wide text-secondary uppercase">
-                  CEO &amp; Founder
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </Container>

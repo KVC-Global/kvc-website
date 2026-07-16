@@ -100,7 +100,7 @@ export function SiteServices({ className }: { className?: string }) {
     >
       <Container>
         <div className="text-center">
-          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-secondary uppercase">
+          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
             Dịch vụ của chúng tôi
           </p>
           <h2
@@ -111,7 +111,7 @@ export function SiteServices({ className }: { className?: string }) {
           </h2>
           <span
             aria-hidden="true"
-            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-secondary"
+            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-brand-gold"
           />
         </div>
 

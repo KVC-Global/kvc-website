@@ -18,7 +18,10 @@ export function SiteHero({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className={cn("relative w-full overflow-hidden bg-cover bg-center", className)}
+      className={cn(
+        "relative w-full overflow-hidden bg-cover bg-center",
+        className
+      )}
       style={{ backgroundImage: `url(${HERO_IMAGE})` }}
     >
       <Image
@@ -46,15 +49,15 @@ export function SiteHero({ className }: { className?: string }) {
           </h1>
 
           <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">
-            Khởi đầu hành trình định cư, làm việc và kinh doanh tại Singapore cùng
-            đối tác tư vấn di trú hàng đầu. Chúng tôi biến giấc mơ toàn cầu của
-            bạn thành hiện thực bền vững.
+            Khởi đầu hành trình định cư, làm việc và kinh doanh tại Singapore
+            cùng đối tác tư vấn di trú hàng đầu. Chúng tôi biến giấc mơ toàn cầu
+            của bạn thành hiện thực bền vững.
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
             <a
               href="#du-hoc"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
               Du học &amp; Việc làm Singapore
               <svg
