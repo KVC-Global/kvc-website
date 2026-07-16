@@ -121,7 +121,7 @@ export function SiteAbout({ className }: { className?: string }) {
         </div>
 
         <div>
-          <p className="font-sans text-[13px] font-bold tracking-[0.24em] text-primary uppercase">
+          <p className="font-sans text-[13px] font-bold tracking-[0.24em] text-secondary uppercase">
             Về công ty
           </p>
           <h2

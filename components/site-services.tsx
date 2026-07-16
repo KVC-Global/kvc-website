@@ -56,7 +56,7 @@ function ServiceCard({ service }: { service: Service }) {
   return (
     <article
       className={cn(
-            "group relative flex h-full flex-col overflow-hidden rounded-sm bg-white p-5 text-foreground shadow-[0_18px_40px_-22px_rgba(29,66,124,0.35)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-brand-blue-mid hover:text-white hover:shadow-[0_28px_60px_-22px_rgba(29,66,124,0.45)]"
+        "group relative flex h-full flex-col overflow-hidden rounded-sm bg-white p-5 text-foreground shadow-[0_18px_40px_-22px_rgba(29,66,124,0.35)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-brand-blue-mid hover:text-white hover:shadow-[0_28px_60px_-22px_rgba(29,66,124,0.45)]"
       )}
     >
       <h3 className="font-display text-[22px] leading-tight font-bold tracking-tight text-foreground transition-colors duration-300 group-hover:text-white">
@@ -100,7 +100,7 @@ export function SiteServices({ className }: { className?: string }) {
     >
       <Container>
         <div className="text-center">
-          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-primary uppercase">
+          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-secondary uppercase">
             Dịch vụ của chúng tôi
           </p>
           <h2
