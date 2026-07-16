@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/container"
 import { WorkPassTarget } from "./work-pass-target"
 import { WorkPassProcess } from "./work-pass-process"
 import { WorkPassRequirements } from "./work-pass-requirements"
+import { WorkPassFees } from "./work-pass-fees"
 
 export function WorkPassDetails({ className }: { className?: string }) {
   return (
@@ -12,6 +13,7 @@ export function WorkPassDetails({ className }: { className?: string }) {
         <WorkPassTarget />
         <WorkPassProcess />
         <WorkPassRequirements />
+        <WorkPassFees />
       </Container>
     </div>
   )
