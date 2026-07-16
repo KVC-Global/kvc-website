@@ -3,12 +3,10 @@ import Link from "next/link"
 import {
   ArrowRight,
   Award,
-  Calendar,
   FileText,
   Globe2,
   Mail,
   MapPin,
-  MessageCircle,
   Phone,
   ScrollText,
   ShieldCheck,
@@ -82,8 +80,12 @@ export function AboutPage() {
   return (
     <div className="bg-background">
       {/* ───────────────────────── Hero ───────────────────────── */}
-      <section className="relative w-full overflow-hidden border-b border-border bg-white">
-        <div className="absolute inset-y-0 right-0 z-0 hidden w-full lg:block lg:w-[52%]">
+      <section
+        aria-labelledby="about-hero-heading"
+        className="relative w-full border-b border-border bg-white"
+      >
+        {/* Desktop Background Image (Right side) */}
+        <div className="absolute inset-y-0 right-0 z-0 hidden w-full overflow-hidden lg:block lg:w-[52%]">
           <Image
             src="/images/study-abroad-hero.jpg"
             alt="Đội ngũ KVC Global làm việc tại Singapore"
@@ -92,24 +94,31 @@ export function AboutPage() {
             sizes="(max-width: 1024px) 100vw, 52vw"
             className="object-cover object-center"
           />
-          <div className="absolute inset-y-0 left-0 w-48 bg-linear-to-r from-white via-white/80 to-transparent" />
+          {/* Soft blend transition from white background (left) to image */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-white via-white/80 to-transparent"
+          />
         </div>
 
-        <Container className="relative z-10 py-8 md:py-16 lg:py-20">
+        {/* Main Content Container */}
+        <Container className="relative z-10 pt-6 md:pt-10 lg:pt-12 pb-20 sm:pb-24 md:pb-28">
+          {/* Breadcrumb Navigation */}
           <nav
             aria-label="Breadcrumb"
-            className="mb-8 flex flex-wrap items-center gap-1.5 text-xs font-medium text-muted-foreground md:text-sm"
+            className="mb-8 flex flex-wrap items-center gap-1.5 text-xs font-medium text-muted-foreground md:text-sm font-body"
           >
-            <Link href="/" className="transition-colors hover:text-foreground">
+            <Link href="/" className="hover:text-foreground transition-colors duration-200">
               Trang chủ
             </Link>
-            <span className="text-muted-foreground/60">&gt;</span>
-            <span className="font-semibold text-foreground" aria-current="page">
+            <span className="text-muted-foreground/60 select-none">&gt;</span>
+            <span className="text-foreground/80 font-semibold" aria-current="page">
               Giới thiệu
             </span>
           </nav>
 
-          <div className="relative mb-8 h-60 w-full overflow-hidden rounded-lg sm:h-90 md:h-105 lg:hidden">
+          {/* Mobile/Tablet Image Display (Shown only on small/medium screens) */}
+          <div className="relative mb-8 h-[200px] w-full overflow-hidden rounded-lg sm:h-[280px] md:h-[340px] lg:hidden">
             <Image
               src="/images/study-abroad-hero.jpg"
               alt="Đội ngũ KVC Global làm việc tại Singapore"
@@ -119,67 +128,107 @@ export function AboutPage() {
             />
           </div>
 
+          {/* Content Box */}
           <div className="max-w-full lg:max-w-[55%]">
-            <span className="mb-3 inline-block rounded-full bg-brand-light px-3 py-1 text-xs font-bold tracking-[0.24em] text-secondary uppercase sm:text-sm">
+            {/* Subtitle / Tag */}
+            <span className="inline-block font-heading text-xs font-bold tracking-wider text-secondary uppercase sm:text-sm mb-3">
               Giới thiệu về KVC Global
             </span>
-            <h1 className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]">
+
+            {/* Main Title */}
+            <h1
+              id="about-hero-heading"
+              className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
+            >
               Đồng hành cùng bạn
-              <span className="mt-1 block">chạm tới tương lai mới</span>
+              <span className="block mt-1">chạm tới tương lai mới</span>
             </h1>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px] md:leading-relaxed">
+
+            {/* Description Paragraph */}
+            <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px] md:leading-relaxed">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation.
             </p>
 
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+            {/* Call to Actions (CTAs) */}
+            <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4">
               <Link
                 href="#lien-he"
-                className="group inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-lg"
+                className="group inline-flex items-center justify-center gap-2 rounded-sm bg-secondary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
               >
                 Đăng ký tư vấn miễn phí
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
               </Link>
+
               <Link
                 href="#cau-chuyen"
-                className="group inline-flex items-center justify-center gap-2 rounded-sm border border-primary bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-light hover:shadow-md"
+                className="group inline-flex items-center justify-center gap-2 rounded-sm border border-secondary bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-light hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
               >
                 Tìm hiểu thêm
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 text-brand-blue"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
               </Link>
             </div>
           </div>
+        </Container>
 
-          {/* Floating stats bar — overlaps the hero → story transition */}
-          <div className="relative z-20 mt-12 w-full lg:mt-16 xl:mt-20">
-            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-border shadow-[0_24px_60px_-20px_rgba(15,27,45,0.22)] ring-1 ring-black/5 sm:grid-cols-4">
+        {/* Stats Grid — centered on the hero → story boundary, straddling both */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 translate-y-1/2">
+          <Container>
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md bg-border ring-1 ring-black/5 md:grid-cols-4">
               {HERO_STATS.map((stat) => {
                 const Icon = stat.icon
                 return (
                   <div
                     key={stat.label}
-                    className="flex flex-col items-start gap-2 bg-white px-6 py-6 transition-colors duration-300 ease-out hover:bg-brand-light"
+                    className="group flex items-center justify-center gap-3 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 md:h-[160px] md:py-7"
                   >
-                    <Icon className="h-7 w-7 text-secondary" strokeWidth={1.5} />
-                    <span className="font-heading text-2xl font-bold text-brand-blue">
-                      {stat.value}
-                    </span>
-                    <span className="font-body text-sm font-medium text-muted-foreground">
-                      {stat.label}
-                    </span>
+                    <Icon
+                      className="h-7 w-7 shrink-0 text-secondary transition-transform duration-300 ease-out sm:h-9 sm:w-9"
+                      strokeWidth={1.75}
+                    />
+                    <div className="flex min-w-0 flex-col">
+                      <div className="font-display text-xl font-bold text-primary sm:text-3xl">
+                        {stat.value}
+                      </div>
+                      <div className="truncate font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
+                        {stat.label}
+                      </div>
+                    </div>
                   </div>
                 )
               })}
             </div>
-          </div>
-        </Container>
+          </Container>
+        </div>
       </section>
 
       {/* ───────────────────── Story section ───────────────────── */}
       <section
         id="cau-chuyen"
-        className="w-full bg-brand-light py-20 sm:py-24"
+        className="w-full bg-brand-light pt-20 sm:pt-24 md:pt-28 pb-20 sm:pb-24"
       >
         <Container className="grid items-center gap-12 md:grid-cols-2">
           <div className="flex flex-col">
@@ -208,14 +257,14 @@ export function AboutPage() {
             </div>
             <Link
               href="#lien-he"
-              className="group mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-brand-blue px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue/90 hover:shadow-lg"
+              className="group mt-8 inline-flex w-fit items-center gap-2 rounded-sm bg-brand-blue px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue/90 hover:shadow-lg"
             >
               Tìm hiểu về dịch vụ
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
 
-          <div className="relative aspect-[3/2] w-full overflow-hidden rounded-2xl shadow-[0_24px_60px_-24px_rgba(15,27,45,0.18)]">
+          <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-[0_24px_60px_-24px_rgba(15,27,45,0.18)]">
             <Image
               src="/images/singapore-merlion-sunset.jpg"
               alt="Đội ngũ KVC Global tại Singapore"
@@ -237,14 +286,14 @@ export function AboutPage() {
             <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl">
               Gần bạn hơn ở mỗi điểm đến
             </h2>
-            <span className="mt-4 h-1 w-12 rounded-full bg-secondary" />
+            <span className="mt-4 h-1 w-12 rounded-sm bg-secondary" />
           </div>
 
           <div className="mt-14 grid gap-8 md:grid-cols-2">
             {OFFICES.map((office) => (
               <div
                 key={office.title}
-                className="flex flex-col overflow-hidden rounded-xl bg-white shadow-[0_18px_50px_-24px_rgba(15,27,45,0.22)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(15,27,45,0.28)] sm:flex-row"
+                className="flex flex-col overflow-hidden rounded-lg bg-white shadow-[0_18px_50px_-24px_rgba(15,27,45,0.22)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(15,27,45,0.28)] sm:flex-row"
               >
                 <div className="relative h-56 w-full shrink-0 sm:h-auto sm:w-[45%]">
                   <Image
@@ -287,7 +336,7 @@ export function AboutPage() {
 
                   <Link
                     href={office.mapUrl}
-                    className="group mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-secondary px-5 py-2.5 text-sm font-semibold text-secondary transition-all duration-300 ease-out hover:bg-secondary hover:text-white"
+                    className="group mt-6 inline-flex w-fit items-center gap-2 rounded-sm border border-secondary px-5 py-2.5 text-sm font-semibold text-primary transition-all duration-300 ease-out hover:bg-secondary hover:text-white"
                   >
                     Xem bản đồ
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -320,10 +369,10 @@ export function AboutPage() {
               return (
                 <div
                   key={item.title}
-                  className="flex flex-row items-start gap-5 rounded-xl bg-brand-light p-8 shadow-sm ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md"
+                  className="flex flex-row items-center gap-5 rounded-lg bg-brand-light p-8 shadow-sm ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md"
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-secondary/20">
-                    <Icon className="h-6 w-6 text-secondary" strokeWidth={1.5} />
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-secondary/20">
+                    <Icon className="h-9 w-9 text-secondary" strokeWidth={1.5} />
                   </div>
                   <div className="flex flex-col">
                     <h3 className="font-heading text-lg font-bold text-brand-blue">
@@ -334,7 +383,7 @@ export function AboutPage() {
                     </p>
                     <Link
                       href={item.href}
-                      className="group mt-4 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-secondary"
+                      className="group mt-4 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
                     >
                       Xem chi tiết
                       <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -345,7 +394,7 @@ export function AboutPage() {
             })}
 
             {/* Card 3 — framed certificates image */}
-            <div className="relative overflow-hidden rounded-xl shadow-sm ring-1 ring-black/5">
+            <div className="relative overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5">
               <Image
                 src="/images/free-singapore-tour-for.jpg"
                 alt="Các giấy phép và chứng nhận hoạt động của KVC Global"
@@ -358,49 +407,6 @@ export function AboutPage() {
         </Container>
       </section>
 
-      {/* ───────────────────────── CTA ─────────────────────────── */}
-      <section id="lien-he" className="w-full bg-white pb-24 sm:pb-28">
-        <Container>
-          <div className="relative overflow-hidden rounded-3xl">
-            <Image
-              src="/images/study-abroad-hero.jpg"
-              alt="Toàn cảnh thành phố Singapore"
-              fill
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-            {/* Light overlay keeps the primary-dark heading legible */}
-            <div className="absolute inset-0 bg-linear-to-r from-white via-white/90 to-white/40" />
-
-            <div className="relative w-full max-w-[60%] p-12 sm:p-16">
-              <h2 className="font-heading text-3xl font-extrabold uppercase tracking-tight text-brand-blue sm:text-4xl md:text-5xl">
-                Sẵn sàng bắt đầu
-                <span className="block">hành trình của bạn?</span>
-              </h2>
-              <p className="mt-5 max-w-md text-base leading-relaxed text-brand-dark/80">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </p>
-              <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-                <Link
-                  href="#lien-he"
-                  className="group inline-flex items-center justify-center gap-2 rounded-md bg-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue/90 hover:shadow-lg"
-                >
-                  <Calendar className="h-4 w-4" />
-                  Đặt lịch tư vấn
-                </Link>
-                <Link
-                  href="#lien-he"
-                  className="group inline-flex items-center justify-center gap-2 rounded-md border border-border bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-light hover:shadow-md"
-                >
-                  <MessageCircle className="h-4 w-4" />
-                  Chat với chúng tôi
-                </Link>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
     </div>
   )
 }
