@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { WorkPassDetails } from "@/components/work-pass/work-pass-details"
 import { WorkPassHero } from "@/components/work-pass/work-pass-hero"
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export default function WorkPassPage() {
   return (
     <>
       <WorkPassHero />
+      <WorkPassDetails />
     </>
   )
 }
