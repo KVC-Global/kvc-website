@@ -124,7 +124,7 @@ export function SiteHeaderActions() {
 
       <a
         href="#tu-van"
-        className="hidden items-center gap-2 rounded-sm bg-primary px-5 py-2.5 font-body text-[15px] font-semibold whitespace-nowrap text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:inline-flex"
+        className="hidden items-center gap-2 rounded-sm bg-brand-blue-mid px-5 py-2.5 font-body text-[15px] font-semibold whitespace-nowrap text-primary-foreground shadow-sm transition-colors hover:bg-brand-blue-mid/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:inline-flex"
       >
         <svg
           viewBox="0 0 24 24"

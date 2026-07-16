@@ -108,7 +108,7 @@ function StepItem({ step, index }: { step: Step; index: number }) {
   const num = String(index + 1).padStart(2, "0")
   return (
     <div className="relative flex flex-col items-center text-center">
-      <div className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-blue shadow-[0_12px_28px_-12px_rgba(10,37,64,0.45)]">
+      <div className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-blue-mid shadow-[0_12px_28px_-12px_rgba(29,66,124,0.45)]">
         <Icon className="h-7 w-7 text-secondary" strokeWidth={1.6} />
       </div>
       <div
@@ -135,7 +135,7 @@ export function SiteWhyProcess({ className }: { className?: string }) {
     >
       <Container>
         <div className="text-center">
-          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-primary uppercase">
+          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
             Vì sao chọn KVC Global?
           </p>
           <h2
@@ -146,7 +146,7 @@ export function SiteWhyProcess({ className }: { className?: string }) {
           </h2>
           <span
             aria-hidden="true"
-            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-secondary"
+            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-brand-gold"
           />
         </div>
 
@@ -157,7 +157,7 @@ export function SiteWhyProcess({ className }: { className?: string }) {
         </div>
 
         <div className="mt-20 text-center sm:mt-24">
-          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-primary uppercase">
+          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
             Quy trình đồng hành
           </p>
           <h3 className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]">
@@ -165,7 +165,7 @@ export function SiteWhyProcess({ className }: { className?: string }) {
           </h3>
           <span
             aria-hidden="true"
-            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-secondary"
+            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-brand-gold"
           />
         </div>
 
@@ -176,7 +176,7 @@ export function SiteWhyProcess({ className }: { className?: string }) {
         >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute top-[35px] right-[10%] left-[10%] hidden h-px bg-brand-blue/15 lg:block"
+            className="pointer-events-none absolute top-[35px] right-[10%] left-[10%] hidden h-px bg-secondary lg:block"
           />
           {STEPS.map((step, index) => (
             <div key={step.title} role="listitem">
