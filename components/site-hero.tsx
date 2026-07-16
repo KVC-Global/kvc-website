@@ -42,7 +42,7 @@ export function SiteHero({ className }: { className?: string }) {
             className="font-heading text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
           >
             <span className="block text-primary">BEGIN SOMETHING</span>
-            <span className="block text-secondary">GREATER.</span>
+            <span className="block text-brand-gold">GREATER.</span>
           </h1>
 
           <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">
@@ -73,7 +73,7 @@ export function SiteHero({ className }: { className?: string }) {
 
             <a
               href="#mo-cong-ty"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-primary bg-white px-6 py-3.5 text-sm font-semibold text-foreground transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
               Mở công ty tại Singapore
               <ArrowUpRight

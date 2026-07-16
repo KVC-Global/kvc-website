@@ -39,7 +39,7 @@ export function SiteHeaderNav({ className }: { className?: string }) {
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "group relative inline-block py-1 whitespace-nowrap transition-colors duration-300 ease-out hover:text-foreground focus-visible:text-foreground focus-visible:outline-none",
-                  active && "text-foreground"
+                  active && "text-brand-gold"
                 )}
               >
                 <span className="relative inline-block">
@@ -47,7 +47,7 @@ export function SiteHeaderNav({ className }: { className?: string }) {
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "absolute -bottom-1 left-1/2 h-[2px] w-full origin-center -translate-x-1/2 rounded-full bg-secondary transition-transform duration-300 ease-out",
+                      "absolute -bottom-1 left-1/2 h-[2px] w-full origin-center -translate-x-1/2 rounded-full bg-brand-gold transition-transform duration-300 ease-out",
                       active
                         ? "scale-x-100"
                         : "scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100"
@@ -121,13 +121,13 @@ export function SiteHeaderMobileMenu({
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "group relative block overflow-hidden rounded-md px-3 py-3 transition-all duration-300 ease-out hover:bg-muted hover:pl-5 hover:text-foreground focus-visible:bg-muted focus-visible:pl-5 focus-visible:text-foreground focus-visible:outline-none",
-                    active && "bg-muted pl-5 font-semibold text-foreground"
+                    active && "bg-muted pl-5 font-semibold text-brand-gold"
                   )}
                 >
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-secondary transition-transform duration-300 ease-out",
+                      "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-brand-gold transition-transform duration-300 ease-out",
                       active
                         ? "scale-y-100"
                         : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"
