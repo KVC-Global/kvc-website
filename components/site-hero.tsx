@@ -4,8 +4,7 @@ import { ArrowUpRight } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=1920&q=80&auto=format&fit=crop"
+const HERO_IMAGE = "/du-lich-singapore-3-ngay-2-dem-cover.webp"
 
 export function SiteHero({ className }: { className?: string }) {
   return (
@@ -25,10 +24,15 @@ export function SiteHero({ className }: { className?: string }) {
         priority
         sizes="100vw"
         className="object-cover object-center"
+        style={{ transform: "scaleX(-1)" }}
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-white from-50% to-transparent to-100%"
+        className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, #fff 0%, #fff 30%, transparent 60%)",
+            }}
       />
 
       <Container className="relative flex min-h-[600px] flex-col justify-center pt-28 pb-20 sm:pt-32 sm:pb-24 md:min-h-[640px] md:pt-36 md:pb-0">
@@ -79,7 +83,6 @@ export function SiteHero({ className }: { className?: string }) {
             </a>
           </div>
         </div>
-
       </Container>
     </section>
   )
