@@ -14,10 +14,11 @@ export function SiteStatBar({ className }: { className?: string }) {
   return (
     <section
       aria-label="Thống kê nổi bật"
-      className={cn("relative z-30 -mt-8 sm:-mt-10 md:-mt-14", className)}
+      className={cn("absolute bottom-0 z-30", className)}
+      style={{ left: 0, right: 0, transform: "translateY(50%)" }}
     >
       <Container>
-        <div className="relative overflow-hidden rounded-md bg-border shadow-[0_24px_48px_-16px_rgba(15,27,45,0.25),0_8px_16px_-8px_rgba(15,27,45,0.12)] ring-1 ring-black/5">
+        <div className="relative overflow-hidden rounded-2xl bg-border shadow-[0_24px_48px_-16px_rgba(15,27,45,0.25),0_8px_16px_-8px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:rounded-3xl">
           <div className="grid grid-cols-2 gap-px bg-border md:grid-cols-4">
             {STATS.map((stat) => {
               const Icon = stat.icon

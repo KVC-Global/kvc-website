@@ -43,7 +43,10 @@ export function SitePartners({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="partners-heading"
-      className={cn("w-full bg-brand-light py-16 sm:py-20", className)}
+      className={cn(
+        "w-full bg-brand-light pt-28 pb-12 sm:pt-32 sm:pb-16 md:pt-36",
+        className
+      )}
     >
       <Container>
         <div className="text-center">

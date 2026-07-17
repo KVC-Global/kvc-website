@@ -2,6 +2,7 @@ import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { SiteStatBar } from "@/components/site-stat-bar"
 import { Container } from "@/components/ui/container"
 
 const HERO_IMAGE = "/du-lich-singapore-3-ngay-2-dem-cover.webp"
@@ -11,7 +12,7 @@ export function SiteHero({ className }: { className?: string }) {
     <section
       aria-labelledby="hero-heading"
       className={cn(
-        "relative w-full overflow-hidden bg-cover bg-center",
+        "relative w-full bg-cover bg-center",
         className
       )}
       style={{ backgroundImage: `url(${HERO_IMAGE})` }}
@@ -84,6 +85,7 @@ export function SiteHero({ className }: { className?: string }) {
           </div>
         </div>
       </Container>
+      <SiteStatBar />
     </section>
   )
 }
