@@ -23,7 +23,7 @@ function PartnerCard({ partner }: { partner: Partner }) {
   return (
     <div
       className={cn(
-        "group flex h-[110px] w-[220px] shrink-0 items-center justify-center rounded-xl px-4"
+        "group flex h-[160px] w-[280px] shrink-0 items-center justify-center rounded-xl px-4"
       )}
     >
       <Image
@@ -31,7 +31,7 @@ function PartnerCard({ partner }: { partner: Partner }) {
         alt={partner.name}
         width={200}
         height={200}
-        className="h-20 w-auto object-contain"
+        className="h-40 w-auto object-contain"
       />
     </div>
   )
@@ -44,7 +44,7 @@ export function SitePartners({ className }: { className?: string }) {
     <section
       aria-labelledby="partners-heading"
       className={cn(
-        "w-full bg-brand-light pt-28 pb-12 sm:pt-32 sm:pb-30 md:pt-36",
+        "w-full bg-brand-light pt-28 pb-12 sm:pt-32 sm:pb-30",
         className
       )}
     >
@@ -60,7 +60,7 @@ export function SitePartners({ className }: { className?: string }) {
       </Container>
 
       <div
-        className="relative mt-12 w-full overflow-hidden"
+        className="relative mt-8 w-full overflow-hidden pb-10 sm:pb-22"
         style={{
           maskImage:
             "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
