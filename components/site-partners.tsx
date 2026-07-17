@@ -44,7 +44,7 @@ export function SitePartners({ className }: { className?: string }) {
     <section
       aria-labelledby="partners-heading"
       className={cn(
-        "w-full bg-brand-light pt-28 pb-12 sm:pt-32 sm:pb-16 md:pt-36",
+        "w-full bg-brand-light pt-28 pb-12 sm:pt-32 sm:pb-30 md:pt-36",
         className
       )}
     >
@@ -52,7 +52,7 @@ export function SitePartners({ className }: { className?: string }) {
         <div className="text-center">
           <h2
             id="partners-heading"
-            className="mt-3 font-display text-2xl font-bold tracking-[0.18em] text-primary uppercase sm:text-3xl"
+            className="mt-1 font-display text-base font-bold tracking-[0.18em] text-primary uppercase"
           >
             Đối tác &amp; Trường liên kết hàng đầu
           </h2>
