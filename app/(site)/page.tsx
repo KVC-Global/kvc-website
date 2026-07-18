@@ -9,6 +9,11 @@ import { SiteTestimonials } from "@/components/site-testimonials"
 import { SiteWhyProcess } from "@/components/site-why-process"
 import { sanityFetch } from "@/sanity/live"
 import { PARTNERS_QUERY, SERVICES_QUERY, TESTIMONIALS_QUERY } from "@/sanity/queries"
+import type {
+  PARTNERS_QUERY_RESULT,
+  SERVICES_QUERY_RESULT,
+  TESTIMONIALS_QUERY_RESULT,
+} from "@/sanity.types"
 
 export const metadata: Metadata = {
   title: "KVC Global — Du học Singapore, Khóa học Online, Training Employment Pass",
@@ -37,15 +42,15 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-  const [
-    { data: partners },
-    { data: services },
-    { data: testimonials },
-  ] = await Promise.all([
+  const [partnersRes, servicesRes, testimonialsRes] = await Promise.all([
     sanityFetch({ query: PARTNERS_QUERY }),
     sanityFetch({ query: SERVICES_QUERY }),
     sanityFetch({ query: TESTIMONIALS_QUERY }),
   ])
+
+  const partners = partnersRes.data as PARTNERS_QUERY_RESULT
+  const services = servicesRes.data as SERVICES_QUERY_RESULT
+  const testimonials = testimonialsRes.data as TESTIMONIALS_QUERY_RESULT
 
   return (
     <>
