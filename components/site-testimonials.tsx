@@ -106,10 +106,22 @@ function Stars({ count = 5, size = 14 }: { count?: number; size?: number }) {
   )
 }
 
+const FALLBACK_AVATARS: Record<string, string> = {
+  "minh anh": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&q=80&auto=format&fit=crop",
+  "phương linh": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&q=80&auto=format&fit=crop",
+  "hoàng nam": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&q=80&auto=format&fit=crop",
+  "thanh huyền": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&q=80&auto=format&fit=crop",
+  "quốc bảo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&q=80&auto=format&fit=crop",
+  "mai trang": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&q=80&auto=format&fit=crop",
+}
+
 function TestimonialCard({ testimonial }: { testimonial: SanityTestimonial }) {
+  const nameKey = testimonial.name.toLowerCase().trim()
+  const fallbackAvatar = FALLBACK_AVATARS[nameKey] || "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&q=80&auto=format&fit=crop"
+
   const avatarUrl = testimonial.image
     ? urlFor(testimonial.image).url()
-    : "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&q=80&auto=format&fit=crop"
+    : fallbackAvatar
 
   const displayRole = [testimonial.role, testimonial.company]
     .filter(Boolean)
