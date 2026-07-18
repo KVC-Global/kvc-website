@@ -20,7 +20,7 @@ export function SiteHeaderShell({ className }: { className?: string }) {
         <div className="flex h-15 w-full items-center justify-between gap-6 px-3 md:h-24 md:px-8">
           <SiteHeaderLogo />
           <div className="flex gap-2 md:gap-7">
-            <SiteHeaderNav className="hidden lg:flex" />
+            <SiteHeaderNav className="hidden xl:flex" />
             <SiteHeaderActions />
             <SiteHeaderMobileToggle onOpen={() => setOpen(true)} />
           </div>

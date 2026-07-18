@@ -598,9 +598,9 @@ export function OnlineDetails({ className }: { className?: string }) {
                 return (
                   <div
                     key={idx}
-                    className="flex w-full flex-1 flex-col items-center lg:w-auto lg:flex-row"
+                    className="flex w-full min-w-0 flex-1 flex-col items-center lg:w-auto lg:flex-row"
                   >
-                    <div className="group flex min-h-[160px] w-full flex-1 flex-col items-center justify-center rounded-md border border-border/60 bg-white p-4 text-center transition-all duration-300 hover:bg-brand-light/40 hover:shadow-xs">
+                    <div className="group flex min-h-[160px] w-full min-w-0 flex-1 flex-col items-center justify-center rounded-md border border-border/60 bg-white p-4 text-center transition-all duration-300 hover:bg-brand-light/40 hover:shadow-xs">
                       <div className="mb-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid transition-colors group-hover:bg-brand-blue">
                         <Icon
                           className="h-5 w-5 text-brand-gold-light"
