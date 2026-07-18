@@ -4,6 +4,8 @@ import { Award, Handshake, ShieldCheck } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 
+import styles from "./site-about.module.css"
+
 type Stat = { value: string; label: string; color?: string }
 const STATS: Stat[] = [
   { value: "88%", label: "Tư vấn chiến lược kinh doanh" },
@@ -111,13 +113,10 @@ export function SiteAbout({ className }: { className?: string }) {
     >
       <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
         <div
-          className="rounded-2xl border border-[#E6E9EE] bg-brand-light px-8 pt-12 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-12 sm:pt-14 md:px-28 md:pt-16"
-          style={{ paddingBottom: "clamp(7rem, 8vw, 9rem)" }}
+          className="rounded-2xl border border-[#E6E9EE] bg-brand-light px-10 pt-12 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-14 sm:pt-14 md:px-32 md:pt-16"
+          style={{ paddingBottom: "clamp(6rem, 7vw, 8rem)" }}
         >
-          <div
-            className="grid gap-y-20 md:grid-cols-[9fr_11fr] md:items-start md:gap-y-16"
-            style={{ columnGap: "clamp(5rem, 6vw, 7rem)" }}
-          >
+          <div className={styles.aboutGrid}>
             <div className="relative" style={{ paddingBottom: "2.5rem" }}>
               <div className="relative overflow-hidden rounded-xl shadow-[0_30px_60px_-20px_rgba(15,27,45,0.25)]">
                 <Image
@@ -125,7 +124,7 @@ export function SiteAbout({ className }: { className?: string }) {
                   alt="Cặp đôi doanh nhân tư vấn visa tại văn phòng"
                   width={1200}
                   height={1500}
-                  className="aspect-[4/5] w-full object-cover md:aspect-auto md:h-[580px] lg:h-[600px] xl:h-[640px] 2xl:h-[660px]"
+                  className={styles.mainImage}
                 />
               </div>
 
@@ -147,7 +146,7 @@ export function SiteAbout({ className }: { className?: string }) {
               </div>
             </div>
 
-            <div>
+            <div className="flex h-full w-full max-w-2xl flex-col">
               <p className="font-sans text-[13px] font-bold tracking-[0.24em] text-brand-gold uppercase">
                 Về công ty
               </p>
