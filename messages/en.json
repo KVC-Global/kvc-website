@@ -19,6 +19,13 @@
     "btnStudyWork": "Study & Work in Singapore",
     "btnIncorporate": "Incorporate Company in Singapore"
   },
+  "stats": {
+    "ariaLabel": "Key Statistics",
+    "clients": "Trusted Clients",
+    "successRate": "Success Rate",
+    "partners": "Strategic Partners",
+    "experience": "Years Experience"
+  },
   "footer": {
     "bio": "KVC Global — Accompanying you on your journey of studying, working, business, and settling in Singapore and other countries.",
     "servicesHeading": "Services",

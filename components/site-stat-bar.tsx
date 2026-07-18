@@ -2,24 +2,27 @@ import { CheckCircle2, Landmark, Star, Users } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { getDictionaryServer } from "@/lib/i18n-server"
 
-const STATS = [
-  { icon: Users, value: "10,000+", label: "Khách hàng tin tưởng" },
-  { icon: CheckCircle2, value: "98%", label: "Tỷ lệ thành công" },
-  { icon: Landmark, value: "150+", label: "Đối tác chiến lược" },
-  { icon: Star, value: "10+", label: "Năm kinh nghiệm" },
-] as const
+export async function SiteStatBar({ className }: { className?: string }) {
+  const t = await getDictionaryServer()
 
-export function SiteStatBar({ className }: { className?: string }) {
+  const stats = [
+    { icon: Users, value: "10,000+", label: t.stats.clients },
+    { icon: CheckCircle2, value: "98%", label: t.stats.successRate },
+    { icon: Landmark, value: "150+", label: t.stats.partners },
+    { icon: Star, value: "10+", label: t.stats.experience },
+  ]
+
   return (
     <section
-      aria-label="Thống kê nổi bật"
+      aria-label={t.stats.ariaLabel}
       className={cn("relative z-30 -mt-8 sm:-mt-10 md:-mt-14", className)}
     >
       <Container>
         <div className="relative overflow-hidden rounded-md bg-border shadow-[0_24px_48px_-16px_rgba(15,27,45,0.25),0_8px_16px_-8px_rgba(15,27,45,0.12)] ring-1 ring-black/5">
           <div className="grid grid-cols-2 gap-px bg-border md:grid-cols-4">
-            {STATS.map((stat) => {
+            {stats.map((stat) => {
               const Icon = stat.icon
               return (
                 <div

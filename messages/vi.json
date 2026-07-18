@@ -19,6 +19,13 @@
     "btnStudyWork": "Du học & Việc làm Singapore",
     "btnIncorporate": "Mở công ty tại Singapore"
   },
+  "stats": {
+    "ariaLabel": "Thống kê nổi bật",
+    "clients": "Khách hàng tin tưởng",
+    "successRate": "Tỷ lệ thành công",
+    "partners": "Đối tác chiến lược",
+    "experience": "Năm kinh nghiệm"
+  },
   "footer": {
     "bio": "KVC Global — Đồng hành cùng bạn trên hành trình học tập, làm việc, kinh doanh và định cư tại Singapore và nhiều quốc gia khác.",
     "servicesHeading": "Dịch vụ",
