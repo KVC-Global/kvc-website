@@ -239,7 +239,7 @@ export function AboutPage() {
             Outer wrapper owns the straddle positioning (translate-y-1/2);
             inner motion wrapper owns the entrance animation so framer-motion's
             transform never overrides the straddle. */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 translate-y-1/2">
+        <div className="relative z-20 lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:translate-y-1/2">
           <motion.div
             variants={staggerFast}
             initial="hidden"
@@ -247,14 +247,14 @@ export function AboutPage() {
             viewport={inView}
           >
             <Container>
-              <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md bg-border ring-1 ring-black/5 md:grid-cols-4">
+              <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md bg-border ring-1 ring-black/5 lg:grid-cols-4">
                 {HERO_STATS.map((stat) => {
                   const Icon = stat.icon
                   return (
                     <motion.div
                       key={stat.label}
                       variants={fadeUp}
-                      className="group flex items-center justify-center gap-3 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 md:h-[160px] md:py-7"
+                      className="group flex items-center justify-center gap-3 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 lg:h-[160px] lg:py-7"
                     >
                       <Icon
                         className="h-7 w-7 shrink-0 text-brand-gold-light transition-transform duration-300 ease-out sm:h-9 sm:w-9"
@@ -362,15 +362,15 @@ export function AboutPage() {
             initial="hidden"
             whileInView="visible"
             viewport={inView}
-            className="mt-14 grid gap-8 md:grid-cols-2"
+            className="mt-14 grid gap-8 lg:grid-cols-2"
           >
             {OFFICES.map((office) => (
               <motion.div
                 key={office.title}
                 variants={fadeUp}
-                className="flex flex-col overflow-hidden rounded-lg bg-white shadow-[0_18px_50px_-24px_rgba(15,27,45,0.22)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(15,27,45,0.28)] sm:flex-row"
+                className="flex flex-col overflow-hidden rounded-lg bg-white shadow-[0_18px_50px_-24px_rgba(15,27,45,0.22)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(15,27,45,0.28)] lg:flex-row"
               >
-                <div className="relative h-56 w-full shrink-0 sm:h-auto sm:w-[45%]">
+                <div className="relative h-56 w-full shrink-0 lg:h-auto lg:w-[45%]">
                   <Image
                     src={office.image}
                     alt={office.title}
@@ -449,7 +449,7 @@ export function AboutPage() {
             initial="hidden"
             whileInView="visible"
             viewport={inView}
-            className="mt-14 grid gap-6 md:grid-cols-3"
+            className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {LICENSES.map((item) => {
               const Icon = item.icon
@@ -457,7 +457,7 @@ export function AboutPage() {
                 <motion.div
                   key={item.title}
                   variants={fadeUp}
-                  className="flex flex-row items-center gap-5 rounded-lg bg-white p-8 shadow-sm ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md"
+                  className="flex flex-col items-start gap-5 rounded-lg bg-white p-8 shadow-sm ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md"
                 >
                   <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-brand-blue-mid">
                     <Icon className="h-9 w-9 text-brand-gold-light" strokeWidth={1.5} />
@@ -481,10 +481,10 @@ export function AboutPage() {
               )
             })}
 
-            {/* Card 3 — framed certificates image */}
+            {/* Card 3 — framed certificates image (expands full only when alone in a row) */}
             <motion.div
               variants={fadeUp}
-              className="relative overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5"
+              className="relative min-h-[260px] overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5 sm:col-span-2 lg:col-span-1 sm:min-h-[340px] lg:min-h-[300px]"
             >
               <Image
                 src="/images/free-singapore-tour-for.jpg"

@@ -527,12 +527,12 @@ export function OnlineDetails({ className }: { className?: string }) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          className="mt-8 grid grid-cols-1 gap-8 md:mt-12 lg:grid-cols-12"
+          className="mt-8 grid grid-cols-1 gap-8 md:mt-12 2xl:grid-cols-12"
         >
           <motion.section
             variants={fadeUpVariants}
             aria-labelledby="prospects-heading"
-            className="relative flex min-h-[380px] flex-col justify-between overflow-hidden rounded-lg border border-border bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] md:p-8 lg:col-span-5"
+            className="relative flex min-h-[380px] flex-col justify-between overflow-hidden rounded-lg border border-border bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] md:p-8 2xl:col-span-5"
           >
             <div className="relative z-10 flex h-full max-w-[72%] flex-col justify-between sm:max-w-[75%]">
               <div>
@@ -579,7 +579,7 @@ export function OnlineDetails({ className }: { className?: string }) {
           <motion.section
             variants={fadeUpVariants}
             aria-labelledby="journey-heading"
-            className="flex flex-col rounded-lg border border-border bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] md:p-8 lg:col-span-7"
+            className="flex flex-col rounded-lg border border-border bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] md:p-8 2xl:col-span-7"
           >
             <div className="mb-8 text-center">
               <h2
