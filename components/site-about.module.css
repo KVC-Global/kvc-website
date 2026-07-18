@@ -1,0 +1,42 @@
+.aboutGrid {
+  display: grid;
+  row-gap: 5rem;
+  column-gap: clamp(3rem, 4vw, 4.5rem);
+}
+
+.mainImage {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+@media (min-width: 48rem) {
+  .aboutGrid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+    row-gap: 4rem;
+  }
+
+  .mainImage {
+    height: 740px;
+    aspect-ratio: auto;
+  }
+}
+
+@media (min-width: 64rem) {
+  .mainImage {
+    height: 780px;
+  }
+}
+
+@media (min-width: 80rem) {
+  .mainImage {
+    height: 820px;
+  }
+}
+
+@media (min-width: 96rem) {
+  .mainImage {
+    height: 860px;
+  }
+}
