@@ -8,7 +8,7 @@ import styles from "./site-about.module.css"
 
 type Stat = { value: string; label: string; color?: string }
 const STATS: Stat[] = [
-  { value: "88%", label: "Tư vấn chiến lược kinh doanh" },
+  { value: "88%", label: "Tư vấn chiến lược kinh doanh", color: "#F8BC62" },
   { value: "93%", label: "Mạng lưới giáo dục & công nghệ", color: "#F8BC62" },
 ]
 
@@ -54,7 +54,7 @@ function ProgressRing({
   value: string
   color?: string
 }) {
-  const size = 120
+  const size = 100
   const stroke = 6
   const radius = (size - stroke) / 2
   const circumference = 2 * Math.PI * radius
@@ -105,10 +105,7 @@ export function SiteAbout({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="about-heading"
-      className={cn(
-        "w-full bg-white py-10 sm:py-14 md:py-16 md:pb-25",
-        className
-      )}
+      className={cn("w-full bg-white py-10 sm:py-14 md:pb-25", className)}
     >
       <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
         <div
@@ -236,7 +233,7 @@ export function SiteAbout({ className }: { className?: string }) {
               <div className="mt-10">
                 <a
                   href="#gioi-thieu"
-                  className="group inline-flex items-center justify-center gap-2 rounded-md border-2 border-brand-gold px-7 py-3.5 text-sm font-semibold tracking-wide text-brand-gold uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+                  className="group inline-flex items-center justify-center gap-2 rounded-md border-2 border-brand-gold px-8 py-3.5 text-sm font-semibold tracking-wide text-brand-gold uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
                 >
                   Về chúng tôi
                   <svg

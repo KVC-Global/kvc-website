@@ -43,7 +43,7 @@ export function SitePartners({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="partners-heading"
-      className={cn("w-full bg-white pt-28 pb-12 sm:pt-32 sm:pb-30", className)}
+      className={cn("w-full bg-white pt-28 pb-12 sm:pt-32", className)}
     >
       <Container>
         <div className="text-center">
@@ -57,7 +57,7 @@ export function SitePartners({ className }: { className?: string }) {
       </Container>
 
       <div
-        className="relative mt-8 w-full overflow-hidden pb-10 sm:pb-22"
+        className="relative mt-8 w-full overflow-hidden pb-8"
         style={{
           maskImage:
             "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
