@@ -3,6 +3,7 @@ import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import { urlFor } from "@/sanity/image"
+import { getDictionaryServer } from "@/lib/i18n-server"
 
 export type SanityPartner = {
   name: string
@@ -52,13 +53,14 @@ function PartnerCard({ partner }: { partner: SanityPartner }) {
   )
 }
 
-export function SitePartners({
+export async function SitePartners({
   className,
   partners = PARTNERS,
 }: {
   className?: string
   partners?: ReadonlyArray<SanityPartner>
 }) {
+  const t = await getDictionaryServer()
   const track = [...partners, ...partners]
 
   return (
@@ -72,7 +74,7 @@ export function SitePartners({
             id="partners-heading"
             className="mt-3 font-display text-2xl font-bold tracking-[0.18em] text-primary uppercase sm:text-3xl"
           >
-            Đối tác &amp; Trường liên kết hàng đầu
+            {t.partners.title}
           </h2>
         </div>
       </Container>
@@ -91,7 +93,7 @@ export function SitePartners({
             "flex w-max gap-6 will-change-transform motion-reduce:animate-none",
             "animate-marquee hover:[animation-play-state:paused]"
           )}
-          aria-label="Đối tác & trường liên kết"
+          aria-label={t.partners.ariaLabel}
         >
           {track.map((partner, index) => (
             <PartnerCard key={`${partner.name}-${index}`} partner={partner} />

@@ -5,7 +5,7 @@ export const TESTIMONIALS_QUERY = defineQuery(
 )
 
 export const PARTNERS_QUERY = defineQuery(
-  `*[_type == "partner"] | order(name asc)`
+  `*[_type == "partner" && (!defined(language) || language == $lang)] | order(name asc)`
 )
 
 export const SERVICES_QUERY = defineQuery(

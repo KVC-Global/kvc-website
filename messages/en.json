@@ -26,6 +26,10 @@
     "partners": "Strategic Partners",
     "experience": "Years Experience"
   },
+  "partners": {
+    "title": "Leading Partners & Affiliated Schools",
+    "ariaLabel": "Partners & affiliated schools"
+  },
   "footer": {
     "bio": "KVC Global — Accompanying you on your journey of studying, working, business, and settling in Singapore and other countries.",
     "servicesHeading": "Services",

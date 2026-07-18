@@ -54,8 +54,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
+  const locale = await getLocale()
+
   const [partnersRes, servicesRes, testimonialsRes] = await Promise.all([
-    sanityFetch({ query: PARTNERS_QUERY }),
+    sanityFetch({ query: PARTNERS_QUERY, params: { lang: locale } }),
     sanityFetch({ query: SERVICES_QUERY }),
     sanityFetch({ query: TESTIMONIALS_QUERY }),
   ])
