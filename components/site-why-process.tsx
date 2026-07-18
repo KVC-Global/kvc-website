@@ -86,12 +86,15 @@ const STEPS: ReadonlyArray<Step> = [
 function ReasonItem({ reason }: { reason: Reason }) {
   const Icon = reason.icon
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="group flex flex-col items-center text-center transition-transform duration-300 ease-out hover:-translate-y-1.5 lg:border-l lg:border-dashed lg:border-brand-gold/40 lg:pl-8 lg:first:border-l-0 lg:first:pl-0">
       <span
         aria-hidden="true"
-        className="inline-flex h-14 w-14 items-center justify-center rounded-full ring-1 ring-brand-blue/15"
+        className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-light ring-1 ring-brand-gold transition-all duration-300 ease-out group-hover:scale-110 group-hover:bg-brand-gold group-hover:shadow-[0_12px_28px_-10px_rgba(200,145,60,0.55)]"
       >
-        <Icon className="h-7 w-7 text-secondary" strokeWidth={1.6} />
+        <Icon
+          className="h-8 w-8 text-primary transition-colors duration-300 group-hover:text-white"
+          strokeWidth={1.6}
+        />
       </span>
       <h3 className="mt-5 font-display text-[19px] font-bold tracking-tight text-brand-blue">
         {reason.title}
@@ -107,9 +110,12 @@ function StepItem({ step, index }: { step: Step; index: number }) {
   const Icon = step.icon
   const num = String(index + 1).padStart(2, "0")
   return (
-    <div className="relative flex flex-col items-center text-center">
-      <div className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-blue-mid shadow-[0_12px_28px_-12px_rgba(29,66,124,0.45)]">
-        <Icon className="h-7 w-7 text-secondary" strokeWidth={1.6} />
+    <div className="group relative flex flex-col items-center text-center transition-transform duration-300 ease-out hover:-translate-y-1.5">
+      <div className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-blue-mid shadow-[0_12px_28px_-12px_rgba(29,66,124,0.45)] transition-all duration-300 ease-out group-hover:scale-110 group-hover:bg-secondary group-hover:shadow-[0_12px_28px_-10px_rgba(241,209,163,0.9)]">
+        <Icon
+          className="h-8 w-8 text-secondary transition-colors duration-300 group-hover:text-primary"
+          strokeWidth={1.6}
+        />
       </div>
       <div
         className="mt-5 font-display text-[15px] font-bold tracking-[0.18em] text-secondary"
@@ -133,27 +139,32 @@ export function SiteWhyProcess({ className }: { className?: string }) {
       aria-labelledby="why-process-heading"
       className={cn("relative w-full bg-white py-20 sm:py-24", className)}
     >
-      <Container>
-        <div className="text-center">
-          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-            Vì sao chọn KVC Global?
-          </p>
-          <h2
-            id="why-process-heading"
-            className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]"
-          >
-            Đối tác đáng tin cậy cho hành trình của bạn
-          </h2>
-          <span
-            aria-hidden="true"
-            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-brand-gold"
-          />
-        </div>
+      <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+        <div
+          className="rounded-lg border border-[#E6E9EE] bg-brand-light px-6 pt-14 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-10 sm:pt-16 md:px-16"
+          style={{ paddingBottom: "clamp(3rem, 5vw, 5rem)" }}
+        >
+          <div className="text-center">
+            <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
+              Vì sao chọn KVC Global?
+            </p>
+            <h2
+              id="why-process-heading"
+              className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]"
+            >
+              Đối tác đáng tin cậy cho hành trình của bạn
+            </h2>
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-brand-gold"
+            />
+          </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {REASONS.map((reason) => (
-            <ReasonItem key={reason.title} reason={reason} />
-          ))}
+          <div className="mt-12 grid grid-cols-1 gap-10 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            {REASONS.map((reason) => (
+              <ReasonItem key={reason.title} reason={reason} />
+            ))}
+          </div>
         </div>
 
         <div className="mt-20 text-center sm:mt-24">

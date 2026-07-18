@@ -136,7 +136,7 @@ const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
 
 function ColumnHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="font-heading text-[15px] font-semibold tracking-[0.18em] text-foreground uppercase">
+    <h3 className="text-base font-semibold text-primary capitalize">
       {children}
     </h3>
   )
