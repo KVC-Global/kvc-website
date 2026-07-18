@@ -102,7 +102,7 @@ export function AboutPage() {
         </div>
 
         {/* Main Content Container */}
-        <Container className="relative z-10 pt-6 md:pt-10 lg:pt-12 pb-20 sm:pb-24 md:pb-28">
+        <Container className="relative z-10 pt-28 pb-20 sm:pt-32 sm:pb-24 md:pt-36 md:pb-28">
           {/* Breadcrumb Navigation */}
           <nav
             aria-label="Breadcrumb"
