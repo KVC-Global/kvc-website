@@ -31,5 +31,5 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "studio-kvc-global"]
+  "exclude": ["node_modules"]
 }
