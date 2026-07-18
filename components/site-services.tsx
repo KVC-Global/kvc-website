@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { urlFor } from "@/sanity/image"
 
 const ACCENT = "var(--color-secondary)"
 
@@ -11,7 +12,7 @@ export type SanityService = {
   description: string
   slug?: { current: string }
   icon?: string
-  image?: string
+  image?: any
   alt?: string
   href?: string
 }
@@ -56,7 +57,10 @@ const SERVICES: ReadonlyArray<SanityService> = [
 
 function ServiceCard({ service }: { service: SanityService }) {
   const href = service.href || `/${service.slug?.current || ""}`
-  const imageUrl = service.image || "/images/singapore-student.jpeg"
+  const imageUrl =
+    service.image && typeof service.image === "object"
+      ? urlFor(service.image).url()
+      : (service.image as string) || "/images/singapore-student.jpeg"
   const altText = service.alt || service.title
 
   return (

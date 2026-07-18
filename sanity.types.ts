@@ -27,6 +27,13 @@ export type Faq = {
   order?: number;
 };
 
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
 export type Service = {
   _id: string;
   _type: "service";
@@ -37,6 +44,14 @@ export type Service = {
   slug: Slug;
   description: string;
   icon?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  alt?: string;
   details?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -57,17 +72,26 @@ export type Service = {
   }>;
 };
 
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
 export type Slug = {
   _type: "slug";
   current: string;
   source?: string;
-};
-
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
 export type Partner = {
@@ -85,22 +109,6 @@ export type Partner = {
     _type: "image";
   };
   website?: string;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
 };
 
 export type Testimonial = {
@@ -220,7 +228,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Faq | Service | Slug | SanityImageAssetReference | Partner | SanityImageCrop | SanityImageHotspot | Testimonial | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Faq | SanityImageAssetReference | Service | SanityImageCrop | SanityImageHotspot | Slug | Partner | Testimonial | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
 // Source: ../kvc-website/sanity/queries.ts
 // Variable: TESTIMONIALS_QUERY
@@ -278,6 +286,14 @@ export type SERVICES_QUERY_RESULT = Array<{
   slug: Slug;
   description: string;
   icon?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  alt?: string;
   details?: Array<{
     children?: Array<{
       marks?: Array<string>;
