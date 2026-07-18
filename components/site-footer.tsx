@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
+  ArrowUpRight,
   ChevronDown,
   Mail,
   MapPin,
@@ -18,8 +19,7 @@ import { cn } from "@/lib/utils"
 const ACCENT = "var(--color-brand-gold)"
 const NAVY = "var(--color-brand-blue-mid)"
 
-const CTA_IMAGE =
-  "https://images.pexels.com/photos/35421791/pexels-photo-35421791.jpeg?auto=compress&w=1920&q=80"
+const CTA_IMAGE = "/footer-banner.png"
 
 const SERVICES_LINKS = [
   { label: "Tư vấn du học", href: "#tu-van-du-hoc" },
@@ -45,23 +45,23 @@ const SUPPORT_LINKS = [
 const CONTACT_ITEMS = [
   {
     icon: Phone,
-    label: "(+84) 28 7300 6769",
-    href: "tel:+842873006769",
+    label: "(+84) 1900 8888 | (+65) 6789 0000",
+    href: "tel:+8419008888",
   },
   {
     icon: Mail,
-    label: "hello@kvcglobal.com",
-    href: "mailto:hello@kvcglobal.com",
+    label: "info@kvcglobal.vn",
+    href: "mailto:info@kvcglobal.vn",
   },
   {
     icon: MapPin,
-    label: "Tầng 6, 65 Lê Lợi, P. Bến Nghé, Quận 1, TP. Hồ Chí Minh, Việt Nam",
-    href: "https://maps.google.com/?q=65+L%C3%AA+L%E1%BB%A3i%2C+Qu%E1%BA%ADn+1",
+    label: "456 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh, Việt Nam",
+    href: "https://maps.google.com/?q=456+X%C3%B4+Vi%E1%BA%BFt+Ngh%E1%BB%87+T%C4%A9nh%2C+Th%E1%BA%A1nh+M%E1%BB%B9+T%C3%A2y%2C+H%E1%BB%93+Ch%C3%AD+Minh%2C+Vi%E1%BB%87t+Nam",
   },
   {
     icon: MapPin,
-    label: "20 Collyer Quay, #11-05 Singapore 049319",
-    href: "https://maps.google.com/?q=20+Collyer+Quay+%2311-05+Singapore+049319",
+    label: "Chinatown Point, 133 New Bridge Rd #22-01/02, Singapore 059413",
+    href: "https://maps.google.com/?q=Chinatown+Point%2C+133+New+Bridge+Rd+%2322-01%2F02%2C+Singapore+059413",
   },
 ]
 
@@ -226,12 +226,11 @@ function CtaBanner({ className }: { className?: string }) {
 
             <Link
               href="#chat-chuyen-vien"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-foreground/25 bg-white/90 px-5 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-white hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
-              <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
               Chat với chuyên viên
-              <ArrowRight
-                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+              <ArrowUpRight
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 strokeWidth={2.5}
               />
             </Link>
@@ -267,7 +266,7 @@ function CollapsibleFooterSection({
       onToggle={(event) => setOpen((event.target as HTMLDetailsElement).open)}
       className={cn("group", className)}
     >
-      <summary className="-mx-2 flex cursor-pointer list-none items-center justify-between gap-3 rounded-sm px-2 py-2 transition-colors duration-200 ease-out hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
+      <summary className="relative -mx-2 flex cursor-pointer list-none items-center justify-between gap-3 px-2 pt-2 pb-3 transition-colors duration-200 ease-out after:absolute after:bottom-0 after:left-2 after:h-px after:w-1/2 after:bg-brand-blue-mid/15 hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
         <ColumnHeading>{heading}</ColumnHeading>
         <ChevronDown
           aria-hidden="true"
@@ -387,8 +386,22 @@ export function SiteFooter({ className }: { className?: string }) {
 
         <div aria-hidden="true" className="h-px w-full bg-brand-blue-mid/15" />
 
-        <div className="flex flex-col items-start justify-between gap-2 py-6 text-[13px] text-foreground/65 sm:flex-row sm:items-center">
+        <div className="flex flex-col items-start justify-between gap-3 py-6 text-[13px] text-foreground/50 sm:flex-row sm:items-center">
           <p>© 2024 KVC Global. All rights reserved.</p>
+          <nav aria-label="Chính sách pháp lý" className="flex items-center gap-5">
+            <Link
+              href="#chinh-sach-bao-mat"
+              className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="#dieu-khoan-su-dung"
+              className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"
+            >
+              Terms of Service
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
