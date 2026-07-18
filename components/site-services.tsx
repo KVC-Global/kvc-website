@@ -106,7 +106,7 @@ export function SiteServices({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="services-heading"
-      className={cn("w-full bg-muted py-20 sm:py-24", className)}
+      className={cn("w-full bg-[#fcfbfd] py-20 sm:py-24", className)}
     >
       <Container>
         <div className="text-center">
