@@ -261,7 +261,7 @@ function TimelineLayout({ programs }: { programs: Program[] }) {
               className="group/timeline relative flex flex-col items-start justify-between sm:flex-row sm:items-center"
             >
               {/* Step dot (scales up nicely on hover) */}
-              <div className="absolute left-6 z-10 mt-12 flex h-4 w-4 -translate-x-1/2 items-center justify-center rounded-full border-2 border-white bg-[#0A2540] shadow-sm transition-transform duration-300 ease-out group-hover/timeline:scale-125 sm:left-1/2 sm:mt-0" />
+              <div className="absolute left-6 z-10 mt-12 flex h-4 w-4 -translate-x-1/2 items-center justify-center rounded-full border-2 border-white bg-brand-blue-mid shadow-sm transition-transform duration-300 ease-out group-hover/timeline:scale-125 sm:left-1/2 sm:mt-0" />
 
               {/* Tag for desktop (opposite side of the card) */}
               <div
@@ -271,7 +271,7 @@ function TimelineLayout({ programs }: { programs: Program[] }) {
                 )}
               >
                 {level && (
-                  <span className="inline-block rounded-md bg-[#0A2540] px-3 py-1 font-sans text-sm font-semibold text-white shadow-sm">
+                  <span className="inline-block rounded-md bg-brand-blue-mid px-3 py-1 font-sans text-sm font-semibold text-white shadow-sm">
                     {level}
                   </span>
                 )}
@@ -306,7 +306,7 @@ function TimelineLayout({ programs }: { programs: Program[] }) {
                   {/* Card Content */}
                   <div className="p-6">
                     {level && (
-                      <span className="mb-2 block font-sans text-[11px] font-semibold tracking-wider text-[#C8913C] uppercase sm:hidden">
+                      <span className="mb-2 block font-sans text-[11px] font-semibold tracking-wider text-brand-gold uppercase sm:hidden">
                         {level}
                       </span>
                     )}
@@ -350,14 +350,14 @@ function CardGridLayout({ programs }: { programs: Program[] }) {
             className="group flex h-full flex-col justify-between rounded-2xl border border-border bg-white p-6 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[#0A2540]/20 hover:shadow-[0_16px_36px_-14px_rgba(15,27,45,0.18)]"
           >
             <div>
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[#F4F7FA] text-[#0A2540] transition-colors duration-300 ease-out group-hover:bg-[#0A2540] group-hover:text-white">
+              <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-brand-blue-mid text-brand-gold-light transition-colors duration-300 ease-out group-hover:bg-brand-blue">
                 <GraduationCap className="h-5 w-5" strokeWidth={1.75} />
               </span>
               <h3 className="mt-4 font-display text-lg leading-snug font-bold text-foreground">
                 {program.title}
               </h3>
             </div>
-            <span className="mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-[#C8913C]">
+            <span className="mt-6 inline-flex items-center gap-1.5 font-sans text-sm font-semibold text-brand-gold">
               Xem chi tiết
               <ArrowUpRight
                 className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
@@ -415,7 +415,7 @@ function ImageTextLayout({
         {/* Text side */}
         <div className="flex flex-1 flex-col justify-center p-8 lg:p-10">
           {program.tag && (
-            <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-[#C8913C]/12 px-3 py-1 font-sans text-[11px] font-semibold tracking-[0.18em] text-[#C8913C] uppercase">
+            <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-brand-gold/12 px-3 py-1 font-sans text-[11px] font-semibold tracking-[0.18em] text-brand-gold uppercase">
               <GraduationCap className="h-3.5 w-3.5" strokeWidth={2} />
               {program.tag}
             </span>
@@ -433,7 +433,7 @@ function ImageTextLayout({
 
           <Link
             href={program.href}
-            className="group/btn mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-[#0A2540] px-6 py-3 font-sans text-sm font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#0A2540]/90 hover:shadow-[0_12px_28px_-8px_rgba(10,37,64,0.45)]"
+            className="group/btn mt-8 inline-flex w-fit items-center gap-2 rounded-full bg-brand-blue-mid px-6 py-3 font-sans text-sm font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-[0_12px_28px_-8px_rgba(10,37,64,0.45)]"
           >
             Xem chi tiết
             <ArrowUpRight
@@ -466,7 +466,7 @@ export function OnlineDirectory({ className }: { className?: string }) {
     >
       <Container>
         <div className="max-w-2xl">
-          <p className="font-sans text-[11px] font-semibold tracking-[0.28em] text-[#C8913C] uppercase">
+          <p className="font-sans text-[11px] font-semibold tracking-[0.28em] text-brand-gold uppercase">
             Danh mục chương trình
           </p>
           <h2
@@ -501,8 +501,8 @@ export function OnlineDirectory({ className }: { className?: string }) {
                 className={cn(
                   "shrink-0 rounded-full border px-5 py-2.5 font-sans text-sm font-semibold transition-all duration-300 ease-out",
                   selected
-                    ? "border-[#0A2540] bg-[#0A2540] text-white shadow-sm"
-                    : "border-border bg-white text-foreground/80 hover:border-[#0A2540]/40 hover:text-foreground"
+                    ? "border-brand-blue-mid bg-brand-blue-mid text-white shadow-sm"
+                    : "border-border bg-white text-foreground/80 hover:border-brand-blue-mid/40 hover:text-foreground"
                 )}
               >
                 {category.label}

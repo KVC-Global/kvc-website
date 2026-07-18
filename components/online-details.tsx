@@ -10,11 +10,9 @@ import {
   TrendingUp,
   Check,
   Hotel,
-  Utensils,
   Truck,
   Laptop,
   Brain,
-  Bot,
   ShieldCheck,
   PlusCircle,
   Lightbulb,
@@ -29,16 +27,12 @@ import {
   GraduationCap,
   IdCard,
   Building2,
+  Languages,
 } from "lucide-react"
 import { motion, useInView, Variants } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
-const ENIcon = (props: any) => (
-  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-brand-blue font-heading text-[11px] font-extrabold tracking-tight text-brand-blue select-none">
-    EN
-  </div>
-)
 
 const BENEFITS = [
   {
@@ -60,7 +54,7 @@ const BENEFITS = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
   },
   {
-    icon: ENIcon,
+    icon: Languages,
     title: "Hỗ trợ Tiếng Anh",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
@@ -341,9 +335,9 @@ export function OnlineDetails({ className }: { className?: string }) {
                 key={index}
                 className="flex flex-col items-center rounded-lg border border-border bg-white p-8 text-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-10px_rgba(10,37,64,0.1)]"
               >
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-brand-light">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-brand-blue-mid">
                   <benefit.icon
-                    className="h-7 w-7 text-brand-blue"
+                    className="h-7 w-7 text-brand-gold-light"
                     strokeWidth={1.75}
                   />
                 </div>
@@ -389,9 +383,9 @@ export function OnlineDetails({ className }: { className?: string }) {
                     key={idx}
                     className="group flex min-h-[140px] flex-col items-center justify-center rounded-md border border-border/60 bg-white p-4 text-center transition-all duration-300 hover:bg-brand-light/40 hover:shadow-xs"
                   >
-                    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-light transition-colors group-hover:bg-white">
+                    <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue-mid transition-colors group-hover:bg-brand-blue">
                       <Icon
-                        className="h-5 w-5 text-brand-blue"
+                        className="h-5 w-5 text-brand-gold-light"
                         strokeWidth={1.75}
                       />
                     </div>
@@ -555,9 +549,9 @@ export function OnlineDetails({ className }: { className?: string }) {
                     className="flex w-full flex-1 flex-col items-center lg:w-auto lg:flex-row"
                   >
                     <div className="group flex min-h-[160px] w-full flex-1 flex-col items-center justify-center rounded-md border border-border/60 bg-white p-4 text-center transition-all duration-300 hover:bg-brand-light/40 hover:shadow-xs">
-                      <div className="mb-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-light transition-colors group-hover:bg-white">
+                      <div className="mb-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid transition-colors group-hover:bg-brand-blue">
                         <Icon
-                          className="h-5 w-5 text-brand-blue"
+                          className="h-5 w-5 text-brand-gold-light"
                           strokeWidth={1.75}
                         />
                       </div>
@@ -885,9 +879,9 @@ export function OnlineDetails({ className }: { className?: string }) {
                   href={service.href}
                   className="group flex cursor-pointer items-center gap-4 rounded-lg border border-border/60 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)]"
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-light transition-colors duration-300 group-hover:bg-brand-blue/5">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid transition-colors duration-300 group-hover:bg-brand-blue">
                     <Icon
-                      className="h-5 w-5 text-brand-blue transition-transform duration-300 group-hover:scale-105"
+                      className="h-5 w-5 text-brand-gold-light transition-transform duration-300 group-hover:scale-105"
                       strokeWidth={1.75}
                     />
                   </div>

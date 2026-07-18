@@ -94,7 +94,7 @@ export function OnlineHero({ className }: { className?: string }) {
           >
             <Link
               href="#dang-ky"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-gold px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#b07f32] hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid"
             >
               Đăng ký tư vấn miễn phí
               <svg
@@ -113,7 +113,7 @@ export function OnlineHero({ className }: { className?: string }) {
 
             <Link
               href="#chuong-trinh"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-light hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-blue-mid bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:text-white hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid"
             >
               Khám phá chương trình
               <svg
@@ -146,8 +146,8 @@ export function OnlineHero({ className }: { className?: string }) {
                   key={stat.label}
                   className="flex items-center gap-4 bg-white px-5 py-4 transition-all duration-300 ease-out hover:bg-brand-light sm:px-6 sm:py-5 lg:min-w-[240px]"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-light">
-                    <Icon className="h-5 w-5 text-brand-gold" strokeWidth={2} />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-blue-mid">
+                    <Icon className="h-5 w-5 text-brand-gold-light" strokeWidth={2} />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-heading text-sm font-bold text-brand-blue sm:text-[15px]">
