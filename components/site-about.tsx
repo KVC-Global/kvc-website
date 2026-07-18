@@ -3,43 +3,9 @@ import { Award, Handshake } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { getDictionaryServer, getLocale } from "@/lib/i18n-server"
 
 type Stat = { value: string; label: string; color?: string }
-const STATS: Stat[] = [
-  { value: "88%", label: "Tư vấn chiến lược kinh doanh" },
-  { value: "93%", label: "Mạng lưới giáo dục & công nghệ", color: "#F8BC62" },
-]
-
-const ICON_STATS = [
-  {
-    id: "exp-1",
-    icon: Handshake,
-    value: "15+ Năm",
-    sub: "Kinh nghiệm thực chiến",
-    tone: "blue" as const,
-  },
-  {
-    id: "acra-1",
-    icon: Award,
-    value: "Top 1%",
-    sub: "Đối tác ACRA Singapore",
-    tone: "gold" as const,
-  },
-  {
-    id: "exp-2",
-    icon: Handshake,
-    value: "15+ Năm",
-    sub: "Kinh nghiệm thực chiến",
-    tone: "blue" as const,
-  },
-  {
-    id: "acra-2",
-    icon: Award,
-    value: "Top 1%",
-    sub: "Đối tác ACRA Singapore",
-    tone: "gold" as const,
-  },
-] as const
 
 const MAIN_IMAGE =
   "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=1500&q=80&auto=format&fit=crop"
@@ -103,7 +69,46 @@ function ProgressRing({
   )
 }
 
-export function SiteAbout({ className }: { className?: string }) {
+export async function SiteAbout({ className }: { className?: string }) {
+  const t = await getDictionaryServer()
+  const locale = await getLocale()
+
+  const stats: Stat[] = [
+    { value: "88%", label: t.about.statStrategy },
+    { value: "93%", label: t.about.statNetwork, color: "#F8BC62" },
+  ]
+
+  const iconStats = [
+    {
+      id: "exp-1",
+      icon: Handshake,
+      value: t.about.expValue,
+      sub: t.about.expSub,
+      tone: "blue" as const,
+    },
+    {
+      id: "acra-1",
+      icon: Award,
+      value: t.about.acraValue,
+      sub: t.about.acraSub,
+      tone: "gold" as const,
+    },
+    {
+      id: "exp-2",
+      icon: Handshake,
+      value: t.about.expValue,
+      sub: t.about.expSub,
+      tone: "blue" as const,
+    },
+    {
+      id: "acra-2",
+      icon: Award,
+      value: t.about.acraValue,
+      sub: t.about.acraSub,
+      tone: "gold" as const,
+    },
+  ] as const
+
   return (
     <section
       aria-labelledby="about-heading"
@@ -131,7 +136,7 @@ export function SiteAbout({ className }: { className?: string }) {
           <div className="relative overflow-hidden rounded-xl shadow-[0_30px_60px_-20px_rgba(15,27,45,0.25)]">
             <Image
               src={MAIN_IMAGE}
-              alt="Cặp đôi doanh nhân tư vấn visa tại văn phòng"
+              alt={t.about.altImage1}
               width={1200}
               height={1500}
               className="aspect-[4/5] w-full object-cover"
@@ -141,7 +146,7 @@ export function SiteAbout({ className }: { className?: string }) {
           <div className="absolute right-2 -bottom-12 w-[58%] overflow-hidden rounded-lg border-[3px] border-white shadow-[0_20px_40px_-12px_rgba(15,27,45,0.3)] sm:right-6 sm:-bottom-16 sm:w-[52%]">
             <Image
               src={SECONDARY_IMAGE}
-              alt="Đội ngũ tư vấn KVC Global đang làm việc"
+              alt={t.about.altImage2}
               width={800}
               height={600}
               className="h-auto w-full object-cover"
@@ -151,19 +156,17 @@ export function SiteAbout({ className }: { className?: string }) {
 
         <div>
           <p className="font-sans text-[13px] font-bold tracking-[0.24em] text-brand-gold uppercase">
-            Về công ty
+            {t.about.tagline}
           </p>
           <h2
             id="about-heading"
             className="mt-3 font-display text-3xl leading-[1.1] font-bold text-primary sm:text-4xl md:text-[44px]"
           >
-            Chào mừng đến với KVC Global
+            {t.about.title}
           </h2>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-foreground/80 sm:text-lg">
-            KVC Global là đối tác đáng tin cậy của bạn trong việc cung cấp các
-            giải pháp toàn diện về học tập, làm việc, kinh doanh và định cư tại
-            Singapore.
+            {t.about.description}
           </p>
 
           <div className="mt-5 flex items-center gap-3">
@@ -178,7 +181,7 @@ export function SiteAbout({ className }: { className?: string }) {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center gap-8 sm:gap-10">
-            {STATS.map((stat) => (
+            {stats.map((stat) => (
               <div
                 key={stat.label}
                 className="flex shrink-0 items-center gap-4"
@@ -194,7 +197,7 @@ export function SiteAbout({ className }: { className?: string }) {
           <div className="mt-10">
             <div>
               <h3 className="font-sans text-[13px] font-bold tracking-[0.24em] text-brand-gold uppercase">
-                Những con số chứng minh năng lực
+                {t.about.statsTitle}
               </h3>
               <span
                 aria-hidden="true"
@@ -203,7 +206,7 @@ export function SiteAbout({ className }: { className?: string }) {
             </div>
 
             <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-5 sm:grid-cols-2">
-              {ICON_STATS.map((item) => {
+              {iconStats.map((item) => {
                 const Icon = item.icon
                 return (
                   <div key={item.id} className="flex items-center gap-4">
@@ -234,10 +237,10 @@ export function SiteAbout({ className }: { className?: string }) {
 
           <div className="mt-10">
             <a
-              href="#gioi-thieu"
+              href={locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu"}
               className="group inline-flex items-center justify-center gap-2 rounded-md border-2 border-brand-gold px-7 py-3.5 text-sm font-semibold tracking-wide text-brand-gold uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
             >
-              Về chúng tôi
+              {t.about.btn}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"

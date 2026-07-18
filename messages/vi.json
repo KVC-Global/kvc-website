@@ -30,6 +30,21 @@
     "title": "Đối tác & Trường liên kết hàng đầu",
     "ariaLabel": "Đối tác & trường liên kết"
   },
+  "about": {
+    "altImage1": "Cặp đôi doanh nhân tư vấn visa tại văn phòng",
+    "altImage2": "Đội ngũ tư vấn KVC Global đang làm việc",
+    "tagline": "Về công ty",
+    "title": "Chào mừng đến với KVC Global",
+    "description": "KVC Global là đối tác đáng tin cậy của bạn trong việc cung cấp các giải pháp toàn diện về học tập, làm việc, kinh doanh và định cư tại Singapore.",
+    "statStrategy": "Tư vấn chiến lược kinh doanh",
+    "statNetwork": "Mạng lưới giáo dục & công nghệ",
+    "statsTitle": "Những con số chứng minh năng lực",
+    "expValue": "15+ Năm",
+    "expSub": "Kinh nghiệm thực chiến",
+    "acraValue": "Top 1%",
+    "acraSub": "Đối tác ACRA Singapore",
+    "btn": "Về chúng tôi"
+  },
   "footer": {
     "bio": "KVC Global — Đồng hành cùng bạn trên hành trình học tập, làm việc, kinh doanh và định cư tại Singapore và nhiều quốc gia khác.",
     "servicesHeading": "Dịch vụ",

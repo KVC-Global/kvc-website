@@ -30,6 +30,21 @@
     "title": "Leading Partners & Affiliated Schools",
     "ariaLabel": "Partners & affiliated schools"
   },
+  "about": {
+    "altImage1": "Business couple consulting visa at office",
+    "altImage2": "KVC Global consulting team working",
+    "tagline": "About company",
+    "title": "Welcome to KVC Global",
+    "description": "KVC Global is your trusted partner in providing comprehensive solutions for studying, working, business, and settling in Singapore.",
+    "statStrategy": "Business strategy consulting",
+    "statNetwork": "Education & technology network",
+    "statsTitle": "Proven capabilities in numbers",
+    "expValue": "15+ Years",
+    "expSub": "Practical experience",
+    "acraValue": "Top 1%",
+    "acraSub": "ACRA Singapore Partner",
+    "btn": "About Us"
+  },
   "footer": {
     "bio": "KVC Global — Accompanying you on your journey of studying, working, business, and settling in Singapore and other countries.",
     "servicesHeading": "Services",
