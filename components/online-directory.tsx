@@ -286,7 +286,7 @@ function TimelineLayout({ programs }: { programs: Program[] }) {
               >
                 <Link
                   href={program.href}
-                  className="group block overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#0A2540]/20 hover:shadow-xl"
+                  className="group block overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-[#0A2540]/20 hover:shadow-xl"
                 >
                   {/* Card Image */}
                   <div className="relative h-48 w-full overflow-hidden bg-[#F4F7FA]">
