@@ -116,7 +116,7 @@ function Stars({ count = 5, size = 14 }: { count?: number; size?: number }) {
 
 function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-7 text-brand-blue shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:min-h-[300px] sm:p-8">
+    <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-5 text-brand-blue shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:min-h-[300px] sm:p-6">
       <div className="flex items-center gap-3">
         <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/40">
           <Image
@@ -193,7 +193,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
     <section
       aria-labelledby="testimonials-heading"
       className={cn(
-        "mx-6 rounded-xl bg-brand-blue-mid py-10 sm:py-15",
+        "mx-6 rounded-xl bg-brand-blue-mid py-10 sm:py-12",
         className
       )}
     >
@@ -222,7 +222,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
               </a>
             </div>
 
-            <div className="mt-10 overflow-hidden">
+            <div className="mt-7 overflow-hidden">
               <div
                 className="flex transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${active * 100}%)` }}
@@ -240,7 +240,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
 
             {pageCount > 1 ? (
               <div
-                className="mt-8 flex items-center justify-center gap-2"
+                className="mt-6 flex items-center justify-center gap-2"
                 role="tablist"
                 aria-label="Chọn trang cảm nhận"
               >
