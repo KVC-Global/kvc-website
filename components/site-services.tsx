@@ -57,11 +57,21 @@ const SERVICES: ReadonlyArray<SanityService> = [
 
 function ServiceCard({ service }: { service: SanityService }) {
   const href = service.href || `/${service.slug?.current || ""}`
+  
+  // Look up fallback image/alt from local SERVICES array by matching title or slug
+  const fallbackService = SERVICES.find(
+    (s) =>
+      s.title.toLowerCase() === service.title.toLowerCase() ||
+      (service.slug?.current && s.slug?.current === service.slug.current)
+  )
+  const fallbackImage = fallbackService?.image || "/images/singapore-student.jpeg"
+  const fallbackAlt = fallbackService?.alt || service.title
+
   const imageUrl =
     service.image && typeof service.image === "object"
       ? urlFor(service.image).url()
-      : (service.image as string) || "/images/singapore-student.jpeg"
-  const altText = service.alt || service.title
+      : (service.image as string) || fallbackImage
+  const altText = service.alt || fallbackAlt
 
   return (
     <article
