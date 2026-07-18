@@ -12,6 +12,13 @@
     "freeConsultation": "Tư vấn miễn phí",
     "selectLanguage": "Chọn ngôn ngữ"
   },
+  "hero": {
+    "title1": "BEGIN SOMETHING",
+    "title2": "GREATER.",
+    "description": "Khởi đầu hành trình định cư, làm việc và kinh doanh tại Singapore cùng đối tác tư vấn di trú hàng đầu. Chúng tôi biến giấc mơ toàn cầu của bạn thành hiện thực bền vững.",
+    "btnStudyWork": "Du học & Việc làm Singapore",
+    "btnIncorporate": "Mở công ty tại Singapore"
+  },
   "footer": {
     "bio": "KVC Global — Đồng hành cùng bạn trên hành trình học tập, làm việc, kinh doanh và định cư tại Singapore và nhiều quốc gia khác.",
     "servicesHeading": "Dịch vụ",

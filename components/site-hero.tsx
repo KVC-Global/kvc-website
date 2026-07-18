@@ -3,11 +3,14 @@ import { ArrowUpRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { getDictionaryServer } from "@/lib/i18n-server"
 
 const HERO_IMAGE =
   "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=1920&q=80&auto=format&fit=crop"
 
-export function SiteHero({ className }: { className?: string }) {
+export async function SiteHero({ className }: { className?: string }) {
+  const t = await getDictionaryServer()
+
   return (
     <section
       aria-labelledby="hero-heading"
@@ -37,14 +40,12 @@ export function SiteHero({ className }: { className?: string }) {
             id="hero-heading"
             className="font-heading text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
           >
-            <span className="block text-primary">BEGIN SOMETHING</span>
-            <span className="block text-brand-gold">GREATER.</span>
+            <span className="block text-primary">{t.hero.title1}</span>
+            <span className="block text-brand-gold">{t.hero.title2}</span>
           </h1>
 
           <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">
-            Khởi đầu hành trình định cư, làm việc và kinh doanh tại Singapore
-            cùng đối tác tư vấn di trú hàng đầu. Chúng tôi biến giấc mơ toàn cầu
-            của bạn thành hiện thực bền vững.
+            {t.hero.description}
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
@@ -52,7 +53,7 @@ export function SiteHero({ className }: { className?: string }) {
               href="#du-hoc"
               className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
-              Du học &amp; Việc làm Singapore
+              {t.hero.btnStudyWork}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -71,7 +72,7 @@ export function SiteHero({ className }: { className?: string }) {
               href="#mo-cong-ty"
               className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
-              Mở công ty tại Singapore
+              {t.hero.btnIncorporate}
               <ArrowUpRight
                 className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 strokeWidth={2.5}

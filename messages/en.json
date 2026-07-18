@@ -12,6 +12,13 @@
     "freeConsultation": "Free Consultation",
     "selectLanguage": "Select language"
   },
+  "hero": {
+    "title1": "BEGIN SOMETHING",
+    "title2": "GREATER.",
+    "description": "Embark on your journey to settle, work, and do business in Singapore with a leading immigration consulting partner. We turn your global dreams into sustainable reality.",
+    "btnStudyWork": "Study & Work in Singapore",
+    "btnIncorporate": "Incorporate Company in Singapore"
+  },
   "footer": {
     "bio": "KVC Global — Accompanying you on your journey of studying, working, business, and settling in Singapore and other countries.",
     "servicesHeading": "Services",
