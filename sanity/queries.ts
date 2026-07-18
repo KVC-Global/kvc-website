@@ -9,7 +9,7 @@ export const PARTNERS_QUERY = defineQuery(
 )
 
 export const SERVICES_QUERY = defineQuery(
-  `*[_type == "service"] | order(title asc)`
+  `*[_type == "service" && (!defined(language) || language == $lang)] | order(title asc)`
 )
 
 export const FAQS_QUERY = defineQuery(

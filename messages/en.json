@@ -45,6 +45,21 @@
     "acraSub": "ACRA Singapore Partner",
     "btn": "About Us"
   },
+  "services": {
+    "tagline": "Our Services",
+    "title": "Comprehensive Solutions for Your Future",
+    "btnMore": "Explore other services",
+    "cardLearnMore": "Learn more",
+    "cardRegister": "Register now",
+    "businessDesc": "Accompanying entrepreneurs in their business expansion and settlement journey in Singapore with comprehensive solutions.",
+    "businessAlt": "Entrepreneurs shaking hands to collaborate at office",
+    "studentDesc": "Supporting international students to enroll in top Singapore schools and processing visas quickly and safely.",
+    "studentAlt": "International students during graduation ceremony in Singapore",
+    "workDesc": "Professional work visa solutions for employees in Singapore along with long-term settlement support.",
+    "workAlt": "Professional working with laptop in modern workspace",
+    "touristDesc": "Simple and fast tourist visa procedures for you and your family to explore Singapore at any time.",
+    "touristAlt": "Tourists exploring modern Singapore neighborhood"
+  },
   "footer": {
     "bio": "KVC Global — Accompanying you on your journey of studying, working, business, and settling in Singapore and other countries.",
     "servicesHeading": "Services",

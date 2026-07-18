@@ -45,6 +45,21 @@
     "acraSub": "Đối tác ACRA Singapore",
     "btn": "Về chúng tôi"
   },
+  "services": {
+    "tagline": "Dịch vụ của chúng tôi",
+    "title": "Giải pháp toàn diện cho tương lai của bạn",
+    "btnMore": "Khám phá các dịch vụ khác",
+    "cardLearnMore": "Tìm hiểu thêm",
+    "cardRegister": "Đăng kí ngay",
+    "businessDesc": "Đồng hành cùng doanh nhân trong hành trình mở rộng kinh doanh và định cư Singapore với giải pháp toàn diện.",
+    "businessAlt": "Doanh nhân bắt tay hợp tác kinh doanh tại văn phòng",
+    "studentDesc": "Hỗ trợ sinh viên quốc tế nhập học tại các trường hàng đầu Singapore và xử lý visa nhanh chóng, an toàn.",
+    "studentAlt": "Sinh viên quốc tế trong lễ tốt nghiệp tại Singapore",
+    "workDesc": "Giải pháp visa lao động chuyên nghiệp cho người đi làm việc tại Singapore cùng hỗ trợ định cư lâu dài.",
+    "workAlt": "Chuyên gia làm việc với laptop tại không gian làm việc hiện đại",
+    "touristDesc": "Thủ tục visa du lịch đơn giản, nhanh gọn để bạn và gia đình khám phá Singapore bất cứ lúc nào.",
+    "touristAlt": "Du khách khám phá khu phố Singapore hiện đại"
+  },
   "footer": {
     "bio": "KVC Global — Đồng hành cùng bạn trên hành trình học tập, làm việc, kinh doanh và định cư tại Singapore và nhiều quốc gia khác.",
     "servicesHeading": "Dịch vụ",
