@@ -141,7 +141,7 @@ export function SiteWhyProcess({ className }: { className?: string }) {
     >
       <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
         <div
-          className="rounded-2xl border border-[#E6E9EE] bg-brand-light px-6 pt-14 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-10 sm:pt-16 md:px-16"
+          className="rounded-lg border border-[#E6E9EE] bg-brand-light px-6 pt-14 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-10 sm:pt-16 md:px-16"
           style={{ paddingBottom: "clamp(3rem, 5vw, 5rem)" }}
         >
           <div className="text-center">
@@ -160,11 +160,11 @@ export function SiteWhyProcess({ className }: { className?: string }) {
             />
           </div>
 
-              <div className="mt-12 grid grid-cols-1 gap-10 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-                {REASONS.map((reason) => (
-                  <ReasonItem key={reason.title} reason={reason} />
-                ))}
-              </div>
+          <div className="mt-12 grid grid-cols-1 gap-10 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            {REASONS.map((reason) => (
+              <ReasonItem key={reason.title} reason={reason} />
+            ))}
+          </div>
         </div>
 
         <div className="mt-20 text-center sm:mt-24">

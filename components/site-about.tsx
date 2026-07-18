@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Award, Handshake, ShieldCheck } from "lucide-react"
+import { Award, Handshake } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
@@ -43,8 +43,7 @@ const ICON_STATS = [
   },
 ] as const
 
-const MAIN_IMAGE =
-  "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&h=1500&q=80&auto=format&fit=crop"
+const MAIN_IMAGE = "/about-image.png"
 
 const ACCENT = "var(--color-secondary)"
 
@@ -113,7 +112,7 @@ export function SiteAbout({ className }: { className?: string }) {
     >
       <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
         <div
-          className="rounded-2xl border border-[#E6E9EE] bg-brand-light px-10 pt-12 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-14 sm:pt-14 md:px-32 md:pt-16"
+          className="rounded-lg border border-[#E6E9EE] bg-brand-light px-10 pt-12 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-14 sm:pt-14 md:px-32 md:pt-16"
           style={{ paddingBottom: "clamp(6rem, 7vw, 8rem)" }}
         >
           <div className={styles.aboutGrid}>
@@ -122,8 +121,8 @@ export function SiteAbout({ className }: { className?: string }) {
                 <Image
                   src={MAIN_IMAGE}
                   alt="Cặp đôi doanh nhân tư vấn visa tại văn phòng"
-                  width={1200}
-                  height={1500}
+                  width={536}
+                  height={732}
                   className={styles.mainImage}
                 />
               </div>
@@ -137,10 +136,15 @@ export function SiteAbout({ className }: { className?: string }) {
                   backgroundColor: "#F8D39E",
                 }}
               >
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary text-white">
-                  <ShieldCheck className="h-5 w-5" strokeWidth={2.25} />
-                </span>
-                <p className="font-display text-base leading-snug font-bold text-primary sm:text-lg">
+                <Image
+                  src="/shield-check.svg"
+                  alt=""
+                  width={32}
+                  height={40}
+                  aria-hidden="true"
+                  className="h-10 w-8 shrink-0"
+                />
+                <p className="font-display text-base leading-snug font-bold text-[#000F22] sm:text-lg">
                   Trusted by Global Enterprises
                 </p>
               </div>

@@ -220,7 +220,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
     <section
       aria-labelledby="testimonials-heading"
       className={cn(
-        "mx-6 rounded-xl bg-brand-blue-mid py-10 sm:py-12",
+        "mx-6 rounded-lg bg-brand-blue-mid py-10 sm:py-12",
         className
       )}
     >
