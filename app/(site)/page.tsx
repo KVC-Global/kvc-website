@@ -15,30 +15,42 @@ import type {
   TESTIMONIALS_QUERY_RESULT,
 } from "@/sanity.types"
 
-export const metadata: Metadata = {
-  title: "KVC Global — Du học Singapore, Khóa học Online, Training Employment Pass",
-  description:
-    "Định hướng tương lai của bạn với KVC Global — đơn vị hàng đầu về du học Singapore, chương trình khóa học online quốc tế, và Training Employment Pass.",
-  openGraph: {
-    title: "KVC Global — Du học Singapore, Khóa học Online, Training Employment Pass",
-    description:
-      "Định hướng tương lai của bạn với KVC Global — đơn vị hàng đầu về du học Singapore, chương trình khóa học online quốc tế, và Training Employment Pass.",
-    images: [
-      {
-        url: "/images/thumb-sharing.png",
-        width: 1200,
-        height: 630,
-        alt: "KVC Global",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "KVC Global — Du học Singapore, Khóa học Online, Training Employment Pass",
-    description:
-      "Định hướng tương lai của bạn với KVC Global — đơn vị hàng đầu về du học Singapore, chương trình khóa học online quốc tế, và Training Employment Pass.",
-    images: ["/images/thumb-sharing.png"],
-  },
+import { getLocale } from "@/lib/i18n-server"
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
+  const isEn = locale === "en"
+
+  const title = isEn
+    ? "KVC Global — Study in Singapore, Online Courses, Training Employment Pass"
+    : "KVC Global — Du học Singapore, Khóa học Online, Training Employment Pass"
+
+  const description = isEn
+    ? "Shape your future with KVC Global — a leading provider of study in Singapore, international online courses, and Training Employment Pass."
+    : "Định hướng tương lai của bạn với KVC Global — đơn vị hàng đầu về du học Singapore, chương trình khóa học online quốc tế, và Training Employment Pass."
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: "/images/thumb-sharing.png",
+          width: 1200,
+          height: 630,
+          alt: "KVC Global",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/images/thumb-sharing.png"],
+    },
+  }
 }
 
 export default async function Page() {

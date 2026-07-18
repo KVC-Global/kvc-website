@@ -1,0 +1,47 @@
+{
+  "nav": {
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "workPass": "Work pass & việc làm",
+    "studyAbroad": "Du học",
+    "onlineCourses": "Khóa học Online",
+    "enterprise": "Dịch vụ doanh nghiệp",
+    "contact": "Liên hệ"
+  },
+  "header": {
+    "freeConsultation": "Tư vấn miễn phí",
+    "selectLanguage": "Chọn ngôn ngữ"
+  },
+  "footer": {
+    "bio": "KVC Global — Đồng hành cùng bạn trên hành trình học tập, làm việc, kinh doanh và định cư tại Singapore và nhiều quốc gia khác.",
+    "servicesHeading": "Dịch vụ",
+    "aboutHeading": "Về chúng tôi",
+    "supportHeading": "Hỗ trợ",
+    "contactHeading": "Liên hệ",
+    "services": {
+      "studyConsulting": "Tư vấn du học",
+      "internship": "Thực tập Singapore",
+      "incorporation": "Thành lập doanh nghiệp",
+      "immigration": "Tư vấn di trú & định cư"
+    },
+    "about": {
+      "intro": "Giới thiệu",
+      "team": "Đội ngũ",
+      "partners": "Đối tác",
+      "values": "Giá trị cốt lõi",
+      "process": "Quy trình làm việc"
+    },
+    "support": {
+      "faq": "Câu hỏi thường gặp",
+      "privacy": "Chính sách bảo mật",
+      "terms": "Điều khoản sử dụng"
+    },
+    "cta": {
+      "title": "Bắt đầu hành trình của bạn?",
+      "description": "Khởi đầu hành trình định cư, làm việc và kinh doanh tại Singapore cùng đối tác tư vấn di trú hàng đầu. Chúng tôi biến giấc mơ toàn cầu của bạn thành hiện thực bền vững.",
+      "book": "Đặt lịch tư vấn ngay",
+      "chat": "Chat với chuyên viên"
+    },
+    "addressVN": "Tầng 6, 65 Lê Lợi, P. Bến Nghé, Quận 1, TP. Hồ Chí Minh, Việt Nam"
+  }
+}

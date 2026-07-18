@@ -12,32 +12,39 @@ import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { SanityLive } from "@/sanity/live"
+import { getLocale } from "@/lib/i18n-server"
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://kvcglobal.com"),
-  title: {
-    default: "KVC Global",
-    template: "%s",
-  },
-  description:
-    "Định hướng tương lai của bạn với KVC Global — Du học Singapore, khóa học online quốc tế, Training Employment Pass.",
-  openGraph: {
-    type: "website",
-    locale: "vi_VN",
-    siteName: "KVC Global",
-    images: [
-      {
-        url: "/images/thumb-sharing.png",
-        width: 1200,
-        height: 630,
-        alt: "KVC Global",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    images: ["/images/thumb-sharing.png"],
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
+  const isEn = locale === "en"
+
+  return {
+    metadataBase: new URL("https://kvcglobal.com"),
+    title: {
+      default: "KVC Global",
+      template: "%s",
+    },
+    description: isEn
+      ? "Shape your future with KVC Global — Study in Singapore, international online courses, Training Employment Pass."
+      : "Định hướng tương lai của bạn với KVC Global — Du học Singapore, khóa học online quốc tế, Training Employment Pass.",
+    openGraph: {
+      type: "website",
+      locale: isEn ? "en_US" : "vi_VN",
+      siteName: "KVC Global",
+      images: [
+        {
+          url: "/images/thumb-sharing.png",
+          width: 1200,
+          height: 630,
+          alt: "KVC Global",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      images: ["/images/thumb-sharing.png"],
+    },
+  }
 }
 
 const inter = Inter({
@@ -66,14 +73,16 @@ const fontMono = JetBrains_Mono({
   display: "swap",
 })
 
-export default function SiteLayout({
+export default async function SiteLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const locale = await getLocale()
+
   return (
     <html
-      lang="vi"
+      lang={locale}
       suppressHydrationWarning
       className={cn(
         "antialiased",

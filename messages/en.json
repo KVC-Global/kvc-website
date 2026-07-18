@@ -1,0 +1,47 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "workPass": "Work Pass & Employment",
+    "studyAbroad": "Study Abroad",
+    "onlineCourses": "Online Courses",
+    "enterprise": "Enterprise Services",
+    "contact": "Contact"
+  },
+  "header": {
+    "freeConsultation": "Free Consultation",
+    "selectLanguage": "Select language"
+  },
+  "footer": {
+    "bio": "KVC Global — Accompanying you on your journey of studying, working, business, and settling in Singapore and other countries.",
+    "servicesHeading": "Services",
+    "aboutHeading": "About Us",
+    "supportHeading": "Support",
+    "contactHeading": "Contact",
+    "services": {
+      "studyConsulting": "Study Abroad Consulting",
+      "internship": "Singapore Internship",
+      "incorporation": "Business Incorporation",
+      "immigration": "Migration & Residency Consulting"
+    },
+    "about": {
+      "intro": "About Us",
+      "team": "Our Team",
+      "partners": "Partners",
+      "values": "Core Values",
+      "process": "Our Process"
+    },
+    "support": {
+      "faq": "FAQs",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use"
+    },
+    "cta": {
+      "title": "Start your journey?",
+      "description": "Embark on your journey to settle, work, and do business in Singapore with a leading immigration consulting partner. We turn your global dreams into sustainable reality.",
+      "book": "Book a consultation now",
+      "chat": "Chat with specialist"
+    },
+    "addressVN": "6th Floor, 65 Le Loi, Ben Nghe Ward, District 1, Ho Chi Minh City, Vietnam"
+  }
+}
