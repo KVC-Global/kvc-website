@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { redirect } from "next/navigation"
 
 import { SiteAbout } from "@/components/site-about"
 import { SiteHero } from "@/components/site-hero"
@@ -8,6 +7,8 @@ import { SiteServices } from "@/components/site-services"
 import { SiteStatBar } from "@/components/site-stat-bar"
 import { SiteTestimonials } from "@/components/site-testimonials"
 import { SiteWhyProcess } from "@/components/site-why-process"
+import { sanityFetch } from "@/sanity/live"
+import { PARTNERS_QUERY, SERVICES_QUERY, TESTIMONIALS_QUERY } from "@/sanity/queries"
 
 export const metadata: Metadata = {
   title: "KVC Global — Du học Singapore, Khóa học Online, Training Employment Pass",
@@ -35,21 +36,26 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Page() {
+export default async function Page() {
+  const [
+    { data: partners },
+    { data: services },
+    { data: testimonials },
+  ] = await Promise.all([
+    sanityFetch({ query: PARTNERS_QUERY }),
+    sanityFetch({ query: SERVICES_QUERY }),
+    sanityFetch({ query: TESTIMONIALS_QUERY }),
+  ])
+
   return (
     <>
       <SiteHero />
       <SiteStatBar />
-      <SitePartners />
+      <SitePartners partners={partners?.length ? partners : undefined} />
       <SiteAbout />
-      <SiteServices />
+      <SiteServices services={services?.length ? services : undefined} />
       <SiteWhyProcess />
-      <SiteTestimonials />
+      <SiteTestimonials testimonials={testimonials?.length ? testimonials : undefined} />
     </>
   )
 }
-
-// TODO: replace with feature flag check (e.g. `if (flags.showLanding) return <SiteLanding />`)
-// export default function Page() {
-//   redirect("/coming-soon")
-// }

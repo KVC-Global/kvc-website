@@ -5,67 +5,59 @@ import { useEffect, useState } from "react"
 import { ArrowRight, Star } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { urlFor } from "@/sanity/image"
 
 const ACCENT = "var(--color-secondary)"
 const VISIBLE_COUNT = 3
 
-type Testimonial = {
+export type SanityTestimonial = {
   name: string
-  role: string
-  avatar: string
+  role?: string
+  company?: string
   quote: string
+  image?: any
+  rating?: number
 }
 
-const TESTIMONIALS: ReadonlyArray<Testimonial> = [
+const TESTIMONIALS: ReadonlyArray<SanityTestimonial> = [
   {
     name: "Minh Anh",
-    role: "Du học sinh — NUS",
-    avatar:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&q=80&auto=format&fit=crop",
+    role: "Du học sinh",
+    company: "NUS",
     quote:
       "Nhờ KVC Global từ A đến Z, tôi đã nhận được học bổng 50% tại NUS — điều mà tôi chưa từng nghĩ tới!",
   },
   {
     name: "Phương Linh",
     role: "Thực tập sinh MBA",
-    avatar:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&q=80&auto=format&fit=crop",
     quote:
       "Chương trình thực tập tại Singapore giúp tôi có trải nghiệm tuyệt vời và cơ hội phát triển bản thân.",
   },
   {
     name: "Hoàng Nam",
     role: "Doanh nhân",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&q=80&auto=format&fit=crop",
     quote:
       "KVC đã hỗ trợ thành lập công ty tại Singapore nhanh chóng và đúng quy trình. Dịch vụ rất chuyên nghiệp!",
   },
   {
     name: "Thanh Huyền",
     role: "Định cư Singapore",
-    avatar:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&q=80&auto=format&fit=crop",
     quote:
       "Đội ngũ tư vấn tận tâm, thủ tục minh bạch. Tôi cảm thấy yên tâm trong suốt hành trình định cư của mình.",
   },
   {
     name: "Quốc Bảo",
     role: "Lao động tay nghề",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&q=80&auto=format&fit=crop",
     quote:
       "Quy trình xử lý hồ sơ nhanh gọn, hỗ trợ 24/7. Tôi đã có việc làm ổn định chỉ sau 3 tháng.",
   },
   {
     name: "Mai Trang",
     role: "Khách hàng doanh nghiệp",
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&q=80&auto=format&fit=crop",
     quote:
       "KVC giúp chúng tôi mở rộng thị trường Singapore hiệu quả. Đối tác tin cậy và chuyên nghiệp.",
   },
-] as const
+]
 
 type GoogleReview = {
   name: string
@@ -114,13 +106,21 @@ function Stars({ count = 5, size = 14 }: { count?: number; size?: number }) {
   )
 }
 
-function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+function TestimonialCard({ testimonial }: { testimonial: SanityTestimonial }) {
+  const avatarUrl = testimonial.image
+    ? urlFor(testimonial.image).url()
+    : "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&q=80&auto=format&fit=crop"
+
+  const displayRole = [testimonial.role, testimonial.company]
+    .filter(Boolean)
+    .join(" — ")
+
   return (
     <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-7 text-brand-blue shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:min-h-[300px] sm:p-8">
       <div className="flex items-center gap-3">
         <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/40">
           <Image
-            src={testimonial.avatar}
+            src={avatarUrl}
             alt={testimonial.name}
             fill
             sizes="48px"
@@ -131,9 +131,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           <div className="font-display text-[15px] font-bold text-brand-blue">
             {testimonial.name}
           </div>
-          <div className="mt-0.5 text-[12px] font-medium text-brand-blue/60">
-            {testimonial.role}
-          </div>
+          {displayRole && (
+            <div className="mt-0.5 text-[12px] font-medium text-brand-blue/60">
+              {displayRole}
+            </div>
+          )}
         </div>
       </div>
       <div className="mt-5 flex-1 border-t border-brand-blue/10 pt-5">
@@ -177,9 +179,15 @@ function GoogleLogo() {
   )
 }
 
-export function SiteTestimonials({ className }: { className?: string }) {
+export function SiteTestimonials({
+  className,
+  testimonials = TESTIMONIALS,
+}: {
+  className?: string
+  testimonials?: ReadonlyArray<SanityTestimonial>
+}) {
   const [active, setActive] = useState(0)
-  const pageCount = Math.ceil(TESTIMONIALS.length / VISIBLE_COUNT)
+  const pageCount = Math.ceil(testimonials.length / VISIBLE_COUNT)
 
   useEffect(() => {
     if (pageCount <= 1) return
@@ -227,7 +235,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
                 className="flex transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${active * 100}%)` }}
               >
-                {TESTIMONIALS.map((t) => (
+                {testimonials.map((t) => (
                   <div
                     key={t.name}
                     className="w-full shrink-0 px-2 sm:w-1/2 sm:px-3 lg:w-1/3"

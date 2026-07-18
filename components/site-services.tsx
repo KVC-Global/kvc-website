@@ -6,15 +6,17 @@ import { Container } from "@/components/ui/container"
 
 const ACCENT = "var(--color-secondary)"
 
-type Service = {
+export type SanityService = {
   title: string
   description: string
-  image: string
-  alt: string
-  href: string
+  slug?: { current: string }
+  icon?: string
+  image?: string
+  alt?: string
+  href?: string
 }
 
-const SERVICES: ReadonlyArray<Service> = [
+const SERVICES: ReadonlyArray<SanityService> = [
   {
     title: "Business Visa",
     description:
@@ -52,7 +54,11 @@ const SERVICES: ReadonlyArray<Service> = [
   },
 ] as const
 
-function ServiceCard({ service }: { service: Service }) {
+function ServiceCard({ service }: { service: SanityService }) {
+  const href = service.href || `/${service.slug?.current || ""}`
+  const imageUrl = service.image || "/images/singapore-student.jpeg"
+  const altText = service.alt || service.title
+
   return (
     <article
       className={cn(
@@ -68,8 +74,8 @@ function ServiceCard({ service }: { service: Service }) {
 
       <div className="relative mt-4 aspect-[4/3] w-full overflow-hidden">
         <Image
-          src={service.image}
-          alt={service.alt}
+          src={imageUrl}
+          alt={altText}
           fill
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
@@ -77,7 +83,7 @@ function ServiceCard({ service }: { service: Service }) {
       </div>
 
       <a
-        href={service.href}
+        href={href}
         className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold tracking-[0.16em] uppercase"
       >
         <span className="relative inline-block leading-none">
@@ -102,7 +108,13 @@ function ServiceCard({ service }: { service: Service }) {
   )
 }
 
-export function SiteServices({ className }: { className?: string }) {
+export function SiteServices({
+  className,
+  services = SERVICES,
+}: {
+  className?: string
+  services?: ReadonlyArray<SanityService>
+}) {
   return (
     <section
       aria-labelledby="services-heading"
@@ -126,7 +138,7 @@ export function SiteServices({ className }: { className?: string }) {
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
-          {SERVICES.map((service) => (
+          {services.map((service) => (
             <ServiceCard key={service.title} service={service} />
           ))}
         </div>
