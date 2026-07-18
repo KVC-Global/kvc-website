@@ -11,6 +11,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
+import { SanityLive } from "@/sanity/live"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kvcglobal.com"),
@@ -87,6 +88,7 @@ export default function SiteLayout({
           <SiteHeader />
           <main className="flex-1">{children}</main>
           <SiteFooter />
+          <SanityLive />
         </ThemeProvider>
       </body>
     </html>
