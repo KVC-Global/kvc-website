@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import {
   Clock,
@@ -131,6 +131,30 @@ const TESTIMONIALS = [
     quote:
       "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
   },
+  {
+    name: "Sed Do Eiusmod",
+    role: "Học viên Online",
+    avatar: "/images/student-avatar-1.jpg",
+    rating: 5,
+    quote:
+      "Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+  },
+  {
+    name: "Ut Labore Magna",
+    role: "Học viên Online",
+    avatar: "/images/student-avatar-2.jpg",
+    rating: 5,
+    quote:
+      "Aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+  },
+  {
+    name: "Nostrud Exercitation",
+    role: "Học viên Online",
+    avatar: "/images/student-avatar-3.jpg",
+    rating: 5,
+    quote:
+      "Ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident.",
+  },
 ] as const
 
 const FAQS = [
@@ -196,27 +220,55 @@ const staggerContainer: Variants = {
 export function OnlineDetails({ className }: { className?: string }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [activeIdx, setActiveIdx] = useState(0)
+  const [cardsPerView, setCardsPerView] = useState(1)
+
+  // One card width including the 24px gap between cards.
+  const getCardWidth = () => {
+    const container = scrollRef.current
+    return container?.firstElementChild
+      ? (container.firstElementChild as HTMLElement).offsetWidth + 24
+      : 300
+  }
+
+  // Number of pages (views) the slider can stop at. The last page is the
+  // final leftmost-card position, so its indicator is always reachable.
+  const pageCount = Math.max(
+    1,
+    TESTIMONIALS.length - Math.min(cardsPerView, TESTIMONIALS.length) + 1,
+  )
+
+  const recomputeCardsPerView = () => {
+    const container = scrollRef.current
+    if (!container) return
+    const cw = getCardWidth()
+    const cpv = Math.round(container.offsetWidth / cw)
+    setCardsPerView(Math.min(Math.max(1, cpv), TESTIMONIALS.length))
+  }
+
+  useEffect(() => {
+    recomputeCardsPerView()
+    const onResize = () => recomputeCardsPerView()
+    window.addEventListener("resize", onResize)
+    return () => window.removeEventListener("resize", onResize)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleScroll = (dir: "left" | "right") => {
     const container = scrollRef.current
     if (container) {
-      const cardWidth = container.firstElementChild
-        ? (container.firstElementChild as HTMLElement).offsetWidth + 24
-        : 300
-      const scrollAmount = dir === "left" ? -cardWidth : cardWidth
-      container.scrollBy({ left: scrollAmount, behavior: "smooth" })
+      const cardWidth = getCardWidth()
+      container.scrollBy({
+        left: dir === "left" ? -cardWidth : cardWidth,
+        behavior: "smooth",
+      })
     }
   }
 
   const updateActiveDot = () => {
     const container = scrollRef.current
     if (container) {
-      const scrollLeft = container.scrollLeft
-      const cardWidth = container.firstElementChild
-        ? (container.firstElementChild as HTMLElement).offsetWidth + 24
-        : 300
-      const index = Math.round(scrollLeft / cardWidth)
-      setActiveIdx(index)
+      const index = Math.round(container.scrollLeft / getCardWidth())
+      setActiveIdx(Math.min(Math.max(0, index), pageCount - 1))
     }
   }
 
@@ -598,15 +650,11 @@ export function OnlineDetails({ className }: { className?: string }) {
         </motion.div>
 
         {/* Section 5: Student Testimonials Slider */}
-        <motion.section
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+        <section
           aria-labelledby="testimonials-heading"
-          className="mt-20 md:mt-28"
+          className="mt-20 md:mt-28 w-full"
         >
-          <motion.div variants={fadeUpVariants} className="mb-10 text-center">
+          <div className="mb-10 text-center">
             <h2
               id="testimonials-heading"
               className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl"
@@ -614,12 +662,9 @@ export function OnlineDetails({ className }: { className?: string }) {
               Học viên nói gì về Khóa Học Online?
             </h2>
             <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={fadeUpVariants}
-            className="group/nav relative px-0 md:px-8"
-          >
+          <div className="group/nav relative px-0 md:px-8">
             <button
               onClick={() => handleScroll("left")}
               aria-label="Previous testimonial"
@@ -698,14 +743,13 @@ export function OnlineDetails({ className }: { className?: string }) {
             >
               <ChevronRight className="h-5 w-5" strokeWidth={2.25} />
             </button>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={fadeUpVariants}
+          <div
             className="mt-8 flex justify-center gap-2"
             aria-hidden="true"
           >
-            {TESTIMONIALS.map((_, idx) => {
+            {Array.from({ length: pageCount }).map((_, idx) => {
               const isActive = activeIdx === idx
               return (
                 <button
@@ -733,8 +777,8 @@ export function OnlineDetails({ className }: { className?: string }) {
                 />
               )
             })}
-          </motion.div>
-        </motion.section>
+          </div>
+        </section>
 
         {/* Section 6: FAQ Accordion Section */}
         <motion.section
