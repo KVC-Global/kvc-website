@@ -4,7 +4,6 @@ import { SiteAbout } from "@/components/site-about"
 import { SiteHero } from "@/components/site-hero"
 import { SitePartners } from "@/components/site-partners"
 import { SiteServices } from "@/components/site-services"
-import { SiteStatBar } from "@/components/site-stat-bar"
 import { SiteTestimonials } from "@/components/site-testimonials"
 import { SiteWhyProcess } from "@/components/site-why-process"
 import { sanityFetch } from "@/sanity/live"
@@ -14,7 +13,6 @@ import type {
   SERVICES_QUERY_RESULT,
   TESTIMONIALS_QUERY_RESULT,
 } from "@/sanity.types"
-
 import { getLocale } from "@/lib/i18n-server"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -69,7 +67,6 @@ export default async function Page() {
   return (
     <>
       <SiteHero />
-      <SiteStatBar />
       <SitePartners partners={partners?.length ? partners : undefined} />
       <SiteAbout />
       <SiteServices services={services?.length ? services : undefined} />

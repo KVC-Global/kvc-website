@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { ArrowRight, Star } from "lucide-react"
+import { ArrowRight, Quote, Star } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { urlFor } from "@/sanity/image"
@@ -17,6 +17,7 @@ export type SanityTestimonial = {
   company?: string
   quote: string
   image?: any
+  avatar?: string
   rating?: number
 }
 
@@ -58,6 +59,30 @@ const TESTIMONIALS: ReadonlyArray<SanityTestimonial> = [
     quote:
       "KVC giúp chúng tôi mở rộng thị trường Singapore hiệu quả. Đối tác tin cậy và chuyên nghiệp.",
   },
+  {
+    name: "Thu Hà",
+    role: "Phụ huynh học sinh",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&q=80&auto=format&fit=crop",
+    quote:
+      "Là phụ huynh, tôi hoàn toàn yên tâm khi gửi con cho KVC đồng hành. Con tôi nay đã nhập học tại PSB Academy.",
+  },
+  {
+    name: "Đức Thịnh",
+    role: "Kỹ sư xây dựng",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&q=80&auto=format&fit=crop",
+    quote:
+      "Sang Singapore làm việc với mức lương tốt hơn hẳn. KVC hỗ trợ tôi từ hồ sơ đến khi nhận việc.",
+  },
+  {
+    name: "Lan Anh",
+    role: "Du học sinh — PSB Academy",
+    avatar:
+      "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=200&h=200&q=80&auto=format&fit=crop",
+    quote:
+      "Môi trường học quốc tế, chương trình chuyên sâu. Cảm ơn KVC đã giúp tôi chọn đúng ngành, đúng trường.",
+  },
 ]
 
 type GoogleReview = {
@@ -97,8 +122,7 @@ function Stars({ count = 5, size = 14 }: { count?: number; size?: number }) {
       {Array.from({ length: count }).map((_, i) => (
         <Star
           key={i}
-          className="text-brand-gold"
-          style={{ width: size, height: size }}
+          style={{ width: size, height: size, color: "#F8BC62" }}
           strokeWidth={0}
           fill="currentColor"
         />
@@ -122,26 +146,32 @@ function TestimonialCard({ testimonial }: { testimonial: SanityTestimonial }) {
 
   const avatarUrl = testimonial.image
     ? urlFor(testimonial.image).url()
-    : fallbackAvatar
+    : testimonial.avatar || fallbackAvatar
 
   const displayRole = [testimonial.role, testimonial.company]
     .filter(Boolean)
     .join(" — ")
 
   return (
-    <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-7 text-brand-blue shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:min-h-[300px] sm:p-8">
-      <div className="flex items-center gap-3">
-        <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/40">
+    <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-5 text-brand-blue shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:min-h-[300px] sm:p-6">
+      <div className="flex items-start gap-3">
+        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/40">
           <Image
             src={avatarUrl}
             alt={testimonial.name}
             fill
-            sizes="48px"
+            sizes="56px"
             className="object-cover"
           />
         </div>
-        <div className="leading-tight">
-          <div className="font-display text-[15px] font-bold text-brand-blue">
+        <div className="flex-1 leading-tight">
+          <Quote
+            aria-hidden="true"
+            className="h-5 w-5 text-brand-blue"
+            strokeWidth={0}
+            fill="currentColor"
+          />
+          <div className="mt-1.5 font-display text-[15px] font-bold text-brand-blue">
             {testimonial.name}
           </div>
           {displayRole && (
@@ -151,11 +181,9 @@ function TestimonialCard({ testimonial }: { testimonial: SanityTestimonial }) {
           )}
         </div>
       </div>
-      <div className="mt-5 flex-1 border-t border-brand-blue/10 pt-5">
-        <p className="text-[14.5px] leading-relaxed text-brand-blue/80 sm:text-[15px]">
-          &ldquo;{testimonial.quote}&rdquo;
-        </p>
-      </div>
+      <p className="mt-4 flex-1 text-[14.5px] leading-relaxed text-brand-blue/80 sm:text-[15px]">
+        {testimonial.quote}
+      </p>
     </article>
   )
 }
@@ -237,7 +265,7 @@ export function SiteTestimonials({
     <section
       aria-labelledby="testimonials-heading"
       className={cn(
-        "mx-6 rounded-xl bg-brand-blue-mid py-10 sm:py-15",
+        "mx-6 rounded-lg bg-brand-blue-mid py-10 sm:py-12",
         className
       )}
     >
@@ -266,7 +294,7 @@ export function SiteTestimonials({
               </a>
             </div>
 
-            <div className="mt-10 overflow-hidden">
+            <div className="mt-7 overflow-hidden">
               <div
                 className="flex transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${active * 100}%)` }}
@@ -284,7 +312,7 @@ export function SiteTestimonials({
 
             {pageCount > 1 ? (
               <div
-                className="mt-8 flex items-center justify-center gap-2"
+                className="mt-6 flex items-center justify-center gap-2"
                 role="tablist"
                 aria-label={t.testimonials.ariaLabel}
               >
@@ -321,11 +349,19 @@ export function SiteTestimonials({
               <GoogleLogo />
             </div>
 
-            <div className="mt-5 flex items-baseline gap-3">
+            <div className="mt-5 flex gap-2">
               <span className="font-display text-5xl leading-none font-bold text-white">
                 4.9
               </span>
-              <Stars size={16} />
+              <div>
+                <div>
+                  <Stars size={20} />
+                </div>
+                <p className="text-[13px] text-white/65">
+                  Dựa trên <span className="font-semibold text-white">328</span>{" "}
+                  đánh giá
+                </p>
+              </div>
             </div>
             <p className="mt-2 text-[13px] text-white/65">
               {t.testimonials.google.rating}
@@ -342,13 +378,13 @@ export function SiteTestimonials({
                     {review.initial}
                   </span>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="truncate text-[13px] font-semibold text-white">
-                        {review.name}
-                      </span>
+                    <div className="truncate text-[13px] font-semibold text-white">
+                      {review.name}
+                    </div>
+                    <div>
                       <Stars size={11} />
                     </div>
-                    <p className="mt-1 text-[12.5px] leading-relaxed text-white/70">
+                    <p className="text-[12.5px] leading-relaxed text-white/70">
                       {review.text}
                     </p>
                   </div>
@@ -358,7 +394,7 @@ export function SiteTestimonials({
 
             <a
               href="#google-reviews"
-              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand-gold px-5 py-3 text-[13px] font-semibold tracking-[0.16em] text-brand-blue uppercase shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-md"
+              className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-md bg-secondary px-5 py-3 text-[13px] font-semibold tracking-[0.16em] text-brand-blue uppercase shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-md"
             >
               {t.testimonials.google.btn}
               <ArrowRight className="h-4 w-4" strokeWidth={2.75} />

@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
+  ArrowUpRight,
   ChevronDown,
   Mail,
   MapPin,
@@ -19,8 +20,7 @@ import { useLocale, useDictionary } from "@/lib/i18n-client"
 const ACCENT = "var(--color-brand-gold)"
 const NAVY = "var(--color-brand-blue-mid)"
 
-const CTA_IMAGE =
-  "https://images.pexels.com/photos/35421791/pexels-photo-35421791.jpeg?auto=compress&w=1920&q=80"
+const CTA_IMAGE = "/footer-banner.png"
 
 type SocialIconProps = {
   className?: string
@@ -93,7 +93,7 @@ const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
 
 function ColumnHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="font-heading text-[15px] font-semibold tracking-[0.18em] text-foreground uppercase">
+    <h3 className="text-base font-semibold text-primary capitalize">
       {children}
     </h3>
   )
@@ -124,7 +124,7 @@ function LinkList({
 
 function CtaBanner({ className }: { className?: string }) {
   const t = useDictionary()
-  
+
   return (
     <div
       className={cn(
@@ -183,12 +183,12 @@ function CtaBanner({ className }: { className?: string }) {
 
             <Link
               href="#chat-chuyen-vien"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-foreground/25 bg-white/90 px-5 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-white hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
               <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
               {t.footer.cta.chat}
-              <ArrowRight
-                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+              <ArrowUpRight
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 strokeWidth={2.5}
               />
             </Link>
@@ -224,7 +224,7 @@ function CollapsibleFooterSection({
       onToggle={(event) => setOpen((event.target as HTMLDetailsElement).open)}
       className={cn("group", className)}
     >
-      <summary className="-mx-2 flex cursor-pointer list-none items-center justify-between gap-3 rounded-sm px-2 py-2 transition-colors duration-200 ease-out hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
+      <summary className="relative -mx-2 flex cursor-pointer list-none items-center justify-between gap-3 px-2 pt-2 pb-3 transition-colors duration-200 ease-out after:absolute after:bottom-0 after:left-2 after:h-px after:w-1/2 after:bg-brand-blue-mid/15 hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
         <ColumnHeading>{heading}</ColumnHeading>
         <ChevronDown
           aria-hidden="true"
@@ -390,8 +390,22 @@ export function SiteFooter({ className }: { className?: string }) {
 
         <div aria-hidden="true" className="h-px w-full bg-brand-blue-mid/15" />
 
-        <div className="flex flex-col items-start justify-between gap-2 py-6 text-[13px] text-foreground/65 sm:flex-row sm:items-center">
+        <div className="flex flex-col items-start justify-between gap-3 py-6 text-[13px] text-foreground/50 sm:flex-row sm:items-center">
           <p>© 2024 KVC Global. All rights reserved.</p>
+          <nav aria-label="Chính sách pháp lý" className="flex items-center gap-5">
+            <Link
+              href="#chinh-sach-bao-mat"
+              className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="#dieu-khoan-su-dung"
+              className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"
+            >
+              Terms of Service
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
