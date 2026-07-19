@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity"
 
 export const TESTIMONIALS_QUERY = defineQuery(
-  `*[_type == "testimonial"] | order(name asc)`
+  `*[_type == "testimonial" && (!defined(language) || language == $lang)] | order(name asc)`
 )
 
 export const PARTNERS_QUERY = defineQuery(

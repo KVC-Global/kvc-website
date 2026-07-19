@@ -59,7 +59,7 @@ export default async function Page() {
   const [partnersRes, servicesRes, testimonialsRes] = await Promise.all([
     sanityFetch({ query: PARTNERS_QUERY, params: { lang: locale } }),
     sanityFetch({ query: SERVICES_QUERY, params: { lang: locale } }),
-    sanityFetch({ query: TESTIMONIALS_QUERY }),
+    sanityFetch({ query: TESTIMONIALS_QUERY, params: { lang: locale } }),
   ])
 
   const partners = partnersRes.data as PARTNERS_QUERY_RESULT

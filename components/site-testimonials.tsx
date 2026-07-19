@@ -6,6 +6,7 @@ import { ArrowRight, Star } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { urlFor } from "@/sanity/image"
+import { useDictionary } from "@/lib/i18n-client"
 
 const ACCENT = "var(--color-secondary)"
 const VISIBLE_COUNT = 3
@@ -198,6 +199,29 @@ export function SiteTestimonials({
   className?: string
   testimonials?: ReadonlyArray<SanityTestimonial>
 }) {
+  const t = useDictionary()
+
+  const googleReviews: ReadonlyArray<GoogleReview> = [
+    {
+      name: t.testimonials.google.reviews.review1.name,
+      initial: "H",
+      color: "var(--color-brand-blue)",
+      text: t.testimonials.google.reviews.review1.text,
+    },
+    {
+      name: t.testimonials.google.reviews.review2.name,
+      initial: "M",
+      color: "var(--color-secondary)",
+      text: t.testimonials.google.reviews.review2.text,
+    },
+    {
+      name: t.testimonials.google.reviews.review3.name,
+      initial: "B",
+      color: "#1A4D7A",
+      text: t.testimonials.google.reviews.review3.text,
+    },
+  ]
+
   const [active, setActive] = useState(0)
   const pageCount = Math.ceil(testimonials.length / VISIBLE_COUNT)
 
@@ -224,20 +248,20 @@ export function SiteTestimonials({
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-                  Câu chuyện thành công
+                  {t.testimonials.tagline}
                 </p>
                 <h2
                   id="testimonials-heading"
                   className="mt-3 max-w-xl font-display text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[40px]"
                 >
-                  Niềm tự hào của khách hàng là thành công của chúng tôi.
+                  {t.testimonials.title}
                 </h2>
               </div>
               <a
                 href="#testimonials"
                 className="hidden shrink-0 items-center gap-2 pt-2 text-[13px] font-semibold tracking-[0.18em] whitespace-nowrap text-white/80 uppercase transition-colors hover:text-brand-gold sm:inline-flex"
               >
-                Xem tất cả câu chuyện
+                {t.testimonials.btnMore}
                 <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
               </a>
             </div>
@@ -262,7 +286,7 @@ export function SiteTestimonials({
               <div
                 className="mt-8 flex items-center justify-center gap-2"
                 role="tablist"
-                aria-label="Chọn trang cảm nhận"
+                aria-label={t.testimonials.ariaLabel}
               >
                 {Array.from({ length: pageCount }).map((_, i) => (
                   <button
@@ -270,7 +294,7 @@ export function SiteTestimonials({
                     type="button"
                     role="tab"
                     aria-selected={active === i}
-                    aria-label={`Trang ${i + 1}`}
+                    aria-label={`${t.testimonials.pageLabel} ${i + 1}`}
                     onClick={() => setActive(i)}
                     className={cn(
                       "h-2 rounded-full transition-all duration-300",
@@ -286,11 +310,11 @@ export function SiteTestimonials({
 
           {/* Right: Google reviews */}
           <aside
-            aria-label="Đánh giá trên Google"
+            aria-label={t.testimonials.google.tagline}
             className="rounded-2xl bg-white/[0.04] p-6 ring-1 ring-white/10 sm:p-8"
           >
             <p className="font-sans text-[12px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-              Đánh giá trên Google
+              {t.testimonials.google.tagline}
             </p>
 
             <div className="mt-4">
@@ -304,12 +328,11 @@ export function SiteTestimonials({
               <Stars size={16} />
             </div>
             <p className="mt-2 text-[13px] text-white/65">
-              Dựa trên <span className="font-semibold text-white">328</span>{" "}
-              đánh giá
+              {t.testimonials.google.rating}
             </p>
 
             <ul className="mt-7 space-y-5 border-t border-white/10 pt-6">
-              {GOOGLE_REVIEWS.map((review) => (
+              {googleReviews.map((review) => (
                 <li key={review.name} className="flex items-start gap-3">
                   <span
                     aria-hidden="true"
@@ -337,7 +360,7 @@ export function SiteTestimonials({
               href="#google-reviews"
               className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-md bg-brand-gold px-5 py-3 text-[13px] font-semibold tracking-[0.16em] text-brand-blue uppercase shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-md"
             >
-              Xem tất cả đánh giá trên Google
+              {t.testimonials.google.btn}
               <ArrowRight className="h-4 w-4" strokeWidth={2.75} />
             </a>
           </aside>

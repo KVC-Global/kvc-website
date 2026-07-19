@@ -60,6 +60,32 @@
     "touristDesc": "Thủ tục visa du lịch đơn giản, nhanh gọn để bạn và gia đình khám phá Singapore bất cứ lúc nào.",
     "touristAlt": "Du khách khám phá khu phố Singapore hiện đại"
   },
+  "testimonials": {
+    "tagline": "Câu chuyện thành công",
+    "title": "Niềm tự hào của khách hàng là thành công của chúng tôi.",
+    "btnMore": "Xem tất cả câu chuyện",
+    "ariaLabel": "Chọn trang cảm nhận",
+    "pageLabel": "Trang",
+    "google": {
+      "tagline": "Đánh giá trên Google",
+      "rating": "Dựa trên 328 đánh giá",
+      "btn": "Xem tất cả đánh giá trên Google",
+      "reviews": {
+        "review1": {
+          "name": "Hồng Nhung",
+          "text": "Dịch vụ rất chuyên nghiệp, đội ngũ tư vấn nhiệt tình. Hỗ trợ rất nhanh chóng. Cảm ơn KVC Global!"
+        },
+        "review2": {
+          "name": "Minh Kha",
+          "text": "Nhờ KVC mà tôi đã hoàn thành tốt ước mơ du học Singapore. Mọi thứ đều rõ ràng và đáng tin cậy."
+        },
+        "review3": {
+          "name": "Bích Ngọc",
+          "text": "Tư vấn rõ ràng, cẩn thận, giúp con tôi đạt học bổng NUS. Cảm ơn đội ngũ KVC!"
+        }
+      }
+    }
+  },
   "whyProcess": {
     "whyTagline": "Vì sao chọn KVC Global?",
     "whyTitle": "Đối tác đáng tin cậy cho hành trình của bạn",

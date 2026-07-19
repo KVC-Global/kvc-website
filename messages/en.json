@@ -60,6 +60,32 @@
     "touristDesc": "Simple and fast tourist visa procedures for you and your family to explore Singapore at any time.",
     "touristAlt": "Tourists exploring modern Singapore neighborhood"
   },
+  "testimonials": {
+    "tagline": "Success Stories",
+    "title": "Our clients' pride is our success.",
+    "btnMore": "See all stories",
+    "ariaLabel": "Select testimonial page",
+    "pageLabel": "Page",
+    "google": {
+      "tagline": "Google Reviews",
+      "rating": "Based on 328 reviews",
+      "btn": "See all Google reviews",
+      "reviews": {
+        "review1": {
+          "name": "Hong Nhung",
+          "text": "Very professional service, enthusiastic consulting team. Very prompt support. Thank you, KVC Global!"
+        },
+        "review2": {
+          "name": "Minh Kha",
+          "text": "Thanks to KVC, I successfully achieved my dream of studying abroad in Singapore. Everything was clear and reliable."
+        },
+        "review3": {
+          "name": "Bich Ngoc",
+          "text": "Clear and careful guidance, helping my child get the NUS scholarship. Thank you to the KVC team!"
+        }
+      }
+    }
+  },
   "whyProcess": {
     "whyTagline": "Why Choose KVC Global?",
     "whyTitle": "A Trusted Partner for Your Journey",
