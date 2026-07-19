@@ -3,56 +3,47 @@ import { ArrowRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { urlFor } from "@/sanity/image"
+import { getDictionaryServer, getLocale } from "@/lib/i18n-server"
 
 const ACCENT = "var(--color-secondary)"
 
-type Service = {
+export type SanityService = {
   title: string
   description: string
-  image: string
-  alt: string
-  href: string
+  slug?: { current: string }
+  icon?: string
+  image?: any
+  alt?: string
+  href?: string
 }
 
-const SERVICES: ReadonlyArray<Service> = [
-  {
-    title: "Business Visa",
-    description:
-      "Đồng hành cùng doanh nhân trong hành trình mở rộng kinh doanh và định cư Singapore với giải pháp toàn diện.",
-    image:
-      "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=720&h=540&q=80&auto=format&fit=crop",
-    alt: "Doanh nhân bắt tay hợp tác kinh doanh tại văn phòng",
-    href: "#business-visa",
-  },
-  {
-    title: "Student Visa",
-    description:
-      "Hỗ trợ sinh viên quốc tế nhập học tại các trường hàng đầu Singapore và xử lý visa nhanh chóng, an toàn.",
-    image: "/images/singapore-student.jpeg",
-    alt: "Sinh viên quốc tế trong lễ tốt nghiệp tại Singapore",
-    href: "#student-visa",
-  },
-  {
-    title: "Work Visa",
-    description:
-      "Giải pháp visa lao động chuyên nghiệp cho người đi làm việc tại Singapore cùng hỗ trợ định cư lâu dài.",
-    image:
-      "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=720&h=540&q=80&auto=format&fit=crop",
-    alt: "Chuyên gia làm việc với laptop tại không gian làm việc hiện đại",
-    href: "#work-visa",
-  },
-  {
-    title: "Tourist Visa",
-    description:
-      "Thủ tục visa du lịch đơn giản, nhanh gọn để bạn và gia đình khám phá Singapore bất cứ lúc nào.",
-    image:
-      "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=720&h=540&q=80&auto=format&fit=crop",
-    alt: "Du khách khám phá khu phố Singapore hiện đại",
-    href: "#tourist-visa",
-  },
-] as const
+function ServiceCard({
+  service,
+  defaultServices,
+  t,
+}: {
+  service: SanityService
+  defaultServices: ReadonlyArray<SanityService>
+  t: any
+}) {
+  const href = service.href || `/${service.slug?.current || ""}`
 
-function ServiceCard({ service }: { service: Service }) {
+  // Look up fallback image/alt from localized defaultServices array by matching title or slug
+  const fallbackService = defaultServices.find(
+    (s) =>
+      s.title.toLowerCase() === service.title.toLowerCase() ||
+      (service.slug?.current && s.slug?.current === service.slug.current)
+  )
+  const fallbackImage = fallbackService?.image || "/images/singapore-student.jpeg"
+  const fallbackAlt = fallbackService?.alt || service.title
+
+  const imageUrl =
+    service.image && typeof service.image === "object"
+      ? urlFor(service.image).url()
+      : (service.image as string) || fallbackImage
+  const altText = service.alt || fallbackAlt
+
   return (
     <article
       className={cn(
@@ -68,8 +59,8 @@ function ServiceCard({ service }: { service: Service }) {
 
       <div className="relative mt-4 aspect-[4/3] w-full overflow-hidden">
         <Image
-          src={service.image}
-          alt={service.alt}
+          src={imageUrl}
+          alt={altText}
           fill
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
@@ -77,15 +68,15 @@ function ServiceCard({ service }: { service: Service }) {
       </div>
 
       <a
-        href={service.href}
+        href={href}
         className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold tracking-[0.16em] uppercase"
       >
         <span className="relative inline-block leading-none">
           <span className="block pb-1 text-brand-gold transition-colors duration-300 group-hover:hidden">
-            Tìm hiểu thêm
+            {t.services.cardLearnMore}
           </span>
           <span className="hidden pb-1 text-white transition-colors duration-300 group-hover:block">
-            Đăng kí ngay
+            {t.services.cardRegister}
           </span>
           <span
             aria-hidden="true"
@@ -102,7 +93,51 @@ function ServiceCard({ service }: { service: Service }) {
   )
 }
 
-export function SiteServices({ className }: { className?: string }) {
+export async function SiteServices({
+  className,
+  services,
+}: {
+  className?: string
+  services?: ReadonlyArray<SanityService>
+}) {
+  const t = await getDictionaryServer()
+
+  const defaultServices: ReadonlyArray<SanityService> = [
+    {
+      title: "Business Visa",
+      description: t.services.businessDesc,
+      image:
+        "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=720&h=540&q=80&auto=format&fit=crop",
+      alt: t.services.businessAlt,
+      href: "#business-visa",
+    },
+    {
+      title: "Student Visa",
+      description: t.services.studentDesc,
+      image: "/images/singapore-student.jpeg",
+      alt: t.services.studentAlt,
+      href: "#student-visa",
+    },
+    {
+      title: "Work Visa",
+      description: t.services.workDesc,
+      image:
+        "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=720&h=540&q=80&auto=format&fit=crop",
+      alt: t.services.workAlt,
+      href: "#work-visa",
+    },
+    {
+      title: "Tourist Visa",
+      description: t.services.touristDesc,
+      image:
+        "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=720&h=540&q=80&auto=format&fit=crop",
+      alt: t.services.touristAlt,
+      href: "#tourist-visa",
+    },
+  ]
+
+  const activeServices = services || defaultServices
+
   return (
     <section
       aria-labelledby="services-heading"
@@ -111,13 +146,13 @@ export function SiteServices({ className }: { className?: string }) {
       <Container>
         <div className="text-center">
           <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-            Dịch vụ của chúng tôi
+            {t.services.tagline}
           </p>
           <h2
             id="services-heading"
             className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-primary sm:text-4xl md:text-[40px]"
           >
-            Giải pháp toàn diện cho tương lai của bạn
+            {t.services.title}
           </h2>
           <span
             aria-hidden="true"
@@ -126,8 +161,13 @@ export function SiteServices({ className }: { className?: string }) {
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-7">
-          {SERVICES.map((service) => (
-            <ServiceCard key={service.title} service={service} />
+          {activeServices.map((service) => (
+            <ServiceCard
+              key={service.title}
+              service={service}
+              defaultServices={defaultServices}
+              t={t}
+            />
           ))}
         </div>
 
@@ -136,7 +176,7 @@ export function SiteServices({ className }: { className?: string }) {
             href="#all-services"
             className="group inline-flex items-center justify-center gap-2 rounded-md border-2 border-brand-gold px-7 py-3.5 text-sm font-semibold tracking-wide text-brand-gold uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
           >
-            Khám phá các dịch vụ khác
+            {t.services.btnMore}
             <svg
               viewBox="0 0 24 24"
               aria-hidden="true"

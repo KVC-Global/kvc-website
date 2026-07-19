@@ -5,63 +5,57 @@ import { useEffect, useState } from "react"
 import { ArrowRight, Quote, Star } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { urlFor } from "@/sanity/image"
+import { useDictionary } from "@/lib/i18n-client"
 
 const ACCENT = "var(--color-secondary)"
 const VISIBLE_COUNT = 3
 
-type Testimonial = {
+export type SanityTestimonial = {
   name: string
-  role: string
-  avatar: string
+  role?: string
+  company?: string
   quote: string
+  image?: any
+  avatar?: string
+  rating?: number
 }
 
-const TESTIMONIALS: ReadonlyArray<Testimonial> = [
+const TESTIMONIALS: ReadonlyArray<SanityTestimonial> = [
   {
     name: "Minh Anh",
-    role: "Du học sinh — NUS",
-    avatar:
-      "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&q=80&auto=format&fit=crop",
+    role: "Du học sinh",
+    company: "NUS",
     quote:
       "Nhờ KVC Global từ A đến Z, tôi đã nhận được học bổng 50% tại NUS — điều mà tôi chưa từng nghĩ tới!",
   },
   {
     name: "Phương Linh",
     role: "Thực tập sinh MBA",
-    avatar:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&q=80&auto=format&fit=crop",
     quote:
       "Chương trình thực tập tại Singapore giúp tôi có trải nghiệm tuyệt vời và cơ hội phát triển bản thân.",
   },
   {
     name: "Hoàng Nam",
     role: "Doanh nhân",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&q=80&auto=format&fit=crop",
     quote:
       "KVC đã hỗ trợ thành lập công ty tại Singapore nhanh chóng và đúng quy trình. Dịch vụ rất chuyên nghiệp!",
   },
   {
     name: "Thanh Huyền",
     role: "Định cư Singapore",
-    avatar:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&q=80&auto=format&fit=crop",
     quote:
       "Đội ngũ tư vấn tận tâm, thủ tục minh bạch. Tôi cảm thấy yên tâm trong suốt hành trình định cư của mình.",
   },
   {
     name: "Quốc Bảo",
     role: "Lao động tay nghề",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&q=80&auto=format&fit=crop",
     quote:
       "Quy trình xử lý hồ sơ nhanh gọn, hỗ trợ 24/7. Tôi đã có việc làm ổn định chỉ sau 3 tháng.",
   },
   {
     name: "Mai Trang",
     role: "Khách hàng doanh nghiệp",
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&q=80&auto=format&fit=crop",
     quote:
       "KVC giúp chúng tôi mở rộng thị trường Singapore hiệu quả. Đối tác tin cậy và chuyên nghiệp.",
   },
@@ -89,7 +83,7 @@ const TESTIMONIALS: ReadonlyArray<Testimonial> = [
     quote:
       "Môi trường học quốc tế, chương trình chuyên sâu. Cảm ơn KVC đã giúp tôi chọn đúng ngành, đúng trường.",
   },
-] as const
+]
 
 type GoogleReview = {
   name: string
@@ -137,13 +131,33 @@ function Stars({ count = 5, size = 14 }: { count?: number; size?: number }) {
   )
 }
 
-function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
+const FALLBACK_AVATARS: Record<string, string> = {
+  "minh anh": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&q=80&auto=format&fit=crop",
+  "phương linh": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&q=80&auto=format&fit=crop",
+  "hoàng nam": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&q=80&auto=format&fit=crop",
+  "thanh huyền": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&q=80&auto=format&fit=crop",
+  "quốc bảo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&q=80&auto=format&fit=crop",
+  "mai trang": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&q=80&auto=format&fit=crop",
+}
+
+function TestimonialCard({ testimonial }: { testimonial: SanityTestimonial }) {
+  const nameKey = testimonial.name.toLowerCase().trim()
+  const fallbackAvatar = FALLBACK_AVATARS[nameKey] || "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&q=80&auto=format&fit=crop"
+
+  const avatarUrl = testimonial.image
+    ? urlFor(testimonial.image).url()
+    : testimonial.avatar || fallbackAvatar
+
+  const displayRole = [testimonial.role, testimonial.company]
+    .filter(Boolean)
+    .join(" — ")
+
   return (
     <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-5 text-brand-blue shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:min-h-[300px] sm:p-6">
       <div className="flex items-start gap-3">
         <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/40">
           <Image
-            src={testimonial.avatar}
+            src={avatarUrl}
             alt={testimonial.name}
             fill
             sizes="56px"
@@ -160,9 +174,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
           <div className="mt-1.5 font-display text-[15px] font-bold text-brand-blue">
             {testimonial.name}
           </div>
-          <div className="mt-0.5 text-[12px] font-medium text-brand-blue/60">
-            {testimonial.role}
-          </div>
+          {displayRole && (
+            <div className="mt-0.5 text-[12px] font-medium text-brand-blue/60">
+              {displayRole}
+            </div>
+          )}
         </div>
       </div>
       <p className="mt-4 flex-1 text-[14.5px] leading-relaxed text-brand-blue/80 sm:text-[15px]">
@@ -204,9 +220,38 @@ function GoogleLogo() {
   )
 }
 
-export function SiteTestimonials({ className }: { className?: string }) {
+export function SiteTestimonials({
+  className,
+  testimonials = TESTIMONIALS,
+}: {
+  className?: string
+  testimonials?: ReadonlyArray<SanityTestimonial>
+}) {
+  const t = useDictionary()
+
+  const googleReviews: ReadonlyArray<GoogleReview> = [
+    {
+      name: t.testimonials.google.reviews.review1.name,
+      initial: "H",
+      color: "var(--color-brand-blue)",
+      text: t.testimonials.google.reviews.review1.text,
+    },
+    {
+      name: t.testimonials.google.reviews.review2.name,
+      initial: "M",
+      color: "var(--color-secondary)",
+      text: t.testimonials.google.reviews.review2.text,
+    },
+    {
+      name: t.testimonials.google.reviews.review3.name,
+      initial: "B",
+      color: "#1A4D7A",
+      text: t.testimonials.google.reviews.review3.text,
+    },
+  ]
+
   const [active, setActive] = useState(0)
-  const pageCount = Math.ceil(TESTIMONIALS.length / VISIBLE_COUNT)
+  const pageCount = Math.ceil(testimonials.length / VISIBLE_COUNT)
 
   useEffect(() => {
     if (pageCount <= 1) return
@@ -231,20 +276,20 @@ export function SiteTestimonials({ className }: { className?: string }) {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-                  Câu chuyện thành công
+                  {t.testimonials.tagline}
                 </p>
                 <h2
                   id="testimonials-heading"
                   className="mt-3 max-w-xl font-display text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[40px]"
                 >
-                  Niềm tự hào của khách hàng là thành công của chúng tôi.
+                  {t.testimonials.title}
                 </h2>
               </div>
               <a
                 href="#testimonials"
                 className="hidden shrink-0 items-center gap-2 pt-2 text-[13px] font-semibold tracking-[0.18em] whitespace-nowrap text-white/80 uppercase transition-colors hover:text-brand-gold sm:inline-flex"
               >
-                Xem tất cả câu chuyện
+                {t.testimonials.btnMore}
                 <ArrowRight className="h-4 w-4" strokeWidth={2.5} />
               </a>
             </div>
@@ -254,7 +299,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
                 className="flex transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${active * 100}%)` }}
               >
-                {TESTIMONIALS.map((t) => (
+                {testimonials.map((t) => (
                   <div
                     key={t.name}
                     className="w-full shrink-0 px-2 sm:w-1/2 sm:px-3 lg:w-1/3"
@@ -269,7 +314,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
               <div
                 className="mt-6 flex items-center justify-center gap-2"
                 role="tablist"
-                aria-label="Chọn trang cảm nhận"
+                aria-label={t.testimonials.ariaLabel}
               >
                 {Array.from({ length: pageCount }).map((_, i) => (
                   <button
@@ -277,7 +322,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
                     type="button"
                     role="tab"
                     aria-selected={active === i}
-                    aria-label={`Trang ${i + 1}`}
+                    aria-label={`${t.testimonials.pageLabel} ${i + 1}`}
                     onClick={() => setActive(i)}
                     className={cn(
                       "h-2 rounded-full transition-all duration-300",
@@ -293,11 +338,11 @@ export function SiteTestimonials({ className }: { className?: string }) {
 
           {/* Right: Google reviews */}
           <aside
-            aria-label="Đánh giá trên Google"
+            aria-label={t.testimonials.google.tagline}
             className="rounded-2xl bg-white/[0.04] p-6 ring-1 ring-white/10 sm:p-8"
           >
-            <p className="font-sans text-[12px] font-bold tracking-[0.28em] text-[#F8BC62] uppercase">
-              Đánh giá trên Google
+            <p className="font-sans text-[12px] font-bold tracking-[0.28em] text-brand-gold uppercase">
+              {t.testimonials.google.tagline}
             </p>
 
             <div className="mt-4">
@@ -318,9 +363,12 @@ export function SiteTestimonials({ className }: { className?: string }) {
                 </p>
               </div>
             </div>
+            <p className="mt-2 text-[13px] text-white/65">
+              {t.testimonials.google.rating}
+            </p>
 
             <ul className="mt-7 space-y-5 border-t border-white/10 pt-6">
-              {GOOGLE_REVIEWS.map((review) => (
+              {googleReviews.map((review) => (
                 <li key={review.name} className="flex items-start gap-3">
                   <span
                     aria-hidden="true"
@@ -348,7 +396,7 @@ export function SiteTestimonials({ className }: { className?: string }) {
               href="#google-reviews"
               className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-md bg-secondary px-5 py-3 text-[13px] font-semibold tracking-[0.16em] text-brand-blue uppercase shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-md"
             >
-              Xem tất cả đánh giá trên Google
+              {t.testimonials.google.btn}
               <ArrowRight className="h-4 w-4" strokeWidth={2.75} />
             </a>
           </aside>
