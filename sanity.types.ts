@@ -15,12 +15,61 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type TranslationMetadata = {
+  _id: string;
+  _type: "translation.metadata";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  translations?: InternationalizedArrayReference;
+  schemaTypes?: Array<string>;
+};
+
+export type InternationalizedArrayReference = Array<{
+  _key: string;
+} & InternationalizedArrayReferenceValue>;
+
+export type ServiceReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "service";
+};
+
+export type PartnerReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "partner";
+};
+
+export type TestimonialReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "testimonial";
+};
+
+export type FaqReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "faq";
+};
+
+export type InternationalizedArrayReferenceValue = {
+  _type: "internationalizedArrayReferenceValue";
+  value?: ServiceReference | PartnerReference | TestimonialReference | FaqReference;
+  language: string;
+};
+
 export type Faq = {
   _id: string;
   _type: "faq";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   question: string;
   answer: string;
   category: "general" | "study-abroad" | "online-course" | "work-pass";
@@ -34,12 +83,68 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
+export type Testimonial = {
+  _id: string;
+  _type: "testimonial";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  name: string;
+  role?: string;
+  company?: string;
+  quote: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  rating?: number;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
+export type Partner = {
+  _id: string;
+  _type: "partner";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  name: string;
+  logo: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  website?: string;
+};
+
 export type Service = {
   _id: string;
   _type: "service";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title: string;
   slug: Slug;
   description: string;
@@ -72,63 +177,10 @@ export type Service = {
   }>;
 };
 
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
-
 export type Slug = {
   _type: "slug";
   current: string;
   source?: string;
-};
-
-export type Partner = {
-  _id: string;
-  _type: "partner";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name: string;
-  logo: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  website?: string;
-};
-
-export type Testimonial = {
-  _id: string;
-  _type: "testimonial";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name: string;
-  role?: string;
-  company?: string;
-  quote: string;
-  image?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  rating?: number;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -228,7 +280,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Faq | SanityImageAssetReference | Service | SanityImageCrop | SanityImageHotspot | Slug | Partner | Testimonial | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = TranslationMetadata | InternationalizedArrayReference | ServiceReference | PartnerReference | TestimonialReference | FaqReference | InternationalizedArrayReferenceValue | Faq | SanityImageAssetReference | Testimonial | SanityImageCrop | SanityImageHotspot | Partner | Service | Slug | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
 // Source: ../kvc-website/sanity/queries.ts
 // Variable: TESTIMONIALS_QUERY
@@ -239,6 +291,7 @@ export type TESTIMONIALS_QUERY_RESULT = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   name: string;
   role?: string;
   company?: string;
@@ -255,13 +308,14 @@ export type TESTIMONIALS_QUERY_RESULT = Array<{
 
 // Source: ../kvc-website/sanity/queries.ts
 // Variable: PARTNERS_QUERY
-// Query: *[_type == "partner"] | order(name asc)
+// Query: *[_type == "partner" && (!defined(language) || language == $lang)] | order(name asc)
 export type PARTNERS_QUERY_RESULT = Array<{
   _id: string;
   _type: "partner";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   name: string;
   logo: {
     asset?: SanityImageAssetReference;
@@ -275,13 +329,14 @@ export type PARTNERS_QUERY_RESULT = Array<{
 
 // Source: ../kvc-website/sanity/queries.ts
 // Variable: SERVICES_QUERY
-// Query: *[_type == "service"] | order(title asc)
+// Query: *[_type == "service" && (!defined(language) || language == $lang)] | order(title asc)
 export type SERVICES_QUERY_RESULT = Array<{
   _id: string;
   _type: "service";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   title: string;
   slug: Slug;
   description: string;
@@ -323,6 +378,7 @@ export type FAQS_QUERY_RESULT = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  language?: string;
   question: string;
   answer: string;
   category: "general" | "online-course" | "study-abroad" | "work-pass";
@@ -334,8 +390,8 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"testimonial\"] | order(name asc)": TESTIMONIALS_QUERY_RESULT;
-    "*[_type == \"partner\"] | order(name asc)": PARTNERS_QUERY_RESULT;
-    "*[_type == \"service\"] | order(title asc)": SERVICES_QUERY_RESULT;
+    "*[_type == \"partner\" && (!defined(language) || language == $lang)] | order(name asc)": PARTNERS_QUERY_RESULT;
+    "*[_type == \"service\" && (!defined(language) || language == $lang)] | order(title asc)": SERVICES_QUERY_RESULT;
     "*[_type == \"faq\"] | order(order asc)": FAQS_QUERY_RESULT;
   }
 }
