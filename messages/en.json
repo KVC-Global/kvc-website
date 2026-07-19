@@ -60,6 +60,53 @@
     "touristDesc": "Simple and fast tourist visa procedures for you and your family to explore Singapore at any time.",
     "touristAlt": "Tourists exploring modern Singapore neighborhood"
   },
+  "whyProcess": {
+    "whyTagline": "Why Choose KVC Global?",
+    "whyTitle": "A Trusted Partner for Your Journey",
+    "reasons": {
+      "transparency": {
+        "title": "Transparency",
+        "description": "Clear processes, transparent costs, and a commitment to no hidden fees."
+      },
+      "expertise": {
+        "title": "High Expertise",
+        "description": "A team of highly experienced professionals who deeply understand Singapore & Vietnam systems."
+      },
+      "partners": {
+        "title": "Global Partners",
+        "description": "A prestigious network of global schools, institutions, and corporate partners."
+      },
+      "commitment": {
+        "title": "Long-term Commitment",
+        "description": "Comprehensive support before, during, and after your relocation, setup, or study journey."
+      }
+    },
+    "processTagline": "Cooperation Process",
+    "processTitle": "5 Simple Steps – A Solid Journey",
+    "processAriaLabel": "5-step cooperation process",
+    "steps": {
+      "step1": {
+        "title": "Consultation & Assessment",
+        "description": "Understand your needs, assess your background, and advise on optimal solutions."
+      },
+      "step2": {
+        "title": "Personalized Roadmap",
+        "description": "Build a customized path tailored to your specific goals."
+      },
+      "step3": {
+        "title": "Document Preparation",
+        "description": "Support in compiling and finalizing a complete, meticulous application file."
+      },
+      "step4": {
+        "title": "Submission & Tracking",
+        "description": "Submit applications and monitor processing progress throughout the journey."
+      },
+      "step5": {
+        "title": "Result & Post-arrival Support",
+        "description": "Deliver final results and provide guidance to help you settle in and thrive."
+      }
+    }
+  },
   "footer": {
     "bio": "KVC Global — Accompanying you on your journey of studying, working, business, and settling in Singapore and other countries.",
     "servicesHeading": "Services",

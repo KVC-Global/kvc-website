@@ -60,6 +60,53 @@
     "touristDesc": "Thủ tục visa du lịch đơn giản, nhanh gọn để bạn và gia đình khám phá Singapore bất cứ lúc nào.",
     "touristAlt": "Du khách khám phá khu phố Singapore hiện đại"
   },
+  "whyProcess": {
+    "whyTagline": "Vì sao chọn KVC Global?",
+    "whyTitle": "Đối tác đáng tin cậy cho hành trình của bạn",
+    "reasons": {
+      "transparency": {
+        "title": "Minh bạch",
+        "description": "Quy trình rõ ràng, chi phí minh bạch, cam kết không phát sinh chi phí ẩn."
+      },
+      "expertise": {
+        "title": "Chuyên môn cao",
+        "description": "Đội ngũ chuyên gia giàu kinh nghiệm, hiểu rõ hệ thống quy trình Singapore & Việt Nam."
+      },
+      "partners": {
+        "title": "Đối tác quốc tế",
+        "description": "Mạng lưới đối tác trường học, tổ chức & doanh nghiệp uy tín trên toàn cầu."
+      },
+      "commitment": {
+        "title": "Đồng hành lâu dài",
+        "description": "Hỗ trợ toàn diện trước – trong – sau khi hành trình định cư, thành lập & học tập."
+      }
+    },
+    "processTagline": "Quy trình đồng hành",
+    "processTitle": "5 bước đơn giản – Hành trình vững chắc",
+    "processAriaLabel": "Quy trình đồng hành 5 bước",
+    "steps": {
+      "step1": {
+        "title": "Tư vấn & đánh giá",
+        "description": "Lắng nghe nhu cầu, đánh giá hồ sơ và tư vấn giải pháp tối ưu."
+      },
+      "step2": {
+        "title": "Lên lộ trình cá nhân hóa",
+        "description": "Xây dựng lộ trình phù hợp với mục tiêu của bạn."
+      },
+      "step3": {
+        "title": "Chuẩn bị hồ sơ",
+        "description": "Hỗ trợ chuẩn bị và hoàn thiện hồ sơ chỉn chu, đầy đủ."
+      },
+      "step4": {
+        "title": "Nộp hồ sơ & theo dõi",
+        "description": "Nộp hồ sơ và theo dõi tiến độ xử lý trong suốt quá trình."
+      },
+      "step5": {
+        "title": "Nhận kết quả & hỗ trợ sau",
+        "description": "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài."
+      }
+    }
+  },
   "footer": {
     "bio": "KVC Global — Đồng hành cùng bạn trên hành trình học tập, làm việc, kinh doanh và định cư tại Singapore và nhiều quốc gia khác.",
     "servicesHeading": "Dịch vụ",

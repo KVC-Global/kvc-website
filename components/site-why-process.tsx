@@ -12,6 +12,7 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { getDictionaryServer } from "@/lib/i18n-server"
 
 const ACCENT = "var(--color-secondary)"
 
@@ -21,67 +22,11 @@ type Reason = {
   description: string
 }
 
-const REASONS: ReadonlyArray<Reason> = [
-  {
-    icon: Shield,
-    title: "Mình bạch",
-    description:
-      "Quy trình rõ ràng, chi phí minh bạch, cam kết không phát sinh chi phí ẩn.",
-  },
-  {
-    icon: Award,
-    title: "Chuyên môn cao",
-    description:
-      "Đội ngũ chuyên gia giàu kinh nghiệm, hiểu rõ hệ thống quy trình Singapore & Việt Nam.",
-  },
-  {
-    icon: Globe,
-    title: "Đối tác quốc tế",
-    description:
-      "Mạng lưới đối tác trường học, tổ chức & doanh nghiệp uy tín trên toàn cầu.",
-  },
-  {
-    icon: Handshake,
-    title: "Đồng hành lâu dài",
-    description:
-      "Hỗ trợ toàn diện trước – trong – sau khi hành trình định cư, thành lập & học tập.",
-  },
-] as const
-
 type Step = {
   icon: typeof MessageCircle
   title: string
   description: string
 }
-
-const STEPS: ReadonlyArray<Step> = [
-  {
-    icon: MessageCircle,
-    title: "Tư vấn & đánh giá",
-    description:
-      "Lắng nghe nhu cầu, đánh giá hồ sơ và tư vấn giải pháp tối ưu.",
-  },
-  {
-    icon: ClipboardList,
-    title: "Lên lộ trình cá nhân hóa",
-    description: "Xây dựng lộ trình phù hợp với mục tiêu của bạn.",
-  },
-  {
-    icon: FolderOpen,
-    title: "Chuẩn bị hồ sơ",
-    description: "Hỗ trợ chuẩn bị và hoàn thiện hồ sơ chỉn chu, đầy đủ.",
-  },
-  {
-    icon: Send,
-    title: "Nộp hồ sơ & theo dõi",
-    description: "Nộp hồ sơ và theo dõi tiến độ xử lý trong suốt quá trình.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Nhận kết quả & hỗ trợ sau",
-    description: "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài.",
-  },
-] as const
 
 function ReasonItem({ reason }: { reason: Reason }) {
   const Icon = reason.icon
@@ -127,7 +72,60 @@ function StepItem({ step, index }: { step: Step; index: number }) {
   )
 }
 
-export function SiteWhyProcess({ className }: { className?: string }) {
+export async function SiteWhyProcess({ className }: { className?: string }) {
+  const t = await getDictionaryServer()
+
+  const reasons: ReadonlyArray<Reason> = [
+    {
+      icon: Shield,
+      title: t.whyProcess.reasons.transparency.title,
+      description: t.whyProcess.reasons.transparency.description,
+    },
+    {
+      icon: Award,
+      title: t.whyProcess.reasons.expertise.title,
+      description: t.whyProcess.reasons.expertise.description,
+    },
+    {
+      icon: Globe,
+      title: t.whyProcess.reasons.partners.title,
+      description: t.whyProcess.reasons.partners.description,
+    },
+    {
+      icon: Handshake,
+      title: t.whyProcess.reasons.commitment.title,
+      description: t.whyProcess.reasons.commitment.description,
+    },
+  ]
+
+  const steps: ReadonlyArray<Step> = [
+    {
+      icon: MessageCircle,
+      title: t.whyProcess.steps.step1.title,
+      description: t.whyProcess.steps.step1.description,
+    },
+    {
+      icon: ClipboardList,
+      title: t.whyProcess.steps.step2.title,
+      description: t.whyProcess.steps.step2.description,
+    },
+    {
+      icon: FolderOpen,
+      title: t.whyProcess.steps.step3.title,
+      description: t.whyProcess.steps.step3.description,
+    },
+    {
+      icon: Send,
+      title: t.whyProcess.steps.step4.title,
+      description: t.whyProcess.steps.step4.description,
+    },
+    {
+      icon: BadgeCheck,
+      title: t.whyProcess.steps.step5.title,
+      description: t.whyProcess.steps.step5.description,
+    },
+  ]
+
   return (
     <section
       aria-labelledby="why-process-heading"
@@ -136,13 +134,13 @@ export function SiteWhyProcess({ className }: { className?: string }) {
       <Container>
         <div className="text-center">
           <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-            Vì sao chọn KVC Global?
+            {t.whyProcess.whyTagline}
           </p>
           <h2
             id="why-process-heading"
             className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]"
           >
-            Đối tác đáng tin cậy cho hành trình của bạn
+            {t.whyProcess.whyTitle}
           </h2>
           <span
             aria-hidden="true"
@@ -151,17 +149,17 @@ export function SiteWhyProcess({ className }: { className?: string }) {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {REASONS.map((reason) => (
+          {reasons.map((reason) => (
             <ReasonItem key={reason.title} reason={reason} />
           ))}
         </div>
 
         <div className="mt-20 text-center sm:mt-24">
           <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-            Quy trình đồng hành
+            {t.whyProcess.processTagline}
           </p>
           <h3 className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]">
-            5 bước đơn giản – Hành trình vững chắc
+            {t.whyProcess.processTitle}
           </h3>
           <span
             aria-hidden="true"
@@ -172,13 +170,13 @@ export function SiteWhyProcess({ className }: { className?: string }) {
         <div
           className="relative mt-16 grid grid-cols-1 gap-12 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6"
           role="list"
-          aria-label="Quy trình đồng hành 5 bước"
+          aria-label={t.whyProcess.processAriaLabel}
         >
           <div
             aria-hidden="true"
             className="pointer-events-none absolute top-[35px] right-[10%] left-[10%] hidden h-px bg-secondary lg:block"
           />
-          {STEPS.map((step, index) => (
+          {steps.map((step, index) => (
             <div key={step.title} role="listitem">
               <StepItem step={step} index={index} />
             </div>
