@@ -101,9 +101,9 @@ function OfficeCard({
 
   return (
     <div
-          className={`flex flex-col overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black/5 lg:flex-row ${
-            isReversed ? "lg:flex-row-reverse" : ""
-          }`}
+      className={`flex flex-col overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black/5 lg:flex-row ${
+        isReversed ? "lg:flex-row-reverse" : ""
+      }`}
     >
       {/* Image side */}
       <div className="relative h-64 w-full shrink-0 lg:h-auto lg:w-2/5">
@@ -274,7 +274,7 @@ export function ContactPage() {
       <section
         id="gui-yeu-cau"
         aria-labelledby="contact-form-heading"
-        className="w-full border-b border-border bg-white"
+        className="w-full bg-white"
       >
         <Container className="py-16 sm:py-20 lg:py-24">
           {/* Grid: contact info (left) + form (right) */}
@@ -319,36 +319,36 @@ export function ContactPage() {
       </section>
 
       {/* ═══════════ Section 2: Offices + Maps ═══════════ */}
-          <section
-            aria-labelledby="offices-heading"
-            className="w-full bg-white py-10 sm:py-12 lg:py-16"
-          >
-            <Container>
-              <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-                <div className="flex flex-col items-center text-center">
-                  <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-                    Văn phòng
-                  </p>
-                  <h2
-                    id="offices-heading"
-                    className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
-                  >
-                    Gần bạn hơn ở mỗi điểm đến
-                  </h2>
-                  <span
-                    aria-hidden="true"
-                    className="mt-4 h-1 w-12 rounded-sm bg-brand-gold"
-                  />
-                </div>
+      <section
+        aria-labelledby="offices-heading"
+        className="w-full bg-white py-10 sm:py-12 lg:py-16"
+      >
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+            <div className="flex flex-col items-center text-center">
+              <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
+                Văn phòng
+              </p>
+              <h2
+                id="offices-heading"
+                className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
+              >
+                Gần bạn hơn ở mỗi điểm đến
+              </h2>
+              <span
+                aria-hidden="true"
+                className="mt-4 h-1 w-12 rounded-sm bg-brand-gold"
+              />
+            </div>
 
-                <div className="mt-12 space-y-8 lg:mt-14">
-                  {OFFICES.map((office, i) => (
-                    <OfficeCard key={office.country} office={office} index={i} />
-                  ))}
-                </div>
-              </div>
-            </Container>
-          </section>
+            <div className="mt-12 space-y-8 lg:mt-14">
+              {OFFICES.map((office, i) => (
+                <OfficeCard key={office.country} office={office} index={i} />
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
     </div>
   )
 }
