@@ -92,48 +92,36 @@ function OfficeInfoCard({ office }: { office: (typeof OFFICES)[number] }) {
 /* ───────────────── Office card for section 2 ───────────────── */
 function OfficeCard({
   office,
-  index,
+  reverse,
 }: {
   office: (typeof OFFICES)[number]
-  index: number
+  reverse: boolean
 }) {
-  const isReversed = index % 2 !== 0
+  const phoneHref = office.phone.replace(/[^\d+]/g, "")
+  const detailsPosition = reverse ? "lg:col-start-8" : "lg:col-start-1"
+  const imagePosition = reverse ? "lg:col-start-1" : "lg:col-start-6"
 
   return (
-    <div
-      className={`flex flex-col overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black/5 lg:flex-row ${
-        isReversed ? "lg:flex-row-reverse" : ""
-      }`}
-    >
-      {/* Image side */}
-      <div className="relative h-64 w-full shrink-0 lg:h-auto lg:w-2/5">
-        <Image
-          src={office.image}
-          alt={`Văn phòng KVC Global tại ${office.country}`}
-          fill
-          sizes="(max-width: 1024px) 100vw, 40vw"
-          className="object-cover"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"
-        />
-        <div className="absolute bottom-4 left-4">
-          <span className="inline-block rounded-sm bg-brand-gold px-3 py-1 font-heading text-xs font-bold text-white">
-            {office.country}
-          </span>
-        </div>
-      </div>
-
-      {/* Details + map side */}
-      <div className="flex flex-1 flex-col p-6 sm:p-8">
-        <h3 className="font-heading text-lg font-bold text-brand-blue">
+    <article className="grid gap-4 lg:grid-cols-12 lg:grid-rows-[auto_240px] lg:gap-5">
+      {/* Details card */}
+      <div
+        className={`rounded-lg border border-border bg-white p-6 shadow-sm sm:p-8 lg:col-span-5 ${detailsPosition}`}
+      >
+        <p className="font-heading text-xs font-bold tracking-[0.18em] text-brand-gold uppercase">
+          {office.country}
+        </p>
+        <h3 className="mt-2 font-heading text-xl font-bold text-brand-blue sm:text-2xl">
           {office.role}
         </h3>
-        <ul className="mt-5 space-y-3">
+        <p className="mt-3 max-w-md font-body text-sm leading-relaxed text-brand-dark/65">
+          Kết nối trực tiếp với đội ngũ KVC Global để được hỗ trợ tại văn phòng
+          gần bạn.
+        </p>
+
+        <ul className="mt-6 space-y-4">
           <li className="flex items-start gap-3">
             <MapPin
-              className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold"
+              className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold"
               strokeWidth={1.5}
             />
             <span className="font-body text-sm text-brand-dark/80">
@@ -142,16 +130,19 @@ function OfficeCard({
           </li>
           <li className="flex items-center gap-3">
             <Phone
-              className="h-4 w-4 shrink-0 text-brand-gold"
+              className="h-5 w-5 shrink-0 text-brand-gold"
               strokeWidth={1.5}
             />
-            <span className="font-body text-sm text-brand-dark/80">
+            <a
+              href={`tel:${phoneHref}`}
+              className="font-body text-sm text-brand-blue underline underline-offset-2 transition-colors hover:text-brand-gold"
+            >
               {office.phone}
-            </span>
+            </a>
           </li>
           <li className="flex items-center gap-3">
             <Mail
-              className="h-4 w-4 shrink-0 text-brand-gold"
+              className="h-5 w-5 shrink-0 text-brand-gold"
               strokeWidth={1.5}
             />
             <a
@@ -163,7 +154,7 @@ function OfficeCard({
           </li>
           <li className="flex items-center gap-3">
             <Clock
-              className="h-4 w-4 shrink-0 text-brand-gold"
+              className="h-5 w-5 shrink-0 text-brand-gold"
               strokeWidth={1.5}
             />
             <span className="font-body text-sm text-brand-dark/80">
@@ -171,33 +162,59 @@ function OfficeCard({
             </span>
           </li>
         </ul>
+      </div>
 
-        {/* Map embed */}
-        <div className="mt-6 overflow-hidden rounded-sm">
-          <iframe
-            src={`https://www.google.com/maps?q=${office.mapQ}&output=embed&z=15`}
-            width="100%"
-            height="200"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title={`Bản đồ ${office.role}`}
-            className="rounded-sm"
-          />
-        </div>
-
+      {/* Map card */}
+      <div
+        className={`relative min-h-60 overflow-hidden rounded-lg border border-border bg-white shadow-sm lg:col-span-5 lg:row-start-2 ${detailsPosition}`}
+      >
+        <iframe
+          src={`https://www.google.com/maps?q=${office.mapQ}&output=embed&z=15`}
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title={`Bản đồ ${office.role}`}
+          className="absolute inset-0 h-full w-full"
+        />
         <a
           href={office.mapUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group mt-3 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-brand-blue transition-colors hover:text-brand-gold"
+          className="group absolute right-3 bottom-3 inline-flex items-center gap-1.5 rounded-sm bg-white px-4 py-2.5 text-xs font-semibold text-brand-blue shadow-md ring-1 ring-black/5 transition-colors hover:text-brand-gold"
         >
-          Xem trên Google Maps
-          <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          Mở Google Maps
+          <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
         </a>
       </div>
-    </div>
+
+      {/* Image card */}
+      <div
+        className={`relative min-h-80 overflow-hidden rounded-lg bg-brand-blue shadow-sm lg:col-span-7 lg:row-span-2 lg:row-start-1 lg:min-h-[560px] ${imagePosition}`}
+      >
+        <Image
+          src={office.image}
+          alt={`Văn phòng KVC Global tại ${office.country}`}
+          fill
+          sizes="(max-width: 1024px) 100vw, 58vw"
+          className="object-cover"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-brand-blue/55 via-transparent to-transparent"
+        />
+        <div className="absolute right-5 bottom-5 left-5 flex items-end justify-between gap-4">
+          <p className="font-heading text-sm font-semibold text-white">
+            KVC Global · {office.country}
+          </p>
+          <span className="rounded-sm bg-brand-gold px-3 py-1.5 font-heading text-xs font-bold text-white">
+            {office.country}
+          </span>
+        </div>
+      </div>
+    </article>
   )
 }
 
@@ -342,8 +359,12 @@ export function ContactPage() {
             </div>
 
             <div className="mt-12 space-y-8 lg:mt-14">
-              {OFFICES.map((office, i) => (
-                <OfficeCard key={office.country} office={office} index={i} />
+              {OFFICES.map((office, index) => (
+                <OfficeCard
+                  key={office.country}
+                  office={office}
+                  reverse={index % 2 !== 0}
+                />
               ))}
             </div>
           </div>
