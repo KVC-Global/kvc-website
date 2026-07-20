@@ -3,6 +3,7 @@ import { Clock, Coins, FileCheck, GraduationCap } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import Image from "next/image"
 
 const HERO_IMAGE = "/images/study-abroad-hero.jpg"
 
@@ -17,13 +18,26 @@ export function StudyAbroadHero({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="study-hero-heading"
-      className={cn("relative w-full overflow-hidden bg-cover bg-center", className)}
-      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+      className={cn("relative w-full border-b border-border bg-white", className)}
     >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-white from-50% to-transparent to-100%"
-      />
+      {/* Desktop Background Image (Right side) */}
+      <div className="absolute inset-y-0 right-0 z-0 hidden w-full overflow-hidden lg:block lg:w-[52%]">
+        <Image
+          src={HERO_IMAGE}
+          alt=""
+          role="presentation"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+          style={{ transform: "scaleX(-1)" }}
+        />
+        {/* Soft blend transition from white background (left) to image */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 w-30 bg-gradient-to-r from-white via-white/50 to-transparent"
+        />
+      </div>
 
       <Container className="relative flex min-h-[600px] flex-col justify-center pt-28 pb-20 sm:pt-32 sm:pb-24 md:min-h-[640px] md:pt-36 md:pb-0">
         <nav
@@ -32,14 +46,14 @@ export function StudyAbroadHero({ className }: { className?: string }) {
         >
           <Link
             href="/"
-            className="transition-colors duration-200 hover:text-foreground"
+            className="hover:text-foreground transition-colors duration-200"
           >
             Trang chủ
           </Link>
           <span className="select-none text-muted-foreground/60">&gt;</span>
           <Link
             href="/du-hoc"
-            className="transition-colors duration-200 hover:text-foreground"
+            className="text-muted-foreground/80"
           >
             Du học
           </Link>
