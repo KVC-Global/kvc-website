@@ -215,13 +215,13 @@ export function AboutPage() {
 
               <Link
                 href="#cau-chuyen"
-                className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-blue-mid bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:text-white hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid"
+                className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 Tìm hiểu thêm
                 <svg
                   viewBox="0 0 24 24"
                   aria-hidden="true"
-                  className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 text-brand-blue"
+                  className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2.5"
@@ -247,30 +247,91 @@ export function AboutPage() {
             viewport={inView}
           >
             <Container>
-              <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md bg-border ring-1 ring-black/5 lg:grid-cols-4">
-                {HERO_STATS.map((stat) => {
-                  const Icon = stat.icon
-                  return (
-                    <motion.div
-                      key={stat.label}
-                      variants={fadeUp}
-                      className="group flex items-center justify-center gap-3 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 lg:h-[160px] lg:py-7"
-                    >
-                      <Icon
-                        className="h-7 w-7 shrink-0 text-brand-gold-light transition-transform duration-300 ease-out sm:h-9 sm:w-9"
-                        strokeWidth={1.75}
-                      />
-                      <div className="flex min-w-0 flex-col">
-                        <div className="font-display text-xl font-bold text-primary sm:text-3xl">
-                          {stat.value}
+              <div className="relative overflow-hidden rounded-2xl bg-white shadow-[0_24px_48px_-16px_rgba(15,27,45,0.25),0_8px_16px_-8px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:rounded-3xl">
+                <div className="grid grid-cols-2 md:grid-cols-4">
+                  {HERO_STATS.map((stat) => {
+                    const Icon = stat.icon
+                    return (
+                      <motion.div
+                        key={stat.label}
+                        variants={fadeUp}
+                        className="relative flex items-center justify-center gap-3 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 md:min-h-[150px] md:py-7"
+                      >
+                        <Icon
+                          className="h-10 w-10 shrink-0 text-brand-gold-light sm:h-11 sm:w-11"
+                          strokeWidth={1.75}
+                        />
+                        <div className="flex min-w-0 flex-col md:gap-1.5">
+                          <div className="font-display text-xl font-bold text-primary sm:text-3xl">
+                            {stat.value}
+                          </div>
+                          <div className="truncate font-sans text-sm font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
+                            {stat.label}
+                          </div>
                         </div>
-                        <div className="truncate font-sans text-[11px] font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
-                          {stat.label}
-                        </div>
-                      </div>
-                    </motion.div>
-                  )
-                })}
+                      </motion.div>
+                    )
+                  })}
+                </div>
+
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 hidden md:block"
+                >
+                  {[25, 50, 75].map((left) => (
+                    <span
+                      key={left}
+                      className="absolute"
+                      style={{
+                        backgroundColor: "#c8913c",
+                        height: 48,
+                        left: `${left}%`,
+                        top: "50%",
+                        transform: "translate(-50%, -50%)",
+                        width: 2,
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 md:hidden"
+                >
+                  <span
+                    className="absolute"
+                    style={{
+                      backgroundColor: "#d6b46d",
+                      height: 40,
+                      left: "50%",
+                      top: "25%",
+                      transform: "translate(-50%, -50%)",
+                      width: 1,
+                    }}
+                  />
+                  <span
+                    className="absolute"
+                    style={{
+                      backgroundColor: "#d6b46d",
+                      height: 40,
+                      left: "50%",
+                      top: "75%",
+                      transform: "translate(-50%, -50%)",
+                      width: 1,
+                    }}
+                  />
+                  <span
+                    className="absolute"
+                    style={{
+                      backgroundColor: "#d6b46d",
+                      height: 1,
+                      left: "50%",
+                      top: "50%",
+                      transform: "translate(-50%, -50%)",
+                      width: 40,
+                    }}
+                  />
+                </div>
               </div>
             </Container>
           </motion.div>
@@ -460,7 +521,7 @@ export function AboutPage() {
                   className="flex flex-col items-start gap-5 rounded-lg bg-white p-8 shadow-sm ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md"
                 >
                   <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-brand-blue-mid">
-                    <Icon className="h-9 w-9 text-brand-gold-light" strokeWidth={1.5} />
+                    <Icon className="h-9 w-9 text-secondary" strokeWidth={1.5} />
                   </div>
                   <div className="flex flex-col">
                     <h3 className="font-heading text-lg font-bold text-brand-blue">
