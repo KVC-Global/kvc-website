@@ -182,7 +182,7 @@ export function WorkPassHero({ className }: { className?: string }) {
         </div>
 
         {/* Stats Grid Container */}
-        <div className="relative z-20 mt-12 w-full lg:mt-16 xl:mt-20">
+        <div className="relative z-20 mt-10 w-full sm:mt-12 lg:mt-16 xl:mt-20">
           <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[20px] border border-border bg-border shadow-[0_12px_40px_-15px_rgba(15,27,45,0.12)] ring-1 ring-black/5 md:grid-cols-4 lg:w-fit">
             {STATS.map((stat, idx) => {
               return (
