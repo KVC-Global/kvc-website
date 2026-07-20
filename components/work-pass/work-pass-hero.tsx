@@ -83,7 +83,7 @@ export function WorkPassHero({ className }: { className?: string }) {
       </div>
 
       {/* Main Content Container */}
-      <Container className="relative z-10 py-8 md:py-16 lg:py-20">
+      <Container className="relative z-10 pt-28 pb-20 sm:pt-32 sm:pb-24 md:pt-36 md:pb-28">
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
