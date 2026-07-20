@@ -31,7 +31,7 @@ export function WorkPassRequirements() {
         </h2>
         <span
           aria-hidden="true"
-          className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary"
+          className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold"
         />
       </div>
 
