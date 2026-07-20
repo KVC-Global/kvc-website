@@ -2,43 +2,66 @@ import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { urlFor } from "@/sanity/image"
+import { getDictionaryServer } from "@/lib/i18n-server"
 
-type Partner = {
+export type SanityPartner = {
   name: string
-  subtitle?: string
+  logo?: any
+  website?: string
 }
 
-const PARTNERS: ReadonlyArray<Partner> = [
-  { name: "NUS", subtitle: "National University of Singapore" },
-  { name: "NTU", subtitle: "Nanyang Technological University" },
-  { name: "SMU", subtitle: "Singapore Management University" },
-  { name: "Kaplan", subtitle: "Kaplan Singapore" },
-  { name: "ACRA", subtitle: "Accounting & Corporate Regulatory Authority" },
-  { name: "INSEAD", subtitle: "The Business School for the World" },
-  { name: "PSB", subtitle: "PSB Academy" },
-  { name: "KVC Global", subtitle: "Your Future, Our Mission" },
+const PARTNERS: ReadonlyArray<SanityPartner> = [
+  { name: "NUS" },
+  { name: "NTU" },
+  { name: "SMU" },
+  { name: "Kaplan" },
+  { name: "ACRA" },
+  { name: "INSEAD" },
+  { name: "PSB" },
+  { name: "KVC Global" },
 ]
 
-function PartnerCard({ partner }: { partner: Partner }) {
+function PartnerCard({ partner }: { partner: SanityPartner }) {
+  const logoUrl = partner.logo ? urlFor(partner.logo).url() : "/images/SMU-Logo.png"
   return (
     <div
       className={cn(
         "group flex h-[160px] w-[280px] shrink-0 items-center justify-center rounded-xl px-4"
       )}
     >
-      <Image
-        src="/images/SMU-Logo.png"
-        alt={partner.name}
-        width={200}
-        height={200}
-        className="h-40 w-auto object-contain"
-      />
+      {partner.website ? (
+        <a href={partner.website} target="_blank" rel="noopener noreferrer">
+          <Image
+            src={logoUrl}
+            alt={partner.name}
+            width={200}
+            height={200}
+            className="h-40 w-auto object-contain transition-opacity hover:opacity-85"
+          />
+        </a>
+      ) : (
+        <Image
+          src={logoUrl}
+          alt={partner.name}
+          width={200}
+          height={200}
+          className="h-40 w-auto object-contain"
+        />
+      )}
     </div>
   )
 }
 
-export function SitePartners({ className }: { className?: string }) {
-  const track = [...PARTNERS, ...PARTNERS]
+export async function SitePartners({
+  className,
+  partners = PARTNERS,
+}: {
+  className?: string
+  partners?: ReadonlyArray<SanityPartner>
+}) {
+  const t = await getDictionaryServer()
+  const track = [...partners, ...partners]
 
   return (
     <section
@@ -51,7 +74,7 @@ export function SitePartners({ className }: { className?: string }) {
             id="partners-heading"
             className="mt-1 font-display text-base font-bold tracking-[0.18em] text-primary uppercase"
           >
-            Đối tác &amp; Trường liên kết hàng đầu
+            {t.partners.title}
           </h2>
         </div>
       </Container>
@@ -70,7 +93,7 @@ export function SitePartners({ className }: { className?: string }) {
             "flex w-max gap-6 will-change-transform motion-reduce:animate-none",
             "animate-marquee hover:[animation-play-state:paused]"
           )}
-          aria-label="Đối tác & trường liên kết"
+          aria-label={t.partners.ariaLabel}
         >
           {track.map((partner, index) => (
             <PartnerCard key={`${partner.name}-${index}`} partner={partner} />
