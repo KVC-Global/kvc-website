@@ -13,7 +13,7 @@ import { StudyAbroadServices } from "./study-abroad-services"
 
 export function StudyAbroadDetails({ className }: { className?: string }) {
   return (
-    <div className="w-full bg-brand-light py-16 md:py-24">
+    <div className="w-full bg-brand-light pt-24 pb-16 md:pt-32 md:pb-24">
       <Container className={className}>
         <StudyAbroadIntro />
         <StudyAbroadWhy />

@@ -31,7 +31,7 @@ export function WorkPassReview() {
     <section aria-label="Đánh giá và Case Study" className="mt-8 md:mt-8 w-full">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
         {/* Column 1: Testimonial Card */}
-        <div className="relative flex flex-col sm:flex-row gap-6 items-center sm:items-start border border-brand-blue/10 bg-brand-blue text-white rounded-[20px] p-6 md:p-8 shadow-[0_12px_40px_-15px_rgba(10,37,64,0.35)] overflow-hidden transition-all duration-300 hover:shadow-[0_20px_50px_-15px_rgba(10,37,64,0.45)]">
+        <div className="relative flex flex-col sm:flex-row gap-6 items-center sm:items-start border border-white/10 bg-brand-blue-mid text-white rounded-[20px] p-6 md:p-8 shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 overflow-hidden transition-all duration-300 hover:shadow-[0_28px_50px_-22px_rgba(0,0,0,0.6)]">
           {/* Quote mark decoration background */}
           <span
             aria-hidden="true"
@@ -42,21 +42,19 @@ export function WorkPassReview() {
 
           {/* Left Avatar Section */}
           <div className="relative shrink-0 flex flex-col items-center">
-            <div className="relative h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full border-2 border-brand-gold/40 shadow-lg bg-brand-light p-1">
-              <div className="relative h-full w-full overflow-hidden rounded-full">
-                <Image
-                  src="/images/student-avatar-2.jpg"
-                  alt="Nguyễn Hoàng Nam"
-                  fill
-                  sizes="112px"
-                  className="object-cover object-center"
-                />
-              </div>
+            <div className="relative h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full ring-2 ring-secondary/40 shadow-lg bg-brand-light">
+              <Image
+                src="/images/student-avatar-2.jpg"
+                alt="Nguyễn Hoàng Nam"
+                fill
+                sizes="112px"
+                className="object-cover object-center"
+              />
             </div>
             {/* Soft decorative badge underneath avatar */}
             <div className="mt-3 flex gap-0.5" aria-hidden="true">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Star key={i} className="h-3 w-3 fill-brand-gold text-brand-gold" />
+                <Star key={i} className="h-3 w-3 text-[#F8BC62] fill-current" strokeWidth={0} />
               ))}
             </div>
           </div>

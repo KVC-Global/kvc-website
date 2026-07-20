@@ -49,7 +49,7 @@ export function StudyAbroadFaqs() {
         >
           Câu hỏi thường gặp
         </h2>
-        <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
+        <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold mx-0" />
       </div>
 
       <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 mt-8">

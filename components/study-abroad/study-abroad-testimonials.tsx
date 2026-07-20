@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const TESTIMONIALS = [
@@ -89,7 +89,7 @@ export function StudyAbroadTestimonials() {
         >
           Học viên nói gì về Diploma 6+6 tại KVC Global?
         </h2>
-        <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
+        <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
       </div>
 
       <div className="relative group/nav px-0 md:px-8">
@@ -109,7 +109,7 @@ export function StudyAbroadTestimonials() {
           {TESTIMONIALS.map((testi, idx) => (
             <div
               key={idx}
-              className="snap-start shrink-0 w-[90%] sm:w-[46%] lg:w-[31.5%] border border-border bg-white rounded-lg p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] transition-all duration-300 relative flex flex-col justify-between overflow-hidden min-h-[220px]"
+              className="snap-start shrink-0 w-[90%] sm:w-[46%] lg:w-[31.5%] border border-border/60 bg-white rounded-lg p-6 shadow-[0_18px_40px_-22px_rgba(0,0,0,0.15)] hover:shadow-[0_28px_50px_-22px_rgba(0,0,0,0.25)] transition-all duration-300 relative flex flex-col justify-between overflow-hidden min-h-[220px]"
             >
               <span
                 aria-hidden="true"
@@ -119,7 +119,7 @@ export function StudyAbroadTestimonials() {
               </span>
 
               <div className="flex gap-4 relative z-10">
-                <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full border border-border/80 shadow-xs bg-brand-light">
+                <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/40 shadow-xs bg-brand-light">
                   <Image
                     src={testi.avatar}
                     alt={testi.name}
@@ -133,12 +133,12 @@ export function StudyAbroadTestimonials() {
                   <div>
                     <div className="flex gap-0.5 mb-2.5" aria-label={`Đánh giá ${testi.rating} sao`}>
                       {Array.from({ length: testi.rating }).map((_, i) => (
-                        <span key={i} className="text-amber-400 text-[14px]">★</span>
+                        <Star key={i} className="h-3.5 w-3.5 text-[#F8BC62] fill-current" strokeWidth={0} />
                       ))}
                     </div>
 
                     <blockquote className="font-body text-[13px] sm:text-[14px] leading-relaxed text-brand-dark/85 mb-4 italic">
-                      "{testi.quote}"
+                      &ldquo;{testi.quote}&rdquo;
                     </blockquote>
                   </div>
 
@@ -182,7 +182,7 @@ export function StudyAbroadTestimonials() {
               }}
               className={cn(
                 "h-2 rounded-full transition-all duration-300 cursor-pointer",
-                isActive ? "w-6 bg-secondary" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/60"
+                isActive ? "w-8 bg-brand-gold" : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
               )}
               aria-label={`Go to slide ${idx + 1}`}
             />

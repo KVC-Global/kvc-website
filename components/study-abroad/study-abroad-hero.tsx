@@ -3,6 +3,7 @@ import { Clock, Coins, FileCheck, GraduationCap } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import Image from "next/image"
 
 const HERO_IMAGE = "/images/study-abroad-hero.jpg"
 
@@ -17,13 +18,26 @@ export function StudyAbroadHero({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="study-hero-heading"
-      className={cn("relative w-full overflow-hidden bg-cover bg-center", className)}
-      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+      className={cn("relative w-full border-b border-border bg-white", className)}
     >
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-r from-white from-50% to-transparent to-100%"
-      />
+      {/* Desktop Background Image (Right side) */}
+      <div className="absolute inset-y-0 right-0 z-0 hidden w-full overflow-hidden lg:block lg:w-[52%]">
+        <Image
+          src={HERO_IMAGE}
+          alt=""
+          role="presentation"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+          style={{ transform: "scaleX(-1)" }}
+        />
+        {/* Soft blend transition from white background (left) to image */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 w-30 bg-gradient-to-r from-white via-white/50 to-transparent"
+        />
+      </div>
 
       <Container className="relative flex min-h-[600px] flex-col justify-center pt-28 pb-20 sm:pt-32 sm:pb-24 md:min-h-[640px] md:pt-36 md:pb-0">
         <nav
@@ -32,14 +46,14 @@ export function StudyAbroadHero({ className }: { className?: string }) {
         >
           <Link
             href="/"
-            className="transition-colors duration-200 hover:text-foreground"
+            className="hover:text-foreground transition-colors duration-200"
           >
             Trang chủ
           </Link>
           <span className="select-none text-muted-foreground/60">&gt;</span>
           <Link
             href="/du-hoc"
-            className="transition-colors duration-200 hover:text-foreground"
+            className="text-muted-foreground/80"
           >
             Du học
           </Link>
@@ -50,7 +64,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
         </nav>
 
         <div className="max-w-2xl">
-          <span className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-secondary uppercase sm:text-sm">
+          <span className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
             DIPLOMA 6+6 TẠI SINGAPORE
           </span>
 
@@ -72,7 +86,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
           <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
             <Link
               href="#dang-ky"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-secondary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
               Đăng ký tư vấn miễn phí
               <svg
@@ -91,13 +105,13 @@ export function StudyAbroadHero({ className }: { className?: string }) {
 
             <Link
               href="#chuong-trinh"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-secondary bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-light hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
               Tìm hiểu chương trình
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
-                className="h-4 w-4 text-brand-blue transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"

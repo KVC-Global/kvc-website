@@ -14,7 +14,7 @@ export function StudyAbroadRequirements() {
   return (
     <section
       aria-labelledby="reqs-heading"
-      className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-6"
+      className="bg-white border border-border/60 rounded-lg p-6 md:p-8 shadow-[0_18px_40px_-22px_rgba(15,27,45,0.15)] flex flex-col justify-between overflow-hidden relative lg:col-span-6"
     >
       <div className="flex flex-col md:flex-row gap-6 h-full">
         <div className="flex-1 z-10 flex flex-col justify-between gap-6 lg:max-w-[62%]">
@@ -26,7 +26,7 @@ export function StudyAbroadRequirements() {
               >
                 Điều kiện tham gia
               </h2>
-              <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-secondary mx-auto md:mx-0" />
+              <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold mx-auto md:mx-0" />
             </div>
 
             <ul className="space-y-4" aria-label="Điều kiện tham gia">
@@ -43,8 +43,8 @@ export function StudyAbroadRequirements() {
             </ul>
           </div>
 
-          <div className="bg-[#FFF8EE] border border-[#FFE7C4] rounded-md p-4 flex gap-3 items-start mt-6">
-            <Lightbulb className="h-5 w-5 text-secondary shrink-0 mt-0.5" strokeWidth={2} />
+          <div className="bg-brand-light border border-border/60 rounded-md p-4 flex gap-3 items-start mt-6">
+            <Lightbulb className="h-5 w-5 text-brand-gold shrink-0 mt-0.5" strokeWidth={2} />
             <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal">
               KVC Global sẽ tư vấn chi tiết điều kiện đầu vào phù hợp với từng trường và ngành học học viên quan tâm.
             </p>
@@ -74,7 +74,7 @@ export function StudyAbroadRequirements() {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white via-white/40 to-transparent lg:w-28"
+          className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white via-white/80 to-transparent lg:w-28"
         />
       </div>
     </section>

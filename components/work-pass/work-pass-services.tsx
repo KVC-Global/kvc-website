@@ -42,7 +42,7 @@ export function WorkPassServices() {
         </h2>
         <span
           aria-hidden="true"
-          className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary"
+          className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold"
         />
       </div>
 
@@ -53,16 +53,19 @@ export function WorkPassServices() {
             <Link
               key={idx}
               href={srv.href}
-              className="group flex items-center gap-4 border border-border bg-white rounded-[20px] p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] transition-all duration-300 cursor-pointer"
+              className="group flex cursor-pointer items-center gap-4 rounded-lg border border-border/60 bg-white p-5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)]"
             >
               {/* Icon Frame */}
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-blue/5 group-hover:bg-brand-blue/10 transition-colors duration-300">
-                <Icon className="h-6 w-6 text-brand-blue" strokeWidth={1.8} />
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid transition-colors duration-300 group-hover:bg-brand-blue">
+                <Icon
+                  className="h-5 w-5 text-brand-gold-light transition-transform duration-300 group-hover:scale-105"
+                  strokeWidth={1.75}
+                />
               </div>
 
               {/* Copy & Link */}
               <div className="flex flex-col">
-                <h3 className="font-heading text-sm sm:text-base font-bold text-brand-blue group-hover:text-secondary transition-colors duration-200 leading-snug">
+                <h3 className="font-heading text-sm sm:text-base font-bold text-brand-blue group-hover:text-brand-gold transition-colors duration-200 leading-snug">
                   {srv.title}
                 </h3>
                 <span className="font-heading text-xs font-bold text-brand-gold mt-1 inline-flex items-center gap-1">

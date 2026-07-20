@@ -54,7 +54,7 @@ export function WorkPassProcess() {
         </h2>
         <span
           aria-hidden="true"
-          className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary"
+          className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold"
         />
       </div>
 
@@ -63,10 +63,10 @@ export function WorkPassProcess() {
         role="list"
         aria-label="Quy trình thực hiện TEP 6 bước"
       >
-        {/* Dashed Connecting Line behind the circles on large screens */}
+        {/* Connecting Line behind the circles on large screens */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute top-[36px] right-[8%] left-[8%] hidden h-px border-t-2 border-dashed border-brand-gold/30 lg:block"
+          className="pointer-events-none absolute top-[36px] right-[8%] left-[8%] hidden h-px bg-secondary lg:block"
         />
 
         {STEPS.map((step, index) => {
@@ -79,13 +79,13 @@ export function WorkPassProcess() {
               className="relative flex flex-col items-center text-center group"
             >
               {/* Step Circle */}
-              <div className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-blue shadow-[0_12px_28px_-12px_rgba(10,37,64,0.45)] transition-transform duration-300 group-hover:scale-105">
-                <Icon className="h-7 w-7 text-brand-gold" strokeWidth={1.6} />
+              <div className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-blue-mid shadow-[0_12px_28px_-12px_rgba(29,66,124,0.45)] transition-all duration-300 ease-out group-hover:scale-110 group-hover:bg-secondary group-hover:shadow-[0_12px_28px_-10px_rgba(241,209,163,0.9)]">
+                <Icon className="h-7 w-7 text-secondary transition-colors duration-300 group-hover:text-primary" strokeWidth={1.6} />
               </div>
 
               {/* Step Number */}
               <div
-                className="mt-5 font-display text-[15px] font-bold tracking-[0.18em] text-brand-gold"
+                className="mt-5 font-display text-[15px] font-bold tracking-[0.18em] text-secondary"
                 aria-hidden="true"
               >
                 {num}
@@ -97,7 +97,7 @@ export function WorkPassProcess() {
               </h3>
 
               {/* Step Description */}
-              <p className="mt-2.5 max-w-[200px] font-body text-xs md:text-sm leading-relaxed text-brand-dark/70">
+              <p className="mt-2.5 max-w-[200px] font-body text-xs md:text-sm leading-relaxed text-brand-blue/70">
                 {step.description}
               </p>
             </div>

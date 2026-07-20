@@ -61,29 +61,32 @@ export function WorkPassHero({ className }: { className?: string }) {
     <section
       aria-labelledby="work-pass-hero-heading"
       className={cn(
-        "relative w-full overflow-hidden border-b border-border bg-white",
+        "relative w-full border-b border-border bg-white",
         className
       )}
     >
       {/* Desktop Background Image (Right side) */}
-      <div className="absolute inset-y-0 right-0 z-0 hidden w-full lg:block lg:w-[52%]">
+      <div className="absolute inset-y-0 right-0 z-0 hidden w-full overflow-hidden lg:block lg:w-[52%]">
+
         <Image
           src="/images/work-pass-hero.jpg"
           alt="Đội ngũ chuyên gia KVC Global tại Singapore"
+          role="presentation"
           fill
           priority
-          sizes="(max-w-1024px) 100vw, 52vw"
+          sizes="100vw"
           className="object-cover object-center"
+          style={{ transform: "scaleX(-1)" }}
         />
         {/* Soft blend transition from white background (left) to image */}
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-44 bg-gradient-to-r from-white via-white/80 to-transparent"
+          className="absolute inset-y-0 left-0 w-30 bg-gradient-to-r from-white via-white/50 to-transparent"
         />
       </div>
 
       {/* Main Content Container */}
-      <Container className="relative z-10 py-8 md:py-16 lg:py-20">
+      <Container className="relative z-10 pt-28 pb-20 sm:pt-32 sm:pb-24 md:pt-36 md:pb-20">
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
@@ -91,7 +94,7 @@ export function WorkPassHero({ className }: { className?: string }) {
         >
           <Link
             href="/"
-            className="transition-colors duration-200 hover:text-foreground"
+            className="hover:text-foreground transition-colors duration-200"
           >
             Trang chủ
           </Link>
@@ -140,7 +143,7 @@ export function WorkPassHero({ className }: { className?: string }) {
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               href="#dat-lich"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-gold px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
               Đặt lịch tư vấn miễn phí
               <svg
@@ -159,13 +162,13 @@ export function WorkPassHero({ className }: { className?: string }) {
 
             <Link
               href="#quy-trinh"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-light hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
               Tìm hiểu quy trình
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
-                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 text-brand-blue"
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"
@@ -179,7 +182,7 @@ export function WorkPassHero({ className }: { className?: string }) {
         </div>
 
         {/* Stats Grid Container */}
-        <div className="relative z-20 mt-12 w-full lg:mt-16 xl:mt-20">
+        <div className="relative z-20 mt-10 w-full sm:mt-12 lg:mt-16 xl:mt-20">
           <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[20px] border border-border bg-border shadow-[0_12px_40px_-15px_rgba(15,27,45,0.12)] ring-1 ring-black/5 md:grid-cols-4 lg:w-fit">
             {STATS.map((stat, idx) => {
               return (
