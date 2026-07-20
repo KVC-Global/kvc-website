@@ -61,29 +61,32 @@ export function WorkPassHero({ className }: { className?: string }) {
     <section
       aria-labelledby="work-pass-hero-heading"
       className={cn(
-        "relative w-full overflow-hidden border-b border-border bg-white",
+        "relative w-full border-b border-border bg-white",
         className
       )}
     >
       {/* Desktop Background Image (Right side) */}
-      <div className="absolute inset-y-0 right-0 z-0 hidden w-full lg:block lg:w-[52%]">
+      <div className="absolute inset-y-0 right-0 z-0 hidden w-full overflow-hidden lg:block lg:w-[52%]">
+
         <Image
           src="/images/work-pass-hero.jpg"
           alt="Đội ngũ chuyên gia KVC Global tại Singapore"
+          role="presentation"
           fill
           priority
-          sizes="(max-w-1024px) 100vw, 52vw"
+          sizes="100vw"
           className="object-cover object-center"
+          style={{ transform: "scaleX(-1)" }}
         />
         {/* Soft blend transition from white background (left) to image */}
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-44 bg-gradient-to-r from-white via-white/80 to-transparent"
+          className="absolute inset-y-0 left-0 w-30 bg-gradient-to-r from-white via-white/50 to-transparent"
         />
       </div>
 
       {/* Main Content Container */}
-      <Container className="relative z-10 pt-28 pb-20 sm:pt-32 sm:pb-24 md:pt-36 md:pb-28">
+      <Container className="relative z-10 pt-28 pb-20 sm:pt-32 sm:pb-24 md:pt-36 md:pb-20">
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
