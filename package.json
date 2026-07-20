@@ -17,6 +17,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.42.2",
+    "gitnexus": "^1.6.9",
     "lucide-react": "^1.23.0",
     "next": "16.2.6",
     "next-sanity": "^13.1.3",

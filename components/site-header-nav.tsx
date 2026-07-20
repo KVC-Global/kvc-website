@@ -113,7 +113,7 @@ export function SiteHeaderMobileMenu({
   }
 
   return (
-    <div id="site-mobile-nav" className="fixed inset-0 z-50 bg-white lg:hidden">
+    <div id="site-mobile-nav" className="fixed inset-0 z-50 bg-white xl:hidden">
       <div className="flex h-20 items-center justify-end px-6">
         <button
           type="button"

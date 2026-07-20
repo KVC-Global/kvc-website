@@ -1,9 +1,11 @@
+"use client"
+
 import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import { urlFor } from "@/sanity/image"
-import { getDictionaryServer } from "@/lib/i18n-server"
+import { useDictionary } from "@/lib/i18n-client"
 
 export type SanityPartner = {
   name: string
@@ -53,14 +55,14 @@ function PartnerCard({ partner }: { partner: SanityPartner }) {
   )
 }
 
-export async function SitePartners({
+export function SitePartners({
   className,
   partners = PARTNERS,
 }: {
   className?: string
   partners?: ReadonlyArray<SanityPartner>
 }) {
-  const t = await getDictionaryServer()
+  const t = useDictionary()
   const track = [...partners, ...partners]
 
   return (
@@ -103,3 +105,4 @@ export async function SitePartners({
     </section>
   )
 }
+

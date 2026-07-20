@@ -46,8 +46,8 @@ export function StudyAbroadSupport() {
           const Icon = step.icon
           const isLast = idx === SUPPORT_STEPS.length - 1
           return (
-            <div key={idx} className="flex flex-col lg:flex-row items-center w-full lg:w-auto flex-1">
-              <div className="flex flex-col items-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-md p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[160px] w-full flex-1 justify-center">
+            <div key={idx} className="flex flex-col lg:flex-row items-center w-full min-w-0 lg:w-auto flex-1">
+              <div className="flex flex-col items-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-md p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[160px] w-full min-w-0 flex-1 justify-center">
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-light group-hover:bg-white transition-colors shrink-0">
                   <Icon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
                 </div>
