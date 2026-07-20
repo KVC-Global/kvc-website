@@ -14,7 +14,7 @@ export function WorkPassFees() {
         </h2>
         <span
           aria-hidden="true"
-          className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary"
+          className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold"
         />
       </div>
 
@@ -29,8 +29,8 @@ export function WorkPassFees() {
             <table className="w-full border-collapse text-left text-sm">
               <thead>
                 <tr className="font-heading font-bold text-brand-blue">
-                  <th className="px-6 py-3.5 bg-[#FFF8EE] rounded-l-lg border-r border-border/60">Hạng mục</th>
-                  <th className="px-6 py-3.5 bg-[#FFF8EE] rounded-r-lg text-center">Chi phí (SGD)</th>
+                  <th className="px-6 py-3.5 bg-brand-light rounded-l-lg border-r border-border/60">Hạng mục</th>
+                  <th className="px-6 py-3.5 bg-brand-light rounded-r-lg text-center">Chi phí (SGD)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/40 font-body text-brand-dark/95">

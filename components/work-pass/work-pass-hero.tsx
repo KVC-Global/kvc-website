@@ -94,7 +94,7 @@ export function WorkPassHero({ className }: { className?: string }) {
         >
           <Link
             href="/"
-            className="transition-colors duration-200 hover:text-foreground"
+            className="hover:text-foreground transition-colors duration-200"
           >
             Trang chủ
           </Link>
