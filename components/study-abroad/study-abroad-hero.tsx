@@ -64,7 +64,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
         </nav>
 
         <div className="max-w-2xl">
-          <span className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-secondary uppercase sm:text-sm">
+          <span className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
             DIPLOMA 6+6 TẠI SINGAPORE
           </span>
 
@@ -86,7 +86,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
           <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
             <Link
               href="#dang-ky"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-secondary px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
               Đăng ký tư vấn miễn phí
               <svg
@@ -105,13 +105,13 @@ export function StudyAbroadHero({ className }: { className?: string }) {
 
             <Link
               href="#chuong-trinh"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-secondary bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-light hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
               Tìm hiểu chương trình
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
-                className="h-4 w-4 text-brand-blue transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2.5"

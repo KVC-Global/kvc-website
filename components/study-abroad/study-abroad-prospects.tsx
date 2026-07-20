@@ -14,7 +14,7 @@ export function StudyAbroadProspects() {
   return (
     <section
       aria-labelledby="prospects-heading"
-      className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col justify-between overflow-hidden relative lg:col-span-5 min-h-[380px]"
+      className="bg-white border border-border/60 rounded-lg p-6 md:p-8 shadow-[0_18px_40px_-22px_rgba(15,27,45,0.15)] flex flex-col justify-between overflow-hidden relative lg:col-span-5 min-h-[380px]"
     >
       <div className="relative z-10 flex flex-col justify-between h-full max-w-[72%] sm:max-w-[75%]">
         <div>
@@ -24,13 +24,13 @@ export function StudyAbroadProspects() {
           >
             Sau khi tốt nghiệp, học viên có thể làm gì?
           </h2>
-          <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
+          <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
 
           <ul className="mt-8 space-y-4" aria-label="Cơ hội sau tốt nghiệp">
             {GRADUATION_OPPORTUNITIES.map((opp, idx) => (
               <li key={idx} className="flex items-start gap-3">
-                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-secondary bg-secondary/10">
-                  <Check className="h-3 w-3 text-secondary" strokeWidth={3} />
+                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
+                  <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
                 </div>
                 <span className="font-body text-[14px] md:text-[15px] leading-relaxed text-brand-dark/90">
                   {opp}

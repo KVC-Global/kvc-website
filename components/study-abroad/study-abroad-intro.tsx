@@ -37,16 +37,16 @@ export function StudyAbroadIntro() {
           {/* Bullet Points */}
           <ul className="mt-4 space-y-3.5" aria-label="Cấu trúc chương trình">
             <li className="flex items-start gap-3">
-              <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-secondary bg-secondary/10">
-                <Check className="h-3 w-3 text-secondary" strokeWidth={3} />
+              <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
+                <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
               </div>
               <span>
                 <strong className="font-semibold text-brand-blue">6 tháng</strong> học lý thuyết tại trường
               </span>
             </li>
             <li className="flex items-start gap-3">
-              <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-secondary bg-secondary/10">
-                <Check className="h-3 w-3 text-secondary" strokeWidth={3} />
+              <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
+                <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
               </div>
               <span>
                 <strong className="font-semibold text-brand-blue">6 tháng</strong> thực tập hưởng lương tại các doanh nghiệp uy tín ở Singapore
