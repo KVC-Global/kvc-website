@@ -422,7 +422,7 @@ export function OnlineDetails({ className }: { className?: string }) {
                 id="majors-heading"
                 className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
               >
-                Ngành học phổ biến
+                Chương trình học
               </h2>
               <div className="mx-auto mt-2 h-0.5 w-12 rounded-full bg-brand-gold" />
             </div>
