@@ -324,7 +324,7 @@ export function SiteHeaderMobileMenu({
                                 href={childHref}
                                 aria-current={childActive ? "page" : undefined}
                                 className={cn(
-                                  "block rounded-md px-4 py-2.5 text-base transition-all duration-300 ease-out hover:bg-muted hover:pl-6 hover:text-foreground focus-visible:bg-muted focus-visible:pl-6 focus-visible:text-foreground focus-visible:outline-none",
+                                  "relative block rounded-md px-4 py-2.5 text-base transition-all duration-300 ease-out hover:bg-muted hover:pl-6 hover:text-foreground focus-visible:bg-muted focus-visible:pl-6 focus-visible:text-foreground focus-visible:outline-none",
                                   childActive && "bg-muted pl-6 font-semibold text-brand-gold"
                                 )}
                               >
