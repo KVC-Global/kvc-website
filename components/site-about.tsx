@@ -80,31 +80,31 @@ export async function SiteAbout({ className }: { className?: string }) {
 
   const iconStats = [
     {
-      id: "exp-1",
+      id: "experience",
       icon: Handshake,
       value: t.about.expValue,
       sub: t.about.expSub,
       tone: "blue" as const,
     },
     {
-      id: "acra-1",
+      id: "clients",
       icon: Award,
-      value: t.about.acraValue,
-      sub: t.about.acraSub,
+      value: t.about.clientsValue,
+      sub: t.about.clientsSub,
       tone: "gold" as const,
     },
     {
-      id: "exp-2",
+      id: "partners",
       icon: Handshake,
-      value: t.about.expValue,
-      sub: t.about.expSub,
+      value: t.about.partnersValue,
+      sub: t.about.partnersSub,
       tone: "blue" as const,
     },
     {
-      id: "acra-2",
+      id: "google-rating",
       icon: Award,
-      value: t.about.acraValue,
-      sub: t.about.acraSub,
+      value: t.about.ratingValue,
+      sub: t.about.ratingSub,
       tone: "gold" as const,
     },
   ] as const

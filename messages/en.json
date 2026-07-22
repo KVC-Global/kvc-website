@@ -39,10 +39,14 @@
     "statStrategy": "Business strategy consulting",
     "statNetwork": "Education & technology network",
     "statsTitle": "Proven capabilities in numbers",
-    "expValue": "15+ Years",
-    "expSub": "Practical experience",
-    "acraValue": "Top 1%",
-    "acraSub": "ACRA Singapore Partner",
+    "expValue": "13+ Years",
+    "expSub": "Hands-on experience",
+    "clientsValue": "10,000+",
+    "clientsSub": "Trusted clients",
+    "partnersValue": "150+",
+    "partnersSub": "Strategic partners",
+    "ratingValue": "4.8 Google rating",
+    "ratingSub": "Based on 600+ reviews",
     "btn": "About Us"
   },
   "services": {
