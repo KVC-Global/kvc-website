@@ -129,27 +129,6 @@ export async function SiteAbout({ className }: { className?: string }) {
                 />
               </div>
 
-              <div
-                className="absolute bottom-0 flex flex-col items-start justify-center gap-4 rounded-xl px-6 py-6 shadow-[0_20px_40px_-16px_rgba(15,27,45,0.28)] sm:px-7"
-                style={{
-                  right: "-1rem",
-                  width: "min(280px, calc(100% - 1rem))",
-                  minHeight: "10rem",
-                  backgroundColor: "#F8D39E",
-                }}
-              >
-                <Image
-                  src="/shield-check.svg"
-                  alt=""
-                  width={32}
-                  height={40}
-                  aria-hidden="true"
-                  className="h-10 w-8 shrink-0"
-                />
-                <p className="font-display text-base leading-snug font-bold text-[#000F22] sm:text-lg">
-                  Trusted by Global Enterprises
-                </p>
-              </div>
             </div>
 
             <div className="flex h-full w-full max-w-2xl flex-col">
