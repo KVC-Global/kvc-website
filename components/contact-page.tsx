@@ -84,9 +84,9 @@ const OFFICES = [
     role: "Chi nhánh Việt Nam",
     address:
       "456 Xô Viết Nghệ Tĩnh, Phường 25, Quận Bình Thạnh, TP. Hồ Chí Minh",
-    phone: "(+84) 1900 8888",
+    phone: "(+84) 911942409",
     email: "info@kvcglobal.vn",
-    hours: "Thứ 2 – Thứ 7, 8:30 – 17:30",
+    hours: "Thứ 2 - Thứ 6, 08:00-17:00",
     mapUrl:
       "https://maps.google.com/?q=456+X%C3%B4+Vi%E1%BA%BFt+Ngh%E1%BB%87+T%C4%A9nh,+B%C3%ACnh+Th%E1%BA%A1nh,+H%E1%BB%93+Ch%C3%AD+Minh",
     mapQ: "456+X%C3%B4+Vi%E1%BA%BFt+Ngh%E1%BB%87+T%C4%A9nh,+B%C3%ACnh+Th%E1%BA%A1nh,+H%E1%BB%93+Ch%C3%AD+Minh",
