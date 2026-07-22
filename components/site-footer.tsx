@@ -252,7 +252,10 @@ export function SiteFooter({ className }: { className?: string }) {
   ]
 
   const aboutLinks = [
-    { label: t.footer.about.intro, href: locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu" },
+    {
+      label: t.footer.about.intro,
+      href: locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu",
+    },
     { label: t.footer.about.team, href: "#doi-ngu" },
     { label: t.footer.about.partners, href: "#doi-tac" },
     { label: t.footer.about.values, href: "#gia-tri-cot-loi" },
@@ -273,8 +276,8 @@ export function SiteFooter({ className }: { className?: string }) {
     },
     {
       icon: Mail,
-      label: "hello@kvcglobal.com",
-      href: "mailto:hello@kvcglobal.com",
+      label: "info@kvcglobal.vn",
+      href: "mailto:info@kvcglobal.vn",
     },
     {
       icon: MapPin,
@@ -331,7 +334,10 @@ export function SiteFooter({ className }: { className?: string }) {
             </ul>
           </div>
 
-          <CollapsibleFooterSection heading={t.footer.servicesHeading} className="lg:col-span-2">
+          <CollapsibleFooterSection
+            heading={t.footer.servicesHeading}
+            className="lg:col-span-2"
+          >
             <LinkList links={servicesLinks} />
           </CollapsibleFooterSection>
 
@@ -342,11 +348,17 @@ export function SiteFooter({ className }: { className?: string }) {
             <LinkList links={aboutLinks} />
           </CollapsibleFooterSection>
 
-          <CollapsibleFooterSection heading={t.footer.supportHeading} className="lg:col-span-2">
+          <CollapsibleFooterSection
+            heading={t.footer.supportHeading}
+            className="lg:col-span-2"
+          >
             <LinkList links={supportLinks} />
           </CollapsibleFooterSection>
 
-          <CollapsibleFooterSection heading={t.footer.contactHeading} className="lg:col-span-3">
+          <CollapsibleFooterSection
+            heading={t.footer.contactHeading}
+            className="lg:col-span-3"
+          >
             <ul className="flex flex-col gap-3 text-[15px]">
               {contactItems.map((item, index) => {
                 const Icon = item.icon
@@ -387,7 +399,10 @@ export function SiteFooter({ className }: { className?: string }) {
 
         <div className="flex flex-col items-start justify-between gap-3 py-6 text-[13px] text-foreground/50 sm:flex-row sm:items-center">
           <p>© 2026 KVC Global. All rights reserved.</p>
-          <nav aria-label="Chính sách pháp lý" className="flex items-center gap-5">
+          <nav
+            aria-label="Chính sách pháp lý"
+            className="flex items-center gap-5"
+          >
             <Link
               href="#chinh-sach-bao-mat"
               className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"

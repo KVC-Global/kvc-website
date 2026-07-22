@@ -72,7 +72,7 @@
     "google": {
       "tagline": "Đánh giá trên Google",
       "rating": "Dựa trên 328 đánh giá",
-      "btn": "Xem tất cả đánh giá trên Google",
+      "btn": "Xem tất cả đánh giá",
       "reviews": {
         "review1": {
           "name": "Hồng Nhung",
@@ -167,6 +167,6 @@
       "book": "Đặt lịch tư vấn ngay",
       "chat": "Chat với chuyên viên"
     },
-    "addressVN": "Tầng 6, 65 Lê Lợi, P. Bến Nghé, Quận 1, TP. Hồ Chí Minh, Việt Nam"
+    "addressVN": "456 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh, Việt Nam"
   }
 }

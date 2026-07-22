@@ -366,14 +366,11 @@ export function SiteTestimonials({
                   <Stars size={20} />
                 </div>
                 <p className="text-[13px] text-white/65">
-                  Dựa trên <span className="font-semibold text-white">328</span>{" "}
+                  Dựa trên <span className="font-semibold text-white">500</span>{" "}
                   đánh giá
                 </p>
               </div>
             </div>
-            <p className="mt-2 text-[13px] text-white/65">
-              {t.testimonials.google.rating}
-            </p>
 
             <ul className="mt-7 space-y-5 border-t border-white/10 pt-6">
               {googleReviews.map((review) => (
