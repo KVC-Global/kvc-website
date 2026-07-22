@@ -24,7 +24,9 @@ function ProgressRing({
   const stroke = 6
   const radius = (size - stroke) / 2
   const circumference = 2 * Math.PI * radius
-  const arc = circumference * 0.92
+  const percentage = Math.min(100, Math.max(0, Number.parseFloat(value) || 0))
+  const arc = circumference * (percentage / 100)
+  const gap = circumference - arc
   return (
     <div
       className="relative shrink-0"
@@ -55,7 +57,7 @@ function ProgressRing({
           stroke={color}
           strokeWidth={stroke}
           strokeLinecap="round"
-          strokeDasharray={`${arc} ${circumference}`}
+          strokeDasharray={`${arc} ${gap}`}
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
@@ -72,8 +74,8 @@ export async function SiteAbout({ className }: { className?: string }) {
   const locale = await getLocale()
 
   const stats: Stat[] = [
-    { value: "88%", label: t.about.statStrategy },
-    { value: "93%", label: t.about.statNetwork, color: "#F8BC62" },
+    { value: "98%", label: t.about.statStrategy, color: "#F8BC62" },
+    { value: "100%", label: t.about.statNetwork, color: "#F8BC62" },
   ]
 
   const iconStats = [
