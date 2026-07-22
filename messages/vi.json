@@ -99,39 +99,61 @@
         "description": "Quy trình rõ ràng, chi phí minh bạch, cam kết không phát sinh chi phí ẩn."
       },
       "expertise": {
-        "title": "Chuyên môn cao",
-        "description": "Đội ngũ chuyên gia giàu kinh nghiệm, hiểu rõ hệ thống quy trình Singapore & Việt Nam."
+        "title": "Chuyên môn",
+        "description": "15 năm kinh nghiệm, hàng nghìn hồ sơ thành công, hiểu rõ mọi khía cạnh."
       },
       "partners": {
-        "title": "Đối tác quốc tế",
-        "description": "Mạng lưới đối tác trường học, tổ chức & doanh nghiệp uy tín trên toàn cầu."
+        "title": "Đối tác đáng tin cậy",
+        "description": "Mạng lưới đối tác chiến lược toàn cầu hỗ trợ bạn trên mọi lộ trình."
       },
       "commitment": {
-        "title": "Đồng hành lâu dài",
-        "description": "Hỗ trợ toàn diện trước – trong – sau khi hành trình định cư, thành lập & học tập."
+        "title": "Cam kết chất lượng",
+        "description": "Từ tư vấn đến hoàn tất, chúng tôi bên bạn từ bước đầu tiên đến cuối cùng."
       }
     },
-    "processTagline": "Quy trình đồng hành",
-    "processTitle": "5 bước đơn giản – Hành trình vững chắc",
-    "processAriaLabel": "Quy trình đồng hành 5 bước",
+    "processTagline": "Quy trình của chúng tôi",
+    "processTitle": "5 bước hỗ trợ bạn đạt thành công",
+    "processAriaLabel": "Chọn bước",
     "steps": {
       "step1": {
-        "title": "Tư vấn & đánh giá",
-        "description": "Lắng nghe nhu cầu, đánh giá hồ sơ và tư vấn giải pháp tối ưu."
+        "title": "Tư vấn & Đánh giá",
+        "description": "Nhân viên tư vấn chuyên quản lý một đối một cùng bạn để hiểu rõ mục tiêu."
       },
       "step2": {
-        "title": "Lên lộ trình cá nhân hóa",
-        "description": "Xây dựng lộ trình phù hợp với mục tiêu của bạn."
+        "title": "Chuẩn bị hồ sơ",
+        "description": "Chuẩn bị hồ sơ chặt chẽ, kiểm soát chất lượng đầu vào cao."
       },
       "step3": {
-        "title": "Chuẩn bị hồ sơ",
-        "description": "Hỗ trợ chuẩn bị và hoàn thiện hồ sơ chỉn chu, đầy đủ."
+        "title": "Nộp & Theo dõi",
+        "description": "Nộp hồ sơ đúng kỳ hạn, cập nhật tình trạng mỗi bước."
       },
       "step4": {
-        "title": "Nộp hồ sơ & theo dõi",
-        "description": "Nộp hồ sơ và theo dõi tiến độ xử lý trong suốt quá trình."
+        "title": "Nhận kết quả & hỗ trợ sau",
+        "description": "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài."
       },
       "step5": {
+        "title": "Đạt thành công",
+        "description": "Bạn đã bắt đầu cuộc sống mới tại Singapore."
+      }
+    }
+  },
+  "process": {
+    "tagline": "Quy trình của chúng tôi",
+    "title": "4 bước đơn giản để bắt đầu hành trình",
+    "steps": {
+      "step1": {
+        "title": "Tư vấn & Đánh giá",
+        "description": "Nhân viên tư vấn chuyên quản lý một đối một cùng bạn để hiểu rõ mục tiêu."
+      },
+      "step2": {
+        "title": "Chuẩn bị hồ sơ",
+        "description": "Chuẩn bị hồ sơ chặt chẽ, kiểm soát chất lượng đầu vào cao."
+      },
+      "step3": {
+        "title": "Nộp & Theo dõi",
+        "description": "Nộp hồ sơ đúng kỳ hạn, cập nhật tình trạng mỗi bước."
+      },
+      "step4": {
         "title": "Nhận kết quả & hỗ trợ sau",
         "description": "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài."
       }
@@ -168,5 +190,12 @@
       "chat": "Chat với chuyên viên"
     },
     "addressVN": "456 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh, Việt Nam"
+  },
+  "contact": {
+    "getInTouch": "Liên hệ với chúng tôi",
+    "description": "Có câu hỏi hoặc cần hỗ trợ? Chúng tôi luôn sẵn sàng giúp bạn! Hãy liên hệ với đội ngũ của chúng tôi thông qua thông tin dưới đây.",
+    "officeHours": "Giờ làm việc",
+    "connectWithUs": "Kết nối với chúng tôi",
+    "socialDescription": "Cập nhật những tin tức mới nhất và thông tin du học bằng cách theo dõi chúng tôi trên mạng xã hội."
   }
 }

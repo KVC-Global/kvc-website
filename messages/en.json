@@ -168,5 +168,12 @@
       "chat": "Chat with specialist"
     },
     "addressVN": "6th Floor, 65 Le Loi, Ben Nghe Ward, District 1, Ho Chi Minh City, Vietnam"
+  },
+  "contact": {
+    "getInTouch": "Get in Touch With Us",
+    "description": "Have a question or need assistance? We're here to help! Reach out to our team using the contact information below.",
+    "officeHours": "Office Hours",
+    "connectWithUs": "Connect With Us",
+    "socialDescription": "Stay updated on the latest news and immigration updates by following us on social media."
   }
 }
