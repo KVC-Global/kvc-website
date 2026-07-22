@@ -194,7 +194,7 @@ function GoogleLogo() {
       viewBox="0 0 272 92"
       role="img"
       aria-label="Google"
-      className="h-7 w-auto"
+      className="h-10 w-auto sm:h-12"
     >
       <path
         fill="#4285F4"
@@ -351,7 +351,7 @@ export function SiteTestimonials({
 
             <div className="mt-5 flex gap-2">
               <span className="font-display text-5xl leading-none font-bold text-white">
-                4.9
+                4.8
               </span>
               <div>
                 <div>

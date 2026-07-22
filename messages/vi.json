@@ -52,7 +52,6 @@
   "services": {
     "tagline": "Dịch vụ của chúng tôi",
     "title": "Giải pháp toàn diện cho tương lai của bạn",
-    "btnMore": "Khám phá các dịch vụ khác",
     "cardLearnMore": "Tìm hiểu thêm",
     "cardRegister": "Đăng kí ngay",
     "businessDesc": "Đồng hành cùng doanh nhân trong hành trình mở rộng kinh doanh và định cư Singapore với giải pháp toàn diện.",
@@ -93,6 +92,7 @@
   "whyProcess": {
     "whyTagline": "Vì sao chọn KVC Global?",
     "whyTitle": "Đối tác đáng tin cậy cho hành trình của bạn",
+    "cta": "Khám phá thêm",
     "reasons": {
       "transparency": {
         "title": "Minh bạch",

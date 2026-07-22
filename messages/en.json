@@ -52,7 +52,6 @@
   "services": {
     "tagline": "Our Services",
     "title": "Comprehensive Solutions for Your Future",
-    "btnMore": "Explore other services",
     "cardLearnMore": "Learn more",
     "cardRegister": "Register now",
     "businessDesc": "Accompanying entrepreneurs in their business expansion and settlement journey in Singapore with comprehensive solutions.",
@@ -93,6 +92,7 @@
   "whyProcess": {
     "whyTagline": "Why Choose KVC Global?",
     "whyTitle": "A Trusted Partner for Your Journey",
+    "cta": "Explore more",
     "reasons": {
       "transparency": {
         "title": "Transparency",
