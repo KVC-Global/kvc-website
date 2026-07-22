@@ -132,17 +132,25 @@ function Stars({ count = 5, size = 14 }: { count?: number; size?: number }) {
 }
 
 const FALLBACK_AVATARS: Record<string, string> = {
-  "minh anh": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&q=80&auto=format&fit=crop",
-  "phương linh": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&q=80&auto=format&fit=crop",
-  "hoàng nam": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&q=80&auto=format&fit=crop",
-  "thanh huyền": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&q=80&auto=format&fit=crop",
-  "quốc bảo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&q=80&auto=format&fit=crop",
-  "mai trang": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&q=80&auto=format&fit=crop",
+  "minh anh":
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&q=80&auto=format&fit=crop",
+  "phương linh":
+    "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&q=80&auto=format&fit=crop",
+  "hoàng nam":
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&q=80&auto=format&fit=crop",
+  "thanh huyền":
+    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&q=80&auto=format&fit=crop",
+  "quốc bảo":
+    "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&q=80&auto=format&fit=crop",
+  "mai trang":
+    "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&q=80&auto=format&fit=crop",
 }
 
 function TestimonialCard({ testimonial }: { testimonial: SanityTestimonial }) {
   const nameKey = testimonial.name.toLowerCase().trim()
-  const fallbackAvatar = FALLBACK_AVATARS[nameKey] || "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&q=80&auto=format&fit=crop"
+  const fallbackAvatar =
+    FALLBACK_AVATARS[nameKey] ||
+    "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&q=80&auto=format&fit=crop"
 
   const avatarUrl = testimonial.image
     ? urlFor(testimonial.image).url()
@@ -153,14 +161,14 @@ function TestimonialCard({ testimonial }: { testimonial: SanityTestimonial }) {
     .join(" — ")
 
   return (
-    <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-5 text-brand-blue shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:min-h-[300px] sm:p-6">
-      <div className="flex items-start gap-3">
-        <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/40">
+    <article className="flex h-full w-full shrink-0 flex-col rounded-lg bg-white p-5 text-brand-blue shadow-[0_18px_40px_-22px_rgba(0,0,0,0.5)] ring-1 ring-white/10 sm:min-h-[340px] sm:p-6">
+      <div className="flex items-start gap-4">
+        <div className="relative h-28 w-28 shrink-0 overflow-hidden rounded-lg ring-2 ring-secondary/40">
           <Image
             src={avatarUrl}
             alt={testimonial.name}
             fill
-            sizes="56px"
+            sizes="112px"
             className="object-cover"
           />
         </div>
@@ -280,7 +288,7 @@ export function SiteTestimonials({
                 </p>
                 <h2
                   id="testimonials-heading"
-                  className="mt-3 max-w-xl font-display text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[40px]"
+                  className="mt-10 max-w-xl font-display text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[40px]"
                 >
                   {t.testimonials.title}
                 </h2>
@@ -294,7 +302,7 @@ export function SiteTestimonials({
               </a>
             </div>
 
-            <div className="mt-7 overflow-hidden">
+            <div className="mt-10 overflow-hidden">
               <div
                 className="flex transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${active * 100}%)` }}
