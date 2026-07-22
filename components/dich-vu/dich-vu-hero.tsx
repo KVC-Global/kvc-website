@@ -109,19 +109,9 @@ export function DichVuHero({ className }: { className?: string }) {
             id="dich-vu-hero-heading"
             className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
           >
-            Dịch vụ doanh nghiệp
-            <span className="mt-1 block">toàn diện tại Việt Nam & Singapore</span>
+            Đồng hành cùng doanh nghiệp
+            <span className="mt-1 block">trên hành trình mở rộng toàn cầu</span>
           </motion.h1>
-
-          {/* Description Paragraph */}
-          <motion.p
-            variants={fadeUp}
-            className="mt-5 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px] md:leading-relaxed"
-          >
-            KVC Global đồng hành cùng doanh nhân và chủ doanh nghiệp trong hành
-            trình xây dựng, vận hành và phát triển doanh nghiệp bền vững tại hai
-            thị trường chiến lược Việt Nam và Singapore.
-          </motion.p>
 
           {/* Call to Actions (CTAs) */}
           <motion.div

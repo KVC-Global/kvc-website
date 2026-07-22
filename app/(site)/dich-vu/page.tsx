@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 
 import { DichVuHero } from "@/components/dich-vu/dich-vu-hero"
+import { DichVuIntro } from "@/components/dich-vu/dich-vu-intro"
 import { DichVuServices } from "@/components/dich-vu/dich-vu-services"
 
 export const metadata: Metadata = {
@@ -33,6 +34,7 @@ export default function DichVuPage() {
   return (
     <>
       <DichVuHero />
+      <DichVuIntro />
       <DichVuServices />
     </>
   )
