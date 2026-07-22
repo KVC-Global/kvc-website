@@ -12,6 +12,7 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { getDictionaryServer } from "@/lib/i18n-server"
 
 const ACCENT = "var(--color-secondary)"
 
@@ -21,77 +22,24 @@ type Reason = {
   description: string
 }
 
-const REASONS: ReadonlyArray<Reason> = [
-  {
-    icon: Shield,
-    title: "Mình bạch",
-    description:
-      "Quy trình rõ ràng, chi phí minh bạch, cam kết không phát sinh chi phí ẩn.",
-  },
-  {
-    icon: Award,
-    title: "Chuyên môn cao",
-    description:
-      "Đội ngũ chuyên gia giàu kinh nghiệm, hiểu rõ hệ thống quy trình Singapore & Việt Nam.",
-  },
-  {
-    icon: Globe,
-    title: "Đối tác quốc tế",
-    description:
-      "Mạng lưới đối tác trường học, tổ chức & doanh nghiệp uy tín trên toàn cầu.",
-  },
-  {
-    icon: Handshake,
-    title: "Đồng hành lâu dài",
-    description:
-      "Hỗ trợ toàn diện trước – trong – sau khi hành trình định cư, thành lập & học tập.",
-  },
-] as const
-
 type Step = {
   icon: typeof MessageCircle
   title: string
   description: string
 }
 
-const STEPS: ReadonlyArray<Step> = [
-  {
-    icon: MessageCircle,
-    title: "Tư vấn & đánh giá",
-    description:
-      "Lắng nghe nhu cầu, đánh giá hồ sơ và tư vấn giải pháp tối ưu.",
-  },
-  {
-    icon: ClipboardList,
-    title: "Lên lộ trình cá nhân hóa",
-    description: "Xây dựng lộ trình phù hợp với mục tiêu của bạn.",
-  },
-  {
-    icon: FolderOpen,
-    title: "Chuẩn bị hồ sơ",
-    description: "Hỗ trợ chuẩn bị và hoàn thiện hồ sơ chỉn chu, đầy đủ.",
-  },
-  {
-    icon: Send,
-    title: "Nộp hồ sơ & theo dõi",
-    description: "Nộp hồ sơ và theo dõi tiến độ xử lý trong suốt quá trình.",
-  },
-  {
-    icon: BadgeCheck,
-    title: "Nhận kết quả & hỗ trợ sau",
-    description: "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài.",
-  },
-] as const
-
 function ReasonItem({ reason }: { reason: Reason }) {
   const Icon = reason.icon
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="group flex flex-col items-center text-center transition-transform duration-300 ease-out hover:-translate-y-1.5 lg:border-l lg:border-dashed lg:border-brand-gold/40 lg:pl-8 lg:first:border-l-0 lg:first:pl-0">
       <span
         aria-hidden="true"
-        className="inline-flex h-14 w-14 items-center justify-center rounded-full ring-1 ring-brand-blue/15"
+        className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-light ring-1 ring-brand-gold transition-all duration-300 ease-out group-hover:scale-110 group-hover:bg-brand-gold group-hover:shadow-[0_12px_28px_-10px_rgba(200,145,60,0.55)]"
       >
-        <Icon className="h-7 w-7 text-secondary" strokeWidth={1.6} />
+        <Icon
+          className="h-8 w-8 text-primary transition-colors duration-300 group-hover:text-white"
+          strokeWidth={1.6}
+        />
       </span>
       <h3 className="mt-5 font-display text-[19px] font-bold tracking-tight text-brand-blue">
         {reason.title}
@@ -107,9 +55,12 @@ function StepItem({ step, index }: { step: Step; index: number }) {
   const Icon = step.icon
   const num = String(index + 1).padStart(2, "0")
   return (
-    <div className="relative flex flex-col items-center text-center">
-      <div className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-blue shadow-[0_12px_28px_-12px_rgba(10,37,64,0.45)]">
-        <Icon className="h-7 w-7 text-secondary" strokeWidth={1.6} />
+    <div className="group relative flex flex-col items-center text-center transition-transform duration-300 ease-out hover:-translate-y-1.5">
+      <div className="relative z-10 inline-flex h-[72px] w-[72px] items-center justify-center rounded-full bg-brand-blue-mid shadow-[0_12px_28px_-12px_rgba(29,66,124,0.45)] transition-all duration-300 ease-out group-hover:scale-110 group-hover:bg-secondary group-hover:shadow-[0_12px_28px_-10px_rgba(241,209,163,0.9)]">
+        <Icon
+          className="h-8 w-8 text-secondary transition-colors duration-300 group-hover:text-primary"
+          strokeWidth={1.6}
+        />
       </div>
       <div
         className="mt-5 font-display text-[15px] font-bold tracking-[0.18em] text-secondary"
@@ -127,58 +78,116 @@ function StepItem({ step, index }: { step: Step; index: number }) {
   )
 }
 
-export function SiteWhyProcess({ className }: { className?: string }) {
+export async function SiteWhyProcess({ className }: { className?: string }) {
+  const t = await getDictionaryServer()
+
+  const reasons: ReadonlyArray<Reason> = [
+    {
+      icon: Shield,
+      title: t.whyProcess.reasons.transparency.title,
+      description: t.whyProcess.reasons.transparency.description,
+    },
+    {
+      icon: Award,
+      title: t.whyProcess.reasons.expertise.title,
+      description: t.whyProcess.reasons.expertise.description,
+    },
+    {
+      icon: Globe,
+      title: t.whyProcess.reasons.partners.title,
+      description: t.whyProcess.reasons.partners.description,
+    },
+    {
+      icon: Handshake,
+      title: t.whyProcess.reasons.commitment.title,
+      description: t.whyProcess.reasons.commitment.description,
+    },
+  ]
+
+  const steps: ReadonlyArray<Step> = [
+    {
+      icon: MessageCircle,
+      title: t.whyProcess.steps.step1.title,
+      description: t.whyProcess.steps.step1.description,
+    },
+    {
+      icon: ClipboardList,
+      title: t.whyProcess.steps.step2.title,
+      description: t.whyProcess.steps.step2.description,
+    },
+    {
+      icon: FolderOpen,
+      title: t.whyProcess.steps.step3.title,
+      description: t.whyProcess.steps.step3.description,
+    },
+    {
+      icon: Send,
+      title: t.whyProcess.steps.step4.title,
+      description: t.whyProcess.steps.step4.description,
+    },
+    {
+      icon: BadgeCheck,
+      title: t.whyProcess.steps.step5.title,
+      description: t.whyProcess.steps.step5.description,
+    },
+  ]
+
   return (
     <section
       aria-labelledby="why-process-heading"
       className={cn("relative w-full bg-white py-20 sm:py-24", className)}
     >
-      <Container>
-        <div className="text-center">
-          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-primary uppercase">
-            Vì sao chọn KVC Global?
-          </p>
-          <h2
-            id="why-process-heading"
-            className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]"
-          >
-            Đối tác đáng tin cậy cho hành trình của bạn
-          </h2>
-          <span
-            aria-hidden="true"
-            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-secondary"
-          />
-        </div>
+      <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+        <div
+          className="rounded-lg border border-[#E6E9EE] bg-brand-light px-6 pt-14 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-10 sm:pt-16 md:px-16"
+          style={{ paddingBottom: "clamp(3rem, 5vw, 5rem)" }}
+        >
+          <div className="text-center">
+            <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
+              {t.whyProcess.whyTagline}
+            </p>
+            <h2
+              id="why-process-heading"
+              className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]"
+            >
+              {t.whyProcess.whyTitle}
+            </h2>
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-brand-gold"
+            />
+          </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {REASONS.map((reason) => (
-            <ReasonItem key={reason.title} reason={reason} />
-          ))}
+          <div className="mt-12 grid grid-cols-1 gap-10 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            {reasons.map((reason) => (
+              <ReasonItem key={reason.title} reason={reason} />
+            ))}
+          </div>
         </div>
 
         <div className="mt-20 text-center sm:mt-24">
-          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-primary uppercase">
-            Quy trình đồng hành
+          <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
+            {t.whyProcess.processTagline}
           </p>
           <h3 className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]">
-            5 bước đơn giản – Hành trình vững chắc
+            {t.whyProcess.processTitle}
           </h3>
           <span
             aria-hidden="true"
-            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-secondary"
+            className="mx-auto mt-5 block h-[3px] w-16 rounded-full bg-brand-gold"
           />
         </div>
 
         <div
           className="relative mt-16 grid grid-cols-1 gap-12 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6"
           role="list"
-          aria-label="Quy trình đồng hành 5 bước"
+          aria-label={t.whyProcess.processAriaLabel}
         >
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute top-[35px] right-[10%] left-[10%] hidden h-px bg-brand-blue/15 lg:block"
+            className="pointer-events-none absolute top-[35px] right-[10%] left-[10%] hidden h-px bg-secondary lg:block"
           />
-          {STEPS.map((step, index) => (
+          {steps.map((step, index) => (
             <div key={step.title} role="listitem">
               <StepItem step={step} index={index} />
             </div>

@@ -1,9 +1,10 @@
 "use client"
 
 import { Clock, Wallet, FileText, Briefcase, TrendingUp } from "lucide-react"
+import { cn } from "@/lib/utils"
 
-const ENIcon = () => (
-  <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-brand-blue font-heading text-[11px] font-extrabold text-brand-blue tracking-tight select-none">
+const ENIcon = ({ className }: { className?: string }) => (
+  <div className={cn("flex h-7 w-7 items-center justify-center rounded-full border border-current font-heading text-[9px] font-extrabold tracking-tight select-none", className)}>
     EN
   </div>
 )
@@ -59,24 +60,25 @@ export function StudyAbroadWhy() {
       >
         Vì sao nên chọn Diploma 6+6?
       </h2>
-      <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
+      <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
 
       <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
         {BENEFITS.map((benefit, index) => {
+          const Icon = benefit.icon
           return (
             <div
               key={index}
-              className="flex flex-col items-center rounded-lg border border-border bg-white p-8 text-center shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_12px_30px_-10px_rgba(10,37,64,0.1)]"
+              className="group flex flex-col items-center rounded-lg border border-border/60 bg-white p-8 text-center shadow-[0_18px_40px_-22px_rgba(29,66,124,0.15)] transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-brand-blue-mid hover:text-white hover:shadow-[0_28px_60px_-22px_rgba(29,66,124,0.3)]"
             >
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-brand-light">
-                <benefit.icon className="h-7 w-7 text-brand-blue" strokeWidth={1.75} />
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-brand-light transition-colors duration-300 group-hover:bg-white/10 shrink-0">
+                <Icon className="h-7 w-7 text-brand-gold transition-colors duration-300 group-hover:text-[#f8bc62]" strokeWidth={1.75} />
               </div>
 
-              <h3 className="font-heading text-[16px] font-bold text-brand-blue sm:text-[17px]">
+              <h3 className="font-heading text-[16px] font-bold text-brand-blue sm:text-[17px] transition-colors duration-300 group-hover:text-white">
                 {benefit.title}
               </h3>
 
-              <p className="mt-3 font-body text-xs leading-relaxed text-muted-foreground sm:text-sm">
+              <p className="mt-3 font-body text-xs leading-relaxed text-muted-foreground sm:text-sm transition-colors duration-300 group-hover:text-white/80">
                 {benefit.description}
               </p>
             </div>

@@ -6,7 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
-  CalendarCheck,
+  ArrowUpRight,
   ChevronDown,
   Mail,
   MapPin,
@@ -15,56 +15,12 @@ import {
 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useLocale, useDictionary } from "@/lib/i18n-client"
 
-const ACCENT = "var(--secondary)"
-const NAVY = "var(--color-brand-blue)"
+const ACCENT = "var(--color-brand-gold)"
+const NAVY = "var(--color-brand-blue-mid)"
 
-const CTA_IMAGE =
-  "https://images.pexels.com/photos/35421791/pexels-photo-35421791.jpeg?auto=compress&w=1920&q=80"
-
-const SERVICES_LINKS = [
-  { label: "Tư vấn du học", href: "#tu-van-du-hoc" },
-  { label: "Thực tập Singapore", href: "#thuc-tap-singapore" },
-  { label: "Thành lập doanh nghiệp", href: "#thanh-lap-doanh-nghiep" },
-  { label: "Tư vấn di trú & định cư", href: "#tu-van-di-tru" },
-]
-
-const ABOUT_LINKS = [
-  { label: "Giới thiệu", href: "/gioi-thieu" },
-  { label: "Đội ngũ", href: "#doi-ngu" },
-  { label: "Đối tác", href: "#doi-tac" },
-  { label: "Giá trị cốt lõi", href: "#gia-tri-cot-loi" },
-  { label: "Quy trình làm việc", href: "#quy-trinh-lam-viec" },
-]
-
-const SUPPORT_LINKS = [
-  { label: "Câu hỏi thường gặp", href: "#faq" },
-  { label: "Chính sách bảo mật", href: "#chinh-sach-bao-mat" },
-  { label: "Điều khoản sử dụng", href: "#dieu-khoan-su-dung" },
-]
-
-const CONTACT_ITEMS = [
-  {
-    icon: Phone,
-    label: "(+84) 28 7300 6769",
-    href: "tel:+842873006769",
-  },
-  {
-    icon: Mail,
-    label: "hello@kvcglobal.com",
-    href: "mailto:hello@kvcglobal.com",
-  },
-  {
-    icon: MapPin,
-    label: "Tầng 6, 65 Lê Lợi, P. Bến Nghé, Quận 1, TP. Hồ Chí Minh, Việt Nam",
-    href: "https://maps.google.com/?q=65+L%C3%AA+L%E1%BB%A3i%2C+Qu%E1%BA%ADn+1",
-  },
-  {
-    icon: MapPin,
-    label: "20 Collyer Quay, #11-05 Singapore 049319",
-    href: "https://maps.google.com/?q=20+Collyer+Quay+%2311-05+Singapore+049319",
-  },
-]
+const CTA_IMAGE = "/footer-banner.png"
 
 type SocialIconProps = {
   className?: string
@@ -137,7 +93,7 @@ const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
 
 function ColumnHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="font-heading text-[15px] font-semibold tracking-[0.18em] text-foreground uppercase">
+    <h3 className="text-base font-semibold text-primary capitalize">
       {children}
     </h3>
   )
@@ -167,6 +123,8 @@ function LinkList({
 }
 
 function CtaBanner({ className }: { className?: string }) {
+  const t = useDictionary()
+
   return (
     <div
       className={cn(
@@ -193,47 +151,47 @@ function CtaBanner({ className }: { className?: string }) {
           }}
         />
 
-        <div className="relative mr-auto flex h-full w-full max-w-7xl items-center px-15">
-          <div className="max-w-xl">
-            <h2
-              id="footer-cta-heading"
-              className="font-heading text-2xl leading-[1.15] font-bold tracking-tight text-primary sm:text-3xl md:text-[34px]"
+        <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col items-center justify-center px-6 text-center">
+          <h2
+            id="footer-cta-heading"
+            className="font-heading text-2xl leading-[1.15] font-bold tracking-tight text-primary uppercase sm:text-3xl md:text-[34px]"
+          >
+            {t.footer.cta.title}
+          </h2>
+          <span
+            aria-hidden="true"
+            className="mx-auto mt-4 block h-[3px] w-16 rounded-full bg-brand-gold"
+          />
+
+          <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-foreground/80 sm:text-base">
+            {t.footer.cta.description}
+          </p>
+
+          <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href="#dat-lich-tu-van"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+              style={{ background: NAVY }}
             >
-              <span className="block uppercase">Sẵn sàng bắt đầu</span>
-              <span className="block uppercase">hành trình của bạn?</span>
-            </h2>
+              <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
+              {t.footer.cta.book}
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                strokeWidth={2.5}
+              />
+            </Link>
 
-            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-foreground/80 sm:text-base">
-              Đội ngũ KVC Global luôn sẵn sàng lắng nghe và tư vấn lộ trình phù
-              hợp nhất cho bạn và gia đình.
-            </p>
-
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link
-                href="#dat-lich-tu-van"
-                className="group inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-                style={{ background: NAVY }}
-              >
-                <CalendarCheck className="h-4 w-4" strokeWidth={2.25} />
-                Đặt lịch tư vấn ngay
-                <ArrowRight
-                  className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
-                  strokeWidth={2.5}
-                />
-              </Link>
-
-              <Link
-                href="#chat-chuyen-vien"
-                className="group inline-flex items-center justify-center gap-2 rounded-sm border border-foreground/25 bg-white/90 px-5 py-3 text-sm font-semibold text-foreground backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-foreground/40 hover:bg-white hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
-              >
-                <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
-                Chat với chuyên viên
-                <ArrowRight
-                  className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
-                  strokeWidth={2.5}
-                />
-              </Link>
-            </div>
+            <Link
+              href="#chat-chuyen-vien"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
+            >
+              <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
+              {t.footer.cta.chat}
+              <ArrowUpRight
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                strokeWidth={2.5}
+              />
+            </Link>
           </div>
         </div>
       </div>
@@ -266,7 +224,7 @@ function CollapsibleFooterSection({
       onToggle={(event) => setOpen((event.target as HTMLDetailsElement).open)}
       className={cn("group", className)}
     >
-      <summary className="-mx-2 flex cursor-pointer list-none items-center justify-between gap-3 rounded-sm px-2 py-2 transition-colors duration-200 ease-out hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
+      <summary className="relative -mx-2 flex cursor-pointer list-none items-center justify-between gap-3 px-2 pt-2 pb-3 transition-colors duration-200 ease-out after:absolute after:bottom-0 after:left-2 after:h-px after:w-1/2 after:bg-brand-blue-mid/15 hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
         <ColumnHeading>{heading}</ColumnHeading>
         <ChevronDown
           aria-hidden="true"
@@ -283,6 +241,53 @@ function CollapsibleFooterSection({
 }
 
 export function SiteFooter({ className }: { className?: string }) {
+  const locale = useLocale()
+  const t = useDictionary()
+
+  const servicesLinks = [
+    { label: t.footer.services.studyConsulting, href: "#tu-van-du-hoc" },
+    { label: t.footer.services.internship, href: "#thuc-tap-singapore" },
+    { label: t.footer.services.incorporation, href: "#thanh-lap-doanh-nghiep" },
+    { label: t.footer.services.immigration, href: "#tu-van-di-tru" },
+  ]
+
+  const aboutLinks = [
+    { label: t.footer.about.intro, href: locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu" },
+    { label: t.footer.about.team, href: "#doi-ngu" },
+    { label: t.footer.about.partners, href: "#doi-tac" },
+    { label: t.footer.about.values, href: "#gia-tri-cot-loi" },
+    { label: t.footer.about.process, href: "#quy-trinh-lam-viec" },
+  ]
+
+  const supportLinks = [
+    { label: t.footer.support.faq, href: "#faq" },
+    { label: t.footer.support.privacy, href: "#chinh-sach-bao-mat" },
+    { label: t.footer.support.terms, href: "#dieu-khoan-su-dung" },
+  ]
+
+  const contactItems = [
+    {
+      icon: Phone,
+      label: "(+84) 28 7300 6769",
+      href: "tel:+842873006769",
+    },
+    {
+      icon: Mail,
+      label: "hello@kvcglobal.com",
+      href: "mailto:hello@kvcglobal.com",
+    },
+    {
+      icon: MapPin,
+      label: t.footer.addressVN,
+      href: "https://maps.google.com/?q=65+L%C3%AA+L%E1%BB%A3i%2C+Qu%E1%BA%ADn+1",
+    },
+    {
+      icon: MapPin,
+      label: "20 Collyer Quay, #11-05 Singapore 049319",
+      href: "https://maps.google.com/?q=20+Collyer+Quay+%2311-05+Singapore+049319",
+    },
+  ]
+
   return (
     <footer className={cn("bg-white text-foreground", className)}>
       <div className="px-4 pt-12 sm:px-6 sm:pt-16">
@@ -293,7 +298,7 @@ export function SiteFooter({ className }: { className?: string }) {
         <div className="mt-14 grid grid-cols-1 gap-10 pb-10 sm:mt-16 sm:grid-cols-2 sm:gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-3">
             <Link
-              href="/"
+              href={locale === "vi" ? "/vi" : "/en"}
               aria-label="KVC Global — Trang chủ"
               className="inline-flex items-center no-underline"
             >
@@ -308,8 +313,7 @@ export function SiteFooter({ className }: { className?: string }) {
             </Link>
 
             <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-foreground/75">
-              KVC Global — Đồng hành cùng bạn trên hành trình học tập, làm việc,
-              kinh doanh và định cư tại Singapore và nhiều quốc gia khác.
+              {t.footer.bio}
             </p>
 
             <ul className="mt-6 flex items-center gap-3">
@@ -322,8 +326,7 @@ export function SiteFooter({ className }: { className?: string }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={social.label}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full text-primary transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-primary focus-visible:-translate-y-0.5 focus-visible:text-primary focus-visible:outline-none"
-                      style={{ background: "rgba(10, 37, 64, 0.08)" }}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue-mid/10 text-primary transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-primary focus-visible:-translate-y-0.5 focus-visible:text-primary focus-visible:outline-none"
                     >
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </a>
@@ -333,24 +336,24 @@ export function SiteFooter({ className }: { className?: string }) {
             </ul>
           </div>
 
-          <CollapsibleFooterSection heading="Dịch vụ" className="lg:col-span-2">
-            <LinkList links={SERVICES_LINKS} />
+          <CollapsibleFooterSection heading={t.footer.servicesHeading} className="lg:col-span-2">
+            <LinkList links={servicesLinks} />
           </CollapsibleFooterSection>
 
           <CollapsibleFooterSection
-            heading="Về chúng tôi"
+            heading={t.footer.aboutHeading}
             className="lg:col-span-2"
           >
-            <LinkList links={ABOUT_LINKS} />
+            <LinkList links={aboutLinks} />
           </CollapsibleFooterSection>
 
-          <CollapsibleFooterSection heading="Hỗ trợ" className="lg:col-span-2">
-            <LinkList links={SUPPORT_LINKS} />
+          <CollapsibleFooterSection heading={t.footer.supportHeading} className="lg:col-span-2">
+            <LinkList links={supportLinks} />
           </CollapsibleFooterSection>
 
-          <CollapsibleFooterSection heading="Liên hệ" className="lg:col-span-3">
+          <CollapsibleFooterSection heading={t.footer.contactHeading} className="lg:col-span-3">
             <ul className="flex flex-col gap-3 text-[15px]">
-              {CONTACT_ITEMS.map((item, index) => {
+              {contactItems.map((item, index) => {
                 const Icon = item.icon
                 return (
                   <li key={`${item.label}-${index}`} className="flex gap-3">
@@ -385,14 +388,24 @@ export function SiteFooter({ className }: { className?: string }) {
           </CollapsibleFooterSection>
         </div>
 
-        <div
-          aria-hidden="true"
-          className="h-px w-full"
-          style={{ background: "rgba(10, 37, 64, 0.12)" }}
-        />
+        <div aria-hidden="true" className="h-px w-full bg-brand-blue-mid/15" />
 
-        <div className="flex flex-col items-start justify-between gap-2 py-6 text-[13px] text-foreground/65 sm:flex-row sm:items-center">
+        <div className="flex flex-col items-start justify-between gap-3 py-6 text-[13px] text-foreground/50 sm:flex-row sm:items-center">
           <p>© 2024 KVC Global. All rights reserved.</p>
+          <nav aria-label="Chính sách pháp lý" className="flex items-center gap-5">
+            <Link
+              href="#chinh-sach-bao-mat"
+              className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="#dieu-khoan-su-dung"
+              className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"
+            >
+              Terms of Service
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>

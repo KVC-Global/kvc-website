@@ -6,159 +6,168 @@
 
 /* KVC Global brand tokens — see DESIGN.md */
 @theme {
-    --color-brand-blue: #0a2540;
-    --color-brand-gold: #c8913c;
-    --color-brand-dark: #1a202c;
-    --color-brand-light: #f4f7fa;
+  --color-brand-blue: #020e50;
+  --color-brand-blue-mid: #1d427c;
+  --color-brand-gold: #c8913c;
+  --color-brand-gold-light: #f8bc62;
+  --color-brand-dark: #1a202c;
+  --color-brand-light: #fcfbfd;
 
-    --font-heading: "Montserrat", "Inter", sans-serif;
-    --font-body: "Be Vietnam Pro", "Inter", sans-serif;
+  --font-heading: "Montserrat", "Inter", sans-serif;
+  --font-body: "Be Vietnam Pro", "Inter", sans-serif;
 
-    --radius-brand: 20px;
+  --radius-brand: 20px;
 
-    --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
 }
 
 @keyframes marquee {
-    from {
-        transform: translateX(-50%);
-    }
-    to {
-        transform: translateX(0);
-    }
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @theme inline {
-    --font-heading: var(--font-montserrat);
-    --font-body: var(--font-be-vietnam);
-    --font-sans: var(--font-be-vietnam);
-    --font-serif: var(--font-be-vietnam);
-    --font-display: var(--font-montserrat);
-    --color-sidebar-ring: var(--sidebar-ring);
-    --color-sidebar-border: var(--sidebar-border);
-    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-    --color-sidebar-accent: var(--sidebar-accent);
-    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-    --color-sidebar-primary: var(--sidebar-primary);
-    --color-sidebar-foreground: var(--sidebar-foreground);
-    --color-sidebar: var(--sidebar);
-    --color-chart-5: var(--chart-5);
-    --color-chart-4: var(--chart-4);
-    --color-chart-3: var(--chart-3);
-    --color-chart-2: var(--chart-2);
-    --color-chart-1: var(--chart-1);
-    --color-ring: var(--ring);
-    --color-input: var(--input);
-    --color-border: var(--border);
-    --color-destructive: var(--destructive);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-accent: var(--accent);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-muted: var(--muted);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-secondary: var(--secondary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-primary: var(--primary);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-popover: var(--popover);
-    --color-card-foreground: var(--card-foreground);
-    --color-card: var(--card);
-    --color-foreground: var(--foreground);
-    --color-background: var(--background);
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
-    --radius-2xl: calc(var(--radius) * 1.8);
-    --radius-3xl: calc(var(--radius) * 2.2);
-    --radius-4xl: calc(var(--radius) * 2.6);
+  --font-heading: var(--font-montserrat);
+  --font-body: var(--font-be-vietnam);
+  --font-sans: var(--font-be-vietnam);
+  --font-serif: var(--font-be-vietnam);
+  --font-display: var(--font-montserrat);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 /* Brand light: Pure White canvas, Charcoal Black text, Dark Blue primary, KVC Gold accent, Soft Light Blue alt section */
 :root {
-    --background: #ffffff;
-    --foreground: #1a202c;
-    --card: #ffffff;
-    --card-foreground: #1a202c;
-    --popover: #ffffff;
-    --popover-foreground: #1a202c;
-    --primary: #0a2540;
-    --primary-foreground: #ffffff;
-    --secondary: #f1d1a3;
-    --secondary-foreground: #0a2540;
-    --muted: #f4f7fa;
-    --muted-foreground: #4a5568;
-    --accent: #f4f7fa;
-    --accent-foreground: #0a2540;
-    --destructive: #b0421c;
-    --border: #e3e8ef;
-    --input: #e3e8ef;
-    --ring: #0a2540;
-    --chart-1: #0a2540;
-    --chart-2: #c8913c;
-    --chart-3: #1a202c;
-    --chart-4: #f4f7fa;
-    --chart-5: #6b7a8f;
-    --radius: 1.25rem;
-    --sidebar: #f4f7fa;
-    --sidebar-foreground: #1a202c;
-    --sidebar-primary: #0a2540;
-    --sidebar-primary-foreground: #ffffff;
-    --sidebar-accent: #c8913c;
-    --sidebar-accent-foreground: #0a2540;
-    --sidebar-border: #e3e8ef;
-    --sidebar-ring: #0a2540;
+  --background: #ffffff;
+  --foreground: #1a202c;
+  --card: #ffffff;
+  --card-foreground: #1a202c;
+  --popover: #ffffff;
+  --popover-foreground: #1a202c;
+  --primary: #020e50;
+  --primary-foreground: #ffffff;
+  --secondary: #f1d1a3;
+  --secondary-foreground: #0a2540;
+  --muted: #f4f7fa;
+  --muted-foreground: #4a5568;
+  --accent: #f4f7fa;
+  --accent-foreground: #0a2540;
+  --destructive: #b0421c;
+  --border: #e3e8ef;
+  --input: #e3e8ef;
+  --ring: #0a2540;
+  --chart-1: #0a2540;
+  --chart-2: #c8913c;
+  --chart-3: #1a202c;
+  --chart-4: #f4f7fa;
+  --chart-5: #6b7a8f;
+  --radius: 1.25rem;
+  --sidebar: #f4f7fa;
+  --sidebar-foreground: #1a202c;
+  --sidebar-primary: #0a2540;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #c8913c;
+  --sidebar-accent-foreground: #0a2540;
+  --sidebar-border: #e3e8ef;
+  --sidebar-ring: #0a2540;
 }
 
 /* Brand dark: Dark Blue structural bookends, Pure White text, KVC Gold accent */
 .dark {
-    --background: #0a2540;
-    --foreground: #ffffff;
-    --card: #102f50;
-    --card-foreground: #ffffff;
-    --popover: #102f50;
-    --popover-foreground: #ffffff;
-    --primary: #c8913c;
-    --primary-foreground: #0a2540;
-    --secondary: #f1d1a3;
-    --secondary-foreground: #0a2540;
-    --muted: #102f50;
-    --muted-foreground: #c8d1dc;
-    --accent: #102f50;
-    --accent-foreground: #c8913c;
-    --destructive: #c45a32;
-    --border: #1d3a5e;
-    --input: #1d3a5e;
-    --ring: #c8913c;
-    --chart-1: #c8913c;
-    --chart-2: #ffffff;
-    --chart-3: #c8d1dc;
-    --chart-4: #1a202c;
-    --chart-5: #0a2540;
-    --sidebar: #0a2540;
-    --sidebar-foreground: #ffffff;
-    --sidebar-primary: #c8913c;
-    --sidebar-primary-foreground: #0a2540;
-    --sidebar-accent: #102f50;
-    --sidebar-accent-foreground: #c8913c;
-    --sidebar-border: #1d3a5e;
-    --sidebar-ring: #c8913c;
+  --background: #0a2540;
+  --foreground: #ffffff;
+  --card: #102f50;
+  --card-foreground: #ffffff;
+  --popover: #102f50;
+  --popover-foreground: #ffffff;
+  --primary: #c8913c;
+  --primary-foreground: #0a2540;
+  --secondary: #f1d1a3;
+  --secondary-foreground: #0a2540;
+  --muted: #102f50;
+  --muted-foreground: #c8d1dc;
+  --accent: #102f50;
+  --accent-foreground: #c8913c;
+  --destructive: #c45a32;
+  --border: #1d3a5e;
+  --input: #1d3a5e;
+  --ring: #c8913c;
+  --chart-1: #c8913c;
+  --chart-2: #ffffff;
+  --chart-3: #c8d1dc;
+  --chart-4: #1a202c;
+  --chart-5: #0a2540;
+  --sidebar: #0a2540;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #c8913c;
+  --sidebar-primary-foreground: #0a2540;
+  --sidebar-accent: #102f50;
+  --sidebar-accent-foreground: #c8913c;
+  --sidebar-border: #1d3a5e;
+  --sidebar-ring: #c8913c;
 }
 
 @layer base {
-    * {
-        @apply border-border outline-ring/50;
-    }
-    body {
-        @apply bg-background text-foreground;
-    }
-    html {
-        @apply font-sans;
-    }
-    h1, h2, h3, h4 {
-        @apply font-heading tracking-tight;
-    }
-    p, li, label, input, textarea {
-        @apply leading-relaxed;
-    }
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading tracking-tight;
+  }
+  p,
+  li,
+  label,
+  input,
+  textarea {
+    @apply leading-relaxed;
+  }
 }

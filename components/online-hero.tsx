@@ -1,33 +1,20 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { Clock, Coins, FileCheck, GraduationCap } from "lucide-react"
 import { motion } from "framer-motion"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+
+const HERO_IMAGE =
+  "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&q=80&auto=format&fit=crop"
+
 const STATS = [
-  {
-    icon: Clock,
-    value: "Linh hoạt",
-    label: "thời gian học",
-  },
-  {
-    icon: Coins,
-    value: "Tiết kiệm",
-    label: "chi phí du học",
-  },
-  {
-    icon: FileCheck,
-    value: "Bằng cấp",
-    label: "chính quy",
-  },
-  {
-    icon: GraduationCap,
-    value: "Liên thông",
-    label: "quốc tế",
-  },
+  { icon: Clock, value: "Linh hoạt", label: "thời gian học" },
+  { icon: Coins, value: "Tiết kiệm", label: "chi phí du học" },
+  { icon: FileCheck, value: "Bằng cấp", label: "chính quy" },
+  { icon: GraduationCap, value: "Liên thông", label: "quốc tế" },
 ] as const
 
 export function OnlineHero({ className }: { className?: string }) {
@@ -35,36 +22,23 @@ export function OnlineHero({ className }: { className?: string }) {
     <section
       aria-labelledby="online-hero-heading"
       className={cn(
-        "relative w-full overflow-hidden border-b border-border bg-white",
+        "relative w-full overflow-hidden bg-cover bg-center",
         className
       )}
+      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
     >
-      {/* Desktop Background Image (Right side) */}
-      <div className="absolute inset-y-0 right-0 z-0 hidden w-full lg:block lg:w-[52%]">
-        <Image
-          src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&q=80&auto=format&fit=crop"
-          alt="Học viên trực tuyến"
-          fill
-          priority
-          sizes="(max-w-1024px) 100vw, 52vw"
-          className="object-cover object-center"
-        />
-        {/* Soft blend transition from white background (left) to image */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-white via-white/80 to-transparent"
-        />
-      </div>
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-r from-white from-50% to-transparent to-100%"
+      />
 
-      {/* Main Content Container */}
-      <Container className="relative z-10 py-8 md:py-16 lg:py-20">
-        {/* Breadcrumb Navigation */}
+      <Container className="relative flex min-h-[600px] flex-col justify-center pt-28 pb-20 sm:pt-32 sm:pb-24 md:min-h-[640px] md:pt-36 md:pb-0">
         <motion.nav
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           aria-label="Breadcrumb"
-          className="mb-8 flex flex-wrap items-center gap-1.5 font-body text-xs font-medium text-muted-foreground md:text-sm"
+          className="mb-6 flex flex-wrap items-center gap-1.5 font-body text-xs font-medium text-muted-foreground md:mb-8 md:text-sm"
         >
           <Link
             href="/"
@@ -81,25 +55,7 @@ export function OnlineHero({ className }: { className?: string }) {
           </span>
         </motion.nav>
 
-        {/* Mobile/Tablet Image Display (Shown only on small/medium screens) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          className="relative mb-8 h-[240px] w-full overflow-hidden rounded-lg sm:h-[360px] md:h-[420px] lg:hidden"
-        >
-          <Image
-            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&q=80&auto=format&fit=crop"
-            alt="Học viên trực tuyến"
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        </motion.div>
-
-        {/* Content Box */}
-        <div className="max-w-full lg:max-w-[55%]">
-          {/* Subtitle / Tag */}
+        <div className="max-w-2xl">
           <motion.span
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -109,7 +65,6 @@ export function OnlineHero({ className }: { className?: string }) {
             ĐÀO TẠO TRỰC TUYẾN
           </motion.span>
 
-          {/* Main Title */}
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -121,27 +76,25 @@ export function OnlineHero({ className }: { className?: string }) {
             <span className="mt-1 block">phát triển sự nghiệp toàn cầu</span>
           </motion.h1>
 
-          {/* Description Paragraph */}
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px] md:leading-relaxed"
+            className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]"
           >
             Các chương trình đào tạo trực tuyến chất lượng quốc tế, giúp bạn vừa
             học vừa làm và lấy bằng cấp có giá trị toàn cầu.
           </motion.p>
 
-          {/* Call to Actions (CTAs) */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center"
+            className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4"
           >
             <Link
               href="#dang-ky"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-gold px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#b07f32] hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid"
             >
               Đăng ký tư vấn miễn phí
               <svg
@@ -160,7 +113,7 @@ export function OnlineHero({ className }: { className?: string }) {
 
             <Link
               href="#chuong-trinh"
-              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-light hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-blue-mid bg-white px-6 py-3.5 text-sm font-semibold text-brand-blue transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:text-white hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid"
             >
               Khám phá chương trình
               <svg
@@ -179,23 +132,25 @@ export function OnlineHero({ className }: { className?: string }) {
           </motion.div>
         </div>
 
-        {/* Stats Grid Container */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="relative z-20 mt-12 w-full lg:mt-16 xl:mt-20"
+          className="relative z-20 mt-10 w-full sm:mt-12 lg:mt-16 xl:mt-20"
         >
           <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border shadow-[0_12px_40px_-15px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:grid-cols-2 lg:w-fit lg:grid-cols-4">
-            {STATS.map((stat, idx) => {
+            {STATS.map((stat) => {
               const Icon = stat.icon
               return (
                 <div
-                  key={idx}
+                  key={stat.label}
                   className="flex items-center gap-4 bg-white px-5 py-4 transition-all duration-300 ease-out hover:bg-brand-light sm:px-6 sm:py-5 lg:min-w-[240px]"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-light">
-                    <Icon className="h-5 w-5 text-brand-gold" strokeWidth={2} />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-blue-mid">
+                    <Icon
+                      className="h-5 w-5 text-brand-gold-light"
+                      strokeWidth={2}
+                    />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-heading text-sm font-bold text-brand-blue sm:text-[15px]">
