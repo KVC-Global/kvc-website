@@ -21,7 +21,7 @@ const NAV_LINKS_KEYS = [
 
 const destinations = [
   { key: "diplomaSingapore", href: "/du-hoc", isComingSoon: false },
-  { key: "uniMasterSingapore", href: "/coming-soon", isComingSoon: true },
+  { key: "uniMasterSingapore", href: "/du-hoc/dai-hoc-thac-si", isComingSoon: false },
   { key: "privateAllAges", href: "/du-hoc/tu-thuc", isComingSoon: false },
   { key: "publicAllAges", href: "/du-hoc/cong-lap", isComingSoon: false },
   { key: "malaysia", href: "/coming-soon", isComingSoon: true },
