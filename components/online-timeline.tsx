@@ -119,16 +119,7 @@ function TimelineCard({
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className={cn(
-            "group/card block w-full overflow-hidden rounded-lg border border-border bg-white text-left shadow-sm transition-all duration-300 ease-out",
-            "hover:-translate-y-1 hover:shadow-lg"
-          )}
-          style={{
-            [isEven ? "borderRightColor" : "borderLeftColor"]:
-              levelWeight >= 7 ? "rgb(200,145,60)" : "rgba(200,145,60,0.6)",
-            [isEven ? "borderRightWidth" : "borderLeftWidth"]:
-              levelWeight >= 7 ? "3px" : "2px",
-          }}
+          className="group/card block w-full overflow-hidden rounded-lg border border-border bg-white text-left shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
         >
           {/* ── Card header ── */}
           <div className="flex items-start justify-between gap-4 p-6">
