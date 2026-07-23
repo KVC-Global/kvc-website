@@ -4,10 +4,11 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
-import { Check, GraduationCap, Clock, Globe, Star, Users, ArrowRight, Calendar, ListChecks, UserCheck, Building2 } from "lucide-react"
+import { Check, GraduationCap, Clock, Globe, Star, Users, ArrowRight, Building2 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { ExpandableTimeline, type TimelineProgram } from "@/components/online-timeline"
 
 const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -72,15 +73,7 @@ const STEPS = [
   "Bắt đầu chương trình học trực tuyến.",
 ]
 
-interface Program {
-  name: string
-  duration: string
-  start: string
-  subjects: string[]
-  entry: string
-}
-
-const PROGRAMS: Program[] = [
+const PROGRAMS: TimelineProgram[] = [
   {
     name: "BA (Hons) Business Management",
     duration: "12 tháng",
@@ -326,48 +319,11 @@ export function OnlineWolverhampton({ className }: { className?: string }) {
       <section className="bg-brand-light py-16 md:py-24">
         <Container>
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+            <motion.div variants={fadeUpVariants} className="mb-4 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Các chương trình đào tạo</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {PROGRAMS.map((prog, i) => (
-                <motion.div key={i} variants={fadeUpVariants} className="flex flex-col rounded-lg border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
-                  <h3 className="font-heading text-lg font-bold text-brand-blue">{prog.name}</h3>
-                  <div className="mt-4 flex flex-wrap gap-4 text-sm text-brand-dark/75">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-light px-3 py-1 font-medium">
-                      <Clock className="h-3.5 w-3.5 text-brand-gold" />
-                      {prog.duration}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-light px-3 py-1 font-medium">
-                      <Calendar className="h-3.5 w-3.5 text-brand-gold" />
-                      {prog.start}
-                    </span>
-                  </div>
-                  <div className="mt-5">
-                    <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue">
-                      <ListChecks className="h-4 w-4 text-brand-gold" />
-                      Môn học
-                    </h4>
-                    <ul className="mt-2 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
-                      {prog.subjects.map((s, j) => (
-                        <li key={j} className="flex items-start gap-2 text-sm text-brand-dark/75">
-                          <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="mt-5 rounded-md bg-brand-gold/5 border border-brand-gold/20 p-4">
-                    <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue">
-                      <UserCheck className="h-4 w-4 text-brand-gold" />
-                      Điều kiện đầu vào
-                    </h4>
-                    <p className="mt-1.5 text-sm text-brand-dark/75">{prog.entry}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            <ExpandableTimeline programs={PROGRAMS} />
           </motion.div>
         </Container>
       </section>
