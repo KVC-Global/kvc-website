@@ -273,8 +273,8 @@ export function OnlineOthm({ className }: { className?: string }) {
             <div className="mx-auto max-w-3xl">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {BENEFITS.map((item, i) => (
-                  <motion.div key={i} variants={fadeUpVariants} className="flex items-start gap-3 rounded-lg border border-border bg-white p-4 shadow-sm">
-                    <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
+                  <motion.div key={i} variants={fadeUpVariants} className="flex items-center gap-3 rounded-lg border border-border bg-white p-4 shadow-sm">
+                    <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
                       <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
                     </div>
                     <span className="font-body text-sm text-brand-dark/85">{item}</span>
