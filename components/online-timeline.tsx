@@ -94,10 +94,10 @@ export function ExpandableTimeline({
             <motion.li
               key={index}
               variants={timelineItemVariants}
-              className="group/timeline relative flex flex-col items-start justify-between sm:flex-row sm:items-start"
+              className="group/timeline relative flex flex-col items-start justify-between sm:flex-row sm:items-center"
             >
               {/* Step dot */}
-              <div className="absolute left-6 z-10 mt-10 flex h-4 w-4 -translate-x-1/2 items-center justify-center rounded-full border-2 border-white bg-brand-blue-mid shadow-sm transition-transform duration-300 ease-out group-hover/timeline:scale-125 sm:left-1/2 sm:mt-10" />
+              <div className="absolute left-6 z-10 mt-12 flex h-4 w-4 -translate-x-1/2 items-center justify-center rounded-full border-2 border-white bg-brand-blue-mid shadow-sm transition-transform duration-300 ease-out group-hover/timeline:scale-125 sm:left-1/2 sm:top-1/2 sm:mt-0 sm:-translate-y-1/2" />
 
               {/* Level tag (opposite side on desktop) */}
               {level && (
