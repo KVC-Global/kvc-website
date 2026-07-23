@@ -71,11 +71,11 @@ function TimelineCard({
   const isEven = index % 2 === 0
   const [expanded, setExpanded] = React.useState(false)
   const cardRef = React.useRef<HTMLDivElement | null>(null)
-  const inView = useInView(cardRef, { margin: "-80px" })
+  const inView = useInView(cardRef, { once: true, margin: "-80px" })
 
-  // Sync expanded state with scroll — auto expand/collapse
+  // Auto-expand when scrolled into view (fires once per card)
   React.useEffect(() => {
-    setExpanded(inView)
+    if (inView) setExpanded(true)
   }, [inView])
 
   return (
