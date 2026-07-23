@@ -464,42 +464,45 @@ export function SiteHeaderMobileMenu({
             // Dropdown parent — Khóa học Online accordion
             if (hasChildren) {
               return (
-                <li key={link.href}>
+                <li key={link.href} className="flex flex-col">
                   <button
                     type="button"
                     aria-expanded={isExpanded}
                     onClick={() => setExpandedKey(isExpanded ? null : link.key)}
                     className={cn(
-                      "flex w-full items-center justify-between rounded-md px-3 py-3 text-left transition-all duration-300 ease-out hover:bg-muted hover:pl-5 hover:text-foreground focus-visible:bg-muted focus-visible:pl-5 focus-visible:text-foreground focus-visible:outline-none",
+                      "group relative flex w-full items-center justify-between overflow-hidden rounded-md px-3 py-3 text-left transition-all duration-300 ease-out hover:bg-muted hover:pl-5 hover:text-foreground focus-visible:bg-muted focus-visible:pl-5 focus-visible:text-foreground focus-visible:outline-none",
                       active && "bg-muted pl-5 font-semibold text-brand-gold"
                     )}
                   >
-                    <span className="relative">
-                      <span
-                        aria-hidden="true"
-                        className={cn(
-                          "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-brand-gold transition-transform duration-300 ease-out",
-                          active ? "scale-y-100" : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"
-                        )}
-                      />
-                      {label}
-                    </span>
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-brand-gold transition-transform duration-300 ease-out",
+                        active || isExpanded
+                          ? "scale-y-100"
+                          : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"
+                      )}
+                    />
+                    <span>{label}</span>
                     <ChevronDown
                       className={cn(
-                        "h-4 w-4 shrink-0 transition-transform duration-200",
-                        isExpanded && "rotate-180"
+                        "h-5 w-5 transition-transform duration-300 text-muted-foreground",
+                        isExpanded && "rotate-180 text-brand-gold"
                       )}
                     />
                   </button>
 
+                  {/* Collapsible Panel */}
                   <div
                     className={cn(
                       "grid transition-all duration-300 ease-in-out",
-                      isExpanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                      isExpanded
+                        ? "grid-rows-[1fr] opacity-100 mt-1"
+                        : "grid-rows-[0fr] opacity-0 pointer-events-none"
                     )}
                   >
                     <div className="overflow-hidden">
-                      <ul className="ml-4 border-l-2 border-border/60 py-1">
+                      <ul className="pl-6 pr-3 flex flex-col gap-1 border-l border-border/80 ml-4 my-1">
                         {link.children!.map((child) => {
                           const childHref = getLocalizedHref(child.href, locale)
                           const childActive = isActive(pathname, childHref)
@@ -509,17 +512,10 @@ export function SiteHeaderMobileMenu({
                                 href={childHref}
                                 aria-current={childActive ? "page" : undefined}
                                 className={cn(
-                                  "relative block rounded-md px-4 py-2.5 text-base transition-all duration-300 ease-out hover:bg-muted hover:pl-6 hover:text-foreground focus-visible:bg-muted focus-visible:pl-6 focus-visible:text-foreground focus-visible:outline-none",
-                                  childActive && "bg-muted pl-6 font-semibold text-brand-gold"
+                                  "block rounded-md py-2 px-3 text-sm font-body text-muted-foreground hover:bg-muted hover:text-foreground transition-all",
+                                  childActive && "text-brand-gold font-medium bg-muted/50"
                                 )}
                               >
-                                <span
-                                  aria-hidden="true"
-                                  className={cn(
-                                    "absolute inset-y-2 left-4 w-[3px] origin-top rounded-r-full bg-brand-gold transition-transform duration-300 ease-out",
-                                    childActive ? "scale-y-100" : "scale-y-0"
-                                  )}
-                                />
                                 {t.nav[child.key]}
                               </Link>
                             </li>
