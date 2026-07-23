@@ -95,6 +95,19 @@ function TimelineCard({
         style={{ width: 14 + (levelWeight - 3), height: 14 + (levelWeight - 3) }}
       />
 
+      {/* ── Duration badge (opposite side on desktop) ── */}
+      <div
+        className={cn(
+          "hidden sm:flex sm:w-[calc(50%-2.5rem)]",
+          isEven ? "order-2 pl-10 justify-start" : "pr-10 justify-end"
+        )}
+      >
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1 font-sans text-sm font-semibold text-brand-blue-mid">
+          <Clock className="h-3.5 w-3.5 text-brand-gold" />
+          {program.duration}
+        </span>
+      </div>
+
       {/* ── Card ── */}
       <div
         className={cn(
