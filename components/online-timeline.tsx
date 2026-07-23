@@ -99,7 +99,7 @@ function TimelineCard({
       <div
         className={cn(
           "w-full pl-16 sm:w-[calc(50%-2.5rem)] sm:pl-0",
-          isEven ? "sm:pr-10" : "sm:order-2 sm:pl-10"
+          isEven ? "sm:mr-auto sm:pr-10" : "sm:ml-auto sm:pl-10"
         )}
       >
         <button
