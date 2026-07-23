@@ -6,32 +6,32 @@ import { cn } from "@/lib/utils"
 
 const FAQS = [
   {
-    question: "Diploma 6+6 khác gì so với du học truyền thống?",
-    answer: "Khác với du học truyền thống tập trung chủ yếu vào lý thuyết kéo dài 3-4 năm, Diploma 6+6 tối ưu hóa thời gian học trong 12 tháng. Trong đó có 6 tháng học lý thuyết song song thực hành, và 6 tháng thực tập hưởng lương bắt buộc tại các doanh nghiệp. Mô hình này giúp học viên vừa tiết kiệm chi phí, vừa tích lũy kinh nghiệm làm việc thực tế tại Singapore ngay khi tốt nghiệp.",
+    question: "Kỳ thi AEIS/S-AEIS là gì và ôn luyện thế nào?",
+    answer: "AEIS (Admissions Exercise for International Students) là kỳ thi quốc gia do Bộ Giáo dục Singapore tổ chức vào tháng 9 hàng năm để tuyển học sinh quốc tế vào các trường công lập (Tiểu học 2-5 và Trung học 1-3). S-AEIS tổ chức bổ sung vào tháng 2. Đề thi gồm môn Toán và Tiếng Anh (hoặc chứng chỉ CEQ cho tiểu học), đòi hỏi ôn luyện chuyên sâu trước tối thiểu 6-12 tháng.",
   },
   {
-    question: "Học phí và chi phí sinh hoạt tại Singapore khoảng bao nhiêu?",
-    answer: "Học phí trọn gói cho chương trình Diploma dao động khoảng 6.000 - 8.000 SGD tùy ngành học. Chi phí sinh hoạt (ăn ở, đi lại) tại Singapore trung bình khoảng 800 - 1.200 SGD/tháng. Tuy học phí và sinh hoạt phí ở Singapore cao hơn Việt Nam, mức thu nhập trong 6 tháng thực tập hưởng lương (800 - 1.500 SGD/tháng) hoàn toàn có thể giúp học viên tự trang trải phần lớn sinh hoạt phí.",
+    question: "Học sinh học trường công lập có cơ hội định cư PR không?",
+    answer: "Có, đây là lợi thế lớn của hệ thống công lập Singapore. Học sinh quốc tế cư trú hợp pháp tại Singapore từ 2 năm trở lên và đã đỗ ít nhất một kỳ thi quốc gia (như PSLE, GCE O-Level, N-Level hoặc A-Level) hoàn toàn đủ điều kiện tự nộp hồ sơ xin Thường trú nhân (PR).",
   },
   {
-    question: "Sau 6 tháng thực tập, có được làm việc tiếp không?",
-    answer: "Sau khi kết thúc 6 tháng thực tập, nếu hoàn thành tốt công việc và doanh nghiệp có nhu cầu, học viên có thể được gia hạn hợp đồng làm việc chính thức dưới dạng visa S Pass hoặc EP. Ngoài ra, học viên cũng có thể lựa chọn học chuyển tiếp liên thông lên Cử nhân (1.5 - 2 năm nữa) để nhận bằng Đại học quốc tế.",
+    question: "MOE Tuition Grant hỗ trợ học phí thế nào cho du học sinh?",
+    answer: "MOE Tuition Grant là chương trình hỗ trợ học phí đáng kể của chính phủ Singapore dành cho sinh viên quốc tế học hệ Cao đẳng (Polytechnic) hoặc Đại học công lập. Sau khi nhận hỗ trợ, sinh viên cam kết làm việc cho doanh nghiệp đăng ký tại Singapore trong thời gian 3 năm sau khi tốt nghiệp.",
   },
   {
-    question: "Trợ cấp 800-1.500 SGD/tháng tại những doanh nghiệp nào?",
-    answer: "Học viên được thực tập tại các đối tác liên kết uy tín của KVC Global và nhà trường tại Singapore, bao gồm các chuỗi khách sạn 4-5 sao quốc tế, các chuỗi nhà hàng ẩm thực lớn, các doanh nghiệp logistics hàng đầu hoặc các công ty dịch vụ/thương mại điện tử công nghệ.",
+    question: "Phụ huynh sang Singapore theo diện thăm thân đi kèm con có được đi làm không?",
+    answer: "Thẻ thăm thân dài hạn (LTVP) dành cho mẹ hoặc bà đi kèm học sinh dưới 18 tuổi không cho phép đi làm việc tự do. Nếu tìm được công ty bảo lãnh phù hợp, phụ huynh phải làm thủ tục xin Giấy phép lao động (Work Permit hoặc S Pass) theo quy định của MOM mới được đi làm hợp pháp.",
   },
   {
-    question: "Nếu không đạt yêu cầu thực tập thì sao?",
-    answer: "Trong trường hợp học viên chưa đáp ứng được yêu cầu của doanh nghiệp thực tập ban đầu, KVC Global phối hợp cùng bộ phận hỗ trợ sinh viên của nhà trường sẽ tiến hành bổ túc kiến thức, hướng dẫn lại kỹ năng phỏng vấn và sắp xếp phỏng vấn tại các doanh nghiệp đối tác khác để đảm bảo 100% học viên hoàn thành học phần thực tập hưởng lương.",
+    question: "Học phí trường công lập Singapore được đóng như thế nào?",
+    answer: "Học phí của học sinh quốc tế tại các trường công lập Singapore được quy định cụ thể bởi MOE và đóng theo định kỳ hàng tháng (thông qua tài khoản ngân hàng liên kết GIRO hoặc thanh toán trực tiếp), giúp giảm bớt áp lực tài chính đóng gộp cho gia đình.",
   },
   {
-    question: "Có thể chuyển ngành khi đã nhập học không?",
-    answer: "Trong thời gian học lý thuyết ở những tuần đầu tiên, học viên có thể làm đơn xin chuyển đổi ngành học nếu nhận thấy bản thân phù hợp hơn với ngành khác. KVC Global và nhà trường sẽ hướng dẫn các thủ tục hồ sơ cần thiết để chuyển đổi thuận tiện nhất mà không ảnh hưởng tới tiến độ visa du học.",
+    question: "KVC Global hỗ trợ gia đình làm thủ tục giám hộ ra sao?",
+    answer: "KVC Global cung cấp dịch vụ người giám hộ hợp pháp cư trú tại Singapore đáp ứng đầy đủ tiêu chí của MOE (là công dân Singapore hoặc thường trú nhân). Người giám hộ sẽ hỗ trợ ký kết giấy tờ, tham gia họp phụ huynh, giữ kết nối chặt chẽ giữa nhà trường và gia đình tại Việt Nam.",
   },
 ] as const
 
-export function StudyAbroadFaqs({ className }: { className?: string }) {
+export function PublicStudyAbroadFaqs({ className }: { className?: string }) {
   const [openFaqs, setOpenFaqs] = useState<Record<number, boolean>>({})
   const toggleFaq = (idx: number) => {
     setOpenFaqs((prev) => ({ ...prev, [idx]: !prev[idx] }))

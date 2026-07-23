@@ -1,23 +1,23 @@
 import Link from "next/link"
-import { Clock, Coins, FileCheck, GraduationCap } from "lucide-react"
+import { Landmark, Compass, Coins, GraduationCap } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import Image from "next/image"
 
-const HERO_IMAGE = "/images/study-abroad-hero.jpg"
+const HERO_IMAGE = "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200&auto=format&fit=crop"
 
 const STATS = [
-  { icon: Clock, value: "1 năm", label: "hoàn thành" },
-  { icon: Coins, value: "800 – 1.500 SGD/tháng", label: "trợ cấp thực tập" },
-  { icon: FileCheck, value: "Không yêu cầu IELTS", label: "bắt buộc" },
-  { icon: GraduationCap, value: "Bằng Diploma", label: "quốc tế" },
+  { icon: Landmark, value: "Tiểu học – Dự bị ĐH", label: "hệ thống công lập" },
+  { icon: Compass, value: "Kỳ thi AEIS", label: "tuyển sinh quốc gia" },
+  { icon: Coins, value: "MOE Tuition Grant", label: "hỗ trợ học phí" },
+  { icon: GraduationCap, value: "Xét Thường trú nhân", label: "cơ hội định cư PR" },
 ] as const
 
-export function StudyAbroadHero({ className }: { className?: string }) {
+export function PublicStudyAbroadHero({ className }: { className?: string }) {
   return (
     <section
-      aria-labelledby="study-hero-heading"
+      aria-labelledby="public-hero-heading"
       className={cn(
         "relative w-full border-b border-border bg-cover bg-center bg-white",
         className
@@ -26,13 +26,11 @@ export function StudyAbroadHero({ className }: { className?: string }) {
     >
       <Image
         src={HERO_IMAGE}
-        alt=""
-        role="presentation"
+        alt="Trường công lập Singapore"
         fill
         priority
         sizes="100vw"
         className="object-cover object-center animate-fade-in"
-        style={{ transform: "scaleX(-1)" }}
       />
       <div
         aria-hidden="true"
@@ -57,39 +55,38 @@ export function StudyAbroadHero({ className }: { className?: string }) {
           <span className="select-none text-muted-foreground/60">&gt;</span>
           <Link
             href="/du-hoc"
-            className="text-muted-foreground/80"
+            className="hover:text-foreground transition-colors duration-200"
           >
             Du học
           </Link>
           <span className="select-none text-muted-foreground/60">&gt;</span>
           <span className="font-semibold text-foreground/80" aria-current="page">
-            Diploma 6+6 tại Singapore
+            Du học công lập Singapore
           </span>
         </nav>
 
         <div className="max-w-2xl">
           <span className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-            DIPLOMA 6+6 TẠI SINGAPORE
+            DU HỌC CÔNG LẬP SINGAPORE
           </span>
 
           <h1
-            id="study-hero-heading"
+            id="public-hero-heading"
             className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
           >
-            Vừa học vừa làm,
+            Nền giáo dục đỉnh cao,
             <span className="mt-1 block">
-              lấy bằng quốc tế chỉ trong 1 năm
+              bước đệm định cư tương lai vững chắc
             </span>
           </h1>
 
           <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">
-            Lộ trình Diploma 6+6 kết hợp 6 tháng học lý thuyết và 6 tháng thực
-            tập hưởng lương tại Singapore.
+            Hệ thống giáo dục công lập uy tín hàng đầu thế giới dưới sự quản lý trực tiếp của Bộ Giáo dục Singapore (MOE), mở ra lộ trình phát triển học thuật vượt trội.
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
             <Link
-              href="#dang-ky"
+              href="#dang-ky-tu-van"
               className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
               Đăng ký tư vấn miễn phí
@@ -108,10 +105,10 @@ export function StudyAbroadHero({ className }: { className?: string }) {
             </Link>
 
             <Link
-              href="#chuong-trinh"
+              href="#lo-trinh"
               className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
-              Tìm hiểu chương trình
+              Tìm hiểu lộ trình học
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"

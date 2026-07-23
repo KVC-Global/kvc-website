@@ -48,11 +48,11 @@ const BENEFITS = [
   },
 ] as const
 
-export function StudyAbroadWhy() {
+export function StudyAbroadWhy({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="why-heading"
-      className="mt-20 md:mt-28 w-full"
+      className={cn("mt-20 md:mt-28 w-full", className)}
     >
       <h2
         id="why-heading"
