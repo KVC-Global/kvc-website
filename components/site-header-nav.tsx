@@ -22,7 +22,7 @@ const NAV_LINKS_KEYS = [
 const destinations = [
   { key: "diplomaSingapore", href: "/du-hoc", isComingSoon: false },
   { key: "uniMasterSingapore", href: "/coming-soon", isComingSoon: true },
-  { key: "privateAllAges", href: "/coming-soon", isComingSoon: true },
+  { key: "privateAllAges", href: "/du-hoc/tu-thuc", isComingSoon: false },
   { key: "publicAllAges", href: "/coming-soon", isComingSoon: true },
   { key: "malaysia", href: "/coming-soon", isComingSoon: true },
   { key: "taiwan", href: "/coming-soon", isComingSoon: true },
