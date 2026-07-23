@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "@/lib/utils"
 import { Globe, Coins, Milestone, TrendingUp, ShieldCheck, Users } from "lucide-react"
 
 const BENEFITS = [
@@ -41,11 +42,11 @@ const BENEFITS = [
   },
 ] as const
 
-export function PublicStudyAbroadWhy() {
+export function PublicStudyAbroadWhy({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="public-why-heading"
-      className="mt-20 md:mt-28 w-full"
+      className={cn("mt-20 md:mt-28 w-full", className)}
     >
       <h2
         id="public-why-heading"

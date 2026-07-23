@@ -37,7 +37,7 @@ export function PublicStudyAbroadServices() {
   return (
     <section
       aria-labelledby="related-services-heading"
-      className="mt-20 md:mt-28 w-full animate-fade-in"
+      className="w-full animate-fade-in"
     >
       <div className="text-center mb-10">
         <h2

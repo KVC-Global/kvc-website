@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "@/lib/utils"
 import { Check, FileText, Calendar, Compass, ShieldCheck } from "lucide-react"
 
 const DOCS = [
@@ -10,11 +11,11 @@ const DOCS = [
   "Giấy tờ bổ sung theo yêu cầu riêng của trường",
 ] as const
 
-export function PrivateStudyAbroadRequirements() {
+export function PrivateStudyAbroadRequirements({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="reqs-heading"
-      className="mt-20 md:mt-28 w-full"
+      className={cn("mt-20 md:mt-28 w-full", className)}
     >
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 items-stretch">
         {/* Left Side: Requirements */}

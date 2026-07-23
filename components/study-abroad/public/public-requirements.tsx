@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "@/lib/utils"
 import { Check, Info, ShieldCheck, Landmark } from "lucide-react"
 
 const COSTS = [
@@ -9,11 +10,11 @@ const COSTS = [
   { item: "Chi tiêu cá nhân khác", fee: "200 – 400 SGD / tháng" },
 ] as const
 
-export function PublicStudyAbroadRequirements() {
+export function PublicStudyAbroadRequirements({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="public-reqs-heading"
-      className="mt-20 md:mt-28 w-full"
+      className={cn("mt-20 md:mt-28 w-full", className)}
     >
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 items-stretch">
         {/* Left Side: Requirements & Guardian */}

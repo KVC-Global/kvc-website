@@ -31,7 +31,7 @@ const FAQS = [
   },
 ] as const
 
-export function PublicStudyAbroadFaqs() {
+export function PublicStudyAbroadFaqs({ className }: { className?: string }) {
   const [openFaqs, setOpenFaqs] = useState<Record<number, boolean>>({})
   const toggleFaq = (idx: number) => {
     setOpenFaqs((prev) => ({ ...prev, [idx]: !prev[idx] }))
@@ -40,7 +40,7 @@ export function PublicStudyAbroadFaqs() {
   return (
     <section
       aria-labelledby="faq-heading"
-      className="mt-20 md:mt-28 w-full"
+      className={cn("mt-20 md:mt-28 w-full", className)}
     >
       <div className="text-left mb-8">
         <h2

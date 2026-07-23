@@ -1,5 +1,6 @@
 "use client"
 
+import { cn } from "@/lib/utils"
 import { Compass, FolderOpen, BookOpen, UserCheck, Smile } from "lucide-react"
 
 const STEPS = [
@@ -30,11 +31,11 @@ const STEPS = [
   },
 ] as const
 
-export function PublicStudyAbroadSupport() {
+export function PublicStudyAbroadSupport({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="support-heading"
-      className="mt-20 md:mt-28 w-full"
+      className={cn("mt-20 md:mt-28 w-full", className)}
     >
       <div className="text-center mb-12">
         <h2
