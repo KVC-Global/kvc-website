@@ -95,20 +95,6 @@ function TimelineCard({
         style={{ width: 14 + (levelWeight - 3), height: 14 + (levelWeight - 3) }}
       />
 
-      {/* ── Level tag (opposite side on desktop) ── */}
-      {level && (
-        <div
-          className={cn(
-            "hidden sm:block sm:w-[calc(50%-2.5rem)]",
-            isEven ? "order-2 pl-10 text-left" : "pr-10 text-right"
-          )}
-        >
-          <span className="inline-block rounded-md bg-brand-blue-mid px-3 py-1 font-sans text-sm font-semibold text-brand-gold-light shadow-sm">
-            {level}
-          </span>
-        </div>
-      )}
-
       {/* ── Card ── */}
       <div
         className={cn(
