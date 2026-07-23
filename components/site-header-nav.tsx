@@ -23,7 +23,7 @@ const destinations = [
   { key: "diplomaSingapore", href: "/du-hoc", isComingSoon: false },
   { key: "uniMasterSingapore", href: "/coming-soon", isComingSoon: true },
   { key: "privateAllAges", href: "/du-hoc/tu-thuc", isComingSoon: false },
-  { key: "publicAllAges", href: "/coming-soon", isComingSoon: true },
+  { key: "publicAllAges", href: "/du-hoc/cong-lap", isComingSoon: false },
   { key: "malaysia", href: "/coming-soon", isComingSoon: true },
   { key: "taiwan", href: "/coming-soon", isComingSoon: true },
 ] as const
