@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import Image from "next/image"
 
-const HERO_IMAGE = "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?q=80&w=1200&auto=format&fit=crop"
+const HERO_IMAGE = "/images/private-school-hero.jpg"
 
 const STATS = [
   { icon: School, value: "Mầm non – Lớp 12", label: "bậc đào tạo" },
