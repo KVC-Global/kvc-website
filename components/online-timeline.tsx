@@ -66,7 +66,7 @@ function TimelineCard({
   program: TimelineProgram
   index: number
 }) {
-  const { level, rest } = splitName(program.name)
+  const { level } = splitName(program.name)
   const isEven = index % 2 === 0
   const levelWeight = getLevelWeight(program.name)
 
@@ -130,7 +130,7 @@ function TimelineCard({
                 </span>
               )}
               <h3 className="font-display text-xl leading-snug font-bold text-brand-blue">
-                {rest}
+                {program.name}
               </h3>
             </div>
             <ChevronDown
