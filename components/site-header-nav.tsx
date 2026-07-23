@@ -71,142 +71,6 @@ function isChildActive(pathname: string, children: SubLink[], locale: string) {
   return children.some((child) => isActive(pathname, getLocalizedHref(child.href, locale)))
 }
 
-// ─── desktop dropdown ───────────────────────────────────────────────────────
-
-function NavDropdown({
-  link,
-  locale,
-  t,
-}: {
-  link: NavLink
-  locale: string
-  t: ReturnType<typeof useDictionary>
-}) {
-  const pathname = usePathname() ?? "/"
-  const [open, setOpen] = React.useState(false)
-  const ref = React.useRef<HTMLLIElement | null>(null)
-  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  const parentHref = getLocalizedHref(link.href, locale)
-  const parentActive = isActive(pathname, parentHref)
-  const childActive = isChildActive(pathname, link.children!, locale)
-  const active = parentActive || childActive
-
-  const clearCloseTimeout = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-      timeoutRef.current = null
-    }
-  }
-
-  const handleMouseEnter = () => {
-    clearCloseTimeout()
-    setOpen(true)
-  }
-
-  const handleMouseLeave = () => {
-    // Small delay so users don't accidentally close when moving to dropdown
-    timeoutRef.current = setTimeout(() => setOpen(false), 150)
-  }
-
-  // Cleanup timeout on unmount
-  React.useEffect(() => {
-    return () => clearCloseTimeout()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  // Close on outside click
-  React.useEffect(() => {
-    if (!open) return
-    const onClick = (event: MouseEvent) => {
-      if (!ref.current?.contains(event.target as Node)) {
-        setOpen(false)
-      }
-    }
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false)
-    }
-    document.addEventListener("mousedown", onClick)
-    document.addEventListener("keydown", onKey)
-    return () => {
-      document.removeEventListener("mousedown", onClick)
-      document.removeEventListener("keydown", onKey)
-    }
-  }, [open])
-
-  return (
-    <li
-      key={link.href}
-      ref={ref}
-      className="relative"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <Link
-        href={getLocalizedHref(link.href, locale)}
-        aria-haspopup="true"
-        aria-expanded={open}
-        onClick={(e) => {
-          // On click (mobile/accessibility), toggle the dropdown instead of navigating
-          e.preventDefault()
-          setOpen((v) => !v)
-        }}
-        className={cn(
-          "group relative inline-flex items-center gap-1 py-1 font-body text-[15px] font-medium whitespace-nowrap transition-colors duration-300 ease-out hover:text-foreground focus-visible:text-foreground focus-visible:outline-none",
-          active && "text-brand-gold"
-        )}
-      >
-        <span className="relative inline-block">
-          {t.nav[link.key]}
-          <span
-            aria-hidden="true"
-            className={cn(
-              "absolute -bottom-1 left-1/2 h-[2px] w-full origin-center -translate-x-1/2 rounded-full bg-brand-gold transition-transform duration-300 ease-out",
-              active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100 group-focus-visible:scale-x-100"
-            )}
-          />
-        </span>
-        <ChevronDown
-          className={cn(
-            "h-3.5 w-3.5 transition-transform duration-200",
-            open && "rotate-180"
-          )}
-        />
-      </Link>
-
-      {open && (
-        <ul
-          className="absolute top-full left-1/2 z-50 mt-2 w-72 -translate-x-1/2 overflow-hidden rounded-sm border border-border bg-white py-1 shadow-lg"
-          onMouseEnter={clearCloseTimeout}
-          onMouseLeave={handleMouseLeave}
-        >
-          {link.children!.map((child) => {
-            const childHref = getLocalizedHref(child.href, locale)
-            const childItemActive = isActive(pathname, childHref)
-            return (
-              <li key={child.href}>
-                <Link
-                  href={childHref}
-                  aria-current={childItemActive ? "page" : undefined}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "block px-4 py-2.5 text-sm transition-colors hover:bg-muted",
-                    childItemActive
-                      ? "font-semibold text-brand-gold"
-                      : "text-foreground"
-                  )}
-                >
-                  {t.nav[child.key]}
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-      )}
-    </li>
-  )
-}
-
 // ─── main nav component ─────────────────────────────────────────────────────
 
 export function SiteHeaderNav({ className }: { className?: string }) {
@@ -218,16 +82,68 @@ export function SiteHeaderNav({ className }: { className?: string }) {
     <nav aria-label="Primary" className={className}>
       <ul className="flex items-center gap-7 font-body text-[15px] font-medium text-primary">
         {NAV_LINKS.map((link) => {
-          // Render dropdown for links with children
-          if (link.children) {
-            return <NavDropdown key={link.href} link={link} locale={locale} t={t} />
-          }
-
-          // Flat link (no children)
           const localizedHref = getLocalizedHref(link.href, locale)
           const label = t.nav[link.key]
           const active = isActive(pathname, localizedHref)
 
+          // Khóa học Online — dropdown with sub-pages
+          if (link.children) {
+            const childActive = isChildActive(pathname, link.children, locale)
+            const dropdownActive = active || childActive
+            return (
+              <li key={link.href} className="group relative">
+                <Link
+                  href={localizedHref}
+                  aria-current={dropdownActive ? "page" : undefined}
+                  className={cn(
+                    "group/link relative inline-flex items-center gap-1 py-1 whitespace-nowrap transition-colors duration-300 ease-out hover:text-foreground focus-visible:text-foreground focus-visible:outline-none",
+                    dropdownActive && "text-brand-gold"
+                  )}
+                >
+                  <span className="relative inline-block">
+                    {label}
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "absolute -bottom-1 left-1/2 h-[2px] w-full origin-center -translate-x-1/2 rounded-full bg-brand-gold transition-transform duration-300 ease-out",
+                        dropdownActive
+                          ? "scale-x-100"
+                          : "scale-x-0 group-hover/link:scale-x-100 group-focus-visible/link:scale-x-100"
+                      )}
+                    />
+                  </span>
+                  <ChevronDown className="h-4 w-4 text-muted-foreground/80 group-hover:rotate-180 transition-transform duration-350 ease-out" />
+                </Link>
+
+                {/* Dropdown Menu */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
+                  <div className="bg-white border border-border/80 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-2.5 flex flex-col gap-1">
+                    {link.children.map((child) => {
+                      const childHref = getLocalizedHref(child.href, locale)
+                      const childItemActive = isActive(pathname, childHref)
+                      return (
+                        <Link
+                          key={child.href}
+                          href={childHref}
+                          aria-current={childItemActive ? "page" : undefined}
+                          className={cn(
+                            "rounded-lg p-2.5 transition-colors hover:bg-muted/70 focus-visible:bg-muted/70 focus-visible:outline-none",
+                            childItemActive && "bg-muted/50"
+                          )}
+                        >
+                          <span className="font-heading text-sm font-semibold text-brand-blue">
+                            {t.nav[child.key]}
+                          </span>
+                        </Link>
+                      )
+                    })}
+                  </div>
+                </div>
+              </li>
+            )
+          }
+
+          // Flat link (no children)
           if (link.key === "studyAbroad") {
             return (
               <li key={link.href} className="group relative">
