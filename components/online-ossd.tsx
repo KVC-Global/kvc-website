@@ -1,0 +1,450 @@
+"use client"
+
+import * as React from "react"
+import Image from "next/image"
+import Link from "next/link"
+import { motion, Variants } from "framer-motion"
+import { Check, ChevronRight, GraduationCap, Clock, Globe, Users, BookOpen, Star, ArrowRight } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Container } from "@/components/ui/container"
+
+const fadeUpVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+}
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+}
+
+const HERO_BG = "https://images.unsplash.com/photo-1523050854058-8df9010c10f1?w=1920&q=80&auto=format&fit=crop"
+
+const WHY_ITEMS = [
+  {
+    icon: Globe,
+    title: "Bằng cấp được công nhận quốc tế",
+    desc: "OSSD được các trường đại học tại Canada và nhiều quốc gia sử dụng làm căn cứ xét tuyển đầu vào.",
+  },
+  {
+    icon: Star,
+    title: "Tăng cơ hội vào đại học",
+    desc: "Học sinh được đánh giá dựa trên quá trình học tập thay vì chỉ một kỳ thi duy nhất, giúp xây dựng hồ sơ học tập toàn diện.",
+  },
+  {
+    icon: Users,
+    title: "Phát triển kỹ năng toàn diện",
+    desc: "Kỹ năng nghiên cứu, làm việc nhóm, thuyết trình, quản lý thời gian, tư duy độc lập.",
+  },
+  {
+    icon: Clock,
+    title: "Linh hoạt trong học tập",
+    desc: "Học trực tuyến, lộ trình học cá nhân hóa, chuyển đổi tín chỉ nếu đủ điều kiện.",
+  },
+]
+
+const STRUCTURE_ITEMS = [
+  { title: "Hoàn thành 30 tín chỉ", desc: "Bao gồm các môn học bắt buộc và tự chọn theo định hướng nghề nghiệp và đại học. Đối với học sinh bắt đầu Grade 9 từ năm học 2024 trở đi, yêu cầu gồm 17 tín chỉ bắt buộc và 13 tín chỉ tự chọn; các khóa trước đó là 18 tín chỉ bắt buộc và 12 tín chỉ tự chọn." },
+  { title: "Năng lực đọc viết", desc: "Học sinh cần đáp ứng yêu cầu về năng lực đọc – viết của tỉnh Ontario thông qua bài đánh giá hoặc khóa học thay thế theo quy định." },
+  { title: "Hoạt động cộng đồng", desc: "Hoàn thành 40 giờ hoạt động cộng đồng (Community Involvement) nhằm phát triển trách nhiệm xã hội và kỹ năng thực tiễn." },
+  { title: "Học trực tuyến", desc: "Theo quy định hiện hành, học sinh cần hoàn thành tối thiểu 2 tín chỉ học trực tuyến (trừ các trường hợp được miễn theo chính sách của Ontario)." },
+]
+
+const SUBJECTS = [
+  "English", "Mathematics", "Science", "Business Studies",
+  "Computer Science", "Social Sciences", "Canadian & World Studies", "Arts",
+  "Health & Physical Education", "Technology", "French", "Economics", "Accounting",
+]
+
+const TARGET_AUDIENCE = [
+  "Học sinh THCS chuẩn bị vào THPT.",
+  "Học sinh THPT muốn chuyển sang chương trình quốc tế.",
+  "Học sinh có kế hoạch du học Canada.",
+  "Học sinh muốn xét tuyển vào các trường đại học quốc tế.",
+  "Gia đình mong muốn con học theo chương trình giáo dục Canada.",
+]
+
+const BENEFITS = [
+  { title: "Tư vấn lộ trình cá nhân", desc: "Đội ngũ chuyên gia hỗ trợ xây dựng kế hoạch học tập phù hợp với năng lực và mục tiêu của từng học sinh." },
+  { title: "Hỗ trợ chọn môn", desc: "Tư vấn lựa chọn môn học phù hợp với ngành học tương lai, điều kiện xét tuyển đại học, khả năng học tập." },
+  { title: "Đồng hành xuyên suốt", desc: "Theo dõi tiến độ học tập, hỗ trợ hồ sơ, tư vấn hoạt động ngoại khóa, chuẩn bị hồ sơ đại học." },
+  { title: "Mở rộng cơ hội quốc tế", desc: "OSSD giúp học sinh xây dựng nền tảng để ứng tuyển vào nhiều trường đại học tại Canada và các quốc gia khác." },
+]
+
+const STEPS = [
+  "Đăng ký tư vấn với KVC Global.",
+  "Đánh giá học lực và hồ sơ hiện tại.",
+  "Xây dựng lộ trình học OSSD phù hợp.",
+  "Hoàn tất thủ tục nhập học.",
+  "Bắt đầu chương trình và được hỗ trợ xuyên suốt đến khi hoàn thành bằng OSSD.",
+]
+
+const PARENT_REASONS = [
+  "Tư vấn chuyên sâu về hệ thống giáo dục Canada.",
+  "Xây dựng lộ trình học tập cá nhân hóa.",
+  "Hỗ trợ lựa chọn môn học và định hướng đại học.",
+  "Đồng hành trong quá trình học và chuẩn bị hồ sơ du học.",
+  "Kết nối với các chương trình chuyển tiếp và tuyển sinh quốc tế.",
+]
+
+export function OnlineOssd({ className }: { className?: string }) {
+  return (
+    <div className={cn("w-full", className)}>
+      {/* ── Hero ── */}
+      <section
+        className="relative w-full overflow-hidden bg-cover bg-center"
+        style={{ backgroundImage: `url(${HERO_BG})` }}
+      >
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white from-55% to-transparent" />
+        <Container className="relative flex min-h-[580px] flex-col justify-center pt-28 pb-20 md:min-h-[640px]">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-6 flex flex-wrap items-center gap-1.5 font-body text-xs font-medium text-muted-foreground md:text-sm"
+          >
+            <Link href="/" className="transition-colors duration-200 hover:text-foreground">Trang chủ</Link>
+            <span className="text-muted-foreground/60 select-none">&gt;</span>
+            <Link href="/khoa-hoc-online" className="transition-colors duration-200 hover:text-foreground">Khóa Học Online</Link>
+            <span className="text-muted-foreground/60 select-none">&gt;</span>
+            <span className="font-semibold text-foreground/80" aria-current="page">OSSD Ontario</span>
+          </motion.div>
+
+          <div className="max-w-2xl">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm"
+            >
+              OSSD CANADA
+            </motion.span>
+            <motion.h1
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl"
+            >
+              Bằng Tốt nghiệp Trung học Phổ thông Ontario
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]"
+            >
+              Mở cánh cửa vào các trường đại học hàng đầu tại Canada, Anh, Mỹ, Úc và nhiều quốc gia khác với chương trình OSSD được công nhận quốc tế.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="mt-3 max-w-xl font-body text-sm leading-relaxed text-brand-dark/75"
+            >
+              KVC Global mang đến chương trình OSSD theo hình thức học linh hoạt, giúp học sinh xây dựng hồ sơ học thuật vững chắc và tăng lợi thế khi xét tuyển đại học toàn cầu.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-8"
+            >
+              <Link
+                href="#dang-ky"
+                className="group inline-flex items-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg"
+              >
+                Đăng ký tư vấn miễn phí
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
+              </Link>
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── OSSD là gì? ── */}
+      <section className="bg-white py-16 md:py-24">
+        <Container>
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16"
+          >
+            <motion.div variants={fadeUpVariants} className="lg:col-span-5">
+              <div className="relative aspect-4/3 overflow-hidden rounded-lg shadow-lg">
+                <Image
+                  src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80&auto=format&fit=crop"
+                  alt="OSSD Ontario program"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                />
+              </div>
+            </motion.div>
+            <motion.div variants={fadeUpVariants} className="lg:col-span-7">
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">OSSD là gì?</h2>
+              <p className="mt-5 font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
+                Ontario Secondary School Diploma (OSSD) là bằng tốt nghiệp trung học phổ thông chính thức của tỉnh Ontario, Canada. Đây là chương trình giáo dục được công nhận rộng rãi bởi các trường đại học và cao đẳng tại Canada cũng như nhiều quốc gia trên thế giới.
+              </p>
+              <p className="mt-4 font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
+                OSSD chú trọng phát triển toàn diện cho học sinh thông qua:
+              </p>
+              <ul className="mt-4 space-y-2.5">
+                {["Kiến thức học thuật vững chắc.", "Tư duy phản biện và giải quyết vấn đề.", "Kỹ năng nghiên cứu và giao tiếp.", "Hoạt động ngoại khóa và trách nhiệm cộng đồng.", "Chuẩn bị sẵn sàng cho môi trường đại học quốc tế."].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
+                      <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
+                    </div>
+                    <span className="font-body text-sm text-brand-dark/85">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ── Vì sao chọn OSSD? ── */}
+      <section className="bg-brand-light py-16 md:py-24">
+        <Container>
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Vì sao chọn chương trình OSSD?</h2>
+              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            </motion.div>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {WHY_ITEMS.map((item, i) => {
+                const Icon = item.icon
+                return (
+                  <motion.div
+                    key={i}
+                    variants={fadeUpVariants}
+                    className="flex flex-col items-center rounded-lg border border-border bg-white p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-brand-blue-mid">
+                      <Icon className="h-7 w-7 text-brand-gold-light" strokeWidth={1.75} />
+                    </div>
+                    <h3 className="font-heading text-[16px] font-bold text-brand-blue">{item.title}</h3>
+                    <p className="mt-3 font-body text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.desc}</p>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ── Cấu trúc chương trình ── */}
+      <section className="bg-white py-16 md:py-24">
+        <Container>
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Cấu trúc chương trình OSSD</h2>
+              <p className="mt-3 font-body text-sm text-brand-dark/75">Để nhận bằng OSSD, học sinh cần hoàn thành các yêu cầu tốt nghiệp theo quy định của Bộ Giáo dục Ontario.</p>
+              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            </motion.div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {STRUCTURE_ITEMS.map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUpVariants}
+                  className="flex gap-4 rounded-lg border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid text-lg font-bold text-brand-gold-light">
+                    {i + 1}
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-lg font-bold text-brand-blue">{item.title}</h3>
+                    <p className="mt-2 font-body text-sm leading-relaxed text-brand-dark/75">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ── Các môn học ── */}
+      <section className="bg-brand-light py-16 md:py-24">
+        <Container>
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Các môn học</h2>
+              <p className="mt-3 font-body text-sm text-brand-dark/75">Học sinh có thể lựa chọn nhiều môn học thuộc các nhóm. Việc lựa chọn môn học sẽ được tư vấn dựa trên định hướng ngành nghề và trường đại học mong muốn.</p>
+              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            </motion.div>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+              {SUBJECTS.map((subject, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUpVariants}
+                  className="flex items-center gap-3 rounded-md border border-border bg-white p-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <BookOpen className="h-4 w-4 shrink-0 text-brand-gold" strokeWidth={1.75} />
+                  <span className="font-body text-sm font-medium text-brand-blue">{subject}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ── Đối tượng phù hợp ── */}
+      <section className="bg-white py-16 md:py-24">
+        <Container>
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Đối tượng phù hợp</h2>
+              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            </motion.div>
+            <div className="mx-auto max-w-3xl">
+              <ul className="space-y-4">
+                {TARGET_AUDIENCE.map((item, i) => (
+                  <motion.li key={i} variants={fadeUpVariants} className="flex items-start gap-4 rounded-lg border border-border bg-white p-5 shadow-sm">
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
+                      <Check className="h-4 w-4 text-brand-gold" strokeWidth={3} />
+                    </div>
+                    <span className="font-body text-sm text-brand-dark/85 sm:text-base">{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ── Lợi ích tại KVC Global ── */}
+      <section className="bg-brand-light py-16 md:py-24">
+        <Container>
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Lợi ích khi học OSSD tại KVC Global</h2>
+              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            </motion.div>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {BENEFITS.map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeUpVariants}
+                  className="flex gap-4 rounded-lg border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid">
+                    <GraduationCap className="h-5 w-5 text-brand-gold-light" strokeWidth={1.75} />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-lg font-bold text-brand-blue">{item.title}</h3>
+                    <p className="mt-2 font-body text-sm leading-relaxed text-brand-dark/75">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ── Hình thức học ── */}
+      <section className="bg-white py-16 md:py-24">
+        <Container>
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Hình thức học</h2>
+              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            </motion.div>
+            <div className="mx-auto max-w-4xl">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {["Chương trình theo chuẩn Ontario.", "Môi trường học hiện đại.", "Giáo viên đạt chuẩn giảng dạy.", "Đánh giá liên tục trong suốt quá trình học.", "Học tập linh hoạt theo kế hoạch cá nhân."].map((item, i) => (
+                  <motion.div key={i} variants={fadeUpVariants} className="flex items-center gap-3 rounded-md border border-border bg-white p-4 shadow-sm">
+                    <Check className="h-4 w-4 shrink-0 text-brand-gold" strokeWidth={3} />
+                    <span className="font-body text-sm text-brand-dark/85">{item}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ── Quy trình đăng ký ── */}
+      <section className="bg-brand-light py-16 md:py-24">
+        <Container>
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Quy trình đăng ký</h2>
+              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            </motion.div>
+            <div className="mx-auto max-w-4xl">
+              <div className="relative">
+                <div aria-hidden="true" className="absolute top-8 left-8 right-8 h-0.5 bg-brand-blue-mid/20 hidden md:block" />
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-5">
+                  {STEPS.map((step, i) => (
+                    <motion.div key={i} variants={fadeUpVariants} className="relative flex flex-col items-center text-center">
+                      <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-brand-blue-mid text-xl font-bold text-white shadow-md">
+                        {i + 1}
+                      </div>
+                      <p className="mt-4 font-body text-sm leading-relaxed text-brand-dark/85">{step}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ── Vì sao phụ huynh chọn KVC? ── */}
+      <section className="bg-white py-16 md:py-24">
+        <Container>
+          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Vì sao phụ huynh lựa chọn KVC Global?</h2>
+              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            </motion.div>
+            <div className="mx-auto max-w-3xl">
+              <ul className="space-y-4">
+                {PARENT_REASONS.map((item, i) => (
+                  <motion.li key={i} variants={fadeUpVariants} className="flex items-start gap-4 rounded-lg border border-border bg-white p-5 shadow-sm">
+                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
+                      <Check className="h-4 w-4 text-brand-gold" strokeWidth={3} />
+                    </div>
+                    <span className="font-body text-sm text-brand-dark/85 sm:text-base">{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* ── CTA / Liên hệ ── */}
+      <section className="bg-brand-blue-mid py-16 md:py-24">
+        <Container>
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center"
+          >
+            <motion.h2 variants={fadeUpVariants} className="font-heading text-2xl font-extrabold text-white sm:text-3xl">
+              Liên hệ KVC Global
+            </motion.h2>
+            <motion.p variants={fadeUpVariants} className="mt-4 mx-auto max-w-2xl font-body text-sm leading-relaxed text-white/80 sm:text-base">
+              KVC Global đồng hành cùng học sinh và phụ huynh từ bước lựa chọn chương trình OSSD đến quá trình hoàn thành bằng tốt nghiệp và chuẩn bị hồ sơ vào các trường đại học quốc tế.
+            </motion.p>
+            <motion.div variants={fadeUpVariants} className="mt-8">
+              <Link
+                href="/lien-he"
+                className="group inline-flex items-center gap-2 rounded-sm bg-brand-gold px-8 py-4 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold/90 hover:shadow-lg"
+              >
+                Liên hệ ngay để được tư vấn miễn phí
+                <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
+              </Link>
+            </motion.div>
+          </motion.div>
+        </Container>
+      </section>
+    </div>
+  )
+}
