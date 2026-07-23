@@ -76,11 +76,35 @@ function NavDropdown({
   const pathname = usePathname() ?? "/"
   const [open, setOpen] = React.useState(false)
   const ref = React.useRef<HTMLLIElement | null>(null)
+  const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const parentHref = getLocalizedHref(link.href, locale)
   const parentActive = isActive(pathname, parentHref)
   const childActive = isChildActive(pathname, link.children!, locale)
   const active = parentActive || childActive
+
+  const clearCloseTimeout = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = null
+    }
+  }
+
+  const handleMouseEnter = () => {
+    clearCloseTimeout()
+    setOpen(true)
+  }
+
+  const handleMouseLeave = () => {
+    // Small delay so users don't accidentally close when moving to dropdown
+    timeoutRef.current = setTimeout(() => setOpen(false), 150)
+  }
+
+  // Cleanup timeout on unmount
+  React.useEffect(() => {
+    return () => clearCloseTimeout()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   // Close on outside click
   React.useEffect(() => {
@@ -102,12 +126,22 @@ function NavDropdown({
   }, [open])
 
   return (
-    <li key={link.href} ref={ref} className="relative">
-      <button
-        type="button"
+    <li
+      key={link.href}
+      ref={ref}
+      className="relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <Link
+        href={getLocalizedHref(link.href, locale)}
         aria-haspopup="true"
         aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
+        onClick={(e) => {
+          // On click (mobile/accessibility), toggle the dropdown instead of navigating
+          e.preventDefault()
+          setOpen((v) => !v)
+        }}
         className={cn(
           "group relative inline-flex items-center gap-1 py-1 font-body text-[15px] font-medium whitespace-nowrap transition-colors duration-300 ease-out hover:text-foreground focus-visible:text-foreground focus-visible:outline-none",
           active && "text-brand-gold"
@@ -129,10 +163,14 @@ function NavDropdown({
             open && "rotate-180"
           )}
         />
-      </button>
+      </Link>
 
       {open && (
-        <ul className="absolute top-full left-1/2 z-50 mt-2 w-72 -translate-x-1/2 overflow-hidden rounded-sm border border-border bg-white py-1 shadow-lg">
+        <ul
+          className="absolute top-full left-1/2 z-50 mt-2 w-72 -translate-x-1/2 overflow-hidden rounded-sm border border-border bg-white py-1 shadow-lg"
+          onMouseEnter={clearCloseTimeout}
+          onMouseLeave={handleMouseLeave}
+        >
           {link.children!.map((child) => {
             const childHref = getLocalizedHref(child.href, locale)
             const childItemActive = isActive(pathname, childHref)
