@@ -18,24 +18,28 @@ export function PublicStudyAbroadHero({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="public-hero-heading"
-      className={cn("relative w-full border-b border-border bg-white", className)}
+      className={cn(
+        "relative w-full border-b border-border bg-cover bg-center bg-white",
+        className
+      )}
+      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
     >
-      {/* Desktop Background Image (Right side) */}
-      <div className="absolute inset-y-0 right-0 z-0 hidden w-full overflow-hidden lg:block lg:w-[52%]">
-        <Image
-          src={HERO_IMAGE}
-          alt="Trường công lập Singapore"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        {/* Soft blend transition from white background (left) to image */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-30 bg-gradient-to-r from-white via-white/50 to-transparent"
-        />
-      </div>
+      <Image
+        src={HERO_IMAGE}
+        alt="Trường công lập Singapore"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center animate-fade-in"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #fff 0%, #fff 30%, transparent 60%)",
+        }}
+      />
 
       <Container className="relative flex min-h-[600px] flex-col justify-center pt-28 pb-20 sm:pt-32 sm:pb-24 md:min-h-[640px] md:pt-36 md:pb-0">
         <nav
