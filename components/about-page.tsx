@@ -5,13 +5,15 @@ import Link from "next/link"
 import {
   ArrowRight,
   Award,
-  FileText,
+  ChevronRight,
+  Clock,
+  Eye,
   Globe2,
   Mail,
   MapPin,
   Phone,
-  ScrollText,
   ShieldCheck,
+  Target,
   Users,
 } from "lucide-react"
 import { motion, Variants } from "framer-motion"
@@ -40,45 +42,158 @@ const HERO_STATS = [
 ] as const
 
 const OFFICES = [
-  // TODO:: hide for production
-  // {
-  //   title: "Singapore — Trụ sở chính",
-  //   image: "/images/singapore1-5221.jpg",
-  //   address: "1 Raffles Place, #20-61, Singapore 048616",
-  //   contacts: [
-  //     { icon: Phone, text: "+65 6123 4567" },
-  //     { icon: Mail, text: "singapore@kvcglobal.com" },
-  //     { icon: MapPin, text: "Thứ 2 – Thứ 6, 9:00 – 18:00" },
-  //   ],
-  //   mapUrl: "https://maps.google.com",
-  // },
   {
-    title: "Việt Nam — Chi nhánh TP.HCM",
+    country: "Việt Nam",
+    role: "Chi nhánh Việt Nam",
+    address:
+      "456 Xô Viết Nghệ Tĩnh, Phường 25, Quận Bình Thạnh, TP. Hồ Chí Minh",
+    phone: "(+84) 911942409",
+    email: "info@kvcglobal.vn",
+    hours: "Thứ 2 - Thứ 6, 08:00-17:00",
+    mapUrl:
+      "https://maps.google.com/?q=456+X%C3%B4+Vi%E1%BA%BFt+Ngh%E1%BB%87+T%C4%A9nh,+B%C3%ACnh+Th%E1%BA%A1nh,+H%E1%BB%93+Ch%C3%AD+Minh",
+    mapQ: "456+X%C3%B4+Vi%E1%BA%BFt+Ngh%E1%BB%87+T%C4%A9nh,+B%C3%ACnh+Th%E1%BA%A1nh,+H%E1%BB%93+Ch%C3%AD+Minh",
     image: "/images/dat-nuoc-singapore-01.jpg",
-    address: "Tầng 8, Tòa nhà Bitexco, Q.1, TP. Hồ Chí Minh",
-    contacts: [
-      { icon: Phone, text: "+84 28 3982 4567" },
-      { icon: Mail, text: "vietnam@kvcglobal.com" },
-      { icon: MapPin, text: "Thứ 2 – Thứ 7, 8:30 – 17:30" },
-    ],
-    mapUrl: "https://maps.google.com",
   },
+  // TODO: Hide Singapore data for production
+  // {
+  //   country: "Singapore",
+  //   role: "Văn phòng Singapore",
+  //   address: "Chinatown Point, 133 New Bridge Rd #22-01/02, Singapore 059413",
+  //   phone: "(+65) 6789 0000",
+  //   email: "info@kvcglobal.vn",
+  //   hours: "Thứ 2 – Thứ 6, 9:00 – 18:00",
+  //   mapUrl:
+  //     "https://maps.google.com/?q=Chinatown+Point,+133+New+Bridge+Rd,+Singapore+059413",
+  //   mapQ: "Chinatown+Point,+133+New+Bridge+Rd,+Singapore+059413",
+  //   image: "/images/singapore1-5221.jpg",
+  // },
 ] as const
 
-const LICENSES = [
-  {
-    icon: FileText,
-    title: "Giấy phép tư vấn du học",
-    text: "Cấp bởi Sở Giáo dục & Đào tạo, cho phép hoạt động tư vấn du học hợp pháp tại Việt Nam.",
-    href: "#",
-  },
-  {
-    icon: ScrollText,
-    title: "Giấy phép kinh doanh Singapore",
-    text: "Đăng ký hoạt động doanh nghiệp (ACRA) tại Singapore với đầy đủ tư cách pháp nhân.",
-    href: "#",
-  },
-] as const
+function OfficeCard({
+  office,
+  reverse,
+}: {
+  office: (typeof OFFICES)[number]
+  reverse: boolean
+}) {
+  const phoneHref = office.phone.replace(/[^\d+]/g, "")
+  const detailsPosition = reverse ? "lg:col-start-8" : "lg:col-start-1"
+  const imagePosition = reverse ? "lg:col-start-1" : "lg:col-start-6"
+
+  return (
+    <article className="grid gap-4 lg:grid-cols-12 lg:grid-rows-[auto_240px] lg:gap-5">
+      <div
+        className={`rounded-lg border border-border bg-white p-6 shadow-sm sm:p-8 lg:col-span-5 ${detailsPosition}`}
+      >
+        <p className="font-heading text-xs font-bold tracking-[0.18em] text-brand-gold uppercase">
+          {office.country}
+        </p>
+        <h3 className="mt-2 font-heading text-xl font-bold text-brand-blue sm:text-2xl">
+          {office.role}
+        </h3>
+        <p className="mt-3 max-w-md font-body text-sm leading-relaxed text-brand-dark/65">
+          Kết nối trực tiếp với đội ngũ KVC Global để được hỗ trợ tại văn phòng
+          gần bạn.
+        </p>
+
+        <ul className="mt-6 space-y-4">
+          <li className="flex items-start gap-3">
+            <MapPin
+              className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold"
+              strokeWidth={1.5}
+            />
+            <span className="font-body text-sm text-brand-dark/80">
+              {office.address}
+            </span>
+          </li>
+          <li className="flex items-center gap-3">
+            <Phone
+              className="h-5 w-5 shrink-0 text-brand-gold"
+              strokeWidth={1.5}
+            />
+            <a
+              href={`tel:${phoneHref}`}
+              className="font-body text-sm text-brand-blue underline underline-offset-2 transition-colors hover:text-brand-gold"
+            >
+              {office.phone}
+            </a>
+          </li>
+          <li className="flex items-center gap-3">
+            <Mail
+              className="h-5 w-5 shrink-0 text-brand-gold"
+              strokeWidth={1.5}
+            />
+            <a
+              href={`mailto:${office.email}`}
+              className="font-body text-sm text-brand-blue underline underline-offset-2 transition-colors hover:text-brand-gold"
+            >
+              {office.email}
+            </a>
+          </li>
+          <li className="flex items-center gap-3">
+            <Clock
+              className="h-5 w-5 shrink-0 text-brand-gold"
+              strokeWidth={1.5}
+            />
+            <span className="font-body text-sm text-brand-dark/80">
+              {office.hours}
+            </span>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        className={`relative min-h-60 overflow-hidden rounded-lg border border-border bg-white shadow-sm lg:col-span-5 lg:row-start-2 ${detailsPosition}`}
+      >
+        <iframe
+          src={`https://www.google.com/maps?q=${office.mapQ}&output=embed&z=15`}
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title={`Bản đồ ${office.role}`}
+          className="absolute inset-0 h-full w-full"
+        />
+        <a
+          href={office.mapUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group absolute right-3 bottom-3 inline-flex items-center gap-1.5 rounded-sm bg-white px-4 py-2.5 text-xs font-semibold text-brand-blue shadow-md ring-1 ring-black/5 transition-colors hover:text-brand-gold"
+        >
+          Mở Google Maps
+          <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+        </a>
+      </div>
+
+      <div
+        className={`relative min-h-80 overflow-hidden rounded-lg bg-brand-blue shadow-sm lg:col-span-7 lg:row-span-2 lg:row-start-1 lg:min-h-[560px] ${imagePosition}`}
+      >
+        <Image
+          src={office.image}
+          alt={`Văn phòng KVC Global tại ${office.country}`}
+          fill
+          sizes="(max-width: 1024px) 100vw, 58vw"
+          className="object-cover"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-gradient-to-t from-brand-blue/55 via-transparent to-transparent"
+        />
+        <div className="absolute right-5 bottom-5 left-5 flex items-end justify-between gap-4">
+          <p className="font-heading text-sm font-semibold text-white">
+            KVC Global · {office.country}
+          </p>
+          <span className="rounded-sm bg-brand-gold px-3 py-1.5 font-heading text-xs font-bold text-white">
+            {office.country}
+          </span>
+        </div>
+      </div>
+    </article>
+  )
+}
 
 // ─── Motion variants ────────────────────────────────────────────────────────
 
@@ -104,8 +219,6 @@ const staggerFast: Variants = {
 const inView = { once: true, margin: "-80px" } as const
 
 export function AboutPage() {
-  const hasSingleOffice = OFFICES.length === 1
-
   return (
     <div className="bg-background">
       {/* ───────────────────────── Hero ───────────────────────── */}
@@ -347,6 +460,102 @@ export function AboutPage() {
         </div>
       </section>
 
+      {/* ───────────────────── About / Vision / Mission ───────── */}
+      <section
+        id="gioi-thieu"
+        aria-labelledby="gioi-thieu-heading"
+        className="w-full bg-white pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-36 lg:pb-24"
+      >
+        <Container>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={inView}
+            className="grid items-stretch gap-10 lg:grid-cols-[0.86fr_1fr] lg:gap-16"
+          >
+            <div className="order-2 flex flex-col justify-center">
+              <motion.div variants={fadeUp}>
+                <h2
+                  id="gioi-thieu-heading"
+                  className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
+                >
+                  Về KVC Global
+                </h2>
+                <p className="mt-5 max-w-2xl font-body text-base leading-relaxed text-brand-dark/70 sm:text-[17px]">
+                  KVC Global đồng hành cùng cá nhân và doanh nghiệp trên hành
+                  trình học tập, làm việc và đầu tư tại Singapore. Chúng tôi
+                  cung cấp tư vấn rõ ràng, chuyên nghiệp và minh bạch, giúp
+                  khách hàng tự tin đưa ra quyết định phù hợp với mục tiêu của
+                  mình.
+                </p>
+              </motion.div>
+
+              <div className="mt-10 space-y-5 sm:mt-12">
+                <motion.div
+                  variants={fadeUp}
+                  className="grid grid-cols-[48px_1fr] gap-4 rounded-lg border border-border bg-brand-light/50 p-5 shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md sm:p-6"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-md bg-brand-blue-mid text-brand-gold-light">
+                    <Eye
+                      aria-hidden="true"
+                      className="h-6 w-6"
+                      strokeWidth={1.75}
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-xl font-bold text-brand-blue">
+                      Tầm nhìn
+                    </h3>
+                    <p className="mt-2 font-body text-base leading-relaxed text-brand-dark/80">
+                      Trở thành đơn vị tư vấn đáng tin cậy, giúp khách hàng
+                      thuận lợi tiếp cận cơ hội học tập, nghề nghiệp và phát
+                      triển tại Singapore.
+                    </p>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  variants={fadeUp}
+                  className="grid grid-cols-[48px_1fr] gap-4 rounded-lg border border-border bg-brand-light/50 p-5 shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md sm:p-6"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-md bg-brand-blue-mid text-brand-gold-light">
+                    <Target
+                      aria-hidden="true"
+                      className="h-6 w-6"
+                      strokeWidth={1.75}
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-xl font-bold text-brand-blue">
+                      Sứ mệnh
+                    </h3>
+                    <p className="mt-2 font-body text-base leading-relaxed text-brand-dark/80">
+                      Cung cấp giải pháp tư vấn đúng quy trình, đúng quy định,
+                      đồng thời tối giản sự phức tạp để mỗi hồ sơ được xử lý
+                      minh bạch và nhất quán.
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            <motion.div
+              variants={fadeUp}
+              className="relative order-1 min-h-[420px] overflow-hidden rounded-2xl bg-brand-blue sm:min-h-[540px] lg:min-h-[680px]"
+            >
+              <Image
+                src="/images/singapore1-5221.jpg"
+                alt="Tượng Merlion tại Singapore"
+                fill
+                sizes="(max-width: 1024px) 100vw, 42vw"
+                className="object-cover"
+              />
+            </motion.div>
+          </motion.div>
+        </Container>
+      </section>
+
       {/* ───────────────────── Story section ───────────────────── */}
       <section
         id="cau-chuyen"
@@ -413,177 +622,53 @@ export function AboutPage() {
       </section>
 
       {/* ───────────────────── Offices section ─────────────────── */}
-      <section className="w-full bg-white py-20 sm:py-24">
-        <Container>
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={inView}
-            className="flex flex-col items-center text-center"
-          >
-            <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-              Văn phòng
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl">
-              Gần bạn hơn ở mỗi điểm đến
-            </h2>
-            <span className="mt-4 h-1 w-12 rounded-sm bg-brand-gold" />
-          </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={inView}
-            className={`mt-14 grid gap-8 ${hasSingleOffice ? "mx-auto max-w-5xl" : "lg:grid-cols-2"}`}
-          >
-            {OFFICES.map((office) => (
-              <motion.div
-                key={office.title}
-                variants={fadeUp}
-                className={`flex flex-col overflow-hidden rounded-lg bg-white shadow-[0_18px_50px_-24px_rgba(15,27,45,0.22)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(15,27,45,0.28)] lg:flex-row ${hasSingleOffice ? "lg:min-h-[420px]" : ""}`}
+      <section
+        aria-labelledby="about-offices-heading"
+        className="w-full bg-white py-10 sm:py-12 lg:py-16"
+      >
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={inView}
+              className="flex flex-col items-center text-center"
+            >
+              <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
+                Văn phòng
+              </p>
+              <h2
+                id="about-offices-heading"
+                className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
               >
-                <div
-                  className={`relative h-64 w-full shrink-0 sm:h-72 lg:h-auto ${hasSingleOffice ? "lg:w-[52%]" : "lg:w-[45%]"}`}
-                >
-                  <Image
-                    src={office.image}
-                    alt={office.title}
-                    fill
-                    sizes={
-                      hasSingleOffice
-                        ? "(max-width: 1024px) 100vw, 520px"
-                        : "(max-width: 640px) 100vw, 45vw"
-                    }
-                    className="object-cover"
-                  />
-                </div>
-                <div
-                  className={`flex flex-1 flex-col justify-center p-8 ${hasSingleOffice ? "sm:p-10 lg:p-12" : ""}`}
-                >
-                  <h3
-                    className={`font-heading font-bold text-brand-gold ${hasSingleOffice ? "text-2xl" : "text-xl"}`}
-                  >
-                    {office.title}
-                  </h3>
-                  <p className="mt-4 flex items-start gap-3 text-sm leading-relaxed text-brand-dark/80 sm:text-base">
-                    <MapPin
-                      className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold"
-                      strokeWidth={1.5}
-                    />
-                    {office.address}
-                  </p>
+                Gần bạn hơn ở mỗi điểm đến
+              </h2>
+              <span
+                aria-hidden="true"
+                className="mt-4 h-1 w-12 rounded-sm bg-brand-gold"
+              />
+            </motion.div>
 
-                  <ul className="mt-6 space-y-3.5">
-                    {office.contacts.map((contact) => {
-                      const Icon = contact.icon
-                      return (
-                        <li
-                          key={contact.text}
-                          className="flex items-center gap-3 text-sm text-brand-dark/80 sm:text-base"
-                        >
-                          <Icon
-                            className="h-5 w-5 shrink-0 text-brand-gold"
-                            strokeWidth={1.5}
-                          />
-                          {contact.text}
-                        </li>
-                      )
-                    })}
-                  </ul>
-
-                  <Link
-                    href={office.mapUrl}
-                    className="group mt-8 inline-flex w-fit items-center gap-2 rounded-sm border border-brand-blue-mid px-5 py-2.5 text-sm font-semibold text-primary transition-all duration-300 ease-out hover:bg-brand-blue-mid hover:text-white"
-                  >
-                    Xem bản đồ
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={inView}
+              className="mt-12 space-y-8 lg:mt-14"
+            >
+              {OFFICES.map((office, index) => (
+                <motion.div key={office.country} variants={fadeUp}>
+                  <OfficeCard office={office} reverse={index % 2 !== 0} />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </Container>
       </section>
 
       {/* ───────────────────── Partners (reuse) ────────────────── */}
       <SitePartners />
-
-      {/* ───────────────────── Licenses section ────────────────── */}
-      <section className="w-full bg-white py-20 sm:py-24">
-        <Container>
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={inView}
-            className="flex flex-col items-center text-center"
-          >
-            <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-              Giấy phép hoạt động
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl">
-              Hoạt động hợp pháp, minh bạch
-            </h2>
-          </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={inView}
-            className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {LICENSES.map((item) => {
-              const Icon = item.icon
-              return (
-                <motion.div
-                  key={item.title}
-                  variants={fadeUp}
-                  className="flex flex-col items-start gap-5 rounded-lg bg-white p-8 shadow-sm ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md"
-                >
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-brand-blue-mid">
-                    <Icon
-                      className="h-9 w-9 text-secondary"
-                      strokeWidth={1.5}
-                    />
-                  </div>
-                  <div className="flex flex-col">
-                    <h3 className="font-heading text-lg font-bold text-brand-blue">
-                      {item.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      {item.text}
-                    </p>
-                    <Link
-                      href={item.href}
-                      className="group mt-4 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary/80"
-                    >
-                      Xem chi tiết
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                    </Link>
-                  </div>
-                </motion.div>
-              )
-            })}
-
-            {/* Card 3 — framed certificates image (expands full only when alone in a row) */}
-            <motion.div
-              variants={fadeUp}
-              className="relative min-h-[260px] overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5 sm:col-span-2 sm:min-h-[340px] lg:col-span-1 lg:min-h-[300px]"
-            >
-              <Image
-                src="/images/free-singapore-tour-for.jpg"
-                alt="Các giấy phép và chứng nhận hoạt động của KVC Global"
-                fill
-                sizes="(max-width: 768px) 100vw, 33vw"
-                className="object-cover"
-              />
-            </motion.div>
-          </motion.div>
-        </Container>
-      </section>
     </div>
   )
 }
