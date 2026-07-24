@@ -3,6 +3,7 @@ import { GraduationCap, Compass, Coins, CheckCircle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { StudyAbroadStatBar } from "@/components/study-abroad/study-abroad-stat-bar"
 import Image from "next/image"
 
 const HERO_IMAGE = "/images/uni-master-hero.jpg"
@@ -14,12 +15,16 @@ const STATS = [
   { icon: CheckCircle, value: "Cam kết minh bạch", label: "hành trình du học" },
 ] as const
 
-export function UniMasterStudyAbroadHero({ className }: { className?: string }) {
+export function UniMasterStudyAbroadHero({
+  className,
+}: {
+  className?: string
+}) {
   return (
     <section
       aria-labelledby="uni-master-hero-heading"
       className={cn(
-        "relative w-full border-b border-border bg-cover bg-center bg-white",
+        "relative w-full border-b border-border bg-white bg-cover bg-center pb-16 md:pb-20",
         className
       )}
       style={{ backgroundImage: `url(${HERO_IMAGE})` }}
@@ -30,7 +35,7 @@ export function UniMasterStudyAbroadHero({ className }: { className?: string }) 
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center animate-fade-in"
+        className="animate-fade-in object-cover object-center"
         style={{ transform: "scaleX(-1)" }}
       />
       <div
@@ -49,19 +54,22 @@ export function UniMasterStudyAbroadHero({ className }: { className?: string }) 
         >
           <Link
             href="/"
-            className="hover:text-foreground transition-colors duration-200"
+            className="transition-colors duration-200 hover:text-foreground"
           >
             Trang chủ
           </Link>
-          <span className="select-none text-muted-foreground/60">&gt;</span>
+          <span className="text-muted-foreground/60 select-none">&gt;</span>
           <Link
             href="/du-hoc"
-            className="hover:text-foreground transition-colors duration-200"
+            className="transition-colors duration-200 hover:text-foreground"
           >
             Du học
           </Link>
-          <span className="select-none text-muted-foreground/60">&gt;</span>
-          <span className="font-semibold text-foreground/80" aria-current="page">
+          <span className="text-muted-foreground/60 select-none">&gt;</span>
+          <span
+            className="font-semibold text-foreground/80"
+            aria-current="page"
+          >
             Đại học & Thạc sĩ Singapore
           </span>
         </nav>
@@ -82,7 +90,9 @@ export function UniMasterStudyAbroadHero({ className }: { className?: string }) 
           </h1>
 
           <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">
-            Định hướng học tập dựa trên học lực, tài chính và mục tiêu nghề nghiệp thực tế của riêng bạn thông qua mạng lưới liên kết trường học rộng lớn từ KVC Global.
+            Định hướng học tập dựa trên học lực, tài chính và mục tiêu nghề
+            nghiệp thực tế của riêng bạn thông qua mạng lưới liên kết trường học
+            rộng lớn từ KVC Global.
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
@@ -125,33 +135,9 @@ export function UniMasterStudyAbroadHero({ className }: { className?: string }) 
             </Link>
           </div>
         </div>
-
-        <div className="relative z-20 mt-10 w-full sm:mt-12 lg:mt-16 xl:mt-20">
-          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border shadow-[0_12px_40px_-15px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:grid-cols-2 lg:w-fit lg:grid-cols-4">
-            {STATS.map((stat) => {
-              const Icon = stat.icon
-              return (
-                <div
-                  key={stat.label}
-                  className="flex items-center gap-4 bg-white px-5 py-4 transition-all duration-300 ease-out hover:bg-brand-light sm:px-6 sm:py-5 lg:min-w-[240px]"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-light">
-                    <Icon className="h-5 w-5 text-secondary" strokeWidth={2} />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-heading text-sm font-bold text-brand-blue sm:text-[15px]">
-                      {stat.value}
-                    </span>
-                    <span className="font-body text-xs font-medium text-muted-foreground">
-                      {stat.label}
-                    </span>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
       </Container>
+
+      <StudyAbroadStatBar stats={STATS} />
     </section>
   )
 }
