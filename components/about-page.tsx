@@ -837,10 +837,12 @@ export function AboutPage() {
             </div>
             <h2
               id="client-reviews-heading"
-              className="mt-6 font-heading text-3xl leading-tight font-extrabold tracking-tight text-brand-blue sm:text-4xl"
+              className="mt-6 font-heading text-[1.65rem] leading-[1.2] font-extrabold tracking-tight text-brand-blue sm:text-[1.875rem]"
             >
-              Khách hàng luôn ở trung tâm
-              <span className="block text-brand-gold">
+              <span className="sm:whitespace-nowrap">
+                Khách hàng luôn ở trung tâm
+              </span>
+              <span className="block text-brand-gold sm:whitespace-nowrap">
                 trong mọi điều chúng tôi làm
               </span>
             </h2>
