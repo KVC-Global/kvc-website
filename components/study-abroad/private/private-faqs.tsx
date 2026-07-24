@@ -6,32 +6,32 @@ import { cn } from "@/lib/utils"
 
 const FAQS = [
   {
-    question: "Diploma 6+6 khác gì so với du học truyền thống?",
-    answer: "Khác với du học truyền thống tập trung chủ yếu vào lý thuyết kéo dài 3-4 năm, Diploma 6+6 tối ưu hóa thời gian học trong 12 tháng. Trong đó có 6 tháng học lý thuyết song song thực hành, và 6 tháng thực tập hưởng lương bắt buộc tại các doanh nghiệp. Mô hình này giúp học viên vừa tiết kiệm chi phí, vừa tích lũy kinh nghiệm làm việc thực tế tại Singapore ngay khi tốt nghiệp.",
+    question: "Độ tuổi nào là phù hợp nhất để đi du học tư thục tại Singapore?",
+    answer: "Singapore đón nhận học sinh từ 18 tháng (bậc mầm non) đến hết trung học phổ thông (18 tuổi). Độ tuổi lý tưởng tùy thuộc vào định hướng định cư hoặc du học dài hạn của gia đình. Các em thường du học từ bậc tiểu học hoặc trung học cơ sở để sớm thích nghi với ngôn ngữ và văn hóa quốc tế.",
   },
   {
-    question: "Học phí và chi phí sinh hoạt tại Singapore khoảng bao nhiêu?",
-    answer: "Học phí trọn gói cho chương trình Diploma dao động khoảng 6.000 - 8.000 SGD tùy ngành học. Chi phí sinh hoạt (ăn ở, đi lại) tại Singapore trung bình khoảng 800 - 1.200 SGD/tháng. Tuy học phí và sinh hoạt phí ở Singapore cao hơn Việt Nam, mức thu nhập trong 6 tháng thực tập hưởng lương (800 - 1.500 SGD/tháng) hoàn toàn có thể giúp học viên tự trang trải phần lớn sinh hoạt phí.",
+    question: "Học sinh dưới 18 tuổi đi du học cần người giám hộ như thế nào?",
+    answer: "Theo quy định của Bộ Giáo dục Singapore, học sinh dưới 18 tuổi không sống cùng cha mẹ bắt buộc phải có người giám hộ hợp pháp cư trú tại Singapore. Người giám hộ sẽ hỗ trợ liên lạc với nhà trường, ký giấy tờ hành chính và chăm sóc học sinh khi cần thiết. KVC Global hỗ trợ cung cấp dịch vụ người giám hộ uy tín.",
   },
   {
-    question: "Sau 6 tháng thực tập, có được làm việc tiếp không?",
-    answer: "Sau khi kết thúc 6 tháng thực tập, nếu hoàn thành tốt công việc và doanh nghiệp có nhu cầu, học viên có thể được gia hạn hợp đồng làm việc chính thức dưới dạng visa S Pass hoặc EP. Ngoài ra, học viên cũng có thể lựa chọn học chuyển tiếp liên thông lên Cử nhân (1.5 - 2 năm nữa) để nhận bằng Đại học quốc tế.",
+    question: "Học phí trung bình tại các trường quốc tế Singapore là bao nhiêu?",
+    answer: "Học phí dao động tùy theo trường và bậc học, thường từ 18.000 SGD đến hơn 50.000 SGD/năm. Các trường như AIS, SAIS hay Brighton College có cơ sở vật chất và chương trình giảng dạy chất lượng cao tương xứng với mức học phí đóng.",
   },
   {
-    question: "Trợ cấp 800-1.500 SGD/tháng tại những doanh nghiệp nào?",
-    answer: "Học viên được thực tập tại các đối tác liên kết uy tín của KVC Global và nhà trường tại Singapore, bao gồm các chuỗi khách sạn 4-5 sao quốc tế, các chuỗi nhà hàng ẩm thực lớn, các doanh nghiệp logistics hàng đầu hoặc các công ty dịch vụ/thương mại điện tử công nghệ.",
+    question: "Có cần chứng chỉ tiếng Anh (IELTS/TOEFL) khi đăng ký học không?",
+    answer: "Các trường quốc tế không bắt buộc phải có chứng chỉ tiếng Anh quốc tế ngay từ đầu. Họ sẽ tổ chức bài kiểm tra năng lực tiếng Anh và Toán đầu vào để xếp lớp. Các trường đều có chương trình bổ trợ tiếng Anh (EAL/ESL) dành riêng cho học sinh quốc tế.",
   },
   {
-    question: "Nếu không đạt yêu cầu thực tập thì sao?",
-    answer: "Trong trường hợp học viên chưa đáp ứng được yêu cầu của doanh nghiệp thực tập ban đầu, KVC Global phối hợp cùng bộ phận hỗ trợ sinh viên của nhà trường sẽ tiến hành bổ túc kiến thức, hướng dẫn lại kỹ năng phỏng vấn và sắp xếp phỏng vấn tại các doanh nghiệp đối tác khác để đảm bảo 100% học viên hoàn thành học phần thực tập hưởng lương.",
+    question: "Thủ tục xin Student Pass (Thị thực học sinh) có phức tạp không?",
+    answer: "Sau khi học sinh nhận được thư mời nhập học chính thức từ trường, KVC Global sẽ hướng dẫn chuẩn bị và nộp hồ sơ xin Student Pass lên Cục Di trú Singapore (ICA). Thủ tục thường mất từ 2-4 tuần, KVC Global cam kết chuẩn bị hồ sơ tối ưu nhất.",
   },
   {
-    question: "Có thể chuyển ngành khi đã nhập học không?",
-    answer: "Trong thời gian học lý thuyết ở những tuần đầu tiên, học viên có thể làm đơn xin chuyển đổi ngành học nếu nhận thấy bản thân phù hợp hơn với ngành khác. KVC Global và nhà trường sẽ hướng dẫn các thủ tục hồ sơ cần thiết để chuyển đổi thuận tiện nhất mà không ảnh hưởng tới tiến độ visa du học.",
+    question: "Phụ huynh có được sang Singapore sinh sống cùng con không?",
+    answer: "Đối với học sinh dưới 12 tuổi học tại trường quốc tế, mẹ hoặc bà có thể xin Thẻ thăm thân dài hạn (Long-Term Visit Pass - LTVP) để cư trú tại Singapore chăm sóc con học tập. KVC Global hỗ trợ tư vấn và làm thủ tục xin LTVP này cho phụ huynh.",
   },
 ] as const
 
-export function StudyAbroadFaqs({ className }: { className?: string }) {
+export function PrivateStudyAbroadFaqs({ className }: { className?: string }) {
   const [openFaqs, setOpenFaqs] = useState<Record<number, boolean>>({})
   const toggleFaq = (idx: number) => {
     setOpenFaqs((prev) => ({ ...prev, [idx]: !prev[idx] }))
