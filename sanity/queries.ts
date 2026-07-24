@@ -60,4 +60,20 @@ export const HOME_PAGE_QUERY = defineQuery(`{
   )
 }`)
 
+export const PARTNERS_QUERY = defineQuery(`select(
+  count(*[_type == "homePage" && language == $lang][0].partners) > 0 =>
+    *[_type == "homePage" && language == $lang][0].partners[]->{
+      _id,
+      name,
+      logo,
+      website
+    },
+  *[_type == "partner" && (!defined(language) || language == $lang)] | order(name asc) {
+    _id,
+    name,
+    logo,
+    website
+  }
+)`)
+
 export const FAQS_QUERY = defineQuery(`*[_type == "faq"] | order(order asc)`)

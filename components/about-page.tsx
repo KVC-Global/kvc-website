@@ -20,7 +20,7 @@ import {
 } from "lucide-react"
 import { motion, Variants } from "framer-motion"
 
-import { SitePartners } from "@/components/site-partners"
+import { SitePartners, type SanityPartner } from "@/components/site-partners"
 import { Container } from "@/components/ui/container"
 
 /**
@@ -321,7 +321,11 @@ const staggerFast: Variants = {
 
 const inView = { once: true, margin: "-80px" } as const
 
-export function AboutPage() {
+export function AboutPage({
+  partners,
+}: {
+  partners?: ReadonlyArray<SanityPartner>
+}) {
   return (
     <div className="bg-background">
       {/* ───────────────────────── Hero ───────────────────────── */}
@@ -400,12 +404,11 @@ export function AboutPage() {
               variants={fadeUp}
               className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px] md:leading-relaxed"
             >
-              KVC Global đồng hành cùng học sinh, người lao động và doanh
-              nghiệp trên hành trình chinh phục Singapore — từ du học, xét
-              tuyển trường, xin work pass, đến thành lập và vận hành doanh
-              nghiệp. Chúng tôi biến những thủ tục phức tạp thành lộ trình rõ
-              ràng, để bạn tập trung vào điều quan trọng nhất: tương lai của
-              chính mình.
+              KVC Global đồng hành cùng học sinh, người lao động và doanh nghiệp
+              trên hành trình chinh phục Singapore — từ du học, xét tuyển
+              trường, xin work pass, đến thành lập và vận hành doanh nghiệp.
+              Chúng tôi biến những thủ tục phức tạp thành lộ trình rõ ràng, để
+              bạn tập trung vào điều quan trọng nhất: tương lai của chính mình.
             </motion.p>
 
             {/* Call to Actions (CTAs) */}
@@ -722,57 +725,61 @@ export function AboutPage() {
         </Container>
       </section>
 
+      {/* ───────────────────── Partners (plain white row) ──────── */}
+      <SitePartners partners={partners} />
+
       {/* ───────────────────── Offices section ─────────────────── */}
       <section
         aria-labelledby="about-offices-heading"
         className="w-full bg-white py-10 sm:py-12 lg:py-16"
       >
-        <Container>
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={inView}
-            className="flex flex-col items-center text-center"
-          >
-            <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-              Văn phòng
-            </p>
-            <h2
-              id="about-offices-heading"
-              className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
-            >
-              Gần bạn hơn ở mỗi điểm đến
-            </h2>
-            <span
-              aria-hidden="true"
-              className="mt-4 h-1 w-12 rounded-sm bg-brand-gold"
-            />
-          </motion.div>
-
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={inView}
-            className="mt-12 space-y-8 lg:mt-14"
-          >
-            {OFFICES.map((office, index) => (
-              <motion.div key={office.country} variants={fadeUp}>
-                <OfficeCard office={office} reverse={index % 2 !== 0} />
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+            <div className="mx-auto max-w-7xl">
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={inView}
+                className="flex flex-col items-center text-center"
+              >
+                <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
+                  Văn phòng
+                </p>
+                <h2
+                  id="about-offices-heading"
+                  className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
+                >
+                  Gần bạn hơn ở mỗi điểm đến
+                </h2>
+                <span
+                  aria-hidden="true"
+                  className="mt-4 h-1 w-12 rounded-sm bg-brand-gold"
+                />
               </motion.div>
-            ))}
-          </motion.div>
+
+              <motion.div
+                variants={stagger}
+                initial="hidden"
+                whileInView="visible"
+                viewport={inView}
+                className="mt-12 space-y-8 lg:mt-14"
+              >
+                {OFFICES.map((office, index) => (
+                  <motion.div key={office.country} variants={fadeUp}>
+                    <OfficeCard office={office} reverse={index % 2 !== 0} />
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </div>
         </Container>
       </section>
-
-      {/* ───────────────────── Partners (reuse) ────────────────── */}
-      <SitePartners className="bg-brand-light" />
 
       {/* ───────────────────── Client-first reviews ─────────────── */}
       <section
         aria-labelledby="client-reviews-heading"
-        className="relative isolate min-h-[720px] overflow-hidden border-t border-border bg-brand-light sm:min-h-[780px]"
+        className="relative isolate min-h-[720px] overflow-hidden border-t border-border bg-white sm:min-h-[780px]"
       >
         <div
           aria-hidden="true"
