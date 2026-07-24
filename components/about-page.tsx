@@ -40,17 +40,18 @@ const HERO_STATS = [
 ] as const
 
 const OFFICES = [
-  {
-    title: "Singapore — Trụ sở chính",
-    image: "/images/singapore1-5221.jpg",
-    address: "1 Raffles Place, #20-61, Singapore 048616",
-    contacts: [
-      { icon: Phone, text: "+65 6123 4567" },
-      { icon: Mail, text: "singapore@kvcglobal.com" },
-      { icon: MapPin, text: "Thứ 2 – Thứ 6, 9:00 – 18:00" },
-    ],
-    mapUrl: "https://maps.google.com",
-  },
+  // TODO:: hide for production
+  // {
+  //   title: "Singapore — Trụ sở chính",
+  //   image: "/images/singapore1-5221.jpg",
+  //   address: "1 Raffles Place, #20-61, Singapore 048616",
+  //   contacts: [
+  //     { icon: Phone, text: "+65 6123 4567" },
+  //     { icon: Mail, text: "singapore@kvcglobal.com" },
+  //     { icon: MapPin, text: "Thứ 2 – Thứ 6, 9:00 – 18:00" },
+  //   ],
+  //   mapUrl: "https://maps.google.com",
+  // },
   {
     title: "Việt Nam — Chi nhánh TP.HCM",
     image: "/images/dat-nuoc-singapore-01.jpg",
@@ -103,6 +104,8 @@ const staggerFast: Variants = {
 const inView = { once: true, margin: "-80px" } as const
 
 export function AboutPage() {
+  const hasSingleOffice = OFFICES.length === 1
+
   return (
     <div className="bg-background">
       {/* ───────────────────────── Hero ───────────────────────── */}
@@ -132,13 +135,19 @@ export function AboutPage() {
           {/* Breadcrumb Navigation */}
           <nav
             aria-label="Breadcrumb"
-            className="mb-8 flex flex-wrap items-center gap-1.5 text-xs font-medium text-muted-foreground md:text-sm font-body"
+            className="mb-8 flex flex-wrap items-center gap-1.5 font-body text-xs font-medium text-muted-foreground md:text-sm"
           >
-            <Link href="/" className="hover:text-foreground transition-colors duration-200">
+            <Link
+              href="/"
+              className="transition-colors duration-200 hover:text-foreground"
+            >
               Trang chủ
             </Link>
             <span className="text-muted-foreground/60 select-none">&gt;</span>
-            <span className="text-foreground/80 font-semibold" aria-current="page">
+            <span
+              className="font-semibold text-foreground/80"
+              aria-current="page"
+            >
               Giới thiệu
             </span>
           </nav>
@@ -164,7 +173,7 @@ export function AboutPage() {
             {/* Subtitle / Tag */}
             <motion.span
               variants={fadeUp}
-              className="inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm mb-3"
+              className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm"
             >
               Giới thiệu về KVC Global
             </motion.span>
@@ -176,7 +185,7 @@ export function AboutPage() {
               className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
             >
               Đồng hành cùng bạn
-              <span className="block mt-1">chạm tới tương lai mới</span>
+              <span className="mt-1 block">chạm tới tương lai mới</span>
             </motion.h1>
 
             {/* Description Paragraph */}
@@ -192,7 +201,7 @@ export function AboutPage() {
             {/* Call to Actions (CTAs) */}
             <motion.div
               variants={fadeUp}
-              className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4"
+              className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center"
             >
               <Link
                 href="#lien-he"
@@ -239,7 +248,7 @@ export function AboutPage() {
             Outer wrapper owns the straddle positioning (translate-y-1/2);
             inner motion wrapper owns the entrance animation so framer-motion's
             transform never overrides the straddle. */}
-        <div className="relative z-20 lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:translate-y-1/2">
+        <div className="relative z-20 lg:absolute lg:right-0 lg:bottom-0 lg:left-0 lg:translate-y-1/2">
           <motion.div
             variants={staggerFast}
             initial="hidden"
@@ -341,7 +350,7 @@ export function AboutPage() {
       {/* ───────────────────── Story section ───────────────────── */}
       <section
         id="cau-chuyen"
-        className="w-full bg-brand-light pt-20 sm:pt-24 md:pt-28 pb-20 sm:pb-24"
+        className="w-full bg-brand-light pt-20 pb-20 sm:pt-24 sm:pb-24 md:pt-28"
       >
         <motion.div
           variants={stagger}
@@ -362,16 +371,20 @@ export function AboutPage() {
               </h2>
               <div className="mt-6 space-y-4">
                 <p className="text-base leading-relaxed text-brand-dark/80">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                  enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                  nisi ut aliquip ex ea commodo consequat.
+                  KVC Global được thành lập nhằm cung cấp giải pháp tư vấn
+                  chuyên nghiệp cho các cá nhân và tổ chức có nhu cầu học tập,
+                  làm việc hoặc đầu tư tại Singapore. Chúng tôi tập trung vào
+                  việc đảm bảo mỗi hồ sơ được thực hiện đúng quy trình, đúng quy
+                  định pháp lý, hạn chế tối đa rủi ro phát sinh trong quá trình
+                  xử lý.
                 </p>
                 <p className="text-base leading-relaxed text-brand-dark/80">
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
+                  Qua quá trình hoạt động, KVC Global đã phát triển năng lực tư
+                  vấn trên cả hai lĩnh vực trọng tâm — giáo dục và doanh nghiệp
+                  — với đội ngũ am hiểu hệ thống giáo dục Singapore cũng như các
+                  quy định của ACRA, MOM và ICA. Mỗi dịch vụ được triển khai dựa
+                  trên quy trình rà soát và kiểm tra rõ ràng, nhằm đảm bảo kết
+                  quả nhất quán cho khách hàng.
                 </p>
               </div>
               <Link
@@ -423,45 +436,55 @@ export function AboutPage() {
             initial="hidden"
             whileInView="visible"
             viewport={inView}
-            className="mt-14 grid gap-8 lg:grid-cols-2"
+            className={`mt-14 grid gap-8 ${hasSingleOffice ? "mx-auto max-w-5xl" : "lg:grid-cols-2"}`}
           >
             {OFFICES.map((office) => (
               <motion.div
                 key={office.title}
                 variants={fadeUp}
-                className="flex flex-col overflow-hidden rounded-lg bg-white shadow-[0_18px_50px_-24px_rgba(15,27,45,0.22)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(15,27,45,0.28)] lg:flex-row"
+                className={`flex flex-col overflow-hidden rounded-lg bg-white shadow-[0_18px_50px_-24px_rgba(15,27,45,0.22)] ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_28px_70px_-24px_rgba(15,27,45,0.28)] lg:flex-row ${hasSingleOffice ? "lg:min-h-[420px]" : ""}`}
               >
-                <div className="relative h-56 w-full shrink-0 lg:h-auto lg:w-[45%]">
+                <div
+                  className={`relative h-64 w-full shrink-0 sm:h-72 lg:h-auto ${hasSingleOffice ? "lg:w-[52%]" : "lg:w-[45%]"}`}
+                >
                   <Image
                     src={office.image}
                     alt={office.title}
                     fill
-                    sizes="(max-width: 640px) 100vw, 45vw"
+                    sizes={
+                      hasSingleOffice
+                        ? "(max-width: 1024px) 100vw, 520px"
+                        : "(max-width: 640px) 100vw, 45vw"
+                    }
                     className="object-cover"
                   />
                 </div>
-                <div className="flex flex-1 flex-col p-8">
-                  <h3 className="font-heading text-xl font-bold text-brand-gold">
+                <div
+                  className={`flex flex-1 flex-col justify-center p-8 ${hasSingleOffice ? "sm:p-10 lg:p-12" : ""}`}
+                >
+                  <h3
+                    className={`font-heading font-bold text-brand-gold ${hasSingleOffice ? "text-2xl" : "text-xl"}`}
+                  >
                     {office.title}
                   </h3>
-                  <p className="mt-3 flex items-start gap-2 text-sm leading-relaxed text-brand-dark/80">
+                  <p className="mt-4 flex items-start gap-3 text-sm leading-relaxed text-brand-dark/80 sm:text-base">
                     <MapPin
-                      className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-brand-gold"
                       strokeWidth={1.5}
                     />
                     {office.address}
                   </p>
 
-                  <ul className="mt-5 space-y-3">
+                  <ul className="mt-6 space-y-3.5">
                     {office.contacts.map((contact) => {
                       const Icon = contact.icon
                       return (
                         <li
                           key={contact.text}
-                          className="flex items-center gap-3 text-sm text-brand-dark/80"
+                          className="flex items-center gap-3 text-sm text-brand-dark/80 sm:text-base"
                         >
                           <Icon
-                            className="h-4 w-4 shrink-0 text-brand-gold"
+                            className="h-5 w-5 shrink-0 text-brand-gold"
                             strokeWidth={1.5}
                           />
                           {contact.text}
@@ -472,7 +495,7 @@ export function AboutPage() {
 
                   <Link
                     href={office.mapUrl}
-                    className="group mt-6 inline-flex w-fit items-center gap-2 rounded-sm border border-brand-blue-mid px-5 py-2.5 text-sm font-semibold text-primary transition-all duration-300 ease-out hover:bg-brand-blue-mid hover:text-white"
+                    className="group mt-8 inline-flex w-fit items-center gap-2 rounded-sm border border-brand-blue-mid px-5 py-2.5 text-sm font-semibold text-primary transition-all duration-300 ease-out hover:bg-brand-blue-mid hover:text-white"
                   >
                     Xem bản đồ
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -521,7 +544,10 @@ export function AboutPage() {
                   className="flex flex-col items-start gap-5 rounded-lg bg-white p-8 shadow-sm ring-1 ring-black/5 transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-md"
                 >
                   <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-md bg-brand-blue-mid">
-                    <Icon className="h-9 w-9 text-secondary" strokeWidth={1.5} />
+                    <Icon
+                      className="h-9 w-9 text-secondary"
+                      strokeWidth={1.5}
+                    />
                   </div>
                   <div className="flex flex-col">
                     <h3 className="font-heading text-lg font-bold text-brand-blue">
@@ -545,7 +571,7 @@ export function AboutPage() {
             {/* Card 3 — framed certificates image (expands full only when alone in a row) */}
             <motion.div
               variants={fadeUp}
-              className="relative min-h-[260px] overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5 sm:col-span-2 lg:col-span-1 sm:min-h-[340px] lg:min-h-[300px]"
+              className="relative min-h-[260px] overflow-hidden rounded-lg shadow-sm ring-1 ring-black/5 sm:col-span-2 sm:min-h-[340px] lg:col-span-1 lg:min-h-[300px]"
             >
               <Image
                 src="/images/free-singapore-tour-for.jpg"
@@ -558,7 +584,6 @@ export function AboutPage() {
           </motion.div>
         </Container>
       </section>
-
     </div>
   )
 }
