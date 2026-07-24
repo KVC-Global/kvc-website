@@ -327,24 +327,26 @@ export function AboutPage() {
       {/* ───────────────────────── Hero ───────────────────────── */}
       <section
         aria-labelledby="about-hero-heading"
-        className="relative w-full border-b border-border bg-white"
+        className="relative w-full border-b border-border bg-cover bg-center"
+        style={{ backgroundImage: "url(/images/study-abroad-hero.jpg)" }}
       >
-        {/* Desktop Background Image (Right side) */}
-        <div className="absolute inset-y-0 right-0 z-0 hidden w-full overflow-hidden lg:block lg:w-[52%]">
-          <Image
-            src="/images/study-abroad-hero.jpg"
-            alt="Đội ngũ KVC Global làm việc tại Singapore"
-            fill
-            priority
-            sizes="(max-width: 1024px) 100vw, 52vw"
-            className="object-cover object-center"
-          />
-          {/* Soft blend transition from white background (left) to image */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-white via-white/80 to-transparent"
-          />
-        </div>
+        <Image
+          src="/images/study-abroad-hero.jpg"
+          alt=""
+          role="presentation"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #fff 0%, #fff 30%, transparent 70%)",
+          }}
+        />
 
         {/* Main Content Container */}
         <Container className="relative z-10 pt-28 pb-20 sm:pt-32 sm:pb-24 md:pt-36 md:pb-28">
@@ -367,17 +369,6 @@ export function AboutPage() {
               Giới thiệu
             </span>
           </nav>
-
-          {/* Mobile/Tablet Image Display (Shown only on small/medium screens) */}
-          <div className="relative mb-8 h-[200px] w-full overflow-hidden rounded-lg sm:h-[280px] md:h-[340px] lg:hidden">
-            <Image
-              src="/images/study-abroad-hero.jpg"
-              alt="Đội ngũ KVC Global làm việc tại Singapore"
-              fill
-              sizes="100vw"
-              className="object-cover object-center"
-            />
-          </div>
 
           {/* Content Box */}
           <motion.div

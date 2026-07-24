@@ -32,7 +32,7 @@ export async function SiteHero({ className }: { className?: string }) {
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #fff 0%, #fff 30%, transparent 60%)",
+            "linear-gradient(to right, #fff 0%, #fff 30%, transparent 70%)",
         }}
       />
 
