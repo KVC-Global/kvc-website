@@ -559,66 +559,70 @@ export function AboutPage() {
       {/* ───────────────────── Story section ───────────────────── */}
       <section
         id="cau-chuyen"
-        className="w-full bg-brand-light pt-20 pb-20 sm:pt-24 sm:pb-24 md:pt-28"
+        className="w-full bg-white py-10 sm:py-12 lg:py-16"
       >
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="visible"
-          viewport={inView}
-        >
-          <Container className="grid items-center gap-12 md:grid-cols-2">
-            <motion.div variants={fadeUp} className="flex flex-col">
-              <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-                Câu chuyện KVC Global
-              </p>
-              <h2 className="mt-4 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl">
-                Hơn một thập kỷ đồng hành
-                <span className="block text-brand-gold">
-                  cùng những ước mơ vươn xa
-                </span>
-              </h2>
-              <div className="mt-6 space-y-4">
-                <p className="text-base leading-relaxed text-brand-dark/80">
-                  KVC Global được thành lập nhằm cung cấp giải pháp tư vấn
-                  chuyên nghiệp cho các cá nhân và tổ chức có nhu cầu học tập,
-                  làm việc hoặc đầu tư tại Singapore. Chúng tôi tập trung vào
-                  việc đảm bảo mỗi hồ sơ được thực hiện đúng quy trình, đúng quy
-                  định pháp lý, hạn chế tối đa rủi ro phát sinh trong quá trình
-                  xử lý.
-                </p>
-                <p className="text-base leading-relaxed text-brand-dark/80">
-                  Qua quá trình hoạt động, KVC Global đã phát triển năng lực tư
-                  vấn trên cả hai lĩnh vực trọng tâm — giáo dục và doanh nghiệp
-                  — với đội ngũ am hiểu hệ thống giáo dục Singapore cũng như các
-                  quy định của ACRA, MOM và ICA. Mỗi dịch vụ được triển khai dựa
-                  trên quy trình rà soát và kiểm tra rõ ràng, nhằm đảm bảo kết
-                  quả nhất quán cho khách hàng.
-                </p>
-              </div>
-              <Link
-                href="#lien-he"
-                className="group mt-8 inline-flex w-fit items-center gap-2 rounded-sm bg-brand-blue-mid px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg"
-              >
-                Tìm hiểu về dịch vụ
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-            </motion.div>
-
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+          <div className="rounded-lg bg-brand-light px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
             <motion.div
-              variants={fadeUp}
-              className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-[0_24px_60px_-24px_rgba(15,27,45,0.18)]"
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={inView}
             >
-              <Image
-                src="/images/singapore-merlion-sunset.jpg"
-                alt="Đội ngũ KVC Global tại Singapore"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover object-center"
-              />
+              <div className="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
+                <motion.div variants={fadeUp} className="flex flex-col">
+                  <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
+                    Câu chuyện KVC Global
+                  </p>
+                  <h2 className="mt-4 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl">
+                    Hơn một thập kỷ đồng hành
+                    <span className="block text-brand-gold">
+                      cùng những ước mơ vươn xa
+                    </span>
+                  </h2>
+                  <div className="mt-6 space-y-4">
+                    <p className="text-base leading-relaxed text-brand-dark/80">
+                      KVC Global được thành lập nhằm cung cấp giải pháp tư vấn
+                      chuyên nghiệp cho các cá nhân và tổ chức có nhu cầu học
+                      tập, làm việc hoặc đầu tư tại Singapore. Chúng tôi tập
+                      trung vào việc đảm bảo mỗi hồ sơ được thực hiện đúng quy
+                      trình, đúng quy định pháp lý, hạn chế tối đa rủi ro phát
+                      sinh trong quá trình xử lý.
+                    </p>
+                    <p className="text-base leading-relaxed text-brand-dark/80">
+                      Qua quá trình hoạt động, KVC Global đã phát triển năng lực
+                      tư vấn trên cả hai lĩnh vực trọng tâm — giáo dục và doanh
+                      nghiệp — với đội ngũ am hiểu hệ thống giáo dục Singapore
+                      cũng như các quy định của ACRA, MOM và ICA. Mỗi dịch vụ
+                      được triển khai dựa trên quy trình rà soát và kiểm tra rõ
+                      ràng, nhằm đảm bảo kết quả nhất quán cho khách hàng.
+                    </p>
+                  </div>
+                  <Link
+                    href="#lien-he"
+                    className="group mt-8 inline-flex w-fit items-center gap-2 rounded-sm bg-brand-blue-mid px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg"
+                  >
+                    Tìm hiểu về dịch vụ
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                </motion.div>
+
+                <motion.div
+                  variants={fadeUp}
+                  className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-[0_24px_60px_-24px_rgba(15,27,45,0.18)]"
+                >
+                  <Image
+                    src="/images/singapore-merlion-sunset.jpg"
+                    alt="Đội ngũ KVC Global tại Singapore"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover object-center"
+                  />
+                </motion.div>
+              </div>
             </motion.div>
-          </Container>
-        </motion.div>
+          </div>
+        </Container>
       </section>
 
       {/* ───────────────────── Offices section ─────────────────── */}
@@ -626,49 +630,47 @@ export function AboutPage() {
         aria-labelledby="about-offices-heading"
         className="w-full bg-white py-10 sm:py-12 lg:py-16"
       >
-        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={inView}
-              className="flex flex-col items-center text-center"
+        <Container>
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={inView}
+            className="flex flex-col items-center text-center"
+          >
+            <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
+              Văn phòng
+            </p>
+            <h2
+              id="about-offices-heading"
+              className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
             >
-              <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-                Văn phòng
-              </p>
-              <h2
-                id="about-offices-heading"
-                className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
-              >
-                Gần bạn hơn ở mỗi điểm đến
-              </h2>
-              <span
-                aria-hidden="true"
-                className="mt-4 h-1 w-12 rounded-sm bg-brand-gold"
-              />
-            </motion.div>
+              Gần bạn hơn ở mỗi điểm đến
+            </h2>
+            <span
+              aria-hidden="true"
+              className="mt-4 h-1 w-12 rounded-sm bg-brand-gold"
+            />
+          </motion.div>
 
-            <motion.div
-              variants={stagger}
-              initial="hidden"
-              whileInView="visible"
-              viewport={inView}
-              className="mt-12 space-y-8 lg:mt-14"
-            >
-              {OFFICES.map((office, index) => (
-                <motion.div key={office.country} variants={fadeUp}>
-                  <OfficeCard office={office} reverse={index % 2 !== 0} />
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={inView}
+            className="mt-12 space-y-8 lg:mt-14"
+          >
+            {OFFICES.map((office, index) => (
+              <motion.div key={office.country} variants={fadeUp}>
+                <OfficeCard office={office} reverse={index % 2 !== 0} />
+              </motion.div>
+            ))}
+          </motion.div>
         </Container>
       </section>
 
       {/* ───────────────────── Partners (reuse) ────────────────── */}
-      <SitePartners />
+      <SitePartners className="bg-brand-light" />
     </div>
   )
 }
