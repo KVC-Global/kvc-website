@@ -1,10 +1,16 @@
-import type { LucideIcon } from "lucide-react"
+import type { ComponentType } from "react"
 
 import { Container } from "@/components/ui/container"
 import { cn } from "@/lib/utils"
 
+type StatIcon = ComponentType<{
+  className?: string
+  strokeWidth?: number
+  "aria-hidden"?: boolean
+}>
+
 type StudyAbroadStat = {
-  icon: LucideIcon
+  icon: StatIcon
   value: string
   label: string
 }
@@ -36,7 +42,7 @@ export function StudyAbroadStatBar({
                   <Icon
                     className="h-9 w-9 shrink-0 text-[#f8bc62] sm:h-11 sm:w-11"
                     strokeWidth={1.75}
-                    aria-hidden="true"
+                    aria-hidden={true}
                   />
                   <div className="flex min-w-0 flex-col gap-1">
                     <div className="font-display text-base leading-tight font-bold text-primary sm:text-xl md:text-2xl">
