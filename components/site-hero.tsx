@@ -14,10 +14,7 @@ export async function SiteHero({ className }: { className?: string }) {
   return (
     <section
       aria-labelledby="hero-heading"
-      className={cn(
-        "relative w-full bg-cover bg-center",
-        className
-      )}
+      className={cn("relative w-full bg-cover bg-center", className)}
       style={{ backgroundImage: `url(${HERO_IMAGE})` }}
     >
       <Image
@@ -33,10 +30,10 @@ export async function SiteHero({ className }: { className?: string }) {
       <div
         aria-hidden="true"
         className="absolute inset-0"
-            style={{
-              backgroundImage:
-                "linear-gradient(to right, #fff 0%, #fff 30%, transparent 60%)",
-            }}
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #fff 0%, #fff 30%, transparent 70%)",
+        }}
       />
 
       <Container className="relative flex min-h-[600px] flex-col justify-center pt-28 pb-20 sm:pt-32 sm:pb-24 md:min-h-[640px] md:pt-36 md:pb-0">
@@ -46,7 +43,7 @@ export async function SiteHero({ className }: { className?: string }) {
             className="font-heading text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
           >
             <span className="block text-primary">{t.hero.title1}</span>
-            <span className="block text-brand-gold">{t.hero.title2}</span>
+            <span className="block text-[#D7B684]">{t.hero.title2}</span>
           </h1>
 
           <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">

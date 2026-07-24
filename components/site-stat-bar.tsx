@@ -11,7 +11,7 @@ export async function SiteStatBar({ className }: { className?: string }) {
     { icon: Users, value: "10,000+", label: t.stats.clients },
     { icon: CheckCircle2, value: "98%", label: t.stats.successRate },
     { icon: Landmark, value: "150+", label: t.stats.partners },
-    { icon: Star, value: "10+", label: t.stats.experience },
+    { icon: Star, value: "13+", label: t.stats.experience },
   ]
 
   return (

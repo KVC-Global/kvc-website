@@ -12,7 +12,7 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
-import { getDictionaryServer } from "@/lib/i18n-server"
+import { getDictionaryServer, getLocale } from "@/lib/i18n-server"
 
 const ACCENT = "var(--color-secondary)"
 
@@ -80,6 +80,7 @@ function StepItem({ step, index }: { step: Step; index: number }) {
 
 export async function SiteWhyProcess({ className }: { className?: string }) {
   const t = await getDictionaryServer()
+  const locale = await getLocale()
 
   const reasons: ReadonlyArray<Reason> = [
     {
@@ -162,6 +163,27 @@ export async function SiteWhyProcess({ className }: { className?: string }) {
             {reasons.map((reason) => (
               <ReasonItem key={reason.title} reason={reason} />
             ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <a
+              href={locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu"}
+              className="group inline-flex items-center justify-center gap-2 rounded-md border-2 border-brand-gold px-7 py-3.5 text-sm font-semibold tracking-wide text-brand-gold uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+            >
+              {t.whyProcess.cta}
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </a>
           </div>
         </div>
 

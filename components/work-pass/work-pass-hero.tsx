@@ -4,33 +4,16 @@ import Image from "next/image"
 import Link from "next/link"
 import { Award, Briefcase, ClipboardCheck } from "lucide-react"
 
-import { cn } from "@/lib/utils"
+import { StudyAbroadStatBar } from "@/components/study-abroad/study-abroad-stat-bar"
 import { Container } from "@/components/ui/container"
+import { cn } from "@/lib/utils"
+
+const HERO_IMAGE = "/images/work-pass-hero.jpg"
 
 const STATS = [
-  {
-    type: "lucide",
-    icon: Briefcase,
-    value: "10+ năm",
-    label: "Kinh nghiệm",
-  },
-  {
-    type: "lucide",
-    icon: ClipboardCheck,
-    value: "15,000+ hồ sơ",
-    label: "Tư vấn thành công",
-  },
-  {
-    type: "lucide",
-    icon: Award,
-    value: "95% tỷ lệ",
-    label: "Visa & hồ sơ thành công",
-  },
-  {
-    type: "google",
-    value: "Google 4.9/5",
-    label: "250+ đánh giá",
-  },
+  { icon: Briefcase, value: "10+ năm", label: "Kinh nghiệm" },
+  { icon: ClipboardCheck, value: "15,000+ hồ sơ", label: "Tư vấn thành công" },
+  { icon: Award, value: "95% tỷ lệ", label: "Visa & hồ sơ thành công" },
 ] as const
 
 function GoogleIcon({ className }: { className?: string }) {
@@ -61,32 +44,30 @@ export function WorkPassHero({ className }: { className?: string }) {
     <section
       aria-labelledby="work-pass-hero-heading"
       className={cn(
-        "relative w-full border-b border-border bg-white",
+        "relative w-full border-b border-border bg-white bg-cover bg-center pb-16 md:pb-20",
         className
       )}
+      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
     >
-      {/* Desktop Background Image (Right side) */}
-      <div className="absolute inset-y-0 right-0 z-0 hidden w-full overflow-hidden lg:block lg:w-[52%]">
+      <Image
+        src={HERO_IMAGE}
+        alt=""
+        role="presentation"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #fff 0%, #fff 30%, transparent 70%)",
+        }}
+      />
 
-        <Image
-          src="/images/work-pass-hero.jpg"
-          alt="Đội ngũ chuyên gia KVC Global tại Singapore"
-          role="presentation"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-          style={{ transform: "scaleX(-1)" }}
-        />
-        {/* Soft blend transition from white background (left) to image */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-30 bg-gradient-to-r from-white via-white/50 to-transparent"
-        />
-      </div>
-
-      {/* Main Content Container */}
-      <Container className="relative z-10 pt-28 pb-20 sm:pt-32 sm:pb-24 md:pt-36 md:pb-20">
+      <Container className="relative z-10 flex min-h-[600px] flex-col justify-center pt-28 pb-20 sm:pt-32 sm:pb-24 md:min-h-[640px] md:pt-36 md:pb-20">
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
@@ -94,15 +75,13 @@ export function WorkPassHero({ className }: { className?: string }) {
         >
           <Link
             href="/"
-            className="hover:text-foreground transition-colors duration-200"
+            className="transition-colors duration-200 hover:text-foreground"
           >
             Trang chủ
           </Link>
-          <span className="select-none text-muted-foreground/60">&gt;</span>
-          <span className="text-muted-foreground/80">
-            Work pass & việc làm
-          </span>
-          <span className="select-none text-muted-foreground/60">&gt;</span>
+          <span className="text-muted-foreground/60 select-none">&gt;</span>
+          <span className="text-muted-foreground/80">Work pass & việc làm</span>
+          <span className="text-muted-foreground/60 select-none">&gt;</span>
           <span
             className="font-semibold text-foreground/80"
             aria-current="page"
@@ -111,26 +90,14 @@ export function WorkPassHero({ className }: { className?: string }) {
           </span>
         </nav>
 
-        {/* Mobile/Tablet Image Display (Shown only on small/medium screens) */}
-        <div className="relative mb-8 h-[240px] w-full overflow-hidden rounded-lg sm:h-[360px] md:h-[420px] lg:hidden">
-          <Image
-            src="/images/work-pass-hero.jpg"
-            alt="Đội ngũ chuyên gia KVC Global tại Singapore"
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        </div>
-
-        {/* Content Box */}
-        <div className="max-w-full lg:max-w-[55%]">
+        <div className="max-w-2xl">
           {/* Main Title */}
           <h1
             id="work-pass-hero-heading"
             className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
           >
             TEP - Training
-            <span className="block mt-1">Employment Pass Singapore</span>
+            <span className="mt-1 block">Employment Pass Singapore</span>
           </h1>
 
           {/* Description Paragraph */}
@@ -180,40 +147,18 @@ export function WorkPassHero({ className }: { className?: string }) {
             </Link>
           </div>
         </div>
-
-        {/* Stats Grid Container */}
-        <div className="relative z-20 mt-10 w-full sm:mt-12 lg:mt-16 xl:mt-20">
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[20px] border border-border bg-border shadow-[0_12px_40px_-15px_rgba(15,27,45,0.12)] ring-1 ring-black/5 md:grid-cols-4 lg:w-fit">
-            {STATS.map((stat, idx) => {
-              return (
-                <div
-                  key={idx}
-                  className="flex items-center gap-4 bg-white px-5 py-4 transition-all duration-300 ease-out hover:bg-brand-light sm:px-6 sm:py-5 lg:min-w-[240px]"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-light">
-                    {stat.type === "lucide" && stat.icon ? (
-                      <stat.icon
-                        className="h-5 w-5 text-brand-gold"
-                        strokeWidth={2}
-                      />
-                    ) : (
-                      <GoogleIcon className="h-5 w-5" />
-                    )}
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-heading text-sm font-bold text-brand-blue sm:text-[15px]">
-                      {stat.value}
-                    </span>
-                    <span className="font-body text-xs text-muted-foreground font-medium">
-                      {stat.label}
-                    </span>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
       </Container>
+
+      <StudyAbroadStatBar
+        stats={[
+          ...STATS,
+          {
+            icon: GoogleIcon,
+            value: "Google 4.9/5",
+            label: "250+ đánh giá",
+          },
+        ]}
+      />
     </section>
   )
 }

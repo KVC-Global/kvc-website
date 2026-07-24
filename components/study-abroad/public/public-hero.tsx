@@ -3,15 +3,21 @@ import { Landmark, Compass, Coins, GraduationCap } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
+import { StudyAbroadStatBar } from "@/components/study-abroad/study-abroad-stat-bar"
 import Image from "next/image"
 
-const HERO_IMAGE = "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200&auto=format&fit=crop"
+const HERO_IMAGE =
+  "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=1200&auto=format&fit=crop"
 
 const STATS = [
   { icon: Landmark, value: "Tiểu học – Dự bị ĐH", label: "hệ thống công lập" },
   { icon: Compass, value: "Kỳ thi AEIS", label: "tuyển sinh quốc gia" },
   { icon: Coins, value: "MOE Tuition Grant", label: "hỗ trợ học phí" },
-  { icon: GraduationCap, value: "Xét Thường trú nhân", label: "cơ hội định cư PR" },
+  {
+    icon: GraduationCap,
+    value: "Xét Thường trú nhân",
+    label: "cơ hội định cư PR",
+  },
 ] as const
 
 export function PublicStudyAbroadHero({ className }: { className?: string }) {
@@ -19,7 +25,7 @@ export function PublicStudyAbroadHero({ className }: { className?: string }) {
     <section
       aria-labelledby="public-hero-heading"
       className={cn(
-        "relative w-full border-b border-border bg-cover bg-center bg-white",
+        "relative w-full border-b border-border bg-white bg-cover bg-center pb-16 md:pb-20",
         className
       )}
       style={{ backgroundImage: `url(${HERO_IMAGE})` }}
@@ -30,14 +36,14 @@ export function PublicStudyAbroadHero({ className }: { className?: string }) {
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center animate-fade-in"
+        className="animate-fade-in object-cover object-center"
       />
       <div
         aria-hidden="true"
         className="absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #fff 0%, #fff 30%, transparent 60%)",
+            "linear-gradient(to right, #fff 0%, #fff 30%, transparent 70%)",
         }}
       />
 
@@ -48,19 +54,22 @@ export function PublicStudyAbroadHero({ className }: { className?: string }) {
         >
           <Link
             href="/"
-            className="hover:text-foreground transition-colors duration-200"
+            className="transition-colors duration-200 hover:text-foreground"
           >
             Trang chủ
           </Link>
-          <span className="select-none text-muted-foreground/60">&gt;</span>
+          <span className="text-muted-foreground/60 select-none">&gt;</span>
           <Link
             href="/du-hoc"
-            className="hover:text-foreground transition-colors duration-200"
+            className="transition-colors duration-200 hover:text-foreground"
           >
             Du học
           </Link>
-          <span className="select-none text-muted-foreground/60">&gt;</span>
-          <span className="font-semibold text-foreground/80" aria-current="page">
+          <span className="text-muted-foreground/60 select-none">&gt;</span>
+          <span
+            className="font-semibold text-foreground/80"
+            aria-current="page"
+          >
             Du học công lập Singapore
           </span>
         </nav>
@@ -81,7 +90,9 @@ export function PublicStudyAbroadHero({ className }: { className?: string }) {
           </h1>
 
           <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">
-            Hệ thống giáo dục công lập uy tín hàng đầu thế giới dưới sự quản lý trực tiếp của Bộ Giáo dục Singapore (MOE), mở ra lộ trình phát triển học thuật vượt trội.
+            Hệ thống giáo dục công lập uy tín hàng đầu thế giới dưới sự quản lý
+            trực tiếp của Bộ Giáo dục Singapore (MOE), mở ra lộ trình phát triển
+            học thuật vượt trội.
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
@@ -124,33 +135,9 @@ export function PublicStudyAbroadHero({ className }: { className?: string }) {
             </Link>
           </div>
         </div>
-
-        <div className="relative z-20 mt-10 w-full sm:mt-12 lg:mt-16 xl:mt-20">
-          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-border bg-border shadow-[0_12px_40px_-15px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:grid-cols-2 lg:w-fit lg:grid-cols-4">
-            {STATS.map((stat) => {
-              const Icon = stat.icon
-              return (
-                <div
-                  key={stat.label}
-                  className="flex items-center gap-4 bg-white px-5 py-4 transition-all duration-300 ease-out hover:bg-brand-light sm:px-6 sm:py-5 lg:min-w-[240px]"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-light">
-                    <Icon className="h-5 w-5 text-secondary" strokeWidth={2} />
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-heading text-sm font-bold text-brand-blue sm:text-[15px]">
-                      {stat.value}
-                    </span>
-                    <span className="font-body text-xs font-medium text-muted-foreground">
-                      {stat.label}
-                    </span>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </div>
       </Container>
+
+      <StudyAbroadStatBar stats={STATS} />
     </section>
   )
 }
