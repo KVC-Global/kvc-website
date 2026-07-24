@@ -8,6 +8,8 @@ import { StudyAbroadStatBar } from "@/components/study-abroad/study-abroad-stat-
 import { Container } from "@/components/ui/container"
 import { cn } from "@/lib/utils"
 
+const HERO_IMAGE = "/images/work-pass-hero.jpg"
+
 const STATS = [
   { icon: Briefcase, value: "10+ năm", label: "Kinh nghiệm" },
   { icon: ClipboardCheck, value: "15,000+ hồ sơ", label: "Tư vấn thành công" },
@@ -42,31 +44,30 @@ export function WorkPassHero({ className }: { className?: string }) {
     <section
       aria-labelledby="work-pass-hero-heading"
       className={cn(
-        "relative w-full border-b border-border bg-white pb-16 md:pb-20",
+        "relative w-full border-b border-border bg-white bg-cover bg-center pb-16 md:pb-20",
         className
       )}
+      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
     >
-      {/* Desktop Background Image (Right side) */}
-      <div className="absolute inset-y-0 right-0 z-0 hidden w-full overflow-hidden lg:block lg:w-[52%]">
-        <Image
-          src="/images/work-pass-hero.jpg"
-          alt="Đội ngũ chuyên gia KVC Global tại Singapore"
-          role="presentation"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-          style={{ transform: "scaleX(-1)" }}
-        />
-        {/* Soft blend transition from white background (left) to image */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-30 bg-gradient-to-r from-white via-white/50 to-transparent"
-        />
-      </div>
+      <Image
+        src={HERO_IMAGE}
+        alt=""
+        role="presentation"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-center"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #fff 0%, #fff 30%, transparent 70%)",
+        }}
+      />
 
-      {/* Main Content Container */}
-      <Container className="relative z-10 pt-28 pb-20 sm:pt-32 sm:pb-24 md:pt-36 md:pb-20">
+      <Container className="relative z-10 flex min-h-[600px] flex-col justify-center pt-28 pb-20 sm:pt-32 sm:pb-24 md:min-h-[640px] md:pt-36 md:pb-20">
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
@@ -89,19 +90,7 @@ export function WorkPassHero({ className }: { className?: string }) {
           </span>
         </nav>
 
-        {/* Mobile/Tablet Image Display (Shown only on small/medium screens) */}
-        <div className="relative mb-8 h-[240px] w-full overflow-hidden rounded-lg sm:h-[360px] md:h-[420px] lg:hidden">
-          <Image
-            src="/images/work-pass-hero.jpg"
-            alt="Đội ngũ chuyên gia KVC Global tại Singapore"
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        </div>
-
-        {/* Content Box */}
-        <div className="max-w-full lg:max-w-[55%]">
+        <div className="max-w-2xl">
           {/* Main Title */}
           <h1
             id="work-pass-hero-heading"
@@ -158,19 +147,18 @@ export function WorkPassHero({ className }: { className?: string }) {
             </Link>
           </div>
         </div>
+      </Container>
 
-          </Container>
-
-          <StudyAbroadStatBar
-            stats={[
-              ...STATS,
-              {
-                icon: GoogleIcon,
-                value: "Google 4.9/5",
-                label: "250+ đánh giá",
-              },
-            ]}
-          />
+      <StudyAbroadStatBar
+        stats={[
+          ...STATS,
+          {
+            icon: GoogleIcon,
+            value: "Google 4.9/5",
+            label: "250+ đánh giá",
+          },
+        ]}
+      />
     </section>
   )
 }
