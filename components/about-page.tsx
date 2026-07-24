@@ -37,7 +37,7 @@ import { Container } from "@/components/ui/container"
  */
 
 const HERO_STATS = [
-  { icon: Award, value: "10+ năm", label: "Kinh nghiệm" },
+  { icon: Award, value: "13+ năm", label: "Kinh nghiệm" },
   { icon: Users, value: "2.000+", label: "Khách hàng" },
   { icon: ShieldCheck, value: "100%", label: "Minh bạch" },
   { icon: Globe2, value: "24/7", label: "Hỗ trợ" },
@@ -409,9 +409,12 @@ export function AboutPage() {
               variants={fadeUp}
               className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px] md:leading-relaxed"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation.
+              KVC Global đồng hành cùng học sinh, người lao động và doanh
+              nghiệp trên hành trình chinh phục Singapore — từ du học, xét
+              tuyển trường, xin work pass, đến thành lập và vận hành doanh
+              nghiệp. Chúng tôi biến những thủ tục phức tạp thành lộ trình rõ
+              ràng, để bạn tập trung vào điều quan trọng nhất: tương lai của
+              chính mình.
             </motion.p>
 
             {/* Call to Actions (CTAs) */}
