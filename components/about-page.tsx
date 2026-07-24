@@ -12,7 +12,9 @@ import {
   Mail,
   MapPin,
   Phone,
+  Quote,
   ShieldCheck,
+  Star,
   Target,
   Users,
 } from "lucide-react"
@@ -39,6 +41,51 @@ const HERO_STATS = [
   { icon: Users, value: "2.000+", label: "Khách hàng" },
   { icon: ShieldCheck, value: "100%", label: "Minh bạch" },
   { icon: Globe2, value: "24/7", label: "Hỗ trợ" },
+] as const
+
+const CLIENT_REVIEWS = [
+  {
+    name: "Minh Anh",
+    role: "Du học sinh tại Singapore",
+    quote:
+      "Đội ngũ KVC tư vấn rõ ràng, theo sát từng bước và giúp mình tự tin hơn trong suốt quá trình chuẩn bị hồ sơ.",
+    image: "/images/student-avatar-1.jpg",
+  },
+  {
+    name: "Hoàng Nam",
+    role: "Khách hàng Work Pass",
+    quote:
+      "Mọi mốc xử lý đều được cập nhật minh bạch. Tôi luôn biết hồ sơ của mình đang ở đâu và cần làm gì tiếp theo.",
+    image: "/images/student-avatar-2.jpg",
+  },
+  {
+    name: "Phương Linh",
+    role: "Du học sinh",
+    quote:
+      "KVC giúp mình chọn lộ trình phù hợp thay vì đưa ra một giải pháp chung cho tất cả mọi người.",
+    image: "/images/student-avatar-3.jpg",
+  },
+  {
+    name: "Thanh Huyền",
+    role: "Phụ huynh học sinh",
+    quote:
+      "Sự tận tâm và phản hồi nhanh của đội ngũ khiến gia đình tôi an tâm từ lúc chuẩn bị đến khi nhập học.",
+    image: "/images/student-avatar-4.jpg",
+  },
+  {
+    name: "Quốc Bảo",
+    role: "Khách hàng doanh nghiệp",
+    quote:
+      "Quy trình gọn gàng, tài liệu được kiểm tra kỹ và mọi trao đổi đều đi thẳng vào vấn đề.",
+    image: "/images/student-portrait.jpg",
+  },
+  {
+    name: "Mai Trang",
+    role: "Khách hàng tại TP. Hồ Chí Minh",
+    quote:
+      "Tôi đánh giá cao cách KVC giải thích các lựa chọn và rủi ro trước khi cùng khách hàng ra quyết định.",
+    image: "/images/singapore-student.jpeg",
+  },
 ] as const
 
 const OFFICES = [
@@ -69,6 +116,62 @@ const OFFICES = [
   //   image: "/images/singapore1-5221.jpg",
   // },
 ] as const
+
+function ClientReviewCard({
+  review,
+  className,
+}: {
+  review: (typeof CLIENT_REVIEWS)[number]
+  className?: string
+}) {
+  return (
+    <article
+      className={`flex min-h-56 flex-col rounded-lg border border-brand-blue/10 bg-white p-5 shadow-[0_18px_50px_-28px_rgba(10,37,64,0.35)] sm:p-6 ${className ?? ""}`}
+    >
+      <div className="flex items-center gap-3">
+        <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full bg-brand-light ring-2 ring-brand-gold/25">
+          <Image
+            src={review.image}
+            alt=""
+            fill
+            sizes="48px"
+            className="object-cover"
+          />
+        </div>
+        <div className="min-w-0">
+          <h3 className="truncate font-heading text-sm font-bold text-brand-blue">
+            {review.name}
+          </h3>
+          <p className="truncate font-body text-xs text-brand-dark/55">
+            {review.role}
+          </p>
+        </div>
+      </div>
+
+      <div
+        className="mt-5 flex items-center gap-1"
+        aria-label="Đánh giá 5 trên 5 sao"
+      >
+        {Array.from({ length: 5 }).map((_, index) => (
+          <Star
+            key={index}
+            aria-hidden="true"
+            className="h-3.5 w-3.5 fill-brand-gold text-brand-gold"
+            strokeWidth={0}
+          />
+        ))}
+      </div>
+      <blockquote className="mt-3 line-clamp-4 font-body text-sm leading-relaxed text-brand-dark/75">
+        “{review.quote}”
+      </blockquote>
+      <Quote
+        aria-hidden="true"
+        className="mt-auto h-5 w-5 self-end fill-brand-blue/8 text-brand-blue/8"
+        strokeWidth={0}
+      />
+    </article>
+  )
+}
 
 function OfficeCard({
   office,
@@ -671,6 +774,83 @@ export function AboutPage() {
 
       {/* ───────────────────── Partners (reuse) ────────────────── */}
       <SitePartners className="bg-brand-light" />
+
+      {/* ───────────────────── Client-first reviews ─────────────── */}
+      <section
+        aria-labelledby="client-reviews-heading"
+        className="relative isolate min-h-[720px] overflow-hidden border-t border-border bg-brand-light sm:min-h-[780px]"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 grid grid-cols-2 gap-4 p-4 sm:grid-cols-3 sm:gap-5 sm:p-6 lg:grid-cols-4 lg:p-8"
+        >
+          {CLIENT_REVIEWS.map((review, index) => (
+            <ClientReviewCard
+              key={review.name}
+              review={review}
+              className={`${index === 1 ? "hidden sm:flex" : ""} ${index === 4 ? "hidden lg:flex" : ""} ${index % 3 === 1 ? "sm:translate-y-14" : ""}`}
+            />
+          ))}
+          <ClientReviewCard
+            review={CLIENT_REVIEWS[0]}
+            className="hidden lg:flex lg:translate-y-8"
+          />
+          <ClientReviewCard
+            review={CLIENT_REVIEWS[3]}
+            className="hidden lg:flex lg:-translate-y-8"
+          />
+        </div>
+
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-white/72 backdrop-blur-[2px]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white to-transparent"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-white to-transparent"
+        />
+
+        <Container className="relative z-10 flex min-h-[720px] items-center justify-center py-20 sm:min-h-[780px]">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={inView}
+            className="w-full max-w-xl rounded-2xl border border-white/90 bg-white/95 px-6 py-12 text-center shadow-[0_28px_70px_-28px_rgba(10,37,64,0.45)] ring-1 ring-brand-blue/10 sm:px-12 sm:py-14"
+          >
+            <div
+              className="mx-auto flex w-fit items-center gap-1.5"
+              aria-label="Đánh giá 5 trên 5 sao"
+            >
+              {Array.from({ length: 5 }).map((_, index) => (
+                <Star
+                  key={index}
+                  aria-hidden="true"
+                  className="h-4 w-4 fill-brand-gold text-brand-gold"
+                  strokeWidth={0}
+                />
+              ))}
+            </div>
+            <h2
+              id="client-reviews-heading"
+              className="mt-6 font-heading text-3xl leading-tight font-extrabold tracking-tight text-brand-blue sm:text-4xl"
+            >
+              Khách hàng luôn ở trung tâm
+              <span className="block text-brand-gold">
+                trong mọi điều chúng tôi làm
+              </span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-md font-body text-sm leading-relaxed text-brand-dark/65 sm:text-base">
+              Mỗi phản hồi giúp KVC Global hoàn thiện quy trình và mang đến trải
+              nghiệm tư vấn rõ ràng, tận tâm hơn mỗi ngày.
+            </p>
+          </motion.div>
+        </Container>
+      </section>
     </div>
   )
 }

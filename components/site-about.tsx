@@ -9,7 +9,7 @@ import styles from "./site-about.module.css"
 
 type Stat = { value: string; label: string; color?: string }
 
-const MAIN_IMAGE = "/about-image.png"
+const MAIN_IMAGE = "/images/singapore-merlion-sunset.jpg"
 
 const ACCENT = "var(--color-secondary)"
 
