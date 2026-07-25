@@ -234,7 +234,7 @@ export function OnlineDetails({ className }: { className?: string }) {
   // final leftmost-card position, so its indicator is always reachable.
   const pageCount = Math.max(
     1,
-    TESTIMONIALS.length - Math.min(cardsPerView, TESTIMONIALS.length) + 1,
+    TESTIMONIALS.length - Math.min(cardsPerView, TESTIMONIALS.length) + 1
   )
 
   const recomputeCardsPerView = () => {
@@ -652,7 +652,7 @@ export function OnlineDetails({ className }: { className?: string }) {
         {/* Section 5: Student Testimonials Slider */}
         <section
           aria-labelledby="testimonials-heading"
-          className="mt-20 md:mt-28 w-full"
+          className="mt-20 w-full md:mt-28"
         >
           <div className="mb-10 text-center">
             <h2
@@ -745,10 +745,7 @@ export function OnlineDetails({ className }: { className?: string }) {
             </button>
           </div>
 
-          <div
-            className="mt-8 flex justify-center gap-2"
-            aria-hidden="true"
-          >
+          <div className="mt-8 flex justify-center gap-2" aria-hidden="true">
             {Array.from({ length: pageCount }).map((_, idx) => {
               const isActive = activeIdx === idx
               return (

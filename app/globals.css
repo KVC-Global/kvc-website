@@ -171,3 +171,12 @@
     @apply leading-relaxed;
   }
 }
+
+/* Hide scrollbar for horizontal card lists */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

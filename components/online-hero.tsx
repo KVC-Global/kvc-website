@@ -23,7 +23,7 @@ export function OnlineHero({ className }: { className?: string }) {
       aria-labelledby="online-hero-heading"
       className={cn(
         "relative w-full overflow-hidden bg-cover bg-center",
-        className,
+        className
       )}
       style={{ backgroundImage: `url(${HERO_IMAGE})` }}
     >
@@ -46,7 +46,7 @@ export function OnlineHero({ className }: { className?: string }) {
           >
             Trang chủ
           </Link>
-          <span className="select-none text-muted-foreground/60">&gt;</span>
+          <span className="text-muted-foreground/60 select-none">&gt;</span>
           <span
             className="font-semibold text-foreground/80"
             aria-current="page"
@@ -147,7 +147,10 @@ export function OnlineHero({ className }: { className?: string }) {
                   className="flex items-center gap-4 bg-white px-5 py-4 transition-all duration-300 ease-out hover:bg-brand-light sm:px-6 sm:py-5 lg:min-w-[240px]"
                 >
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-blue-mid">
-                    <Icon className="h-5 w-5 text-brand-gold-light" strokeWidth={2} />
+                    <Icon
+                      className="h-5 w-5 text-brand-gold-light"
+                      strokeWidth={2}
+                    />
                   </div>
                   <div className="flex flex-col">
                     <span className="font-heading text-sm font-bold text-brand-blue sm:text-[15px]">
