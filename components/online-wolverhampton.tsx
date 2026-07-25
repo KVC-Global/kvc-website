@@ -148,14 +148,19 @@ export function OnlineWolverhampton({ className }: { className?: string }) {
   const activeProgram = PROGRAMS[activeProgramId] || PROGRAMS[0]
   const benefitsRef = React.useRef<HTMLDivElement>(null)
   const scrollBenefits = (dir: "left" | "right") => {
-    benefitsRef.current?.scrollBy({ left: dir === "left" ? -300 : 300, behavior: "smooth" })
+    const el = benefitsRef.current; if (!el) return
+    if (dir === "left") {
+      el.scrollTo({ left: Math.max(0, el.scrollLeft - el.clientWidth + 40), behavior: "smooth" })
+    } else {
+      el.scrollBy({ left: el.clientWidth - 40, behavior: "smooth" })
+    }
   }
 
   return (
     <div className={cn("w-full", className)}>
       {/* ── Hero ── */}
       <section className="relative w-full overflow-hidden bg-cover bg-center" style={{ backgroundImage: `url(${HERO_BG})` }}>
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white from-55% to-transparent" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white from-30% to-transparent to-70%" />
         <Container className="relative flex min-h-[580px] flex-col justify-center pt-28 pb-20 md:min-h-[640px]">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-6 flex flex-wrap items-center gap-1.5 font-body text-xs font-medium text-muted-foreground md:text-sm">
             <Link href="/" className="transition-colors duration-200 hover:text-foreground">Trang chủ</Link>
@@ -365,12 +370,12 @@ export function OnlineWolverhampton({ className }: { className?: string }) {
                 <button type="button" onClick={() => scrollBenefits("right")} className="absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100" aria-label="Next">
                   <ChevronRight className="h-5 w-5" strokeWidth={2} />
                 </button>
-                <div ref={benefitsRef} className="flex gap-6 overflow-x-auto pb-4 -mx-2 px-2 snap-x snap-mandatory scrollbar-hide">
+                <div ref={benefitsRef} className="overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"><div className="flex gap-6 w-max mx-auto px-2">
                   {BENEFITS.map((item, i) => (
                   <motion.div
                     key={i}
                     variants={fadeUpVariants}
-                    className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:w-[300px]"
+                    className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:w-[300px] xl:w-[350px]"
                   >
                     <div className="relative aspect-video overflow-hidden">
                       <Image
@@ -391,6 +396,7 @@ export function OnlineWolverhampton({ className }: { className?: string }) {
                     </div>
                   </motion.div>
                 ))}
+                </div>
                 </div>
               </div>
             </motion.div>
