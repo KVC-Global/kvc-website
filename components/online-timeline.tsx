@@ -1,12 +1,7 @@
 "use client"
 
 import * as React from "react"
-import {
-  motion,
-  useScroll,
-  useTransform,
-  type Variants,
-} from "framer-motion"
+import { motion, useScroll, useTransform, type Variants } from "framer-motion"
 import {
   ChevronDown,
   Clock,
@@ -58,7 +53,10 @@ function splitName(name: string): { level: string; rest: string } {
   if (acro)
     return {
       level: acro[1],
-      rest: name.slice(acro[1].length).replace(/^[–\s]+/, "").trim(),
+      rest: name
+        .slice(acro[1].length)
+        .replace(/^[–\s]+/, "")
+        .trim(),
     }
   return { level: "", rest: name }
 }
@@ -80,7 +78,6 @@ function TimelineCard({
   program: TimelineProgram
   index: number
 }) {
-  const { level } = splitName(program.name)
   const isEven = index % 2 === 0
   const levelWeight = getLevelWeight(program.name)
 
@@ -91,14 +88,13 @@ function TimelineCard({
       variants={timelineItemVariants}
       className="group/timeline relative flex flex-col items-start sm:flex-row sm:items-center"
     >
-
       {/* Center rail dot */}
       <div
         className={cn(
-          "absolute left-6 z-10 flex -translate-x-1/2 items-center justify-center rounded-full border-2 border-white shadow-sm transition-all duration-500 ease-out sm:left-1/2 sm:top-1/2 sm:mt-0 sm:-translate-y-1/2",
+          "absolute left-6 z-10 flex -translate-x-1/2 items-center justify-center rounded-full border-2 border-white shadow-sm transition-all duration-500 ease-out sm:top-1/2 sm:left-1/2 sm:mt-0 sm:-translate-y-1/2",
           expanded
             ? "bg-brand-gold shadow-[0_0_0_6px_rgba(200,145,60,0.12)]"
-            : "bg-brand-blue-mid",
+            : "bg-brand-blue-mid"
         )}
         style={{
           width: 14 + (levelWeight - 3),
@@ -110,7 +106,7 @@ function TimelineCard({
       <div
         className={cn(
           "w-full pl-16 sm:w-[calc(50%-2.5rem)] sm:pl-0",
-          isEven ? "sm:mr-auto sm:pr-10" : "sm:ml-auto sm:pl-10",
+          isEven ? "sm:mr-auto sm:pr-10" : "sm:ml-auto sm:pl-10"
         )}
       >
         <button
@@ -118,24 +114,9 @@ function TimelineCard({
           onClick={() => setExpanded((v) => !v)}
           className="group/card relative block w-full overflow-hidden rounded-xl border border-border/60 bg-white text-left shadow-sm transition-all duration-500 ease-out hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg"
         >
-          {/* Left accent bar */}
-          <div
-            className={cn(
-              "absolute inset-y-0 left-0 w-1 transition-all duration-500",
-              expanded
-                ? "bg-brand-gold"
-                : "bg-brand-gold/20 group-hover/card:bg-brand-gold/60",
-            )}
-          />
-
           {/* Card header */}
-          <div className="flex items-start justify-between gap-4 p-6 pl-7">
+          <div className="flex items-start justify-between gap-4 p-6">
             <div className="flex-1">
-              {level && (
-                <span className="mb-2 block font-sans text-[11px] font-semibold tracking-wider text-brand-gold uppercase">
-                  {level}
-                </span>
-              )}
               <h3 className="font-heading text-lg leading-snug font-bold text-brand-blue sm:text-xl">
                 {program.name}
               </h3>
@@ -143,7 +124,7 @@ function TimelineCard({
             <ChevronDown
               className={cn(
                 "mt-1 h-5 w-5 shrink-0 transition-transform duration-300",
-                expanded ? "rotate-180 text-brand-gold" : "text-brand-blue/30",
+                expanded ? "rotate-180 text-brand-gold" : "text-brand-blue/30"
               )}
               strokeWidth={2}
             />
@@ -155,11 +136,11 @@ function TimelineCard({
               "grid transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
               expanded
                 ? "grid-rows-[1fr] opacity-100"
-                : "grid-rows-[0fr] opacity-0",
+                : "grid-rows-[0fr] opacity-0"
             )}
           >
             <div className="overflow-hidden">
-              <div className="border-t border-border bg-brand-light px-7 pb-6 pt-5">
+              <div className="border-t border-border bg-brand-light px-6 pt-5 pb-6">
                 {/* Duration & Start badges */}
                 <div className="flex flex-wrap gap-3">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 font-body text-sm font-medium text-brand-blue-mid">
@@ -175,8 +156,11 @@ function TimelineCard({
                 {/* Subjects */}
                 <div className="mt-5">
                   <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue">
-                    <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />
-                    Mon hoc
+                    <ListChecks
+                      className="h-4 w-4 text-brand-gold"
+                      strokeWidth={1.75}
+                    />
+                    Môn học
                   </h4>
                   <ul className="mt-2 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
                     {program.subjects.map((s, j) => (
@@ -194,8 +178,11 @@ function TimelineCard({
                 {/* Entry requirements */}
                 <div className="mt-5 rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-4">
                   <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue">
-                    <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />
-                    Dieu kien dau vao
+                    <UserCheck
+                      className="h-4 w-4 text-brand-gold"
+                      strokeWidth={1.75}
+                    />
+                    Điều kiện đầu vào
                   </h4>
                   <p className="mt-1.5 text-sm leading-relaxed text-brand-dark/75">
                     {program.entry}
@@ -231,12 +218,12 @@ export function ExpandableTimeline({
   const glowOpacity = useTransform(
     scrollYProgress,
     [0, 0.03, 0.97, 1],
-    [0, 1, 1, 0],
+    [0, 1, 1, 0]
   )
   const progressOpacity = useTransform(
     scrollYProgress,
     [0, 0.02, 0.98, 1],
-    [0, 1, 1, 0],
+    [0, 1, 1, 0]
   )
 
   return (

@@ -508,7 +508,7 @@ export function OnlineOssd({ className }: { className?: string }) {
                   </p>
                 </motion.div>
                 <div className="relative">
-                  <div className="group relative aspect-4/3 overflow-hidden rounded-lg shadow-md">
+                  <div className="group relative aspect-video sm:aspect-4/3 overflow-hidden rounded-lg shadow-md">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={currentSubject}
