@@ -4,7 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
-import { Check, GraduationCap, Clock, Globe, Star, Users, ArrowRight, Building2 } from "lucide-react"
+import { Check, GraduationCap, Clock, Globe, Star, Users, ArrowRight, Building2, Monitor, FileText } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
@@ -38,6 +38,14 @@ const KVC_SUPPORT = [
   "Theo dõi tiến độ học.",
   "Hỗ trợ thực hiện luận văn (Dissertation).",
   "Đồng hành cho đến khi nhận bằng.",
+]
+
+const LEARNING_FORMATS = [
+  { icon: Globe, title: "100% Online", desc: "Học hoàn toàn trực tuyến, không cần đến lớp, chủ động thời gian và địa điểm học tập." },
+  { icon: Clock, title: "Học mọi lúc, mọi nơi", desc: "Linh hoạt sắp xếp lịch học theo thời gian biểu cá nhân, phù hợp với người đi làm." },
+  { icon: FileText, title: "Tài liệu học tập điện tử", desc: "Toàn bộ giáo trình, bài giảng và tài nguyên được cung cấp qua nền tảng trực tuyến." },
+  { icon: Users, title: "Giảng viên hướng dẫn", desc: "Đội ngũ giảng viên giàu kinh nghiệm hướng dẫn và hỗ trợ trực tuyến trong suốt khóa học." },
+  { icon: Star, title: "Đánh giá đa dạng", desc: "Kết hợp bài tập, dự án và luận văn theo từng chương trình để đánh giá toàn diện năng lực." },
 ]
 
 const LEARNING_FORMAT = [
@@ -221,26 +229,46 @@ export function OnlineWolverhampton({ className }: { className?: string }) {
       </section>
 
       {/* ── Hình thức học ── */}
-      <section className="py-16 md:py-24">
-        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+      <section className="bg-white py-16 md:py-24">
+        <Container>
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Hình thức học</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="mx-auto max-w-4xl">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {LEARNING_FORMAT.map((item, i) => (
-                  <motion.div key={i} variants={fadeUpVariants} className="flex items-center gap-3 rounded-md border border-border bg-white p-4 shadow-sm">
-                    <Check className="h-4 w-4 shrink-0 text-brand-gold" strokeWidth={3} />
-                    <span className="font-body text-sm text-brand-dark/85">{item}</span>
-                  </motion.div>
-                ))}
+            <div className="mx-auto max-w-5xl">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
+                {LEARNING_FORMATS.map((item, i) => {
+                  const Icon = item.icon
+                  const isWide = i < 2
+                  return (
+                    <motion.div
+                      key={i}
+                      variants={fadeUpVariants}
+                      className={cn(
+                        "group relative overflow-hidden rounded-xl border border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
+                        "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg",
+                        isWide ? "lg:col-span-3" : "lg:col-span-2",
+                      )}
+                    >
+                      <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-brand-gold/[0.06] transition-all duration-500 group-hover:scale-150 group-hover:bg-brand-gold/[0.12]" />
+                      <div className="relative z-10">
+                        <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-brand-gold/20 bg-brand-gold/[0.06] transition-all duration-500 group-hover:border-brand-gold/40 group-hover:bg-brand-gold/[0.14]">
+                          <Icon className="h-5 w-5 text-brand-gold transition-transform duration-500 group-hover:scale-110" strokeWidth={1.75} />
+                        </div>
+                        <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )
+                })}
               </div>
             </div>
           </motion.div>
-          </div>
         </Container>
       </section>
 

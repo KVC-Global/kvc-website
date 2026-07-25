@@ -4,7 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
-import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp } from "lucide-react"
+import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp, Monitor, FileText } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
@@ -27,6 +27,14 @@ const WHY_ITEMS = [
   { icon: Star, title: "Học Online 100%", desc: "Học mọi lúc, mọi nơi. Không cần đến lớp. Chủ động thời gian. Phù hợp người đi làm." },
   { icon: Users, title: "Giảng viên hỗ trợ", desc: "Hướng dẫn làm Assignment. Theo sát tiến độ học tập. Giải đáp nhanh chóng." },
   { icon: TrendingUp, title: "Chi phí hợp lý", desc: "Tiết kiệm đáng kể so với du học trực tiếp nhưng vẫn sở hữu bằng cấp theo tiêu chuẩn Anh Quốc." },
+]
+
+const LEARNING_FORMATS = [
+  { icon: Globe, title: "100% Online", desc: "Học mọi lúc, mọi nơi, chủ động thời gian, phù hợp người đi làm, không cần đến lớp." },
+  { icon: FileText, title: "Tài liệu điện tử", desc: "Toàn bộ giáo trình, bài giảng và tài nguyên học tập được cung cấp dưới dạng số, truy cập dễ dàng." },
+  { icon: Monitor, title: "Hệ thống LMS", desc: "Nền tảng quản lý học tập hiện đại, giao diện thân thiện, hỗ trợ học tập trên mọi thiết bị." },
+  { icon: Star, title: "Đánh giá qua Assignment", desc: "Hình thức đánh giá linh hoạt thông qua bài tập thay vì thi viết truyền thống (tùy chương trình)." },
+  { icon: Users, title: "Hỗ trợ trực tuyến", desc: "Đội ngũ giảng viên và cố vấn học tập luôn sẵn sàng hỗ trợ, giải đáp thắc mắc kịp thời." },
 ]
 
 const LEARNING_FORMAT = [
@@ -251,14 +259,36 @@ export function OnlineQualifi({ className }: { className?: string }) {
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Hình thức học</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="mx-auto max-w-4xl">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {LEARNING_FORMAT.map((item, i) => (
-                  <motion.div key={i} variants={fadeUpVariants} className="flex items-center gap-3 rounded-md border border-border bg-white p-4 shadow-sm">
-                    <Check className="h-4 w-4 shrink-0 text-brand-gold" strokeWidth={3} />
-                    <span className="font-body text-sm text-brand-dark/85">{item}</span>
-                  </motion.div>
-                ))}
+            <div className="mx-auto max-w-5xl">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
+                {LEARNING_FORMATS.map((item, i) => {
+                  const Icon = item.icon
+                  const isWide = i < 2
+                  return (
+                    <motion.div
+                      key={i}
+                      variants={fadeUpVariants}
+                      className={cn(
+                        "group relative overflow-hidden rounded-xl border border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
+                        "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg",
+                        isWide ? "lg:col-span-3" : "lg:col-span-2",
+                      )}
+                    >
+                      <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-brand-gold/[0.06] transition-all duration-500 group-hover:scale-150 group-hover:bg-brand-gold/[0.12]" />
+                      <div className="relative z-10">
+                        <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-brand-gold/20 bg-brand-gold/[0.06] transition-all duration-500 group-hover:border-brand-gold/40 group-hover:bg-brand-gold/[0.14]">
+                          <Icon className="h-5 w-5 text-brand-gold transition-transform duration-500 group-hover:scale-110" strokeWidth={1.75} />
+                        </div>
+                        <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
+                          {item.title}
+                        </h3>
+                        <p className="mt-2 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )
+                })}
               </div>
             </div>
           </motion.div>
