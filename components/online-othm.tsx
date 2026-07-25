@@ -470,21 +470,28 @@ export function OnlineOthm({ className }: { className?: string }) {
                     <Calendar className="h-3.5 w-3.5 text-brand-gold" />{activeProgram.start}
                   </span>
                 </div>
-                <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-2">
-                  <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Môn học
-                </h4>
-                <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 mb-5">
-                  {activeProgram.subjects.map((s, j) => (
-                    <li key={j} className="flex items-start gap-2 text-sm text-brand-dark/70">
-                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />{s}
-                    </li>
-                  ))}
-                </ul>
-                <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-4">
-                  <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-1.5">
-                    <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
-                  </h4>
-                  <p className="text-sm leading-relaxed text-brand-dark/75">{activeProgram.entry}</p>
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-5">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-lg sm:col-span-2">
+                    <Image src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format&fit=crop" alt={activeProgram.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 200px" />
+                  </div>
+                  <div className="sm:col-span-3">
+                    <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-2">
+                      <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Môn học
+                    </h4>
+                    <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 mb-4">
+                      {activeProgram.subjects.map((s, j) => (
+                        <li key={j} className="flex items-start gap-2 text-sm text-brand-dark/70">
+                          <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />{s}
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-4">
+                      <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-1.5">
+                        <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                      </h4>
+                      <p className="text-sm leading-relaxed text-brand-dark/75">{activeProgram.entry}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
