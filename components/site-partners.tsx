@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import { urlFor } from "@/sanity/image"
 import { useDictionary } from "@/lib/i18n-client"
+import type { HomepageSectionHeading } from "@/sanity/home-page"
 
 export type SanityPartner = {
   name: string
@@ -58,9 +59,11 @@ function PartnerCard({ partner }: { partner: SanityPartner }) {
 export function SitePartners({
   className,
   partners = PARTNERS,
+  content,
 }: {
   className?: string
   partners?: ReadonlyArray<SanityPartner>
+  content?: HomepageSectionHeading
 }) {
   const t = useDictionary()
   const track = [...partners, ...partners]
@@ -76,7 +79,7 @@ export function SitePartners({
             id="partners-heading"
             className="mt-1 font-display text-base font-bold tracking-[0.18em] text-primary uppercase"
           >
-            {t.partners.title}
+            {content?.title || t.partners.title}
           </h2>
         </div>
       </Container>
