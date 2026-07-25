@@ -4,7 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
-import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp, Monitor, FileText, Briefcase, Building2, Clock, BookOpen, Calendar, ListChecks, UserCheck, ChevronRight } from "lucide-react"
+import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp, Monitor, FileText, Briefcase, Building2, Clock, BookOpen, Calendar, ListChecks, UserCheck, ChevronRight, ChevronLeft } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
@@ -142,6 +142,10 @@ const PROGRAMS: TimelineProgram[] = [
 export function OnlineQualifi({ className }: { className?: string }) {
   const [activeProgramId, setActiveProgramId] = React.useState(0)
   const activeProgram = PROGRAMS[activeProgramId] || PROGRAMS[0]
+  const benefitsRef = React.useRef<HTMLDivElement>(null)
+  const scrollBenefits = (dir: "left" | "right") => {
+    benefitsRef.current?.scrollBy({ left: dir === "left" ? -300 : 300, behavior: "smooth" })
+  }
 
   return (
     <div className={cn("w-full", className)}>
@@ -390,8 +394,15 @@ export function OnlineQualifi({ className }: { className?: string }) {
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Lợi ích khi học QUALIFI</h2>
                 <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
               </motion.div>
-              <div className="flex gap-6 overflow-x-auto pb-4 -mx-2 px-2 snap-x snap-mandatory scrollbar-hide">
-                {BENEFITS.map((item, i) => (
+              <div className="relative group/scroll">
+                <button type="button" onClick={() => scrollBenefits("left")} className="absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100" aria-label="Previous">
+                  <ChevronLeft className="h-5 w-5" strokeWidth={2} />
+                </button>
+                <button type="button" onClick={() => scrollBenefits("right")} className="absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100" aria-label="Next">
+                  <ChevronRight className="h-5 w-5" strokeWidth={2} />
+                </button>
+                <div ref={benefitsRef} className="flex gap-6 overflow-x-auto pb-4 -mx-2 px-2 snap-x snap-mandatory scrollbar-hide">
+                  {BENEFITS.map((item, i) => (
                   <motion.div
                     key={i}
                     variants={fadeUpVariants}
@@ -416,6 +427,7 @@ export function OnlineQualifi({ className }: { className?: string }) {
                     </div>
                   </motion.div>
                 ))}
+                </div>
               </div>
             </motion.div>
           </div>
