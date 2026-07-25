@@ -15,7 +15,7 @@ const NAV_LINKS_KEYS = [
   { href: "/work-pass", key: "workPass" },
   { href: "/du-hoc", key: "studyAbroad" },
   { href: "/khoa-hoc-online", key: "onlineCourses" },
-  { href: "/doanh-nghiep", key: "enterprise" },
+  { href: "/dich-vu", key: "enterprise" },
   { href: "/lien-he", key: "contact" },
 ] as const
 
