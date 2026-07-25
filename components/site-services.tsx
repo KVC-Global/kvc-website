@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import { urlFor } from "@/sanity/image"
 import { getDictionaryServer, getLocale } from "@/lib/i18n-server"
+import type { HomepageSectionHeading } from "@/sanity/home-page"
 
 const ACCENT = "var(--color-secondary)"
 
@@ -96,9 +97,11 @@ function ServiceCard({
 export async function SiteServices({
   className,
   services,
+  content,
 }: {
   className?: string
   services?: ReadonlyArray<SanityService>
+  content?: HomepageSectionHeading
 }) {
   const t = await getDictionaryServer()
 
@@ -146,13 +149,13 @@ export async function SiteServices({
       <Container>
         <div className="text-center">
           <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-            {t.services.tagline}
+            {content?.eyebrow || t.services.tagline}
           </p>
           <h2
             id="services-heading"
             className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-primary sm:text-4xl md:text-[40px]"
           >
-            {t.services.title}
+            {content?.title || t.services.title}
           </h2>
           <span
             aria-hidden="true"

@@ -3,16 +3,31 @@ import { CheckCircle2, Landmark, Star, Users } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import { getDictionaryServer } from "@/lib/i18n-server"
+import type { HomepageStat } from "@/sanity/home-page"
 
-export async function SiteStatBar({ className }: { className?: string }) {
+export async function SiteStatBar({
+  className,
+  content,
+}: {
+  className?: string
+  content?: HomepageStat[]
+}) {
   const t = await getDictionaryServer()
 
-  const stats = [
+  const defaultStats = [
     { icon: Users, value: "10,000+", label: t.stats.clients },
     { icon: CheckCircle2, value: "98%", label: t.stats.successRate },
     { icon: Landmark, value: "150+", label: t.stats.partners },
     { icon: Star, value: "13+", label: t.stats.experience },
   ]
+  const icons = [Users, CheckCircle2, Landmark, Star]
+  const stats = content?.length
+    ? content.map((stat, index) => ({
+        icon: icons[index % icons.length],
+        value: stat.value || "",
+        label: stat.label || "",
+      }))
+    : defaultStats
 
   return (
     <section

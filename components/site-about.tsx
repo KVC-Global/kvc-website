@@ -4,6 +4,8 @@ import { Award, Handshake } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import { getDictionaryServer, getLocale } from "@/lib/i18n-server"
+import { urlFor } from "@/sanity/image"
+import type { HomepageAbout } from "@/sanity/home-page"
 
 import styles from "./site-about.module.css"
 
@@ -69,9 +71,16 @@ function ProgressRing({
   )
 }
 
-export async function SiteAbout({ className }: { className?: string }) {
+export async function SiteAbout({
+  className,
+  content,
+}: {
+  className?: string
+  content?: HomepageAbout
+}) {
   const t = await getDictionaryServer()
   const locale = await getLocale()
+  const image = content?.image ? urlFor(content.image).url() : MAIN_IMAGE
 
   const stats: Stat[] = [
     { value: "98%", label: t.about.statStrategy, color: "#F8BC62" },
@@ -123,8 +132,8 @@ export async function SiteAbout({ className }: { className?: string }) {
             <div className="relative" style={{ paddingBottom: "2.5rem" }}>
               <div className="relative overflow-hidden rounded-xl shadow-[0_30px_60px_-20px_rgba(15,27,45,0.25)]">
                 <Image
-                  src={MAIN_IMAGE}
-                  alt={t.about.altImage1}
+                  src={image}
+                  alt={content?.imageAlt || t.about.altImage1}
                   width={536}
                   height={732}
                   className={styles.mainImage}
@@ -135,17 +144,17 @@ export async function SiteAbout({ className }: { className?: string }) {
 
             <div className="flex h-full w-full max-w-2xl flex-col">
               <p className="font-sans text-[13px] font-bold tracking-[0.24em] text-brand-gold uppercase">
-                {t.about.tagline}
+                {content?.eyebrow || t.about.tagline}
               </p>
               <h2
                 id="about-heading"
                 className="mt-3 font-display text-3xl leading-[1.1] font-bold text-primary sm:text-4xl md:text-[44px]"
               >
-                {t.about.title}
+                {content?.title || t.about.title}
               </h2>
 
               <p className="mt-5 max-w-xl text-base leading-relaxed text-foreground/80 sm:text-lg">
-                {t.about.description}
+                {content?.description || t.about.description}
               </p>
 
               <div className="mt-5 flex items-center gap-3">
@@ -216,10 +225,10 @@ export async function SiteAbout({ className }: { className?: string }) {
 
               <div className="mt-10">
                 <a
-                  href={locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu"}
+                  href={content?.ctaHref || (locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu")}
                   className="group inline-flex items-center justify-center gap-2 rounded-md border-2 border-brand-gold px-8 py-3.5 text-sm font-semibold tracking-wide text-brand-gold uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
                 >
-                  {t.about.btn}
+                  {content?.ctaLabel || t.about.btn}
                   <svg
                     viewBox="0 0 24 24"
                     aria-hidden="true"

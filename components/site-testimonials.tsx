@@ -7,6 +7,10 @@ import { ArrowRight, Quote, Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { urlFor } from "@/sanity/image"
 import { useDictionary } from "@/lib/i18n-client"
+import type {
+  HomepageGoogleReviews,
+  HomepageSectionHeading,
+} from "@/sanity/home-page"
 
 const ACCENT = "var(--color-secondary)"
 const VISIBLE_COUNT = 3
@@ -231,13 +235,17 @@ function GoogleLogo() {
 export function SiteTestimonials({
   className,
   testimonials = TESTIMONIALS,
+  googleReviewsContent,
+  content,
 }: {
   className?: string
   testimonials?: ReadonlyArray<SanityTestimonial>
+  googleReviewsContent?: HomepageGoogleReviews
+  content?: HomepageSectionHeading
 }) {
   const t = useDictionary()
 
-  const googleReviews: ReadonlyArray<GoogleReview> = [
+  const defaultGoogleReviews: ReadonlyArray<GoogleReview> = [
     {
       name: t.testimonials.google.reviews.review1.name,
       initial: "H",
@@ -257,6 +265,15 @@ export function SiteTestimonials({
       text: t.testimonials.google.reviews.review3.text,
     },
   ]
+  const googleReviews: ReadonlyArray<GoogleReview> =
+    googleReviewsContent?.reviews?.length
+      ? googleReviewsContent.reviews.map((review) => ({
+          name: review.name || "",
+          initial: review.initial || review.name?.charAt(0) || "K",
+          color: review.color || "var(--color-brand-blue)",
+          text: review.text || "",
+        }))
+      : defaultGoogleReviews
 
   const [active, setActive] = useState(0)
   const pageCount = Math.ceil(testimonials.length / VISIBLE_COUNT)
@@ -284,13 +301,13 @@ export function SiteTestimonials({
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-                  {t.testimonials.tagline}
+                  {content?.eyebrow || t.testimonials.tagline}
                 </p>
                 <h2
                   id="testimonials-heading"
                   className="mt-10 max-w-xl font-display text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[40px]"
                 >
-                  {t.testimonials.title}
+                  {content?.title || t.testimonials.title}
                 </h2>
               </div>
               <a
@@ -359,14 +376,17 @@ export function SiteTestimonials({
 
             <div className="mt-5 flex gap-2">
               <span className="font-display text-5xl leading-none font-bold text-white">
-                4.8
+                {googleReviewsContent?.rating ?? 4.8}
               </span>
               <div>
                 <div>
                   <Stars size={20} />
                 </div>
                 <p className="text-[13px] text-white/65">
-                  Dựa trên <span className="font-semibold text-white">500</span>{" "}
+                  Dựa trên{" "}
+                  <span className="font-semibold text-white">
+                    {googleReviewsContent?.reviewCount ?? 500}
+                  </span>{" "}
                   đánh giá
                 </p>
               </div>
@@ -398,7 +418,7 @@ export function SiteTestimonials({
             </ul>
 
             <a
-              href="#google-reviews"
+              href={googleReviewsContent?.reviewUrl || "#google-reviews"}
               className="mt-7 inline-flex w-full items-center justify-center gap-2 rounded-md bg-secondary px-5 py-3 text-[13px] font-semibold tracking-[0.16em] text-brand-blue uppercase shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-secondary/90 hover:shadow-md"
             >
               {t.testimonials.google.btn}
