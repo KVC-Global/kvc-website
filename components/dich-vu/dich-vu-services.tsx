@@ -262,9 +262,9 @@ function AccordionChevron({ open }: { open: boolean }) {
     <motion.div
       animate={{ rotate: open ? 180 : 0 }}
       transition={{ duration: 0.3, ease: [0.21, 0.47, 0.32, 0.98] }}
-      className="ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid text-white"
+      className="ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-light text-brand-blue"
     >
-      <ChevronDown className="h-5 w-5" strokeWidth={2} />
+      <ChevronDown className="h-5 w-5" strokeWidth={2.5} />
     </motion.div>
   )
 }
@@ -356,7 +356,7 @@ function SingaporeSubTabs() {
               className={cn(
                 "inline-flex items-center gap-2 rounded-sm px-4 py-2.5 text-xs font-semibold transition-all duration-200 sm:text-sm",
                 isActive
-                  ? "bg-brand-blue-mid text-white shadow-sm"
+                  ? "bg-brand-blue text-white shadow-sm"
                   : "bg-muted/60 text-brand-dark/70 hover:bg-muted hover:text-brand-dark"
               )}
             >
@@ -437,8 +437,8 @@ function AccordionPanel({
     <motion.div
       variants={fadeUp}
       className={cn(
-        "overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-shadow duration-300",
-        open && "shadow-lg ring-1 ring-brand-gold/20"
+        "overflow-hidden rounded-lg border border-border/80 bg-white shadow-xs transition-all duration-300 dark:border-border/10 dark:bg-card",
+        open && "shadow-md border-brand-gold/40"
       )}
     >
       {/* ── Header (clickable toggle) ── */}
@@ -447,8 +447,8 @@ function AccordionPanel({
         className="flex w-full items-center gap-4 px-5 py-5 text-left transition-colors duration-200 hover:bg-muted/30 sm:gap-5 sm:px-8 sm:py-6"
         aria-expanded={open}
       >
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-brand-blue-mid sm:h-14 sm:w-14">
-          <Icon className="h-6 w-6 text-brand-gold-light" strokeWidth={1.75} />
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-brand-light sm:h-14 sm:w-14">
+          <Icon className="h-6 w-6 text-brand-gold" strokeWidth={2} />
         </div>
 
         <div className="min-w-0 flex-1">
@@ -526,7 +526,7 @@ function AccordionPanel({
                 {section.cta && (
                   <Link
                     href={section.cta.href}
-                    className="group mt-8 inline-flex w-fit items-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg sm:px-7 sm:py-3.5"
+                    className="group mt-8 inline-flex w-fit items-center gap-2 rounded-sm bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg sm:px-7 sm:py-3.5"
                   >
                     {"icon" in section.cta && section.cta.icon && (
                       <GraduationCap className="h-4 w-4" />
@@ -567,7 +567,7 @@ export function DichVuServices() {
   return (
     <>
       {/* ─── Section header ─── */}
-      <section className="w-full bg-white pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28">
+      <section className="w-full bg-white pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 dark:bg-background">
         <Container>
           <motion.div
             variants={fadeUp}
@@ -576,19 +576,19 @@ export function DichVuServices() {
             viewport={inView}
             className="flex flex-col items-center text-center"
           >
-            <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-              Dịch vụ của chúng tôi
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl">
+            <span className="mb-3 block text-center font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
+              DỊCH VỤ CỦA CHÚNG TÔI
+            </span>
+            <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl dark:text-foreground">
               Giải pháp theo từng thị trường
             </h2>
-            <span className="mt-4 block h-1 w-12 rounded-sm bg-brand-gold" />
+            <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
           </motion.div>
         </Container>
       </section>
 
       {/* ─── Accordion cards ─── */}
-      <section className="w-full bg-brand-light pb-20 sm:pb-24 md:pb-28">
+      <section className="w-full bg-white pb-20 sm:pb-24 md:pb-28 dark:bg-background">
         <Container>
           <motion.div
             variants={stagger}
