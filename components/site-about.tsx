@@ -9,7 +9,7 @@ import styles from "./site-about.module.css"
 
 type Stat = { value: string; label: string; color?: string }
 
-const MAIN_IMAGE = "/about-image.png"
+const MAIN_IMAGE = "/images/singapore-merlion-sunset.jpg"
 
 const ACCENT = "var(--color-secondary)"
 
@@ -24,7 +24,9 @@ function ProgressRing({
   const stroke = 6
   const radius = (size - stroke) / 2
   const circumference = 2 * Math.PI * radius
-  const arc = circumference * 0.92
+  const percentage = Math.min(100, Math.max(0, Number.parseFloat(value) || 0))
+  const arc = circumference * (percentage / 100)
+  const gap = circumference - arc
   return (
     <div
       className="relative shrink-0"
@@ -55,7 +57,7 @@ function ProgressRing({
           stroke={color}
           strokeWidth={stroke}
           strokeLinecap="round"
-          strokeDasharray={`${arc} ${circumference}`}
+          strokeDasharray={`${arc} ${gap}`}
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">
@@ -72,37 +74,37 @@ export async function SiteAbout({ className }: { className?: string }) {
   const locale = await getLocale()
 
   const stats: Stat[] = [
-    { value: "88%", label: t.about.statStrategy },
-    { value: "93%", label: t.about.statNetwork, color: "#F8BC62" },
+    { value: "98%", label: t.about.statStrategy, color: "#F8BC62" },
+    { value: "100%", label: t.about.statNetwork, color: "#F8BC62" },
   ]
 
   const iconStats = [
     {
-      id: "exp-1",
+      id: "experience",
       icon: Handshake,
       value: t.about.expValue,
       sub: t.about.expSub,
       tone: "blue" as const,
     },
     {
-      id: "acra-1",
+      id: "clients",
       icon: Award,
-      value: t.about.acraValue,
-      sub: t.about.acraSub,
+      value: t.about.clientsValue,
+      sub: t.about.clientsSub,
       tone: "gold" as const,
     },
     {
-      id: "exp-2",
+      id: "partners",
       icon: Handshake,
-      value: t.about.expValue,
-      sub: t.about.expSub,
+      value: t.about.partnersValue,
+      sub: t.about.partnersSub,
       tone: "blue" as const,
     },
     {
-      id: "acra-2",
+      id: "google-rating",
       icon: Award,
-      value: t.about.acraValue,
-      sub: t.about.acraSub,
+      value: t.about.ratingValue,
+      sub: t.about.ratingSub,
       tone: "gold" as const,
     },
   ] as const
@@ -129,27 +131,6 @@ export async function SiteAbout({ className }: { className?: string }) {
                 />
               </div>
 
-              <div
-                className="absolute bottom-0 flex flex-col items-start justify-center gap-4 rounded-xl px-6 py-6 shadow-[0_20px_40px_-16px_rgba(15,27,45,0.28)] sm:px-7"
-                style={{
-                  right: "-1rem",
-                  width: "min(280px, calc(100% - 1rem))",
-                  minHeight: "10rem",
-                  backgroundColor: "#F8D39E",
-                }}
-              >
-                <Image
-                  src="/shield-check.svg"
-                  alt=""
-                  width={32}
-                  height={40}
-                  aria-hidden="true"
-                  className="h-10 w-8 shrink-0"
-                />
-                <p className="font-display text-base leading-snug font-bold text-[#000F22] sm:text-lg">
-                  Trusted by Global Enterprises
-                </p>
-              </div>
             </div>
 
             <div className="flex h-full w-full max-w-2xl flex-col">

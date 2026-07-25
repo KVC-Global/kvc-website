@@ -50,24 +50,27 @@
     "ariaLabel": "Đối tác & trường liên kết"
   },
   "about": {
-    "altImage1": "Cặp đôi doanh nhân tư vấn visa tại văn phòng",
+    "altImage1": "Tượng Merlion và Marina Bay Sands lúc hoàng hôn tại Singapore",
     "altImage2": "Đội ngũ tư vấn KVC Global đang làm việc",
     "tagline": "Về công ty",
     "title": "Chào mừng đến với KVC Global",
     "description": "KVC Global là đối tác đáng tin cậy của bạn trong việc cung cấp các giải pháp toàn diện về học tập, làm việc, kinh doanh và định cư tại Singapore.",
-    "statStrategy": "Tư vấn chiến lược kinh doanh",
-    "statNetwork": "Mạng lưới giáo dục & công nghệ",
+    "statStrategy": "Tỷ lệ hồ sơ thành công",
+    "statNetwork": "Rà soát theo chuẩn ICA Due Diligence",
     "statsTitle": "Những con số chứng minh năng lực",
-    "expValue": "15+ Năm",
+    "expValue": "13+ Năm",
     "expSub": "Kinh nghiệm thực chiến",
-    "acraValue": "Top 1%",
-    "acraSub": "Đối tác ACRA Singapore",
+    "clientsValue": "10,000+",
+    "clientsSub": "Khách hàng tin tưởng",
+    "partnersValue": "150+",
+    "partnersSub": "Đối tác chiến lược",
+    "ratingValue": "4.8 Đánh giá trên Google",
+    "ratingSub": "Dựa trên 600+ reviews",
     "btn": "Về chúng tôi"
   },
   "services": {
     "tagline": "Dịch vụ của chúng tôi",
     "title": "Giải pháp toàn diện cho tương lai của bạn",
-    "btnMore": "Khám phá các dịch vụ khác",
     "cardLearnMore": "Tìm hiểu thêm",
     "cardRegister": "Đăng kí ngay",
     "businessDesc": "Đồng hành cùng doanh nhân trong hành trình mở rộng kinh doanh và định cư Singapore với giải pháp toàn diện.",
@@ -81,14 +84,14 @@
   },
   "testimonials": {
     "tagline": "Câu chuyện thành công",
-    "title": "Niềm tự hào của khách hàng là thành công của chúng tôi.",
+    "title": "Sự thành công của khách hàng là niềm tự hào của chúng tôi.",
     "btnMore": "Xem tất cả câu chuyện",
     "ariaLabel": "Chọn trang cảm nhận",
     "pageLabel": "Trang",
     "google": {
       "tagline": "Đánh giá trên Google",
       "rating": "Dựa trên 328 đánh giá",
-      "btn": "Xem tất cả đánh giá trên Google",
+      "btn": "Xem tất cả đánh giá",
       "reviews": {
         "review1": {
           "name": "Hồng Nhung",
@@ -108,45 +111,68 @@
   "whyProcess": {
     "whyTagline": "Vì sao chọn KVC Global?",
     "whyTitle": "Đối tác đáng tin cậy cho hành trình của bạn",
+    "cta": "Khám phá thêm",
     "reasons": {
       "transparency": {
         "title": "Minh bạch",
         "description": "Quy trình rõ ràng, chi phí minh bạch, cam kết không phát sinh chi phí ẩn."
       },
       "expertise": {
-        "title": "Chuyên môn cao",
-        "description": "Đội ngũ chuyên gia giàu kinh nghiệm, hiểu rõ hệ thống quy trình Singapore & Việt Nam."
+        "title": "Chuyên môn",
+        "description": "15 năm kinh nghiệm, hàng nghìn hồ sơ thành công, hiểu rõ mọi khía cạnh."
       },
       "partners": {
-        "title": "Đối tác quốc tế",
-        "description": "Mạng lưới đối tác trường học, tổ chức & doanh nghiệp uy tín trên toàn cầu."
+        "title": "Đối tác đáng tin cậy",
+        "description": "Mạng lưới đối tác chiến lược toàn cầu hỗ trợ bạn trên mọi lộ trình."
       },
       "commitment": {
-        "title": "Đồng hành lâu dài",
-        "description": "Hỗ trợ toàn diện trước – trong – sau khi hành trình định cư, thành lập & học tập."
+        "title": "Cam kết chất lượng",
+        "description": "Từ tư vấn đến hoàn tất, chúng tôi bên bạn từ bước đầu tiên đến cuối cùng."
       }
     },
-    "processTagline": "Quy trình đồng hành",
-    "processTitle": "5 bước đơn giản – Hành trình vững chắc",
-    "processAriaLabel": "Quy trình đồng hành 5 bước",
+    "processTagline": "Quy trình của chúng tôi",
+    "processTitle": "5 bước hỗ trợ bạn đạt thành công",
+    "processAriaLabel": "Chọn bước",
     "steps": {
       "step1": {
-        "title": "Tư vấn & đánh giá",
-        "description": "Lắng nghe nhu cầu, đánh giá hồ sơ và tư vấn giải pháp tối ưu."
+        "title": "Tư vấn & Đánh giá",
+        "description": "Nhân viên tư vấn chuyên quản lý một đối một cùng bạn để hiểu rõ mục tiêu."
       },
       "step2": {
-        "title": "Lên lộ trình cá nhân hóa",
-        "description": "Xây dựng lộ trình phù hợp với mục tiêu của bạn."
+        "title": "Chuẩn bị hồ sơ",
+        "description": "Chuẩn bị hồ sơ chặt chẽ, kiểm soát chất lượng đầu vào cao."
       },
       "step3": {
-        "title": "Chuẩn bị hồ sơ",
-        "description": "Hỗ trợ chuẩn bị và hoàn thiện hồ sơ chỉn chu, đầy đủ."
+        "title": "Nộp & Theo dõi",
+        "description": "Nộp hồ sơ đúng kỳ hạn, cập nhật tình trạng mỗi bước."
       },
       "step4": {
-        "title": "Nộp hồ sơ & theo dõi",
-        "description": "Nộp hồ sơ và theo dõi tiến độ xử lý trong suốt quá trình."
+        "title": "Nhận kết quả & hỗ trợ sau",
+        "description": "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài."
       },
       "step5": {
+        "title": "Đạt thành công",
+        "description": "Bạn đã bắt đầu cuộc sống mới tại Singapore."
+      }
+    }
+  },
+  "process": {
+    "tagline": "Quy trình của chúng tôi",
+    "title": "4 bước đơn giản để bắt đầu hành trình",
+    "steps": {
+      "step1": {
+        "title": "Tư vấn & Đánh giá",
+        "description": "Nhân viên tư vấn chuyên quản lý một đối một cùng bạn để hiểu rõ mục tiêu."
+      },
+      "step2": {
+        "title": "Chuẩn bị hồ sơ",
+        "description": "Chuẩn bị hồ sơ chặt chẽ, kiểm soát chất lượng đầu vào cao."
+      },
+      "step3": {
+        "title": "Nộp & Theo dõi",
+        "description": "Nộp hồ sơ đúng kỳ hạn, cập nhật tình trạng mỗi bước."
+      },
+      "step4": {
         "title": "Nhận kết quả & hỗ trợ sau",
         "description": "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài."
       }
@@ -182,6 +208,13 @@
       "book": "Đặt lịch tư vấn ngay",
       "chat": "Chat với chuyên viên"
     },
-    "addressVN": "Tầng 6, 65 Lê Lợi, P. Bến Nghé, Quận 1, TP. Hồ Chí Minh, Việt Nam"
+    "addressVN": "456 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh, Việt Nam"
+  },
+  "contact": {
+    "getInTouch": "Liên hệ với chúng tôi",
+    "description": "Có câu hỏi hoặc cần hỗ trợ? Chúng tôi luôn sẵn sàng giúp bạn! Hãy liên hệ với đội ngũ của chúng tôi thông qua thông tin dưới đây.",
+    "officeHours": "Giờ làm việc",
+    "connectWithUs": "Kết nối với chúng tôi",
+    "socialDescription": "Cập nhật những tin tức mới nhất và thông tin du học bằng cách theo dõi chúng tôi trên mạng xã hội."
   }
 }
