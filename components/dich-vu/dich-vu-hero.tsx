@@ -8,6 +8,8 @@ import { Building2, Globe2, Handshake, Users } from "lucide-react"
 import { Container } from "@/components/ui/container"
 import { cn } from "@/lib/utils"
 
+const HERO_IMAGE = "/images/study-abroad-hero.jpg"
+
 const STATS = [
   { icon: Building2, value: "500+", label: "Doanh nghiệp thành lập" },
   { icon: Globe2, value: "2", label: "Quốc gia hoạt động" },
@@ -34,29 +36,31 @@ export function DichVuHero({ className }: { className?: string }) {
     <section
       aria-labelledby="dich-vu-hero-heading"
       className={cn(
-        "relative w-full border-b border-border bg-white",
+        "relative w-full border-b border-border bg-white bg-cover bg-center pb-16 md:pb-20",
         className
       )}
+      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
     >
-      {/* Desktop Background Image (Right side) */}
-      <div className="absolute inset-y-0 right-0 z-0 hidden w-full overflow-hidden lg:block lg:w-[52%]">
-        <Image
-          src="/images/study-abroad-hero.jpg"
-          alt="Văn phòng KVC Global tại Singapore"
-          fill
-          priority
-          sizes="(max-width: 1024px) 100vw, 52vw"
-          className="object-cover object-center"
-        />
-        {/* Soft blend transition from white background (left) to image */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-y-0 left-0 w-48 bg-gradient-to-r from-white via-white/80 to-transparent"
-        />
-      </div>
+      <Image
+        src={HERO_IMAGE}
+        alt="Văn phòng KVC Global tại Singapore"
+        fill
+        priority
+        sizes="100vw"
+        className="animate-fade-in object-cover object-center"
+        style={{ transform: "scaleX(-1)" }}
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, #fff 0%, #fff 30%, transparent 60%)",
+        }}
+      />
 
       {/* Main Content Container */}
-      <Container className="relative z-10 pt-28 pb-20 sm:pt-32 sm:pb-24 md:pt-36 md:pb-28">
+      <Container className="relative flex min-h-[600px] flex-col justify-center pt-28 pb-20 sm:pt-32 sm:pb-24 md:min-h-[640px] md:pt-36 md:pb-0">
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
@@ -76,17 +80,6 @@ export function DichVuHero({ className }: { className?: string }) {
             Dịch vụ
           </span>
         </nav>
-
-        {/* Mobile/Tablet Image Display (Shown only on small/medium screens) */}
-        <div className="relative mb-8 h-[200px] w-full overflow-hidden rounded-lg sm:h-[280px] md:h-[340px] lg:hidden">
-          <Image
-            src="/images/study-abroad-hero.jpg"
-            alt="Văn phòng KVC Global tại Singapore"
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        </div>
 
         {/* Content Box */}
         <motion.div
