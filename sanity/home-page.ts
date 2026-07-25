@@ -54,6 +54,17 @@ export type HomepageGoogleReviews = {
   reviews?: HomepageGoogleReview[]
 }
 
+export type HomepageSectionHeading = {
+  eyebrow?: string
+  title?: string
+  description?: string
+}
+
+export type HomepageWhyProcessContent = {
+  why?: HomepageSectionHeading & { cta?: string }
+  process?: HomepageSectionHeading & { ariaLabel?: string }
+}
+
 export type HomepageSeo = {
   title?: string
   description?: string
@@ -64,6 +75,10 @@ export type HomePageData = {
   hero?: HomepageHero
   stats?: HomepageStat[]
   about?: HomepageAbout
+  partnersContent?: HomepageSectionHeading
+  servicesContent?: HomepageSectionHeading
+  whyProcessContent?: HomepageWhyProcessContent
+  testimonialsContent?: HomepageSectionHeading
   whyReasons?: HomepageReason[]
   processSteps?: HomepageProcessStep[]
   googleReviews?: HomepageGoogleReviews

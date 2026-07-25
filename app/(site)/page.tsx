@@ -94,16 +94,24 @@ export default async function Page() {
   return (
     <>
       <SiteHero content={home?.hero} stats={home?.stats} />
-      <SitePartners partners={partners?.length ? partners : undefined} />
+      <SitePartners
+        partners={partners?.length ? partners : undefined}
+        content={home?.partnersContent}
+      />
       <SiteAbout content={home?.about} />
-      <SiteServices services={services?.length ? services : undefined} />
+      <SiteServices
+        services={services?.length ? services : undefined}
+        content={home?.servicesContent}
+      />
       <SiteWhyProcess
         reasons={home?.whyReasons}
         processSteps={home?.processSteps}
+        content={home?.whyProcessContent}
       />
       <SiteTestimonials
         testimonials={testimonials?.length ? testimonials : undefined}
         googleReviewsContent={home?.googleReviews}
+        content={home?.testimonialsContent}
       />
     </>
   )

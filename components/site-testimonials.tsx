@@ -7,7 +7,10 @@ import { ArrowRight, Quote, Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { urlFor } from "@/sanity/image"
 import { useDictionary } from "@/lib/i18n-client"
-import type { HomepageGoogleReviews } from "@/sanity/home-page"
+import type {
+  HomepageGoogleReviews,
+  HomepageSectionHeading,
+} from "@/sanity/home-page"
 
 const ACCENT = "var(--color-secondary)"
 const VISIBLE_COUNT = 3
@@ -233,10 +236,12 @@ export function SiteTestimonials({
   className,
   testimonials = TESTIMONIALS,
   googleReviewsContent,
+  content,
 }: {
   className?: string
   testimonials?: ReadonlyArray<SanityTestimonial>
   googleReviewsContent?: HomepageGoogleReviews
+  content?: HomepageSectionHeading
 }) {
   const t = useDictionary()
 
@@ -296,13 +301,13 @@ export function SiteTestimonials({
             <div className="flex items-start justify-between gap-4">
               <div>
                 <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-                  {t.testimonials.tagline}
+                  {content?.eyebrow || t.testimonials.tagline}
                 </p>
                 <h2
                   id="testimonials-heading"
                   className="mt-10 max-w-xl font-display text-3xl leading-[1.15] font-bold tracking-tight text-white sm:text-4xl md:text-[40px]"
                 >
-                  {t.testimonials.title}
+                  {content?.title || t.testimonials.title}
                 </h2>
               </div>
               <a

@@ -12,6 +12,13 @@ export const HOME_PAGE_QUERY = defineQuery(`
     "about": aboutSection{
       eyebrow, title, description, image, imageAlt, ctaLabel, ctaHref
     },
+    "partnersContent": partnersSection{eyebrow, title},
+    "servicesContent": servicesSection{eyebrow, title, description},
+    "whyProcessContent": whyProcessSection{
+      why{eyebrow, title, cta},
+      process{eyebrow, title, ariaLabel}
+    },
+    "testimonialsContent": testimonialsSection{eyebrow, title},
     "whyReasons": whyProcessSection.why.reasons[]{_key, icon, title, description},
     "processSteps": whyProcessSection.process.steps[]{_key, icon, title, description},
     "googleReviews": testimonialsSection.googleReviews{

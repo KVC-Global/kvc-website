@@ -16,6 +16,7 @@ import { getDictionaryServer, getLocale } from "@/lib/i18n-server"
 import type {
   HomepageProcessStep,
   HomepageReason,
+  HomepageWhyProcessContent,
 } from "@/sanity/home-page"
 
 const ACCENT = "var(--color-secondary)"
@@ -86,10 +87,12 @@ export async function SiteWhyProcess({
   className,
   reasons: reasonsContent,
   processSteps,
+  content,
 }: {
   className?: string
   reasons?: HomepageReason[]
   processSteps?: HomepageProcessStep[]
+  content?: HomepageWhyProcessContent
 }) {
   const t = await getDictionaryServer()
   const locale = await getLocale()
@@ -173,13 +176,13 @@ export async function SiteWhyProcess({
         >
           <div className="text-center">
             <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-              {t.whyProcess.whyTagline}
+              {content?.why?.eyebrow || t.whyProcess.whyTagline}
             </p>
             <h2
               id="why-process-heading"
               className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]"
             >
-              {t.whyProcess.whyTitle}
+              {content?.why?.title || t.whyProcess.whyTitle}
             </h2>
             <span
               aria-hidden="true"
@@ -198,7 +201,7 @@ export async function SiteWhyProcess({
               href={locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu"}
               className="group inline-flex items-center justify-center gap-2 rounded-md border-2 border-brand-gold px-7 py-3.5 text-sm font-semibold tracking-wide text-brand-gold uppercase transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold hover:text-white hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
             >
-              {t.whyProcess.cta}
+              {content?.why?.cta || t.whyProcess.cta}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -217,10 +220,10 @@ export async function SiteWhyProcess({
 
         <div className="mt-20 text-center sm:mt-24">
           <p className="font-sans text-[13px] font-bold tracking-[0.28em] text-brand-gold uppercase">
-            {t.whyProcess.processTagline}
+            {content?.process?.eyebrow || t.whyProcess.processTagline}
           </p>
           <h3 className="mt-3 font-display text-3xl leading-[1.15] font-bold tracking-tight text-brand-blue sm:text-4xl md:text-[40px]">
-            {t.whyProcess.processTitle}
+            {content?.process?.title || t.whyProcess.processTitle}
           </h3>
           <span
             aria-hidden="true"
@@ -231,7 +234,7 @@ export async function SiteWhyProcess({
         <div
           className="relative mt-16 grid grid-cols-1 gap-12 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6"
           role="list"
-          aria-label={t.whyProcess.processAriaLabel}
+          aria-label={content?.process?.ariaLabel || t.whyProcess.processAriaLabel}
         >
           <div
             aria-hidden="true"
