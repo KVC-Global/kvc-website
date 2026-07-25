@@ -4,11 +4,11 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
-import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp, Monitor, FileText, Briefcase, Building2, Clock } from "lucide-react"
+import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp, Monitor, FileText, Briefcase, Building2, Clock, BookOpen, Calendar, ListChecks, UserCheck, ChevronRight } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
-import { ExpandableTimeline, type TimelineProgram } from "@/components/online-timeline"
+import type { TimelineProgram } from "@/components/online-timeline"
 
 const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -140,6 +140,9 @@ const PROGRAMS: TimelineProgram[] = [
 ]
 
 export function OnlineQualifi({ className }: { className?: string }) {
+  const [activeProgramId, setActiveProgramId] = React.useState(0)
+  const activeProgram = PROGRAMS[activeProgramId] || PROGRAMS[0]
+
   return (
     <div className={cn("w-full", className)}>
       {/* ── Hero ── */}
@@ -457,17 +460,126 @@ export function OnlineQualifi({ className }: { className?: string }) {
         </Container>
       </section>
 
-      {/* ── Level Programs ── */}
+      {/* ── Các chương trình QUALIFI ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
           <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-            <motion.div variants={fadeUpVariants} className="mb-4 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Các chương trình QUALIFI</h2>
-              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+              <motion.div variants={fadeUpVariants} className="mb-10 text-center">
+                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Các chương trình QUALIFI</h2>
+                <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+              </motion.div>
+
+              {/* Desktop: Tabs + Detail */}
+              <div className="hidden lg:grid grid-cols-12 gap-8 items-start">
+                <div className="col-span-4 flex flex-col gap-2">
+                  {PROGRAMS.map((program, i) => {
+                    const isActive = i === activeProgramId
+                    return (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => setActiveProgramId(i)}
+                        className={cn(
+                          "flex items-center justify-between rounded-lg border p-4 text-left font-heading text-[15px] font-bold transition-all duration-300",
+                          isActive
+                            ? "border-brand-blue bg-brand-blue text-white shadow-md"
+                            : "border-border bg-white text-brand-blue hover:bg-brand-light",
+                        )}
+                      >
+                        <span className="flex items-center gap-3">
+                          <BookOpen className={cn("h-5 w-5 shrink-0", isActive ? "text-brand-gold-light" : "text-brand-gold")} />
+                          {program.name}
+                        </span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", isActive && "translate-x-1")} />
+                      </button>
+                    )
+                  })}
+                </div>
+                <div className="col-span-8 rounded-lg border border-border/60 bg-white p-6 shadow-sm">
+                  <h3 className="font-heading text-xl font-bold text-brand-blue mb-3">{activeProgram.name}</h3>
+                  <div className="flex flex-wrap gap-3 mb-5">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 font-body text-sm font-medium text-brand-blue-mid">
+                      <Clock className="h-3.5 w-3.5 text-brand-gold" />{activeProgram.duration}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 font-body text-sm font-medium text-brand-blue-mid">
+                      <Calendar className="h-3.5 w-3.5 text-brand-gold" />{activeProgram.start}
+                    </span>
+                  </div>
+                  <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-2">
+                    <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Môn học
+                  </h4>
+                  <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 mb-5">
+                    {activeProgram.subjects.map((s, j) => (
+                      <li key={j} className="flex items-start gap-2 text-sm text-brand-dark/70">
+                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />{s}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-4">
+                    <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-1.5">
+                      <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                    </h4>
+                    <p className="text-sm leading-relaxed text-brand-dark/75">{activeProgram.entry}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mobile: Accordion */}
+              <div className="lg:hidden flex flex-col gap-4">
+                {PROGRAMS.map((program, i) => {
+                  const isOpen = i === activeProgramId
+                  return (
+                    <div key={i} className="overflow-hidden rounded-lg border border-border bg-white shadow-sm">
+                      <button
+                        type="button"
+                        onClick={() => setActiveProgramId(isOpen ? -1 : i)}
+                        className={cn(
+                          "flex w-full items-center justify-between p-4 text-left font-heading text-sm font-bold transition-colors",
+                          isOpen ? "bg-brand-blue text-white" : "text-brand-blue",
+                        )}
+                      >
+                        <span className="flex items-center gap-3">
+                          <BookOpen className={cn("h-5 w-5", isOpen ? "text-brand-gold-light" : "text-brand-gold")} />
+                          {program.name}
+                        </span>
+                        <ChevronRight className={cn("h-4 w-4 transition-transform", isOpen ? "rotate-90" : "")} />
+                      </button>
+                      <div className={cn("grid transition-all duration-300", isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}>
+                        <div className="overflow-hidden">
+                          <div className="border-t border-border/60 p-4">
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 text-xs font-medium text-brand-blue-mid">
+                                <Clock className="h-3 w-3 text-brand-gold" />{program.duration}
+                              </span>
+                              <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 text-xs font-medium text-brand-blue-mid">
+                                <Calendar className="h-3 w-3 text-brand-gold" />{program.start}
+                              </span>
+                            </div>
+                            <h4 className="flex items-center gap-2 font-heading text-xs font-semibold text-brand-blue mb-2">
+                              <ListChecks className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />Môn học
+                            </h4>
+                            <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2 mb-4 text-xs">
+                              {program.subjects.map((s, j) => (
+                                <li key={j} className="flex items-start gap-2 text-brand-dark/70">
+                                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />{s}
+                                </li>
+                              ))}
+                            </ul>
+                            <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-3">
+                              <h4 className="flex items-center gap-2 font-heading text-xs font-semibold text-brand-blue mb-1">
+                                <UserCheck className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                              </h4>
+                              <p className="text-xs leading-relaxed text-brand-dark/75">{program.entry}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
             </motion.div>
-            <ExpandableTimeline programs={PROGRAMS} />
-          </motion.div>
           </div>
         </Container>
       </section>
