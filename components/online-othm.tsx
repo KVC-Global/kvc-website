@@ -435,23 +435,6 @@ export function OnlineOthm({ className }: { className?: string }) {
         </Container>
       </section>
 
-      {/* ── CTA / Liên hệ ── */}
-      <section className="bg-brand-blue-mid py-16 md:py-24">
-        <Container>
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="text-center">
-            <motion.h2 variants={fadeUpVariants} className="font-heading text-2xl font-extrabold text-white sm:text-3xl">Liên hệ KVC Global</motion.h2>
-            <motion.p variants={fadeUpVariants} className="mt-4 mx-auto max-w-2xl font-body text-sm leading-relaxed text-white/80 sm:text-base">
-              KVC Global cam kết mang đến cho học viên chương trình đào tạo chất lượng quốc tế, lộ trình học tập rõ ràng và dịch vụ hỗ trợ chuyên nghiệp từ khi đăng ký đến khi hoàn thành chương trình.
-            </motion.p>
-            <motion.div variants={fadeUpVariants} className="mt-8">
-              <Link href="/lien-he" className="group inline-flex items-center gap-2 rounded-sm bg-brand-gold px-8 py-4 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-gold/90 hover:shadow-lg">
-                Liên hệ ngay để được tư vấn miễn phí
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
-              </Link>
-            </motion.div>
-          </motion.div>
-        </Container>
-      </section>
     </div>
   )
 }
