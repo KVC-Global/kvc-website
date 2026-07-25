@@ -38,7 +38,7 @@ const NAV_LINKS: NavLink[] = [
       { href: "/khoa-hoc-online/wolverhampton", key: "wolverhampton" },
     ],
   },
-  { href: "/doanh-nghiep", key: "enterprise" },
+  { href: "/dich-vu", key: "enterprise" },
   { href: "/lien-he", key: "contact" },
 ]
 
