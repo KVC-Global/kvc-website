@@ -1,12 +1,23 @@
 "use client"
 
 import * as React from "react"
-import { motion, useInView, Variants } from "framer-motion"
-import { ChevronDown, Clock, Calendar, ListChecks, UserCheck } from "lucide-react"
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type Variants,
+} from "framer-motion"
+import {
+  ChevronDown,
+  Clock,
+  Calendar,
+  ListChecks,
+  UserCheck,
+} from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-// ─── types ──────────────────────────────────────────────────────────────────
+// Types
 
 export interface TimelineProgram {
   name: string
@@ -17,13 +28,13 @@ export interface TimelineProgram {
   level?: string
 }
 
-// ─── animation variants ────────────────────────────────────────────────────
+// Animation variants
 
 const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.14 },
+    transition: { staggerChildren: 0.12 },
   },
 }
 
@@ -38,17 +49,20 @@ const timelineItemVariants: Variants = {
   },
 }
 
-// ─── helpers ────────────────────────────────────────────────────────────────
+// Helpers
 
 function splitName(name: string): { level: string; rest: string } {
   const m = name.match(/^(Level\s+\d+(?:\s+Extended)?)/i)
   if (m) return { level: m[1], rest: name.slice(m[1].length).trim() }
   const acro = name.match(/^([A-Z]{2,}(?:\s*\(Hons\))?(?:\s*–.*?)?)/)
-  if (acro) return { level: acro[1], rest: name.slice(acro[1].length).replace(/^[–\s]+/, "").trim() }
+  if (acro)
+    return {
+      level: acro[1],
+      rest: name.slice(acro[1].length).replace(/^[–\s]+/, "").trim(),
+    }
   return { level: "", rest: name }
 }
 
-/** Numeric weight for progression sizing */
 function getLevelWeight(name: string): number {
   const m = name.match(/Level\s+(\d+)/i)
   if (m) return parseInt(m[1], 10)
@@ -57,7 +71,7 @@ function getLevelWeight(name: string): number {
   return 4
 }
 
-// ─── card sub-component ─────────────────────────────────────────────────────
+// Card sub-component
 
 function TimelineCard({
   program,
@@ -70,73 +84,82 @@ function TimelineCard({
   const isEven = index % 2 === 0
   const levelWeight = getLevelWeight(program.name)
 
-  const [expanded, setExpanded] = React.useState(false)
-  const cardRef = React.useRef<HTMLDivElement | null>(null)
-  const inView = useInView(cardRef, { once: true, margin: "-80px" })
-
-  React.useEffect(() => {
-    if (inView) setExpanded(true)
-  }, [inView])
+  const [expanded, setExpanded] = React.useState(true)
 
   return (
     <motion.li
       variants={timelineItemVariants}
-      className="group/timeline relative flex flex-col items-start justify-between sm:flex-row sm:items-center"
+      className="group/timeline relative flex flex-col items-start sm:flex-row sm:items-center"
     >
-      {/* Sentinel for scroll detection */}
-      <div ref={cardRef} className="absolute inset-0 pointer-events-none" aria-hidden="true" />
 
-      {/* ── Center rail dot ── */}
+      {/* Center rail dot */}
       <div
         className={cn(
-          "absolute left-6 z-10 mt-12 flex -translate-x-1/2 items-center justify-center rounded-full border-2 border-white bg-brand-blue-mid shadow-sm transition-all duration-500 ease-out sm:left-1/2 sm:top-1/2 sm:mt-0 sm:-translate-y-1/2",
-          expanded && "shadow-[0_0_0_4px_rgba(200,145,60,0.15)]"
+          "absolute left-6 z-10 flex -translate-x-1/2 items-center justify-center rounded-full border-2 border-white shadow-sm transition-all duration-500 ease-out sm:left-1/2 sm:top-1/2 sm:mt-0 sm:-translate-y-1/2",
+          expanded
+            ? "bg-brand-gold shadow-[0_0_0_6px_rgba(200,145,60,0.12)]"
+            : "bg-brand-blue-mid",
         )}
-        style={{ width: 14 + (levelWeight - 3), height: 14 + (levelWeight - 3) }}
+        style={{
+          width: 14 + (levelWeight - 3),
+          height: 14 + (levelWeight - 3),
+        }}
       />
 
-      {/* ── Card ── */}
+      {/* Card */}
       <div
         className={cn(
           "w-full pl-16 sm:w-[calc(50%-2.5rem)] sm:pl-0",
-          isEven ? "sm:mr-auto sm:pr-10" : "sm:ml-auto sm:pl-10"
+          isEven ? "sm:mr-auto sm:pr-10" : "sm:ml-auto sm:pl-10",
         )}
       >
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="group/card block w-full overflow-hidden rounded-lg border border-border bg-white text-left shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
+          className="group/card relative block w-full overflow-hidden rounded-xl border border-border/60 bg-white text-left shadow-sm transition-all duration-500 ease-out hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg"
         >
-          {/* ── Card header ── */}
-          <div className="flex items-start justify-between gap-4 p-6">
+          {/* Left accent bar */}
+          <div
+            className={cn(
+              "absolute inset-y-0 left-0 w-1 transition-all duration-500",
+              expanded
+                ? "bg-brand-gold"
+                : "bg-brand-gold/20 group-hover/card:bg-brand-gold/60",
+            )}
+          />
+
+          {/* Card header */}
+          <div className="flex items-start justify-between gap-4 p-6 pl-7">
             <div className="flex-1">
               {level && (
-                <span className="mb-2 block font-sans text-[11px] font-semibold tracking-wider text-brand-gold uppercase sm:hidden">
+                <span className="mb-2 block font-sans text-[11px] font-semibold tracking-wider text-brand-gold uppercase">
                   {level}
                 </span>
               )}
-              <h3 className="font-display text-xl leading-snug font-bold text-brand-blue">
+              <h3 className="font-heading text-lg leading-snug font-bold text-brand-blue sm:text-xl">
                 {program.name}
               </h3>
             </div>
             <ChevronDown
               className={cn(
                 "mt-1 h-5 w-5 shrink-0 transition-transform duration-300",
-                expanded ? "rotate-180 text-brand-gold" : "text-brand-blue/30"
+                expanded ? "rotate-180 text-brand-gold" : "text-brand-blue/30",
               )}
               strokeWidth={2}
             />
           </div>
 
-          {/* ── Expandable details ── */}
+          {/* Expandable details */}
           <div
             className={cn(
               "grid transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]",
-              expanded ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+              expanded
+                ? "grid-rows-[1fr] opacity-100"
+                : "grid-rows-[0fr] opacity-0",
             )}
           >
             <div className="overflow-hidden">
-              <div className="border-t border-border bg-brand-light px-6 pb-6 pt-5">
+              <div className="border-t border-border bg-brand-light px-7 pb-6 pt-5">
                 {/* Duration & Start badges */}
                 <div className="flex flex-wrap gap-3">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 font-body text-sm font-medium text-brand-blue-mid">
@@ -153,7 +176,7 @@ function TimelineCard({
                 <div className="mt-5">
                   <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue">
                     <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />
-                    Môn học
+                    Mon hoc
                   </h4>
                   <ul className="mt-2 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
                     {program.subjects.map((s, j) => (
@@ -169,10 +192,10 @@ function TimelineCard({
                 </div>
 
                 {/* Entry requirements */}
-                <div className="mt-5 rounded-md bg-brand-gold/5 border border-brand-gold/20 p-4">
+                <div className="mt-5 rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-4">
                   <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue">
                     <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />
-                    Điều kiện đầu vào
+                    Dieu kien dau vao
                   </h4>
                   <p className="mt-1.5 text-sm leading-relaxed text-brand-dark/75">
                     {program.entry}
@@ -187,7 +210,7 @@ function TimelineCard({
   )
 }
 
-// ─── main component ─────────────────────────────────────────────────────────
+// Main component
 
 export function ExpandableTimeline({
   programs,
@@ -196,23 +219,55 @@ export function ExpandableTimeline({
   programs: TimelineProgram[]
   className?: string
 }) {
+  const containerRef = React.useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 95%", "end 5%"],
+  })
+
+  const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1])
+  const glowTop = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
+  const glowOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.03, 0.97, 1],
+    [0, 1, 1, 0],
+  )
+  const progressOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.02, 0.98, 1],
+    [0, 1, 1, 0],
+  )
+
   return (
-    <div className={cn("relative mt-16", className)}>
-      {/* Center rail */}
-      <motion.div
-        initial={{ height: 0 }}
-        whileInView={{ height: "100%" }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 1.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-        className="absolute top-0 left-6 w-px bg-gradient-to-b from-brand-blue-mid/20 via-brand-blue-mid/40 to-transparent sm:left-1/2 sm:-translate-x-1/2"
+    <div ref={containerRef} className={cn("relative mt-16", className)}>
+      {/* Static background rail */}
+      <div
+        aria-hidden="true"
+        className="absolute top-0 left-6 h-full w-px bg-brand-blue-mid/[0.08] sm:left-1/2 sm:-translate-x-1/2"
       />
 
+      {/* Scroll-driven progress rail */}
+      <motion.div
+        aria-hidden="true"
+        style={{ scaleY: lineScale, originY: 0, opacity: progressOpacity }}
+        className="absolute top-0 left-6 h-full w-px bg-gradient-to-b from-brand-gold via-brand-blue-mid to-brand-gold sm:left-1/2 sm:-translate-x-1/2"
+      />
+
+      {/* Glow orb at progress tip */}
+      <motion.div
+        aria-hidden="true"
+        style={{ top: glowTop, opacity: glowOpacity }}
+        className="absolute left-6 z-20 h-3 w-3 -translate-x-[5px] -translate-y-1/2 rounded-full bg-brand-gold shadow-[0_0_16px_3px_rgba(200,145,60,0.45)] sm:left-1/2 sm:-translate-x-[6px]"
+      />
+
+      {/* Card list */}
       <motion.ol
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="relative space-y-12 sm:space-y-16"
+        viewport={{ once: false, margin: "-50px" }}
+        className="relative space-y-14 sm:space-y-20"
       >
         {programs.map((program, index) => (
           <TimelineCard key={index} program={program} index={index} />

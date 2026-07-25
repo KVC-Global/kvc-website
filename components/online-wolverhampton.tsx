@@ -4,7 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
-import { Check, GraduationCap, Clock, Globe, Star, Users, ArrowRight, Building2, Monitor, FileText } from "lucide-react"
+import { Check, GraduationCap, Clock, Globe, Star, Users, ArrowRight, Building2, Monitor, FileText, Briefcase } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
@@ -57,28 +57,52 @@ const LEARNING_FORMAT = [
 ]
 
 const TARGET_AUDIENCE = [
-  "Người đã tốt nghiệp đại học muốn nâng cao trình độ.",
-  "Nhà quản lý và lãnh đạo doanh nghiệp.",
-  "Người đi làm cần bằng cấp quốc tế để phát triển sự nghiệp.",
-  "Học viên có kế hoạch làm việc hoặc học tập trong môi trường quốc tế.",
-  "Những người cần chương trình học linh hoạt nhưng vẫn đảm bảo chất lượng giáo dục Anh Quốc.",
+  { icon: GraduationCap, title: "Người đã tốt nghiệp đại học", desc: "Mong muốn nâng cao trình độ với bằng cấp chính quy từ trường đại học công lập Anh Quốc." },
+  { icon: Building2, title: "Nhà quản lý & Lãnh đạo", desc: "Phát triển năng lực quản trị và tư duy chiến lược để dẫn dắt tổ chức trong môi trường toàn cầu." },
+  { icon: Briefcase, title: "Người đi làm", desc: "Cần bằng cấp quốc tế để thăng tiến sự nghiệp mà không phải tạm dừng công việc hiện tại." },
+  { icon: Globe, title: "Học viên hướng quốc tế", desc: "Có kế hoạch làm việc hoặc học tập trong môi trường đa quốc gia, cần bằng cấp được công nhận rộng rãi." },
+  { icon: Clock, title: "Người cần linh hoạt", desc: "Chương trình học trực tuyến đảm bảo chất lượng giáo dục Anh Quốc với lịch trình cá nhân hóa." },
 ]
 
 const BENEFITS = [
-  "Bằng cấp được cấp trực tiếp bởi University of Wolverhampton.",
-  "Chương trình đào tạo theo tiêu chuẩn giáo dục Vương quốc Anh.",
-  "Linh hoạt về thời gian học.",
-  "Phát triển năng lực quản lý, nghiên cứu và chuyên môn.",
-  "Gia tăng cơ hội thăng tiến và làm việc trong môi trường quốc tế.",
-  "Tiết kiệm đáng kể chi phí so với hình thức du học toàn thời gian.",
+  {
+    title: "Bằng cấp chính quy trực tiếp",
+    desc: "Bằng được cấp trực tiếp bởi University of Wolverhampton, trường đại học công lập với hơn 190 năm lịch sử.",
+    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    title: "Chuẩn giáo dục Anh Quốc",
+    desc: "Chương trình đào tạo bám sát khung tiêu chuẩn giáo dục Vương quốc Anh, được công nhận toàn cầu.",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    title: "Học tập linh hoạt",
+    desc: "100% trực tuyến, chủ động thời gian, không gián đoạn công việc hiện tại.",
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    title: "Phát triển năng lực toàn diện",
+    desc: "Nâng cao kỹ năng quản lý, nghiên cứu và chuyên môn thông qua chương trình học ứng dụng thực tiễn.",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    title: "Cơ hội thăng tiến quốc tế",
+    desc: "Gia tăng lợi thế cạnh tranh, mở rộng cơ hội làm việc trong môi trường đa quốc gia.",
+    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    title: "Tiết kiệm chi phí tối đa",
+    desc: "Tiết kiệm đáng kể so với du học toàn thời gian, không mất chi phí sinh hoạt tại nước ngoài.",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80&auto=format&fit=crop",
+  },
 ]
 
 const STEPS = [
-  "Đăng ký tư vấn với KVC Global.",
-  "Đánh giá hồ sơ học thuật.",
-  "Chuẩn bị hồ sơ nhập học.",
-  "Nhận thư mời nhập học.",
-  "Bắt đầu chương trình học trực tuyến.",
+  { title: "Đăng ký tư vấn", desc: "Liên hệ với KVC Global để được tư vấn chi tiết về chương trình của University of Wolverhampton." },
+  { title: "Đánh giá hồ sơ", desc: "Đội ngũ chuyên gia đánh giá hồ sơ học thuật, bằng cấp và kinh nghiệm làm việc của bạn." },
+  { title: "Chuẩn bị hồ sơ", desc: "Hỗ trợ chuẩn bị và hoàn thiện hồ sơ nhập học theo yêu cầu của University of Wolverhampton." },
+  { title: "Nhận thư mời", desc: "Nhận thư mời nhập học chính thức từ trường và hoàn tất các thủ tục cần thiết." },
+  { title: "Bắt đầu học tập", desc: "Khởi đầu chương trình học trực tuyến, nhận bằng cấp chính quy từ trường đại học công lập Anh Quốc." },
 ]
 
 const PROGRAMS: TimelineProgram[] = [
@@ -229,37 +253,83 @@ export function OnlineWolverhampton({ className }: { className?: string }) {
       </section>
 
       {/* ── Hình thức học ── */}
+      <section className="py-16 md:py-24">
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+              <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Hình thức học</h2>
+                <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+              </motion.div>
+              <div className="mx-auto max-w-5xl">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
+                  {LEARNING_FORMATS.map((item, i) => {
+                    const Icon = item.icon
+                    const isWide = i < 2
+                    return (
+                      <motion.div
+                        key={i}
+                        variants={fadeUpVariants}
+                        className={cn(
+                          "group relative overflow-hidden rounded-xl border border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
+                          "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg",
+                          isWide ? "lg:col-span-3" : "lg:col-span-2",
+                        )}
+                      >
+                        <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-brand-gold/[0.06] transition-all duration-500 group-hover:scale-150 group-hover:bg-brand-gold/[0.12]" />
+                        <div className="relative z-10">
+                          <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-brand-gold/20 bg-brand-gold/[0.06] transition-all duration-500 group-hover:border-brand-gold/40 group-hover:bg-brand-gold/[0.14]">
+                            <Icon className="h-5 w-5 text-brand-gold transition-transform duration-500 group-hover:scale-110" strokeWidth={1.75} />
+                          </div>
+                          <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
+                            {item.title}
+                          </h3>
+                          <p className="mt-2 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )
+                  })}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ── Đối tượng phù hợp ── */}
       <section className="bg-white py-16 md:py-24">
         <Container>
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Hình thức học</h2>
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Đối tượng phù hợp</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
             <div className="mx-auto max-w-5xl">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
-                {LEARNING_FORMATS.map((item, i) => {
-                  const Icon = item.icon
-                  const isWide = i < 2
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {TARGET_AUDIENCE.map((item, i) => {
+                  const isHero = i === 0
                   return (
                     <motion.div
                       key={i}
                       variants={fadeUpVariants}
                       className={cn(
-                        "group relative overflow-hidden rounded-xl border border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
-                        "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg",
-                        isWide ? "lg:col-span-3" : "lg:col-span-2",
+                        "group relative flex gap-5 rounded-xl border border-l-2 border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
+                        "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg hover:border-l-brand-gold",
+                        isHero && "sm:col-span-2",
                       )}
                     >
-                      <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-brand-gold/[0.06] transition-all duration-500 group-hover:scale-150 group-hover:bg-brand-gold/[0.12]" />
-                      <div className="relative z-10">
-                        <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-lg border border-brand-gold/20 bg-brand-gold/[0.06] transition-all duration-500 group-hover:border-brand-gold/40 group-hover:bg-brand-gold/[0.14]">
-                          <Icon className="h-5 w-5 text-brand-gold transition-transform duration-500 group-hover:scale-110" strokeWidth={1.75} />
-                        </div>
+                      <div className="flex items-start gap-4">
+                        <span className="font-heading text-3xl font-extrabold text-brand-gold/15 leading-none select-none sm:text-4xl">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <div className="flex-1">
                         <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
                           {item.title}
                         </h3>
-                        <p className="mt-2 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
+                        <p className="mt-1.5 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
                           {item.desc}
                         </p>
                       </div>
@@ -272,52 +342,43 @@ export function OnlineWolverhampton({ className }: { className?: string }) {
         </Container>
       </section>
 
-      {/* ── Đối tượng phù hợp ── */}
-      <section className="bg-white py-16 md:py-24">
-        <Container>
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Đối tượng phù hợp</h2>
-              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
-            </motion.div>
-            <div className="mx-auto max-w-3xl">
-              <ul className="space-y-4">
-                {TARGET_AUDIENCE.map((item, i) => (
-                  <motion.li key={i} variants={fadeUpVariants} className="flex items-start gap-4 rounded-lg border border-border bg-white p-5 shadow-sm">
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
-                      <Check className="h-4 w-4 text-brand-gold" strokeWidth={3} />
-                    </div>
-                    <span className="font-body text-sm text-brand-dark/85 sm:text-base">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        </Container>
-      </section>
-
       {/* ── Lợi ích ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
           <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Lợi ích khi học tại University of Wolverhampton</h2>
-              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
-            </motion.div>
-            <div className="mx-auto max-w-3xl">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+              <motion.div variants={fadeUpVariants} className="mb-10 text-center">
+                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Lợi ích khi học tại University of Wolverhampton</h2>
+                <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+              </motion.div>
+              <div className="flex gap-6 overflow-x-auto pb-4 -mx-2 px-2 snap-x snap-mandatory scrollbar-hide">
                 {BENEFITS.map((item, i) => (
-                  <motion.div key={i} variants={fadeUpVariants} className="flex items-start gap-3 rounded-lg border border-border bg-white p-4 shadow-sm">
-                    <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
-                      <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
+                  <motion.div
+                    key={i}
+                    variants={fadeUpVariants}
+                    className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:w-[300px]"
+                  >
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="300px"
+                      />
                     </div>
-                    <span className="font-body text-sm text-brand-dark/85">{item}</span>
+                    <div className="p-5">
+                      <h3 className="font-heading text-base font-bold text-brand-blue">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 font-body text-sm leading-relaxed text-brand-dark/75">
+                        {item.desc}
+                      </p>
+                    </div>
                   </motion.div>
                 ))}
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
           </div>
         </Container>
       </section>
@@ -326,22 +387,33 @@ export function OnlineWolverhampton({ className }: { className?: string }) {
       <section className="bg-white py-16 md:py-24">
         <Container>
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+            <motion.div variants={fadeUpVariants} className="mb-14 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Quy trình đăng ký</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="mx-auto max-w-4xl">
+            <div className="mx-auto max-w-2xl">
               <div className="relative">
-                <div aria-hidden="true" className="absolute top-8 left-8 right-8 h-0.5 bg-brand-blue-mid/20 hidden md:block" />
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-5">
-                  {STEPS.map((step, i) => (
-                    <motion.div key={i} variants={fadeUpVariants} className="relative flex flex-col items-center text-center">
-                      <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-brand-blue-mid text-xl font-bold text-white shadow-md">
-                        {i + 1}
-                      </div>
-                      <p className="mt-4 font-body text-sm leading-relaxed text-brand-dark/85">{step}</p>
-                    </motion.div>
-                  ))}
+                <div aria-hidden="true" className="absolute top-0 bottom-0 left-8 w-px bg-brand-blue-mid/[0.12] sm:left-10" />
+                <div className="flex flex-col gap-0">
+                  {STEPS.map((step, i) => {
+                    const isLast = i === STEPS.length - 1
+                    return (
+                      <motion.div key={i} variants={fadeUpVariants} className="group relative flex gap-6 pb-10 last:pb-0 sm:gap-8">
+                        <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white shadow-[0_4px_20px_rgba(2,14,80,0.08)] ring-1 ring-brand-blue-mid/10 transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,14,80,0.14)] group-hover:ring-brand-gold/40 sm:h-20 sm:w-20">
+                          <span className="font-heading text-2xl font-extrabold text-brand-blue-mid transition-colors duration-500 group-hover:text-brand-blue sm:text-3xl">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                        </div>
+                        <div className="flex-1 pt-1 sm:pt-2">
+                          <h3 className="font-heading text-lg font-bold text-brand-blue">{step.title}</h3>
+                          <p className="mt-1.5 font-body text-sm leading-relaxed text-brand-dark/70">{step.desc}</p>
+                        </div>
+                        {!isLast && (
+                          <div aria-hidden="true" className="absolute left-[26.5px] top-[78px] z-10 h-3 w-3 rounded-full border-2 border-brand-blue-mid/20 bg-white sm:left-[34.5px] sm:top-[94px]" />
+                        )}
+                      </motion.div>
+                    )
+                  })}
                 </div>
               </div>
             </div>

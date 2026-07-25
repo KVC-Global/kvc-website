@@ -4,7 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
-import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp, Monitor, FileText } from "lucide-react"
+import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp, Monitor, FileText, Briefcase, Building2, Clock } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
@@ -46,28 +46,52 @@ const LEARNING_FORMAT = [
 ]
 
 const TARGET_AUDIENCE = [
-  "Sinh viên muốn sở hữu bằng cấp quốc tế.",
-  "Người đi làm cần nâng cao trình độ.",
-  "Chủ doanh nghiệp muốn phát triển năng lực quản lý.",
-  "Người có kế hoạch học chuyển tiếp tại Anh hoặc quốc tế.",
-  "Người muốn học linh hoạt mà vẫn đạt chuẩn giáo dục Anh Quốc.",
+  { icon: GraduationCap, title: "Sinh viên", desc: "Mong muốn sở hữu bằng cấp quốc tế được công nhận rộng rãi để khởi đầu sự nghiệp thuận lợi." },
+  { icon: Briefcase, title: "Người đi làm", desc: "Cần nâng cao trình độ chuyên môn và kỹ năng thực tiễn mà không phải tạm dừng công việc." },
+  { icon: Building2, title: "Chủ doanh nghiệp", desc: "Phát triển năng lực quản lý và tư duy chiến lược để dẫn dắt doanh nghiệp vươn xa." },
+  { icon: Globe, title: "Người có kế hoạch du học", desc: "Chuẩn bị nền tảng vững chắc để chuyển tiếp lên các chương trình tại Anh và quốc tế." },
+  { icon: Clock, title: "Người cần linh hoạt", desc: "Học tập đạt chuẩn giáo dục Anh Quốc với lịch trình hoàn toàn chủ động và cá nhân hóa." },
 ]
 
 const BENEFITS = [
-  "Chứng chỉ theo tiêu chuẩn Anh Quốc",
-  "Linh hoạt thời gian học",
-  "Phù hợp người đi làm",
-  "Tiết kiệm chi phí",
-  "Mở rộng cơ hội nghề nghiệp",
-  "Có lộ trình chuyển tiếp lên Đại học và Thạc sĩ quốc tế",
+  {
+    title: "Chứng chỉ chuẩn Anh Quốc",
+    desc: "Văn bằng được Ofqual công nhận và quản lý, đảm bảo chất lượng theo khung trình độ Anh Quốc (RQF).",
+    image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    title: "Học tập linh hoạt",
+    desc: "Chủ động sắp xếp thời gian học, phù hợp với lịch trình cá nhân và công việc bận rộn.",
+    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    title: "Phù hợp người đi làm",
+    desc: "Thiết kế dành riêng cho người vừa học vừa làm, không cần đến lớp, không gián đoạn công việc.",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    title: "Tiết kiệm chi phí",
+    desc: "Chi phí hợp lý, tiết kiệm đáng kể so với du học trực tiếp nhưng vẫn sở hữu bằng cấp quốc tế.",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    title: "Cơ hội nghề nghiệp rộng mở",
+    desc: "Nâng cao năng lực cạnh tranh, mở rộng cơ hội thăng tiến trong môi trường làm việc quốc tế.",
+    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=600&q=80&auto=format&fit=crop",
+  },
+  {
+    title: "Lộ trình chuyển tiếp đại học",
+    desc: "Đủ điều kiện chuyển tiếp lên các chương trình Cử nhân và Thạc sĩ tại nhiều trường đối tác.",
+    image: "https://images.unsplash.com/photo-1523050854058-8df90109c73f?w=600&q=80&auto=format&fit=crop",
+  },
 ]
 
 const STEPS = [
-  "Đăng ký tư vấn",
-  "Đánh giá hồ sơ",
-  "Chọn chương trình phù hợp",
-  "Hoàn tất thủ tục nhập học",
-  "Bắt đầu học trực tuyến",
+  { title: "Đăng ký tư vấn", desc: "Liên hệ với KVC Global để được tư vấn chi tiết về chương trình QUALIFI và định hướng học tập." },
+  { title: "Đánh giá hồ sơ", desc: "Đội ngũ chuyên gia đánh giá trình độ, kinh nghiệm và mục tiêu để đưa ra lời khuyên phù hợp." },
+  { title: "Chọn chương trình", desc: "Lựa chọn chương trình QUALIFI phù hợp với năng lực và kế hoạch phát triển sự nghiệp." },
+  { title: "Hoàn tất nhập học", desc: "Hoàn thiện thủ tục đăng ký, kích hoạt tài khoản học tập trên nền tảng trực tuyến." },
+  { title: "Bắt đầu học tập", desc: "Khởi đầu hành trình học trực tuyến với sự hỗ trợ liên tục từ giảng viên và cố vấn học tập." },
 ]
 
 const PROGRAMS: TimelineProgram[] = [
@@ -213,14 +237,53 @@ export function OnlineQualifi({ className }: { className?: string }) {
       </section>
 
       {/* ── Cơ hội học tiếp ── */}
-      <section className="bg-white py-10">
+      <section className="bg-white py-16 md:py-24">
         <Container>
-          <motion.div variants={fadeUpVariants} initial="hidden" whileInView="visible" viewport={{ once: true }} className="mx-auto max-w-3xl rounded-lg border border-brand-gold/20 bg-brand-gold/5 p-6 text-center">
-            <GraduationCap className="mx-auto h-8 w-8 text-brand-gold" strokeWidth={1.75} />
-            <h3 className="mt-3 font-heading text-lg font-bold text-brand-blue">Cơ hội học tiếp</h3>
-            <p className="mt-2 font-body text-sm text-brand-dark/75">
-              Sau khi hoàn thành các chương trình QUALIFI từ Level 4 trở lên, học viên có thể đủ điều kiện chuyển tiếp lên các chương trình đại học hoặc sau đại học tại nhiều trường đối tác theo quy định của từng trường.
-            </p>
+          <motion.div variants={fadeUpVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Cơ hội học tiếp</h2>
+              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            </motion.div>
+            <div className="mx-auto max-w-5xl">
+              <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
+                {/* Image */}
+                <motion.div variants={fadeUpVariants} className="lg:col-span-7">
+                  <div className="relative aspect-4/3 overflow-hidden rounded-xl shadow-lg">
+                    <Image
+                      src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80&auto=format&fit=crop"
+                      alt="Học viên tốt nghiệp và cơ hội chuyển tiếp"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 58vw"
+                    />
+                  </div>
+                </motion.div>
+                {/* Content */}
+                <motion.div variants={fadeUpVariants} className="lg:col-span-5">
+                  <p className="font-body text-sm leading-relaxed text-brand-dark/80 sm:text-base">
+                    Sau khi hoàn thành các chương trình QUALIFI từ Level 4 trở lên, học viên có thể đủ điều kiện chuyển tiếp lên các chương trình đại học hoặc sau đại học tại nhiều trường đối tác theo quy định của từng trường.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {["Đại học", "Thạc sĩ", "MBA", "Tiến sĩ"].map((level) => (
+                      <span key={level} className="inline-flex items-center rounded-full border border-brand-gold/20 bg-brand-gold/[0.04] px-4 py-1.5 font-body text-sm font-medium text-brand-blue-mid">
+                        {level}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-8 flex items-center gap-4 rounded-lg border border-brand-gold/15 bg-brand-gold/[0.03] p-5">
+                    <GraduationCap className="h-8 w-8 shrink-0 text-brand-gold" strokeWidth={1.5} />
+                    <div>
+                      <p className="font-heading text-sm font-semibold text-brand-blue">
+                        Bằng cấp được công nhận quốc tế
+                      </p>
+                      <p className="mt-1 font-body text-xs text-brand-dark/70">
+                        Liên kết với hơn 100 trường đại học đối tác trên toàn cầu
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </motion.div>
         </Container>
       </section>
@@ -229,24 +292,44 @@ export function OnlineQualifi({ className }: { className?: string }) {
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
           <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Đối tượng phù hợp</h2>
-              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+              <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Đối tượng phù hợp</h2>
+                <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+              </motion.div>
+              <div className="mx-auto max-w-5xl">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {TARGET_AUDIENCE.map((item, i) => {
+                    const isHero = i === 0
+                    return (
+                      <motion.div
+                        key={i}
+                        variants={fadeUpVariants}
+                        className={cn(
+                          "group relative flex gap-5 rounded-xl border border-l-2 border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
+                          "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg hover:border-l-brand-gold",
+                          isHero && "sm:col-span-2",
+                        )}
+                      >
+                        <div className="flex items-start gap-4">
+                          <span className="font-heading text-3xl font-extrabold text-brand-gold/15 leading-none select-none sm:text-4xl">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
+                            {item.title}
+                          </h3>
+                          <p className="mt-1.5 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </motion.div>
+                    )
+                  })}
+                </div>
+              </div>
             </motion.div>
-            <div className="mx-auto max-w-3xl">
-              <ul className="space-y-4">
-                {TARGET_AUDIENCE.map((item, i) => (
-                  <motion.li key={i} variants={fadeUpVariants} className="flex items-start gap-4 rounded-lg border border-border bg-white p-5 shadow-sm">
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
-                      <Check className="h-4 w-4 text-brand-gold" strokeWidth={3} />
-                    </div>
-                    <span className="font-body text-sm text-brand-dark/85 sm:text-base">{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
           </div>
         </Container>
       </section>
@@ -299,24 +382,39 @@ export function OnlineQualifi({ className }: { className?: string }) {
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
           <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Lợi ích khi học QUALIFI</h2>
-              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
-            </motion.div>
-            <div className="mx-auto max-w-3xl">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+              <motion.div variants={fadeUpVariants} className="mb-10 text-center">
+                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Lợi ích khi học QUALIFI</h2>
+                <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+              </motion.div>
+              <div className="flex gap-6 overflow-x-auto pb-4 -mx-2 px-2 snap-x snap-mandatory scrollbar-hide">
                 {BENEFITS.map((item, i) => (
-                  <motion.div key={i} variants={fadeUpVariants} className="flex items-start gap-3 rounded-lg border border-border bg-white p-4 shadow-sm">
-                    <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
-                      <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
+                  <motion.div
+                    key={i}
+                    variants={fadeUpVariants}
+                    className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:w-[300px]"
+                  >
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="300px"
+                      />
                     </div>
-                    <span className="font-body text-sm text-brand-dark/85">{item}</span>
+                    <div className="p-5">
+                      <h3 className="font-heading text-base font-bold text-brand-blue">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 font-body text-sm leading-relaxed text-brand-dark/75">
+                        {item.desc}
+                      </p>
+                    </div>
                   </motion.div>
                 ))}
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
           </div>
         </Container>
       </section>
@@ -325,22 +423,33 @@ export function OnlineQualifi({ className }: { className?: string }) {
       <section className="bg-white py-16 md:py-24">
         <Container>
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+            <motion.div variants={fadeUpVariants} className="mb-14 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Quy trình đăng ký</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="mx-auto max-w-4xl">
+            <div className="mx-auto max-w-2xl">
               <div className="relative">
-                <div aria-hidden="true" className="absolute top-8 left-8 right-8 h-0.5 bg-brand-blue-mid/20 hidden md:block" />
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-5">
-                  {STEPS.map((step, i) => (
-                    <motion.div key={i} variants={fadeUpVariants} className="relative flex flex-col items-center text-center">
-                      <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-brand-blue-mid text-xl font-bold text-white shadow-md">
-                        {i + 1}
-                      </div>
-                      <p className="mt-4 font-body text-sm leading-relaxed text-brand-dark/85">{step}</p>
-                    </motion.div>
-                  ))}
+                <div aria-hidden="true" className="absolute top-0 bottom-0 left-8 w-px bg-brand-blue-mid/[0.12] sm:left-10" />
+                <div className="flex flex-col gap-0">
+                  {STEPS.map((step, i) => {
+                    const isLast = i === STEPS.length - 1
+                    return (
+                      <motion.div key={i} variants={fadeUpVariants} className="group relative flex gap-6 pb-10 last:pb-0 sm:gap-8">
+                        <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white shadow-[0_4px_20px_rgba(2,14,80,0.08)] ring-1 ring-brand-blue-mid/10 transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,14,80,0.14)] group-hover:ring-brand-gold/40 sm:h-20 sm:w-20">
+                          <span className="font-heading text-2xl font-extrabold text-brand-blue-mid transition-colors duration-500 group-hover:text-brand-blue sm:text-3xl">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                        </div>
+                        <div className="flex-1 pt-1 sm:pt-2">
+                          <h3 className="font-heading text-lg font-bold text-brand-blue">{step.title}</h3>
+                          <p className="mt-1.5 font-body text-sm leading-relaxed text-brand-dark/70">{step.desc}</p>
+                        </div>
+                        {!isLast && (
+                          <div aria-hidden="true" className="absolute left-[26.5px] top-[78px] z-10 h-3 w-3 rounded-full border-2 border-brand-blue-mid/20 bg-white sm:left-[34.5px] sm:top-[94px]" />
+                        )}
+                      </motion.div>
+                    )
+                  })}
                 </div>
               </div>
             </div>

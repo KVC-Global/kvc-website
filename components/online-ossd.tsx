@@ -202,11 +202,11 @@ const LEARNING_FORMATS = [
 ]
 
 const STEPS = [
-  "Đăng ký tư vấn với KVC Global.",
-  "Đánh giá học lực và hồ sơ hiện tại.",
-  "Xây dựng lộ trình học OSSD phù hợp.",
-  "Hoàn tất thủ tục nhập học.",
-  "Bắt đầu chương trình và được hỗ trợ xuyên suốt đến khi hoàn thành bằng OSSD.",
+  { title: "Đăng ký tư vấn", desc: "Liên hệ với KVC Global để được tư vấn chi tiết về chương trình OSSD và lộ trình học tập phù hợp." },
+  { title: "Đánh giá hồ sơ", desc: "Đội ngũ chuyên gia đánh giá học lực, hồ sơ hiện tại và mục tiêu để đưa ra định hướng tối ưu." },
+  { title: "Xây dựng lộ trình", desc: "Thiết kế lộ trình học OSSD cá nhân hóa, lựa chọn môn học phù hợp với định hướng đại học." },
+  { title: "Hoàn tất nhập học", desc: "Hoàn thiện thủ tục, kích hoạt tài khoản học tập và sẵn sàng bắt đầu hành trình OSSD." },
+  { title: "Học tập & Hỗ trợ", desc: "Bắt đầu chương trình với sự đồng hành xuyên suốt từ KVC Global cho đến khi hoàn thành bằng." },
 ]
 
 const PARENT_REASONS = [
@@ -720,36 +720,53 @@ export function OnlineOssd({ className }: { className?: string }) {
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
           >
-            <motion.div
-              variants={fadeUpVariants}
-              className="mb-12 text-center"
-            >
+            <motion.div variants={fadeUpVariants} className="mb-14 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
                 Quy trình đăng ký
               </h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="mx-auto max-w-4xl">
+            <div className="mx-auto max-w-2xl">
               <div className="relative">
+                {/* Vertical connecting line */}
                 <div
                   aria-hidden="true"
-                  className="absolute top-8 right-8 left-8 hidden h-0.5 bg-brand-blue-mid/20 md:block"
+                  className="absolute top-0 bottom-0 left-8 w-px bg-brand-blue-mid/[0.12] sm:left-10"
                 />
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-5">
-                  {STEPS.map((step, i) => (
-                    <motion.div
-                      key={i}
-                      variants={fadeUpVariants}
-                      className="relative flex flex-col items-center text-center"
-                    >
-                      <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-brand-blue-mid text-xl font-bold text-white shadow-md">
-                        {i + 1}
-                      </div>
-                      <p className="mt-4 font-body text-sm leading-relaxed text-brand-dark/85">
-                        {step}
-                      </p>
-                    </motion.div>
-                  ))}
+                <div className="flex flex-col gap-0">
+                  {STEPS.map((step, i) => {
+                    const isLast = i === STEPS.length - 1
+                    return (
+                      <motion.div
+                        key={i}
+                        variants={fadeUpVariants}
+                        className="group relative flex gap-6 pb-10 last:pb-0 sm:gap-8"
+                      >
+                        {/* Number badge */}
+                        <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white shadow-[0_4px_20px_rgba(2,14,80,0.08)] ring-1 ring-brand-blue-mid/10 transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,14,80,0.14)] group-hover:ring-brand-gold/40 sm:h-20 sm:w-20">
+                          <span className="font-heading text-2xl font-extrabold text-brand-blue-mid transition-colors duration-500 group-hover:text-brand-blue sm:text-3xl">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                        </div>
+                        {/* Content */}
+                        <div className="flex-1 pt-1 sm:pt-2">
+                          <h3 className="font-heading text-lg font-bold text-brand-blue">
+                            {step.title}
+                          </h3>
+                          <p className="mt-1.5 font-body text-sm leading-relaxed text-brand-dark/70">
+                            {step.desc}
+                          </p>
+                        </div>
+                        {/* Connecting dot (except last) */}
+                        {!isLast && (
+                          <div
+                            aria-hidden="true"
+                            className="absolute left-[26.5px] top-[78px] z-10 h-3 w-3 rounded-full border-2 border-brand-blue-mid/20 bg-white sm:left-[34.5px] sm:top-[94px]"
+                          />
+                        )}
+                      </motion.div>
+                    )
+                  })}
                 </div>
               </div>
             </div>
@@ -758,42 +775,44 @@ export function OnlineOssd({ className }: { className?: string }) {
       </section>
 
       {/* ── Vì sao phụ huynh chọn KVC? ── */}
-      <section className="bg-white py-16 md:py-24">
-        <Container>
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                Vì sao phụ huynh lựa chọn KVC Global?
-              </h2>
-              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+      <section className="py-16 md:py-24">
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+            <motion.div
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
+                  Vì sao phụ huynh lựa chọn KVC Global?
+                </h2>
+                <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+              </motion.div>
+              <div className="mx-auto max-w-3xl">
+                <ul className="space-y-4">
+                  {PARENT_REASONS.map((item, i) => (
+                    <motion.li
+                      key={i}
+                      variants={fadeUpVariants}
+                      className="flex items-start gap-4 rounded-lg border border-border bg-white p-5 shadow-sm"
+                    >
+                      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
+                        <Check
+                          className="h-4 w-4 text-brand-gold"
+                          strokeWidth={3}
+                        />
+                      </div>
+                      <span className="font-body text-sm text-brand-dark/85 sm:text-base">
+                        {item}
+                      </span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
-            <div className="mx-auto max-w-3xl">
-              <ul className="space-y-4">
-                {PARENT_REASONS.map((item, i) => (
-                  <motion.li
-                    key={i}
-                    variants={fadeUpVariants}
-                    className="flex items-start gap-4 rounded-lg border border-border bg-white p-5 shadow-sm"
-                  >
-                    <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
-                      <Check
-                        className="h-4 w-4 text-brand-gold"
-                        strokeWidth={3}
-                      />
-                    </div>
-                    <span className="font-body text-sm text-brand-dark/85 sm:text-base">
-                      {item}
-                    </span>
-                  </motion.li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
+          </div>
         </Container>
       </section>
 
