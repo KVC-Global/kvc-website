@@ -2,18 +2,22 @@ import type { Metadata } from "next"
 
 import { SiteAbout } from "@/components/site-about"
 import { SiteHero } from "@/components/site-hero"
-import { SitePartners } from "@/components/site-partners"
-import { SiteServices } from "@/components/site-services"
-import { SiteTestimonials } from "@/components/site-testimonials"
+import { SitePartners, type SanityPartner } from "@/components/site-partners"
+import { SiteServices, type SanityService } from "@/components/site-services"
+import {
+  SiteTestimonials,
+  type SanityTestimonial,
+} from "@/components/site-testimonials"
 import { SiteWhyProcess } from "@/components/site-why-process"
-import { sanityFetch } from "@/sanity/live"
-import { PARTNERS_QUERY, SERVICES_QUERY, TESTIMONIALS_QUERY } from "@/sanity/queries"
-import type {
-  PARTNERS_QUERY_RESULT,
-  SERVICES_QUERY_RESULT,
-  TESTIMONIALS_QUERY_RESULT,
-} from "@/sanity.types"
 import { getLocale } from "@/lib/i18n-server"
+import { sanityFetch } from "@/sanity/live"
+import { HOME_PAGE_QUERY } from "@/sanity/queries"
+
+type HomePageData = {
+  partners: SanityPartner[] | null
+  services: SanityService[] | null
+  testimonials: SanityTestimonial[] | null
+}
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale()
@@ -53,16 +57,11 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Page() {
   const locale = await getLocale()
-
-  const [partnersRes, servicesRes, testimonialsRes] = await Promise.all([
-    sanityFetch({ query: PARTNERS_QUERY, params: { lang: locale } }),
-    sanityFetch({ query: SERVICES_QUERY, params: { lang: locale } }),
-    sanityFetch({ query: TESTIMONIALS_QUERY, params: { lang: locale } }),
-  ])
-
-  const partners = partnersRes.data as PARTNERS_QUERY_RESULT
-  const services = servicesRes.data as SERVICES_QUERY_RESULT
-  const testimonials = testimonialsRes.data as TESTIMONIALS_QUERY_RESULT
+  const { data } = await sanityFetch({
+    query: HOME_PAGE_QUERY,
+    params: { lang: locale },
+  })
+  const { partners, services, testimonials } = data as HomePageData
 
   return (
     <>
@@ -71,7 +70,9 @@ export default async function Page() {
       <SiteAbout />
       <SiteServices services={services?.length ? services : undefined} />
       <SiteWhyProcess />
-      <SiteTestimonials testimonials={testimonials?.length ? testimonials : undefined} />
+      <SiteTestimonials
+        testimonials={testimonials?.length ? testimonials : undefined}
+      />
     </>
   )
 }

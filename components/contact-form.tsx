@@ -58,7 +58,9 @@ export function ContactForm() {
       SERVICES.find((item) => item.value === serviceValue)?.label ?? "Khác"
     const message = (data.get("message") as string).trim()
 
-    const subject = encodeURIComponent(`[Liên hệ KVC Global] ${name} - ${service}`)
+    const subject = encodeURIComponent(
+      `[Liên hệ KVC Global] ${name} - ${service}`
+    )
     const body = encodeURIComponent(
       [
         `Họ và tên: ${name}`,
@@ -68,7 +70,7 @@ export function ContactForm() {
         ``,
         `Tin nhắn:`,
         `${message}`,
-      ].join("\n"),
+      ].join("\n")
     )
 
     return `mailto:info@kvcglobal.vn?subject=${subject}&body=${body}`
@@ -91,10 +93,7 @@ export function ContactForm() {
   if (state === "submitted") {
     return (
       <div className="flex flex-col items-center justify-center rounded-sm border border-border bg-white px-6 py-14 text-center shadow-sm">
-        <CheckCircle2
-          className="h-12 w-12 text-brand-gold"
-          strokeWidth={1.5}
-        />
+        <CheckCircle2 className="h-12 w-12 text-brand-gold" strokeWidth={1.5} />
         <h3 className="mt-4 font-heading text-xl font-bold text-brand-blue">
           Mở ứng dụng email...
         </h3>
@@ -173,11 +172,10 @@ export function ContactForm() {
         </select>
       </Field>
 
-      <Field id="contact-message" label="Tin nhắn" required>
+      <Field id="contact-message" label="Tin nhắn">
         <textarea
           id="contact-message"
           name="message"
-          required
           rows={4}
           placeholder="Nội dung bạn muốn tư vấn..."
           className={inputBase + " resize-y"}

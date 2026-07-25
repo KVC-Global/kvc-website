@@ -11,7 +11,7 @@ import { WorkPassServices } from "./work-pass-services"
 
 export function WorkPassDetails({ className }: { className?: string }) {
   return (
-    <div className="w-full bg-brand-light py-16 md:py-24">
+    <div className="w-full bg-brand-light pt-36 pb-16 sm:pt-40 md:pt-44 md:pb-24">
       <Container className={className}>
         <WorkPassTarget />
         <WorkPassProcess />

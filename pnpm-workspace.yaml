@@ -4,6 +4,7 @@ packages:
 allowBuilds:
   '@ladybugdb/core': true
   '@scarf/scarf': true
+  esbuild: set this to true or false
   gitnexus: true
   onnxruntime-node: true
   protobufjs: true
@@ -20,4 +21,3 @@ allowBuilds:
   tree-sitter-rust: true
   tree-sitter-typescript: true
   unrs-resolver: true
-

@@ -252,7 +252,10 @@ export function SiteFooter({ className }: { className?: string }) {
   ]
 
   const aboutLinks = [
-    { label: t.footer.about.intro, href: locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu" },
+    {
+      label: t.footer.about.intro,
+      href: locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu",
+    },
     { label: t.footer.about.team, href: "#doi-ngu" },
     { label: t.footer.about.partners, href: "#doi-tac" },
     { label: t.footer.about.values, href: "#gia-tri-cot-loi" },
@@ -268,23 +271,18 @@ export function SiteFooter({ className }: { className?: string }) {
   const contactItems = [
     {
       icon: Phone,
-      label: "(+84) 28 7300 6769",
-      href: "tel:+842873006769",
+      label: "(+84) 911942409 / (+65) 9742 1392",
+      href: "tel:+84911942409",
     },
     {
       icon: Mail,
-      label: "hello@kvcglobal.com",
-      href: "mailto:hello@kvcglobal.com",
+      label: "info@kvcglobal.vn",
+      href: "mailto:info@kvcglobal.vn",
     },
     {
       icon: MapPin,
       label: t.footer.addressVN,
       href: "https://maps.google.com/?q=65+L%C3%AA+L%E1%BB%A3i%2C+Qu%E1%BA%ADn+1",
-    },
-    {
-      icon: MapPin,
-      label: "20 Collyer Quay, #11-05 Singapore 049319",
-      href: "https://maps.google.com/?q=20+Collyer+Quay+%2311-05+Singapore+049319",
     },
   ]
 
@@ -336,7 +334,10 @@ export function SiteFooter({ className }: { className?: string }) {
             </ul>
           </div>
 
-          <CollapsibleFooterSection heading={t.footer.servicesHeading} className="lg:col-span-2">
+          <CollapsibleFooterSection
+            heading={t.footer.servicesHeading}
+            className="lg:col-span-2"
+          >
             <LinkList links={servicesLinks} />
           </CollapsibleFooterSection>
 
@@ -347,11 +348,17 @@ export function SiteFooter({ className }: { className?: string }) {
             <LinkList links={aboutLinks} />
           </CollapsibleFooterSection>
 
-          <CollapsibleFooterSection heading={t.footer.supportHeading} className="lg:col-span-2">
+          <CollapsibleFooterSection
+            heading={t.footer.supportHeading}
+            className="lg:col-span-2"
+          >
             <LinkList links={supportLinks} />
           </CollapsibleFooterSection>
 
-          <CollapsibleFooterSection heading={t.footer.contactHeading} className="lg:col-span-3">
+          <CollapsibleFooterSection
+            heading={t.footer.contactHeading}
+            className="lg:col-span-3"
+          >
             <ul className="flex flex-col gap-3 text-[15px]">
               {contactItems.map((item, index) => {
                 const Icon = item.icon
@@ -391,8 +398,11 @@ export function SiteFooter({ className }: { className?: string }) {
         <div aria-hidden="true" className="h-px w-full bg-brand-blue-mid/15" />
 
         <div className="flex flex-col items-start justify-between gap-3 py-6 text-[13px] text-foreground/50 sm:flex-row sm:items-center">
-          <p>© 2024 KVC Global. All rights reserved.</p>
-          <nav aria-label="Chính sách pháp lý" className="flex items-center gap-5">
+          <p>© 2026 KVC Global. All rights reserved.</p>
+          <nav
+            aria-label="Chính sách pháp lý"
+            className="flex items-center gap-5"
+          >
             <Link
               href="#chinh-sach-bao-mat"
               className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"
