@@ -4,7 +4,7 @@ import * as React from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
-import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp, Monitor, FileText, Briefcase, Building2, Clock, BookOpen, Calendar, ListChecks, UserCheck, ChevronRight } from "lucide-react"
+import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp, Monitor, FileText, Briefcase, Building2, Clock, BookOpen, Calendar, ListChecks, UserCheck, ChevronRight, ChevronLeft } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
@@ -142,12 +142,21 @@ const PROGRAMS: TimelineProgram[] = [
 export function OnlineQualifi({ className }: { className?: string }) {
   const [activeProgramId, setActiveProgramId] = React.useState(0)
   const activeProgram = PROGRAMS[activeProgramId] || PROGRAMS[0]
+  const benefitsRef = React.useRef<HTMLDivElement>(null)
+  const scrollBenefits = (dir: "left" | "right") => {
+    const el = benefitsRef.current; if (!el) return
+    if (dir === "left") {
+      el.scrollTo({ left: Math.max(0, el.scrollLeft - el.clientWidth + 40), behavior: "smooth" })
+    } else {
+      el.scrollBy({ left: el.clientWidth - 40, behavior: "smooth" })
+    }
+  }
 
   return (
     <div className={cn("w-full", className)}>
       {/* ── Hero ── */}
       <section className="relative w-full overflow-hidden bg-cover bg-center" style={{ backgroundImage: `url(${HERO_BG})` }}>
-        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white from-55% to-transparent" />
+        <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white from-30% to-transparent to-70%" />
         <Container className="relative flex min-h-[580px] flex-col justify-center pt-28 pb-20 md:min-h-[640px]">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-6 flex flex-wrap items-center gap-1.5 font-body text-xs font-medium text-muted-foreground md:text-sm">
             <Link href="/" className="transition-colors duration-200 hover:text-foreground">Trang chủ</Link>
@@ -390,12 +399,19 @@ export function OnlineQualifi({ className }: { className?: string }) {
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Lợi ích khi học QUALIFI</h2>
                 <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
               </motion.div>
-              <div className="flex gap-6 overflow-x-auto pb-4 -mx-2 px-2 snap-x snap-mandatory scrollbar-hide">
-                {BENEFITS.map((item, i) => (
+              <div className="relative group/scroll">
+                <button type="button" onClick={() => scrollBenefits("left")} className="absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100" aria-label="Previous">
+                  <ChevronLeft className="h-5 w-5" strokeWidth={2} />
+                </button>
+                <button type="button" onClick={() => scrollBenefits("right")} className="absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100" aria-label="Next">
+                  <ChevronRight className="h-5 w-5" strokeWidth={2} />
+                </button>
+                <div ref={benefitsRef} className="overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"><div className="flex gap-6 w-max mx-auto px-2">
+                  {BENEFITS.map((item, i) => (
                   <motion.div
                     key={i}
                     variants={fadeUpVariants}
-                    className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:w-[300px]"
+                    className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:w-[300px] xl:w-[350px]"
                   >
                     <div className="relative aspect-video overflow-hidden">
                       <Image
@@ -416,6 +432,8 @@ export function OnlineQualifi({ className }: { className?: string }) {
                     </div>
                   </motion.div>
                 ))}
+                </div>
+                </div>
               </div>
             </motion.div>
           </div>

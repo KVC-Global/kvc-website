@@ -228,6 +228,17 @@ export function OnlineOssd({ className }: { className?: string }) {
     setCurrentSubject((prev) => (prev - 1 + SUBJECTS.length) % SUBJECTS.length)
   }, [])
 
+  const benefitsScrollRef = React.useRef<HTMLDivElement>(null)
+  const scrollBenefits = (direction: "left" | "right") => {
+    const el = benefitsScrollRef.current
+    if (!el) return
+    if (direction === "left") {
+      el.scrollTo({ left: Math.max(0, el.scrollLeft - el.clientWidth + 40), behavior: "smooth" })
+    } else {
+      el.scrollBy({ left: el.clientWidth - 40, behavior: "smooth" })
+    }
+  }
+
   React.useEffect(() => {
     const timer = setInterval(nextSubject, 4000)
     return () => clearInterval(timer)
@@ -242,7 +253,7 @@ export function OnlineOssd({ className }: { className?: string }) {
       >
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-r from-white from-55% to-transparent"
+          className="absolute inset-0 bg-gradient-to-r from-white from-30% to-transparent to-70%"
         />
         <Container className="relative flex min-h-[580px] flex-col justify-center pt-28 pb-20 md:min-h-[640px]">
           <motion.div
@@ -679,13 +690,30 @@ export function OnlineOssd({ className }: { className?: string }) {
                 </h2>
                 <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
               </motion.div>
-              <div className="flex gap-6 overflow-x-auto pb-4 -mx-2 px-2 snap-x snap-mandatory scrollbar-hide">
-                {BENEFITS.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeUpVariants}
-                    className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:w-[300px]"
-                  >
+              <div className="relative group/scroll">
+                <button
+                  type="button"
+                  onClick={() => scrollBenefits("left")}
+                  className="absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100"
+                  aria-label="Previous"
+                >
+                  <ChevronLeft className="h-5 w-5" strokeWidth={2} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollBenefits("right")}
+                  className="absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100"
+                  aria-label="Next"
+                >
+                  <ChevronRight className="h-5 w-5" strokeWidth={2} />
+                </button>
+                <div ref={benefitsScrollRef} className="overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"><div className="flex gap-6 w-max mx-auto px-2">
+                  {BENEFITS.map((item, i) => (
+                    <motion.div
+                      key={i}
+                      variants={fadeUpVariants}
+                      className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:w-[300px] xl:w-[350px]"
+                    >
                     <div className="relative aspect-video overflow-hidden">
                       <Image
                         src={item.image}
@@ -705,6 +733,8 @@ export function OnlineOssd({ className }: { className?: string }) {
                     </div>
                   </motion.div>
                 ))}
+                </div>
+              </div>
               </div>
             </motion.div>
           </div>
