@@ -191,8 +191,9 @@ export function OnlineOthm({ className }: { className?: string }) {
       </section>
 
       {/* ── Vì sao chọn KVC Global? ── */}
-      <section className="bg-brand-light py-16 md:py-24">
-        <Container>
+      <section className="py-16 md:py-24">
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Vì sao chọn KVC Global?</h2>
@@ -213,6 +214,7 @@ export function OnlineOthm({ className }: { className?: string }) {
               })}
             </div>
           </motion.div>
+          </div>
         </Container>
       </section>
 
@@ -239,8 +241,9 @@ export function OnlineOthm({ className }: { className?: string }) {
       </section>
 
       {/* ── Đối tượng phù hợp ── */}
-      <section className="bg-brand-light py-16 md:py-24">
-        <Container>
+      <section className="py-16 md:py-24">
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Đối tượng phù hợp</h2>
@@ -259,6 +262,7 @@ export function OnlineOthm({ className }: { className?: string }) {
               </ul>
             </div>
           </motion.div>
+          </div>
         </Container>
       </section>
 
@@ -287,8 +291,9 @@ export function OnlineOthm({ className }: { className?: string }) {
       </section>
 
       {/* ── Quy trình đăng ký ── */}
-      <section className="bg-brand-light py-16 md:py-24">
-        <Container>
+      <section className="py-16 md:py-24">
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Quy trình đăng ký</h2>
@@ -310,6 +315,7 @@ export function OnlineOthm({ className }: { className?: string }) {
               </div>
             </div>
           </motion.div>
+          </div>
         </Container>
       </section>
 
