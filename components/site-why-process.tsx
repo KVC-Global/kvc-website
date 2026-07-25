@@ -13,6 +13,10 @@ import {
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import { getDictionaryServer, getLocale } from "@/lib/i18n-server"
+import type {
+  HomepageProcessStep,
+  HomepageReason,
+} from "@/sanity/home-page"
 
 const ACCENT = "var(--color-secondary)"
 
@@ -78,11 +82,19 @@ function StepItem({ step, index }: { step: Step; index: number }) {
   )
 }
 
-export async function SiteWhyProcess({ className }: { className?: string }) {
+export async function SiteWhyProcess({
+  className,
+  reasons: reasonsContent,
+  processSteps,
+}: {
+  className?: string
+  reasons?: HomepageReason[]
+  processSteps?: HomepageProcessStep[]
+}) {
   const t = await getDictionaryServer()
   const locale = await getLocale()
 
-  const reasons: ReadonlyArray<Reason> = [
+  const defaultReasons: ReadonlyArray<Reason> = [
     {
       icon: Shield,
       title: t.whyProcess.reasons.transparency.title,
@@ -105,7 +117,15 @@ export async function SiteWhyProcess({ className }: { className?: string }) {
     },
   ]
 
-  const steps: ReadonlyArray<Step> = [
+  const reasons: ReadonlyArray<Reason> = reasonsContent?.length
+    ? reasonsContent.map((reason) => ({
+        icon: Shield,
+        title: reason.title || "",
+        description: reason.description || "",
+      }))
+    : defaultReasons
+
+  const defaultSteps: ReadonlyArray<Step> = [
     {
       icon: MessageCircle,
       title: t.whyProcess.steps.step1.title,
@@ -132,6 +152,14 @@ export async function SiteWhyProcess({ className }: { className?: string }) {
       description: t.whyProcess.steps.step5.description,
     },
   ]
+
+  const steps: ReadonlyArray<Step> = processSteps?.length
+    ? processSteps.map((step) => ({
+        icon: MessageCircle,
+        title: step.title || "",
+        description: step.description || "",
+      }))
+    : defaultSteps
 
   return (
     <section
