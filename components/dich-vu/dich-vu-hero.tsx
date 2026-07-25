@@ -8,7 +8,7 @@ import { Building2, Globe2, Handshake, Users } from "lucide-react"
 import { Container } from "@/components/ui/container"
 import { cn } from "@/lib/utils"
 
-const HERO_IMAGE = "/images/study-abroad-hero.jpg"
+const HERO_IMAGE = "/images/service-hero.jpg"
 
 const STATS = [
   { icon: Building2, value: "500+", label: "Doanh nghiệp thành lập" },
