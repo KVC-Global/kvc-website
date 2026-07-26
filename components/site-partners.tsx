@@ -26,7 +26,9 @@ const PARTNERS: ReadonlyArray<SanityPartner> = [
 ]
 
 function PartnerCard({ partner }: { partner: SanityPartner }) {
-  const logoUrl = partner.logo ? urlFor(partner.logo).url() : "/images/SMU-Logo.png"
+  const logoUrl = partner.logo
+    ? urlFor(partner.logo).url()
+    : "/images/SMU-Logo.png"
   return (
     <div
       className={cn(
@@ -75,6 +77,11 @@ export function SitePartners({
     >
       <Container>
         <div className="text-center">
+          {content?.eyebrow && (
+            <p className="font-heading text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
+              {content.eyebrow}
+            </p>
+          )}
           <h2
             id="partners-heading"
             className="mt-1 font-display text-base font-bold tracking-[0.18em] text-primary uppercase"
@@ -108,4 +115,3 @@ export function SitePartners({
     </section>
   )
 }
-
