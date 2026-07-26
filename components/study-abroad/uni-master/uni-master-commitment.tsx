@@ -1,27 +1,39 @@
 "use client"
 
-import { ShieldCheck, Heart, Sparkles } from "lucide-react"
+import { HelpCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
+import type { UniMasterCommitmentContent } from "@/sanity/uni-master-page"
+import { uniMasterIcons } from "./uni-master-icons"
 
 const COMMITMENTS = [
   {
-    icon: ShieldCheck,
+    icon: "ShieldCheck",
     title: "Tư vấn minh bạch",
     description: "Không áp đặt một lộ trình cố định hay một trường cố định. Tư vấn lộ trình cá nhân hóa dựa trên học lực và khả năng chi trả thực tế.",
   },
   {
-    icon: Heart,
+    icon: "Heart",
     title: "Lợi ích học viên hàng đầu",
     description: "Đề xuất trường học và chương trình đào tạo dựa trên lợi ích thực tế của gia đình, không phụ thuộc vào chính sách riêng của bất kỳ đối tác nào.",
   },
   {
-    icon: Sparkles,
+    icon: "Sparkles",
     title: "Đồng hành xuyên suốt",
     description: "Hỗ trợ học viên hoàn thiện hồ sơ đăng ký học, luyện tập phỏng vấn, xử lý visa Student Pass trọn gói và hỗ trợ hòa nhập tại Singapore.",
   },
 ] as const
 
-export function UniMasterCommitment({ className }: { className?: string }) {
+export function UniMasterCommitment({
+  className,
+  content,
+}: {
+  className?: string
+  content?: UniMasterCommitmentContent
+}) {
+  const items = content?.items?.length
+    ? content.items
+    : COMMITMENTS
+
   return (
     <section
       aria-labelledby="commitment-heading"
@@ -32,15 +44,17 @@ export function UniMasterCommitment({ className }: { className?: string }) {
           id="commitment-heading"
           className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl"
         >
-          Cam kết từ KVC Global
+          {content?.title || "Cam kết từ KVC Global"}
         </h2>
         <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-stretch">
-        {COMMITMENTS.map((comm, idx) => {
-          const Icon = comm.icon
+        {items.map((comm, idx) => {
+          const iconName = comm.icon
+          const Icon = iconName ? uniMasterIcons[iconName] : undefined
           const num = String(idx + 1).padStart(2, "0")
+
           return (
             <div
               key={idx}
@@ -49,7 +63,11 @@ export function UniMasterCommitment({ className }: { className?: string }) {
               <div>
                 <div className="flex justify-between items-start">
                   <div className="flex h-10 w-10 items-center justify-center rounded-md bg-brand-light group-hover:bg-brand-blue/5 transition-colors">
-                    <Icon className="h-5 w-5 text-brand-gold" strokeWidth={2} />
+                    {Icon ? (
+                      <Icon className="h-5 w-5 text-brand-gold" strokeWidth={2} />
+                    ) : (
+                      <HelpCircle className="h-5 w-5 text-brand-gold" strokeWidth={2} />
+                    )}
                   </div>
                   <span className="font-display text-[13px] font-bold tracking-wider text-secondary">
                     {num}
