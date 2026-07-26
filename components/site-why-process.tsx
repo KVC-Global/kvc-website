@@ -21,16 +21,35 @@ import type {
 
 const ACCENT = "var(--color-secondary)"
 
+type Icon = typeof Shield
+
 type Reason = {
-  icon: typeof Shield
+  icon: Icon
   title: string
   description: string
 }
 
 type Step = {
-  icon: typeof MessageCircle
+  icon: Icon
   title: string
   description: string
+}
+
+const CMS_ICONS = {
+  award: Award,
+  badgecheck: BadgeCheck,
+  clipboardlist: ClipboardList,
+  folderopen: FolderOpen,
+  globe: Globe,
+  handshake: Handshake,
+  messagecircle: MessageCircle,
+  send: Send,
+  shield: Shield,
+} as const satisfies Record<string, Icon>
+
+function resolveCmsIcon(icon: string | undefined, fallback: Icon): Icon {
+  const key = icon?.trim().replace(/[ _-]/g, "").toLowerCase()
+  return key ? (CMS_ICONS[key as keyof typeof CMS_ICONS] ?? fallback) : fallback
 }
 
 function ReasonItem({ reason }: { reason: Reason }) {
@@ -122,7 +141,7 @@ export async function SiteWhyProcess({
 
   const reasons: ReadonlyArray<Reason> = reasonsContent?.length
     ? reasonsContent.map((reason) => ({
-        icon: Shield,
+        icon: resolveCmsIcon(reason.icon, Shield),
         title: reason.title || "",
         description: reason.description || "",
       }))
@@ -158,7 +177,7 @@ export async function SiteWhyProcess({
 
   const steps: ReadonlyArray<Step> = processSteps?.length
     ? processSteps.map((step) => ({
-        icon: MessageCircle,
+        icon: resolveCmsIcon(step.icon, MessageCircle),
         title: step.title || "",
         description: step.description || "",
       }))
@@ -234,7 +253,9 @@ export async function SiteWhyProcess({
         <div
           className="relative mt-16 grid grid-cols-1 gap-12 sm:grid-cols-3 lg:grid-cols-5 lg:gap-6"
           role="list"
-          aria-label={content?.process?.ariaLabel || t.whyProcess.processAriaLabel}
+          aria-label={
+            content?.process?.ariaLabel || t.whyProcess.processAriaLabel
+          }
         >
           <div
             aria-hidden="true"
