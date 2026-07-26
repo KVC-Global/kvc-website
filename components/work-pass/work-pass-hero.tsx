@@ -56,10 +56,10 @@ export function WorkPassHero({
 
   const stats = content?.stats?.length
     ? content.stats.map((stat) => ({
-        icon: stat.icon ? workPassIcons[stat.icon] || Briefcase : Briefcase,
-        value: stat.value || "",
-        label: stat.label || "",
-      }))
+      icon: stat.icon ? workPassIcons[stat.icon] || Briefcase : Briefcase,
+      value: stat.value || "",
+      label: stat.label || "",
+    }))
     : STATS
 
   const locale = useLocale()
@@ -142,7 +142,7 @@ export function WorkPassHero({
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
               href={content?.primaryButtonHref || "#dat-lich"}
-              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
               {content?.primaryButtonLabel || "Đặt lịch tư vấn miễn phí"}
               <svg
