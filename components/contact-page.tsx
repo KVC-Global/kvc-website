@@ -7,6 +7,8 @@ import { ChevronRight, Clock, Mail, MapPin, Phone } from "lucide-react"
 import { ContactForm } from "@/components/contact-form"
 import { Container } from "@/components/ui/container"
 import { useLocale, useDictionary } from "@/lib/i18n-client"
+import type { ContactPageData } from "@/sanity/content-pages"
+import { urlFor } from "@/sanity/image"
 
 type SocialIconProps = {
   className?: string
@@ -108,7 +110,7 @@ const OFFICES = [
 ] as const
 
 /* ───────────────── Contact info card ───────────────── */
-function OfficeInfoCard({ office }: { office: (typeof OFFICES)[number] }) {
+function OfficeInfoCard({ office }: { office: { country: string; role: string; address: string; phone: string; email: string; hours: string; mapUrl: string; mapQ: string; image: string; description?: string; imageAlt?: string } }) {
   return (
     <div className="rounded-lg border border-border bg-brand-light/50 p-6 transition-all duration-300 hover:shadow-sm">
       <h3 className="font-heading text-base font-bold text-brand-blue">
@@ -167,7 +169,7 @@ function OfficeCard({
   office,
   reverse,
 }: {
-  office: (typeof OFFICES)[number]
+  office: { country: string; role: string; address: string; phone: string; email: string; hours: string; mapUrl: string; mapQ: string; image: string; description?: string; imageAlt?: string }
   reverse: boolean
 }) {
   const phoneHref = office.phone.replace(/[^\d+]/g, "")
@@ -269,7 +271,7 @@ function OfficeCard({
       >
         <Image
           src={office.image}
-          alt={`Văn phòng KVC Global tại ${office.country}`}
+          alt={office.imageAlt || `Văn phòng KVC Global tại ${office.country}`}
           fill
           sizes="(max-width: 1024px) 100vw, 58vw"
           className="object-cover"
@@ -292,9 +294,20 @@ function OfficeCard({
 }
 
 /* ───────────────── Main page component ───────────────── */
-export function ContactPage() {
+export function ContactPage({ content }: { content?: ContactPageData }) {
   const locale = useLocale()
   const t = useDictionary()
+  const hero = content?.hero
+  const info = content?.info
+  const offices = content?.offices?.offices?.length
+    ? content.offices.offices.map((office) => ({
+        country: office.country || "", role: office.role || "", address: office.address || "",
+        phone: office.phone || "", email: office.email || "", hours: office.hours || "",
+        mapUrl: office.mapUrl || "#", mapQ: office.mapQuery || "",
+        image: office.image ? urlFor(office.image).width(1200).url() : "/images/dat-nuoc-singapore-01.jpg",
+        description: office.description, imageAlt: office.imageAlt,
+      }))
+    : OFFICES
   return (
     <div>
       {/* ═══════════ Hero banner ═══════════ */}
@@ -303,8 +316,8 @@ export function ContactPage() {
         className="relative w-full overflow-hidden bg-white"
       >
         <Image
-          src="/du-lich-singapore-3-ngay-2-dem-cover.webp"
-          alt="Toàn cảnh Singapore, nơi KVC Global đồng hành cùng khách hàng"
+          src={hero?.backgroundImage ? urlFor(hero.backgroundImage).width(1920).url() : "/du-lich-singapore-3-ngay-2-dem-cover.webp"}
+          alt={hero?.backgroundImageAlt || "Toàn cảnh Singapore, nơi KVC Global đồng hành cùng khách hàng"}
           fill
           priority
           sizes="100vw"
@@ -326,14 +339,14 @@ export function ContactPage() {
                 href="/"
                 className="transition-colors duration-200 hover:text-brand-blue"
               >
-                Trang chủ
+                {hero?.breadcrumbHome || "Trang chủ"}
               </Link>
               <ChevronRight className="h-3.5 w-3.5" strokeWidth={2} />
               <span
                 className="font-semibold text-brand-blue"
                 aria-current="page"
               >
-                Liên hệ
+                {hero?.breadcrumbCurrent || "Liên hệ"}
               </span>
             </nav>
 
@@ -341,18 +354,17 @@ export function ContactPage() {
               id="contact-hero-heading"
               className="font-heading text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
             >
-              <span className="block text-brand-blue">KẾT NỐI CÙNG</span>
-              <span className="block text-brand-gold">KVC GLOBAL.</span>
+              <span className="block text-brand-blue">{hero?.titleLine1 || "KẾT NỐI CÙNG"}</span>
+              <span className="block text-brand-gold">{hero?.titleLine2 || "KVC GLOBAL."}</span>
             </h1>
             <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">
-              Chia sẻ mục tiêu của bạn. Đội ngũ KVC Global sẽ tư vấn lộ trình
-              Singapore rõ ràng, phù hợp và minh bạch.
+              {hero?.description || "Chia sẻ mục tiêu của bạn. Đội ngũ KVC Global sẽ tư vấn lộ trình Singapore rõ ràng, phù hợp và minh bạch."}
             </p>
             <a
-              href="#gui-yeu-cau"
+              href={hero?.primaryButtonHref || "#gui-yeu-cau"}
               className="group mt-7 inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid/90 hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
-              Gửi yêu cầu tư vấn
+              {hero?.primaryButtonLabel || "Gửi yêu cầu tư vấn"}
               <ChevronRight
                 className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
                 strokeWidth={2.5}
@@ -374,10 +386,10 @@ export function ContactPage() {
             {/* ── Left column: contact info ── */}
             <div className="lg:col-span-5">
               <h2 className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl">
-                {t.contact.getInTouch}
+                {info?.title || t.contact.getInTouch}
               </h2>
               <p className="mt-4 max-w-lg font-body text-sm leading-relaxed text-brand-dark/70 sm:text-base">
-                {t.contact.description}
+                {info?.description || t.contact.description}
               </p>
 
               {/* Contact Details */}
@@ -389,10 +401,10 @@ export function ContactPage() {
                     strokeWidth={1.5}
                   />
                   <a
-                    href="tel:+84911942409"
+                    href={`tel:${(info?.phone || "+84911942409").replace(/[^\d+]/g, "")}`}
                     className="font-body text-sm text-brand-dark/80 transition-colors hover:text-brand-gold"
                   >
-                    (+84) 911942409
+                    {info?.phone || "(+84) 911942409"}
                   </a>
                 </div>
 
@@ -403,10 +415,10 @@ export function ContactPage() {
                     strokeWidth={1.5}
                   />
                   <a
-                    href="mailto:info@kvcglobal.vn"
+                    href={`mailto:${info?.email || "info@kvcglobal.vn"}`}
                     className="font-body text-sm text-brand-dark/80 transition-colors hover:text-brand-gold"
                   >
-                    info@kvcglobal.vn
+                    {info?.email || "info@kvcglobal.vn"}
                   </a>
                 </div>
 
@@ -417,7 +429,7 @@ export function ContactPage() {
                     strokeWidth={1.5}
                   />
                   <span className="font-body text-sm text-brand-dark/80">
-                    {t.footer.addressVN}
+                    {info?.address || t.footer.addressVN}
                   </span>
                 </div>
               </div>
@@ -425,18 +437,18 @@ export function ContactPage() {
               {/* Office Hours */}
               <div className="mt-8">
                 <h3 className="font-heading text-sm font-bold tracking-wide text-brand-dark uppercase">
-                  {t.contact.officeHours}:
+                  {info?.officeHoursTitle || t.contact.officeHours}:
                 </h3>
                 <div className="mt-3 space-y-1">
                   <p className="font-body text-sm text-brand-dark/80">
                     {locale === "vi"
-                      ? "Thứ 2 - Thứ 6, 8:00 - 17:00"
-                      : "Monday - Friday, 8:00 AM - 5:00 PM"}
+                      ? info?.weekdayHours || "Thứ 2 - Thứ 6, 8:00 - 17:00"
+                      : info?.weekdayHours || "Monday - Friday, 8:00 AM - 5:00 PM"}
                   </p>
                   <p className="font-body text-sm text-brand-dark/80">
                     {locale === "vi"
-                      ? "Thứ 7 - Chủ nhật: Đóng cửa"
-                      : "Saturday - Sunday: Closed"}
+                      ? info?.weekendHours || "Thứ 7 - Chủ nhật: Đóng cửa"
+                      : info?.weekendHours || "Saturday - Sunday: Closed"}
                   </p>
                 </div>
               </div>
@@ -444,10 +456,10 @@ export function ContactPage() {
               {/* Social Media */}
               <div className="mt-8">
                 <h3 className="font-heading text-sm font-bold text-brand-dark">
-                  {t.contact.connectWithUs}:
+                  {info?.socialTitle || t.contact.connectWithUs}:
                 </h3>
                 <p className="mt-2 font-body text-sm text-brand-dark/70">
-                  {t.contact.socialDescription}
+                  {info?.socialDescription || t.contact.socialDescription}
                 </p>
                 <ul className="mt-4 flex items-center gap-3">
                   {SOCIAL_LINKS.map((social) => {
@@ -477,14 +489,13 @@ export function ContactPage() {
                   id="contact-form-heading"
                   className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
                 >
-                  Gửi yêu cầu tư vấn
+                  {content?.form?.title || "Gửi yêu cầu tư vấn"}
                 </h2>
                 <p className="mt-2 font-body text-sm text-brand-dark/70">
-                  Điền thông tin bên dưới, chúng tôi sẽ liên hệ lại trong thời
-                  gian sớm nhất.
+                  {content?.form?.description || "Điền thông tin bên dưới, chúng tôi sẽ liên hệ lại trong thời gian sớm nhất."}
                 </p>
                 <div className="mt-6">
-                  <ContactForm />
+                  <ContactForm content={content?.form} email={info?.email} />
                 </div>
               </div>
             </div>
@@ -501,13 +512,13 @@ export function ContactPage() {
           <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
             <div className="flex flex-col items-center text-center">
               <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-                Văn phòng
+                {content?.offices?.eyebrow || "Văn phòng"}
               </p>
               <h2
                 id="offices-heading"
                 className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
               >
-                Gần bạn hơn ở mỗi điểm đến
+                {content?.offices?.title || "Gần bạn hơn ở mỗi điểm đến"}
               </h2>
               <span
                 aria-hidden="true"
@@ -516,7 +527,7 @@ export function ContactPage() {
             </div>
 
             <div className="mt-12 space-y-8 lg:mt-14">
-              {OFFICES.map((office, index) => (
+              {offices.map((office, index) => (
                 <OfficeCard
                   key={office.country}
                   office={office}
