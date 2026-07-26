@@ -91,16 +91,17 @@ export interface PrivateStudyFaqsContent {
   items?: PrivateStudyFaqItem[]
 }
 
-export interface PrivateStudyServiceItem {
+export interface PrivateStudyRelatedServiceItem {
+  _id?: string
+  icon?: string
   title?: string
   ctaText?: string
-  icon?: string
   href?: string
 }
 
-export interface PrivateStudyServicesContent {
+export interface PrivateStudyRelatedServicesContent {
   title?: string
-  services?: PrivateStudyServiceItem[]
+  services?: PrivateStudyRelatedServiceItem[]
 }
 
 export interface PrivateStudySeoContent {
@@ -119,6 +120,6 @@ export interface PrivateStudyPageContent {
   requirements?: PrivateStudyRequirementsContent
   support?: PrivateStudySupportContent
   faqs?: PrivateStudyFaqsContent
-  services?: PrivateStudyServicesContent
+  relatedServices?: PrivateStudyRelatedServicesContent
   seo?: PrivateStudySeoContent
 }

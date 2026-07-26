@@ -26,7 +26,7 @@ export function WorkPassDetails({
         <WorkPassFees content={content?.fees} />
         <WorkPassReview content={content?.review} />
         <WorkPassFaqs content={content?.faqs} />
-        <WorkPassServices content={content?.services} />
+        <WorkPassServices content={content?.relatedServices} />
       </Container>
     </div>
   )

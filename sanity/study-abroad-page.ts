@@ -102,17 +102,17 @@ export type StudyAbroadFaqsContent = {
   faqs?: StudyAbroadFaqItem[]
 }
 
-export type StudyAbroadServiceItem = {
-  _key?: string
+export type StudyAbroadRelatedServiceItem = {
+  _id?: string
+  icon?: string
   title?: string
   ctaText?: string
-  icon?: string
   href?: string
 }
 
-export type StudyAbroadServicesContent = {
+export type StudyAbroadRelatedServicesContent = {
   title?: string
-  services?: StudyAbroadServiceItem[]
+  services?: StudyAbroadRelatedServiceItem[]
 }
 
 export type StudyAbroadSeoContent = {
@@ -133,6 +133,6 @@ export type StudyAbroadPageContent = {
   support?: StudyAbroadSupportContent
   testimonials?: StudyAbroadTestimonialsContent
   faqs?: StudyAbroadFaqsContent
-  services?: StudyAbroadServicesContent
+  relatedServices?: StudyAbroadRelatedServicesContent
   seo?: StudyAbroadSeoContent
 }

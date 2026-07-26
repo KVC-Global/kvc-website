@@ -64,7 +64,7 @@ export function PublicStudyAbroadDetails({
       {/* 8. Services & ContactForm Section - Wrapped in a rounded-lg bg-muted card */}
       <Container className="mt-16 max-w-none px-4 sm:px-5 md:mt-24 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
         <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <PublicStudyAbroadServices content={content?.services} />
+          <PublicStudyAbroadServices content={content?.relatedServices} />
         </div>
       </Container>
     </div>

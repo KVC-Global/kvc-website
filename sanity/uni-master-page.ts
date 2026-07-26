@@ -60,16 +60,17 @@ export interface UniMasterCommitmentContent {
   items?: UniMasterCommitmentItem[]
 }
 
-export interface UniMasterServiceItem {
+export interface UniMasterRelatedServiceItem {
+  _id?: string
+  icon?: string
   title?: string
   ctaText?: string
-  icon?: string
   href?: string
 }
 
-export interface UniMasterServicesContent {
+export interface UniMasterRelatedServicesContent {
   title?: string
-  services?: UniMasterServiceItem[]
+  services?: UniMasterRelatedServiceItem[]
 }
 
 export interface UniMasterSeoContent {
@@ -86,6 +87,6 @@ export interface UniMasterPageContent {
   why?: UniMasterWhyContent
   audience?: UniMasterAudienceContent
   commitment?: UniMasterCommitmentContent
-  services?: UniMasterServicesContent
+  relatedServices?: UniMasterRelatedServicesContent
   seo?: UniMasterSeoContent
 }

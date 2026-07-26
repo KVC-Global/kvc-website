@@ -146,9 +146,15 @@ export const WORK_PASS_PAGE_QUERY = defineQuery(`
       title,
       faqs[]{_key, question, answer}
     },
-    "services": servicesSection{
+    "relatedServices": servicesSection{
       title,
-      services[]{_key, icon, title, cta, href}
+      services[]->{
+        _id,
+        title,
+        ctaText,
+        icon,
+        href
+      }
     },
     seo{title, description, image}
   }
@@ -210,9 +216,15 @@ export const STUDY_ABROAD_PAGE_QUERY = defineQuery(`
       title,
       faqs[]{_key, question, answer}
     },
-    "services": servicesSection {
+    "relatedServices": servicesSection {
       title,
-      services[]{_key, title, ctaText, icon, href}
+      services[]->{
+        _id,
+        title,
+        ctaText,
+        icon,
+        href
+      }
     },
     seo{title, description, shareImage}
   }
@@ -253,9 +265,15 @@ export const UNI_MASTER_PAGE_QUERY = defineQuery(`
       title,
       items[]{_key, icon, title, description}
     },
-    "services": servicesSection {
+    "relatedServices": servicesSection {
       title,
-      services[]{_key, title, ctaText, icon, href}
+      services[]->{
+        _id,
+        title,
+        ctaText,
+        icon,
+        href
+      }
     },
     seo{title, description, shareImage}
   }
@@ -313,9 +331,15 @@ export const PRIVATE_STUDY_PAGE_QUERY = defineQuery(`
       title,
       items[]{_key, question, answer}
     },
-    "services": servicesSection {
+    "relatedServices": servicesSection {
       title,
-      services[]{_key, title, ctaText, icon, href}
+      services[]->{
+        _id,
+        title,
+        ctaText,
+        icon,
+        href
+      }
     },
     seo{title, description, shareImage}
   }
@@ -384,9 +408,15 @@ export const PUBLIC_STUDY_PAGE_QUERY = defineQuery(`
       title,
       items[]{_key, question, answer}
     },
-    "services": servicesSection {
+    "relatedServices": servicesSection {
       title,
-      services[]{_key, title, ctaText, icon, href}
+      services[]->{
+        _id,
+        title,
+        ctaText,
+        icon,
+        href
+      }
     },
     seo{title, description, shareImage}
   }

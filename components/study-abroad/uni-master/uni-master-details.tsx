@@ -43,7 +43,7 @@ export function UniMasterStudyAbroadDetails({
 
       {/* 5. Services - Default container, no card */}
       <Container className={className}>
-        <UniMasterServices content={content?.services} />
+        <UniMasterServices content={content?.relatedServices} />
       </Container>
     </div>
   )

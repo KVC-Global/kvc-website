@@ -110,17 +110,17 @@ export type WorkPassFaqsContent = {
   faqs?: WorkPassFaqItem[]
 }
 
-export type WorkPassServiceItem = {
-  _key?: string
+export type WorkPassRelatedServiceItem = {
+  _id?: string
   icon?: string
   title?: string
-  cta?: string
+  ctaText?: string
   href?: string
 }
 
-export type WorkPassServicesContent = {
+export type WorkPassRelatedServicesContent = {
   title?: string
-  services?: WorkPassServiceItem[]
+  services?: WorkPassRelatedServiceItem[]
 }
 
 export type WorkPassSeo = {
@@ -137,6 +137,6 @@ export type WorkPassPageData = {
   fees?: WorkPassFeesContent
   review?: WorkPassReviewContent
   faqs?: WorkPassFaqsContent
-  services?: WorkPassServicesContent
+  relatedServices?: WorkPassRelatedServicesContent
   seo?: WorkPassSeo
 }

@@ -66,7 +66,7 @@ export function StudyAbroadDetails({
 
       {/* 7. Services - Default container, no card */}
       <Container className={className}>
-        <StudyAbroadServices content={content?.services} />
+        <StudyAbroadServices content={content?.relatedServices} />
       </Container>
     </div>
   )

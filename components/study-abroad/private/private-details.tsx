@@ -59,7 +59,7 @@ export function PrivateStudyAbroadDetails({
 
       {/* 7. Services - Default container, no card */}
       <Container className={className}>
-        <PrivateStudyAbroadServices content={content?.services} />
+        <PrivateStudyAbroadServices content={content?.relatedServices} />
       </Container>
     </div>
   )

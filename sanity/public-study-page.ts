@@ -129,16 +129,17 @@ export interface PublicStudyFaqsContent {
   items?: PublicStudyFaqItem[]
 }
 
-export interface PublicStudyServiceItem {
+export interface PublicStudyRelatedServiceItem {
+  _id?: string
+  icon?: string
   title?: string
   ctaText?: string
-  icon?: string
   href?: string
 }
 
-export interface PublicStudyServicesContent {
+export interface PublicStudyRelatedServicesContent {
   title?: string
-  services?: PublicStudyServiceItem[]
+  services?: PublicStudyRelatedServiceItem[]
 }
 
 export interface PublicStudySeoContent {
@@ -158,6 +159,6 @@ export interface PublicStudyPageContent {
   workRules?: PublicStudyWorkRulesContent
   support?: PublicStudySupportContent
   faqs?: PublicStudyFaqsContent
-  services?: PublicStudyServicesContent
+  relatedServices?: PublicStudyRelatedServicesContent
   seo?: PublicStudySeoContent
 }
