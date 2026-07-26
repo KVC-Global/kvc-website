@@ -4,6 +4,8 @@ import { useRef, useState } from "react"
 import Image from "next/image"
 import { ChevronLeft, ChevronRight, Star } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { urlFor } from "@/sanity/image"
+import type { StudyAbroadTestimonialsContent } from "@/sanity/study-abroad-page"
 
 const TESTIMONIALS = [
   {
@@ -50,9 +52,13 @@ const TESTIMONIALS = [
   },
 ] as const
 
-export function StudyAbroadTestimonials() {
+export function StudyAbroadTestimonials({ content }: { content?: StudyAbroadTestimonialsContent }) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [activeIdx, setActiveIdx] = useState(0)
+
+  const testimonials = content?.testimonials?.length
+    ? content.testimonials
+    : TESTIMONIALS
 
   const handleScroll = (dir: "left" | "right") => {
     const container = scrollRef.current
@@ -87,7 +93,7 @@ export function StudyAbroadTestimonials() {
           id="testimonials-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          Học viên nói gì về Diploma 6+6 tại KVC Global?
+          {content?.title || "Học viên nói gì về Diploma 6+6 tại KVC Global?"}
         </h2>
         <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
       </div>
@@ -106,54 +112,62 @@ export function StudyAbroadTestimonials() {
           onScroll={updateActiveDot}
           className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-none gap-6 py-2 px-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
-          {TESTIMONIALS.map((testi, idx) => (
-            <div
-              key={idx}
-              className="snap-start shrink-0 w-[90%] sm:w-[46%] lg:w-[31.5%] border border-border/60 bg-white rounded-lg p-6 shadow-[0_18px_40px_-22px_rgba(0,0,0,0.15)] hover:shadow-[0_28px_50px_-22px_rgba(0,0,0,0.25)] transition-all duration-300 relative flex flex-col justify-between overflow-hidden min-h-[220px]"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute top-2 right-4 font-serif text-[110px] leading-none text-brand-blue/5 select-none pointer-events-none"
+          {testimonials.map((testi, idx) => {
+            const avatarUrl = testi.avatar
+              ? typeof testi.avatar === "string"
+                ? testi.avatar
+                : urlFor(testi.avatar).url()
+              : "/images/student-avatar-1.jpg"
+
+            return (
+              <div
+                key={idx}
+                className="snap-start shrink-0 w-[90%] sm:w-[46%] lg:w-[31.5%] border border-border/60 bg-white rounded-lg p-6 shadow-[0_18px_40px_-22px_rgba(0,0,0,0.15)] hover:shadow-[0_28px_50px_-22px_rgba(0,0,0,0.25)] transition-all duration-300 relative flex flex-col justify-between overflow-hidden min-h-[220px]"
               >
-                “
-              </span>
+                <span
+                  aria-hidden="true"
+                  className="absolute top-2 right-4 font-serif text-[110px] leading-none text-brand-blue/5 select-none pointer-events-none"
+                >
+                  “
+                </span>
 
-              <div className="flex gap-4 relative z-10">
-                <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/40 shadow-xs bg-brand-light">
-                  <Image
-                    src={testi.avatar}
-                    alt={testi.name}
-                    fill
-                    sizes="(max-w-768px) 56px, 64px"
-                    className="object-cover object-center"
-                  />
-                </div>
-
-                <div className="flex-1 flex flex-col justify-between">
-                  <div>
-                    <div className="flex gap-0.5 mb-2.5" aria-label={`Đánh giá ${testi.rating} sao`}>
-                      {Array.from({ length: testi.rating }).map((_, i) => (
-                        <Star key={i} className="h-3.5 w-3.5 text-[#F8BC62] fill-current" strokeWidth={0} />
-                      ))}
-                    </div>
-
-                    <blockquote className="font-body text-[13px] sm:text-[14px] leading-relaxed text-brand-dark/85 mb-4 italic">
-                      &ldquo;{testi.quote}&rdquo;
-                    </blockquote>
+                <div className="flex gap-4 relative z-10">
+                  <div className="relative h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full ring-2 ring-secondary/40 shadow-xs bg-brand-light">
+                    <Image
+                      src={avatarUrl}
+                      alt={testi.name || ""}
+                      fill
+                      sizes="(max-w-768px) 56px, 64px"
+                      className="object-cover object-center"
+                    />
                   </div>
 
-                  <div>
-                    <cite className="font-heading text-sm font-bold text-brand-blue not-italic block">
-                      {testi.name}
-                    </cite>
-                    <span className="font-body text-[11px] md:text-[12px] text-muted-foreground block mt-0.5">
-                      {testi.role}
-                    </span>
+                  <div className="flex-1 flex flex-col justify-between">
+                    <div>
+                      <div className="flex gap-0.5 mb-2.5" aria-label={`Đánh giá ${testi.rating} sao`}>
+                        {Array.from({ length: testi.rating || 5 }).map((_, i) => (
+                          <Star key={i} className="h-3.5 w-3.5 text-[#F8BC62] fill-current" strokeWidth={0} />
+                        ))}
+                      </div>
+
+                      <blockquote className="font-body text-[13px] sm:text-[14px] leading-relaxed text-brand-dark/85 mb-4 italic">
+                        &ldquo;{testi.quote}&rdquo;
+                      </blockquote>
+                    </div>
+
+                    <div>
+                      <cite className="font-heading text-sm font-bold text-brand-blue not-italic block">
+                        {testi.name}
+                      </cite>
+                      <span className="font-body text-[11px] md:text-[12px] text-muted-foreground block mt-0.5">
+                        {testi.role}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         <button
@@ -166,7 +180,7 @@ export function StudyAbroadTestimonials() {
       </div>
 
       <div className="flex justify-center gap-2 mt-8" aria-hidden="true">
-        {TESTIMONIALS.map((_, idx) => {
+        {testimonials.map((_, idx) => {
           const isActive = activeIdx === idx
           return (
             <button

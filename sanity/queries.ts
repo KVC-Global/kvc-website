@@ -109,3 +109,67 @@ export const WORK_PASS_PAGE_QUERY = defineQuery(`
   }
 `)
 
+export const STUDY_ABROAD_PAGE_QUERY = defineQuery(`
+  *[_type == "studyAbroadPage" && language == $lang][0]{
+    _id,
+    language,
+    "hero": heroSection{
+      eyebrow,
+      title,
+      description,
+      primaryButtonLabel,
+      primaryButtonHref,
+      secondaryButtonLabel,
+      secondaryButtonHref,
+      backgroundImage,
+      stats[]{_key, value, label, icon}
+    },
+    "intro": introSection{
+      title,
+      highlightText,
+      bullets,
+      paragraphs,
+      image,
+      imageAlt
+    },
+    "why": whySection{
+      title,
+      items[]{_key, icon, title, description}
+    },
+    "majors": majorsSection{
+      title,
+      items[]{_key, icon, name}
+    },
+    "requirements": requirementsSection{
+      title,
+      conditions,
+      tipText,
+      image,
+      imageAlt
+    },
+    "prospects": prospectsSection{
+      title,
+      opportunities,
+      image,
+      imageAlt
+    },
+    "support": supportSection{
+      title,
+      steps[]{_key, icon, text}
+    },
+    "testimonials": testimonialsSection{
+      title,
+      testimonials[]{_key, name, role, avatar, rating, quote}
+    },
+    "faqs": faqsSection{
+      title,
+      faqs[]{_key, question, answer}
+    },
+    "services": servicesSection{
+      title,
+      services[]{_key, title, ctaText, icon, href}
+    },
+    seo{title, description, shareImage}
+  }
+`)
+

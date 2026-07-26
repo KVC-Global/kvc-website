@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
+import type { StudyAbroadFaqsContent } from "@/sanity/study-abroad-page"
 
 const FAQS = [
   {
@@ -22,7 +23,7 @@ const FAQS = [
     answer: "Học viên được thực tập tại các đối tác liên kết uy tín của KVC Global và nhà trường tại Singapore, bao gồm các chuỗi khách sạn 4-5 sao quốc tế, các chuỗi nhà hàng ẩm thực lớn, các doanh nghiệp logistics hàng đầu hoặc các công ty dịch vụ/thương mại điện tử công nghệ.",
   },
   {
-    question: "Nếu không đạt yêu cầu thực tập thì sao?",
+    question: "If không đạt yêu cầu thực tập thì sao?",
     answer: "Trong trường hợp học viên chưa đáp ứng được yêu cầu của doanh nghiệp thực tập ban đầu, KVC Global phối hợp cùng bộ phận hỗ trợ sinh viên của nhà trường sẽ tiến hành bổ túc kiến thức, hướng dẫn lại kỹ năng phỏng vấn và sắp xếp phỏng vấn tại các doanh nghiệp đối tác khác để đảm bảo 100% học viên hoàn thành học phần thực tập hưởng lương.",
   },
   {
@@ -31,11 +32,22 @@ const FAQS = [
   },
 ] as const
 
-export function StudyAbroadFaqs({ className }: { className?: string }) {
+export function StudyAbroadFaqs({
+  className,
+  content,
+}: {
+  className?: string
+  content?: StudyAbroadFaqsContent
+}) {
   const [openFaqs, setOpenFaqs] = useState<Record<number, boolean>>({})
   const toggleFaq = (idx: number) => {
     setOpenFaqs((prev) => ({ ...prev, [idx]: !prev[idx] }))
   }
+
+  const faqs = content?.faqs?.length ? content.faqs : FAQS
+  const half = Math.ceil(faqs.length / 2)
+  const leftFaqs = faqs.slice(0, half)
+  const rightFaqs = faqs.slice(half)
 
   return (
     <section
@@ -47,15 +59,15 @@ export function StudyAbroadFaqs({ className }: { className?: string }) {
           id="faqs-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          Câu hỏi thường gặp
+          {content?.title || "Câu hỏi thường gặp"}
         </h2>
         <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold mx-0" />
       </div>
 
       <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 mt-8">
-        {/* Left Column (FAQs 0, 1, 2) */}
+        {/* Left Column */}
         <div className="flex flex-col gap-4">
-          {FAQS.slice(0, 3).map((faq, index) => {
+          {leftFaqs.map((faq, index) => {
             const globalIdx = index
             const isOpen = !!openFaqs[globalIdx]
             return (
@@ -95,10 +107,10 @@ export function StudyAbroadFaqs({ className }: { className?: string }) {
           })}
         </div>
 
-        {/* Right Column (FAQs 3, 4, 5) */}
+        {/* Right Column */}
         <div className="flex flex-col gap-4">
-          {FAQS.slice(3, 6).map((faq, index) => {
-            const globalIdx = index + 3
+          {rightFaqs.map((faq, index) => {
+            const globalIdx = index + half
             const isOpen = !!openFaqs[globalIdx]
             return (
               <div
