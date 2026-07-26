@@ -2,6 +2,22 @@
 
 import { cn } from "@/lib/utils"
 import { Check, Info, ShieldCheck, Landmark } from "lucide-react"
+import type { PublicStudyRequirementsContent } from "@/sanity/public-study-page"
+
+const DOCS = [
+  {
+    title: "Thẻ học sinh (Student Pass):",
+    description: "Bắt buộc đối với toàn bộ học sinh quốc tế để học tập hợp pháp tại Singapore. Quy trình nộp hồ sơ qua hệ thống SOLAR của Cục Di trú Singapore (ICA).",
+  },
+  {
+    title: "Người giám hộ (Guardian):",
+    description: "Học sinh dưới 18 tuổi bắt buộc phải có người giám hộ hợp pháp cư trú tại Singapore (là công dân Singapore hoặc thường trú nhân PR).",
+  },
+  {
+    title: "Yêu cầu Tiếng Anh:",
+    description: "Tùy lộ trình thi tuyển (AEIS, O-Level, J-PACT hoặc Polytechnic), học sinh cần chuẩn bị năng lực ngoại ngữ tương ứng (Cambridge CEQ, IELTS 5.5 - 6.0).",
+  },
+] as const
 
 const COSTS = [
   { item: "Chỗ ở (Ký túc xá / Căn hộ / Homestay)", fee: "800 – 1.500 SGD / tháng" },
@@ -10,7 +26,21 @@ const COSTS = [
   { item: "Chi tiêu cá nhân khác", fee: "200 – 400 SGD / tháng" },
 ] as const
 
-export function PublicStudyAbroadRequirements({ className }: { className?: string }) {
+export function PublicStudyAbroadRequirements({
+  className,
+  content,
+}: {
+  className?: string
+  content?: PublicStudyRequirementsContent
+}) {
+  const conditions = content?.conditions?.length
+    ? content.conditions
+    : DOCS
+
+  const costs = content?.costs?.length
+    ? content.costs
+    : COSTS
+
   return (
     <section
       aria-labelledby="public-reqs-heading"
@@ -25,42 +55,35 @@ export function PublicStudyAbroadRequirements({ className }: { className?: strin
                 id="public-reqs-heading"
                 className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
               >
-                Quy định về Visa & Người giám hộ
+                {content?.title1 || "Quy định về Visa & Người giám hộ"}
               </h2>
               <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
             </div>
 
             <ul className="space-y-4 font-body text-sm text-brand-dark/95">
-              <li className="flex items-start gap-3">
-                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-emerald-500 bg-emerald-50 text-emerald-600">
-                  <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                </div>
-                <span>
-                  <strong>Thẻ học sinh (Student Pass):</strong> Bắt buộc đối với toàn bộ học sinh quốc tế để học tập hợp pháp tại Singapore. Quy trình nộp hồ sơ qua hệ thống SOLAR của Cục Di trú Singapore (ICA).
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-emerald-500 bg-emerald-50 text-emerald-600">
-                  <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                </div>
-                <span>
-                  <strong>Người giám hộ (Guardian):</strong> Học sinh dưới 18 tuổi bắt buộc phải có người giám hộ hợp pháp cư trú tại Singapore (là công dân Singapore hoặc thường trú nhân PR).
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-emerald-500 bg-emerald-50 text-emerald-600">
-                  <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                </div>
-                <span>
-                  <strong>Yêu cầu Tiếng Anh:</strong> Tùy lộ trình thi tuyển (AEIS, O-Level, J-PACT hoặc Polytechnic), học sinh cần chuẩn bị năng lực ngoại ngữ tương ứng (Cambridge CEQ, IELTS 5.5 - 6.0).
-                </span>
-              </li>
+              {conditions.map((cond, idx) => (
+                <li key={idx} className="flex items-start gap-3">
+                  <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-emerald-500 bg-emerald-50 text-emerald-600">
+                    <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                  </div>
+                  <span>
+                    {cond.title && <strong>{cond.title} </strong>}
+                    {cond.description}
+                  </span>
+                </li>
+              ))}
             </ul>
 
             <div className="bg-brand-light border border-border/60 rounded-md p-4 flex gap-3 items-start mt-6">
               <ShieldCheck className="h-5 w-5 text-brand-blue shrink-0 mt-0.5" strokeWidth={2} />
               <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal">
-                <strong>Hỗ trợ từ KVC:</strong> Hỗ trợ kết nối các lớp luyện thi AEIS cấp tốc, tư vấn thủ tục giám hộ và hoàn tất hồ sơ Student Pass trọn gói.
+                {content?.tipText1 ? (
+                  content.tipText1
+                ) : (
+                  <>
+                    <strong>Hỗ trợ từ KVC:</strong> Hỗ trợ kết nối các lớp luyện thi AEIS cấp tốc, tư vấn thủ tục giám hộ và hoàn tất hồ sơ Student Pass trọn gói.
+                  </>
+                )}
               </p>
             </div>
           </div>
@@ -73,7 +96,7 @@ export function PublicStudyAbroadRequirements({ className }: { className?: strin
               <h2
                 className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
               >
-                Dự trù chi phí sinh hoạt tại Singapore
+                {content?.title2 || "Dự trù chi phí sinh hoạt tại Singapore"}
               </h2>
               <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
             </div>
@@ -87,7 +110,7 @@ export function PublicStudyAbroadRequirements({ className }: { className?: strin
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/60 text-brand-dark/90">
-                  {COSTS.map((cost, idx) => (
+                  {costs.map((cost, idx) => (
                     <tr key={idx} className="hover:bg-brand-light/35 transition-colors">
                       <td className="py-3 px-3">{cost.item}</td>
                       <td className="py-3 px-3 text-right text-brand-blue font-semibold">{cost.fee}</td>
@@ -100,7 +123,8 @@ export function PublicStudyAbroadRequirements({ className }: { className?: strin
             <div className="mt-5 bg-brand-light border border-border/60 rounded-md p-4 flex gap-3 items-start">
               <Info className="h-5 w-5 text-brand-gold shrink-0 mt-0.5" strokeWidth={2} />
               <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal">
-                Chi phí thực tế có thể thay đổi tùy thuộc vào phong cách sống và sự lựa chọn loại hình nhà ở (ký túc xá trường công, homestay tư nhân hoặc thuê căn hộ) của gia đình.
+                {content?.tipText2 ||
+                  "Chi phí thực tế có thể thay đổi tùy thuộc vào phong cách sống và sự lựa chọn loại hình nhà ở (ký túc xá trường công, homestay tư nhân hoặc thuê căn hộ) của gia đình."}
               </p>
             </div>
           </div>
@@ -110,10 +134,10 @@ export function PublicStudyAbroadRequirements({ className }: { className?: strin
       {/* Scholarships Block */}
       <div className="mt-12 bg-white border border-border/60 rounded-lg p-6 md:p-8 shadow-sm dark:border-border/10 dark:bg-card">
         <span className="font-heading text-xs font-bold tracking-wider text-brand-gold uppercase">
-          CHƯƠNG TRÌNH HỌC BỔNG CỦA BỘ GIÁO DỤC SINGAPORE (MOE)
+          {content?.scholarshipEyebrow || "CHƯƠNG TRÌNH HỌC BỔNG CỦA BỘ GIÁO DỤC SINGAPORE (MOE)"}
         </span>
         <h3 className="font-heading text-xl font-bold text-brand-blue mt-2 mb-6 dark:text-foreground">
-          Cơ hội nhận học bổng danh giá cho học sinh xuất sắc
+          {content?.scholarshipTitle || "Cơ hội nhận học bổng danh giá cho học sinh xuất sắc"}
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -121,13 +145,21 @@ export function PublicStudyAbroadRequirements({ className }: { className?: strin
           <div className="border border-border/40 rounded-lg p-5 bg-brand-light/20">
             <h4 className="font-heading text-lg font-bold text-brand-blue border-b border-border pb-3 mb-4 flex items-center gap-2 dark:text-foreground">
               <Landmark className="h-5 w-5 text-brand-gold" />
-              Học bổng ASEAN (ASEAN Scholarship)
+              {content?.scholarship1?.title || "Học bổng ASEAN (ASEAN Scholarship)"}
             </h4>
             <ul className="space-y-2.5 font-body text-sm text-muted-foreground list-disc pl-5 leading-normal">
-              <li><strong>Đối tượng:</strong> Dành cho học sinh xuất sắc lớp 8 đến lớp 10 tại Việt Nam.</li>
-              <li><strong>Quyền lợi:</strong> Tài trợ 100% học phí, hỗ trợ chi phí sinh hoạt thường niên, cung cấp chỗ ở ký túc xá, vé máy bay khứ hồi khi bắt đầu và kết thúc khóa học, và lệ phí thi quốc gia.</li>
-              <li><strong>Thời hạn:</strong> Kéo dài 4 năm (từ lớp Trung học 3 đến hết lớp Dự bị Đại học 2).</li>
-              <li><strong>Yêu cầu:</strong> Thành tích học tập nổi bật, hoạt động ngoại khóa đa dạng và vượt qua bài thi tuyển sinh + phỏng vấn trực tiếp từ đại diện MOE.</li>
+              <li>
+                <strong>Đối tượng:</strong> {content?.scholarship1?.target || "Dành cho học sinh xuất sắc lớp 8 đến lớp 10 tại Việt Nam."}
+              </li>
+              <li>
+                <strong>Quyền lợi:</strong> {content?.scholarship1?.benefit || "Tài trợ 100% học phí, hỗ trợ chi phí sinh hoạt thường niên, cung cấp chỗ ở ký túc xá, vé máy bay khứ hồi khi bắt đầu và kết thúc khóa học, và lệ phí thi quốc gia."}
+              </li>
+              <li>
+                <strong>Thời hạn:</strong> {content?.scholarship1?.duration || "Kéo dài 4 năm (từ lớp Trung học 3 đến hết lớp Dự bị Đại học 2)."}
+              </li>
+              <li>
+                <strong>Yêu cầu:</strong> {content?.scholarship1?.standard || "Thành tích học tập nổi bật, hoạt động ngoại khóa đa dạng và vượt qua bài thi tuyển sinh + phỏng vấn trực tiếp từ đại diện MOE."}
+              </li>
             </ul>
           </div>
 
@@ -135,13 +167,21 @@ export function PublicStudyAbroadRequirements({ className }: { className?: strin
           <div className="border border-border/40 rounded-lg p-5 bg-brand-light/20">
             <h4 className="font-heading text-lg font-bold text-brand-blue border-b border-border pb-3 mb-4 flex items-center gap-2 dark:text-foreground">
               <Landmark className="h-5 w-5 text-brand-gold" />
-              Học bổng Dự bị Đại học MOE
+              {content?.scholarship2?.title || "Học bổng Dự bị Đại học MOE"}
             </h4>
             <ul className="space-y-2.5 font-body text-sm text-muted-foreground list-disc pl-5 leading-normal">
-              <li><strong>Đối tượng:</strong> Học sinh quốc tế chuẩn bị nhập học bậc Dự bị Đại học (Junior College) tại Singapore.</li>
-              <li><strong>Quyền lợi:</strong> Trợ cấp sinh hoạt phí khoảng 750 SGD mỗi học kỳ kèm hỗ trợ chi phí học phí lên đến 2.400 SGD/năm.</li>
-              <li><strong>Thời hạn:</strong> Kéo dài 2 năm học bậc JC.</li>
-              <li><strong>Yêu cầu:</strong> Xét kết quả kỳ thi GCE 'O' Level xuất sắc (điểm L1R5 ≤ 8 điểm hoặc tương đương).</li>
+              <li>
+                <strong>Đối tượng:</strong> {content?.scholarship2?.target || "Học sinh quốc tế chuẩn bị nhập học bậc Dự bị Đại học (Junior College) tại Singapore."}
+              </li>
+              <li>
+                <strong>Quyền lợi:</strong> {content?.scholarship2?.benefit || "Trợ cấp sinh hoạt phí khoảng 750 SGD mỗi học kỳ kèm hỗ trợ chi phí học phí lên đến 2.400 SGD/năm."}
+              </li>
+              <li>
+                <strong>Thời hạn:</strong> {content?.scholarship2?.duration || "Kéo dài 2 năm học bậc JC."}
+              </li>
+              <li>
+                <strong>Yêu cầu:</strong> {content?.scholarship2?.standard || "Xét kết quả kỳ thi GCE &apos;O&apos; Level xuất sắc (điểm L1R5 ≤ 8 điểm hoặc tương đương)."}
+              </li>
             </ul>
           </div>
         </div>

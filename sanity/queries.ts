@@ -276,3 +276,74 @@ export const PRIVATE_STUDY_PAGE_QUERY = defineQuery(`
   }
 `)
 
+export const PUBLIC_STUDY_PAGE_QUERY = defineQuery(`
+  *[_type == "publicStudyPage" && language == $lang][0] {
+    _id,
+    language,
+    "hero": heroSection {
+      eyebrow,
+      title,
+      description,
+      primaryButtonLabel,
+      primaryButtonHref,
+      secondaryButtonLabel,
+      secondaryButtonHref,
+      backgroundImage,
+      stats[]{_key, value, label, icon}
+    },
+    "intro": introSection {
+      title,
+      paragraph1,
+      paragraph2,
+      paragraph3,
+      image,
+      imageAlt
+    },
+    "why": whySection {
+      title,
+      items[]{_key, icon, title, description}
+    },
+    "pathways": pathwaysSection {
+      title,
+      cards[]{_key, eyebrow, title, description, conditions[]{_key, icon, boldText, normalText}},
+      compareTitle,
+      compareCard1{title, duration, objective, criteria, feeReference},
+      compareCard2{title, duration, objective, criteria, feeReference}
+    },
+    "requirements": requirementsSection {
+      title1,
+      title2,
+      conditions[]{_key, title, description},
+      tipText1,
+      costs[]{_key, item, fee},
+      tipText2,
+      scholarshipEyebrow,
+      scholarshipTitle,
+      scholarship1{title, target, benefit, duration, standard},
+      scholarship2{title, target, benefit, duration, standard}
+    },
+    "workRules": workRulesSection {
+      title,
+      sectionTitle1,
+      sectionDesc1,
+      conditions1,
+      sectionTitle2,
+      conditions2,
+      warningText
+    },
+    "support": supportSection {
+      title,
+      items[]{_key, icon, title, description}
+    },
+    "faqs": faqsSection {
+      title,
+      items[]{_key, question, answer}
+    },
+    "services": servicesSection {
+      title,
+      services[]{_key, title, ctaText, icon, href}
+    },
+    seo{title, description, shareImage}
+  }
+`)
+
