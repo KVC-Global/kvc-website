@@ -216,3 +216,63 @@ export const UNI_MASTER_PAGE_QUERY = defineQuery(`
   }
 `)
 
+export const PRIVATE_STUDY_PAGE_QUERY = defineQuery(`
+  *[_type == "privateStudyPage" && language == $lang][0] {
+    _id,
+    language,
+    "hero": heroSection {
+      eyebrow,
+      title,
+      description,
+      primaryButtonLabel,
+      primaryButtonHref,
+      secondaryButtonLabel,
+      secondaryButtonHref,
+      backgroundImage,
+      stats[]{_key, value, label, icon}
+    },
+    "intro": introSection {
+      title,
+      paragraph1,
+      paragraph2,
+      paragraph3,
+      image,
+      imageAlt
+    },
+    "why": whySection {
+      title,
+      items[]{_key, icon, title, description}
+    },
+    "schools": schoolsSection {
+      title,
+      items[]{_key, id, name, desc, levels[]{_key, grade, age, fee}},
+      tipText
+    },
+    "requirements": requirementsSection {
+      title1,
+      title2,
+      ageTitle,
+      ageDesc,
+      academicTitle,
+      academicDesc,
+      entryTitle,
+      entryDesc,
+      conditions,
+      tipText
+    },
+    "support": supportSection {
+      title,
+      items[]{_key, icon, title, description}
+    },
+    "faqs": faqsSection {
+      title,
+      items[]{_key, question, answer}
+    },
+    "services": servicesSection {
+      title,
+      services[]{_key, title, ctaText, icon, href}
+    },
+    seo{title, description, shareImage}
+  }
+`)
+

@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import { Check, FileText, Calendar, Compass, ShieldCheck } from "lucide-react"
+import type { PrivateStudyRequirementsContent } from "@/sanity/private-study-page"
 
 const DOCS = [
   "Hộ chiếu (còn hiệu lực tối thiểu 6 tháng)",
@@ -11,7 +12,17 @@ const DOCS = [
   "Giấy tờ bổ sung theo yêu cầu riêng của trường",
 ] as const
 
-export function PrivateStudyAbroadRequirements({ className }: { className?: string }) {
+export function PrivateStudyAbroadRequirements({
+  className,
+  content,
+}: {
+  className?: string
+  content?: PrivateStudyRequirementsContent
+}) {
+  const conditions = content?.conditions?.length
+    ? content.conditions
+    : DOCS
+
   return (
     <section
       aria-labelledby="reqs-heading"
@@ -26,7 +37,7 @@ export function PrivateStudyAbroadRequirements({ className }: { className?: stri
                 id="reqs-heading"
                 className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
               >
-                Yêu cầu về độ tuổi & học bạ
+                {content?.title1 || "Yêu cầu về độ tuổi & học bạ"}
               </h2>
               <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
             </div>
@@ -37,9 +48,11 @@ export function PrivateStudyAbroadRequirements({ className }: { className?: stri
                   <Calendar className="h-4 w-4 text-brand-gold" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-heading text-[15px] font-bold text-brand-blue">Độ tuổi phù hợp</span>
+                  <span className="font-heading text-[15px] font-bold text-brand-blue">
+                    {content?.ageTitle || "Độ tuổi phù hợp"}
+                  </span>
                   <p className="font-body text-sm text-muted-foreground mt-1 leading-normal">
-                    Mỗi trường có bảng quy đổi độ tuổi tương ứng với từng khối lớp riêng. Thông thường, học sinh bắt đầu học Lớp 1 (Grade 1) khi đủ 6 tuổi.
+                    {content?.ageDesc || "Mỗi trường có bảng quy đổi độ tuổi tương ứng với từng khối lớp riêng. Thông thường, học sinh bắt đầu học Lớp 1 (Grade 1) khi đủ 6 tuổi."}
                   </p>
                 </div>
               </div>
@@ -49,9 +62,11 @@ export function PrivateStudyAbroadRequirements({ className }: { className?: stri
                   <FileText className="h-4 w-4 text-brand-gold" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-heading text-[15px] font-bold text-brand-blue">Học bạ & Học lực</span>
+                  <span className="font-heading text-[15px] font-bold text-brand-blue">
+                    {content?.academicTitle || "Học bạ & Học lực"}
+                  </span>
                   <p className="font-body text-sm text-muted-foreground mt-1 leading-normal">
-                    Chuẩn bị học bạ của ít nhất 2 năm học gần nhất, được dịch thuật công chứng sang tiếng Anh để nộp hồ sơ xét duyệt.
+                    {content?.academicDesc || "Chuẩn bị học bạ của ít nhất 2 năm học gần nhất, được dịch thuật công chứng sang tiếng Anh để nộp hồ sơ xét duyệt."}
                   </p>
                 </div>
               </div>
@@ -61,9 +76,11 @@ export function PrivateStudyAbroadRequirements({ className }: { className?: stri
                   <Compass className="h-4 w-4 text-brand-gold" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-heading text-[15px] font-bold text-brand-blue">Kiểm tra năng lực đầu vào</span>
+                  <span className="font-heading text-[15px] font-bold text-brand-blue">
+                    {content?.entryTitle || "Kiểm tra năng lực đầu vào"}
+                  </span>
                   <p className="font-body text-sm text-muted-foreground mt-1 leading-normal">
-                    Tùy theo trường, học sinh có thể cần thực hiện một số bài kiểm tra đánh giá tư duy, đánh giá năng lực tiếng Anh, hoặc bài kiểm tra Toán & Đọc hiểu.
+                    {content?.entryDesc || "Tùy theo trường, học sinh có thể cần thực hiện một số bài kiểm tra đánh giá tư duy, đánh giá năng lực tiếng Anh, hoặc bài kiểm tra Toán & Đọc hiểu."}
                   </p>
                 </div>
               </div>
@@ -78,13 +95,13 @@ export function PrivateStudyAbroadRequirements({ className }: { className?: stri
               <h2
                 className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
               >
-                Hồ sơ đăng ký cần chuẩn bị
+                {content?.title2 || "Hồ sơ đăng ký cần chuẩn bị"}
               </h2>
               <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
             </div>
 
             <ul className="space-y-3.5" aria-label="Danh sách hồ sơ cần chuẩn bị">
-              {DOCS.map((doc, idx) => (
+              {conditions.map((doc, idx) => (
                 <li key={idx} className="flex items-start gap-3">
                   <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-emerald-500 bg-emerald-50 text-emerald-600">
                     <Check className="h-3.5 w-3.5" strokeWidth={3} />
@@ -99,7 +116,13 @@ export function PrivateStudyAbroadRequirements({ className }: { className?: stri
             <div className="bg-brand-light border border-border/60 rounded-md p-4 flex gap-3 items-start mt-6">
               <ShieldCheck className="h-5 w-5 text-brand-blue shrink-0 mt-0.5" strokeWidth={2} />
               <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal">
-                <strong>Lưu ý giám hộ:</strong> Học sinh dưới 18 tuổi nếu không có phụ huynh đi cùng bắt buộc phải đăng ký người giám hộ hợp pháp cư trú tại Singapore theo quy định. KVC Global hỗ trợ cung cấp dịch vụ này.
+                {content?.tipText ? (
+                  content.tipText
+                ) : (
+                  <>
+                    <strong>Lưu ý giám hộ:</strong> Học sinh dưới 18 tuổi nếu không có phụ huynh đi cùng bắt buộc phải đăng ký người giám hộ hợp pháp cư trú tại Singapore theo quy định. KVC Global hỗ trợ cung cấp dịch vụ này.
+                  </>
+                )}
               </p>
             </div>
           </div>

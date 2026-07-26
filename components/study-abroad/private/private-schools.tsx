@@ -3,6 +3,7 @@
 import * as React from "react"
 import { Building2, Info, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import type { PrivateStudySchoolsContent } from "@/sanity/private-study-page"
 
 const SCHOOLS = [
   {
@@ -64,9 +65,18 @@ const SCHOOLS = [
   },
 ] as const
 
-export function PrivateStudyAbroadSchools() {
+export function PrivateStudyAbroadSchools({ content }: { content?: PrivateStudySchoolsContent }) {
   const [activeSchoolId, setActiveSchoolId] = React.useState<string>("ais")
-  const activeSchool = SCHOOLS.find((s) => s.id === activeSchoolId) || SCHOOLS[0]
+
+  const schools = content?.items?.length
+    ? content.items
+    : SCHOOLS
+
+  const currentActiveId = schools.some((s) => s.id === activeSchoolId)
+    ? activeSchoolId
+    : (schools[0]?.id || "")
+
+  const activeSchool = schools.find((s) => s.id === currentActiveId) || schools[0]
 
   return (
     <section
@@ -79,75 +89,77 @@ export function PrivateStudyAbroadSchools() {
           id="schools-heading"
           className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl"
         >
-          Trường quốc tế tiêu biểu tại Singapore
+          {content?.title || "Trường quốc tế tiêu biểu tại Singapore"}
         </h2>
         <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
       </div>
 
       {/* Desktop layout: Tabs + Table */}
-      <div className="hidden lg:grid grid-cols-12 gap-8 items-start">
-        {/* Left Side: School Selection Tabs */}
-        <div className="col-span-4 flex flex-col gap-2">
-          {SCHOOLS.map((school) => {
-            const isActive = school.id === activeSchoolId
-            return (
-              <button
-                key={school.id}
-                type="button"
-                onClick={() => setActiveSchoolId(school.id)}
-                className={cn(
-                  "flex items-center justify-between rounded-lg border p-4 text-left font-heading text-[15px] font-bold transition-all duration-300",
-                  isActive
-                    ? "border-brand-blue bg-brand-blue text-white shadow-md"
-                    : "border-border bg-white text-brand-blue hover:bg-brand-light"
-                )}
-              >
-                <span className="flex items-center gap-3">
-                  <Building2 className={cn("h-5 w-5", isActive ? "text-brand-gold-light" : "text-brand-gold")} />
-                  {school.name.split(" (")[0]}
-                </span>
-                <ChevronRight className={cn("h-4 w-4 transition-transform", isActive && "translate-x-1")} />
-              </button>
-            )
-          })}
-        </div>
+      {activeSchool && (
+        <div className="hidden lg:grid grid-cols-12 gap-8 items-start">
+          {/* Left Side: School Selection Tabs */}
+          <div className="col-span-4 flex flex-col gap-2">
+            {schools.map((school) => {
+              const isActive = school.id === currentActiveId
+              return (
+                <button
+                  key={school.id}
+                  type="button"
+                  onClick={() => setActiveSchoolId(school.id || "")}
+                  className={cn(
+                    "flex items-center justify-between rounded-lg border p-4 text-left font-heading text-[15px] font-bold transition-all duration-300",
+                    isActive
+                      ? "border-brand-blue bg-brand-blue text-white shadow-md"
+                      : "border-border bg-white text-brand-blue hover:bg-brand-light"
+                  )}
+                >
+                  <span className="flex items-center gap-3">
+                    <Building2 className={cn("h-5 w-5", isActive ? "text-brand-gold-light" : "text-brand-gold")} />
+                    {school.name ? school.name.split(" (")[0] : ""}
+                  </span>
+                  <ChevronRight className={cn("h-4 w-4 transition-transform", isActive && "translate-x-1")} />
+                </button>
+              )
+            })}
+          </div>
 
-        {/* Right Side: Details & Fees Table */}
-        <div className="col-span-8 bg-white border border-border/60 rounded-lg p-6 shadow-sm">
-          <h3 className="font-heading text-xl font-bold text-brand-blue mb-3">
-            {activeSchool.name}
-          </h3>
-          <p className="font-body text-sm leading-relaxed text-muted-foreground mb-6">
-            {activeSchool.desc}
-          </p>
+          {/* Right Side: Details & Fees Table */}
+          <div className="col-span-8 bg-white border border-border/60 rounded-lg p-6 shadow-sm">
+            <h3 className="font-heading text-xl font-bold text-brand-blue mb-3">
+              {activeSchool.name}
+            </h3>
+            <p className="font-body text-sm leading-relaxed text-muted-foreground mb-6">
+              {activeSchool.desc}
+            </p>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left font-body text-sm border-collapse">
-              <thead>
-                <tr className="border-b border-border/80 bg-brand-light font-heading text-xs font-bold text-brand-blue uppercase">
-                  <th className="py-3 px-4">Bậc học</th>
-                  <th className="py-3 px-4">Độ tuổi / Khối lớp</th>
-                  <th className="py-3 px-4">Học phí tham khảo</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border/60 text-brand-dark/90">
-                {activeSchool.levels.map((lvl, index) => (
-                  <tr key={index} className="hover:bg-brand-light/35 transition-colors">
-                    <td className="py-3.5 px-4 font-semibold">{lvl.grade}</td>
-                    <td className="py-3.5 px-4">{lvl.age}</td>
-                    <td className="py-3.5 px-4 text-brand-blue font-semibold">{lvl.fee}</td>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left font-body text-sm border-collapse">
+                <thead>
+                  <tr className="border-b border-border/80 bg-brand-light font-heading text-xs font-bold text-brand-blue uppercase">
+                    <th className="py-3 px-4">Bậc học</th>
+                    <th className="py-3 px-4">Độ tuổi / Khối lớp</th>
+                    <th className="py-3 px-4">Học phí tham khảo</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-border/60 text-brand-dark/90">
+                  {activeSchool.levels?.map((lvl, index) => (
+                    <tr key={index} className="hover:bg-brand-light/35 transition-colors">
+                      <td className="py-3.5 px-4 font-semibold">{lvl.grade}</td>
+                      <td className="py-3.5 px-4">{lvl.age}</td>
+                      <td className="py-3.5 px-4 text-brand-blue font-semibold">{lvl.fee}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Mobile layout: Card Accordion List */}
       <div className="lg:hidden flex flex-col gap-4">
-        {SCHOOLS.map((school) => {
-          const isOpen = school.id === activeSchoolId
+        {schools.map((school) => {
+          const isOpen = school.id === currentActiveId
           return (
             <div
               key={school.id}
@@ -155,7 +167,7 @@ export function PrivateStudyAbroadSchools() {
             >
               <button
                 type="button"
-                onClick={() => setActiveSchoolId(isOpen ? "" : school.id)}
+                onClick={() => setActiveSchoolId(isOpen ? "" : school.id || "")}
                 className={cn(
                   "flex w-full items-center justify-between p-4 font-heading text-sm font-bold text-brand-blue text-left transition-colors",
                   isOpen && "bg-brand-blue text-white"
@@ -181,7 +193,7 @@ export function PrivateStudyAbroadSchools() {
                     </p>
 
                     <div className="flex flex-col gap-3 font-body text-xs">
-                      {school.levels.map((lvl, index) => (
+                      {school.levels?.map((lvl, index) => (
                         <div
                           key={index}
                           className="bg-brand-light/50 border border-border/40 rounded p-3 flex flex-col gap-1.5"
@@ -209,7 +221,13 @@ export function PrivateStudyAbroadSchools() {
       <div className="bg-brand-light border border-border/60 rounded-md p-4 flex gap-3 items-start mt-8 max-w-3xl mx-auto">
         <Info className="h-5 w-5 text-brand-gold shrink-0 mt-0.5" strokeWidth={2} />
         <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal">
-          <strong>Lưu ý:</strong> Thông tin học phí và chương trình của các trường quốc tế mang tính chất tham khảo tại thời điểm tuyển sinh mới nhất. KVC Global sẽ cập nhật chi phí chính xác trong quá trình tư vấn trực tiếp.
+          {content?.tipText ? (
+            content.tipText
+          ) : (
+            <>
+              <strong>Lưu ý:</strong> Thông tin học phí và chương trình của các trường quốc tế mang tính chất tham khảo tại thời điểm tuyển sinh mới nhất. KVC Global sẽ cập nhật chi phí chính xác trong quá trình tư vấn trực tiếp.
+            </>
+          )}
         </p>
       </div>
     </section>
