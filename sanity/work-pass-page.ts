@@ -16,6 +16,8 @@ export type WorkPassHeroContent = {
   secondaryButtonHref?: string
   backgroundImage?: SanityImage
   stats?: WorkPassStat[]
+  googleReviewValue?: string
+  googleReviewLabel?: string
 }
 
 export type WorkPassTargetItem = {

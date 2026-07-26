@@ -59,7 +59,8 @@ export const WORK_PASS_PAGE_QUERY = defineQuery(`
       primaryButtonLabel, primaryButtonHref,
       secondaryButtonLabel, secondaryButtonHref,
       backgroundImage,
-      stats[]{_key, value, label, icon}
+      stats[]{_key, value, label, icon},
+      googleReviewValue, googleReviewLabel
     },
     "target": targetSection{
       title,

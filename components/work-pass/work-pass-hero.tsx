@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils"
 import { urlFor } from "@/sanity/image"
 import type { WorkPassHeroContent } from "@/sanity/work-pass-page"
 import { workPassIcons } from "./work-pass-icons"
+import { useLocale } from "@/lib/i18n-client"
 
 const HERO_IMAGE = "/images/work-pass-hero.jpg"
 
@@ -60,6 +61,9 @@ export function WorkPassHero({
         label: stat.label || "",
       }))
     : STATS
+
+  const locale = useLocale()
+  const isEn = locale === "en"
 
   return (
     <section
@@ -181,8 +185,8 @@ export function WorkPassHero({
           ...stats,
           {
             icon: GoogleIcon,
-            value: "Google 4.9/5",
-            label: "250+ đánh giá",
+            value: content?.googleReviewValue || "Google 4.9/5",
+            label: content?.googleReviewLabel || (isEn ? "250+ reviews" : "250+ đánh giá"),
           },
         ]}
       />
