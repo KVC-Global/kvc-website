@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 import { urlFor } from "@/sanity/image"
 import type { WorkPassHeroContent } from "@/sanity/work-pass-page"
 import { workPassIcons } from "./work-pass-icons"
-import { useLocale } from "@/lib/i18n-client"
+import { useLocale, useDictionary } from "@/lib/i18n-client"
 
 const HERO_IMAGE = "/images/work-pass-hero.jpg"
 
@@ -64,6 +64,7 @@ export function WorkPassHero({
 
   const locale = useLocale()
   const isEn = locale === "en"
+  const t = useDictionary()
 
   return (
     <section
@@ -99,13 +100,13 @@ export function WorkPassHero({
           className="mb-8 flex flex-wrap items-center gap-1.5 font-body text-xs font-medium text-muted-foreground md:text-sm"
         >
           <Link
-            href="/"
+            href={isEn ? "/en" : "/"}
             className="transition-colors duration-200 hover:text-foreground"
           >
-            Trang chủ
+            {t.nav.home}
           </Link>
           <span className="text-muted-foreground/60 select-none">&gt;</span>
-          <span className="text-muted-foreground/80">Work pass & việc làm</span>
+          <span className="text-muted-foreground/80">{t.nav.workPass}</span>
           <span className="text-muted-foreground/60 select-none">&gt;</span>
           <span
             className="font-semibold text-foreground/80"
