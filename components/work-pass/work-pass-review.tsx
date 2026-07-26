@@ -2,6 +2,8 @@
 
 import Image from "next/image"
 import { Star } from "lucide-react"
+import type { WorkPassReviewContent } from "@/sanity/work-pass-page"
+import { urlFor } from "@/sanity/image"
 
 function GoogleIcon({ className }: { className?: string }) {
   return (
@@ -26,7 +28,26 @@ function GoogleIcon({ className }: { className?: string }) {
   )
 }
 
-export function WorkPassReview() {
+export function WorkPassReview({ content }: { content?: WorkPassReviewContent }) {
+  const testimonial = content?.testimonial
+  const caseStudy = content?.caseStudy
+
+  const testimonialName = testimonial?.name || "Nguyễn Hoàng Nam"
+  const testimonialRole = testimonial?.role || "Graduate Trainee tại Tech Company, Singapore"
+  const testimonialQuote = testimonial?.quote || "KVC Global đã hỗ trợ tôi đạt được TEP nhanh chóng và bắt đầu hành trình sự nghiệp tại Singapore. Đội ngũ tư vấn rất chuyên nghiệp và tận tâm."
+  const testimonialRating = typeof testimonial?.rating === "number" ? testimonial.rating : 5
+  const testimonialImage = testimonial?.image
+    ? urlFor(testimonial.image).url()
+    : "/images/student-avatar-2.jpg"
+
+  const caseStudyTagline = caseStudy?.tagline || "Case Study"
+  const caseStudyDescription = caseStudy?.description || "Hỗ trợ 1,200+ ứng viên Việt Nam đạt TEP thành công trong 10 năm qua, định hướng sự nghiệp bền vững tại Singapore."
+  const caseStudyCtaLabel = caseStudy?.ctaLabel || "Xem thêm câu chuyện"
+  const caseStudyCtaHref = caseStudy?.ctaHref || "#cau-chuyen"
+  const caseStudyImage = caseStudy?.image
+    ? urlFor(caseStudy.image).url()
+    : "/images/singapore-flyer.jpg"
+
   return (
     <section aria-label="Đánh giá và Case Study" className="mt-8 md:mt-8 w-full">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
@@ -44,8 +65,8 @@ export function WorkPassReview() {
           <div className="relative shrink-0 flex flex-col items-center">
             <div className="relative h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full ring-2 ring-secondary/40 shadow-lg bg-brand-light">
               <Image
-                src="/images/student-avatar-2.jpg"
-                alt="Nguyễn Hoàng Nam"
+                src={testimonialImage}
+                alt={testimonialName}
                 fill
                 sizes="112px"
                 className="object-cover object-center"
@@ -53,7 +74,7 @@ export function WorkPassReview() {
             </div>
             {/* Soft decorative badge underneath avatar */}
             <div className="mt-3 flex gap-0.5" aria-hidden="true">
-              {Array.from({ length: 5 }).map((_, i) => (
+              {Array.from({ length: testimonialRating }).map((_, i) => (
                 <Star key={i} className="h-3 w-3 text-[#F8BC62] fill-current" strokeWidth={0} />
               ))}
             </div>
@@ -63,17 +84,17 @@ export function WorkPassReview() {
           <div className="flex-1 flex flex-col justify-between h-full z-10 text-center sm:text-left mt-4 sm:mt-0">
             <div>
               <blockquote className="font-body text-sm sm:text-base leading-relaxed text-white/90 italic mb-4">
-                &ldquo;KVC Global đã hỗ trợ tôi đạt được TEP nhanh chóng và bắt đầu hành trình sự nghiệp tại Singapore. Đội ngũ tư vấn rất chuyên nghiệp và tận tâm.&rdquo;
+                &ldquo;{testimonialQuote}&rdquo;
               </blockquote>
             </div>
 
             <div className="mt-auto flex justify-between items-end">
               <div>
                 <cite className="font-heading text-base font-bold text-brand-gold not-italic block">
-                  Nguyễn Hoàng Nam
+                  {testimonialName}
                 </cite>
                 <span className="font-body text-xs text-white/60 block mt-0.5">
-                  Graduate Trainee tại Tech Company, Singapore
+                  {testimonialRole}
                 </span>
               </div>
 
@@ -88,7 +109,7 @@ export function WorkPassReview() {
           {/* Left Column: Image */}
           <div className="relative sm:col-span-5 min-h-[200px] sm:min-h-full overflow-hidden">
             <Image
-              src="/images/singapore-flyer.jpg"
+              src={caseStudyImage}
               alt="Singapore Flyer và cảnh vịnh Marina Bay lúc hoàng hôn"
               fill
               sizes="(max-w-768px) 100vw, 20vw"
@@ -100,19 +121,19 @@ export function WorkPassReview() {
           <div className="sm:col-span-7 p-6 md:p-8 flex flex-col justify-between h-full bg-white z-10">
             <div>
               <span className="font-heading text-sm font-bold text-brand-blue uppercase tracking-wider block mb-2">
-                Case Study
+                {caseStudyTagline}
               </span>
               <p className="font-body text-sm sm:text-base leading-relaxed text-brand-dark/85">
-                Hỗ trợ 1,200+ ứng viên Việt Nam đạt TEP thành công trong 10 năm qua, định hướng sự nghiệp bền vững tại Singapore.
+                {caseStudyDescription}
               </p>
             </div>
 
             <div className="mt-6 sm:mt-auto">
               <a
-                href="#cau-chuyen"
+                href={caseStudyCtaHref}
                 className="group inline-flex items-center gap-2 font-heading text-sm font-bold text-brand-gold hover:text-brand-gold/90 transition-colors duration-200"
               >
-                <span>Xem thêm câu chuyện</span>
+                <span>{caseStudyCtaLabel}</span>
                 <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
               </a>
             </div>

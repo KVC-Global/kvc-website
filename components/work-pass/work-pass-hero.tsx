@@ -7,6 +7,9 @@ import { Award, Briefcase, ClipboardCheck } from "lucide-react"
 import { StudyAbroadStatBar } from "@/components/study-abroad/study-abroad-stat-bar"
 import { Container } from "@/components/ui/container"
 import { cn } from "@/lib/utils"
+import { urlFor } from "@/sanity/image"
+import type { WorkPassHeroContent } from "@/sanity/work-pass-page"
+import { workPassIcons } from "./work-pass-icons"
 
 const HERO_IMAGE = "/images/work-pass-hero.jpg"
 
@@ -39,7 +42,25 @@ function GoogleIcon({ className }: { className?: string }) {
   )
 }
 
-export function WorkPassHero({ className }: { className?: string }) {
+export function WorkPassHero({
+  className,
+  content,
+}: {
+  className?: string
+  content?: WorkPassHeroContent
+}) {
+  const heroImage = content?.backgroundImage
+    ? urlFor(content.backgroundImage).url()
+    : HERO_IMAGE
+
+  const stats = content?.stats?.length
+    ? content.stats.map((stat) => ({
+        icon: stat.icon ? workPassIcons[stat.icon] || Briefcase : Briefcase,
+        value: stat.value || "",
+        label: stat.label || "",
+      }))
+    : STATS
+
   return (
     <section
       aria-labelledby="work-pass-hero-heading"
@@ -47,10 +68,10 @@ export function WorkPassHero({ className }: { className?: string }) {
         "relative w-full border-b border-border bg-white bg-cover bg-center pb-16 md:pb-20",
         className
       )}
-      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+      style={{ backgroundImage: `url(${heroImage})` }}
     >
       <Image
-        src={HERO_IMAGE}
+        src={heroImage}
         alt=""
         role="presentation"
         fill
@@ -96,23 +117,29 @@ export function WorkPassHero({ className }: { className?: string }) {
             id="work-pass-hero-heading"
             className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
           >
-            TEP - Training
-            <span className="mt-1 block">Employment Pass Singapore</span>
+            {content?.title ? (
+              content.title
+            ) : (
+              <>
+                TEP - Training
+                <span className="mt-1 block">Employment Pass Singapore</span>
+              </>
+            )}
           </h1>
 
           {/* Description Paragraph */}
           <p className="mt-5 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px] md:leading-relaxed">
-            Cơ hội làm việc và tích lũy kinh nghiệm thực tế tại Singapore cho
-            sinh viên quốc tế và người trẻ có tiềm năng.
+            {content?.description ||
+              "Cơ hội làm việc và tích lũy kinh nghiệm thực tế tại Singapore cho sinh viên quốc tế và người trẻ có tiềm năng."}
           </p>
 
           {/* Call to Actions (CTAs) */}
           <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
             <Link
-              href="#dat-lich"
+              href={content?.primaryButtonHref || "#dat-lich"}
               className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
-              Đặt lịch tư vấn miễn phí
+              {content?.primaryButtonLabel || "Đặt lịch tư vấn miễn phí"}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -128,10 +155,10 @@ export function WorkPassHero({ className }: { className?: string }) {
             </Link>
 
             <Link
-              href="#quy-trinh"
+              href={content?.secondaryButtonHref || "#quy-trinh"}
               className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
-              Tìm hiểu quy trình
+              {content?.secondaryButtonLabel || "Tìm hiểu quy trình"}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -151,7 +178,7 @@ export function WorkPassHero({ className }: { className?: string }) {
 
       <StudyAbroadStatBar
         stats={[
-          ...STATS,
+          ...stats,
           {
             icon: GoogleIcon,
             value: "Google 4.9/5",

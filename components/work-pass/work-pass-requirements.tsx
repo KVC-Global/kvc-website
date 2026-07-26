@@ -2,6 +2,8 @@
 
 import Image from "next/image"
 import { CheckCircle2, FileText } from "lucide-react"
+import type { WorkPassRequirementsContent } from "@/sanity/work-pass-page"
+import { urlFor } from "@/sanity/image"
 
 const CONDITIONS = [
   "Tốt nghiệp Cao đẳng/Đại học trở lên.",
@@ -19,7 +21,17 @@ const DOCUMENTS = [
   "Các giấy tờ khác (nếu có)",
 ] as const
 
-export function WorkPassRequirements() {
+export function WorkPassRequirements({
+  content,
+}: {
+  content?: WorkPassRequirementsContent
+}) {
+  const conditions = content?.conditions?.length ? content.conditions : CONDITIONS
+  const documents = content?.documents?.length ? content.documents : DOCUMENTS
+  const requirementsImage = content?.image
+    ? urlFor(content.image).url()
+    : "/images/passport-and-docs.jpg"
+
   return (
     <section aria-labelledby="requirements-heading" className="mt-20 md:mt-28 w-full">
       <div className="text-center mb-12">
@@ -27,7 +39,7 @@ export function WorkPassRequirements() {
           id="requirements-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          3. Yêu cầu & điều kiện
+          {content?.title || "3. Yêu cầu & điều kiện"}
         </h2>
         <span
           aria-hidden="true"
@@ -39,10 +51,10 @@ export function WorkPassRequirements() {
         {/* Column 1: Conditions Card */}
         <div className="flex flex-col border border-border bg-white rounded-[20px] p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] transition-all duration-300">
           <h3 className="font-heading text-lg font-bold text-brand-blue mb-6">
-            Điều kiện
+            {content?.conditionsTitle || "Điều kiện"}
           </h3>
           <ul className="space-y-4" aria-label="Điều kiện tham gia">
-            {CONDITIONS.map((cond, idx) => (
+            {conditions.map((cond, idx) => (
               <li key={idx} className="flex items-start gap-3">
                 <CheckCircle2 className="h-5 w-5 text-brand-gold shrink-0 mt-0.5" strokeWidth={2} />
                 <span className="font-body text-sm leading-relaxed text-brand-dark/90">
@@ -56,10 +68,10 @@ export function WorkPassRequirements() {
         {/* Column 2: Documents Card */}
         <div className="flex flex-col border border-border bg-white rounded-[20px] p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] transition-all duration-300">
           <h3 className="font-heading text-lg font-bold text-brand-blue mb-6">
-            Hồ sơ cần chuẩn bị
+            {content?.documentsTitle || "Hồ sơ cần chuẩn bị"}
           </h3>
           <ul className="space-y-4" aria-label="Hồ sơ cần chuẩn bị">
-            {DOCUMENTS.map((doc, idx) => (
+            {documents.map((doc, idx) => (
               <li key={idx} className="flex items-start gap-3">
                 <FileText className="h-5 w-5 text-brand-gold shrink-0 mt-0.5" strokeWidth={2} />
                 <span className="font-body text-sm leading-relaxed text-brand-dark/90">
@@ -73,8 +85,8 @@ export function WorkPassRequirements() {
         {/* Column 3: Image Card */}
         <div className="relative overflow-hidden rounded-[20px] border border-border shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] min-h-[300px]">
           <Image
-            src="/images/passport-and-docs.jpg"
-            alt="Hộ chiếu và hồ sơ xin cấp visa TEP Singapore"
+            src={requirementsImage}
+            alt={content?.imageAlt || "Hộ chiếu và hồ sơ xin cấp visa TEP Singapore"}
             fill
             sizes="(max-w-768px) 100vw, 33vw"
             className="object-cover object-center transition-transform duration-500 hover:scale-102"

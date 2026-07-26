@@ -51,3 +51,60 @@ export const SERVICES_QUERY = defineQuery(
 )
 
 export const FAQS_QUERY = defineQuery(`*[_type == "faq"] | order(order asc)`)
+
+export const WORK_PASS_PAGE_QUERY = defineQuery(`
+  *[_type == "workPassPage" && language == $lang][0]{
+    "hero": heroSection{
+      title, description,
+      primaryButtonLabel, primaryButtonHref,
+      secondaryButtonLabel, secondaryButtonHref,
+      backgroundImage,
+      stats[]{_key, value, label, icon}
+    },
+    "target": targetSection{
+      title,
+      items[]{_key, icon, title, description}
+    },
+    "process": processSection{
+      title,
+      steps[]{_key, icon, title, description}
+    },
+    "requirements": requirementsSection{
+      title,
+      conditionsTitle,
+      conditions,
+      documentsTitle,
+      documents,
+      image,
+      imageAlt
+    },
+    "fees": feesSection{
+      title,
+      feesTitle,
+      feesCategoryHeader,
+      feesCostHeader,
+      feesList[]{_key, category, cost},
+      feesNote,
+      processingTitle,
+      processingItems[]{_key, icon, title, description}
+    },
+    "review": reviewSection{
+      testimonial{
+        name, role, quote, image, rating
+      },
+      caseStudy{
+        tagline, description, ctaLabel, ctaHref, image
+      }
+    },
+    "faqs": faqsSection{
+      title,
+      faqs[]{_key, question, answer}
+    },
+    "services": servicesSection{
+      title,
+      services[]{_key, icon, title, cta, href}
+    },
+    seo{title, description, image}
+  }
+`)
+

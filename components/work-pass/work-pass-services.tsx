@@ -2,6 +2,8 @@
 
 import Link from "next/link"
 import { GraduationCap, Briefcase, IdCard, Building2 } from "lucide-react"
+import type { WorkPassServicesContent } from "@/sanity/work-pass-page"
+import { workPassIcons } from "./work-pass-icons"
 
 const SERVICES = [
   {
@@ -30,7 +32,16 @@ const SERVICES = [
   },
 ] as const
 
-export function WorkPassServices() {
+export function WorkPassServices({ content }: { content?: WorkPassServicesContent }) {
+  const services = content?.services?.length
+    ? content.services.map((srv) => ({
+        icon: srv.icon ? workPassIcons[srv.icon] || GraduationCap : GraduationCap,
+        title: srv.title || "",
+        cta: srv.cta || "Tìm hiểu ngay",
+        href: srv.href || "#",
+      }))
+    : SERVICES
+
   return (
     <section aria-labelledby="services-heading" className="mt-20 md:mt-28 w-full">
       <div className="text-center mb-12">
@@ -38,7 +49,7 @@ export function WorkPassServices() {
           id="services-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          Các dịch vụ liên quan
+          {content?.title || "Các dịch vụ liên quan"}
         </h2>
         <span
           aria-hidden="true"
@@ -47,7 +58,7 @@ export function WorkPassServices() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {SERVICES.map((srv, idx) => {
+        {services.map((srv, idx) => {
           const Icon = srv.icon
           return (
             <Link
