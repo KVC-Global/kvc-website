@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { CheckCircle2, Send } from "lucide-react"
+import type { ContactPageData } from "@/sanity/content-pages"
 
 const SERVICES = [
   { value: "", label: "Chọn dịch vụ bạn quan tâm *" },
@@ -44,7 +45,14 @@ function Field({
 const inputBase =
   "w-full rounded-sm border border-input bg-white px-4 py-3 font-body text-sm text-foreground placeholder:text-muted-foreground/60 transition-all focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/20"
 
-export function ContactForm() {
+export function ContactForm({
+  content,
+  email: recipientEmail = "info@kvcglobal.vn",
+}: {
+  content?: ContactPageData["form"]
+  email?: string
+}) {
+  const services = content?.serviceOptions?.length ? content.serviceOptions : SERVICES
   const [state, setState] = React.useState<"idle" | "submitted">("idle")
   const formRef = React.useRef<HTMLFormElement>(null)
 
@@ -55,7 +63,7 @@ export function ContactForm() {
     const phone = (data.get("phone") as string).trim()
     const serviceValue = (data.get("service") as string) || "khac"
     const service =
-      SERVICES.find((item) => item.value === serviceValue)?.label ?? "Khác"
+      services.find((item) => item.value === serviceValue)?.label ?? "Khác"
     const message = (data.get("message") as string).trim()
 
     const subject = encodeURIComponent(
@@ -73,7 +81,7 @@ export function ContactForm() {
       ].join("\n")
     )
 
-    return `mailto:info@kvcglobal.vn?subject=${subject}&body=${body}`
+    return `mailto:${recipientEmail}?subject=${subject}&body=${body}`
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -119,7 +127,7 @@ export function ContactForm() {
       noValidate
       className="space-y-5"
     >
-      <Field id="contact-name" label="Họ và tên" required>
+      <Field id="contact-name" label={content?.nameLabel || "Họ và tên"} required>
         <input
           id="contact-name"
           name="name"
@@ -130,7 +138,7 @@ export function ContactForm() {
         />
       </Field>
 
-      <Field id="contact-email" label="Email" required>
+      <Field id="contact-email" label={content?.emailLabel || "Email"} required>
         <input
           id="contact-email"
           name="email"
@@ -141,7 +149,7 @@ export function ContactForm() {
         />
       </Field>
 
-      <Field id="contact-phone" label="Số điện thoại" required>
+      <Field id="contact-phone" label={content?.phoneLabel || "Số điện thoại"} required>
         <input
           id="contact-phone"
           name="phone"
@@ -152,7 +160,7 @@ export function ContactForm() {
         />
       </Field>
 
-      <Field id="contact-service" label="Dịch vụ quan tâm" required>
+      <Field id="contact-service" label={content?.serviceLabel || "Dịch vụ quan tâm"} required>
         <select
           id="contact-service"
           name="service"
@@ -160,7 +168,7 @@ export function ContactForm() {
           defaultValue=""
           className={inputBase + " appearance-none"}
         >
-          {SERVICES.map((svc) => (
+          {services.map((svc) => (
             <option
               key={svc.value}
               value={svc.value}
@@ -172,7 +180,7 @@ export function ContactForm() {
         </select>
       </Field>
 
-      <Field id="contact-message" label="Tin nhắn">
+      <Field id="contact-message" label={content?.messageLabel || "Tin nhắn"}>
         <textarea
           id="contact-message"
           name="message"

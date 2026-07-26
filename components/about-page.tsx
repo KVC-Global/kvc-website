@@ -9,6 +9,8 @@ import {
   Clock,
   Eye,
   Globe2,
+  Heart,
+  Handshake,
   Mail,
   MapPin,
   Phone,
@@ -17,11 +19,14 @@ import {
   Star,
   Target,
   Users,
+  type LucideIcon,
 } from "lucide-react"
 import { motion, Variants } from "framer-motion"
 
-import { SitePartners, type SanityPartner } from "@/components/site-partners"
+import { SitePartners } from "@/components/site-partners"
 import { Container } from "@/components/ui/container"
+import type { AboutPageData } from "@/sanity/content-pages"
+import { urlFor } from "@/sanity/image"
 
 /**
  * About / "Giới thiệu" page.
@@ -46,6 +51,7 @@ const HERO_STATS = [
 const CLIENT_REVIEWS = [
   {
     name: "Minh Anh",
+    rating: 5,
     role: "Du học sinh tại Singapore",
     quote:
       "Đội ngũ KVC tư vấn rõ ràng, theo sát từng bước và giúp mình tự tin hơn trong suốt quá trình chuẩn bị hồ sơ.",
@@ -53,6 +59,7 @@ const CLIENT_REVIEWS = [
   },
   {
     name: "Hoàng Nam",
+    rating: 5,
     role: "Khách hàng Work Pass",
     quote:
       "Mọi mốc xử lý đều được cập nhật minh bạch. Tôi luôn biết hồ sơ của mình đang ở đâu và cần làm gì tiếp theo.",
@@ -60,6 +67,7 @@ const CLIENT_REVIEWS = [
   },
   {
     name: "Phương Linh",
+    rating: 5,
     role: "Du học sinh",
     quote:
       "KVC giúp mình chọn lộ trình phù hợp thay vì đưa ra một giải pháp chung cho tất cả mọi người.",
@@ -67,6 +75,7 @@ const CLIENT_REVIEWS = [
   },
   {
     name: "Thanh Huyền",
+    rating: 5,
     role: "Phụ huynh học sinh",
     quote:
       "Sự tận tâm và phản hồi nhanh của đội ngũ khiến gia đình tôi an tâm từ lúc chuẩn bị đến khi nhập học.",
@@ -74,6 +83,7 @@ const CLIENT_REVIEWS = [
   },
   {
     name: "Quốc Bảo",
+    rating: 5,
     role: "Khách hàng doanh nghiệp",
     quote:
       "Quy trình gọn gàng, tài liệu được kiểm tra kỹ và mọi trao đổi đều đi thẳng vào vấn đề.",
@@ -81,6 +91,7 @@ const CLIENT_REVIEWS = [
   },
   {
     name: "Mai Trang",
+    rating: 5,
     role: "Khách hàng tại TP. Hồ Chí Minh",
     quote:
       "Tôi đánh giá cao cách KVC giải thích các lựa chọn và rủi ro trước khi cùng khách hàng ra quyết định.",
@@ -117,11 +128,42 @@ const OFFICES = [
   // },
 ] as const
 
+/** Safe Lucide icon lookup from CMS string names. Fallback to Award. */
+const ICON_MAP: Record<string, LucideIcon> = {
+  award: Award,
+  users: Users,
+  shieldCheck: ShieldCheck,
+  shield: ShieldCheck,
+  globe2: Globe2,
+  globe: Globe2,
+  star: Star,
+  target: Target,
+  eye: Eye,
+  heart: Heart,
+  handshake: Handshake,
+  clock: Clock,
+  mapPin: MapPin,
+  phone: Phone,
+  mail: Mail,
+}
+function getIcon(name?: string): LucideIcon {
+  return (
+    (name ? ICON_MAP[name[0].toLowerCase() + name.slice(1)] : undefined) ||
+    Award
+  )
+}
+
 function ClientReviewCard({
   review,
   className,
 }: {
-  review: (typeof CLIENT_REVIEWS)[number]
+  review: {
+    name: string
+    role: string
+    quote: string
+    image: string
+    rating?: number
+  }
   className?: string
 }) {
   return (
@@ -150,16 +192,20 @@ function ClientReviewCard({
 
       <div
         className="mt-5 flex items-center gap-1"
-        aria-label="Đánh giá 5 trên 5 sao"
+        aria-label={`Đánh giá ${review.rating ?? 5} trên 5 sao`}
       >
-        {Array.from({ length: 5 }).map((_, index) => (
-          <Star
-            key={index}
-            aria-hidden="true"
-            className="h-3.5 w-3.5 fill-brand-gold text-brand-gold"
-            strokeWidth={0}
-          />
-        ))}
+        {Array.from({ length: 5 }).map((_, index) => {
+          const starRating = review.rating ?? 5
+          const filled = index < Math.round(starRating)
+          return (
+            <Star
+              key={index}
+              aria-hidden="true"
+              className={`h-3.5 w-3.5 ${filled ? "fill-brand-gold text-brand-gold" : "fill-gray-200 text-gray-200"}`}
+              strokeWidth={0}
+            />
+          )
+        })}
       </div>
       <blockquote className="mt-3 line-clamp-4 font-body text-sm leading-relaxed text-brand-dark/75">
         “{review.quote}”
@@ -177,7 +223,19 @@ function OfficeCard({
   office,
   reverse,
 }: {
-  office: (typeof OFFICES)[number]
+  office: {
+    country: string
+    role: string
+    address: string
+    phone: string
+    email: string
+    hours: string
+    mapUrl: string
+    mapQ: string
+    image: string
+    description?: string
+    imageAlt?: string
+  }
   reverse: boolean
 }) {
   const phoneHref = office.phone.replace(/[^\d+]/g, "")
@@ -196,8 +254,8 @@ function OfficeCard({
           {office.role}
         </h3>
         <p className="mt-3 max-w-md font-body text-sm leading-relaxed text-brand-dark/65">
-          Kết nối trực tiếp với đội ngũ KVC Global để được hỗ trợ tại văn phòng
-          gần bạn.
+          {office.description ||
+            "Kết nối trực tiếp với đội ngũ KVC Global để được hỗ trợ tại văn phòng gần bạn."}
         </p>
 
         <ul className="mt-6 space-y-4">
@@ -276,7 +334,7 @@ function OfficeCard({
       >
         <Image
           src={office.image}
-          alt={`Văn phòng KVC Global tại ${office.country}`}
+          alt={office.imageAlt || `Văn phòng KVC Global tại ${office.country}`}
           fill
           sizes="(max-width: 1024px) 100vw, 58vw"
           className="object-cover"
@@ -321,22 +379,63 @@ const staggerFast: Variants = {
 
 const inView = { once: true, margin: "-80px" } as const
 
-export function AboutPage({
-  partners,
-}: {
-  partners?: ReadonlyArray<SanityPartner>
-}) {
+export function AboutPage({ content }: { content?: AboutPageData }) {
+  const hero = content?.hero
+  const story = content?.story
+  const partners = content?.partners?.partners
+  const offices = content?.offices?.offices?.length
+    ? content.offices.offices.map((office) => ({
+        country: office.country || "",
+        role: office.role || "",
+        address: office.address || "",
+        phone: office.phone || "",
+        email: office.email || "",
+        hours: office.hours || "",
+        mapUrl: office.mapUrl || "#",
+        mapQ: office.mapQuery || "",
+        image: office.image
+          ? urlFor(office.image).width(1200).url()
+          : "/images/dat-nuoc-singapore-01.jpg",
+        description: office.description,
+        imageAlt: office.imageAlt,
+      }))
+    : OFFICES
+  const stats = content?.stats?.length
+    ? content.stats.map((stat) => ({
+        icon: getIcon(stat.icon),
+        value: stat.value || "",
+        label: stat.label || "",
+      }))
+    : HERO_STATS
+  const reviews = content?.testimonials?.reviews?.length
+    ? content.testimonials.reviews.map((review) => ({
+        name: review.name || "",
+        role: review.role || "",
+        quote: review.quote || "",
+        image: review.image
+          ? urlFor(review.image).width(96).height(96).url()
+          : "/images/student-avatar-1.jpg",
+        rating: review.rating ?? 5,
+      }))
+    : CLIENT_REVIEWS
+
   return (
     <div className="bg-background">
       {/* ───────────────────────── Hero ───────────────────────── */}
       <section
         aria-labelledby="about-hero-heading"
         className="relative w-full border-b border-border bg-cover bg-center"
-        style={{ backgroundImage: "url(/images/study-abroad-hero.jpg)" }}
+        style={{
+          backgroundImage: `url(${hero?.backgroundImage ? urlFor(hero.backgroundImage).width(1920).url() : "/images/study-abroad-hero.jpg"})`,
+        }}
       >
         <Image
-          src="/images/study-abroad-hero.jpg"
-          alt=""
+          src={
+            hero?.backgroundImage
+              ? urlFor(hero.backgroundImage).width(1920).url()
+              : "/images/study-abroad-hero.jpg"
+          }
+          alt={hero?.backgroundImageAlt || ""}
           role="presentation"
           fill
           priority
@@ -363,14 +462,14 @@ export function AboutPage({
               href="/"
               className="transition-colors duration-200 hover:text-foreground"
             >
-              Trang chủ
+              {hero?.breadcrumbHome || "Trang chủ"}
             </Link>
             <span className="text-muted-foreground/60 select-none">&gt;</span>
             <span
               className="font-semibold text-foreground/80"
               aria-current="page"
             >
-              Giới thiệu
+              {hero?.breadcrumbCurrent || "Giới thiệu"}
             </span>
           </nav>
 
@@ -386,7 +485,7 @@ export function AboutPage({
               variants={fadeUp}
               className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm"
             >
-              Giới thiệu về KVC Global
+              {hero?.eyebrow || "Giới thiệu về KVC Global"}
             </motion.span>
 
             {/* Main Title */}
@@ -395,8 +494,10 @@ export function AboutPage({
               id="about-hero-heading"
               className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
             >
-              Đồng hành cùng bạn
-              <span className="mt-1 block">chạm tới tương lai mới</span>
+              {hero?.titleLine1 || "Đồng hành cùng bạn"}
+              <span className="mt-1 block">
+                {hero?.titleLine2 || "chạm tới tương lai mới"}
+              </span>
             </motion.h1>
 
             {/* Description Paragraph */}
@@ -404,11 +505,8 @@ export function AboutPage({
               variants={fadeUp}
               className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px] md:leading-relaxed"
             >
-              KVC Global đồng hành cùng học sinh, người lao động và doanh nghiệp
-              trên hành trình chinh phục Singapore — từ du học, xét tuyển
-              trường, xin work pass, đến thành lập và vận hành doanh nghiệp.
-              Chúng tôi biến những thủ tục phức tạp thành lộ trình rõ ràng, để
-              bạn tập trung vào điều quan trọng nhất: tương lai của chính mình.
+              {hero?.description ||
+                "KVC Global đồng hành cùng học sinh, người lao động và doanh nghiệp trên hành trình chinh phục Singapore — từ du học, xét tuyển trường, xin work pass, đến thành lập và vận hành doanh nghiệp. Chúng tôi biến những thủ tục phức tạp thành lộ trình rõ ràng, để bạn tập trung vào điều quan trọng nhất: tương lai của chính mình."}
             </motion.p>
 
             {/* Call to Actions (CTAs) */}
@@ -417,10 +515,10 @@ export function AboutPage({
               className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center"
             >
               <Link
-                href="#lien-he"
+                href={hero?.primaryButtonHref || "#lien-he"}
                 className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid"
               >
-                Đăng ký tư vấn miễn phí
+                {hero?.primaryButtonLabel || "Đăng ký tư vấn miễn phí"}
                 <svg
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -436,10 +534,10 @@ export function AboutPage({
               </Link>
 
               <Link
-                href="#cau-chuyen"
+                href={hero?.secondaryButtonHref || "#cau-chuyen"}
                 className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
-                Tìm hiểu thêm
+                {hero?.secondaryButtonLabel || "Tìm hiểu thêm"}
                 <svg
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -471,7 +569,7 @@ export function AboutPage({
             <Container>
               <div className="relative overflow-hidden rounded-2xl bg-white shadow-[0_24px_48px_-16px_rgba(15,27,45,0.25),0_8px_16px_-8px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:rounded-3xl">
                 <div className="grid grid-cols-2 md:grid-cols-4">
-                  {HERO_STATS.map((stat) => {
+                  {stats.map((stat) => {
                     const Icon = stat.icon
                     return (
                       <motion.div
@@ -576,18 +674,20 @@ export function AboutPage({
           >
             <div className="order-2 flex flex-col justify-center">
               <motion.div variants={fadeUp}>
+                {story?.eyebrow && (
+                  <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
+                    {story.eyebrow}
+                  </p>
+                )}
                 <h2
                   id="gioi-thieu-heading"
                   className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
                 >
-                  Về KVC Global
+                  {story?.title || "Về KVC Global"}
                 </h2>
                 <p className="mt-5 max-w-2xl font-body text-base leading-relaxed text-brand-dark/70 sm:text-[17px]">
-                  KVC Global đồng hành cùng cá nhân và doanh nghiệp trên hành
-                  trình học tập, làm việc và đầu tư tại Singapore. Chúng tôi
-                  cung cấp tư vấn rõ ràng, chuyên nghiệp và minh bạch, giúp
-                  khách hàng tự tin đưa ra quyết định phù hợp với mục tiêu của
-                  mình.
+                  {story?.description ||
+                    "KVC Global đồng hành cùng cá nhân và doanh nghiệp trên hành trình học tập, làm việc và đầu tư tại Singapore. Chúng tôi cung cấp tư vấn rõ ràng, chuyên nghiệp và minh bạch, giúp khách hàng tự tin đưa ra quyết định phù hợp với mục tiêu của mình."}
                 </p>
               </motion.div>
 
@@ -605,12 +705,11 @@ export function AboutPage({
                   </div>
                   <div>
                     <h3 className="font-heading text-xl font-bold text-brand-blue">
-                      Tầm nhìn
+                      {story?.visionTitle || "Tầm nhìn"}
                     </h3>
                     <p className="mt-2 font-body text-base leading-relaxed text-brand-dark/80">
-                      Trở thành đơn vị tư vấn đáng tin cậy, giúp khách hàng
-                      thuận lợi tiếp cận cơ hội học tập, nghề nghiệp và phát
-                      triển tại Singapore.
+                      {story?.visionDescription ||
+                        "Trở thành đơn vị tư vấn đáng tin cậy, giúp khách hàng thuận lợi tiếp cận cơ hội học tập, nghề nghiệp và phát triển tại Singapore."}
                     </p>
                   </div>
                 </motion.div>
@@ -628,12 +727,11 @@ export function AboutPage({
                   </div>
                   <div>
                     <h3 className="font-heading text-xl font-bold text-brand-blue">
-                      Sứ mệnh
+                      {story?.missionTitle || "Sứ mệnh"}
                     </h3>
                     <p className="mt-2 font-body text-base leading-relaxed text-brand-dark/80">
-                      Cung cấp giải pháp tư vấn đúng quy trình, đúng quy định,
-                      đồng thời tối giản sự phức tạp để mỗi hồ sơ được xử lý
-                      minh bạch và nhất quán.
+                      {story?.missionDescription ||
+                        "Cung cấp giải pháp tư vấn đúng quy trình, đúng quy định, đồng thời tối giản sự phức tạp để mỗi hồ sơ được xử lý minh bạch và nhất quán."}
                     </p>
                   </div>
                 </motion.div>
@@ -645,8 +743,12 @@ export function AboutPage({
               className="relative order-1 min-h-[420px] overflow-hidden rounded-2xl bg-brand-blue sm:min-h-[540px] lg:min-h-[680px]"
             >
               <Image
-                src="/images/singapore1-5221.jpg"
-                alt="Tượng Merlion tại Singapore"
+                src={
+                  story?.image
+                    ? urlFor(story.image).width(900).url()
+                    : "/images/singapore1-5221.jpg"
+                }
+                alt={story?.imageAlt || "Tượng Merlion tại Singapore"}
                 fill
                 sizes="(max-width: 1024px) 100vw, 42vw"
                 className="object-cover"
@@ -656,7 +758,7 @@ export function AboutPage({
         </Container>
       </section>
 
-      {/* ───────────────────── Story section ───────────────────── */}
+      {/* ───────────────────── Core values ──────────────────── */}
       <section
         id="cau-chuyen"
         className="w-full bg-white py-10 sm:py-12 lg:py-16"
@@ -669,64 +771,116 @@ export function AboutPage({
               whileInView="visible"
               viewport={inView}
             >
-              <div className="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
-                <motion.div variants={fadeUp} className="flex flex-col">
-                  <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-                    Câu chuyện KVC Global
-                  </p>
-                  <h2 className="mt-4 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl">
-                    Hơn một thập kỷ đồng hành
-                    <span className="block text-brand-gold">
-                      cùng những ước mơ vươn xa
-                    </span>
-                  </h2>
-                  <div className="mt-6 space-y-4">
-                    <p className="text-base leading-relaxed text-brand-dark/80">
-                      KVC Global được thành lập nhằm cung cấp giải pháp tư vấn
-                      chuyên nghiệp cho các cá nhân và tổ chức có nhu cầu học
-                      tập, làm việc hoặc đầu tư tại Singapore. Chúng tôi tập
-                      trung vào việc đảm bảo mỗi hồ sơ được thực hiện đúng quy
-                      trình, đúng quy định pháp lý, hạn chế tối đa rủi ro phát
-                      sinh trong quá trình xử lý.
-                    </p>
-                    <p className="text-base leading-relaxed text-brand-dark/80">
-                      Qua quá trình hoạt động, KVC Global đã phát triển năng lực
-                      tư vấn trên cả hai lĩnh vực trọng tâm — giáo dục và doanh
-                      nghiệp — với đội ngũ am hiểu hệ thống giáo dục Singapore
-                      cũng như các quy định của ACRA, MOM và ICA. Mỗi dịch vụ
-                      được triển khai dựa trên quy trình rà soát và kiểm tra rõ
-                      ràng, nhằm đảm bảo kết quả nhất quán cho khách hàng.
-                    </p>
-                  </div>
-                  <Link
-                    href="#lien-he"
-                    className="group mt-8 inline-flex w-fit items-center gap-2 rounded-sm bg-brand-blue-mid px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg"
+              {content?.values?.items?.length ? (
+                <>
+                  {/* CMS-driven values grid */}
+                  <motion.div
+                    variants={fadeUp}
+                    className="mx-auto max-w-2xl text-center"
                   >
-                    Tìm hiểu về dịch vụ
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </Link>
-                </motion.div>
-
-                <motion.div
-                  variants={fadeUp}
-                  className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-[0_24px_60px_-24px_rgba(15,27,45,0.18)]"
-                >
-                  <Image
-                    src="/images/singapore-merlion-sunset.jpg"
-                    alt="Đội ngũ KVC Global tại Singapore"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover object-center"
-                  />
-                </motion.div>
-              </div>
+                    <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
+                      {content.values.eyebrow || "Giá trị cốt lõi"}
+                    </p>
+                    <h2 className="mt-4 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl">
+                      {content.values.title || "Giá trị cốt lõi của KVC Global"}
+                    </h2>
+                    {content.values.description && (
+                      <p className="mt-4 text-base leading-relaxed text-brand-dark/80">
+                        {content.values.description}
+                      </p>
+                    )}
+                  </motion.div>
+                  <motion.div
+                    variants={staggerFast}
+                    className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                  >
+                    {content.values.items.map((item) => {
+                      const Icon = getIcon(item.icon)
+                      return (
+                        <motion.div
+                          key={item._key || item.title}
+                          variants={fadeUp}
+                          className="rounded-lg border border-border bg-white p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-md"
+                        >
+                          <div className="flex h-12 w-12 items-center justify-center rounded-md bg-brand-blue-mid text-brand-gold-light">
+                            <Icon className="h-6 w-6" strokeWidth={1.75} />
+                          </div>
+                          <h3 className="mt-4 font-heading text-lg font-bold text-brand-blue">
+                            {item.title}
+                          </h3>
+                          <p className="mt-2 font-body text-sm leading-relaxed text-brand-dark/80">
+                            {item.description}
+                          </p>
+                        </motion.div>
+                      )
+                    })}
+                  </motion.div>
+                </>
+              ) : (
+                <>
+                  {/* Fallback: original hardcoded story content */}
+                  <div className="mx-auto grid max-w-7xl items-center gap-12 md:grid-cols-2">
+                    <motion.div variants={fadeUp} className="flex flex-col">
+                      <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
+                        Câu chuyện KVC Global
+                      </p>
+                      <h2 className="mt-4 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl">
+                        Hơn một thập kỷ đồng hành
+                        <span className="block text-brand-gold">
+                          cùng những ước mơ vươn xa
+                        </span>
+                      </h2>
+                      <div className="mt-6 space-y-4">
+                        <p className="text-base leading-relaxed text-brand-dark/80">
+                          KVC Global được thành lập nhằm cung cấp giải pháp tư
+                          vấn chuyên nghiệp cho các cá nhân và tổ chức có nhu
+                          cầu học tập, làm việc hoặc đầu tư tại Singapore. Chúng
+                          tôi tập trung vào việc đảm bảo mỗi hồ sơ được thực
+                          hiện đúng quy trình, đúng quy định pháp lý, hạn chế
+                          tối đa rủi ro phát sinh trong quá trình xử lý.
+                        </p>
+                        <p className="text-base leading-relaxed text-brand-dark/80">
+                          Qua quá trình hoạt động, KVC Global đã phát triển năng
+                          lực tư vấn trên cả hai lĩnh vực trọng tâm — giáo dục
+                          và doanh nghiệp — với đội ngũ am hiểu hệ thống giáo
+                          dục Singapore cũng như các quy định của ACRA, MOM và
+                          ICA. Mỗi dịch vụ được triển khai dựa trên quy trình rà
+                          soát và kiểm tra rõ ràng, nhằm đảm bảo kết quả nhất
+                          quán cho khách hàng.
+                        </p>
+                      </div>
+                      <Link
+                        href="#lien-he"
+                        className="group mt-8 inline-flex w-fit items-center gap-2 rounded-sm bg-brand-blue-mid px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg"
+                      >
+                        Tìm hiểu về dịch vụ
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                      </Link>
+                    </motion.div>
+                    <motion.div
+                      variants={fadeUp}
+                      className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-[0_24px_60px_-24px_rgba(15,27,45,0.18)]"
+                    >
+                      <Image
+                        src="/images/singapore-merlion-sunset.jpg"
+                        alt="Đội ngũ KVC Global tại Singapore"
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover object-center"
+                      />
+                    </motion.div>
+                  </div>
+                </>
+              )}
             </motion.div>
           </div>
         </Container>
       </section>
 
       {/* ───────────────────── Partners (plain white row) ──────── */}
-      <SitePartners partners={partners} />
+      {partners?.length ? (
+        <SitePartners partners={partners} content={content?.partners} />
+      ) : null}
 
       {/* ───────────────────── Offices section ─────────────────── */}
       <section
@@ -744,14 +898,19 @@ export function AboutPage({
                 className="flex flex-col items-center text-center"
               >
                 <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-                  Văn phòng
+                  {content?.offices?.eyebrow || "Văn phòng"}
                 </p>
                 <h2
                   id="about-offices-heading"
                   className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
                 >
-                  Gần bạn hơn ở mỗi điểm đến
+                  {content?.offices?.title || "Gần bạn hơn ở mỗi điểm đến"}
                 </h2>
+                {content?.offices?.description && (
+                  <p className="mt-4 max-w-2xl font-body text-base leading-relaxed text-brand-dark/70">
+                    {content.offices.description}
+                  </p>
+                )}
                 <span
                   aria-hidden="true"
                   className="mt-4 h-1 w-12 rounded-sm bg-brand-gold"
@@ -765,7 +924,7 @@ export function AboutPage({
                 viewport={inView}
                 className="mt-12 space-y-8 lg:mt-14"
               >
-                {OFFICES.map((office, index) => (
+                {offices.map((office, index) => (
                   <motion.div key={office.country} variants={fadeUp}>
                     <OfficeCard office={office} reverse={index % 2 !== 0} />
                   </motion.div>
@@ -785,21 +944,25 @@ export function AboutPage({
           aria-hidden="true"
           className="absolute inset-0 grid grid-cols-2 gap-4 p-4 sm:grid-cols-3 sm:gap-5 sm:p-6 lg:grid-cols-4 lg:p-8"
         >
-          {CLIENT_REVIEWS.map((review, index) => (
+          {reviews.map((review, index) => (
             <ClientReviewCard
               key={review.name}
               review={review}
               className={`${index === 1 ? "hidden sm:flex" : ""} ${index === 4 ? "hidden lg:flex" : ""} ${index % 3 === 1 ? "sm:translate-y-14" : ""}`}
             />
           ))}
-          <ClientReviewCard
-            review={CLIENT_REVIEWS[0]}
-            className="hidden lg:flex lg:translate-y-8"
-          />
-          <ClientReviewCard
-            review={CLIENT_REVIEWS[3]}
-            className="hidden lg:flex lg:-translate-y-8"
-          />
+          {reviews.length > 0 && (
+            <ClientReviewCard
+              review={reviews[0]}
+              className="hidden lg:flex lg:translate-y-8"
+            />
+          )}
+          {reviews.length > 3 && (
+            <ClientReviewCard
+              review={reviews[3]}
+              className="hidden lg:flex lg:-translate-y-8"
+            />
+          )}
         </div>
 
         <div
@@ -823,33 +986,31 @@ export function AboutPage({
             viewport={inView}
             className="w-full max-w-xl rounded-2xl border border-white/90 bg-white/95 px-6 py-12 text-center shadow-[0_28px_70px_-28px_rgba(10,37,64,0.45)] ring-1 ring-brand-blue/10 sm:px-12 sm:py-14"
           >
-            <div
-              className="mx-auto flex w-fit items-center gap-1.5"
-              aria-label="Đánh giá 5 trên 5 sao"
-            >
-              {Array.from({ length: 5 }).map((_, index) => (
-                <Star
-                  key={index}
-                  aria-hidden="true"
-                  className="h-4 w-4 fill-brand-gold text-brand-gold"
-                  strokeWidth={0}
-                />
-              ))}
-            </div>
+            {content?.testimonials?.eyebrow && (
+              <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
+                {content.testimonials.eyebrow}
+              </p>
+            )}
             <h2
               id="client-reviews-heading"
               className="mt-6 font-heading text-[1.65rem] leading-[1.2] font-extrabold tracking-tight text-brand-blue sm:text-[1.875rem]"
             >
-              <span className="sm:whitespace-nowrap">
-                Khách hàng luôn ở trung tâm
-              </span>
-              <span className="block text-brand-gold sm:whitespace-nowrap">
-                trong mọi điều chúng tôi làm
-              </span>
+              {content?.testimonials?.title ? (
+                content.testimonials.title
+              ) : (
+                <>
+                  <span className="sm:whitespace-nowrap">
+                    Khách hàng luôn ở trung tâm
+                  </span>
+                  <span className="block text-brand-gold sm:whitespace-nowrap">
+                    trong mọi điều chúng tôi làm
+                  </span>
+                </>
+              )}
             </h2>
             <p className="mx-auto mt-5 max-w-md font-body text-sm leading-relaxed text-brand-dark/65 sm:text-base">
-              Mỗi phản hồi giúp KVC Global hoàn thiện quy trình và mang đến trải
-              nghiệm tư vấn rõ ràng, tận tâm hơn mỗi ngày.
+              {content?.testimonials?.description ||
+                "Mỗi phản hồi giúp KVC Global hoàn thiện quy trình và mang đến trải nghiệm tư vấn rõ ràng, tận tâm hơn mỗi ngày."}
             </p>
           </motion.div>
         </Container>

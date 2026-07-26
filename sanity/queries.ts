@@ -38,6 +38,51 @@ export const HOME_PAGE_QUERY = defineQuery(`
   }
 `)
 
+export const ABOUT_PAGE_QUERY = defineQuery(`
+  *[_type == "aboutPage" && language == $lang][0]{
+    "hero": heroSection,
+    "stats": statsSection.items[]{_key, icon, value, label},
+    "story": storySection,
+    "values": valuesSection{eyebrow, title, description, items[]{_key, icon, title, description}},
+    "testimonials": testimonialsSection{
+      eyebrow, title, description,
+      reviews[]{_key, name, role, quote, image, rating}
+    },
+    "partners": {
+      "eyebrow": partnersSection.eyebrow,
+      "title": partnersSection.title,
+      "partners": select(
+        count(partnersSection.partners) > 0 => partnersSection.partners[]->{_id, name, logo, website},
+        *[_type == "partner"] | order(name asc){_id, name, logo, website}
+      )
+    },
+    "offices": officesSection{
+      eyebrow, title, description,
+      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}
+    },
+    seo{title, description, image}
+  }
+`)
+
+export const CONTACT_PAGE_QUERY = defineQuery(`
+  *[_type == "contactPage" && language == $lang][0]{
+    "hero": heroSection,
+    "info": infoSection{
+      title, description, phone, email, address, officeHoursTitle, weekdayHours, weekendHours,
+      socialTitle, socialDescription, socialLinks[]{_key, label, url, network}
+    },
+    "form": formSection{
+      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, messageLabel,
+      consentLabel, submitLabel, serviceOptions[]{_key, label, value}
+    },
+    "offices": officesSection{
+      eyebrow, title, description,
+      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}
+    },
+    seo{title, description, image}
+  }
+`)
+
 export const TESTIMONIALS_QUERY = defineQuery(
   `*[_type == "testimonial" && (!defined(language) || language == $lang)] | order(name asc)`
 )
