@@ -1,35 +1,55 @@
-import { Clock, Globe2, PiggyBank, Headset } from "lucide-react"
+"use client"
 
+import * as LucideIcons from "lucide-react"
+
+import type { KhoaHocOnlineWhy } from "@/sanity/service-pages"
 import { cn } from "@/lib/utils"
 
-const BENEFITS = [
+const BENEFITS: { icon: string; title: string; description: string }[] = [
   {
-    icon: Clock,
+    icon: "Clock",
     title: "Linh hoạt thời gian",
     description:
       "Học mọi lúc, mọi nơi theo tiến độ cá nhân — phù hợp cho người đi làm và học sinh quốc tế.",
   },
   {
-    icon: Globe2,
+    icon: "Globe2",
     title: "Bằng cấp quốc tế",
     description:
       "Bằng cấp được công nhận tại Anh Quốc và nhiều quốc gia, mở rộng cơ hội nghề nghiệp toàn cầu.",
   },
   {
-    icon: PiggyBank,
+    icon: "PiggyBank",
     title: "Tiết kiệm chi phí",
     description:
       "Học phí tối ưu so với du học trực tiếp, không cần chi phí sinh hoạt ở nước ngoài.",
   },
   {
-    icon: Headset,
+    icon: "Headset",
     title: "Hỗ trợ tận tâm",
     description:
       "Đội ngũ tư vấn đồng hành suốt lộ trình — từ nhập học đến xin visa và định cư.",
   },
-] as const
+]
 
-export function OnlineBenefits({ className }: { className?: string }) {
+function getIcon(iconName?: string) {
+  if (!iconName) return LucideIcons.Clock
+  return (
+    (LucideIcons as unknown as Record<string, React.ComponentType>)[iconName] ||
+    LucideIcons.Clock
+  )
+}
+
+export function OnlineBenefits({
+  className,
+  data,
+}: {
+  className?: string
+  data?: KhoaHocOnlineWhy
+}) {
+  const items = data?.items?.length ? data.items : BENEFITS
+  const title = data?.title ?? "Tại sao chọn học online cùng KVC Global"
+
   return (
     <section
       aria-labelledby="benefits-heading"
@@ -44,26 +64,26 @@ export function OnlineBenefits({ className }: { className?: string }) {
             id="benefits-heading"
             className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
           >
-            Tại sao chọn học online cùng KVC Global
+            {title}
           </h2>
         </div>
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {BENEFITS.map((benefit) => {
-            const Icon = benefit.icon
+          {items.map((item, index) => {
+            const Icon = getIcon(item.icon)
             return (
               <div
-                key={benefit.title}
+                key={item.title ?? index}
                 className="group rounded-2xl border border-border bg-white p-7 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_16px_36px_-16px_rgba(15,27,45,0.16)]"
               >
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#F4F7FA] text-[#0A2540] transition-colors duration-300 ease-out group-hover:bg-[#0A2540] group-hover:text-white">
                   <Icon className="h-6 w-6" strokeWidth={1.75} />
                 </span>
                 <h3 className="mt-5 font-display text-lg font-bold leading-snug text-foreground">
-                  {benefit.title}
+                  {item.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-foreground/70">
-                  {benefit.description}
+                  {item.description}
                 </p>
               </div>
             )
