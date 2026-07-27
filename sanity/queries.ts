@@ -96,3 +96,70 @@ export const SERVICES_QUERY = defineQuery(
 )
 
 export const FAQS_QUERY = defineQuery(`*[_type == "faq"] | order(order asc)`)
+
+// --- New Content Pages ---
+
+export const KHOA_HOC_ONLINE_PAGE_QUERY = defineQuery(`
+  *[_type == "khoaHocOnlinePage" && language == $lang][0]{
+    heroSection{
+      eyebrow, title, description,
+      primaryButtonLabel, primaryButtonHref,
+      secondaryButtonLabel, secondaryButtonHref,
+      stats[]{_key, icon, value, label}
+    },
+    introSection{
+      title, highlightText, paragraphs, bullets, image, imageAlt
+    },
+    programsSection{
+      title,
+      items[]{_key, icon, name, description, duration, highlights}
+    },
+    whySection{
+      title,
+      items[]{_key, icon, title, description}
+    },
+    ctaSection{title, description, buttonLabel, buttonHref},
+    testimonialsSection{
+      title,
+      testimonials[]{_key, name, role, quote, rating}
+    },
+    servicesSection{
+      title,
+      "services": services[]->{title, icon, href, ctaText}
+    },
+    faqsSection{title, faqs[]{_key, question, answer}},
+    seo{title, description}
+  }
+`)
+
+export const DICH_VU_PAGE_QUERY = defineQuery(`
+  *[_type == "dichVuPage" && language == $lang][0]{
+    heroSection{
+      eyebrow, title, description,
+      primaryButtonLabel, primaryButtonHref,
+      stats[]{_key, icon, value, label}
+    },
+    serviceCategories{
+      title,
+      categories[]{_key, icon, title, description, href, image, imageAlt}
+    },
+    whySection{
+      title,
+      items[]{_key, icon, title, description}
+    },
+    processSection{
+      title,
+      steps[]{_key, icon, title, description}
+    },
+    testimonialsSection{
+      title,
+      testimonials[]{_key, name, role, quote, rating}
+    },
+    partnersSection{
+      title,
+      "partners": partners[]->{_id, name, logo, website}
+    },
+    faqsSection{title, faqs[]{_key, question, answer}},
+    seo{title, description}
+  }
+`)
