@@ -1,32 +1,30 @@
 "use client";
 
 import type { DichVuPageData } from "@/sanity/service-pages";
-
-// Existing hardcoded components (used as fallback when CMS data is missing)
 import { DichVuHero } from "@/components/dich-vu/dich-vu-hero";
 import { DichVuIntro } from "@/components/dich-vu/dich-vu-intro";
 import { DichVuServices } from "@/components/dich-vu/dich-vu-services";
+import { DichVuWhy } from "@/components/dich-vu/dich-vu-why";
+import { DichVuProcess } from "@/components/dich-vu/dich-vu-process";
+import { DichVuTestimonials } from "@/components/dich-vu/dich-vu-testimonials";
+import { DichVuPartners } from "@/components/dich-vu/dich-vu-partners";
+import { DichVuFaqs } from "@/components/dich-vu/dich-vu-faqs";
 
 interface Props {
   content?: DichVuPageData;
 }
 
-/**
- * Dịch vụ (Services) page component.
- *
- * Currently renders existing hardcoded components. When CMS data becomes
- * available in Sanity (after editors populate the schema), individual
- * sections can be overridden with CMS content.
- *
- * To add CMS-driven rendering for a section, check content?.sectionName
- * and render the CMS version instead of the hardcoded component.
- */
 export function DichVuPage({ content }: Props) {
   return (
     <>
-      <DichVuHero />
+      <DichVuHero data={content?.heroSection} />
       <DichVuIntro />
       <DichVuServices />
+      <DichVuWhy data={content?.whySection} />
+      <DichVuProcess data={content?.processSection} />
+      <DichVuTestimonials data={content?.testimonialsSection} />
+      <DichVuPartners data={content?.partnersSection} />
+      <DichVuFaqs data={content?.faqsSection} />
     </>
   );
 }
