@@ -3,9 +3,10 @@
 import * as React from "react"
 import { ChevronDown } from "lucide-react"
 
+import type { KhoaHocOnlineFaqs } from "@/sanity/service-pages"
 import { cn } from "@/lib/utils"
 
-const FAQS = [
+const FAQS: { question: string; answer: string }[] = [
   {
     question: "Bằng cấp online có giá trị như bằng offline không?",
     answer:
@@ -26,10 +27,18 @@ const FAQS = [
     answer:
       "Có. Đội ngũ tư vấn KVC Global đồng hành xuyên suốt — từ nhập học, hỗ trợ hồ sơ học thuật đến tư vấn visa và lộ trình định cư phù hợp với mục tiêu cá nhân của bạn.",
   },
-] as const
+]
 
-export function OnlineFaq({ className }: { className?: string }) {
+export function OnlineFaq({
+  className,
+  data,
+}: {
+  className?: string
+  data?: KhoaHocOnlineFaqs
+}) {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0)
+  const faqs = data?.faqs?.length ? data.faqs : FAQS
+  const title = data?.title ?? "Giải đáp thắc mắc về học online"
 
   return (
     <section
@@ -45,15 +54,18 @@ export function OnlineFaq({ className }: { className?: string }) {
             id="faq-heading"
             className="mt-3 font-display text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
           >
-            Giải đáp thắc mắc về học online
+            {title}
           </h2>
         </div>
 
         <div className="mt-10 divide-y divide-border rounded-2xl border border-border bg-white">
-          {FAQS.map((item, index) => {
+          {faqs.map((item, index) => {
             const isOpen = index === openIndex
             return (
-              <div key={item.question} className="first:rounded-t-2xl last:rounded-b-2xl">
+              <div
+                key={item.question ?? index}
+                className="first:rounded-t-2xl last:rounded-b-2xl"
+              >
                 <h3>
                   <button
                     type="button"

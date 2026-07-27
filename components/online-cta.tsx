@@ -1,11 +1,28 @@
+"use client"
+
 import Image from "next/image"
 
+import type { KhoaHocOnlineCta } from "@/sanity/service-pages"
 import { cn } from "@/lib/utils"
 
 const BANNER_IMAGE =
   "https://images.unsplash.com/photo-1513708849965-aa9a95c2b8c5?w=1920&q=80&auto=format&fit=crop"
 
-export function OnlineCta({ className }: { className?: string }) {
+export function OnlineCta({
+  className,
+  data,
+}: {
+  className?: string
+  data?: KhoaHocOnlineCta
+}) {
+  const title =
+    data?.title ?? "Sẵn sàng bắt đầu hành trình của bạn?"
+  const description =
+    data?.description ??
+    "Đội ngũ tư vấn luôn sẵn sàng lắng nghe và thiết kế lộ trình phù hợp nhất."
+  const buttonLabel = data?.buttonLabel ?? "Đặt lịch tư vấn ngay"
+  const buttonHref = data?.buttonHref ?? "#lien-he"
+
   return (
     <section
       aria-labelledby="online-cta-heading"
@@ -31,19 +48,18 @@ export function OnlineCta({ className }: { className?: string }) {
               id="online-cta-heading"
               className="font-display text-3xl font-bold leading-[1.1] text-white sm:text-4xl md:text-[44px]"
             >
-              Sẵn sàng bắt đầu hành trình của bạn?
+              {title}
             </h2>
             <p className="mt-4 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
-              Đội ngũ tư vấn luôn sẵn sàng lắng nghe và thiết kế lộ trình phù
-              hợp nhất.
+              {description}
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
-                href="#lien-he"
+                href={buttonHref}
                 className="group inline-flex items-center justify-center gap-2 rounded-sm bg-[#C8913C] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#b67f30] hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C8913C]"
               >
-                Đặt lịch tư vấn ngay
+                {buttonLabel}
                 <svg
                   viewBox="0 0 24 24"
                   aria-hidden="true"
