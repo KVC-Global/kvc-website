@@ -1,10 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import * as LucideIcons from "lucide-react"
+import { Clock, Coins, FileCheck, GraduationCap } from "lucide-react"
 import { motion } from "framer-motion"
 
 import type { KhoaHocOnlineHero } from "@/sanity/service-pages"
+import { getIcon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 
@@ -12,19 +13,11 @@ const HERO_IMAGE =
   "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&q=80&auto=format&fit=crop"
 
 const STATS = [
-  { icon: LucideIcons.Clock, value: "Linh hoạt", label: "thời gian học" },
-  { icon: LucideIcons.Coins, value: "Tiết kiệm", label: "chi phí du học" },
-  { icon: LucideIcons.FileCheck, value: "Bằng cấp", label: "chính quy" },
-  { icon: LucideIcons.GraduationCap, value: "Liên thông", label: "quốc tế" },
+  { icon: Clock, value: "Linh hoạt", label: "thời gian học" },
+  { icon: Coins, value: "Tiết kiệm", label: "chi phí du học" },
+  { icon: FileCheck, value: "Bằng cấp", label: "chính quy" },
+  { icon: GraduationCap, value: "Liên thông", label: "quốc tế" },
 ] as const
-
-function getIcon(iconName?: string) {
-  if (!iconName) return LucideIcons.Clock
-  return (
-    (LucideIcons as unknown as Record<string, React.ComponentType>)[iconName] ||
-    LucideIcons.Clock
-  )
-}
 
 export function OnlineHero({
   className,
@@ -51,7 +44,7 @@ export function OnlineHero({
   const displayStats =
     data?.stats && data.stats.length > 0
       ? data.stats.map((s) => ({
-          icon: getIcon(s.icon),
+          icon: getIcon(s.icon, Clock),
           value: s.value ?? "",
           label: s.label ?? "",
         }))

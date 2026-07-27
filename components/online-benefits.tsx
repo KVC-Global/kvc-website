@@ -1,8 +1,9 @@
 "use client"
 
-import * as LucideIcons from "lucide-react"
+import { Clock } from "lucide-react"
 
 import type { KhoaHocOnlineWhy } from "@/sanity/service-pages"
+import { getIcon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 
 const BENEFITS: { icon: string; title: string; description: string }[] = [
@@ -31,14 +32,6 @@ const BENEFITS: { icon: string; title: string; description: string }[] = [
       "Đội ngũ tư vấn đồng hành suốt lộ trình — từ nhập học đến xin visa và định cư.",
   },
 ]
-
-function getIcon(iconName?: string) {
-  if (!iconName) return LucideIcons.Clock
-  return (
-    (LucideIcons as unknown as Record<string, React.ComponentType>)[iconName] ||
-    LucideIcons.Clock
-  )
-}
 
 export function OnlineBenefits({
   className,
@@ -70,7 +63,7 @@ export function OnlineBenefits({
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((item, index) => {
-            const Icon = getIcon(item.icon)
+            const Icon = getIcon(item.icon, Clock)
             return (
               <div
                 key={item.title ?? index}
