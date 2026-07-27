@@ -122,11 +122,14 @@ export type KhoaHocOnlinePageData = {
 // --- Dich Vu Page ---
 
 export type DichVuHero = {
+  backgroundImage?: SanityImage;
   eyebrow?: string;
   title?: string;
   description?: string;
   primaryButtonLabel?: string;
   primaryButtonHref?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonHref?: string;
   stats?: Array<{
     _key?: string;
     icon?: string;
