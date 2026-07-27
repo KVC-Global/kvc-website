@@ -1,25 +1,28 @@
 import type { Metadata } from "next"
-import { OnlineQualifi } from "@/components/online-qualifi"
+import { OnlineProgramPage } from "@/components/online-program-page"
+import { getLocale } from "@/lib/i18n-server"
+import { sanityFetch } from "@/sanity/live"
+import { ONLINE_PROGRAM_PAGE_QUERY } from "@/sanity/queries"
+import type { OnlineProgramPageData } from "@/sanity/service-pages"
 
-export const metadata: Metadata = {
-  title: "QUALIFI | KVC Global",
-  description:
-    "Học Chứng chỉ QUALIFI Anh Quốc trực tuyến cùng KVC Global. Nâng tầm sự nghiệp với bằng cấp quốc tế được công nhận toàn cầu.",
-  openGraph: {
-    title: "QUALIFI | KVC Global",
-    description:
-      "Học Chứng chỉ QUALIFI Anh Quốc trực tuyến cùng KVC Global. Nâng tầm sự nghiệp với bằng cấp quốc tế được công nhận toàn cầu.",
-    images: [{ url: "/images/thumb-sharing.png", width: 1200, height: 630, alt: "QUALIFI | KVC Global" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "QUALIFI | KVC Global",
-    description:
-      "Học Chứng chỉ QUALIFI Anh Quốc trực tuyến cùng KVC Global. Nâng tầm sự nghiệp với bằng cấp quốc tế được công nhận toàn cầu.",
-    images: ["/images/thumb-sharing.png"],
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
+  const { data } = await sanityFetch({ query: ONLINE_PROGRAM_PAGE_QUERY, params: { lang: locale, slug: "qualifi" } })
+  const page = data as OnlineProgramPageData | null
+  return {
+    title: page?.seo?.title || "QUALIFI | KVC Global",
+    description: page?.seo?.description || "Học Chứng chỉ QUALIFI Anh Quốc trực tuyến cùng KVC Global.",
+    openGraph: {
+      title: page?.seo?.title || "QUALIFI | KVC Global",
+      description: page?.seo?.description || "",
+      images: [{ url: "/images/thumb-sharing.png", width: 1200, height: 630, alt: "QUALIFI | KVC Global" }],
+    },
+    twitter: { card: "summary_large_image", title: page?.seo?.title || "QUALIFI | KVC Global", description: page?.seo?.description || "", images: ["/images/thumb-sharing.png"] },
+  }
 }
 
-export default function QualifiPage() {
-  return <OnlineQualifi />
+export default async function QualifiPage() {
+  const locale = await getLocale()
+  const { data } = await sanityFetch({ query: ONLINE_PROGRAM_PAGE_QUERY, params: { lang: locale, slug: "qualifi" } })
+  return <OnlineProgramPage data={data as OnlineProgramPageData | null || undefined} />
 }

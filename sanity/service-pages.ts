@@ -185,6 +185,48 @@ export type DichVuFaqs = {
   faqs?: FaqItem[];
 };
 
+// --- Online Program Subpage ---
+
+export type OnlineProgramHero = {
+  tagline?: string; title?: string; subtitle?: string; description?: string;
+  breadcrumb?: string;
+  primaryButtonLabel?: string; primaryButtonHref?: string;
+};
+
+export type OnlineProgramIntro = { title?: string; paragraphs?: string[]; highlights?: string[] };
+
+export type OnlineProgramItem = { title?: string; description?: string };
+
+export type OnlineProgramWhy = { title?: string; items?: OnlineProgramItem[] };
+
+export type OnlineProgramSection = { title?: string; items?: string[] };
+
+export type OnlineProgramStep = { step?: string };
+
+export type OnlineProgramProcess = { title?: string; steps?: OnlineProgramStep[] };
+
+export type OnlineProgramCta = { title?: string; body?: string; buttonLabel?: string; buttonHref?: string };
+
+export type OnlineProgramCard = {
+  name?: string; duration?: string; startDates?: string;
+  subjects?: string[]; entryRequirements?: string;
+};
+
+export type OnlineProgramPrograms = { title?: string; items?: OnlineProgramCard[] };
+
+export type OnlineProgramPageData = {
+  heroSection?: OnlineProgramHero;
+  introSection?: OnlineProgramIntro;
+  whySection?: OnlineProgramWhy;
+  formatSection?: OnlineProgramSection;
+  audienceSection?: OnlineProgramSection;
+  benefitsSection?: OnlineProgramSection;
+  processSection?: OnlineProgramProcess;
+  ctaSection?: OnlineProgramCta;
+  programsSection?: OnlineProgramPrograms;
+  seo?: PageSeo;
+};
+
 export type DichVuPageData = {
   heroSection?: DichVuHero;
   serviceCategories?: DichVuServiceCategories;
