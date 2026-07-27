@@ -32,7 +32,8 @@ export function OnlineServices({
   className?: string;
   data?: KhoaHocOnlineServices;
 }) {
-  const services = data?.services?.length ? data.services : FALLBACK_SERVICES;
+  const rawServices = data?.services?.length ? data.services : FALLBACK_SERVICES;
+  const services = rawServices.filter(Boolean);
   const title = data?.title ?? "Các dịch vụ liên quan";
 
   return (

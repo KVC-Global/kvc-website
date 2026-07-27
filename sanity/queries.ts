@@ -125,7 +125,7 @@ export const KHOA_HOC_ONLINE_PAGE_QUERY = defineQuery(`
     },
     servicesSection{
       title,
-      "services": services[]->{title, icon, href, ctaText}
+      "services": services[]{title, icon, href, ctaText}
     },
     faqsSection{title, faqs[]{_key, question, answer}},
     seo{title, description}
