@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { Clock, Coins, FileCheck, GraduationCap } from "lucide-react"
 
@@ -5,6 +7,10 @@ import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import { StudyAbroadStatBar } from "@/components/study-abroad/study-abroad-stat-bar"
 import Image from "next/image"
+import { useLocale, useDictionary } from "@/lib/i18n-client"
+import { urlFor } from "@/sanity/image"
+import type { StudyAbroadHeroContent } from "@/sanity/study-abroad-page"
+import { studyAbroadIcons } from "./study-abroad-icons"
 
 const HERO_IMAGE = "/images/study-abroad-hero.jpg"
 
@@ -15,7 +21,29 @@ const STATS = [
   { icon: GraduationCap, value: "Bằng Diploma", label: "quốc tế" },
 ] as const
 
-export function StudyAbroadHero({ className }: { className?: string }) {
+export function StudyAbroadHero({
+  className,
+  content,
+}: {
+  className?: string
+  content?: StudyAbroadHeroContent
+}) {
+  const locale = useLocale()
+  const isEn = locale === "en"
+  const t = useDictionary()
+
+  const heroImage = content?.backgroundImage
+    ? urlFor(content.backgroundImage).url()
+    : HERO_IMAGE
+
+  const stats = content?.stats?.length
+    ? content.stats.map((stat) => ({
+        icon: stat.icon ? studyAbroadIcons[stat.icon] || GraduationCap : GraduationCap,
+        value: stat.value || "",
+        label: stat.label || "",
+      }))
+    : STATS
+
   return (
     <section
       aria-labelledby="study-hero-heading"
@@ -23,10 +51,10 @@ export function StudyAbroadHero({ className }: { className?: string }) {
         "relative w-full border-b border-border bg-white bg-cover bg-center pb-16 md:pb-20",
         className
       )}
-      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+      style={{ backgroundImage: `url(${heroImage})` }}
     >
       <Image
-        src={HERO_IMAGE}
+        src={heroImage}
         alt=""
         role="presentation"
         fill
@@ -50,48 +78,54 @@ export function StudyAbroadHero({ className }: { className?: string }) {
           className="mb-6 flex flex-wrap items-center gap-1.5 font-body text-xs font-medium text-muted-foreground md:mb-8 md:text-sm"
         >
           <Link
-            href="/"
+            href={isEn ? "/en" : "/"}
             className="transition-colors duration-200 hover:text-foreground"
           >
-            Trang chủ
+            {t.nav.home}
           </Link>
           <span className="text-muted-foreground/60 select-none">&gt;</span>
-          <Link href="/du-hoc" className="text-muted-foreground/80">
-            Du học
+          <Link href={isEn ? "/en/du-hoc" : "/du-hoc"} className="text-muted-foreground/80">
+            {t.nav.studyAbroad}
           </Link>
           <span className="text-muted-foreground/60 select-none">&gt;</span>
           <span
             className="font-semibold text-foreground/80"
             aria-current="page"
           >
-            Diploma 6+6 tại Singapore
+            {content?.eyebrow || "Diploma 6+6 tại Singapore"}
           </span>
         </nav>
 
         <div className="max-w-2xl">
           <span className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-            DIPLOMA 6+6 TẠI SINGAPORE
+            {content?.eyebrow || "DIPLOMA 6+6 TẠI SINGAPORE"}
           </span>
 
           <h1
             id="study-hero-heading"
             className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
           >
-            Vừa học vừa làm,
-            <span className="mt-1 block">lấy bằng quốc tế chỉ trong 1 năm</span>
+            {content?.title ? (
+              content.title
+            ) : (
+              <>
+                Vừa học vừa làm,
+                <span className="mt-1 block">lấy bằng quốc tế chỉ trong 1 năm</span>
+              </>
+            )}
           </h1>
 
           <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">
-            Lộ trình Diploma 6+6 kết hợp 6 tháng học lý thuyết và 6 tháng thực
-            tập hưởng lương tại Singapore.
+            {content?.description ||
+              "Lộ trình Diploma 6+6 kết hợp 6 tháng học lý thuyết và 6 tháng thực tập hưởng lương tại Singapore."}
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
             <Link
-              href="#dang-ky"
+              href={content?.primaryButtonHref || "#dang-ky"}
               className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid"
             >
-              Đăng ký tư vấn miễn phí
+              {content?.primaryButtonLabel || "Đăng ký tư vấn miễn phí"}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -107,10 +141,10 @@ export function StudyAbroadHero({ className }: { className?: string }) {
             </Link>
 
             <Link
-              href="#chuong-trinh"
+              href={content?.secondaryButtonHref || "#chuong-trinh"}
               className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
-              Tìm hiểu chương trình
+              {content?.secondaryButtonLabel || "Tìm hiểu chương trình"}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -128,7 +162,7 @@ export function StudyAbroadHero({ className }: { className?: string }) {
         </div>
       </Container>
 
-      <StudyAbroadStatBar stats={STATS} />
+      <StudyAbroadStatBar stats={stats} />
     </section>
   )
 }

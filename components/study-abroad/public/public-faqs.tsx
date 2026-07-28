@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
+import type { PublicStudyFaqsContent } from "@/sanity/public-study-page"
 
 const FAQS = [
   {
@@ -10,7 +11,7 @@ const FAQS = [
     answer: "AEIS (Admissions Exercise for International Students) là kỳ thi quốc gia do Bộ Giáo dục Singapore tổ chức vào tháng 9 hàng năm để tuyển học sinh quốc tế vào các trường công lập (Tiểu học 2-5 và Trung học 1-3). S-AEIS tổ chức bổ sung vào tháng 2. Đề thi gồm môn Toán và Tiếng Anh (hoặc chứng chỉ CEQ cho tiểu học), đòi hỏi ôn luyện chuyên sâu trước tối thiểu 6-12 tháng.",
   },
   {
-    question: "Học sinh học trường công lập có cơ hội định cư PR không?",
+    question: "Học sinh quốc tế học trường công lập có cơ hội định cư PR không?",
     answer: "Có, đây là lợi thế lớn của hệ thống công lập Singapore. Học sinh quốc tế cư trú hợp pháp tại Singapore từ 2 năm trở lên và đã đỗ ít nhất một kỳ thi quốc gia (như PSLE, GCE O-Level, N-Level hoặc A-Level) hoàn toàn đủ điều kiện tự nộp hồ sơ xin Thường trú nhân (PR).",
   },
   {
@@ -31,11 +32,22 @@ const FAQS = [
   },
 ] as const
 
-export function PublicStudyAbroadFaqs({ className }: { className?: string }) {
+export function PublicStudyAbroadFaqs({
+  className,
+  content,
+}: {
+  className?: string
+  content?: PublicStudyFaqsContent
+}) {
   const [openFaqs, setOpenFaqs] = useState<Record<number, boolean>>({})
   const toggleFaq = (idx: number) => {
     setOpenFaqs((prev) => ({ ...prev, [idx]: !prev[idx] }))
   }
+
+  const faqs = content?.items?.length ? content.items : FAQS
+  const half = Math.ceil(faqs.length / 2)
+  const leftFaqs = faqs.slice(0, half)
+  const rightFaqs = faqs.slice(half)
 
   return (
     <section
@@ -47,15 +59,15 @@ export function PublicStudyAbroadFaqs({ className }: { className?: string }) {
           id="faqs-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          Câu hỏi thường gặp
+          {content?.title || "Câu hỏi thường gặp"}
         </h2>
         <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold mx-0" />
       </div>
 
       <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 mt-8">
-        {/* Left Column (FAQs 0, 1, 2) */}
+        {/* Left Column */}
         <div className="flex flex-col gap-4">
-          {FAQS.slice(0, 3).map((faq, index) => {
+          {leftFaqs.map((faq, index) => {
             const globalIdx = index
             const isOpen = !!openFaqs[globalIdx]
             return (
@@ -95,10 +107,10 @@ export function PublicStudyAbroadFaqs({ className }: { className?: string }) {
           })}
         </div>
 
-        {/* Right Column (FAQs 3, 4, 5) */}
+        {/* Right Column */}
         <div className="flex flex-col gap-4">
-          {FAQS.slice(3, 6).map((faq, index) => {
-            const globalIdx = index + 3
+          {rightFaqs.map((faq, index) => {
+            const globalIdx = index + half
             const isOpen = !!openFaqs[globalIdx]
             return (
               <div

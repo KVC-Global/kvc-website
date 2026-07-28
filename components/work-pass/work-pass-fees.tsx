@@ -1,8 +1,49 @@
 "use client"
 
 import { Clock, Plane } from "lucide-react"
+import type { WorkPassFeesContent } from "@/sanity/work-pass-page"
+import { workPassIcons } from "./work-pass-icons"
+import { cn } from "@/lib/utils"
 
-export function WorkPassFees() {
+const DEFAULT_FEES = [
+  { category: "Phi xin TEP (MOM)", cost: "105" },
+  { category: "Phi Issuance (nếu áp dụng)", cost: "185" },
+  { category: "Phi dịch vụ tư vấn (KVC Global)", cost: "Liên hệ" },
+]
+
+const DEFAULT_PROCESSING = [
+  {
+    icon: "Clock",
+    title: "Thời gian xét duyệt hồ sơ: 2 - 4 tuần",
+    description: "(Tùy thuộc vào hồ sơ và doanh nghiệp bảo lãnh)",
+  },
+  {
+    icon: "Plane",
+    title: "Thời gian nhập cảnh: Sau khi nhận IPA, bạn có 3 tháng để nhập cảnh Singapore.",
+    description: "",
+  },
+]
+
+export function WorkPassFees({ content }: { content?: WorkPassFeesContent }) {
+  const feesList = content?.feesList?.length
+    ? content.feesList
+    : [
+        ...DEFAULT_FEES,
+        { category: "Tổng chi phí ước tính", cost: "Liên hệ", isBold: true }
+      ]
+
+  const processingItems = content?.processingItems?.length
+    ? content.processingItems.map((item) => ({
+        icon: item.icon ? workPassIcons[item.icon] || Clock : Clock,
+        title: item.title || "",
+        description: item.description || "",
+      }))
+    : DEFAULT_PROCESSING.map((item) => ({
+        icon: item.icon === "Plane" ? Plane : Clock,
+        title: item.title,
+        description: item.description,
+      }))
+
   return (
     <section aria-labelledby="fees-heading" className="mt-20 md:mt-28 w-full">
       <div className="text-center mb-12">
@@ -10,7 +51,7 @@ export function WorkPassFees() {
           id="fees-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          4. Chi phí & thời gian xử lý
+          {content?.title || "4. Chi phí & thời gian xử lý"}
         </h2>
         <span
           aria-hidden="true"
@@ -22,78 +63,81 @@ export function WorkPassFees() {
         {/* Column 1: Reference Costs Card */}
         <div className="flex flex-col border border-border bg-white rounded-[20px] p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] transition-all duration-300">
           <h3 className="font-heading text-lg font-bold text-brand-blue mb-6">
-            Chi phí tham khảo
+            {content?.feesTitle || "Chi phí tham khảo"}
           </h3>
 
           <div className="w-full mt-2">
             <table className="w-full border-collapse text-left text-sm">
               <thead>
                 <tr className="font-heading font-bold text-brand-blue">
-                  <th className="px-6 py-3.5 bg-brand-light rounded-l-lg border-r border-border/60">Hạng mục</th>
-                  <th className="px-6 py-3.5 bg-brand-light rounded-r-lg text-center">Chi phí (SGD)</th>
+                  <th className="px-6 py-3.5 bg-brand-light rounded-l-lg border-r border-border/60">
+                    {content?.feesCategoryHeader || "Hạng mục"}
+                  </th>
+                  <th className="px-6 py-3.5 bg-brand-light rounded-r-lg text-center">
+                    {content?.feesCostHeader || "Chi phí (SGD)"}
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border/40 font-body text-brand-dark/95">
-                <tr className="border-b border-border/40">
-                  <td className="px-6 py-4 font-semibold text-brand-blue border-r border-border/60">Phi xin TEP (MOM)</td>
-                  <td className="px-6 py-4 text-center font-bold text-brand-blue">105</td>
-                </tr>
-                <tr className="border-b border-border/40">
-                  <td className="px-6 py-4 font-semibold text-brand-blue border-r border-border/60">Phi Issuance (nếu áp dụng)</td>
-                  <td className="px-6 py-4 text-center font-bold text-brand-blue">185</td>
-                </tr>
-                <tr className="border-b border-border/40">
-                  <td className="px-6 py-4 font-semibold text-brand-blue border-r border-border/60">Phi dịch vụ tư vấn (KVC Global)</td>
-                  <td className="px-6 py-4 text-center font-bold text-brand-blue">Liên hệ</td>
-                </tr>
-                <tr className="font-bold">
-                  <td className="px-6 py-4 text-brand-blue border-r border-border/60">Tổng chi phí ước tính</td>
-                  <td className="px-6 py-4 text-center text-brand-blue">Liên hệ</td>
-                </tr>
+                {feesList.map((fee, idx) => {
+                  const isLast = idx === feesList.length - 1
+                  const isBold = ('isBold' in fee ? fee.isBold : false) || isLast
+                  return (
+                    <tr
+                      key={idx}
+                      className={cn(
+                        isBold && "font-bold",
+                        !isBold && "border-b border-border/40"
+                      )}
+                    >
+                      <td className="px-6 py-4 text-brand-blue border-r border-border/60">
+                        {fee.category}
+                      </td>
+                      <td className="px-6 py-4 text-center text-brand-blue">
+                        {fee.cost}
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
 
           <p className="mt-4 font-body text-xs italic text-muted-foreground">
-            *Chi phí có thể thay đổi theo quy định của MOM.
+            {content?.feesNote || "*Chi phí có thể thay đổi theo quy định của MOM."}
           </p>
         </div>
 
         {/* Column 2: Timeline Card */}
         <div className="flex flex-col border border-border bg-white rounded-[20px] p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_-10px_rgba(10,37,64,0.08)] transition-all duration-300 justify-center">
           <h3 className="font-heading text-lg font-bold text-brand-blue mb-8">
-            Thời gian xử lý
+            {content?.processingTitle || "Thời gian xử lý"}
           </h3>
 
           <div className="space-y-8">
-            {/* Timeline Item 1 */}
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-light border border-border">
-                <Clock className="h-6 w-6 text-brand-blue" strokeWidth={1.75} />
-              </div>
-              <div className="flex flex-col">
-                <h4 className="font-heading text-sm sm:text-base font-bold text-brand-blue leading-snug">
-                  Thời gian xét duyệt hồ sơ: 2 - 4 tuần
-                </h4>
-                <p className="mt-1 font-body text-xs sm:text-sm text-muted-foreground leading-normal">
-                  (Tùy thuộc vào hồ sơ và doanh nghiệp bảo lãnh)
-                </p>
-              </div>
-            </div>
-
-            <hr className="border-t border-border" />
-
-            {/* Timeline Item 2 */}
-            <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-light border border-border">
-                <Plane className="h-6 w-6 text-brand-blue" strokeWidth={1.75} />
-              </div>
-              <div className="flex flex-col">
-                <h4 className="font-heading text-sm sm:text-base font-bold text-brand-blue leading-snug">
-                  Thời gian nhập cảnh: Sau khi nhận IPA, bạn có 3 tháng để nhập cảnh Singapore.
-                </h4>
-              </div>
-            </div>
+            {processingItems.map((item, idx) => {
+              const Icon = item.icon
+              return (
+                <div key={idx} className="flex flex-col gap-8">
+                  {idx > 0 && <hr className="border-t border-border w-full" />}
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-brand-light border border-border">
+                      <Icon className="h-6 w-6 text-brand-blue" strokeWidth={1.75} />
+                    </div>
+                    <div className="flex flex-col">
+                      <h4 className="font-heading text-sm sm:text-base font-bold text-brand-blue leading-snug">
+                        {item.title}
+                      </h4>
+                      {item.description && (
+                        <p className="mt-1 font-body text-xs sm:text-sm text-muted-foreground leading-normal">
+                          {item.description}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>

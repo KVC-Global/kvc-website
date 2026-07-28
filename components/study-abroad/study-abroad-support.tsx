@@ -1,31 +1,37 @@
 "use client"
 
-import { Compass, ClipboardList, FileSignature, UserCheck, Handshake } from "lucide-react"
+import { Compass as DefaultIcon } from "lucide-react"
+import type { StudyAbroadSupportContent } from "@/sanity/study-abroad-page"
+import { studyAbroadIcons } from "./study-abroad-icons"
 
 const SUPPORT_STEPS = [
   {
-    icon: Compass,
+    icon: "Compass",
     text: "Tư vấn chọn trường, chọn ngành phù hợp",
   },
   {
-    icon: ClipboardList,
+    icon: "ClipboardList",
     text: "Hỗ trợ chuẩn bị hồ sơ đầy đủ, đúng yêu cầu",
   },
   {
-    icon: FileSignature,
+    icon: "FileSignature",
     text: "Luyện phỏng vấn, xử lý hồ sơ visa tỉ mỉ",
   },
   {
-    icon: UserCheck,
+    icon: "UserCheck",
     text: "Đưa đón sân bay, ổn định nơi ở tại Singapore",
   },
   {
-    icon: Handshake,
+    icon: "Handshake",
     text: "Đồng hành kết nối doanh nghiệp thực tập uy tín",
   },
 ] as const
 
-export function StudyAbroadSupport() {
+export function StudyAbroadSupport({ content }: { content?: StudyAbroadSupportContent }) {
+  const steps = content?.steps?.length
+    ? content.steps
+    : SUPPORT_STEPS
+
   return (
     <section
       aria-labelledby="journey-heading"
@@ -36,20 +42,26 @@ export function StudyAbroadSupport() {
           id="journey-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          KVC Global đồng hành cùng bạn
+          {content?.title || "KVC Global đồng hành cùng bạn"}
         </h2>
         <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
       </div>
 
       <div className="flex flex-col lg:flex-row items-stretch justify-between gap-2 mt-4">
-        {SUPPORT_STEPS.map((step, idx) => {
-          const Icon = step.icon
-          const isLast = idx === SUPPORT_STEPS.length - 1
+        {steps.map((step, idx) => {
+          const iconName = step.icon
+          const Icon = iconName ? studyAbroadIcons[iconName] : undefined
+          const isLast = idx === steps.length - 1
+          
           return (
             <div key={idx} className="flex flex-col lg:flex-row items-center w-full min-w-0 lg:w-auto flex-1">
               <div className="flex flex-col items-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-md p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[160px] w-full min-w-0 flex-1 justify-center">
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-light group-hover:bg-white transition-colors shrink-0">
-                  <Icon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
+                  {Icon ? (
+                    <Icon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
+                  ) : (
+                    <DefaultIcon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
+                  )}
                 </div>
                 <span className="font-body text-[12px] md:text-[13px] font-bold text-brand-blue leading-normal">
                   {step.text}

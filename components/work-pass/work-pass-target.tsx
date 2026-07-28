@@ -1,6 +1,8 @@
 "use client"
 
 import { GraduationCap, Briefcase, Users, Target } from "lucide-react"
+import type { WorkPassTargetContent } from "@/sanity/work-pass-page"
+import { workPassIcons } from "./work-pass-icons"
 
 const TARGETS = [
   {
@@ -25,7 +27,15 @@ const TARGETS = [
   },
 ] as const
 
-export function WorkPassTarget() {
+export function WorkPassTarget({ content }: { content?: WorkPassTargetContent }) {
+  const items = content?.items?.length
+    ? content.items.map((item) => ({
+        icon: item.icon ? workPassIcons[item.icon] || GraduationCap : GraduationCap,
+        title: item.title || "",
+        description: item.description || "",
+      }))
+    : TARGETS
+
   return (
     <section aria-labelledby="target-heading" className="w-full">
       <div className="text-center mb-10">
@@ -33,7 +43,7 @@ export function WorkPassTarget() {
           id="target-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          1. Ai nên chọn TEP?
+          {content?.title || "1. Ai nên chọn TEP?"}
         </h2>
         <span
           aria-hidden="true"
@@ -42,7 +52,7 @@ export function WorkPassTarget() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {TARGETS.map((target, index) => {
+        {items.map((target, index) => {
           const Icon = target.icon
           return (
             <div
