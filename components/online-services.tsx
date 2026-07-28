@@ -50,7 +50,7 @@ export function OnlineServices({
           className="text-center"
         >
           <span className="mb-3 block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-            DỊCH VỤ
+            {data?.eyebrow ?? "DỊCH VỤ"}
           </span>
           <h2
             id="online-services-heading"

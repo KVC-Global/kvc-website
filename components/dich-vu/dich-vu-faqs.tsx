@@ -44,7 +44,7 @@ export function DichVuFaqs({
           className="text-center"
         >
           <span className="mb-3 block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-            FAQ
+            {data?.eyebrow ?? "FAQ"}
           </span>
           <h2
             id="dich-vu-faqs-heading"

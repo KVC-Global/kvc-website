@@ -32,6 +32,7 @@ export function DichVuWhy({
   data?: DichVuWhy;
 }) {
   const items = data?.items?.length ? data.items : FALLBACK_ITEMS;
+  const eyebrow = data?.eyebrow ?? "LÝ DO CHỌN KVC";
   const title = data?.title ?? "Tại sao chọn KVC Global?";
 
   return (
@@ -51,7 +52,7 @@ export function DichVuWhy({
             variants={fadeUp}
             className="mb-3 block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm"
           >
-            LÝ DO CHỌN KVC
+            {eyebrow}
           </motion.span>
           <motion.h2
             variants={fadeUp}

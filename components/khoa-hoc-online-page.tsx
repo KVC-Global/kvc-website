@@ -19,7 +19,7 @@ export function KhoaHocOnlinePage({ content }: Props) {
     <>
       <OnlineHero data={content?.heroSection} />
       <OnlineIntro data={content?.introSection} />
-      <OnlineDetails />
+      <OnlineDetails data={content?.programsSection} />
       <OnlineBenefits data={content?.whySection} />
       <OnlineTestimonials data={content?.testimonialsSection} />
       <OnlineServices data={content?.servicesSection} />

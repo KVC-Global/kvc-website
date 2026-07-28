@@ -48,7 +48,7 @@ export function OnlineFaq({
       <div className="mx-auto max-w-[1280px] px-6">
         <div className="max-w-2xl">
           <p className="font-sans text-[11px] font-semibold tracking-[0.28em] text-[#C8913C] uppercase">
-            Câu hỏi thường gặp
+            {data?.eyebrow ?? "Câu hỏi thường gặp"}
           </p>
           <h2
             id="faq-heading"

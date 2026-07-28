@@ -41,7 +41,7 @@ export function DichVuTestimonials({
           className="text-center"
         >
           <span className="mb-3 block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-            ĐÁNH GIÁ
+            {data?.eyebrow ?? "ĐÁNH GIÁ"}
           </span>
           <h2
             id="dich-vu-testimonials-heading"

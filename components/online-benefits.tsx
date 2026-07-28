@@ -41,6 +41,7 @@ export function OnlineBenefits({
   data?: KhoaHocOnlineWhy
 }) {
   const items = data?.items?.length ? data.items : BENEFITS
+  const eyebrow = data?.eyebrow ?? "Lợi ích"
   const title = data?.title ?? "Tại sao chọn học online cùng KVC Global"
 
   return (
@@ -51,7 +52,7 @@ export function OnlineBenefits({
       <div className="mx-auto max-w-[1280px] px-6">
         <div className="max-w-2xl">
           <p className="font-sans text-[11px] font-semibold tracking-[0.28em] text-[#C8913C] uppercase">
-            Lợi ích
+            {eyebrow}
           </p>
           <h2
             id="benefits-heading"

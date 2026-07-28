@@ -77,7 +77,7 @@ export function DichVuHero({
     >
       <Image
         src={heroImage}
-        alt="Văn phòng KVC Global tại Singapore"
+        alt={data?.backgroundImageAlt || "Văn phòng KVC Global tại Singapore"}
         fill
         priority
         sizes="100vw"

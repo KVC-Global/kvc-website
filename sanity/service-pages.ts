@@ -78,9 +78,13 @@ export type KhoaHocOnlineProgram = {
 export type KhoaHocOnlinePrograms = {
   title?: string;
   items?: KhoaHocOnlineProgram[];
+  requirements?: string[];
+  prospects?: string[];
+  supportSteps?: Array<{ _key?: string; icon?: string; text?: string }>;
 };
 
 export type KhoaHocOnlineWhy = {
+  eyebrow?: string;
   title?: string;
   items?: IconItem[];
 };
@@ -93,16 +97,19 @@ export type KhoaHocOnlineCta = {
 };
 
 export type KhoaHocOnlineTestimonials = {
+  eyebrow?: string;
   title?: string;
   testimonials?: TestimonialItem[];
 };
 
 export type KhoaHocOnlineServices = {
+  eyebrow?: string;
   title?: string;
   services?: ServiceCard[];
 };
 
 export type KhoaHocOnlineFaqs = {
+  eyebrow?: string;
   title?: string;
   faqs?: FaqItem[];
 };
@@ -123,6 +130,7 @@ export type KhoaHocOnlinePageData = {
 
 export type DichVuHero = {
   backgroundImage?: SanityImage;
+  backgroundImageAlt?: string;
   eyebrow?: string;
   title?: string;
   description?: string;
@@ -149,11 +157,13 @@ export type DichVuCategory = {
 };
 
 export type DichVuServiceCategories = {
+  eyebrow?: string;
   title?: string;
   categories?: DichVuCategory[];
 };
 
 export type DichVuWhy = {
+  eyebrow?: string;
   title?: string;
   items?: IconItem[];
 };
@@ -161,16 +171,19 @@ export type DichVuWhy = {
 export type DichVuProcessStep = IconItem;
 
 export type DichVuProcess = {
+  eyebrow?: string;
   title?: string;
   steps?: DichVuProcessStep[];
 };
 
 export type DichVuTestimonials = {
+  eyebrow?: string;
   title?: string;
   testimonials?: TestimonialItem[];
 };
 
 export type DichVuPartners = {
+  eyebrow?: string;
   title?: string;
   partners?: Array<{
     _id?: string;
@@ -183,6 +196,65 @@ export type DichVuPartners = {
 export type DichVuFaqs = {
   title?: string;
   faqs?: FaqItem[];
+};
+
+// --- Dich Vu Intro ---
+
+export type DichVuIntroPillar = {
+  icon?: string;
+  label?: string;
+};
+
+export type DichVuIntro = {
+  eyebrow?: string;
+  title?: string;
+  pillars?: DichVuIntroPillar[];
+  paragraph1?: string;
+  paragraph2?: string;
+};
+
+// --- Dich Vu Service Accordion ---
+
+export type DichVuServiceChecklistGroup = {
+  title?: string;
+  items?: string[];
+};
+
+export type DichVuTagList = {
+  label?: string;
+  items?: string[];
+};
+
+export type DichVuSingaporeSubTab = {
+  label?: string;
+  icon?: string;
+  intro?: string[];
+  services?: DichVuServiceChecklistGroup[];
+  audience?: DichVuTagList;
+  benefits?: DichVuTagList;
+};
+
+export type DichVuServiceAccordionSection = {
+  _key?: string;
+  tag?: string;
+  heading?: string;
+  headingAccent?: string;
+  intro?: string[];
+  services?: DichVuServiceChecklistGroup[];
+  audience?: DichVuTagList;
+  benefits?: DichVuTagList;
+  singaporeSubTabs?: DichVuSingaporeSubTab[];
+  ctaLabel?: string;
+  ctaHref?: string;
+  ctaIcon?: string;
+  crossLinkText?: string;
+  image?: SanityImage;
+  imageAlt?: string;
+};
+
+export type DichVuServiceAccordion = {
+  eyebrow?: string;
+  sections?: DichVuServiceAccordionSection[];
 };
 
 // --- Online Program Subpage ---
@@ -229,7 +301,9 @@ export type OnlineProgramPageData = {
 
 export type DichVuPageData = {
   heroSection?: DichVuHero;
+  introSection?: DichVuIntro;
   serviceCategories?: DichVuServiceCategories;
+  accordionSections?: DichVuServiceAccordion;
   whySection?: DichVuWhy;
   processSection?: DichVuProcess;
   testimonialsSection?: DichVuTestimonials;

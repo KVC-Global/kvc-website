@@ -112,22 +112,24 @@ export const KHOA_HOC_ONLINE_PAGE_QUERY = defineQuery(`
     },
     programsSection{
       title,
-      items[]{_key, icon, name, description, duration, highlights}
+      items[]{_key, icon, name, description, duration, highlights},
+      requirements, prospects,
+      supportSteps[]{_key, icon, text}
     },
     whySection{
-      title,
+      eyebrow, title,
       items[]{_key, icon, title, description}
     },
     ctaSection{title, description, buttonLabel, buttonHref},
     testimonialsSection{
-      title,
+      eyebrow, title,
       testimonials[]{_key, name, role, quote, rating}
     },
     servicesSection{
-      title,
+      eyebrow, title,
       "services": services[]{title, icon, href, ctaText}
     },
-    faqsSection{title, faqs[]{_key, question, answer}},
+    faqsSection{eyebrow, title, faqs[]{_key, question, answer}},
     seo{title, description}
   }
 `)
@@ -135,31 +137,50 @@ export const KHOA_HOC_ONLINE_PAGE_QUERY = defineQuery(`
 export const DICH_VU_PAGE_QUERY = defineQuery(`
   *[_type == "dichVuPage" && language == $lang][0]{
     heroSection{
+      backgroundImage, backgroundImageAlt,
       eyebrow, title, description,
       primaryButtonLabel, primaryButtonHref,
+      secondaryButtonLabel, secondaryButtonHref,
       stats[]{_key, icon, value, label}
     },
+    introSection{
+      eyebrow, title,
+      pillars[]{_key, icon, label},
+      paragraph1, paragraph2
+    },
     serviceCategories{
-      title,
+      eyebrow, title,
       categories[]{_key, icon, title, description, href, image, imageAlt}
     },
+    accordionSections{
+      eyebrow,
+      sections[]{
+        _key, tag, heading, headingAccent,
+        intro, image, imageAlt,
+        services[]{title, items},
+        audience{label, items},
+        benefits{label, items},
+        singaporeSubTabs[]{label, icon, intro, services[]{title, items}, audience{label, items}, benefits{label, items}},
+        ctaLabel, ctaHref, ctaIcon, crossLinkText
+      }
+    },
     whySection{
-      title,
+      eyebrow, title,
       items[]{_key, icon, title, description}
     },
     processSection{
-      title,
+      eyebrow, title,
       steps[]{_key, icon, title, description}
     },
     testimonialsSection{
-      title,
+      eyebrow, title,
       testimonials[]{_key, name, role, quote, rating}
     },
     partnersSection{
-      title,
+      eyebrow, title,
       "partners": partners[]->{_id, name, logo, website}
     },
-    faqsSection{title, faqs[]{_key, question, answer}},
+    faqsSection{eyebrow, title, faqs[]{_key, question, answer}},
     seo{title, description}
   }
 `)

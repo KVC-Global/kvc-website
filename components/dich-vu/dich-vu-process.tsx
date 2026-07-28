@@ -31,6 +31,7 @@ export function DichVuProcess({
   data?: DichVuProcess;
 }) {
   const steps = data?.steps?.length ? data.steps : FALLBACK_STEPS;
+  const eyebrow = data?.eyebrow ?? "QUY TRÌNH";
   const title = data?.title ?? "Quy trình làm việc";
 
   return (
@@ -47,7 +48,7 @@ export function DichVuProcess({
           className="text-center"
         >
           <span className="mb-3 block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-            QUY TRÌNH
+            {eyebrow}
           </span>
           <h2
             id="dich-vu-process-heading"

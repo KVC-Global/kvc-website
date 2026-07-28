@@ -6,15 +6,21 @@ import Link from "next/link"
 import { motion, AnimatePresence, Variants } from "framer-motion"
 import {
   ArrowRight,
+  Briefcase,
   Building2,
   Check,
   ChevronDown,
+  Globe2,
   GraduationCap,
   Headphones,
   Landmark,
   MapPin,
+  Scale,
   Users,
 } from "lucide-react"
+
+import type { DichVuServiceCategories, DichVuServiceAccordion, DichVuServiceAccordionSection, DichVuSingaporeSubTab as DichVuSingaporeSubTabType } from "@/sanity/service-pages"
+import { urlFor } from "@/sanity/image"
 
 import { Container } from "@/components/ui/container"
 import { cn } from "@/lib/utils"
@@ -53,10 +59,12 @@ interface AccordionSection {
   intro: string[]
   services: ServiceItem[]
   audience?: { label: string; items: string[] }
-  benefits?: string[]
+  benefits?: { label: string; items: string[] }
   cta: { href: string; label: string; icon?: typeof GraduationCap }
   image: string
   imageAlt: string
+  singaporeSubTabs?: DichVuSingaporeSubTabType[]
+  crossLinkText?: string
 }
 
 interface SingaporeSubTab {
@@ -65,7 +73,7 @@ interface SingaporeSubTab {
   intro: string[]
   services: ServiceItem[]
   audience?: { label: string; items: string[] }
-  benefits?: string[]
+  benefits?: { label: string; items: string[] }
   icon: typeof Building2
 }
 
@@ -254,6 +262,14 @@ const ACCORDION_SECTIONS: AccordionSection[] = [
   },
 ]
 
+/* ─── Helpers ─── */
+
+function getIconComponent(iconName?: string) {
+  if (!iconName) return undefined
+  const icons = { Building2, Users, Headphones, GraduationCap, Landmark, MapPin, Globe2, Scale, Briefcase }
+  return (icons as Record<string, React.ComponentType>)[iconName]
+}
+
 /* ─── Sub-components ─── */
 
 /** Animated chevron that rotates when open. */
@@ -338,15 +354,31 @@ function TagList({
 }
 
 /** Singapore sub-tab content area. */
-function SingaporeSubTabs() {
-  const [activeTab, setActiveTab] = useState(SINGAPORE_SUB_TABS[0].id)
-  const current = SINGAPORE_SUB_TABS.find((t) => t.id === activeTab)!
+function SingaporeSubTabs({ cmsData }: { cmsData?: DichVuSingaporeSubTabType[] }) {
+  // Build sub-tabs from CMS or use hardcoded fallback
+  const subTabs: SingaporeSubTab[] =
+    cmsData && cmsData.length > 0
+      ? cmsData.map((t) => ({
+          id: t.label?.toLowerCase().replace(/\s+/g, "-") ?? "",
+          label: t.label ?? "",
+          icon: getIconComponent(t.icon) ?? Building2,
+          intro: t.intro ?? [],
+          services: (t.services ?? []).map((s) => ({ title: s.title ?? "", items: s.items ?? [] })),
+          audience: t.audience?.items?.length
+            ? { label: t.audience.label ?? "", items: t.audience.items }
+            : undefined,
+          benefits: t.benefits?.items?.length ? { label: t.benefits.label ?? "Lợi ích", items: t.benefits.items } : undefined,
+        }))
+      : SINGAPORE_SUB_TABS
+
+  const [activeTab, setActiveTab] = useState(subTabs[0]?.id ?? "")
+  const current = subTabs.find((t) => t.id === activeTab)!
 
   return (
     <div className="mt-6">
       {/* Tab buttons */}
       <div className="flex flex-wrap gap-2 border-b border-border pb-3">
-        {SINGAPORE_SUB_TABS.map((tab) => {
+        {subTabs.map((tab) => {
           const TabIcon = tab.icon
           const isActive = activeTab === tab.id
           return (
@@ -397,8 +429,8 @@ function SingaporeSubTabs() {
 
           {current.benefits && (
             <TagList
-              label="Lợi ích"
-              items={current.benefits}
+              label={current.benefits.label}
+              items={current.benefits.items}
               variant="benefit"
             />
           )}
@@ -497,7 +529,7 @@ function AccordionPanel({
 
                 {/* Singapore gets sub-tabs; others get regular check-list */}
                 {isSingapore ? (
-                  <SingaporeSubTabs />
+                  <SingaporeSubTabs cmsData={section.singaporeSubTabs} />
                 ) : (
                   <div className="mt-5">
                     <ServiceCheckList services={section.services} />
@@ -513,13 +545,10 @@ function AccordionPanel({
                 )}
 
                 {/* Cross-link paragraph for education section */}
-                {section.id === "cross" && (
+                {(section.crossLinkText || section.id === "cross") && (
                   <p className="mt-5 text-sm leading-relaxed text-brand-dark/70 sm:text-base">
-                    Thông qua mạng lưới đối tác giáo dục quốc tế, KVC Global
-                    giúp các gia đình xây dựng lộ trình học tập phù hợp với mục
-                    tiêu dài hạn của con em, tương tự mô hình kết hợp giữa tư
-                    vấn giáo dục và phát triển sự nghiệp được nhiều đơn vị quốc
-                    tế triển khai.
+                    {section.crossLinkText ??
+                      `Thông qua mạng lưới đối tác giáo dục quốc tế, KVC Global giúp các gia đình xây dựng lộ trình học tập phù hợp với mục tiêu dài hạn của con em, tương tự mô hình kết hợp giữa tư vấn giáo dục và phát triển sự nghiệp được nhiều đơn vị quốc tế triển khai.`}
                   </p>
                 )}
 
@@ -557,17 +586,67 @@ function AccordionPanel({
 
 /* ─── Main export ─── */
 
-export function DichVuServices() {
+export function DichVuServices({
+  className,
+  data,
+  accordionData,
+}: {
+  className?: string
+  data?: DichVuServiceCategories
+  accordionData?: DichVuServiceAccordion
+}) {
   const [openId, setOpenId] = useState<string | null>(null)
 
   const toggle = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id))
   }
 
+  const cmsCategories = data?.categories
+  const sectionEyebrow = data?.eyebrow ?? "DỊCH VỤ CỦA CHÚNG TÔI"
+  const sectionTitle = data?.title ?? "Giải pháp theo từng thị trường"
+
+  // Build CMS accordion sections when available
+  const hardcodedSectionMap = new Map(ACCORDION_SECTIONS.map((s) => [s.tag, s]))
+  const cmsAccordionSections: AccordionSection[] | null =
+    accordionData?.sections && accordionData.sections.length > 0
+      ? accordionData.sections.map((sec, idx) => {
+          const isSingapore = sec.tag === "Singapore"
+          const fallback = hardcodedSectionMap.get(sec.tag ?? "")
+          return {
+            id: sec.tag?.toLowerCase().replace(/\s+/g, "-") ?? `section-${idx}`,
+            icon: isSingapore ? Landmark : sec.tag === "Việt Nam" ? MapPin : Building2,
+            tag: sec.tag ?? "",
+            heading: sec.heading ?? "",
+            headingAccent: sec.headingAccent ?? "",
+            background: idx % 2 === 0 ? "bg-white" : "bg-brand-light",
+            intro: sec.intro ?? [],
+            services: (sec.services ?? []).map((s) => ({
+              title: s.title ?? "",
+              items: s.items ?? [],
+            })),
+            audience: sec.audience?.items?.length
+              ? { label: sec.audience.label ?? "", items: sec.audience.items }
+              : undefined,
+            benefits: sec.benefits?.items?.length ? { label: sec.benefits.label ?? "Lợi ích", items: sec.benefits.items } : undefined,
+            cta: {
+              href: sec.ctaHref ?? "#",
+              label: sec.ctaLabel ?? "",
+              ...(sec.ctaIcon ? { icon: getIconComponent(sec.ctaIcon) } : {}),
+            },
+            image: sec.image ? urlFor(sec.image).url() : (fallback?.image ?? ""),
+            imageAlt: sec.imageAlt || (fallback?.imageAlt ?? ""),
+            ...(isSingapore ? { singaporeSubTabs: sec.singaporeSubTabs ?? [] } : {}),
+            ...(sec.crossLinkText ? { crossLinkText: sec.crossLinkText } : {}),
+          }
+        })
+      : null
+
+  const displayAccordionSections = cmsAccordionSections ?? ACCORDION_SECTIONS
+
   return (
     <>
       {/* ─── Section header ─── */}
-      <section className="w-full bg-white pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 dark:bg-background">
+      <section className={cn("w-full bg-white pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 dark:bg-background", className)}>
         <Container>
           <motion.div
             variants={fadeUp}
@@ -577,19 +656,106 @@ export function DichVuServices() {
             className="flex flex-col items-center text-center"
           >
             <span className="mb-3 block text-center font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-              DỊCH VỤ CỦA CHÚNG TÔI
+              {sectionEyebrow}
             </span>
             <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl dark:text-foreground">
-              Giải pháp theo từng thị trường
+              {sectionTitle}
             </h2>
             <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
           </motion.div>
         </Container>
       </section>
 
-      {/* ─── Accordion cards ─── */}
-      <section className="w-full bg-white pb-20 sm:pb-24 md:pb-28 dark:bg-background">
+      {/* ─── CMS Category Cards (when available) ─── */}
+      {cmsCategories && cmsCategories.length > 0 && (
+        <section className="w-full bg-white pb-10 sm:pb-16 dark:bg-background">
+          <Container>
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              whileInView="visible"
+              viewport={inView}
+              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+            >
+              {cmsCategories.map((cat) => (
+                <motion.div
+                  key={cat._key ?? cat.title}
+                  variants={fadeUp}
+                  className="group relative flex flex-col overflow-hidden rounded-xl border border-border/60 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-gold/30 hover:shadow-lg dark:border-border/10 dark:bg-card"
+                >
+                  {/* Image */}
+                  {cat.image && (
+                    <div className="relative aspect-[16/10] w-full overflow-hidden">
+                      <Image
+                        src={urlFor(cat.image).width(600).height(375).url()}
+                        alt={cat.imageAlt ?? cat.title ?? "Service category"}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
+                      />
+                    </div>
+                  )}
+
+                  {/* Content */}
+                  <div className="flex flex-1 flex-col p-5 sm:p-6">
+                    {cat.icon && (() => {
+                      const IconComp = getIconComponent(cat.icon)
+                      return IconComp ? (
+                        <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-brand-blue-mid/10">
+                          <IconComp className="h-5 w-5 text-brand-gold" strokeWidth={1.75} />
+                        </div>
+                      ) : null
+                    })()}
+                    <h3 className="font-heading text-lg font-bold tracking-tight text-brand-blue dark:text-foreground">
+                      {cat.title}
+                    </h3>
+                    {cat.description && (
+                      <p className="mt-2 line-clamp-3 font-body text-sm leading-relaxed text-muted-foreground">
+                        {cat.description}
+                      </p>
+                    )}
+
+                    {/* Spacer pushes link to bottom */}
+                    <div className="mt-4 flex-1" />
+
+                    {cat.href && (
+                      <Link
+                        href={cat.href}
+                        className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-gold transition-colors hover:text-brand-blue"
+                      >
+                        Tìm hiểu thêm
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </Link>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </Container>
+        </section>
+      )}
+
+      {/* ─── Accordion cards (detailed breakdown) ─── */}
+      <section className={cn("w-full bg-white pb-20 sm:pb-24 md:pb-28 dark:bg-background", cmsCategories && cmsCategories.length > 0 && "pt-0")}>
         <Container>
+          {cmsCategories && cmsCategories.length > 0 && (
+            <motion.div
+              variants={fadeUp}
+              initial="hidden"
+              whileInView="visible"
+              viewport={inView}
+              className="mb-10 flex flex-col items-center text-center"
+            >
+              <span className="mb-2 block font-heading text-xs font-bold tracking-wider text-brand-blue/60 uppercase">
+                {accordionData?.eyebrow ?? "CHI TIẾT DỊCH VỤ"}
+              </span>
+              <span aria-hidden="true" className="mx-auto block h-[2px] w-12 rounded-full bg-brand-gold/40" />
+            </motion.div>
+          )}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -597,7 +763,7 @@ export function DichVuServices() {
             viewport={inView}
             className="mx-auto flex max-w-5xl flex-col gap-5 sm:gap-6"
           >
-            {ACCORDION_SECTIONS.map((section, idx) => (
+            {displayAccordionSections.map((section, idx) => (
               <AccordionPanel
                 key={section.id}
                 section={section}

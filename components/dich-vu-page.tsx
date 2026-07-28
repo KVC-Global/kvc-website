@@ -18,8 +18,8 @@ export function DichVuPage({ content }: Props) {
   return (
     <>
       <DichVuHero data={content?.heroSection} />
-      <DichVuIntro />
-      <DichVuServices />
+      <DichVuIntro data={content?.introSection} />
+      <DichVuServices data={content?.serviceCategories} accordionData={content?.accordionSections} />
       <DichVuWhy data={content?.whySection} />
       <DichVuProcess data={content?.processSection} />
       <DichVuTestimonials data={content?.testimonialsSection} />

@@ -31,6 +31,8 @@ import {
 } from "lucide-react"
 import { motion, useInView, Variants } from "framer-motion"
 
+import type { KhoaHocOnlinePrograms } from "@/sanity/service-pages"
+
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 
@@ -202,6 +204,12 @@ const RELATED_SERVICES = [
   },
 ] as const
 
+function getIconComponent(iconName?: string) {
+  if (!iconName) return null
+  const icons: Record<string, React.ComponentType> = { Clock, Wallet, FileText, Briefcase, TrendingUp, Building2, Laptop, Brain, ShieldCheck, Check, PlusCircle, Lightbulb, Compass, ClipboardList, FileSignature, UserCheck, Handshake, GraduationCap, IdCard, Languages, Truck, Hotel }
+  return icons[iconName] || null
+}
+
 const fadeUpVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
@@ -217,7 +225,13 @@ const staggerContainer: Variants = {
   },
 }
 
-export function OnlineDetails({ className }: { className?: string }) {
+export function OnlineDetails({
+  className,
+  data,
+}: {
+  className?: string
+  data?: KhoaHocOnlinePrograms
+}) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [activeIdx, setActiveIdx] = useState(0)
   const [cardsPerView, setCardsPerView] = useState(1)
@@ -271,6 +285,18 @@ export function OnlineDetails({ className }: { className?: string }) {
       setActiveIdx(Math.min(Math.max(0, index), pageCount - 1))
     }
   }
+
+  // CMS-driven or fallback
+  const displayMajors = (data?.items && data.items.length > 0 ? data.items : MAJORS).map(m => ({
+    icon: getIconComponent(m.icon),
+    name: m.name ?? m.title ?? '',
+  }))
+  const displayRequirements = data?.requirements?.length ? data.requirements : REQUIREMENTS
+  const displayProspects = data?.prospects?.length ? data.prospects : GRADUATION_OPPORTUNITIES
+  const displaySupportSteps = (data?.supportSteps?.length ? data.supportSteps : SUPPORT_STEPS).map(s => ({
+    icon: getIconComponent(s.icon) ?? Check,
+    text: s.text ?? '',
+  }))
 
   const [openFaqs, setOpenFaqs] = useState<Record<number, boolean>>({})
   const toggleFaq = (idx: number) => {
@@ -428,8 +454,8 @@ export function OnlineDetails({ className }: { className?: string }) {
             </div>
 
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-              {MAJORS.map((major, idx) => {
-                const Icon = major.icon
+              {displayMajors.map((major, idx) => {
+                const Icon = major.icon as React.ComponentType
                 return (
                   <div
                     key={idx}
@@ -469,7 +495,7 @@ export function OnlineDetails({ className }: { className?: string }) {
                   </div>
 
                   <ul className="space-y-4" aria-label="Điều kiện tham gia">
-                    {REQUIREMENTS.map((req, idx) => (
+                    {displayRequirements.map((req, idx) => (
                       <li key={idx} className="flex items-start gap-3">
                         <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-emerald-500 bg-emerald-50 text-emerald-600">
                           <Check className="h-3.5 w-3.5" strokeWidth={3} />
@@ -548,7 +574,7 @@ export function OnlineDetails({ className }: { className?: string }) {
                   className="mt-8 space-y-4"
                   aria-label="Cơ hội sau tốt nghiệp"
                 >
-                  {GRADUATION_OPPORTUNITIES.map((opp, idx) => (
+                  {displayProspects.map((opp, idx) => (
                     <li key={idx} className="flex items-start gap-3">
                       <div className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
                         <Check
@@ -592,9 +618,9 @@ export function OnlineDetails({ className }: { className?: string }) {
             </div>
 
             <div className="mt-4 flex flex-col items-stretch justify-between gap-2 lg:flex-row">
-              {SUPPORT_STEPS.map((step, idx) => {
+              {displaySupportSteps.map((step, idx) => {
                 const Icon = step.icon
-                const isLast = idx === SUPPORT_STEPS.length - 1
+                const isLast = idx === displaySupportSteps.length - 1
                 return (
                   <div
                     key={idx}

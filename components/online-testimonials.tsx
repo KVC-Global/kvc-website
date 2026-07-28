@@ -41,7 +41,7 @@ export function OnlineTestimonials({
           className="text-center"
         >
           <span className="mb-3 block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-            CẢM NHẬN
+            {data?.eyebrow ?? "CẢM NHẬN"}
           </span>
           <h2
             id="online-testimonials-heading"

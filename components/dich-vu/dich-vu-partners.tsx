@@ -37,7 +37,7 @@ export function DichVuPartners({
           className="text-center"
         >
           <span className="mb-3 block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-            ĐỐI TÁC
+            {data?.eyebrow ?? "ĐỐI TÁC"}
           </span>
           <h2
             id="dich-vu-partners-heading"
@@ -55,25 +55,35 @@ export function DichVuPartners({
           variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.08 } } }}
           className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
         >
-          {partners.map((partner) => (
-            <motion.div
-              key={partner._id ?? partner.name}
-              variants={fadeUp}
-              className="flex items-center justify-center rounded-lg border border-border/60 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md"
-            >
-              {partner.logo ? (
-                <Image
-                  src={urlFor(partner.logo).width(160).height(80).url()}
-                  alt={partner.name}
-                  width={160}
-                  height={80}
-                  className="h-12 w-auto object-contain"
-                />
-              ) : (
-                <span className="font-heading text-sm font-bold text-muted-foreground">{partner.name}</span>
-              )}
-            </motion.div>
-          ))}
+          {partners.map((partner) => {
+            const content = (
+              <motion.div
+                key={partner._id ?? partner.name}
+                variants={fadeUp}
+                className="flex items-center justify-center rounded-lg border border-border/60 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md"
+              >
+                {partner.logo ? (
+                  <Image
+                    src={urlFor(partner.logo).width(160).height(80).url()}
+                    alt={partner.name}
+                    width={160}
+                    height={80}
+                    className="h-12 w-auto object-contain"
+                  />
+                ) : (
+                  <span className="font-heading text-sm font-bold text-muted-foreground">{partner.name}</span>
+                )}
+              </motion.div>
+            );
+            if (partner.website) {
+              return (
+                <a key={partner._id ?? partner.name} href={partner.website} target="_blank" rel="noopener noreferrer" className="block">
+                  {content}
+                </a>
+              );
+            }
+            return content;
+          })}
         </motion.div>
       </Container>
     </section>
