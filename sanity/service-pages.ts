@@ -39,94 +39,7 @@ export type PageSeo = {
   description?: string;
 };
 
-// --- Khoa Hoc Online Page ---
-
-export type KhoaHocOnlineHero = {
-  eyebrow?: string;
-  title?: string;
-  description?: string;
-  primaryButtonLabel?: string;
-  primaryButtonHref?: string;
-  secondaryButtonLabel?: string;
-  secondaryButtonHref?: string;
-  stats?: Array<{
-    _key?: string;
-    icon?: string;
-    value?: string;
-    label?: string;
-  }>;
-};
-
-export type KhoaHocOnlineIntro = {
-  title?: string;
-  highlightText?: string;
-  paragraphs?: string[];
-  bullets?: string[];
-  image?: SanityImage;
-  imageAlt?: string;
-};
-
-export type KhoaHocOnlineProgram = {
-  _key?: string;
-  icon?: string;
-  name?: string;
-  description?: string;
-  duration?: string;
-  highlights?: string[];
-};
-
-export type KhoaHocOnlinePrograms = {
-  title?: string;
-  items?: KhoaHocOnlineProgram[];
-  requirements?: string[];
-  prospects?: string[];
-  supportSteps?: Array<{ _key?: string; icon?: string; text?: string }>;
-};
-
-export type KhoaHocOnlineWhy = {
-  eyebrow?: string;
-  title?: string;
-  items?: IconItem[];
-};
-
-export type KhoaHocOnlineCta = {
-  title?: string;
-  description?: string;
-  buttonLabel?: string;
-  buttonHref?: string;
-};
-
-export type KhoaHocOnlineTestimonials = {
-  eyebrow?: string;
-  title?: string;
-  testimonials?: TestimonialItem[];
-};
-
-export type KhoaHocOnlineServices = {
-  eyebrow?: string;
-  title?: string;
-  services?: ServiceCard[];
-};
-
-export type KhoaHocOnlineFaqs = {
-  eyebrow?: string;
-  title?: string;
-  faqs?: FaqItem[];
-};
-
-export type KhoaHocOnlinePageData = {
-  heroSection?: KhoaHocOnlineHero;
-  introSection?: KhoaHocOnlineIntro;
-  programsSection?: KhoaHocOnlinePrograms;
-  whySection?: KhoaHocOnlineWhy;
-  ctaSection?: KhoaHocOnlineCta;
-  testimonialsSection?: KhoaHocOnlineTestimonials;
-  servicesSection?: KhoaHocOnlineServices;
-  faqsSection?: KhoaHocOnlineFaqs;
-  seo?: PageSeo;
-};
-
-// --- Dich Vu Page ---
+// --- Dich Vu Page (3 sections only) ---
 
 export type DichVuHero = {
   backgroundImage?: SanityImage;
@@ -160,42 +73,6 @@ export type DichVuServiceCategories = {
   eyebrow?: string;
   title?: string;
   categories?: DichVuCategory[];
-};
-
-export type DichVuWhy = {
-  eyebrow?: string;
-  title?: string;
-  items?: IconItem[];
-};
-
-export type DichVuProcessStep = IconItem;
-
-export type DichVuProcess = {
-  eyebrow?: string;
-  title?: string;
-  steps?: DichVuProcessStep[];
-};
-
-export type DichVuTestimonials = {
-  eyebrow?: string;
-  title?: string;
-  testimonials?: TestimonialItem[];
-};
-
-export type DichVuPartners = {
-  eyebrow?: string;
-  title?: string;
-  partners?: Array<{
-    _id?: string;
-    name: string;
-    logo?: SanityImage;
-    website?: string;
-  }>;
-};
-
-export type DichVuFaqs = {
-  title?: string;
-  faqs?: FaqItem[];
 };
 
 // --- Dich Vu Intro ---
@@ -304,10 +181,5 @@ export type DichVuPageData = {
   introSection?: DichVuIntro;
   serviceCategories?: DichVuServiceCategories;
   accordionSections?: DichVuServiceAccordion;
-  whySection?: DichVuWhy;
-  processSection?: DichVuProcess;
-  testimonialsSection?: DichVuTestimonials;
-  partnersSection?: DichVuPartners;
-  faqsSection?: DichVuFaqs;
   seo?: PageSeo;
 };

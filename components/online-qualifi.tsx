@@ -1,4 +1,5 @@
 "use client"
+import type { OnlineProgramPageData } from "@/sanity/service-pages"
 
 import * as React from "react"
 import Image from "next/image"
@@ -139,7 +140,7 @@ const PROGRAMS: TimelineProgram[] = [
   },
 ]
 
-export function OnlineQualifi({ className }: { className?: string }) {
+export function OnlineQualifi({ className, data }: { className?: string; data?: OnlineProgramPageData }) {
   const [activeProgramId, setActiveProgramId] = React.useState(0)
   const activeProgram = PROGRAMS[activeProgramId] || PROGRAMS[0]
   const benefitsRef = React.useRef<HTMLDivElement>(null)

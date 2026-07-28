@@ -3,9 +3,10 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion, Variants } from "framer-motion"
-import * as LucideIcons from "lucide-react"
+import { Building2, Globe2, Handshake, Users } from "lucide-react"
 
 import type { DichVuHero as DichVuHeroData } from "@/sanity/service-pages"
+import { getIcon } from "@/lib/icons"
 import { urlFor } from "@/sanity/image"
 
 import { Container } from "@/components/ui/container"
@@ -14,10 +15,10 @@ import { cn } from "@/lib/utils"
 const HERO_IMAGE = "/images/service-hero.jpg"
 
 const STATS = [
-  { icon: LucideIcons.Building2, value: "500+", label: "Doanh nghiệp thành lập" },
-  { icon: LucideIcons.Globe2, value: "2", label: "Quốc gia hoạt động" },
-  { icon: LucideIcons.Users, value: "10.000+", label: "Nhân sự được hỗ trợ" },
-  { icon: LucideIcons.Handshake, value: "15+", label: "Năm kinh nghiệm" },
+  { icon: Building2, value: "500+", label: "Doanh nghiệp thành lập" },
+  { icon: Globe2, value: "2", label: "Quốc gia hoạt động" },
+  { icon: Users, value: "10.000+", label: "Nhân sự được hỗ trợ" },
+  { icon: Handshake, value: "15+", label: "Năm kinh nghiệm" },
 ] as const
 
 const fadeUp: Variants = {
@@ -34,37 +35,39 @@ const stagger: Variants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
 }
 
-function getIcon(iconName?: string) {
-  if (!iconName) return LucideIcons.Building2;
-  const Icon = (LucideIcons as unknown as Record<string, React.ComponentType>)[iconName];
-  return Icon || LucideIcons.Building2;
-}
-
 export function DichVuHero({
   className,
   data,
 }: {
-  className?: string;
-  data?: DichVuHeroData;
+  className?: string
+  data?: DichVuHeroData
 }) {
-  // Hero image — use CMS if available, else fallback
+  // CMS-driven or fallback
   const heroImage = data?.backgroundImage
     ? urlFor(data.backgroundImage).url()
-    : HERO_IMAGE;
-
-  // Stats source — CMS if non-empty, else hardcoded fallback
-  const displayStats = data?.stats && data.stats.length > 0
-    ? data.stats.map((s) => ({
-        icon: getIcon(s.icon),
-        value: s.value ?? "",
-        label: s.label ?? "",
-      }))
-    : [...STATS];
-
-  // Title lines — split on \n so CMS and fallback render uniformly
-  const titleLines = (
-    data?.title ?? "Đồng hành cùng doanh nghiệp\ntrên hành trình mở rộng toàn cầu"
-  ).split("\n");
+    : HERO_IMAGE
+  const heroAlt =
+    data?.backgroundImageAlt ?? "Văn phòng KVC Global tại Singapore"
+  const eyebrow =
+    data?.eyebrow ?? "Giải pháp cho doanh nghiệp"
+  const title =
+    data?.title ??
+    "Đồng hành cùng doanh nghiệp\ntrên hành trình mở rộng toàn cầu"
+  const titleLines = title.split("\n")
+  const primaryButtonLabel =
+    data?.primaryButtonLabel ?? "Khám phá dịch vụ"
+  const primaryButtonHref = data?.primaryButtonHref ?? "#dich-vu"
+  const secondaryButtonLabel =
+    data?.secondaryButtonLabel ?? "Đăng ký tư vấn miễn phí"
+  const secondaryButtonHref = data?.secondaryButtonHref ?? "/lien-he"
+  const displayStats =
+    data?.stats && data.stats.length > 0
+      ? data.stats.map((s) => ({
+          icon: getIcon(s.icon, Building2),
+          value: s.value ?? "",
+          label: s.label ?? "",
+        }))
+      : [...STATS]
 
   return (
     <section
@@ -77,7 +80,7 @@ export function DichVuHero({
     >
       <Image
         src={heroImage}
-        alt={data?.backgroundImageAlt || "Văn phòng KVC Global tại Singapore"}
+        alt={heroAlt}
         fill
         priority
         sizes="100vw"
@@ -127,7 +130,7 @@ export function DichVuHero({
             variants={fadeUp}
             className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm"
           >
-            {data?.eyebrow ?? "Giải pháp cho doanh nghiệp"}
+            {eyebrow}
           </motion.span>
 
           {/* Main Title */}
@@ -143,26 +146,16 @@ export function DichVuHero({
             ))}
           </motion.h1>
 
-          {/* Description — only rendered when CMS provides it */}
-          {data?.description && (
-            <motion.p
-              variants={fadeUp}
-              className="mt-4 max-w-xl font-body text-base leading-relaxed text-muted-foreground sm:text-lg"
-            >
-              {data.description}
-            </motion.p>
-          )}
-
           {/* Call to Actions (CTAs) */}
           <motion.div
             variants={fadeUp}
             className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center"
           >
             <Link
-              href={data?.primaryButtonHref ?? "#dich-vu"}
+              href={primaryButtonHref}
               className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
-              {data?.primaryButtonLabel ?? "Khám phá dịch vụ"}
+              {primaryButtonLabel}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -178,10 +171,10 @@ export function DichVuHero({
             </Link>
 
             <Link
-              href={data?.secondaryButtonHref ?? "/lien-he"}
+              href={secondaryButtonHref}
               className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-              {data?.secondaryButtonLabel ?? "Đăng ký tư vấn miễn phí"}
+              {secondaryButtonLabel}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -214,7 +207,7 @@ export function DichVuHero({
                   const Icon = stat.icon
                   return (
                     <motion.div
-                      key={stat.label ?? index}
+                      key={stat.label}
                       variants={fadeUp}
                       className="relative flex items-center justify-center gap-3 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 lg:min-h-[150px] lg:py-7"
                     >

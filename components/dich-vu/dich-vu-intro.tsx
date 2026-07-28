@@ -37,7 +37,7 @@ function getIcon(iconName?: string) {
   return Icon || null
 }
 
-const FALLBACK_PILLARS = [
+const PILLARS = [
   { icon: Building2, label: "Thành lập\ndoanh nghiệp" },
   { icon: Scale, label: "Pháp lý" },
   { icon: Users, label: "Nhân sự" },
@@ -56,19 +56,18 @@ export function DichVuIntro({
   className?: string
   data?: DichVuIntroData
 }) {
-  // Resolve pillars: CMS first, then fallback
+  const eyebrow = data?.eyebrow ?? "DỊCH VỤ CỐT LÕI"
+  const title = data?.title ?? "Giải pháp toàn diện cho doanh nghiệp"
   const displayPillars =
     data?.pillars && data.pillars.length > 0
       ? data.pillars.map((p) => ({
           icon: getIcon(p.icon) ?? Building2,
           label: p.label ?? "",
         }))
-      : [...FALLBACK_PILLARS]
-
-  const eyebrow = data?.eyebrow ?? "DỊCH VỤ CỐT LÕI"
-  const title = data?.title ?? "Giải pháp toàn diện cho doanh nghiệp"
+      : [...PILLARS]
   const paragraph1 = data?.paragraph1 ?? FALLBACK_PARAGRAPH_1
   const paragraph2 = data?.paragraph2 ?? FALLBACK_PARAGRAPH_2
+
   return (
     <section
       aria-label="Giới thiệu dịch vụ"

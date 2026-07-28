@@ -17,6 +17,8 @@ import {
   FileText,
 } from "lucide-react"
 
+import type { OnlineProgramPageData } from "@/sanity/service-pages"
+
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 
@@ -217,7 +219,7 @@ const PARENT_REASONS = [
   "Kết nối với các chương trình chuyển tiếp và tuyển sinh quốc tế.",
 ]
 
-export function OnlineOssd({ className }: { className?: string }) {
+export function OnlineOssd({ className, data }: { className?: string; data?: OnlineProgramPageData }) {
   const [currentSubject, setCurrentSubject] = React.useState(0)
 
   const nextSubject = React.useCallback(() => {

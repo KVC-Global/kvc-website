@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { OnlineProgramPage } from "@/components/online-program-page"
+import { OnlineOssd } from "@/components/online-ossd"
 import { getLocale } from "@/lib/i18n-server"
 import { sanityFetch } from "@/sanity/live"
 import { ONLINE_PROGRAM_PAGE_QUERY } from "@/sanity/queries"
@@ -11,7 +11,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const page = data as OnlineProgramPageData | null
   return {
     title: page?.seo?.title || "OSSD Ontario | KVC Global",
-    description: page?.seo?.description || "OSSD Canada — Bằng Tốt nghiệp Trung học Phổ thông Ontario.",
+    description: page?.seo?.description || "",
     openGraph: {
       title: page?.seo?.title || "OSSD Ontario | KVC Global",
       description: page?.seo?.description || "",
@@ -21,8 +21,8 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function OssdPage() {
+export default async function Page() {
   const locale = await getLocale()
   const { data } = await sanityFetch({ query: ONLINE_PROGRAM_PAGE_QUERY, params: { lang: locale, slug: "ossd" } })
-  return <OnlineProgramPage data={data as OnlineProgramPageData | null || undefined} />
+  return <OnlineOssd data={data as OnlineProgramPageData | null || undefined} />
 }
