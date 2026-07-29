@@ -103,7 +103,7 @@ export const DICH_VU_PAGE_QUERY = defineQuery(`
   *[_type == "dichVuPage" && language == $lang][0]{
     heroSection{
       backgroundImage, backgroundImageAlt,
-      eyebrow, title, description,
+      eyebrow, title,
       primaryButtonLabel, primaryButtonHref,
       secondaryButtonLabel, secondaryButtonHref,
       stats[]{_key, icon, value, label}
@@ -113,12 +113,8 @@ export const DICH_VU_PAGE_QUERY = defineQuery(`
       pillars[]{_key, icon, label},
       paragraph1, paragraph2
     },
-    serviceCategories{
-      eyebrow, title,
-      categories[]{_key, icon, title, description, href, image, imageAlt}
-    },
+    serviceCategories{eyebrow, title},
     accordionSections{
-      eyebrow,
       sections[]{
         _key, tag, heading, headingAccent,
         intro, image, imageAlt,
@@ -128,10 +124,6 @@ export const DICH_VU_PAGE_QUERY = defineQuery(`
         singaporeSubTabs[]{label, icon, intro, services[]{title, items}, audience{label, items}, benefits{label, items}},
         ctaLabel, ctaHref, ctaIcon, crossLinkText
       }
-    },
-    whySection{
-      eyebrow, title,
-      items[]{_key, icon, title, description}
     },
     seo{title, description}
   }

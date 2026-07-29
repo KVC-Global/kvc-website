@@ -46,7 +46,6 @@ export type DichVuHero = {
   backgroundImageAlt?: string;
   eyebrow?: string;
   title?: string;
-  description?: string;
   primaryButtonLabel?: string;
   primaryButtonHref?: string;
   secondaryButtonLabel?: string;
@@ -59,20 +58,9 @@ export type DichVuHero = {
   }>;
 };
 
-export type DichVuCategory = {
-  _key?: string;
-  icon?: string;
-  title?: string;
-  description?: string;
-  href?: string;
-  image?: SanityImage;
-  imageAlt?: string;
-};
-
 export type DichVuServiceCategories = {
   eyebrow?: string;
   title?: string;
-  categories?: DichVuCategory[];
 };
 
 // --- Dich Vu Intro ---
@@ -130,7 +118,6 @@ export type DichVuServiceAccordionSection = {
 };
 
 export type DichVuServiceAccordion = {
-  eyebrow?: string;
   sections?: DichVuServiceAccordionSection[];
 };
 

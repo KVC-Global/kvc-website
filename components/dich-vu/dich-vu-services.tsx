@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import type { DichVuServiceCategories, DichVuServiceAccordion, DichVuServiceAccordionSection, DichVuSingaporeSubTab as DichVuSingaporeSubTabType } from "@/sanity/service-pages"
+import type { DichVuServiceCategories, DichVuServiceAccordion } from "@/sanity/service-pages"
 import { urlFor } from "@/sanity/image"
 import Image from "next/image"
 import Link from "next/link"
@@ -19,6 +19,7 @@ import {
 } from "lucide-react"
 
 import { Container } from "@/components/ui/container"
+import { getIcon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 
 /* ─── Animation variants ─── */
@@ -56,6 +57,9 @@ interface AccordionSection {
   services: ServiceItem[]
   audience?: { label: string; items: string[] }
   benefits?: string[]
+  benefitsLabel?: string
+  singaporeSubTabs?: SingaporeSubTab[]
+  crossLinkText?: string
   cta: { href: string; label: string; icon?: typeof GraduationCap }
   image: string
   imageAlt: string
@@ -68,6 +72,7 @@ interface SingaporeSubTab {
   services: ServiceItem[]
   audience?: { label: string; items: string[] }
   benefits?: string[]
+  benefitsLabel?: string
   icon: typeof Building2
 }
 
@@ -251,6 +256,8 @@ const ACCORDION_SECTIONS: AccordionSection[] = [
       label: "Tìm hiểu chương trình du học",
       icon: GraduationCap,
     },
+    crossLinkText:
+      "Thông qua mạng lưới đối tác giáo dục quốc tế, KVC Global giúp các gia đình xây dựng lộ trình học tập phù hợp với mục tiêu dài hạn của con em, tương tự mô hình kết hợp giữa tư vấn giáo dục và phát triển sự nghiệp được nhiều đơn vị quốc tế triển khai.",
     image: "/images/student-portrait.jpg",
     imageAlt: "Tư vấn du học cho gia đình doanh nhân",
   },
@@ -340,15 +347,15 @@ function TagList({
 }
 
 /** Singapore sub-tab content area. */
-function SingaporeSubTabs() {
-  const [activeTab, setActiveTab] = useState(SINGAPORE_SUB_TABS[0].id)
-  const current = SINGAPORE_SUB_TABS.find((t) => t.id === activeTab)!
+function SingaporeSubTabs({ tabs }: { tabs: SingaporeSubTab[] }) {
+  const [activeTab, setActiveTab] = useState(tabs[0].id)
+  const current = tabs.find((t) => t.id === activeTab) ?? tabs[0]
 
   return (
     <div className="mt-6">
       {/* Tab buttons */}
       <div className="flex flex-wrap gap-2 border-b border-border pb-3">
-        {SINGAPORE_SUB_TABS.map((tab) => {
+        {tabs.map((tab) => {
           const TabIcon = tab.icon
           const isActive = activeTab === tab.id
           return (
@@ -399,7 +406,7 @@ function SingaporeSubTabs() {
 
           {current.benefits && (
             <TagList
-              label="Lợi ích"
+              label={current.benefitsLabel || "Lợi ích"}
               items={current.benefits}
               variant="benefit"
             />
@@ -499,7 +506,13 @@ function AccordionPanel({
 
                 {/* Singapore gets sub-tabs; others get regular check-list */}
                 {isSingapore ? (
-                  <SingaporeSubTabs />
+                  <SingaporeSubTabs
+                    tabs={
+                      section.singaporeSubTabs?.length
+                        ? section.singaporeSubTabs
+                        : SINGAPORE_SUB_TABS
+                    }
+                  />
                 ) : (
                   <div className="mt-5">
                     <ServiceCheckList services={section.services} />
@@ -514,14 +527,17 @@ function AccordionPanel({
                   />
                 )}
 
-                {/* Cross-link paragraph for education section */}
-                {section.id === "cross" && (
+                {section.benefits?.length ? (
+                  <TagList
+                    label={section.benefitsLabel || "Lợi ích"}
+                    items={section.benefits}
+                    variant="benefit"
+                  />
+                ) : null}
+
+                {section.crossLinkText && (
                   <p className="mt-5 text-sm leading-relaxed text-brand-dark/70 sm:text-base">
-                    Thông qua mạng lưới đối tác giáo dục quốc tế, KVC Global
-                    giúp các gia đình xây dựng lộ trình học tập phù hợp với mục
-                    tiêu dài hạn của con em, tương tự mô hình kết hợp giữa tư
-                    vấn giáo dục và phát triển sự nghiệp được nhiều đơn vị quốc
-                    tế triển khai.
+                    {section.crossLinkText}
                   </p>
                 )}
 
@@ -530,9 +546,9 @@ function AccordionPanel({
                     href={section.cta.href}
                     className="group mt-8 inline-flex w-fit items-center gap-2 rounded-sm bg-brand-blue px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg sm:px-7 sm:py-3.5"
                   >
-                    {"icon" in section.cta && section.cta.icon && (
-                      <GraduationCap className="h-4 w-4" />
-                    )}
+                    {section.cta.icon ? (
+                      <section.cta.icon className="h-4 w-4" />
+                    ) : null}
                     {section.cta.label}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                   </Link>
@@ -580,10 +596,16 @@ export function DichVuServices({
   const displaySections =
     accordionData?.sections && accordionData.sections.length > 0
       ? accordionData.sections.map((sec, idx) => {
-          const fallback = hardcodedSectionMap.get(sec.tag ?? "")
+          const fallback =
+            hardcodedSectionMap.get(sec.tag ?? "") ?? ACCORDION_SECTIONS[idx]
           return {
             id: sec.tag?.toLowerCase().replace(/\s+/g, "-") ?? `section-${idx}`,
-            icon: sec.tag === "Singapore" ? Landmark : sec.tag === "Việt Nam" ? MapPin : Building2,
+            icon:
+              sec.tag === "Singapore"
+                ? Landmark
+                : sec.tag === "Việt Nam"
+                  ? MapPin
+                  : Building2,
             tag: sec.tag ?? "",
             heading: sec.heading ?? "",
             headingAccent: sec.headingAccent ?? "",
@@ -597,14 +619,32 @@ export function DichVuServices({
               ? { label: sec.audience.label ?? "", items: sec.audience.items }
               : undefined,
             benefits: sec.benefits?.items,
+            benefitsLabel: sec.benefits?.label || undefined,
+            singaporeSubTabs: sec.singaporeSubTabs?.length
+              ? sec.singaporeSubTabs.map((tab, tabIdx) => ({
+                  id: `sg-${tabIdx}`,
+                  label: tab.label ?? "",
+                  intro: tab.intro ?? [],
+                  services: (tab.services ?? []).map((s) => ({
+                    title: s.title ?? "",
+                    items: s.items ?? [],
+                  })),
+                  audience: tab.audience?.items?.length
+                    ? { label: tab.audience.label ?? "", items: tab.audience.items }
+                    : undefined,
+                  benefits: tab.benefits?.items,
+                  benefitsLabel: tab.benefits?.label || undefined,
+                  icon: getIcon(tab.icon, Building2),
+                }))
+              : undefined,
+            crossLinkText: sec.crossLinkText || undefined,
             cta: {
               href: sec.ctaHref ?? "#",
               label: sec.ctaLabel ?? "",
+              icon: sec.ctaIcon ? getIcon(sec.ctaIcon, GraduationCap) : undefined,
             },
             image: sec.image ? urlFor(sec.image).url() : (fallback?.image ?? ""),
             imageAlt: sec.imageAlt || (fallback?.imageAlt ?? ""),
-            ...(sec.tag === "Singapore" ? { singaporeSubTabs: sec.singaporeSubTabs ?? [] } : {}),
-            ...(sec.crossLinkText ? { crossLinkText: sec.crossLinkText } : {}),
           }
         })
       : ACCORDION_SECTIONS
