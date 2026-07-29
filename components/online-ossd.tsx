@@ -19,6 +19,7 @@ import {
 
 import type { OnlineProgramPageData } from "@/sanity/service-pages"
 
+import { getIcon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 
@@ -246,12 +247,101 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
     return () => clearInterval(timer)
   }, [nextSubject])
 
+  // ── CMS data with hardcoded fallback ──
+  const hero = data?.heroSection
+  const heroBg = hero?.backgroundImage ?? HERO_BG
+  const parentCrumb = hero?.parentBreadcrumb ?? "Khóa Học Online"
+  const crumb = hero?.breadcrumb ?? "OSSD Ontario"
+  const tagline = hero?.tagline ?? "OSSD CANADA"
+  const heroTitle = hero?.title ?? "Bằng Tốt nghiệp Trung học Phổ thông Ontario"
+  const heroSubtitle =
+    hero?.subtitle ??
+    "Mở cánh cửa vào các trường đại học hàng đầu tại Canada, Anh, Mỹ, Úc và nhiều quốc gia khác với chương trình OSSD được công nhận quốc tế."
+  const heroDescription =
+    hero?.description ??
+    "KVC Global mang đến chương trình OSSD theo hình thức học linh hoạt, giúp học sinh xây dựng hồ sơ học thuật vững chắc và tăng lợi thế khi xét tuyển đại học toàn cầu."
+  const heroBtnLabel = hero?.primaryButtonLabel ?? "Đăng ký tư vấn miễn phí"
+  const heroBtnHref = hero?.primaryButtonHref ?? "#dang-ky"
+
+  const intro = data?.introSection
+  const introTitle = intro?.title ?? "OSSD là gì?"
+  const introImage =
+    intro?.image ??
+    "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80&auto=format&fit=crop"
+  const introImageAlt = intro?.imageAlt ?? "OSSD Ontario program"
+  const introParagraphs = intro?.paragraphs?.length
+    ? intro.paragraphs
+    : [
+        "Ontario Secondary School Diploma (OSSD) là bằng tốt nghiệp trung học phổ thông chính thức của tỉnh Ontario, Canada. Đây là chương trình giáo dục được công nhận rộng rãi bởi các trường đại học và cao đẳng tại Canada cũng như nhiều quốc gia trên thế giới.",
+        "OSSD chú trọng phát triển toàn diện cho học sinh thông qua:",
+      ]
+  const introHighlights = intro?.highlights?.length
+    ? intro.highlights
+    : [
+        "Kiến thức học thuật vững chắc.",
+        "Tư duy phản biện và giải quyết vấn đề.",
+        "Kỹ năng nghiên cứu và giao tiếp.",
+        "Hoạt động ngoại khóa và trách nhiệm cộng đồng.",
+        "Chuẩn bị sẵn sàng cho môi trường đại học quốc tế.",
+      ]
+
+  const whyTitle = data?.whySection?.title ?? "Vì sao chọn chương trình OSSD?"
+  const whyItems = data?.whySection?.items?.length
+    ? data!.whySection!.items!.map((c) => ({
+        icon: getIcon(c.icon, Globe),
+        title: c.title ?? "",
+        desc: c.description ?? "",
+      }))
+    : WHY_ITEMS
+
+  const structure = data?.structureSection
+  const structureTitle = structure?.title ?? "Cấu trúc chương trình OSSD"
+  const structureSubtitle =
+    structure?.subtitle ??
+    "Để nhận bằng OSSD, học sinh cần hoàn thành các yêu cầu tốt nghiệp theo quy định của Bộ Giáo dục Ontario."
+  const structureItems = structure?.items?.length
+    ? structure.items.map((s) => ({ title: s.title ?? "", desc: s.description ?? "" }))
+    : STRUCTURE_ITEMS
+
+  const audienceTitle = data?.audienceSection?.title ?? "Đối tượng phù hợp"
+  const audienceItems = data?.audienceSection?.items?.length
+    ? data!.audienceSection!.items!.map((a) => a.title ?? "")
+    : TARGET_AUDIENCE
+
+  const formatTitle = data?.formatSection?.title ?? "Hình thức học"
+  const formatItems = data?.formatSection?.items?.length
+    ? data!.formatSection!.items!.map((c) => ({
+        icon: getIcon(c.icon, Globe),
+        title: c.title ?? "",
+        desc: c.description ?? "",
+      }))
+    : LEARNING_FORMATS
+
+  const benefitsTitle = data?.benefitsSection?.title ?? "Lợi ích khi học OSSD tại KVC Global"
+  const benefitsItems = data?.benefitsSection?.items?.length
+    ? data!.benefitsSection!.items!.map((b) => ({
+        title: b.title ?? "",
+        desc: b.description ?? "",
+        image: b.image ?? "",
+      }))
+    : BENEFITS
+
+  const processTitle = data?.processSection?.title ?? "Quy trình đăng ký"
+  const processSteps = data?.processSection?.steps?.length
+    ? data!.processSection!.steps!.map((s) => ({ title: s.title ?? "", desc: s.description ?? "" }))
+    : STEPS
+
+  const supportTitle = data?.supportSection?.title ?? "Vì sao phụ huynh lựa chọn KVC Global?"
+  const supportItems = data?.supportSection?.items?.length
+    ? data!.supportSection!.items!
+    : PARENT_REASONS
+
   return (
     <div className={cn("w-full", className)}>
       {/* ── Hero ── */}
       <section
         className="relative w-full overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: "url(/images/study-abroad-hero.jpg)" }}
+        style={{ backgroundImage: `url(${heroBg})` }}
       >
         <div
           aria-hidden="true"
@@ -275,14 +365,14 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
               href="/khoa-hoc-online"
               className="transition-colors duration-200 hover:text-foreground"
             >
-              Khóa Học Online
+              {parentCrumb}
             </Link>
             <span className="text-muted-foreground/60 select-none">&gt;</span>
             <span
               className="font-semibold text-foreground/80"
               aria-current="page"
             >
-              OSSD Ontario
+              {crumb}
             </span>
           </motion.div>
 
@@ -293,7 +383,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
               transition={{ duration: 0.5, delay: 0.1 }}
               className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm"
             >
-              OSSD CANADA
+              {tagline}
             </motion.span>
             <motion.h1
               initial={{ opacity: 0, y: 10 }}
@@ -301,7 +391,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
               transition={{ duration: 0.5, delay: 0.2 }}
               className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl"
             >
-              Bằng Tốt nghiệp Trung học Phổ thông Ontario
+              {heroTitle}
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -309,9 +399,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
               transition={{ duration: 0.5, delay: 0.3 }}
               className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]"
             >
-              Mở cánh cửa vào các trường đại học hàng đầu tại Canada, Anh, Mỹ,
-              Úc và nhiều quốc gia khác với chương trình OSSD được công nhận
-              quốc tế.
+              {heroSubtitle}
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -319,9 +407,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
               transition={{ duration: 0.5, delay: 0.35 }}
               className="mt-3 max-w-xl font-body text-sm leading-relaxed text-brand-dark/75"
             >
-              KVC Global mang đến chương trình OSSD theo hình thức học linh
-              hoạt, giúp học sinh xây dựng hồ sơ học thuật vững chắc và tăng lợi
-              thế khi xét tuyển đại học toàn cầu.
+              {heroDescription}
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -330,10 +416,10 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
               className="mt-8"
             >
               <Link
-                href="#dang-ky"
+                href={heroBtnHref}
                 className="group inline-flex items-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg"
               >
-                Đăng ký tư vấn miễn phí
+                {heroBtnLabel}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
               </Link>
             </motion.div>
@@ -354,8 +440,8 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
             <motion.div variants={fadeUpVariants} className="lg:col-span-5">
               <div className="relative aspect-4/3 overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80&auto=format&fit=crop"
-                  alt="OSSD Ontario program"
+                  src={introImage}
+                  alt={introImageAlt}
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 42vw"
@@ -364,25 +450,21 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
             </motion.div>
             <motion.div variants={fadeUpVariants} className="lg:col-span-7">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                OSSD là gì?
+                {introTitle}
               </h2>
-              <p className="mt-5 font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
-                Ontario Secondary School Diploma (OSSD) là bằng tốt nghiệp trung
-                học phổ thông chính thức của tỉnh Ontario, Canada. Đây là chương
-                trình giáo dục được công nhận rộng rãi bởi các trường đại học và
-                cao đẳng tại Canada cũng như nhiều quốc gia trên thế giới.
-              </p>
-              <p className="mt-4 font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
-                OSSD chú trọng phát triển toàn diện cho học sinh thông qua:
-              </p>
+              {introParagraphs.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className={cn(
+                    "font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base",
+                    i === 0 ? "mt-5" : "mt-4"
+                  )}
+                >
+                  {paragraph}
+                </p>
+              ))}
               <ul className="mt-4 space-y-2.5">
-                {[
-                  "Kiến thức học thuật vững chắc.",
-                  "Tư duy phản biện và giải quyết vấn đề.",
-                  "Kỹ năng nghiên cứu và giao tiếp.",
-                  "Hoạt động ngoại khóa và trách nhiệm cộng đồng.",
-                  "Chuẩn bị sẵn sàng cho môi trường đại học quốc tế.",
-                ].map((item, i) => (
+                {introHighlights.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
                       <Check
@@ -416,12 +498,12 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                 className="mb-12 text-center"
               >
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                  Vì sao chọn chương trình OSSD?
+                  {whyTitle}
                 </h2>
                 <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
               </motion.div>
               <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {WHY_ITEMS.map((item, i) => {
+                {whyItems.map((item, i) => {
                   const Icon = item.icon
                   return (
                     <motion.div
@@ -461,16 +543,15 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
           >
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                Cấu trúc chương trình OSSD
+                {structureTitle}
               </h2>
               <p className="mt-3 font-body text-sm text-brand-dark/75">
-                Để nhận bằng OSSD, học sinh cần hoàn thành các yêu cầu tốt
-                nghiệp theo quy định của Bộ Giáo dục Ontario.
+                {structureSubtitle}
               </p>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {STRUCTURE_ITEMS.map((item, i) => (
+              {structureItems.map((item, i) => (
                 <motion.div
                   key={i}
                   variants={fadeUpVariants}
@@ -593,12 +674,12 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                   className="mb-8 text-center lg:text-left"
                 >
                   <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                    Đối tượng phù hợp
+                    {audienceTitle}
                   </h2>
                   <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold lg:mx-0" />
                 </motion.div>
                 <ul className="space-y-4">
-                  {TARGET_AUDIENCE.map((item, i) => (
+                  {audienceItems.map((item, i) => (
                     <motion.li
                       key={i}
                       variants={fadeUpVariants}
@@ -633,13 +714,13 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
           >
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                Hình thức học
+                {formatTitle}
               </h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
             <div className="mx-auto max-w-5xl">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
-                {LEARNING_FORMATS.map((item, i) => {
+                {formatItems.map((item, i) => {
                   const Icon = item.icon
                   const isWide = i < 2
                   return (
@@ -688,7 +769,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
             >
               <motion.div variants={fadeUpVariants} className="mb-10 text-center">
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                  Lợi ích khi học OSSD tại KVC Global
+                  {benefitsTitle}
                 </h2>
                 <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
               </motion.div>
@@ -710,7 +791,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                   <ChevronRight className="h-5 w-5" strokeWidth={2} />
                 </button>
                 <div ref={benefitsScrollRef} className="overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"><div className="flex gap-6 w-max mx-auto px-2">
-                  {BENEFITS.map((item, i) => (
+                  {benefitsItems.map((item, i) => (
                     <motion.div
                       key={i}
                       variants={fadeUpVariants}
@@ -754,7 +835,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
           >
             <motion.div variants={fadeUpVariants} className="mb-14 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                Quy trình đăng ký
+                {processTitle}
               </h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
@@ -766,7 +847,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                   className="absolute top-0 bottom-0 left-8 w-px bg-brand-blue-mid/[0.12] sm:left-10"
                 />
                 <div className="flex flex-col gap-0">
-                  {STEPS.map((step, i) => {
+                  {processSteps.map((step, i) => {
                     const isLast = i === STEPS.length - 1
                     return (
                       <motion.div
@@ -818,13 +899,13 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
             >
               <motion.div variants={fadeUpVariants} className="mb-12 text-center">
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                  Vì sao phụ huynh lựa chọn KVC Global?
+                  {supportTitle}
                 </h2>
                 <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
               </motion.div>
               <div className="mx-auto max-w-3xl">
                 <ul className="space-y-4">
-                  {PARENT_REASONS.map((item, i) => (
+                  {supportItems.map((item, i) => (
                     <motion.li
                       key={i}
                       variants={fadeUpVariants}

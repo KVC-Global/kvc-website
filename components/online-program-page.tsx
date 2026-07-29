@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import { ArrowRight, Check, Clock, GraduationCap } from "lucide-react";
 import { Container } from "@/components/ui/container";
-import { cn } from "@/lib/utils";
 import type { OnlineProgramPageData } from "@/sanity/service-pages";
 
 const HERO_BG = "/images/study-abroad-hero.jpg";
@@ -124,7 +123,7 @@ export function OnlineProgramPage({ data, defaultBreadcrumb }: Props) {
                 {format.items.map((item, i) => (
                   <motion.li key={i} variants={fadeUp} className="flex items-center gap-3 rounded-lg border border-border/60 p-4">
                     <Check className="h-5 w-5 shrink-0 text-brand-gold" strokeWidth={2.5} />
-                    <span className="text-sm text-brand-dark/80">{item}</span>
+                    <span className="text-sm text-brand-dark/80">{item.title}</span>
                   </motion.li>
                 ))}
               </motion.ul>
@@ -142,7 +141,7 @@ export function OnlineProgramPage({ data, defaultBreadcrumb }: Props) {
               <span aria-hidden="true" className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
               <motion.div variants={stagger} className="mt-8 flex flex-wrap gap-3">
                 {audience.items.map((item, i) => (
-                  <motion.span key={i} variants={fadeUp} className="inline-block rounded-full bg-brand-blue-mid/10 px-5 py-2.5 text-sm font-semibold text-brand-blue-mid">{item}</motion.span>
+                  <motion.span key={i} variants={fadeUp} className="inline-block rounded-full bg-brand-blue-mid/10 px-5 py-2.5 text-sm font-semibold text-brand-blue-mid">{item.title}</motion.span>
                 ))}
               </motion.div>
             </motion.div>
@@ -195,7 +194,7 @@ export function OnlineProgramPage({ data, defaultBreadcrumb }: Props) {
                 {benefits.items.map((item, i) => (
                   <motion.li key={i} variants={fadeUp} className="flex items-center gap-3 rounded-lg border border-border/60 bg-white p-4">
                     <Check className="h-5 w-5 shrink-0 text-brand-gold" strokeWidth={2.5} />
-                    <span className="text-sm text-brand-dark/80">{item}</span>
+                    <span className="text-sm text-brand-dark/80">{item.title}</span>
                   </motion.li>
                 ))}
               </motion.ul>
@@ -216,14 +215,14 @@ export function OnlineProgramPage({ data, defaultBreadcrumb }: Props) {
               <div aria-hidden="true" className="pointer-events-none absolute left-8 top-0 hidden h-full w-0.5 bg-gradient-to-b from-brand-gold/40 via-brand-gold/20 to-transparent md:block" />
               <div className="flex flex-col gap-8 md:gap-10">
                 {process.steps.map((s, idx) => (
-                  <motion.div key={s.step ?? idx} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} className="relative flex items-center gap-4 md:gap-8 md:pl-20">
+                  <motion.div key={s.title ?? idx} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} className="relative flex items-center gap-4 md:gap-8 md:pl-20">
                     <div className="absolute left-0 hidden h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full bg-brand-blue text-white shadow-lg md:flex">
                       <span className="font-heading text-base font-bold">{idx + 1}</span>
                     </div>
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-blue text-white md:hidden">
                       <span className="font-heading text-sm font-bold">{idx + 1}</span>
                     </div>
-                    <span className="text-sm text-brand-dark/80 sm:text-base">{s.step}</span>
+                    <span className="text-sm text-brand-dark/80 sm:text-base">{s.title}</span>
                   </motion.div>
                 ))}
               </div>

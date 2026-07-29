@@ -124,20 +124,66 @@ export type DichVuServiceAccordion = {
 // --- Online Program Subpage ---
 
 export type OnlineProgramHero = {
+  parentBreadcrumb?: string;
   tagline?: string; title?: string; subtitle?: string; description?: string;
   breadcrumb?: string;
   primaryButtonLabel?: string; primaryButtonHref?: string;
+  backgroundImage?: string;
 };
 
-export type OnlineProgramIntro = { title?: string; paragraphs?: string[]; highlights?: string[] };
+export type OnlineProgramIntro = {
+  title?: string;
+  paragraphs?: string[];
+  highlights?: string[];
+  image?: string;
+  imageAlt?: string;
+};
 
-export type OnlineProgramItem = { title?: string; description?: string };
+export type OnlineProgramStructureItem = { title?: string; description?: string };
 
-export type OnlineProgramWhy = { title?: string; items?: OnlineProgramItem[] };
+export type OnlineProgramStructure = {
+  title?: string;
+  subtitle?: string;
+  items?: OnlineProgramStructureItem[];
+};
 
-export type OnlineProgramSection = { title?: string; items?: string[] };
+export type OnlineProgramIconCard = {
+  icon?: string;
+  title?: string;
+  description?: string;
+};
 
-export type OnlineProgramStep = { step?: string };
+export type OnlineProgramWhy = { title?: string; items?: OnlineProgramIconCard[] };
+
+export type OnlineProgramSupport = { title?: string; items?: string[] };
+
+export type OnlineProgramFormat = {
+  title?: string;
+  items?: OnlineProgramIconCard[];
+  checklist?: string[];
+};
+
+export type OnlineProgramAudience = { title?: string; items?: OnlineProgramIconCard[] };
+
+export type OnlineProgramProgression = {
+  title?: string;
+  body?: string;
+  tags?: string[];
+  noteTitle?: string;
+  noteBody?: string;
+  image?: string;
+  imageAlt?: string;
+};
+
+export type OnlineProgramBenefitCard = {
+  title?: string;
+  description?: string;
+  image?: string;
+};
+
+export type OnlineProgramBenefits = { title?: string; items?: OnlineProgramBenefitCard[] };
+
+export type OnlineProgramStep = { title?: string; description?: string };
 
 export type OnlineProgramProcess = { title?: string; steps?: OnlineProgramStep[] };
 
@@ -153,10 +199,13 @@ export type OnlineProgramPrograms = { title?: string; items?: OnlineProgramCard[
 export type OnlineProgramPageData = {
   heroSection?: OnlineProgramHero;
   introSection?: OnlineProgramIntro;
+  structureSection?: OnlineProgramStructure;
   whySection?: OnlineProgramWhy;
-  formatSection?: OnlineProgramSection;
-  audienceSection?: OnlineProgramSection;
-  benefitsSection?: OnlineProgramSection;
+  supportSection?: OnlineProgramSupport;
+  formatSection?: OnlineProgramFormat;
+  audienceSection?: OnlineProgramAudience;
+  progressionSection?: OnlineProgramProgression;
+  benefitsSection?: OnlineProgramBenefits;
   processSection?: OnlineProgramProcess;
   ctaSection?: OnlineProgramCta;
   programsSection?: OnlineProgramPrograms;

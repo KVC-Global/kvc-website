@@ -7,6 +7,7 @@ import Link from "next/link"
 import { motion, Variants } from "framer-motion"
 import { Check, GraduationCap, Globe, Star, Users, BookOpen, ArrowRight, Monitor, FileText, Briefcase, Building2, Clock, Calendar, ListChecks, UserCheck, ChevronRight, ChevronLeft } from "lucide-react"
 
+import { getIcon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 import { Container } from "@/components/ui/container"
 import type { TimelineProgram } from "@/components/online-timeline"
@@ -36,14 +37,6 @@ const LEARNING_FORMATS = [
   { icon: FileText, title: "Tài liệu điện tử đầy đủ", desc: "Toàn bộ giáo trình, bài giảng và tài nguyên học tập được cung cấp dưới dạng số." },
   { icon: Star, title: "Đánh giá theo chuẩn Anh Quốc", desc: "Bài tập được thiết kế và đánh giá theo tiêu chuẩn của khung trình độ Anh Quốc (RQF)." },
   { icon: Users, title: "Giảng viên hỗ trợ xuyên suốt", desc: "Đội ngũ giảng viên và cố vấn học tập đồng hành, giải đáp và theo dõi tiến độ liên tục." },
-]
-
-const LEARNING_FORMAT = [
-  "100% Online",
-  "Học trên nền tảng LMS hiện đại",
-  "Tài liệu điện tử đầy đủ",
-  "Đánh giá bằng Assignment theo tiêu chuẩn Anh Quốc",
-  "Có giảng viên và cố vấn học tập hỗ trợ xuyên suốt",
 ]
 
 const TARGET_AUDIENCE = [
@@ -156,7 +149,92 @@ const PROGRAMS: TimelineProgram[] = [
 
 export function OnlineOthm({ className, data }: { className?: string; data?: OnlineProgramPageData }) {
   const [activeProgramId, setActiveProgramId] = React.useState(0)
-  const activeProgram = PROGRAMS[activeProgramId] || PROGRAMS[0]
+
+  // ── CMS data with hardcoded fallback ──
+  const hero = data?.heroSection
+  const heroBg = hero?.backgroundImage ?? HERO_BG
+  const parentCrumb = hero?.parentBreadcrumb ?? "Khóa Học Online"
+  const crumb = hero?.breadcrumb ?? "OTHM"
+  const tagline = hero?.tagline ?? "OTHM ANH QUỐC"
+  const heroTitle = hero?.title ?? "Học Chứng chỉ OTHM Anh Quốc trực tuyến cùng KVC Global"
+  const heroSubtitle = hero?.subtitle ?? "Mở rộng cơ hội nghề nghiệp và học tập quốc tế với bằng cấp được công nhận toàn cầu."
+  const heroDescription = hero?.description ?? "KVC Global cung cấp các chương trình OTHM Qualifications theo hình thức 100% Online, phù hợp với sinh viên, người đi làm và các nhà quản lý mong muốn nâng cao trình độ chuyên môn theo tiêu chuẩn giáo dục Vương quốc Anh."
+  const heroBtnLabel = hero?.primaryButtonLabel ?? "Đăng ký tư vấn miễn phí"
+  const heroBtnHref = hero?.primaryButtonHref ?? "/lien-he"
+
+  const intro = data?.introSection
+  const introTitle = intro?.title ?? "OTHM là gì?"
+  const introImage = intro?.image ?? "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80&auto=format&fit=crop"
+  const introImageAlt = intro?.imageAlt ?? "OTHM program"
+  const introParagraphs = intro?.paragraphs?.length
+    ? intro.paragraphs
+    : [
+        "OTHM (Organization for Tourism and Hospitality Management) là tổ chức cấp bằng của Vương quốc Anh, được Ofqual (Office of Qualifications and Examinations Regulation) quản lý và công nhận.",
+        "Các chương trình OTHM được thiết kế theo Khung trình độ quốc gia Anh (Regulated Qualifications Framework - RQF), giúp người học:",
+      ]
+  const introHighlights = intro?.highlights?.length
+    ? intro.highlights
+    : [
+        "Sở hữu văn bằng theo tiêu chuẩn Anh Quốc.",
+        "Học trực tuyến linh hoạt.",
+        "Phát triển kỹ năng quản lý và chuyên môn.",
+        "Chuyển tiếp lên chương trình Cử nhân hoặc Thạc sĩ tại nhiều trường đại học đối tác trên thế giới.",
+        "Gia tăng lợi thế cạnh tranh trong môi trường làm việc quốc tế.",
+      ]
+
+  const whyTitle = data?.whySection?.title ?? "Vì sao chọn KVC Global?"
+  const whyItems = data?.whySection?.items?.length
+    ? data!.whySection!.items!.map((c) => ({
+        icon: getIcon(c.icon, Globe),
+        title: c.title ?? "",
+        desc: c.description ?? "",
+      }))
+    : WHY_ITEMS
+
+  const formatTitle = data?.formatSection?.title ?? "Hình thức học"
+  const formatItems = data?.formatSection?.items?.length
+    ? data!.formatSection!.items!.map((c) => ({
+        icon: getIcon(c.icon, Globe),
+        title: c.title ?? "",
+        desc: c.description ?? "",
+      }))
+    : LEARNING_FORMATS
+
+  const audienceTitle = data?.audienceSection?.title ?? "Đối tượng phù hợp"
+  const audienceItems = data?.audienceSection?.items?.length
+    ? data!.audienceSection!.items!.map((c) => ({
+        icon: getIcon(c.icon, GraduationCap),
+        title: c.title ?? "",
+        desc: c.description ?? "",
+      }))
+    : TARGET_AUDIENCE
+
+  const benefitsTitle = data?.benefitsSection?.title ?? "Lợi ích khi học OTHM tại KVC Global"
+  const benefitsItems = data?.benefitsSection?.items?.length
+    ? data!.benefitsSection!.items!.map((b) => ({
+        title: b.title ?? "",
+        desc: b.description ?? "",
+        image: b.image ?? "",
+      }))
+    : BENEFITS
+
+  const processTitle = data?.processSection?.title ?? "Quy trình đăng ký"
+  const processSteps = data?.processSection?.steps?.length
+    ? data!.processSection!.steps!.map((s) => ({ title: s.title ?? "", desc: s.description ?? "" }))
+    : STEPS
+
+  const programsItems = data?.programsSection?.items?.length
+    ? data!.programsSection!.items!.map<TimelineProgram>((p) => ({
+        name: p.name ?? "",
+        duration: p.duration ?? "",
+        start: p.startDates ?? "",
+        subjects: p.subjects ?? [],
+        entry: p.entryRequirements ?? "",
+      }))
+    : PROGRAMS
+  const programsTitle = data?.programsSection?.title ?? "Các chương trình OTHM"
+
+  const activeProgram = programsItems[activeProgramId] || programsItems[0]
   const benefitsRef = React.useRef<HTMLDivElement>(null)
   const scrollBenefits = (dir: "left" | "right") => {
     const el = benefitsRef.current; if (!el) return
@@ -170,32 +248,32 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
   return (
     <div className={cn("w-full", className)}>
       {/* ── Hero ── */}
-      <section className="relative w-full overflow-hidden bg-cover bg-center" style={{ backgroundImage: `url(${HERO_BG})` }}>
+      <section className="relative w-full overflow-hidden bg-cover bg-center" style={{ backgroundImage: `url(${heroBg})` }}>
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-white from-30% to-transparent to-70%" />
         <Container className="relative flex min-h-[580px] flex-col justify-center pt-28 pb-20 md:min-h-[640px]">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-6 flex flex-wrap items-center gap-1.5 font-body text-xs font-medium text-muted-foreground md:text-sm">
             <Link href="/" className="transition-colors duration-200 hover:text-foreground">Trang chủ</Link>
             <span className="select-none text-muted-foreground/60">&gt;</span>
-            <Link href="/khoa-hoc-online" className="transition-colors duration-200 hover:text-foreground">Khóa Học Online</Link>
+            <Link href="/khoa-hoc-online" className="transition-colors duration-200 hover:text-foreground">{parentCrumb}</Link>
             <span className="select-none text-muted-foreground/60">&gt;</span>
-            <span className="font-semibold text-foreground/80" aria-current="page">OTHM</span>
+            <span className="font-semibold text-foreground/80" aria-current="page">{crumb}</span>
           </motion.div>
           <div className="max-w-2xl">
             <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-              OTHM ANH QUỐC
+              {tagline}
             </motion.span>
             <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl">
-              Học Chứng chỉ OTHM Anh Quốc trực tuyến cùng KVC Global
+              {heroTitle}
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">
-              Mở rộng cơ hội nghề nghiệp và học tập quốc tế với bằng cấp được công nhận toàn cầu.
+              {heroSubtitle}
             </motion.p>
             <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.35 }} className="mt-3 max-w-xl font-body text-sm leading-relaxed text-brand-dark/75">
-              KVC Global cung cấp các chương trình OTHM Qualifications theo hình thức 100% Online, phù hợp với sinh viên, người đi làm và các nhà quản lý mong muốn nâng cao trình độ chuyên môn theo tiêu chuẩn giáo dục Vương quốc Anh.
+              {heroDescription}
             </motion.p>
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4 }} className="mt-8">
-              <Link href="/lien-he" className="group inline-flex items-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg">
-                Đăng ký tư vấn miễn phí
+              <Link href={heroBtnHref} className="group inline-flex items-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-lg">
+                {heroBtnLabel}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5" />
               </Link>
             </motion.div>
@@ -209,19 +287,18 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
             <motion.div variants={fadeUpVariants} className="lg:col-span-5">
               <div className="relative aspect-4/3 overflow-hidden rounded-lg shadow-lg">
-                <Image src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80&auto=format&fit=crop" alt="OTHM program" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 42vw" />
+                <Image src={introImage} alt={introImageAlt} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 42vw" />
               </div>
             </motion.div>
             <motion.div variants={fadeUpVariants} className="lg:col-span-7">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">OTHM là gì?</h2>
-              <p className="mt-5 font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
-                OTHM (Organization for Tourism and Hospitality Management) là tổ chức cấp bằng của Vương quốc Anh, được Ofqual (Office of Qualifications and Examinations Regulation) quản lý và công nhận.
-              </p>
-              <p className="mt-4 font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
-                Các chương trình OTHM được thiết kế theo Khung trình độ quốc gia Anh (Regulated Qualifications Framework - RQF), giúp người học:
-              </p>
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{introTitle}</h2>
+              {introParagraphs.map((paragraph, i) => (
+                <p key={i} className={cn("font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base", i === 0 ? "mt-5" : "mt-4")}>
+                  {paragraph}
+                </p>
+              ))}
               <ul className="mt-4 space-y-2.5">
-                {["Sở hữu văn bằng theo tiêu chuẩn Anh Quốc.", "Học trực tuyến linh hoạt.", "Phát triển kỹ năng quản lý và chuyên môn.", "Chuyển tiếp lên chương trình Cử nhân hoặc Thạc sĩ tại nhiều trường đại học đối tác trên thế giới.", "Gia tăng lợi thế cạnh tranh trong môi trường làm việc quốc tế."].map((item, i) => (
+                {introHighlights.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-brand-gold bg-brand-gold/10">
                       <Check className="h-3 w-3 text-brand-gold" strokeWidth={3} />
@@ -241,11 +318,11 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
           <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Vì sao chọn KVC Global?</h2>
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{whyTitle}</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {WHY_ITEMS.map((item, i) => {
+              {whyItems.map((item, i) => {
                 const Icon = item.icon
                 return (
                   <motion.div key={i} variants={fadeUpVariants} className="flex flex-col items-center rounded-lg border border-border bg-white p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
@@ -268,12 +345,12 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
         <Container>
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Hình thức học</h2>
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{formatTitle}</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
             <div className="mx-auto max-w-5xl">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
-                {LEARNING_FORMATS.map((item, i) => {
+                {formatItems.map((item, i) => {
                   const Icon = item.icon
                   const isWide = i < 2
                   return (
@@ -313,12 +390,12 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
           <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
               <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Đối tượng phù hợp</h2>
+                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{audienceTitle}</h2>
                 <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
               </motion.div>
               <div className="mx-auto max-w-5xl">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                  {TARGET_AUDIENCE.map((item, i) => {
+                  {audienceItems.map((item, i) => {
                     const isHero = i === 0
                     return (
                       <motion.div
@@ -361,7 +438,7 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
         <Container>
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-10 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Lợi ích khi học OTHM tại KVC Global</h2>
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{benefitsTitle}</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
             <div className="relative group/scroll">
@@ -372,7 +449,7 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
                 <ChevronRight className="h-5 w-5" strokeWidth={2} />
               </button>
               <div ref={benefitsRef} className="overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"><div className="flex gap-6 w-max mx-auto px-2">
-                {BENEFITS.map((item, i) => (
+                {benefitsItems.map((item, i) => (
                 <motion.div
                   key={i}
                   variants={fadeUpVariants}
@@ -410,14 +487,14 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
           <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
               <motion.div variants={fadeUpVariants} className="mb-14 text-center">
-                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Quy trình đăng ký</h2>
+                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{processTitle}</h2>
                 <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
               </motion.div>
               <div className="mx-auto max-w-2xl">
                 <div className="relative">
                   <div aria-hidden="true" className="absolute top-0 bottom-0 left-8 w-px bg-brand-blue-mid/[0.12] sm:left-10" />
                   <div className="flex flex-col gap-0">
-                    {STEPS.map((step, i) => {
+                    {processSteps.map((step, i) => {
                       const isLast = i === STEPS.length - 1
                       return (
                         <motion.div key={i} variants={fadeUpVariants} className="group relative flex gap-6 pb-10 last:pb-0 sm:gap-8">
@@ -449,14 +526,14 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
         <Container>
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-10 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">Các chương trình OTHM</h2>
+              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{programsTitle}</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
 
             {/* Desktop: Tabs + Detail */}
             <div className="hidden lg:grid grid-cols-12 gap-8 items-start">
               <div className="col-span-4 flex flex-col gap-2">
-                {PROGRAMS.map((program, i) => {
+                {programsItems.map((program, i) => {
                   const isActive = i === activeProgramId
                   return (
                     <button
@@ -517,7 +594,7 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
 
             {/* Mobile: Accordion */}
             <div className="lg:hidden flex flex-col gap-4">
-              {PROGRAMS.map((program, i) => {
+              {programsItems.map((program, i) => {
                 const isOpen = i === activeProgramId
                 return (
                   <div key={i} className="overflow-hidden rounded-lg border border-border bg-white shadow-sm">

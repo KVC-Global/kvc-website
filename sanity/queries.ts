@@ -134,15 +134,18 @@ export const DICH_VU_PAGE_QUERY = defineQuery(`
 export const ONLINE_PROGRAM_PAGE_QUERY = defineQuery(`
   *[_type == "onlineProgramPage" && language == $lang && slug == $slug][0]{
     heroSection{
-      tagline, title, subtitle, description, breadcrumb,
-      primaryButtonLabel, primaryButtonHref
+      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,
+      primaryButtonLabel, primaryButtonHref, backgroundImage
     },
-    introSection{title, paragraphs, highlights},
-    whySection{title, items[]{title, description}},
-    formatSection{title, items},
-    audienceSection{title, items},
-    benefitsSection{title, items},
-    processSection{title, steps[]{step}},
+    introSection{title, paragraphs, highlights, image, imageAlt},
+    structureSection{title, subtitle, items[]{title, description}},
+    whySection{title, items[]{icon, title, description}},
+    supportSection{title, items},
+    formatSection{title, items[]{icon, title, description}, checklist},
+    audienceSection{title, items[]{icon, title, description}},
+    progressionSection{title, body, tags, noteTitle, noteBody, image, imageAlt},
+    benefitsSection{title, items[]{title, description, image}},
+    processSection{title, steps[]{title, description}},
     ctaSection{title, body, buttonLabel, buttonHref},
     programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},
     seo{title, description}
