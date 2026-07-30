@@ -7,6 +7,7 @@ import { ChevronRight, Clock, Mail, MapPin, Phone } from "lucide-react"
 import { ContactForm } from "@/components/contact-form"
 import { Container } from "@/components/ui/container"
 import { useLocale, useDictionary } from "@/lib/i18n-client"
+import { sanitizeHref } from "@/lib/site-settings"
 import type { ContactPageData } from "@/sanity/content-pages"
 import { urlFor } from "@/sanity/image"
 
@@ -110,7 +111,23 @@ const OFFICES = [
 ] as const
 
 /* ───────────────── Contact info card ───────────────── */
-function OfficeInfoCard({ office }: { office: { country: string; role: string; address: string; phone: string; email: string; hours: string; mapUrl: string; mapQ: string; image: string; description?: string; imageAlt?: string } }) {
+function OfficeInfoCard({
+  office,
+}: {
+  office: {
+    country: string
+    role: string
+    address: string
+    phone: string
+    email: string
+    hours: string
+    mapUrl: string
+    mapQ: string
+    image: string
+    description?: string
+    imageAlt?: string
+  }
+}) {
   return (
     <div className="rounded-lg border border-border bg-brand-light/50 p-6 transition-all duration-300 hover:shadow-sm">
       <h3 className="font-heading text-base font-bold text-brand-blue">
@@ -169,7 +186,19 @@ function OfficeCard({
   office,
   reverse,
 }: {
-  office: { country: string; role: string; address: string; phone: string; email: string; hours: string; mapUrl: string; mapQ: string; image: string; description?: string; imageAlt?: string }
+  office: {
+    country: string
+    role: string
+    address: string
+    phone: string
+    email: string
+    hours: string
+    mapUrl: string
+    mapQ: string
+    image: string
+    description?: string
+    imageAlt?: string
+  }
   reverse: boolean
 }) {
   const phoneHref = office.phone.replace(/[^\d+]/g, "")
@@ -299,13 +328,27 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
   const t = useDictionary()
   const hero = content?.hero
   const info = content?.info
+  const socialLinks = SOCIAL_LINKS.map((social) => {
+    const cmsLink = info?.socialLinks?.find(
+      (link) => link.network?.toLowerCase() === social.label.toLowerCase()
+    )
+    return { ...social, href: sanitizeHref(cmsLink?.url || social.href) }
+  })
   const offices = content?.offices?.offices?.length
     ? content.offices.offices.map((office) => ({
-        country: office.country || "", role: office.role || "", address: office.address || "",
-        phone: office.phone || "", email: office.email || "", hours: office.hours || "",
-        mapUrl: office.mapUrl || "#", mapQ: office.mapQuery || "",
-        image: office.image ? urlFor(office.image).width(1200).url() : "/images/dat-nuoc-singapore-01.jpg",
-        description: office.description, imageAlt: office.imageAlt,
+        country: office.country || "",
+        role: office.role || "",
+        address: office.address || "",
+        phone: office.phone || "",
+        email: office.email || "",
+        hours: office.hours || "",
+        mapUrl: office.mapUrl || "#",
+        mapQ: office.mapQuery || "",
+        image: office.image
+          ? urlFor(office.image).width(1200).url()
+          : "/images/dat-nuoc-singapore-01.jpg",
+        description: office.description,
+        imageAlt: office.imageAlt,
       }))
     : OFFICES
   return (
@@ -316,8 +359,15 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
         className="relative w-full overflow-hidden bg-white"
       >
         <Image
-          src={hero?.backgroundImage ? urlFor(hero.backgroundImage).width(1920).url() : "/du-lich-singapore-3-ngay-2-dem-cover.webp"}
-          alt={hero?.backgroundImageAlt || "Toàn cảnh Singapore, nơi KVC Global đồng hành cùng khách hàng"}
+          src={
+            hero?.backgroundImage
+              ? urlFor(hero.backgroundImage).width(1920).url()
+              : "/du-lich-singapore-3-ngay-2-dem-cover.webp"
+          }
+          alt={
+            hero?.backgroundImageAlt ||
+            "Toàn cảnh Singapore, nơi KVC Global đồng hành cùng khách hàng"
+          }
           fill
           priority
           sizes="100vw"
@@ -354,11 +404,16 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
               id="contact-hero-heading"
               className="font-heading text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
             >
-              <span className="block text-brand-blue">{hero?.titleLine1 || "KẾT NỐI CÙNG"}</span>
-              <span className="block text-brand-gold">{hero?.titleLine2 || "KVC GLOBAL."}</span>
+              <span className="block text-brand-blue">
+                {hero?.titleLine1 || "KẾT NỐI CÙNG"}
+              </span>
+              <span className="block text-brand-gold">
+                {hero?.titleLine2 || "KVC GLOBAL."}
+              </span>
             </h1>
             <p className="mt-4 max-w-xl font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base md:text-[17px]">
-              {hero?.description || "Chia sẻ mục tiêu của bạn. Đội ngũ KVC Global sẽ tư vấn lộ trình Singapore rõ ràng, phù hợp và minh bạch."}
+              {hero?.description ||
+                "Chia sẻ mục tiêu của bạn. Đội ngũ KVC Global sẽ tư vấn lộ trình Singapore rõ ràng, phù hợp và minh bạch."}
             </p>
             <a
               href={hero?.primaryButtonHref || "#gui-yeu-cau"}
@@ -443,7 +498,8 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
                   <p className="font-body text-sm text-brand-dark/80">
                     {locale === "vi"
                       ? info?.weekdayHours || "Thứ 2 - Thứ 6, 8:00 - 17:00"
-                      : info?.weekdayHours || "Monday - Friday, 8:00 AM - 5:00 PM"}
+                      : info?.weekdayHours ||
+                        "Monday - Friday, 8:00 AM - 5:00 PM"}
                   </p>
                   <p className="font-body text-sm text-brand-dark/80">
                     {locale === "vi"
@@ -462,7 +518,7 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
                   {info?.socialDescription || t.contact.socialDescription}
                 </p>
                 <ul className="mt-4 flex items-center gap-3">
-                  {SOCIAL_LINKS.map((social) => {
+                  {socialLinks.map((social) => {
                     const Icon = social.icon
                     return (
                       <li key={social.label}>
@@ -492,7 +548,8 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
                   {content?.form?.title || "Gửi yêu cầu tư vấn"}
                 </h2>
                 <p className="mt-2 font-body text-sm text-brand-dark/70">
-                  {content?.form?.description || "Điền thông tin bên dưới, chúng tôi sẽ liên hệ lại trong thời gian sớm nhất."}
+                  {content?.form?.description ||
+                    "Điền thông tin bên dưới, chúng tôi sẽ liên hệ lại trong thời gian sớm nhất."}
                 </p>
                 <div className="mt-6">
                   <ContactForm content={content?.form} email={info?.email} />
