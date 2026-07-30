@@ -1,5 +1,39 @@
 import { defineQuery } from "next-sanity"
 
+export const SITE_SETTINGS_QUERY = defineQuery(`
+  *[_type == "siteSettings" && language == $lang][0]{
+    header{
+      comingSoonLabel,
+      navItems[]{
+        _key, label, link{destination, customHref},
+        children[]{_key, label, description, isComingSoon, link{destination, customHref}}
+      },
+      cta{label, link{destination, customHref}}
+    },
+    footer{
+      bio,
+      cta{
+        enabled, title, description,
+        primaryButton{label, link{destination, customHref}},
+        secondaryButton{label, link{destination, customHref}}
+      },
+      servicesColumn{heading, links[]{_key, label, link{destination, customHref}}},
+      aboutColumn{heading, links[]{_key, label, link{destination, customHref}}},
+      supportColumn{heading, links[]{_key, label, link{destination, customHref}}},
+      contactHeading,
+      legalLinks[]{_key, label, link{destination, customHref}},
+      copyrightNotice
+    },
+    "company": *[_id == "company-info"][0]{
+      phones[]{_key, label, number},
+      email,
+      "address": select($lang == "en" => addressEn, addressVi),
+      mapUrl,
+      socialLinks[]{_key, network, url}
+    }
+  }
+`)
+
 export const HOME_PAGE_QUERY = defineQuery(`
   *[_type == "homePage" && language == $lang][0]{
     "hero": heroSection{
@@ -68,8 +102,19 @@ export const CONTACT_PAGE_QUERY = defineQuery(`
   *[_type == "contactPage" && language == $lang][0]{
     "hero": heroSection,
     "info": infoSection{
-      title, description, phone, email, address, officeHoursTitle, weekdayHours, weekendHours,
-      socialTitle, socialDescription, socialLinks[]{_key, label, url, network}
+      title, description, officeHoursTitle, weekdayHours, weekendHours,
+      socialTitle, socialDescription,
+      "phone": coalesce(*[_id == "company-info"][0].phones[0].number, phone),
+      "email": coalesce(*[_id == "company-info"][0].email, email),
+      "address": coalesce(
+        select($lang == "en" => *[_id == "company-info"][0].addressEn),
+        *[_id == "company-info"][0].addressVi,
+        address
+      ),
+      "socialLinks": coalesce(
+        *[_id == "company-info"][0].socialLinks[]{_key, "label": network, url, network},
+        socialLinks[]{_key, label, url, network}
+      )
     },
     "form": formSection{
       title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, messageLabel,
@@ -421,4 +466,3 @@ export const PUBLIC_STUDY_PAGE_QUERY = defineQuery(`
     seo{title, description, shareImage}
   }
 `)
-

@@ -6,5 +6,6 @@ export const { sanityFetch, SanityLive } = defineLive({
     apiVersion: "2026-07-18",
   }),
   serverToken: process.env.SANITY_API_READ_TOKEN,
-  browserToken: process.env.SANITY_API_READ_TOKEN,
+  // Published live updates do not need a browser token. Keep draft access server-only.
+  browserToken: false,
 })
