@@ -158,7 +158,7 @@ function CtaBanner({
         className
       )}
     >
-      <div className="relative h-[320px] sm:h-[300px] md:h-[280px]">
+      <div className="relative h-[360px] py-8 sm:h-[300px] sm:py-0 md:h-[280px]">
         <Image
           src={CTA_IMAGE}
           alt=""
@@ -256,7 +256,7 @@ function CollapsibleFooterSection({
       onToggle={(event) => setOpen((event.target as HTMLDetailsElement).open)}
       className={cn("group", className)}
     >
-      <summary className="relative -mx-2 flex cursor-pointer list-none items-center justify-between gap-3 px-2 pt-2 pb-3 transition-colors duration-200 ease-out after:absolute after:bottom-0 after:left-2 after:h-px after:w-1/2 after:bg-brand-blue-mid/15 hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
+      <summary className="relative -mx-2 flex cursor-pointer list-none items-center justify-between gap-3 px-2 pt-2 pb-3 transition-colors duration-200 ease-out after:absolute after:bottom-0 after:left-2 after:h-px after:w-[calc(100%-1rem)] after:bg-brand-blue-mid/15 hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent lg:after:w-1/2 [&::-webkit-details-marker]:hidden">
         <ColumnHeading>{heading}</ColumnHeading>
         <ChevronDown
           aria-hidden="true"
