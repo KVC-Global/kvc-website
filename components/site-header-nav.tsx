@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { X, ChevronDown } from "lucide-react"
@@ -213,134 +214,166 @@ export function SiteHeaderMobileMenu({
   if (!open) return null
 
   return (
-    <div
-      id="site-mobile-nav"
-      className="fixed inset-0 z-50 overflow-y-auto bg-white xl:hidden"
-    >
-      <div className="flex h-20 items-center justify-end px-6">
-        <button
-          type="button"
-          aria-label={locale === "en" ? "Close menu" : "Đóng menu"}
-          onClick={onClose}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-muted"
+    <div id="site-mobile-nav" className="fixed inset-0 z-50 xl:hidden">
+      <button
+        type="button"
+        aria-label={locale === "en" ? "Close menu" : "Đóng menu"}
+        onClick={onClose}
+        className="absolute inset-0 h-full w-full bg-brand-blue-mid/35 backdrop-blur-sm"
+      />
+
+      <div className="relative ml-auto flex h-[100svh] w-full max-w-[420px] flex-col overflow-hidden bg-white shadow-[-24px_0_80px_rgba(0,0,0,0.22)]">
+        <div className="flex min-h-16 items-center justify-between border-b border-brand-blue-mid/10 px-4 sm:min-h-20 sm:px-6">
+          <Link
+            href={resolveSiteHref({ href: "/" }, locale)}
+            aria-label={
+              locale === "en" ? "KVC Global — Home" : "KVC Global — Trang chủ"
+            }
+            className="inline-flex items-center no-underline"
+          >
+            <Image
+              src="/images/KVC_LOGO_SVG/Blue%20Horizontal%20Logo_KVC.svg.svg"
+              alt="KVC Global"
+              width={150}
+              height={35}
+              className="h-9 w-auto shrink-0"
+              priority
+            />
+          </Link>
+          <button
+            type="button"
+            aria-label={locale === "en" ? "Close menu" : "Đóng menu"}
+            onClick={onClose}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-blue-mid/10 text-foreground transition-colors hover:bg-muted focus-visible:bg-muted focus-visible:outline-none"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <nav
+          aria-label={
+            locale === "en" ? "Mobile navigation" : "Điều hướng di động"
+          }
+          className="min-h-0 flex-1 overflow-y-auto px-3 py-4 sm:px-5"
         >
-          <X className="h-6 w-6" />
-        </button>
-      </div>
-      <nav aria-label="Mobile" className="px-6 pt-2 pb-10">
-        <ul className="flex flex-col gap-1 font-body text-lg text-foreground">
-          {navItems.map((link) => {
-            const href = resolveSiteHref(link, locale)
-            const hasChildren = !!link.children?.length
-            const active = hasChildren
-              ? isChildActive(pathname, link.children, locale) ||
-                isActive(pathname, href)
-              : isActive(pathname, href)
-            const key = link._key || `${link.label}-${href}`
-            const isExpanded = expandedKey === key
+          <ul className="flex flex-col border-y border-brand-blue-mid/10 font-body text-[16px] text-foreground">
+            {navItems.map((link) => {
+              const href = resolveSiteHref(link, locale)
+              const hasChildren = !!link.children?.length
+              const active = hasChildren
+                ? isChildActive(pathname, link.children, locale) ||
+                  isActive(pathname, href)
+                : isActive(pathname, href)
+              const key = link._key || `${link.label}-${href}`
+              const isExpanded = expandedKey === key
 
-            if (hasChildren) {
-              return (
-                <li key={key} className="flex flex-col">
-                  <button
-                    type="button"
-                    aria-expanded={isExpanded}
-                    onClick={() => setExpandedKey(isExpanded ? null : key)}
-                    className={cn(
-                      "group relative flex w-full items-center justify-between overflow-hidden rounded-md px-3 py-3 text-left transition-all duration-300 ease-out hover:bg-muted hover:pl-5 hover:text-foreground focus-visible:bg-muted focus-visible:pl-5 focus-visible:text-foreground focus-visible:outline-none",
-                      active && "bg-muted pl-5 font-semibold text-brand-gold"
-                    )}
+              if (hasChildren) {
+                return (
+                  <li
+                    key={key}
+                    className="border-b border-brand-blue-mid/10 last:border-b-0"
                   >
-                    <span
-                      aria-hidden="true"
+                    <button
+                      type="button"
+                      aria-expanded={isExpanded}
+                      onClick={() => setExpandedKey(isExpanded ? null : key)}
                       className={cn(
-                        "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-brand-gold transition-transform duration-300 ease-out",
-                        active || isExpanded
-                          ? "scale-y-100"
-                          : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"
+                        "group flex w-full items-center justify-between gap-3 px-1 py-4 text-left transition-colors duration-200 hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-none sm:px-2",
+                        (active || isExpanded) && "bg-muted/70 text-brand-gold"
                       )}
-                    />
-                    <span>{link.label}</span>
-                    <ChevronDown
-                      className={cn(
-                        "h-5 w-5 text-muted-foreground transition-transform duration-300",
-                        isExpanded && "rotate-180 text-brand-gold"
-                      )}
-                    />
-                  </button>
+                    >
+                      <span className="min-w-0 truncate font-heading text-[17px] font-semibold">
+                        {link.label}
+                      </span>
+                      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid/5">
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 text-muted-foreground transition-transform duration-300",
+                            isExpanded && "rotate-180 text-brand-gold"
+                          )}
+                        />
+                      </span>
+                    </button>
 
-                  <div
-                    className={cn(
-                      "grid transition-all duration-300 ease-in-out",
-                      isExpanded
-                        ? "mt-1 grid-rows-[1fr] opacity-100"
-                        : "pointer-events-none grid-rows-[0fr] opacity-0"
-                    )}
-                  >
-                    <div className="overflow-hidden">
-                      <ul className="my-1 ml-4 flex flex-col gap-1 border-l border-border/80 pr-3 pl-6">
-                        {link.children?.map((child) => {
-                          const childHref = resolveSiteHref(child, locale)
-                          const childActive = isActive(pathname, childHref)
-                          return (
-                            <li
-                              key={child._key || `${child.label}-${childHref}`}
-                            >
-                              <Link
-                                href={childHref}
-                                aria-current={childActive ? "page" : undefined}
-                                className={cn(
-                                  "flex items-center justify-between gap-3 rounded-md px-3 py-2 font-body text-sm text-muted-foreground transition-all hover:bg-muted hover:text-foreground",
-                                  childActive &&
-                                    "bg-muted/50 font-medium text-brand-gold"
-                                )}
+                    <div
+                      className={cn(
+                        "grid transition-all duration-300 ease-in-out",
+                        isExpanded
+                          ? "grid-rows-[1fr] opacity-100"
+                          : "pointer-events-none grid-rows-[0fr] opacity-0"
+                      )}
+                    >
+                      <div className="overflow-hidden">
+                        <ul className="mb-3 ml-4 flex flex-col border-l border-brand-blue-mid/15 pl-4">
+                          {link.children?.map((child) => {
+                            const childHref = resolveSiteHref(child, locale)
+                            const childActive = isActive(pathname, childHref)
+                            return (
+                              <li
+                                key={
+                                  child._key || `${child.label}-${childHref}`
+                                }
                               >
-                                <span>{child.label}</span>
-                                {child.isComingSoon && (
-                                  <span className="rounded-full bg-brand-gold/10 px-1.5 py-0.5 text-[9px] font-bold text-brand-gold">
-                                    {comingSoonLabel ||
-                                      (locale === "en"
-                                        ? "Coming soon"
-                                        : "Sắp ra mắt")}
+                                <Link
+                                  href={childHref}
+                                  aria-current={
+                                    childActive ? "page" : undefined
+                                  }
+                                  className={cn(
+                                    "flex items-start justify-between gap-3 px-0 py-3 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-none",
+                                    childActive && "font-medium text-brand-gold"
+                                  )}
+                                >
+                                  <span className="min-w-0">
+                                    <span className="block leading-snug">
+                                      {child.label}
+                                    </span>
+                                    {child.description ? (
+                                      <span className="mt-1 line-clamp-2 block text-xs leading-normal text-muted-foreground/85">
+                                        {child.description}
+                                      </span>
+                                    ) : null}
                                   </span>
-                                )}
-                              </Link>
-                            </li>
-                          )
-                        })}
-                      </ul>
+                                  {child.isComingSoon && (
+                                    <span className="mt-0.5 shrink-0 rounded-full bg-brand-gold/10 px-2 py-1 text-[9px] font-bold text-brand-gold">
+                                      {comingSoonLabel ||
+                                        (locale === "en"
+                                          ? "Coming soon"
+                                          : "Sắp ra mắt")}
+                                    </span>
+                                  )}
+                                </Link>
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
+                  </li>
+                )
+              }
+
+              return (
+                <li
+                  key={key}
+                  className="border-b border-brand-blue-mid/10 last:border-b-0"
+                >
+                  <Link
+                    href={href}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "flex min-h-14 items-center px-1 font-heading text-[17px] font-semibold transition-colors hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-none sm:px-2",
+                      active && "text-brand-gold"
+                    )}
+                  >
+                    <span className="min-w-0 truncate">{link.label}</span>
+                  </Link>
                 </li>
               )
-            }
-
-            return (
-              <li key={key}>
-                <Link
-                  href={href}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "group relative block overflow-hidden rounded-md px-3 py-3 transition-all duration-300 ease-out hover:bg-muted hover:pl-5 hover:text-foreground focus-visible:bg-muted focus-visible:pl-5 focus-visible:text-foreground focus-visible:outline-none",
-                    active && "bg-muted pl-5 font-semibold text-brand-gold"
-                  )}
-                >
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-brand-gold transition-transform duration-300 ease-out",
-                      active
-                        ? "scale-y-100"
-                        : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"
-                    )}
-                  />
-                  {link.label}
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-      </nav>
+            })}
+          </ul>
+        </nav>
+      </div>
     </div>
   )
 }
