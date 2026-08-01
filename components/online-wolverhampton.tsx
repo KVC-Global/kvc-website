@@ -193,8 +193,7 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
   const audienceSection = (data as OnlineWolverhamptonPageData)?.targetAudienceSection || (data as OnlineProgramPageData)?.audienceSection
   const audienceTitle = audienceSection?.title ?? "Đối tượng phù hợp"
   const audienceItems = audienceSection?.items?.length
-    ? audienceSection.items.map((c, idx: number) => ({
-        icon: getIcon(c.icon, TARGET_AUDIENCE[idx]?.icon || GraduationCap),
+    ? audienceSection.items.map((c) => ({
         title: c.title ?? "",
         desc: c.description ?? "",
       }))
@@ -415,36 +414,39 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
             <div className="mx-auto max-w-5xl">
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {audienceItems.map((item, i) => {
-                  const isHero = i === 0
-                  const Icon = item.icon
-                  return (
-                    <motion.div
-                      key={i}
-                      variants={fadeUpVariants}
-                      className={cn(
-                        "group relative flex gap-5 rounded-xl border border-l-2 border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
-                        "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg hover:border-l-brand-gold",
-                        isHero && "sm:col-span-2",
-                      )}
-                    >
-                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-gold/20 bg-brand-gold/[0.08] transition-all duration-500 group-hover:border-brand-gold/40 group-hover:bg-brand-gold/[0.16]">
-                        <Icon className="h-5 w-5 text-brand-gold transition-transform duration-500 group-hover:scale-110" strokeWidth={1.75} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
-                          {item.title}
-                        </h3>
-                        {item.desc ? (
-                          <p className="mt-1.5 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
-                            {item.desc}
-                          </p>
-                        ) : null}
-                      </div>
-                    </motion.div>
-                  )
-                })}
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  {audienceItems.map((item, i) => {
+                    const isHero = i === 0
+                    return (
+                      <motion.div
+                        key={i}
+                        variants={fadeUpVariants}
+                        className={cn(
+                          "group relative flex gap-5 rounded-xl border border-l-2 border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
+                          "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg hover:border-l-brand-gold",
+                          isHero && "sm:col-span-2",
+                        )}
+                      >
+                        {/* Number badge */}
+                        <div className="flex items-start gap-4">
+                          <span className="font-heading text-3xl font-extrabold text-brand-gold/15 leading-none select-none sm:text-4xl">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
+                        </div>
+                        {/* Text */}
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
+                            {item.title}
+                          </h3>
+                          {item.desc ? (
+                            <p className="mt-1.5 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
+                              {item.desc}
+                            </p>
+                          ) : null}
+                        </div>
+                      </motion.div>
+                    )
+                  })}
               </div>
             </div>
           </motion.div>
