@@ -1,99 +1,85 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { X, ChevronDown } from "lucide-react"
 
+import { useLocale } from "@/lib/i18n-client"
+import {
+  fallbackSiteSettings,
+  resolveSiteHref,
+  type SiteNavChild,
+  type SiteNavItem,
+} from "@/lib/site-settings"
 import { cn } from "@/lib/utils"
-import { useDictionary, useLocale, dictionaries } from "@/lib/i18n-client"
 
-// ─── types ──────────────────────────────────────────────────────────────────
-
-type NavKey = Exclude<keyof typeof dictionaries.vi.nav, "studyAbroadDestinations">
-
-type SubLink = {
-  href: string
-  key: NavKey
-}
-
-type NavLink = {
-  href: string
-  key: NavKey
-  children?: SubLink[]
-}
-
-const NAV_LINKS: NavLink[] = [
-  { href: "/", key: "home" },
-  { href: "/gioi-thieu", key: "about" },
-  { href: "/work-pass", key: "workPass" },
-  { href: "/du-hoc", key: "studyAbroad" },
-  {
-    href: "/khoa-hoc-online",
-    key: "onlineCourses",
-    children: [
-      { href: "/khoa-hoc-online/ossd", key: "ossd" },
-      { href: "/khoa-hoc-online/othm", key: "othm" },
-      { href: "/khoa-hoc-online/qualifi", key: "qualifi" },
-      { href: "/khoa-hoc-online/wolverhampton", key: "wolverhampton" },
-    ],
-  },
-  { href: "/dich-vu", key: "enterprise" },
-  { href: "/lien-he", key: "contact" },
-]
-
-// ─── helpers ────────────────────────────────────────────────────────────────
-
-const destinations = [
-  { key: "diplomaSingapore", href: "/du-hoc", isComingSoon: false },
-  { key: "uniMasterSingapore", href: "/du-hoc/dai-hoc-thac-si", isComingSoon: false },
-  { key: "privateAllAges", href: "/du-hoc/tu-thuc", isComingSoon: false },
-  { key: "publicAllAges", href: "/du-hoc/cong-lap", isComingSoon: false },
-  { key: "malaysia", href: "/coming-soon", isComingSoon: true },
-  { key: "taiwan", href: "/coming-soon", isComingSoon: true },
-] as const
-
-function getLocalizedHref(href: string, locale: string) {
-  const prefix = locale === "en" ? "/en" : "/vi"
-  if (href === "/") return prefix
-  return `${prefix}${href}`
+function normalizeItems(items: SiteNavItem[] | undefined, locale: "vi" | "en") {
+  return items?.length
+    ? items
+    : fallbackSiteSettings(locale).header?.navItems || []
 }
 
 function isActive(pathname: string, href: string) {
-  if (href === "/vi" || href === "/en") {
-    return pathname === "/vi" || pathname === "/en"
-  }
+  if (href === "/vi" || href === "/en") return pathname === href
   return pathname === href || pathname.startsWith(`${href}/`)
 }
 
-/** Check if any child link is active (for dropdown parent highlighting) */
-function isChildActive(pathname: string, children: SubLink[], locale: string) {
-  return children.some((child) => isActive(pathname, getLocalizedHref(child.href, locale)))
+function isChildActive(
+  pathname: string,
+  children: SiteNavChild[] | undefined,
+  locale: "vi" | "en"
+) {
+  return (
+    children?.some((child) =>
+      isActive(pathname, resolveSiteHref(child, locale))
+    ) || false
+  )
 }
 
-// ─── main nav component ─────────────────────────────────────────────────────
-
-export function SiteHeaderNav({ className }: { className?: string }) {
+export function SiteHeaderNav({
+  ariaLabel,
+  className,
+  items,
+  comingSoonLabel,
+}: {
+  ariaLabel?: string
+  className?: string
+  items?: SiteNavItem[]
+  comingSoonLabel?: string
+}) {
   const locale = useLocale()
-  const t = useDictionary()
   const pathname = usePathname() ?? "/"
+  const navItems = normalizeItems(items, locale)
 
   return (
-    <nav aria-label="Primary" className={className}>
+    <nav
+      aria-label={
+        ariaLabel ||
+        (locale === "en" ? "Primary navigation" : "Điều hướng chính")
+      }
+      className={className}
+    >
       <ul className="flex items-center gap-7 font-body text-[15px] font-medium text-primary">
-        {NAV_LINKS.map((link) => {
-          const localizedHref = getLocalizedHref(link.href, locale)
-          const label = t.nav[link.key]
-          const active = isActive(pathname, localizedHref)
+        {navItems.map((link) => {
+          const href = resolveSiteHref(link, locale)
+          const active = isActive(pathname, href)
+          const hasChildren = !!link.children?.length
+          const dropdownActive =
+            active || isChildActive(pathname, link.children, locale)
 
-          // Khóa học Online — dropdown with sub-pages
-          if (link.children) {
-            const childActive = isChildActive(pathname, link.children, locale)
-            const dropdownActive = active || childActive
+          if (hasChildren) {
+            const widthClass = link.children?.some((child) => child.description)
+              ? "w-85"
+              : "w-72"
             return (
-              <li key={link.href} className="group relative">
+              <li
+                key={link._key || `${link.label}-${href}`}
+                className="group relative"
+              >
                 <Link
-                  href={localizedHref}
+                  href={href}
                   aria-current={dropdownActive ? "page" : undefined}
                   className={cn(
                     "group/link relative inline-flex items-center gap-1 py-1 whitespace-nowrap transition-colors duration-300 ease-out hover:text-foreground focus-visible:text-foreground focus-visible:outline-none",
@@ -101,7 +87,7 @@ export function SiteHeaderNav({ className }: { className?: string }) {
                   )}
                 >
                   <span className="relative inline-block">
-                    {label}
+                    {link.label}
                     <span
                       aria-hidden="true"
                       className={cn(
@@ -112,93 +98,45 @@ export function SiteHeaderNav({ className }: { className?: string }) {
                       )}
                     />
                   </span>
-                  <ChevronDown className="h-4 w-4 text-muted-foreground/80 group-hover:rotate-180 transition-transform duration-350 ease-out" />
+                  <ChevronDown className="h-4 w-4 text-muted-foreground/80 transition-transform duration-350 ease-out group-hover:rotate-180" />
                 </Link>
 
-                {/* Dropdown Menu */}
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
-                  <div className="bg-white border border-border/80 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-2.5 flex flex-col gap-1">
-                    {link.children.map((child) => {
-                      const childHref = getLocalizedHref(child.href, locale)
-                      const childItemActive = isActive(pathname, childHref)
-                      return (
-                        <Link
-                          key={child.href}
-                          href={childHref}
-                          aria-current={childItemActive ? "page" : undefined}
-                          className={cn(
-                            "rounded-lg p-2.5 transition-colors hover:bg-muted/70 focus-visible:bg-muted/70 focus-visible:outline-none",
-                            childItemActive && "bg-muted/50"
-                          )}
-                        >
-                          <span className="font-heading text-sm font-semibold text-brand-blue">
-                            {t.nav[child.key]}
-                          </span>
-                        </Link>
-                      )
-                    })}
-                  </div>
-                </div>
-              </li>
-            )
-          }
-
-          // Flat link (no children)
-          if (link.key === "studyAbroad") {
-            return (
-              <li key={link.href} className="group relative">
-                <Link
-                  href={localizedHref}
-                  aria-current={active ? "page" : undefined}
+                <div
                   className={cn(
-                    "group/link relative inline-flex items-center gap-1 py-1 whitespace-nowrap transition-colors duration-300 ease-out hover:text-foreground focus-visible:text-foreground focus-visible:outline-none",
-                    active && "text-brand-gold"
+                    "pointer-events-none absolute top-full left-1/2 z-50 -translate-x-1/2 pt-2 opacity-0 transition-all duration-300 ease-out group-hover:pointer-events-auto group-hover:opacity-100",
+                    widthClass
                   )}
                 >
-                  <span className="relative inline-block">
-                    {label}
-                    <span
-                      aria-hidden="true"
-                      className={cn(
-                        "absolute -bottom-1 left-1/2 h-[2px] w-full origin-center -translate-x-1/2 rounded-full bg-brand-gold transition-transform duration-300 ease-out",
-                        active
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover/link:scale-x-100 group-focus-visible/link:scale-x-100"
-                      )}
-                    />
-                  </span>
-                  <ChevronDown className="h-4 w-4 text-muted-foreground/80 group-hover:rotate-180 transition-transform duration-350 ease-out" />
-                </Link>
-
-                {/* Dropdown Menu */}
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-85 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300 ease-out z-50">
-                  <div className="bg-white dark:bg-card border border-border/80 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-2.5 flex flex-col gap-1">
-                    {destinations.map((dest) => {
-                      const destHref = getLocalizedHref(dest.href, locale)
-                      const destActive = pathname === destHref
-                      const destName = t.nav.studyAbroadDestinations[dest.key]
-                      const destDesc = t.nav.studyAbroadDestinations[`${dest.key}Desc` as keyof typeof t.nav.studyAbroadDestinations]
-
+                  <div className="flex flex-col gap-1 rounded-xl border border-border/80 bg-white p-2.5 shadow-[0_20px_50px_rgba(0,0,0,0.12)] dark:bg-card">
+                    {link.children?.map((child) => {
+                      const childHref = resolveSiteHref(child, locale)
+                      const childActive = isActive(pathname, childHref)
                       return (
                         <Link
-                          key={dest.key}
-                          href={destHref}
+                          key={child._key || `${child.label}-${childHref}`}
+                          href={childHref}
+                          aria-current={childActive ? "page" : undefined}
                           className={cn(
-                            "text-left flex flex-col gap-0.5 rounded-lg p-2.5 transition-colors hover:bg-muted/70 focus-visible:bg-muted/70 focus-visible:outline-none",
-                            destActive && "bg-muted/50"
+                            "flex flex-col gap-0.5 rounded-lg p-2.5 text-left transition-colors hover:bg-muted/70 focus-visible:bg-muted/70 focus-visible:outline-none",
+                            childActive && "bg-muted/50"
                           )}
                         >
-                          <span className="font-heading text-sm font-semibold text-brand-blue dark:text-foreground flex items-center gap-2">
-                            {destName}
-                            {dest.isComingSoon && (
-                              <span className="text-[10px] font-bold px-1.5 py-0.5 bg-brand-gold/10 text-brand-gold rounded-full tracking-wide">
-                                {t.nav.studyAbroadDestinations.comingSoon}
+                          <span className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue dark:text-foreground">
+                            {child.label}
+                            {child.isComingSoon && (
+                              <span className="rounded-full bg-brand-gold/10 px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-brand-gold">
+                                {comingSoonLabel ||
+                                  (locale === "en"
+                                    ? "Coming soon"
+                                    : "Sắp ra mắt")}
                               </span>
                             )}
                           </span>
-                          <span className="font-body text-xs text-muted-foreground leading-normal">
-                            {destDesc}
-                          </span>
+                          {child.description ? (
+                            <span className="font-body text-xs leading-normal text-muted-foreground">
+                              {child.description}
+                            </span>
+                          ) : null}
                         </Link>
                       )
                     })}
@@ -209,9 +147,9 @@ export function SiteHeaderNav({ className }: { className?: string }) {
           }
 
           return (
-            <li key={link.href}>
+            <li key={link._key || `${link.label}-${href}`}>
               <Link
-                href={localizedHref}
+                href={href}
                 aria-current={active ? "page" : undefined}
                 className={cn(
                   "group relative inline-block py-1 whitespace-nowrap transition-colors duration-300 ease-out hover:text-foreground focus-visible:text-foreground focus-visible:outline-none",
@@ -219,7 +157,7 @@ export function SiteHeaderNav({ className }: { className?: string }) {
                 )}
               >
                 <span className="relative inline-block">
-                  {label}
+                  {link.label}
                   <span
                     aria-hidden="true"
                     className={cn(
@@ -239,20 +177,21 @@ export function SiteHeaderNav({ className }: { className?: string }) {
   )
 }
 
-// ─── mobile menu ────────────────────────────────────────────────────────────
-
 export function SiteHeaderMobileMenu({
   open,
   onClose,
+  items,
+  comingSoonLabel,
 }: {
   open: boolean
   onClose: () => void
+  items?: SiteNavItem[]
+  comingSoonLabel?: string
 }) {
   const pathname = usePathname() ?? "/"
   const locale = useLocale()
-  const t = useDictionary()
+  const navItems = normalizeItems(items, locale)
   const [expandedKey, setExpandedKey] = React.useState<string | null>(null)
-  const [studyAbroadOpen, setStudyAbroadOpen] = React.useState(false)
 
   React.useEffect(() => {
     onClose()
@@ -260,15 +199,9 @@ export function SiteHeaderMobileMenu({
   }, [pathname])
 
   React.useEffect(() => {
-    if (!open) {
-      setExpandedKey(null)
-      setStudyAbroadOpen(false)
-      return
-    }
+    if (!open) return
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        onClose()
-      }
+      if (event.key === "Escape") onClose()
     }
     document.addEventListener("keydown", onKey)
     document.body.style.overflow = "hidden"
@@ -278,199 +211,169 @@ export function SiteHeaderMobileMenu({
     }
   }, [open, onClose])
 
-  if (!open) {
-    return null
-  }
+  if (!open) return null
 
   return (
-    <div id="site-mobile-nav" className="fixed inset-0 z-50 bg-white xl:hidden overflow-y-auto">
-      <div className="flex h-20 items-center justify-end px-6">
-        <button
-          type="button"
-          aria-label={locale === "en" ? "Close menu" : "Đóng menu"}
-          onClick={onClose}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-muted"
+    <div id="site-mobile-nav" className="fixed inset-0 z-50 xl:hidden">
+      <button
+        type="button"
+        aria-label={locale === "en" ? "Close menu" : "Đóng menu"}
+        onClick={onClose}
+        className="absolute inset-0 h-full w-full bg-brand-blue-mid/35 backdrop-blur-sm"
+      />
+
+      <div className="relative ml-auto flex h-[100svh] w-full max-w-[420px] flex-col overflow-hidden bg-white shadow-[-24px_0_80px_rgba(0,0,0,0.22)]">
+        <div className="flex min-h-16 items-center justify-between border-b border-brand-blue-mid/10 px-4 sm:min-h-20 sm:px-6">
+          <Link
+            href={resolveSiteHref({ href: "/" }, locale)}
+            aria-label={
+              locale === "en" ? "KVC Global — Home" : "KVC Global — Trang chủ"
+            }
+            className="inline-flex items-center no-underline"
+          >
+            <Image
+              src="/images/KVC_LOGO_SVG/Blue%20Horizontal%20Logo_KVC.svg.svg"
+              alt="KVC Global"
+              width={150}
+              height={35}
+              className="h-9 w-auto shrink-0"
+              priority
+            />
+          </Link>
+          <button
+            type="button"
+            aria-label={locale === "en" ? "Close menu" : "Đóng menu"}
+            onClick={onClose}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-brand-blue-mid/10 text-foreground transition-colors hover:bg-muted focus-visible:bg-muted focus-visible:outline-none"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        </div>
+
+        <nav
+          aria-label={
+            locale === "en" ? "Mobile navigation" : "Điều hướng di động"
+          }
+          className="min-h-0 flex-1 overflow-y-auto px-3 py-4 sm:px-5"
         >
-          <X className="h-6 w-6" />
-        </button>
-      </div>
-      <nav aria-label="Mobile" className="px-6 pt-2 pb-10">
-        <ul className="flex flex-col gap-1 font-body text-lg text-foreground">
-          {NAV_LINKS.map((link) => {
-            const hasChildren = !!link.children
-            const localizedHref = getLocalizedHref(link.href, locale)
-            const label = t.nav[link.key]
-            const active = hasChildren
-              ? isChildActive(pathname, link.children!, locale) || isActive(pathname, localizedHref)
-              : isActive(pathname, localizedHref)
-            const isExpanded = expandedKey === link.key
+          <ul className="flex flex-col border-y border-brand-blue-mid/10 font-body text-[16px] text-foreground">
+            {navItems.map((link) => {
+              const href = resolveSiteHref(link, locale)
+              const hasChildren = !!link.children?.length
+              const active = hasChildren
+                ? isChildActive(pathname, link.children, locale) ||
+                  isActive(pathname, href)
+                : isActive(pathname, href)
+              const key = link._key || `${link.label}-${href}`
+              const isExpanded = expandedKey === key
 
-            // Study abroad — special accordion with destinations
-            if (link.key === "studyAbroad") {
-              return (
-                <li key={link.href} className="flex flex-col">
-                  <button
-                    type="button"
-                    onClick={() => setStudyAbroadOpen(!studyAbroadOpen)}
-                    aria-expanded={studyAbroadOpen}
-                    className={cn(
-                      "group relative flex w-full items-center justify-between overflow-hidden rounded-md px-3 py-3 text-left transition-all duration-300 ease-out hover:bg-muted hover:pl-5 hover:text-foreground focus-visible:bg-muted focus-visible:pl-5 focus-visible:text-foreground focus-visible:outline-none",
-                      active && "bg-muted pl-5 font-semibold text-brand-gold"
-                    )}
+              if (hasChildren) {
+                return (
+                  <li
+                    key={key}
+                    className="border-b border-brand-blue-mid/10 last:border-b-0"
                   >
-                    <span
-                      aria-hidden="true"
+                    <button
+                      type="button"
+                      aria-expanded={isExpanded}
+                      onClick={() => setExpandedKey(isExpanded ? null : key)}
                       className={cn(
-                        "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-brand-gold transition-transform duration-300 ease-out",
-                        active || studyAbroadOpen
-                          ? "scale-y-100"
-                          : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"
+                        "group flex w-full items-center justify-between gap-3 px-1 py-4 text-left transition-colors duration-200 hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-none sm:px-2",
+                        (active || isExpanded) && "bg-muted/70 text-brand-gold"
                       )}
-                    />
-                    <span>{label}</span>
-                    <ChevronDown
-                      className={cn(
-                        "h-5 w-5 transition-transform duration-300 text-muted-foreground",
-                        studyAbroadOpen && "rotate-180 text-brand-gold"
-                      )}
-                    />
-                  </button>
+                    >
+                      <span className="min-w-0 truncate font-heading text-[17px] font-semibold">
+                        {link.label}
+                      </span>
+                      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid/5">
+                        <ChevronDown
+                          className={cn(
+                            "h-4 w-4 text-muted-foreground transition-transform duration-300",
+                            isExpanded && "rotate-180 text-brand-gold"
+                          )}
+                        />
+                      </span>
+                    </button>
 
-                  {/* Collapsible Panel */}
-                  <div
-                    className={cn(
-                      "grid transition-all duration-300 ease-in-out",
-                      studyAbroadOpen
-                        ? "grid-rows-[1fr] opacity-100 mt-1"
-                        : "grid-rows-[0fr] opacity-0 pointer-events-none"
-                    )}
-                  >
-                    <div className="overflow-hidden">
-                      <ul className="pl-6 pr-3 flex flex-col gap-1 border-l border-border/80 ml-4 my-1">
-                        {destinations.map((dest) => {
-                          const destHref = getLocalizedHref(dest.href, locale)
-                          const destActive = pathname === destHref
-                          const destName = t.nav.studyAbroadDestinations[dest.key]
-                          return (
-                            <li key={dest.key}>
-                              <Link
-                                href={destHref}
-                                className={cn(
-                                  "block rounded-md py-2 px-3 text-sm font-body text-muted-foreground hover:bg-muted hover:text-foreground transition-all flex items-center justify-between",
-                                  destActive && "text-brand-gold font-medium bg-muted/50"
-                                )}
+                    <div
+                      className={cn(
+                        "grid transition-all duration-300 ease-in-out",
+                        isExpanded
+                          ? "grid-rows-[1fr] opacity-100"
+                          : "pointer-events-none grid-rows-[0fr] opacity-0"
+                      )}
+                    >
+                      <div className="overflow-hidden">
+                        <ul className="mb-3 ml-4 flex flex-col border-l border-brand-blue-mid/15 pl-4">
+                          {link.children?.map((child) => {
+                            const childHref = resolveSiteHref(child, locale)
+                            const childActive = isActive(pathname, childHref)
+                            return (
+                              <li
+                                key={
+                                  child._key || `${child.label}-${childHref}`
+                                }
                               >
-                                <span>{destName}</span>
-                                {dest.isComingSoon && (
-                                  <span className="text-[9px] font-bold px-1.5 py-0.5 bg-brand-gold/10 text-brand-gold rounded-full">
-                                    {t.nav.studyAbroadDestinations.comingSoon}
+                                <Link
+                                  href={childHref}
+                                  aria-current={
+                                    childActive ? "page" : undefined
+                                  }
+                                  className={cn(
+                                    "flex items-start justify-between gap-3 px-0 py-3 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-none",
+                                    childActive && "font-medium text-brand-gold"
+                                  )}
+                                >
+                                  <span className="min-w-0">
+                                    <span className="block leading-snug">
+                                      {child.label}
+                                    </span>
+                                    {child.description ? (
+                                      <span className="mt-1 line-clamp-2 block text-xs leading-normal text-muted-foreground/85">
+                                        {child.description}
+                                      </span>
+                                    ) : null}
                                   </span>
-                                )}
-                              </Link>
-                            </li>
-                          )
-                        })}
-                      </ul>
+                                  {child.isComingSoon && (
+                                    <span className="mt-0.5 shrink-0 rounded-full bg-brand-gold/10 px-2 py-1 text-[9px] font-bold text-brand-gold">
+                                      {comingSoonLabel ||
+                                        (locale === "en"
+                                          ? "Coming soon"
+                                          : "Sắp ra mắt")}
+                                    </span>
+                                  )}
+                                </Link>
+                              </li>
+                            )
+                          })}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                </li>
-              )
-            }
+                  </li>
+                )
+              }
 
-            // Dropdown parent — Khóa học Online accordion
-            if (hasChildren) {
               return (
-                <li key={link.href} className="flex flex-col">
-                  <button
-                    type="button"
-                    aria-expanded={isExpanded}
-                    onClick={() => setExpandedKey(isExpanded ? null : link.key)}
+                <li
+                  key={key}
+                  className="border-b border-brand-blue-mid/10 last:border-b-0"
+                >
+                  <Link
+                    href={href}
+                    aria-current={active ? "page" : undefined}
                     className={cn(
-                      "group relative flex w-full items-center justify-between overflow-hidden rounded-md px-3 py-3 text-left transition-all duration-300 ease-out hover:bg-muted hover:pl-5 hover:text-foreground focus-visible:bg-muted focus-visible:pl-5 focus-visible:text-foreground focus-visible:outline-none",
-                      active && "bg-muted pl-5 font-semibold text-brand-gold"
+                      "flex min-h-14 items-center px-1 font-heading text-[17px] font-semibold transition-colors hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-none sm:px-2",
+                      active && "text-brand-gold"
                     )}
                   >
-                    <span
-                      aria-hidden="true"
-                      className={cn(
-                        "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-brand-gold transition-transform duration-300 ease-out",
-                        active || isExpanded
-                          ? "scale-y-100"
-                          : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"
-                      )}
-                    />
-                    <span>{label}</span>
-                    <ChevronDown
-                      className={cn(
-                        "h-5 w-5 transition-transform duration-300 text-muted-foreground",
-                        isExpanded && "rotate-180 text-brand-gold"
-                      )}
-                    />
-                  </button>
-
-                  {/* Collapsible Panel */}
-                  <div
-                    className={cn(
-                      "grid transition-all duration-300 ease-in-out",
-                      isExpanded
-                        ? "grid-rows-[1fr] opacity-100 mt-1"
-                        : "grid-rows-[0fr] opacity-0 pointer-events-none"
-                    )}
-                  >
-                    <div className="overflow-hidden">
-                      <ul className="pl-6 pr-3 flex flex-col gap-1 border-l border-border/80 ml-4 my-1">
-                        {link.children!.map((child) => {
-                          const childHref = getLocalizedHref(child.href, locale)
-                          const childActive = isActive(pathname, childHref)
-                          return (
-                            <li key={child.href}>
-                              <Link
-                                href={childHref}
-                                aria-current={childActive ? "page" : undefined}
-                                className={cn(
-                                  "block rounded-md py-2 px-3 text-sm font-body text-muted-foreground hover:bg-muted hover:text-foreground transition-all",
-                                  childActive && "text-brand-gold font-medium bg-muted/50"
-                                )}
-                              >
-                                {t.nav[child.key]}
-                              </Link>
-                            </li>
-                          )
-                        })}
-                      </ul>
-                    </div>
-                  </div>
+                    <span className="min-w-0 truncate">{link.label}</span>
+                  </Link>
                 </li>
               )
-            }
-
-            // Flat link (no children)
-            return (
-              <li key={link.href}>
-                <Link
-                  href={localizedHref}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "group relative block overflow-hidden rounded-md px-3 py-3 transition-all duration-300 ease-out hover:bg-muted hover:pl-5 hover:text-foreground focus-visible:bg-muted focus-visible:pl-5 focus-visible:text-foreground focus-visible:outline-none",
-                    active && "bg-muted pl-5 font-semibold text-brand-gold"
-                  )}
-                >
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute inset-y-2 left-0 w-[3px] origin-top rounded-r-full bg-brand-gold transition-transform duration-300 ease-out",
-                      active
-                        ? "scale-y-100"
-                        : "scale-y-0 group-hover:scale-y-100 group-focus-visible:scale-y-100"
-                    )}
-                  />
-                  {label}
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-      </nav>
+            })}
+          </ul>
+        </nav>
+      </div>
     </div>
   )
 }

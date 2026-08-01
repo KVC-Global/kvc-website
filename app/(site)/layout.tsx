@@ -13,6 +13,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { SanityLive } from "@/sanity/live"
 import { getLocale } from "@/lib/i18n-server"
+import { getSiteSettings } from "@/sanity/site-settings"
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale()
@@ -79,6 +80,7 @@ export default async function SiteLayout({
   children: React.ReactNode
 }>) {
   const locale = await getLocale()
+  const siteSettings = await getSiteSettings(locale)
 
   return (
     <html
@@ -89,14 +91,14 @@ export default async function SiteLayout({
         inter.variable,
         montserrat.variable,
         beVietnam.variable,
-        fontMono.variable,
+        fontMono.variable
       )}
     >
       <body className="flex min-h-svh flex-col bg-background text-foreground">
         <ThemeProvider>
-          <SiteHeader />
+          <SiteHeader settings={siteSettings} />
           <main className="flex-1">{children}</main>
-          <SiteFooter />
+          <SiteFooter settings={siteSettings} />
           <SanityLive />
         </ThemeProvider>
       </body>

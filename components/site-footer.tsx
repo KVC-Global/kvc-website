@@ -16,6 +16,14 @@ import {
 
 import { cn } from "@/lib/utils"
 import { useLocale, useDictionary } from "@/lib/i18n-client"
+import {
+  fallbackSiteSettings,
+  localizedHref,
+  phoneHref,
+  resolveSiteHref,
+  sanitizeHref,
+  type SiteSettings,
+} from "@/lib/site-settings"
 
 const ACCENT = "var(--color-brand-gold)"
 const NAVY = "var(--color-brand-blue-mid)"
@@ -32,8 +40,9 @@ type SocialLink = {
   icon: (props: SocialIconProps) => React.ReactElement
 }
 
-const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
+const SOCIAL_LINKS: ReadonlyArray<SocialLink & { network: string }> = [
   {
+    network: "facebook",
     label: "Facebook",
     href: "https://facebook.com/kvcglobal",
     icon: ({ className, "aria-hidden": ariaHidden }: SocialIconProps) => (
@@ -48,6 +57,7 @@ const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
     ),
   },
   {
+    network: "linkedin",
     label: "LinkedIn",
     href: "https://linkedin.com/company/kvcglobal",
     icon: ({ className, "aria-hidden": ariaHidden }: SocialIconProps) => (
@@ -62,6 +72,7 @@ const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
     ),
   },
   {
+    network: "youtube",
     label: "YouTube",
     href: "https://youtube.com/@kvcglobal",
     icon: ({ className, "aria-hidden": ariaHidden }: SocialIconProps) => (
@@ -76,6 +87,7 @@ const SOCIAL_LINKS: ReadonlyArray<SocialLink> = [
     ),
   },
   {
+    network: "instagram",
     label: "Instagram",
     href: "https://instagram.com/kvcglobal",
     icon: ({ className, "aria-hidden": ariaHidden }: SocialIconProps) => (
@@ -103,15 +115,21 @@ function LinkList({
   links,
   className,
 }: {
-  links: ReadonlyArray<{ label: string; href: string }>
+  links: ReadonlyArray<{
+    label?: string
+    href?: string
+    openInNewTab?: boolean
+  }>
   className?: string
 }) {
   return (
     <ul className={cn("flex flex-col gap-3 text-[15px]", className)}>
       {links.map((link) => (
-        <li key={link.label}>
+        <li key={`${link.label}-${link.href}`}>
           <Link
-            href={link.href}
+            href={link.href || "#"}
+            target={link.openInNewTab ? "_blank" : undefined}
+            rel={link.openInNewTab ? "noopener noreferrer" : undefined}
             className="text-foreground/80 transition-colors duration-200 hover:text-foreground focus-visible:text-foreground focus-visible:outline-none"
           >
             {link.label}
@@ -122,8 +140,16 @@ function LinkList({
   )
 }
 
-function CtaBanner({ className }: { className?: string }) {
+function CtaBanner({
+  className,
+  settings,
+}: {
+  className?: string
+  settings?: SiteSettings["footer"]
+}) {
   const t = useDictionary()
+  const locale = useLocale()
+  const cta = settings?.cta
 
   return (
     <div
@@ -132,7 +158,7 @@ function CtaBanner({ className }: { className?: string }) {
         className
       )}
     >
-      <div className="relative h-[320px] sm:h-[300px] md:h-[280px]">
+      <div className="relative h-[360px] py-8 sm:h-[300px] sm:py-0 md:h-[280px]">
         <Image
           src={CTA_IMAGE}
           alt=""
@@ -156,7 +182,7 @@ function CtaBanner({ className }: { className?: string }) {
             id="footer-cta-heading"
             className="font-heading text-2xl leading-[1.15] font-bold tracking-tight text-primary uppercase sm:text-3xl md:text-[34px]"
           >
-            {t.footer.cta.title}
+            {cta?.title || t.footer.cta.title}
           </h2>
           <span
             aria-hidden="true"
@@ -164,17 +190,20 @@ function CtaBanner({ className }: { className?: string }) {
           />
 
           <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-foreground/80 sm:text-base">
-            {t.footer.cta.description}
+            {cta?.description || t.footer.cta.description}
           </p>
 
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
-              href="#dat-lich-tu-van"
+              href={resolveSiteHref(
+                cta?.primaryButton || { href: "/lien-he" },
+                locale
+              )}
               className="group inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{ background: NAVY }}
             >
               <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
-              {t.footer.cta.book}
+              {cta?.primaryButton?.label || t.footer.cta.book}
               <ArrowRight
                 className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5"
                 strokeWidth={2.5}
@@ -182,11 +211,14 @@ function CtaBanner({ className }: { className?: string }) {
             </Link>
 
             <Link
-              href="#chat-chuyen-vien"
+              href={resolveSiteHref(
+                cta?.secondaryButton || { href: "/lien-he" },
+                locale
+              )}
               className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto"
             >
               <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
-              {t.footer.cta.chat}
+              {cta?.secondaryButton?.label || t.footer.cta.chat}
               <ArrowUpRight
                 className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 strokeWidth={2.5}
@@ -224,7 +256,7 @@ function CollapsibleFooterSection({
       onToggle={(event) => setOpen((event.target as HTMLDetailsElement).open)}
       className={cn("group", className)}
     >
-      <summary className="relative -mx-2 flex cursor-pointer list-none items-center justify-between gap-3 px-2 pt-2 pb-3 transition-colors duration-200 ease-out after:absolute after:bottom-0 after:left-2 after:h-px after:w-1/2 after:bg-brand-blue-mid/15 hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
+      <summary className="relative -mx-2 flex cursor-pointer list-none items-center justify-between gap-3 px-2 pt-2 pb-3 transition-colors duration-200 ease-out after:absolute after:bottom-0 after:left-2 after:h-px after:w-[calc(100%-1rem)] after:bg-brand-blue-mid/15 hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent lg:after:w-1/2 [&::-webkit-details-marker]:hidden">
         <ColumnHeading>{heading}</ColumnHeading>
         <ChevronDown
           aria-hidden="true"
@@ -240,90 +272,70 @@ function CollapsibleFooterSection({
   )
 }
 
-export function SiteFooter({ className }: { className?: string }) {
+export function SiteFooter({
+  className,
+  settings,
+}: {
+  className?: string
+  settings?: SiteSettings
+}) {
   const locale = useLocale()
-  const t = useDictionary()
-
-  const servicesLinks = [
-    { label: t.footer.services.studyConsulting, href: "#tu-van-du-hoc" },
-    { label: t.footer.services.internship, href: "#thuc-tap-singapore" },
-    { label: t.footer.services.incorporation, href: "#thanh-lap-doanh-nghiep" },
-    { label: t.footer.services.immigration, href: "#tu-van-di-tru" },
+  const fallback = fallbackSiteSettings(locale)
+  const footer = settings?.footer || fallback.footer
+  const company = settings?.company || fallback.company
+  const columns = [
+    footer?.servicesColumn,
+    footer?.aboutColumn,
+    footer?.supportColumn,
   ]
-
-  const aboutLinks = [
-    {
-      label: t.footer.about.intro,
-      href: locale === "vi" ? "/vi/gioi-thieu" : "/en/gioi-thieu",
-    },
-    { label: t.footer.about.team, href: "#doi-ngu" },
-    { label: t.footer.about.partners, href: "#doi-tac" },
-    { label: t.footer.about.values, href: "#gia-tri-cot-loi" },
-    { label: t.footer.about.process, href: "#quy-trinh-lam-viec" },
-  ]
-
-  const supportLinks = [
-    { label: t.footer.support.faq, href: "#faq" },
-    { label: t.footer.support.privacy, href: "#chinh-sach-bao-mat" },
-    { label: t.footer.support.terms, href: "#dieu-khoan-su-dung" },
-  ]
-
-  const contactItems = [
-    {
-      icon: Phone,
-      label: "(+84) 911942409 / (+65) 9742 1392",
-      href: "tel:+84911942409",
-    },
-    {
-      icon: Mail,
-      label: "info@kvcglobal.vn",
-      href: "mailto:info@kvcglobal.vn",
-    },
-    {
-      icon: MapPin,
-      label: t.footer.addressVN,
-      href: "https://maps.google.com/?q=65+L%C3%AA+L%E1%BB%A3i%2C+Qu%E1%BA%ADn+1",
-    },
-  ]
+  const socialIconMap = Object.fromEntries(
+    SOCIAL_LINKS.map((social) => [social.network, social])
+  )
 
   return (
     <footer className={cn("bg-white text-foreground", className)}>
-      <div className="px-4 pt-12 sm:px-6 sm:pt-16">
-        <CtaBanner />
-      </div>
+      {footer?.cta?.enabled !== false ? (
+        <div className="px-4 pt-12 sm:px-6 sm:pt-16">
+          <CtaBanner settings={footer} />
+        </div>
+      ) : null}
 
       <div className="w-full px-4 sm:px-6">
         <div className="mt-14 grid grid-cols-1 gap-10 pb-10 sm:mt-16 sm:grid-cols-2 sm:gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-3">
             <Link
-              href={locale === "vi" ? "/vi" : "/en"}
-              aria-label="KVC Global — Trang chủ"
+              href={localizedHref("/", locale)}
+              aria-label="KVC Global"
               className="inline-flex items-center no-underline"
             >
               <Image
                 src="/images/KVC_LOGO_SVG/Blue%20Horizontal%20Logo_KVC.svg.svg"
                 alt="KVC Global"
                 width={200}
-                height={44}
+                height={46}
                 className="h-9 w-auto shrink-0 sm:h-11"
                 loading="lazy"
               />
             </Link>
 
             <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-foreground/75">
-              {t.footer.bio}
+              {footer?.bio}
             </p>
 
             <ul className="mt-6 flex items-center gap-3">
-              {SOCIAL_LINKS.map((social) => {
-                const Icon = social.icon
+              {company?.socialLinks?.map((social) => {
+                const socialConfig = social.network
+                  ? socialIconMap[social.network]
+                  : undefined
+                const Icon = socialConfig?.icon
+                if (!Icon || !social.url) return null
                 return (
-                  <li key={social.label}>
+                  <li key={social._key || `${social.network}-${social.url}`}>
                     <a
-                      href={social.href}
+                      href={sanitizeHref(social.url)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={social.label}
+                      aria-label={socialConfig.label}
                       className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue-mid/10 text-primary transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-primary focus-visible:-translate-y-0.5 focus-visible:text-primary focus-visible:outline-none"
                     >
                       <Icon className="h-5 w-5" aria-hidden="true" />
@@ -334,63 +346,96 @@ export function SiteFooter({ className }: { className?: string }) {
             </ul>
           </div>
 
-          <CollapsibleFooterSection
-            heading={t.footer.servicesHeading}
-            className="lg:col-span-2"
-          >
-            <LinkList links={servicesLinks} />
-          </CollapsibleFooterSection>
+          {columns.map((column, index) => (
+            <CollapsibleFooterSection
+              key={`${column?.heading}-${index}`}
+              heading={column?.heading || ""}
+              className="lg:col-span-2"
+            >
+              <LinkList
+                links={(column?.links || []).map((link) => ({
+                  label: link.label,
+                  href: resolveSiteHref(link, locale),
+                }))}
+              />
+            </CollapsibleFooterSection>
+          ))}
 
           <CollapsibleFooterSection
-            heading={t.footer.aboutHeading}
-            className="lg:col-span-2"
-          >
-            <LinkList links={aboutLinks} />
-          </CollapsibleFooterSection>
-
-          <CollapsibleFooterSection
-            heading={t.footer.supportHeading}
-            className="lg:col-span-2"
-          >
-            <LinkList links={supportLinks} />
-          </CollapsibleFooterSection>
-
-          <CollapsibleFooterSection
-            heading={t.footer.contactHeading}
+            heading={
+              footer?.contactHeading ||
+              (locale === "en" ? "Contact" : "Liên hệ")
+            }
             className="lg:col-span-3"
           >
             <ul className="flex flex-col gap-3 text-[15px]">
-              {contactItems.map((item, index) => {
-                const Icon = item.icon
+              {company?.phones?.map((phone) => {
+                const href = phoneHref(phone.number)
                 return (
-                  <li key={`${item.label}-${index}`} className="flex gap-3">
-                    <Icon
+                  <li
+                    key={phone._key || `${phone.label}-${phone.number}`}
+                    className="flex gap-3"
+                  >
+                    <Phone
                       className="mt-0.5 h-4 w-4 shrink-0"
                       style={{ color: ACCENT }}
                       strokeWidth={2}
                       aria-hidden
                     />
-                    {item.href ? (
+                    {href ? (
                       <a
-                        href={item.href}
-                        target={
-                          item.href.startsWith("http") ? "_blank" : undefined
-                        }
-                        rel={
-                          item.href.startsWith("http")
-                            ? "noopener noreferrer"
-                            : undefined
-                        }
+                        href={href}
                         className="text-foreground/80 transition-colors duration-200 hover:text-foreground focus-visible:text-foreground focus-visible:outline-none"
                       >
-                        {item.label}
+                        {phone.label ? `${phone.label}: ` : ""}
+                        {phone.number}
                       </a>
-                    ) : (
-                      <span className="text-foreground/80">{item.label}</span>
-                    )}
+                    ) : null}
                   </li>
                 )
               })}
+
+              {company?.email ? (
+                <li className="flex gap-3">
+                  <Mail
+                    className="mt-0.5 h-4 w-4 shrink-0"
+                    style={{ color: ACCENT }}
+                    strokeWidth={2}
+                    aria-hidden
+                  />
+                  <a
+                    href={sanitizeHref(`mailto:${company.email}`)}
+                    className="text-foreground/80 transition-colors duration-200 hover:text-foreground focus-visible:text-foreground focus-visible:outline-none"
+                  >
+                    {company.email}
+                  </a>
+                </li>
+              ) : null}
+
+              {company?.address ? (
+                <li className="flex gap-3">
+                  <MapPin
+                    className="mt-0.5 h-4 w-4 shrink-0"
+                    style={{ color: ACCENT }}
+                    strokeWidth={2}
+                    aria-hidden
+                  />
+                  {company.mapUrl ? (
+                    <a
+                      href={sanitizeHref(company.mapUrl)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-foreground/80 transition-colors duration-200 hover:text-foreground focus-visible:text-foreground focus-visible:outline-none"
+                    >
+                      {company.address}
+                    </a>
+                  ) : (
+                    <span className="text-foreground/80">
+                      {company.address}
+                    </span>
+                  )}
+                </li>
+              ) : null}
             </ul>
           </CollapsibleFooterSection>
         </div>
@@ -398,23 +443,24 @@ export function SiteFooter({ className }: { className?: string }) {
         <div aria-hidden="true" className="h-px w-full bg-brand-blue-mid/15" />
 
         <div className="flex flex-col items-start justify-between gap-3 py-6 text-[13px] text-foreground/50 sm:flex-row sm:items-center">
-          <p>© 2026 KVC Global. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} {footer?.copyrightNotice}
+          </p>
           <nav
-            aria-label="Chính sách pháp lý"
+            aria-label={
+              locale === "en" ? "Legal policies" : "Chính sách pháp lý"
+            }
             className="flex items-center gap-5"
           >
-            <Link
-              href="#chinh-sach-bao-mat"
-              className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="#dieu-khoan-su-dung"
-              className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"
-            >
-              Terms of Service
-            </Link>
+            {footer?.legalLinks?.map((link) => (
+              <Link
+                key={`${link.label}-${link._key || link.href}`}
+                href={resolveSiteHref(link, locale)}
+                className="transition-colors duration-200 hover:text-foreground/75 focus-visible:text-foreground/75 focus-visible:outline-none"
+              >
+                {link.label}
+              </Link>
+            ))}
           </nav>
         </div>
       </div>

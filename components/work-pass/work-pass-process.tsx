@@ -8,6 +8,8 @@ import {
   FileCheck,
   Building2,
 } from "lucide-react"
+import type { WorkPassProcessContent } from "@/sanity/work-pass-page"
+import { workPassIcons } from "./work-pass-icons"
 
 const STEPS = [
   {
@@ -42,7 +44,15 @@ const STEPS = [
   },
 ] as const
 
-export function WorkPassProcess() {
+export function WorkPassProcess({ content }: { content?: WorkPassProcessContent }) {
+  const steps = content?.steps?.length
+    ? content.steps.map((step) => ({
+        icon: step.icon ? workPassIcons[step.icon] || MessageSquareMore : MessageSquareMore,
+        title: step.title || "",
+        description: step.description || "",
+      }))
+    : STEPS
+
   return (
     <section aria-labelledby="process-heading" className="mt-20 md:mt-28 w-full">
       <div className="text-center mb-12">
@@ -50,7 +60,7 @@ export function WorkPassProcess() {
           id="process-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          2. Quy trình thực hiện TEP
+          {content?.title || "2. Quy trình thực hiện TEP"}
         </h2>
         <span
           aria-hidden="true"
@@ -69,7 +79,7 @@ export function WorkPassProcess() {
           className="pointer-events-none absolute top-[36px] right-[8%] left-[8%] hidden h-px bg-secondary lg:block"
         />
 
-        {STEPS.map((step, index) => {
+        {steps.map((step, index) => {
           const Icon = step.icon
           const num = String(index + 1).padStart(2, "0")
           return (

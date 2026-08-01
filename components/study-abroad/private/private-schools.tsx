@@ -3,8 +3,10 @@
 import * as React from "react"
 import { Building2, Info, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/i18n-client"
+import type { PrivateStudySchoolsContent } from "@/sanity/private-study-page"
 
-const SCHOOLS = [
+const SCHOOLS_VI = [
   {
     id: "ais",
     name: "Australian International School (AIS)",
@@ -64,100 +66,166 @@ const SCHOOLS = [
   },
 ] as const
 
-export function PrivateStudyAbroadSchools() {
+const SCHOOLS_EN = [
+  {
+    id: "ais",
+    name: "Australian International School (AIS)",
+    desc: "Offers education from Preschool to Grade 12, combining the Australian curriculum with international qualifications: IB PYP (Preschool - Grade 5), IGCSE (Grade 10), and IBDP (Grades 11-12).",
+    levels: [
+      { grade: "Infant Care", age: "2 months – 18 months", fee: "From 3,330 SGD / month" },
+      { grade: "Preschool & Kindergarten", age: "18 months – 5 years", fee: "From 10,068 SGD / term" },
+      { grade: "Primary School (Prep – Grade 5)", age: "6 – 11 years", fee: "From 21,210 SGD / term" },
+      { grade: "Secondary School (Grade 6 – Grade 12)", age: "11 – 18 years", fee: "From 25,200 SGD / term" },
+    ],
+  },
+  {
+    id: "sais",
+    name: "Stamford American International School (SAIS)",
+    desc: "US-standard curriculum, accepting students from 18 months to 18 years old, offering 4 pathways: IB Diploma, Advanced Placement (AP), BTEC, and internal Stamford Courses.",
+    levels: [
+      { grade: "Early Years (Preschool)", age: "18 months – 6 years", fee: "From 18,000 – 42,000 SGD / year" },
+      { grade: "Primary School", age: "6 – 11 years", fee: "From 49,040 SGD / year" },
+      { grade: "Middle School", age: "11 – 14 years", fee: "From 53,210 SGD / year" },
+      { grade: "High School", age: "14 – 18 years", fee: "From 56,110 SGD / year" },
+    ],
+  },
+  {
+    id: "brighton",
+    name: "Brighton College (Singapore)",
+    desc: "Part of the prestigious Brighton College family in the UK, offering education for pupils aged 18 months to 18 years under the British curriculum (EYFS, IGCSE, A-Level).",
+    levels: [
+      { grade: "Early Years", age: "18 months – 6 years", fee: "From 18,000 – 35,000 SGD / year" },
+      { grade: "Prep School (Primary)", age: "6 – 11 years", fee: "From 42,500 SGD / year" },
+      { grade: "Senior School", age: "From 11 years", fee: "From 49,500 SGD / year" },
+      { grade: "Specialist Programs (PCP & PCS)", age: "Year 1 – Year 8", fee: "From 61,500 SGD / year" },
+    ],
+  },
+  {
+    id: "cis",
+    name: "Canadian International School (CIS)",
+    desc: "Established in 1990, providing the IB curriculum framework from Early Years to High School (PYP, MYP, IBDP).",
+    levels: [
+      { grade: "Nursery", age: "18 months – 2 years", fee: "From 10,780 SGD / term" },
+      { grade: "Preschool & Kindergarten", age: "2 – 5 years", fee: "From 19,635 SGD / term" },
+      { grade: "Primary School (Grades 1-3 / 4-6)", age: "6 – 11 years", fee: "From 20,155 – 21,925 SGD / term" },
+      { grade: "Middle School (Grades 7 – 10)", age: "11 – 16 years", fee: "From 24,680 SGD / term" },
+      { grade: "High School (Grades 11 – 12)", age: "16 – 18 years", fee: "From 25,775 SGD / term" },
+    ],
+  },
+  {
+    id: "xwa",
+    name: "XCL World Academy (XWA)",
+    desc: "An IB World School accepting students aged 2 to 18, focusing on English-Mandarin bilingual curriculum, French and Spanish electives, tech, and AI.",
+    levels: [
+      { grade: "Nursery", age: "18 months – 2 years", fee: "From 14,500 SGD / term" },
+      { grade: "Preschool & Kindergarten", age: "2 – 5 years", fee: "From 15,330 SGD / term" },
+      { grade: "Primary School (Grades 1 – 5)", age: "6 – 11 years", fee: "From 21,505 SGD / term" },
+      { grade: "Middle School (Grades 6 – 10)", age: "11 – 16 years", fee: "From 23,230 SGD / term" },
+      { grade: "High School (Grades 11 – 12)", age: "16 – 18 years", fee: "From 25,190 SGD / term" },
+    ],
+  },
+] as const
+
+export function PrivateStudyAbroadSchools({ content }: { content?: PrivateStudySchoolsContent }) {
+  const locale = useLocale()
+  const isEn = locale === "en"
+
   const [activeSchoolId, setActiveSchoolId] = React.useState<string>("ais")
-  const activeSchool = SCHOOLS.find((s) => s.id === activeSchoolId) || SCHOOLS[0]
+
+  const schools = content?.items?.length
+    ? content.items
+    : (isEn ? SCHOOLS_EN : SCHOOLS_VI)
+
+  // Fallback to the first school in the resolved list if current selection is invalid
+  const currentActiveId = activeSchoolId || schools[0]?.id || ""
+  const activeSchool = schools.find((s) => s.id === currentActiveId) || schools[0]
 
   return (
-    <section
-      id="truong-tieu-bieu"
-      aria-labelledby="schools-heading"
-      className="mt-20 md:mt-28 w-full"
-    >
+    <section className="mt-20 md:mt-28 w-full max-w-5xl mx-auto">
       <div className="text-center mb-10">
-        <h2
-          id="schools-heading"
-          className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl"
-        >
-          Trường quốc tế tiêu biểu tại Singapore
+        <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
+          {content?.title || (isEn ? "Top International Schools in Singapore" : "Các trường quốc tế hàng đầu tại Singapore")}
         </h2>
         <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
       </div>
 
-      {/* Desktop layout: Tabs + Table */}
-      <div className="hidden lg:grid grid-cols-12 gap-8 items-start">
-        {/* Left Side: School Selection Tabs */}
-        <div className="col-span-4 flex flex-col gap-2">
-          {SCHOOLS.map((school) => {
-            const isActive = school.id === activeSchoolId
-            return (
-              <button
-                key={school.id}
-                type="button"
-                onClick={() => setActiveSchoolId(school.id)}
-                className={cn(
-                  "flex items-center justify-between rounded-lg border p-4 text-left font-heading text-[15px] font-bold transition-all duration-300",
-                  isActive
-                    ? "border-brand-blue bg-brand-blue text-white shadow-md"
-                    : "border-border bg-white text-brand-blue hover:bg-brand-light"
-                )}
-              >
-                <span className="flex items-center gap-3">
-                  <Building2 className={cn("h-5 w-5", isActive ? "text-brand-gold-light" : "text-brand-gold")} />
-                  {school.name.split(" (")[0]}
-                </span>
-                <ChevronRight className={cn("h-4 w-4 transition-transform", isActive && "translate-x-1")} />
-              </button>
-            )
-          })}
-        </div>
+      {activeSchool && (
+        <div className="hidden lg:grid grid-cols-12 gap-8 items-start">
+          {/* Left Side: School Selection Tabs */}
+          <div className="col-span-4 flex flex-col gap-2 bg-brand-light/30 border border-border/50 rounded-lg p-3">
+            {schools.map((school) => {
+              const isSelected = school.id === currentActiveId
+              return (
+                <button
+                  key={school.id}
+                  onClick={() => setActiveSchoolId(school.id || "")}
+                  type="button"
+                  className={cn(
+                    "w-full text-left px-4 py-3.5 rounded-md font-heading text-sm font-bold transition-all flex items-center gap-3 cursor-pointer",
+                    isSelected
+                      ? "bg-brand-blue text-white shadow-md scale-[1.02]"
+                      : "text-brand-blue/80 hover:bg-brand-light hover:text-brand-blue"
+                  )}
+                >
+                  <Building2
+                    className={cn(
+                      "h-4 w-4 shrink-0",
+                      isSelected ? "text-brand-gold-light" : "text-brand-gold"
+                    )}
+                  />
+                  <span className="truncate">{school.name}</span>
+                </button>
+              )
+            })}
+          </div>
 
-        {/* Right Side: Details & Fees Table */}
-        <div className="col-span-8 bg-white border border-border/60 rounded-lg p-6 shadow-sm">
-          <h3 className="font-heading text-xl font-bold text-brand-blue mb-3">
-            {activeSchool.name}
-          </h3>
-          <p className="font-body text-sm leading-relaxed text-muted-foreground mb-6">
-            {activeSchool.desc}
-          </p>
+          {/* Right Side: Details & Fees Table */}
+          <div className="col-span-8 bg-white border border-border/60 rounded-lg p-6 shadow-sm dark:border-border/10 dark:bg-card">
+            <h3 className="font-heading text-xl font-bold text-brand-blue mb-3 dark:text-foreground">
+              {activeSchool.name}
+            </h3>
+            <p className="font-body text-sm leading-relaxed text-muted-foreground mb-6">
+              {activeSchool.desc}
+            </p>
 
-          <div className="overflow-x-auto">
-            <table className="w-full text-left font-body text-sm border-collapse">
-              <thead>
-                <tr className="border-b border-border/80 bg-brand-light font-heading text-xs font-bold text-brand-blue uppercase">
-                  <th className="py-3 px-4">Bậc học</th>
-                  <th className="py-3 px-4">Độ tuổi / Khối lớp</th>
-                  <th className="py-3 px-4">Học phí tham khảo</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border/60 text-brand-dark/90">
-                {activeSchool.levels.map((lvl, index) => (
-                  <tr key={index} className="hover:bg-brand-light/35 transition-colors">
-                    <td className="py-3.5 px-4 font-semibold">{lvl.grade}</td>
-                    <td className="py-3.5 px-4">{lvl.age}</td>
-                    <td className="py-3.5 px-4 text-brand-blue font-semibold">{lvl.fee}</td>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left font-body text-sm border-collapse">
+                <thead>
+                  <tr className="border-b border-border/80 bg-brand-light font-heading text-xs font-bold text-brand-blue uppercase">
+                    <th className="py-3 px-4">{isEn ? "Level" : "Bậc học"}</th>
+                    <th className="py-3 px-4">{isEn ? "Age / Grade" : "Độ tuổi / Khối lớp"}</th>
+                    <th className="py-3 px-4">{isEn ? "Reference Tuition" : "Học phí tham khảo"}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-border/60 text-brand-dark/90">
+                  {activeSchool.levels?.map((lvl, index) => (
+                    <tr key={index} className="hover:bg-brand-light/35 transition-colors">
+                      <td className="py-3.5 px-4 font-semibold">{lvl.grade}</td>
+                      <td className="py-3.5 px-4">{lvl.age}</td>
+                      <td className="py-3.5 px-4 text-brand-blue font-semibold">{lvl.fee}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Mobile layout: Card Accordion List */}
       <div className="lg:hidden flex flex-col gap-4">
-        {SCHOOLS.map((school) => {
-          const isOpen = school.id === activeSchoolId
+        {schools.map((school) => {
+          const isOpen = school.id === currentActiveId
           return (
             <div
               key={school.id}
-              className="border border-border bg-white rounded-lg overflow-hidden shadow-sm"
+              className="border border-border bg-white rounded-lg overflow-hidden shadow-sm dark:border-border/10 dark:bg-card"
             >
               <button
                 type="button"
-                onClick={() => setActiveSchoolId(isOpen ? "" : school.id)}
+                onClick={() => setActiveSchoolId(isOpen ? "" : school.id || "")}
                 className={cn(
-                  "flex w-full items-center justify-between p-4 font-heading text-sm font-bold text-brand-blue text-left transition-colors",
+                  "flex w-full items-center justify-between p-4 font-heading text-sm font-bold text-brand-blue text-left transition-colors cursor-pointer",
                   isOpen && "bg-brand-blue text-white"
                 )}
               >
@@ -175,24 +243,24 @@ export function PrivateStudyAbroadSchools() {
                 )}
               >
                 <div className="overflow-hidden">
-                  <div className="p-4 border-t border-border/60">
+                  <div className="p-4 border-t border-border/60 dark:border-border/10">
                     <p className="font-body text-xs leading-relaxed text-muted-foreground mb-4">
                       {school.desc}
                     </p>
 
                     <div className="flex flex-col gap-3 font-body text-xs">
-                      {school.levels.map((lvl, index) => (
+                      {school.levels?.map((lvl, index) => (
                         <div
                           key={index}
-                          className="bg-brand-light/50 border border-border/40 rounded p-3 flex flex-col gap-1.5"
+                          className="bg-brand-light/50 border border-border/40 rounded p-3 flex flex-col gap-1.5 dark:border-border/10 dark:bg-muted/50"
                         >
-                          <div className="font-bold text-brand-blue">{lvl.grade}</div>
+                          <div className="font-bold text-brand-blue dark:text-foreground">{lvl.grade}</div>
                           <div className="text-muted-foreground flex justify-between">
-                            <span>Độ tuổi/Khối:</span>
+                            <span>{isEn ? "Age / Grade:" : "Độ tuổi/Khối:"}</span>
                             <span>{lvl.age}</span>
                           </div>
-                          <div className="text-brand-blue font-bold flex justify-between mt-1 pt-1 border-t border-dashed border-border/60">
-                            <span>Học phí:</span>
+                          <div className="text-brand-blue font-bold flex justify-between mt-1 pt-1 border-t border-dashed border-border/60 dark:border-border/10 dark:text-foreground">
+                            <span>{isEn ? "Tuition:" : "Học phí:"}</span>
                             <span>{lvl.fee}</span>
                           </div>
                         </div>
@@ -206,10 +274,19 @@ export function PrivateStudyAbroadSchools() {
         })}
       </div>
 
-      <div className="bg-brand-light border border-border/60 rounded-md p-4 flex gap-3 items-start mt-8 max-w-3xl mx-auto">
+      <div className="bg-brand-light border border-border/60 rounded-md p-4 flex gap-3 items-start mt-8 max-w-3xl mx-auto dark:border-border/10 dark:bg-muted/40">
         <Info className="h-5 w-5 text-brand-gold shrink-0 mt-0.5" strokeWidth={2} />
         <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal">
-          <strong>Lưu ý:</strong> Thông tin học phí và chương trình của các trường quốc tế mang tính chất tham khảo tại thời điểm tuyển sinh mới nhất. KVC Global sẽ cập nhật chi phí chính xác trong quá trình tư vấn trực tiếp.
+          {content?.tipText ? (
+            content.tipText
+          ) : (
+            <>
+              <strong>{isEn ? "Note:" : "Lưu ý:"}</strong>{" "}
+              {isEn
+                ? "Tuition fees and programs of international schools are for reference at the latest intake. KVC Global will update the exact costs during direct consultation."
+                : "Thông tin học phí và chương trình của các trường quốc tế mang tính chất tham khảo tại thời điểm tuyển sinh mới nhất. KVC Global sẽ cập nhật chi phí chính xác trong quá trình tư vấn trực tiếp."}
+            </>
+          )}
         </p>
       </div>
     </section>

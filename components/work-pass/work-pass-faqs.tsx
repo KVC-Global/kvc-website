@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
+import type { WorkPassFaqsContent } from "@/sanity/work-pass-page"
 import { cn } from "@/lib/utils"
 
 const FAQS = [
@@ -31,12 +32,17 @@ const FAQS = [
   },
 ] as const
 
-export function WorkPassFaqs() {
+export function WorkPassFaqs({ content }: { content?: WorkPassFaqsContent }) {
   const [openFaqs, setOpenFaqs] = useState<Record<number, boolean>>({})
+  const faqs = content?.faqs?.length ? content.faqs : FAQS
 
   const toggleFaq = (idx: number) => {
     setOpenFaqs((prev) => ({ ...prev, [idx]: !prev[idx] }))
   }
+
+  const half = Math.ceil(faqs.length / 2)
+  const leftFaqs = faqs.slice(0, half)
+  const rightFaqs = faqs.slice(half)
 
   return (
     <section aria-labelledby="faqs-heading" className="mt-20 md:mt-28 w-full">
@@ -45,7 +51,7 @@ export function WorkPassFaqs() {
           id="faqs-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          5. Câu hỏi thường gặp
+          {content?.title || "5. Câu hỏi thường gặp"}
         </h2>
         <span
           aria-hidden="true"
@@ -54,9 +60,9 @@ export function WorkPassFaqs() {
       </div>
 
       <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2">
-        {/* Left Column (FAQs 0, 1, 2) */}
+        {/* Left Column */}
         <div className="flex flex-col gap-4">
-          {FAQS.slice(0, 3).map((faq, index) => {
+          {leftFaqs.map((faq, index) => {
             const globalIdx = index
             const isOpen = !!openFaqs[globalIdx]
             return (
@@ -96,10 +102,10 @@ export function WorkPassFaqs() {
           })}
         </div>
 
-        {/* Right Column (FAQs 3, 4, 5) */}
+        {/* Right Column */}
         <div className="flex flex-col gap-4">
-          {FAQS.slice(3, 6).map((faq, index) => {
-            const globalIdx = index + 3
+          {rightFaqs.map((faq, index) => {
+            const globalIdx = index + half
             const isOpen = !!openFaqs[globalIdx]
             return (
               <div
