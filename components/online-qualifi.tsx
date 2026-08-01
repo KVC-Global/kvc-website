@@ -1,5 +1,5 @@
 "use client"
-import type { OnlineProgramPageData } from "@/sanity/service-pages"
+import type { OnlineProgramPageData, OnlineQualifiPageData } from "@/sanity/service-pages"
 
 import * as React from "react"
 import Image from "next/image"
@@ -169,8 +169,8 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
 
   const whyTitle = data?.whySection?.title ?? "Vì sao chọn KVC Global?"
   const whyItems = data?.whySection?.items?.length
-    ? data!.whySection!.items!.map((c) => ({
-        icon: getIcon(c.icon, Globe),
+    ? data!.whySection!.items!.map((c, idx: number) => ({
+        icon: getIcon(c.icon, WHY_ITEMS[idx]?.icon || Globe),
         title: c.title ?? "",
         desc: c.description ?? "",
       }))
@@ -182,22 +182,24 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
   const progressionTags = progression?.tags?.length ? progression.tags : ["Đại học", "Thạc sĩ", "MBA", "Tiến sĩ"]
   const progressionNoteTitle = progression?.noteTitle ?? "Bằng cấp được công nhận quốc tế"
   const progressionNoteBody = progression?.noteBody ?? "Liên kết với hơn 100 trường đại học đối tác trên toàn cầu"
-  const progressionImage = progression?.image ?? "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80&auto=format&fit=crop"
+  const progressionImage = (progression?.image && progression.image.trim()) ? progression.image : "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=1200&q=80&auto=format&fit=crop"
   const progressionImageAlt = progression?.imageAlt ?? "Học viên tốt nghiệp và cơ hội chuyển tiếp"
 
-  const formatTitle = data?.formatSection?.title ?? "Hình thức học"
-  const formatItems = data?.formatSection?.items?.length
-    ? data!.formatSection!.items!.map((c) => ({
-        icon: getIcon(c.icon, Globe),
+  const formatSection = (data as OnlineQualifiPageData)?.learningFormatsSection || (data as OnlineProgramPageData)?.formatSection
+  const formatTitle = formatSection?.title ?? "Hình thức học"
+  const formatItems = formatSection?.items?.length
+    ? formatSection.items.map((c, idx: number) => ({
+        icon: getIcon(c.icon, LEARNING_FORMATS[idx]?.icon || Globe),
         title: c.title ?? "",
         desc: c.description ?? "",
       }))
     : LEARNING_FORMATS
 
-  const audienceTitle = data?.audienceSection?.title ?? "Đối tượng phù hợp"
-  const audienceItems = data?.audienceSection?.items?.length
-    ? data!.audienceSection!.items!.map((c) => ({
-        icon: getIcon(c.icon, GraduationCap),
+  const audienceSection = (data as OnlineQualifiPageData)?.targetAudienceSection || (data as OnlineProgramPageData)?.audienceSection
+  const audienceTitle = audienceSection?.title ?? "Đối tượng phù hợp"
+  const audienceItems = audienceSection?.items?.length
+    ? audienceSection.items.map((c, idx: number) => ({
+        icon: getIcon(c.icon, TARGET_AUDIENCE[idx]?.icon || GraduationCap),
         title: c.title ?? "",
         desc: c.description ?? "",
       }))
@@ -205,10 +207,10 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
 
   const benefitsTitle = data?.benefitsSection?.title ?? "Lợi ích khi học QUALIFI"
   const benefitsItems = data?.benefitsSection?.items?.length
-    ? data!.benefitsSection!.items!.map((b) => ({
+    ? data!.benefitsSection!.items!.map((b, idx: number) => ({
         title: b.title ?? "",
         desc: b.description ?? "",
-        image: b.image ?? "",
+        image: (b.image && b.image.trim()) ? b.image : (BENEFITS[idx]?.image ?? BENEFITS[0]?.image),
       }))
     : BENEFITS
 
@@ -444,7 +446,19 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
                 {formatItems.map((item, i) => {
                   const Icon = item.icon
-                  const isWide = i < 2
+                  const total = formatItems.length
+                  const colSpan =
+                    total === 2
+                      ? "lg:col-span-3"
+                      : total === 3
+                      ? "lg:col-span-2"
+                      : total === 4
+                      ? "lg:col-span-3"
+                      : total === 5
+                      ? i < 2
+                        ? "lg:col-span-3"
+                        : "lg:col-span-2"
+                      : "lg:col-span-2"
                   return (
                     <motion.div
                       key={i}
@@ -452,7 +466,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                       className={cn(
                         "group relative overflow-hidden rounded-xl border border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
                         "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg",
-                        isWide ? "lg:col-span-3" : "lg:col-span-2",
+                        colSpan,
                       )}
                     >
                       <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-brand-gold/[0.06] transition-all duration-500 group-hover:scale-150 group-hover:bg-brand-gold/[0.12]" />
@@ -463,9 +477,11 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                         <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
                           {item.title}
                         </h3>
-                        <p className="mt-2 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
-                          {item.desc}
-                        </p>
+                        {item.desc && (
+                          <p className="mt-2 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
+                            {item.desc}
+                          </p>
+                        )}
                       </div>
                     </motion.div>
                   )

@@ -2,19 +2,20 @@ import type { Metadata } from "next"
 import { OnlineOssd } from "@/components/online-ossd"
 import { getLocale } from "@/lib/i18n-server"
 import { sanityFetch } from "@/sanity/live"
-import { ONLINE_PROGRAM_PAGE_QUERY } from "@/sanity/queries"
-import type { OnlineProgramPageData } from "@/sanity/service-pages"
+import { ONLINE_OSSD_PAGE_QUERY, ONLINE_PROGRAM_PAGE_QUERY } from "@/sanity/queries"
+import type { OnlineOssdPageData, OnlineProgramPageData } from "@/sanity/service-pages"
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale()
-  const { data } = await sanityFetch({ query: ONLINE_PROGRAM_PAGE_QUERY, params: { lang: locale, slug: "ossd" } })
-  const page = data as OnlineProgramPageData | null
+  const { data: ossdData } = await sanityFetch({ query: ONLINE_OSSD_PAGE_QUERY, params: { lang: locale } })
+  const { data: fallbackData } = await sanityFetch({ query: ONLINE_PROGRAM_PAGE_QUERY, params: { lang: locale, slug: "ossd" } })
+  const page = (ossdData || fallbackData) as OnlineOssdPageData | null
   return {
     title: page?.seo?.title || "OSSD Ontario | KVC Global",
-    description: page?.seo?.description || "",
+    description: page?.seo?.description || "OSSD Canada — Bằng Tốt nghiệp Trung học Phổ thông Ontario. Chương trình được công nhận quốc tế.",
     openGraph: {
       title: page?.seo?.title || "OSSD Ontario | KVC Global",
-      description: page?.seo?.description || "",
+      description: page?.seo?.description || "OSSD Canada — Bằng Tốt nghiệp Trung học Phổ thông Ontario.",
       images: [{ url: "/images/thumb-sharing.png", width: 1200, height: 630, alt: "OSSD Ontario | KVC Global" }],
     },
     twitter: { card: "summary_large_image", title: page?.seo?.title || "OSSD Ontario | KVC Global", description: page?.seo?.description || "", images: ["/images/thumb-sharing.png"] },
@@ -23,6 +24,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Page() {
   const locale = await getLocale()
-  const { data } = await sanityFetch({ query: ONLINE_PROGRAM_PAGE_QUERY, params: { lang: locale, slug: "ossd" } })
-  return <OnlineOssd data={data as OnlineProgramPageData | null || undefined} />
+  const { data: ossdData } = await sanityFetch({ query: ONLINE_OSSD_PAGE_QUERY, params: { lang: locale } })
+  const { data: fallbackData } = await sanityFetch({ query: ONLINE_PROGRAM_PAGE_QUERY, params: { lang: locale, slug: "ossd" } })
+  const page = (ossdData || fallbackData) as OnlineOssdPageData | null
+  return <OnlineOssd data={page || undefined} />
 }

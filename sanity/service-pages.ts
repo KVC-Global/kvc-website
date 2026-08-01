@@ -196,6 +196,11 @@ export type OnlineProgramCard = {
 
 export type OnlineProgramPrograms = { title?: string; items?: OnlineProgramCard[] };
 
+export type OnlineProgramSubjectItem = { name?: string; image?: string };
+export type OnlineProgramSubjects = { title?: string; items?: OnlineProgramSubjectItem[] };
+
+export type OnlineProgramParentReasons = { title?: string; items?: string[] };
+
 export type OnlineProgramPageData = {
   heroSection?: OnlineProgramHero;
   introSection?: OnlineProgramIntro;
@@ -208,6 +213,58 @@ export type OnlineProgramPageData = {
   benefitsSection?: OnlineProgramBenefits;
   processSection?: OnlineProgramProcess;
   ctaSection?: OnlineProgramCta;
+  programsSection?: OnlineProgramPrograms;
+  seo?: PageSeo;
+};
+
+export type OnlineOssdPageData = {
+  heroSection?: OnlineProgramHero;
+  introSection?: OnlineProgramIntro;
+  whySection?: OnlineProgramWhy;
+  structureSection?: OnlineProgramStructure;
+  subjectsSection?: OnlineProgramSubjects;
+  targetAudienceSection?: OnlineProgramAudience;
+  benefitsSection?: OnlineProgramBenefits;
+  learningFormatsSection?: OnlineProgramFormat;
+  stepsSection?: OnlineProgramProcess;
+  parentReasonsSection?: OnlineProgramParentReasons;
+  seo?: PageSeo;
+};
+
+export type OnlineOthmPageData = {
+  heroSection?: OnlineProgramHero;
+  introSection?: OnlineProgramIntro;
+  whySection?: OnlineProgramWhy;
+  learningFormatsSection?: OnlineProgramFormat;
+  targetAudienceSection?: OnlineProgramAudience;
+  benefitsSection?: OnlineProgramBenefits;
+  stepsSection?: OnlineProgramProcess;
+  programsSection?: OnlineProgramPrograms;
+  seo?: PageSeo;
+};
+
+export type OnlineQualifiPageData = {
+  heroSection?: OnlineProgramHero;
+  introSection?: OnlineProgramIntro;
+  whySection?: OnlineProgramWhy;
+  learningFormatsSection?: OnlineProgramFormat;
+  targetAudienceSection?: OnlineProgramAudience;
+  benefitsSection?: OnlineProgramBenefits;
+  stepsSection?: OnlineProgramProcess;
+  progressionSection?: OnlineProgramProgression;
+  programsSection?: OnlineProgramPrograms;
+  seo?: PageSeo;
+};
+
+export type OnlineWolverhamptonPageData = {
+  heroSection?: OnlineProgramHero;
+  introSection?: OnlineProgramIntro;
+  whySection?: OnlineProgramWhy;
+  kvcSupportSection?: OnlineProgramSupport;
+  learningFormatsSection?: OnlineProgramFormat;
+  targetAudienceSection?: OnlineProgramAudience;
+  benefitsSection?: OnlineProgramBenefits;
+  stepsSection?: OnlineProgramProcess;
   programsSection?: OnlineProgramPrograms;
   seo?: PageSeo;
 };

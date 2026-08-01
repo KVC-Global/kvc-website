@@ -1,5 +1,5 @@
 "use client"
-import type { OnlineProgramPageData } from "@/sanity/service-pages"
+import type { OnlineProgramPageData, OnlineOthmPageData } from "@/sanity/service-pages"
 
 import * as React from "react"
 import Image from "next/image"
@@ -184,26 +184,28 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
 
   const whyTitle = data?.whySection?.title ?? "Vì sao chọn KVC Global?"
   const whyItems = data?.whySection?.items?.length
-    ? data!.whySection!.items!.map((c) => ({
-        icon: getIcon(c.icon, Globe),
+    ? data!.whySection!.items!.map((c, idx: number) => ({
+        icon: getIcon(c.icon, WHY_ITEMS[idx]?.icon || Globe),
         title: c.title ?? "",
         desc: c.description ?? "",
       }))
     : WHY_ITEMS
 
-  const formatTitle = data?.formatSection?.title ?? "Hình thức học"
-  const formatItems = data?.formatSection?.items?.length
-    ? data!.formatSection!.items!.map((c) => ({
-        icon: getIcon(c.icon, Globe),
+  const formatSection = (data as OnlineOthmPageData)?.learningFormatsSection || (data as OnlineProgramPageData)?.formatSection
+  const formatTitle = formatSection?.title ?? "Hình thức học"
+  const formatItems = formatSection?.items?.length
+    ? formatSection.items.map((c, idx: number) => ({
+        icon: getIcon(c.icon, LEARNING_FORMATS[idx]?.icon || Globe),
         title: c.title ?? "",
         desc: c.description ?? "",
       }))
     : LEARNING_FORMATS
 
-  const audienceTitle = data?.audienceSection?.title ?? "Đối tượng phù hợp"
-  const audienceItems = data?.audienceSection?.items?.length
-    ? data!.audienceSection!.items!.map((c) => ({
-        icon: getIcon(c.icon, GraduationCap),
+  const audienceSection = (data as OnlineOthmPageData)?.targetAudienceSection || (data as OnlineProgramPageData)?.audienceSection
+  const audienceTitle = audienceSection?.title ?? "Đối tượng phù hợp"
+  const audienceItems = audienceSection?.items?.length
+    ? audienceSection.items.map((c, idx: number) => ({
+        icon: getIcon(c.icon, TARGET_AUDIENCE[idx]?.icon || GraduationCap),
         title: c.title ?? "",
         desc: c.description ?? "",
       }))
@@ -211,10 +213,10 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
 
   const benefitsTitle = data?.benefitsSection?.title ?? "Lợi ích khi học OTHM tại KVC Global"
   const benefitsItems = data?.benefitsSection?.items?.length
-    ? data!.benefitsSection!.items!.map((b) => ({
+    ? data!.benefitsSection!.items!.map((b, idx: number) => ({
         title: b.title ?? "",
         desc: b.description ?? "",
-        image: b.image ?? "",
+        image: (b.image && b.image.trim()) ? b.image : (BENEFITS[idx]?.image ?? BENEFITS[0]?.image),
       }))
     : BENEFITS
 
@@ -352,7 +354,19 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
                 {formatItems.map((item, i) => {
                   const Icon = item.icon
-                  const isWide = i < 2
+                  const total = formatItems.length
+                  const colSpan =
+                    total === 2
+                      ? "lg:col-span-3"
+                      : total === 3
+                      ? "lg:col-span-2"
+                      : total === 4
+                      ? "lg:col-span-3"
+                      : total === 5
+                      ? i < 2
+                        ? "lg:col-span-3"
+                        : "lg:col-span-2"
+                      : "lg:col-span-2"
                   return (
                     <motion.div
                       key={i}
@@ -360,7 +374,7 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
                       className={cn(
                         "group relative overflow-hidden rounded-xl border border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
                         "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg",
-                        isWide ? "lg:col-span-3" : "lg:col-span-2",
+                        colSpan,
                       )}
                     >
                       <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-brand-gold/[0.06] transition-all duration-500 group-hover:scale-150 group-hover:bg-brand-gold/[0.12]" />
@@ -371,9 +385,11 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
                         <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
                           {item.title}
                         </h3>
-                        <p className="mt-2 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
-                          {item.desc}
-                        </p>
+                        {item.desc && (
+                          <p className="mt-2 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
+                            {item.desc}
+                          </p>
+                        )}
                       </div>
                     </motion.div>
                   )
@@ -397,6 +413,7 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {audienceItems.map((item, i) => {
                     const isHero = i === 0
+                    const Icon = item.icon
                     return (
                       <motion.div
                         key={i}
@@ -407,21 +424,18 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
                           isHero && "sm:col-span-2",
                         )}
                       >
-                        {/* Left accent bar */}
-                        {/* Number + Icon */}
-                        <div className="flex items-start gap-4">
-                          <span className="font-heading text-3xl font-extrabold text-brand-gold/15 leading-none select-none sm:text-4xl">
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
+                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-gold/20 bg-brand-gold/[0.08] transition-all duration-500 group-hover:border-brand-gold/40 group-hover:bg-brand-gold/[0.16]">
+                          <Icon className="h-5 w-5 text-brand-gold transition-transform duration-500 group-hover:scale-110" strokeWidth={1.75} />
                         </div>
-                        {/* Text */}
-                        <div className="flex-1">
+                        <div className="flex-1 min-w-0">
                           <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
                             {item.title}
                           </h3>
-                          <p className="mt-1.5 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
-                            {item.desc}
-                          </p>
+                          {item.desc ? (
+                            <p className="mt-1.5 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
+                              {item.desc}
+                            </p>
+                          ) : null}
                         </div>
                       </motion.div>
                     )
