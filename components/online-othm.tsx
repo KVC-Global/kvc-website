@@ -413,7 +413,6 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   {audienceItems.map((item, i) => {
                     const isHero = i === 0
-                    const Icon = item.icon
                     return (
                       <motion.div
                         key={i}
@@ -424,9 +423,13 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
                           isHero && "sm:col-span-2",
                         )}
                       >
-                        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-brand-gold/20 bg-brand-gold/[0.08] transition-all duration-500 group-hover:border-brand-gold/40 group-hover:bg-brand-gold/[0.16]">
-                          <Icon className="h-5 w-5 text-brand-gold transition-transform duration-500 group-hover:scale-110" strokeWidth={1.75} />
+                        {/* Number badge */}
+                        <div className="flex items-start gap-4">
+                          <span className="font-heading text-3xl font-extrabold text-brand-gold/15 leading-none select-none sm:text-4xl">
+                            {String(i + 1).padStart(2, "0")}
+                          </span>
                         </div>
+                        {/* Text */}
                         <div className="flex-1 min-w-0">
                           <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
                             {item.title}
