@@ -575,18 +575,39 @@ export function AboutPage({ content }: { content?: AboutPageData }) {
                       <motion.div
                         key={stat.label}
                         variants={fadeUp}
-                        className="relative flex items-center justify-center gap-3 bg-white px-4 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 md:min-h-[150px] md:py-7"
+                        className="relative flex items-center justify-center bg-white px-3 py-5 text-left transition-colors duration-300 ease-out sm:gap-4 sm:px-6 sm:py-6 md:min-h-[150px] md:py-7"
                       >
-                        <Icon
-                          className="h-10 w-10 shrink-0 text-brand-gold-light sm:h-11 sm:w-11"
-                          strokeWidth={1.75}
-                        />
-                        <div className="flex min-w-0 flex-col md:gap-1.5">
-                          <div className="font-display text-xl font-bold text-primary sm:text-3xl">
-                            {stat.value}
+                        <div className="flex min-w-0 flex-col items-center gap-1 text-center sm:hidden">
+                          <div className="flex items-center justify-center gap-2">
+                            <Icon
+                              className="h-7 w-7 shrink-0 text-[#f8bc62]"
+                              style={{ color: "#f8bc62" }}
+                              strokeWidth={1.75}
+                              aria-hidden="true"
+                            />
+                            <div className="font-display text-lg font-bold text-primary">
+                              {stat.value}
+                            </div>
                           </div>
-                          <div className="truncate font-sans text-sm font-semibold tracking-[0.12em] text-foreground/70 uppercase sm:text-xs">
+                          <div className="max-w-full truncate font-sans text-[11px] font-semibold tracking-[0.08em] text-foreground/70 uppercase">
                             {stat.label}
+                          </div>
+                        </div>
+
+                        <div className="hidden min-w-0 items-center gap-4 sm:flex">
+                          <Icon
+                            className="h-11 w-11 shrink-0 text-[#f8bc62]"
+                            style={{ color: "#f8bc62" }}
+                            strokeWidth={1.75}
+                            aria-hidden="true"
+                          />
+                          <div className="flex min-w-0 flex-col md:gap-1.5">
+                            <div className="font-display text-3xl font-bold text-primary">
+                              {stat.value}
+                            </div>
+                            <div className="truncate font-sans text-xs font-semibold tracking-[0.12em] text-foreground/70 uppercase">
+                              {stat.label}
+                            </div>
                           </div>
                         </div>
                       </motion.div>
