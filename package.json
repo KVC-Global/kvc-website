@@ -16,7 +16,7 @@
     "@sanity/document-internationalization": "^6.2.26",
     "@sanity/icons": "^5.2.1",
     "@sanity/image-url": "^2.1.1",
-    "@sanity/vision": "^6.6.0",
+    "@sanity/vision": "^5.31.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.42.2",
