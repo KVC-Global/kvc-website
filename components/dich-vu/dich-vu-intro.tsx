@@ -1,6 +1,7 @@
 "use client"
 
 import { motion, Variants } from "framer-motion"
+import * as LucideIcons from "lucide-react"
 import {
   Building2,
   Globe2,
@@ -9,6 +10,8 @@ import {
   Users,
   Briefcase,
 } from "lucide-react"
+
+import type { DichVuIntro as DichVuIntroData } from "@/sanity/service-pages"
 
 import { Container } from "@/components/ui/container"
 
@@ -28,6 +31,12 @@ const stagger: Variants = {
 
 import { cn } from "@/lib/utils"
 
+function getIcon(iconName?: string) {
+  if (!iconName) return null
+  const Icon = (LucideIcons as unknown as Record<string, React.ComponentType>)[iconName]
+  return Icon || null
+}
+
 const PILLARS = [
   { icon: Building2, label: "Thành lập\ndoanh nghiệp" },
   { icon: Scale, label: "Pháp lý" },
@@ -36,7 +45,29 @@ const PILLARS = [
   { icon: GraduationCap, label: "Giáo dục" },
 ] as const
 
-export function DichVuIntro({ className }: { className?: string }) {
+const FALLBACK_PARAGRAPH_1 = `KVC Global cung cấp giải pháp tư vấn toàn diện dành cho doanh nghiệp, nhà đầu tư và chủ doanh nghiệp mong muốn mở rộng hoạt động tại Việt Nam và Singapore. Chúng tôi kết nối các dịch vụ về thành lập doanh nghiệp, pháp lý, nhân sự, nhập cư và giáo dục, giúp khách hàng xây dựng nền tảng kinh doanh vững chắc và phát triển bền vững tại thị trường quốc tế.`
+
+const FALLBACK_PARAGRAPH_2 = `Với mạng lưới đối tác chiến lược tại Việt Nam và Singapore, KVC Global mang đến giải pháp One-Stop Business Solution, giúp doanh nghiệp tiết kiệm thời gian, tối ưu chi phí và tập trung vào tăng trưởng kinh doanh. Ý tưởng cung cấp giải pháp trọn gói từ thành lập doanh nghiệp, nhập cư, tuyển dụng đến giáo dục cũng là mô hình được nhiều đơn vị tư vấn quốc tế áp dụng.`
+
+export function DichVuIntro({
+  className,
+  data,
+}: {
+  className?: string
+  data?: DichVuIntroData
+}) {
+  const eyebrow = data?.eyebrow ?? "DỊCH VỤ CỐT LÕI"
+  const title = data?.title ?? "Giải pháp toàn diện cho doanh nghiệp"
+  const displayPillars =
+    data?.pillars && data.pillars.length > 0
+      ? data.pillars.map((p) => ({
+          icon: getIcon(p.icon) ?? Building2,
+          label: p.label ?? "",
+        }))
+      : [...PILLARS]
+  const paragraph1 = data?.paragraph1 ?? FALLBACK_PARAGRAPH_1
+  const paragraph2 = data?.paragraph2 ?? FALLBACK_PARAGRAPH_2
+
   return (
     <section
       aria-label="Giới thiệu dịch vụ"
@@ -54,10 +85,10 @@ export function DichVuIntro({ className }: { className?: string }) {
             {/* ── Section label & Header ── */}
             <motion.div variants={fadeUp} className="text-center">
               <span className="mb-3 block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-                DỊCH VỤ CỐT LÕI
+                {eyebrow}
               </span>
               <h2 className="text-center font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl dark:text-foreground">
-                Giải pháp toàn diện cho doanh nghiệp
+                {title}
               </h2>
               <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
             </motion.div>
@@ -73,7 +104,7 @@ export function DichVuIntro({ className }: { className?: string }) {
                 className="pointer-events-none absolute left-[10%] right-[10%] top-8 hidden h-0.5 bg-gradient-to-r from-transparent via-brand-gold/25 to-transparent md:block"
               />
 
-              {PILLARS.map((pillar) => {
+              {displayPillars.map((pillar) => {
                 const Icon = pillar.icon
                 return (
                   <div
@@ -94,12 +125,7 @@ export function DichVuIntro({ className }: { className?: string }) {
             {/* ── Paragraph 1 ── */}
             <motion.div variants={fadeUp} className="mt-12 text-center max-w-4xl mx-auto">
               <p className="font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
-                KVC Global cung cấp giải pháp tư vấn toàn diện dành cho doanh
-                nghiệp, nhà đầu tư và chủ doanh nghiệp mong muốn mở rộng hoạt động
-                tại Việt Nam và Singapore. Chúng tôi kết nối các dịch vụ về thành
-                lập doanh nghiệp, pháp lý, nhân sự, nhập cư và giáo dục, giúp
-                khách hàng xây dựng nền tảng kinh doanh vững chắc và phát triển
-                bền vững tại thị trường quốc tế.
+                {paragraph1}
               </p>
             </motion.div>
 
@@ -123,12 +149,7 @@ export function DichVuIntro({ className }: { className?: string }) {
 
               <div className="relative z-10 text-center max-w-3xl mx-auto">
                 <p className="font-body text-sm leading-relaxed text-white/90 sm:text-base dark:text-foreground">
-                  Với mạng lưới đối tác chiến lược tại Việt Nam và Singapore, KVC
-                  Global mang đến giải pháp One-Stop Business Solution, giúp doanh
-                  nghiệp tiết kiệm thời gian, tối ưu chi phí và tập trung vào tăng
-                  trưởng kinh doanh. Ý tưởng cung cấp giải pháp trọn gói từ thành
-                  lập doanh nghiệp, nhập cư, tuyển dụng đến giáo dục cũng là mô hình
-                  được nhiều đơn vị tư vấn quốc tế áp dụng.
+                  {paragraph2}
                 </p>
               </div>
 

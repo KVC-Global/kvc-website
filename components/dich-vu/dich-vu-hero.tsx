@@ -5,6 +5,10 @@ import Link from "next/link"
 import { motion, Variants } from "framer-motion"
 import { Building2, Globe2, Handshake, Users } from "lucide-react"
 
+import type { DichVuHero as DichVuHeroData } from "@/sanity/service-pages"
+import { getIcon } from "@/lib/icons"
+import { urlFor } from "@/sanity/image"
+
 import { Container } from "@/components/ui/container"
 import { cn } from "@/lib/utils"
 
@@ -31,7 +35,40 @@ const stagger: Variants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.12 } },
 }
 
-export function DichVuHero({ className }: { className?: string }) {
+export function DichVuHero({
+  className,
+  data,
+}: {
+  className?: string
+  data?: DichVuHeroData
+}) {
+  // CMS-driven or fallback
+  const heroImage = data?.backgroundImage
+    ? urlFor(data.backgroundImage).url()
+    : HERO_IMAGE
+  const heroAlt =
+    data?.backgroundImageAlt ?? "Văn phòng KVC Global tại Singapore"
+  const eyebrow =
+    data?.eyebrow ?? "Giải pháp cho doanh nghiệp"
+  const title =
+    data?.title ??
+    "Đồng hành cùng doanh nghiệp\ntrên hành trình mở rộng toàn cầu"
+  const titleLines = title.split("\n")
+  const primaryButtonLabel =
+    data?.primaryButtonLabel ?? "Khám phá dịch vụ"
+  const primaryButtonHref = data?.primaryButtonHref ?? "#dich-vu"
+  const secondaryButtonLabel =
+    data?.secondaryButtonLabel ?? "Đăng ký tư vấn miễn phí"
+  const secondaryButtonHref = data?.secondaryButtonHref ?? "/lien-he"
+  const displayStats =
+    data?.stats && data.stats.length > 0
+      ? data.stats.map((s) => ({
+          icon: getIcon(s.icon, Building2),
+          value: s.value ?? "",
+          label: s.label ?? "",
+        }))
+      : [...STATS]
+
   return (
     <section
       aria-labelledby="dich-vu-hero-heading"
@@ -39,11 +76,11 @@ export function DichVuHero({ className }: { className?: string }) {
         "relative w-full border-b border-border bg-white bg-cover bg-center pb-16 md:pb-20",
         className
       )}
-      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+      style={{ backgroundImage: `url(${heroImage})` }}
     >
       <Image
-        src={HERO_IMAGE}
-        alt="Văn phòng KVC Global tại Singapore"
+        src={heroImage}
+        alt={heroAlt}
         fill
         priority
         sizes="100vw"
@@ -93,7 +130,7 @@ export function DichVuHero({ className }: { className?: string }) {
             variants={fadeUp}
             className="mb-3 inline-block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm"
           >
-            Giải pháp cho doanh nghiệp
+            {eyebrow}
           </motion.span>
 
           {/* Main Title */}
@@ -102,8 +139,11 @@ export function DichVuHero({ className }: { className?: string }) {
             id="dich-vu-hero-heading"
             className="font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl md:text-5xl lg:text-[44px] lg:leading-[1.15]"
           >
-            Đồng hành cùng doanh nghiệp
-            <span className="mt-1 block">trên hành trình mở rộng toàn cầu</span>
+            {titleLines.map((line, i) => (
+              <span key={i} className={i > 0 ? "mt-1 block" : ""}>
+                {line}
+              </span>
+            ))}
           </motion.h1>
 
           {/* Call to Actions (CTAs) */}
@@ -112,10 +152,10 @@ export function DichVuHero({ className }: { className?: string }) {
             className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center"
           >
             <Link
-              href="#dich-vu"
+              href={primaryButtonHref}
               className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
-              Khám phá dịch vụ
+              {primaryButtonLabel}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -131,10 +171,10 @@ export function DichVuHero({ className }: { className?: string }) {
             </Link>
 
             <Link
-              href="/lien-he"
+              href={secondaryButtonHref}
               className="group inline-flex items-center justify-center gap-2 rounded-sm border border-brand-gold bg-white px-6 py-3.5 text-sm font-semibold text-brand-gold transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-muted hover:shadow-md focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
-              Đăng ký tư vấn miễn phí
+              {secondaryButtonLabel}
               <svg
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -163,7 +203,7 @@ export function DichVuHero({ className }: { className?: string }) {
           <Container>
             <div className="relative overflow-hidden rounded-2xl bg-white shadow-[0_24px_48px_-16px_rgba(15,27,45,0.25),0_8px_16px_-8px_rgba(15,27,45,0.12)] ring-1 ring-black/5 sm:rounded-3xl">
               <div className="grid grid-cols-2 lg:grid-cols-4">
-                {STATS.map((stat) => {
+                {displayStats.map((stat, index) => {
                   const Icon = stat.icon
                   return (
                     <motion.div
