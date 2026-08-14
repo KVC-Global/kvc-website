@@ -9,18 +9,23 @@ import {
   SiteHeaderNav,
 } from "@/components/site-header-nav"
 import { SiteHeaderMobileToggle } from "@/components/site-header-mobile-toggle"
-import type { SiteSettings } from "@/lib/site-settings"
+import { useLocale } from "@/lib/i18n-client"
+import { fallbackSiteSettings, type SiteSettings } from "@/lib/site-settings"
 import { cn } from "@/lib/utils"
 
 export function SiteHeaderShell({
   className,
   settings,
+  locale: serverLocale,
 }: {
   className?: string
   settings?: SiteSettings
+  locale?: string
 }) {
   const [open, setOpen] = React.useState(false)
-  const header = settings?.header
+  const clientLocale = useLocale()
+  const isMismatched = !!serverLocale && clientLocale !== serverLocale
+  const header = isMismatched ? fallbackSiteSettings(clientLocale).header : settings?.header
 
   return (
     <div className={cn("w-full", className)}>
