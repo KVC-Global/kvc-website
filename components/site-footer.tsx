@@ -275,14 +275,17 @@ function CollapsibleFooterSection({
 export function SiteFooter({
   className,
   settings,
+  locale: serverLocale,
 }: {
   className?: string
   settings?: SiteSettings
+  locale?: string
 }) {
   const locale = useLocale()
   const fallback = fallbackSiteSettings(locale)
-  const footer = settings?.footer || fallback.footer
-  const company = settings?.company || fallback.company
+  const isMismatched = !!serverLocale && locale !== serverLocale
+  const footer = isMismatched ? fallback.footer : (settings?.footer || fallback.footer)
+  const company = isMismatched ? fallback.company : (settings?.company || fallback.company)
   const columns = [
     footer?.servicesColumn,
     footer?.aboutColumn,

@@ -96,9 +96,9 @@ export default async function SiteLayout({
     >
       <body className="flex min-h-svh flex-col bg-background text-foreground">
         <ThemeProvider>
-          <SiteHeader settings={siteSettings} />
+          <SiteHeader settings={siteSettings} locale={locale} />
           <main className="flex-1">{children}</main>
-          <SiteFooter settings={siteSettings} />
+          <SiteFooter settings={siteSettings} locale={locale} />
           <SanityLive />
         </ThemeProvider>
       </body>
