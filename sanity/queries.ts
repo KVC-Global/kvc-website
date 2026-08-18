@@ -159,7 +159,8 @@ export const DICH_VU_PAGE_QUERY = defineQuery(`
       paragraph1, paragraph2
     },
     videoSection{
-      eyebrow, title, videoId
+      eyebrow, title, 
+      "videoUrl": video.asset->url
     },
     serviceCategories{eyebrow, title},
     accordionSections{

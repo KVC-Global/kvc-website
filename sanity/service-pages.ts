@@ -83,7 +83,7 @@ export type DichVuIntro = {
 export type DichVuVideoSection = {
   eyebrow?: string;
   title?: string;
-  videoId?: string;
+  videoUrl?: string;
 };
 
 // --- Dich Vu Service Accordion ---

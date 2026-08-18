@@ -14,10 +14,10 @@ export function DichVuVideo({ className, data }: { className?: string; data?: Di
 
   const eyebrow = data?.eyebrow ?? "Khám Phá KVC Global"
   const title = data?.title ?? "Giải pháp toàn diện của chúng tôi"
-  const videoId = data?.videoId ?? "ScMzIvxBSi4"
+  const videoUrl = data?.videoUrl ?? "/videos/fallback.mp4"
 
   return (
-    <section className={cn("w-full bg-brand-light/40 py-16 md:py-24 dark:bg-background", className)}>
+    <section className={cn("w-full bg-white py-16 md:py-24 dark:bg-background", className)}>
       <Container>
         <div className="mx-auto max-w-4xl text-center">
           <motion.div
@@ -65,12 +65,12 @@ export function DichVuVideo({ className, data }: { className?: string; data?: Di
                 </div>
               </div>
             ) : (
-              <iframe
-                className="absolute inset-0 h-full w-full border-0"
-                src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
-                title="KVC Global Video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                src={videoUrl}
+                autoPlay
+                controls
+                playsInline
               />
             )}
           </motion.div>
