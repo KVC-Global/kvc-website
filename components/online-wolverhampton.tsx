@@ -295,7 +295,8 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
       {/* ── Vì sao chọn? ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{whyTitle}</h2>
@@ -316,6 +317,7 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
               })}
             </div>
           </motion.div>
+            </div>
           </div>
         </Container>
       </section>
@@ -348,7 +350,8 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
       {/* ── Hình thức học ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
               <motion.div variants={fadeUpVariants} className="mb-12 text-center">
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{formatTitle}</h2>
@@ -401,6 +404,7 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
                 </div>
               </div>
             </motion.div>
+            </div>
           </div>
         </Container>
       </section>
@@ -456,7 +460,8 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
       {/* ── Lợi ích ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
               <motion.div variants={fadeUpVariants} className="mb-10 text-center">
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{benefitsTitle}</h2>
@@ -499,6 +504,7 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
                 </div>
               </div>
             </motion.div>
+            </div>
           </div>
         </Container>
       </section>
@@ -544,7 +550,8 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
       {/* ── Các chương trình đào tạo ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
               <motion.div variants={fadeUpVariants} className="mb-10 text-center">
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{programsTitle}</h2>
@@ -668,6 +675,7 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
                 })}
               </div>
             </motion.div>
+            </div>
           </div>
         </Container>
       </section>
