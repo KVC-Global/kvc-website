@@ -25,10 +25,15 @@ export function PublicStudyAbroadDetails({
         <PublicStudyAbroadIntro content={content?.intro} />
       </Container>
 
-      {/* 2. Why - Wrapped in a rounded-lg bg-muted card */}
+      {/* 2. Why - Wide background with content aligned to default container */}
       <Container className="mt-16 max-w-none px-4 sm:px-5 md:mt-24 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <PublicStudyAbroadWhy className="mt-0 md:mt-0" content={content?.why} />
+        <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+            <PublicStudyAbroadWhy
+              className="mt-0 md:mt-0"
+              content={content?.why}
+            />
+          </div>
         </div>
       </Container>
 
@@ -37,10 +42,15 @@ export function PublicStudyAbroadDetails({
         <PublicStudyAbroadPathways content={content?.pathways} />
       </Container>
 
-      {/* 4. Requirements - Wrapped in a rounded-lg bg-muted card */}
+      {/* 4. Requirements - Wide background with content aligned to default container */}
       <Container className="mt-16 max-w-none px-4 sm:px-5 md:mt-24 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <PublicStudyAbroadRequirements className="mt-0 md:mt-0" content={content?.requirements} />
+        <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+            <PublicStudyAbroadRequirements
+              className="mt-0 md:mt-0"
+              content={content?.requirements}
+            />
+          </div>
         </div>
       </Container>
 
@@ -49,10 +59,15 @@ export function PublicStudyAbroadDetails({
         <PublicStudyAbroadWorkRules content={content?.workRules} />
       </Container>
 
-      {/* 6. Support - Wrapped in a rounded-lg bg-muted card */}
+      {/* 6. Support - Wide background with content aligned to default container */}
       <Container className="mt-16 max-w-none px-4 sm:px-5 md:mt-24 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <PublicStudyAbroadSupport className="mt-0 md:mt-0" content={content?.support} />
+        <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+            <PublicStudyAbroadSupport
+              className="mt-0 md:mt-0"
+              content={content?.support}
+            />
+          </div>
         </div>
       </Container>
 
@@ -61,10 +76,12 @@ export function PublicStudyAbroadDetails({
         <PublicStudyAbroadFaqs content={content?.faqs} />
       </Container>
 
-      {/* 8. Services & ContactForm Section - Wrapped in a rounded-lg bg-muted card */}
+      {/* 8. Services - Wide background with content aligned to default container */}
       <Container className="mt-16 max-w-none px-4 sm:px-5 md:mt-24 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <PublicStudyAbroadServices content={content?.relatedServices} />
+        <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+            <PublicStudyAbroadServices content={content?.relatedServices} />
+          </div>
         </div>
       </Container>
     </div>

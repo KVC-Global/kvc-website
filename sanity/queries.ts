@@ -385,12 +385,20 @@ export const WORK_PASS_PAGE_QUERY = defineQuery(`
     },
     "relatedServices": servicesSection{
       title,
-      services[]->{
-        _id,
-        title,
-        ctaText,
-        icon,
-        href
+      services[]{
+        _type == "reference" => @->{
+          _id,
+          title,
+          ctaText,
+          icon,
+          href
+        },
+        _type != "reference" => {
+          title,
+          ctaText,
+          icon,
+          href
+        }
       }
     },
     seo{title, description, image}
@@ -455,12 +463,20 @@ export const STUDY_ABROAD_PAGE_QUERY = defineQuery(`
     },
     "relatedServices": servicesSection {
       title,
-      services[]->{
-        _id,
-        title,
-        ctaText,
-        icon,
-        href
+      services[]{
+        _type == "reference" => @->{
+          _id,
+          title,
+          ctaText,
+          icon,
+          href
+        },
+        _type != "reference" => {
+          title,
+          ctaText,
+          icon,
+          href
+        }
       }
     },
     seo{title, description, shareImage}
@@ -504,12 +520,20 @@ export const UNI_MASTER_PAGE_QUERY = defineQuery(`
     },
     "relatedServices": servicesSection {
       title,
-      services[]->{
-        _id,
-        title,
-        ctaText,
-        icon,
-        href
+      services[]{
+        _type == "reference" => @->{
+          _id,
+          title,
+          ctaText,
+          icon,
+          href
+        },
+        _type != "reference" => {
+          title,
+          ctaText,
+          icon,
+          href
+        }
       }
     },
     seo{title, description, shareImage}
@@ -570,12 +594,20 @@ export const PRIVATE_STUDY_PAGE_QUERY = defineQuery(`
     },
     "relatedServices": servicesSection {
       title,
-      services[]->{
-        _id,
-        title,
-        ctaText,
-        icon,
-        href
+      services[]{
+        _type == "reference" => @->{
+          _id,
+          title,
+          ctaText,
+          icon,
+          href
+        },
+        _type != "reference" => {
+          title,
+          ctaText,
+          icon,
+          href
+        }
       }
     },
     seo{title, description, shareImage}
@@ -647,12 +679,20 @@ export const PUBLIC_STUDY_PAGE_QUERY = defineQuery(`
     },
     "relatedServices": servicesSection {
       title,
-      services[]->{
-        _id,
-        title,
-        ctaText,
-        icon,
-        href
+      services[]{
+        _type == "reference" => @->{
+          _id,
+          title,
+          ctaText,
+          icon,
+          href
+        },
+        _type != "reference" => {
+          title,
+          ctaText,
+          icon,
+          href
+        }
       }
     },
     seo{title, description, shareImage}

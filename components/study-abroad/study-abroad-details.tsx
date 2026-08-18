@@ -27,10 +27,12 @@ export function StudyAbroadDetails({
         <StudyAbroadIntro content={content?.intro} />
       </Container>
 
-      {/* 2. Why - Wrapped in a rounded-lg bg-muted card */}
+      {/* 2. Why - Wide background with content aligned to default container */}
       <Container className="mt-16 max-w-none px-4 sm:px-5 md:mt-24 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <StudyAbroadWhy className="mt-0 md:mt-0" content={content?.why} />
+        <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+            <StudyAbroadWhy className="mt-0 md:mt-0" content={content?.why} />
+          </div>
         </div>
       </Container>
 
@@ -42,12 +44,14 @@ export function StudyAbroadDetails({
         </div>
       </Container>
 
-      {/* 4. Prospects & Support Row - Wrapped in a rounded-lg bg-muted card */}
+      {/* 4. Prospects & Support Row - Wide background with aligned content */}
       <Container className="mt-16 max-w-none px-4 sm:px-5 md:mt-24 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-            <StudyAbroadProspects content={content?.prospects} />
-            <StudyAbroadSupport content={content?.support} />
+        <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+              <StudyAbroadProspects content={content?.prospects} />
+              <StudyAbroadSupport content={content?.support} />
+            </div>
           </div>
         </div>
       </Container>
@@ -57,10 +61,12 @@ export function StudyAbroadDetails({
         <StudyAbroadTestimonials content={content?.testimonials} />
       </Container>
 
-      {/* 6. FAQs - Wrapped in a rounded-lg bg-muted card */}
+      {/* 6. FAQs - Wide background with content aligned to default container */}
       <Container className="mt-16 max-w-none px-4 sm:px-5 md:mt-24 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <StudyAbroadFaqs className="mt-0 md:mt-0" content={content?.faqs} />
+        <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+            <StudyAbroadFaqs className="mt-0 md:mt-0" content={content?.faqs} />
+          </div>
         </div>
       </Container>
 

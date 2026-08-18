@@ -311,7 +311,8 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
       {/* ── Vì sao chọn KVC Global? ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
           <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
             <motion.div variants={fadeUpVariants} className="mb-12 text-center">
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{whyTitle}</h2>
@@ -332,6 +333,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
               })}
             </div>
           </motion.div>
+            </div>
           </div>
         </Container>
       </section>
@@ -344,11 +346,11 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{progressionTitle}</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="mx-auto max-w-5xl">
-              <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="w-full">
+              <div className="grid grid-cols-1 items-stretch gap-10 lg:grid-cols-12 lg:gap-8 xl:gap-10">
                 {/* Image */}
                 <motion.div variants={fadeUpVariants} className="lg:col-span-7">
-                  <div className="relative aspect-4/3 overflow-hidden rounded-xl shadow-lg">
+                  <div className="relative aspect-4/3 overflow-hidden rounded-xl shadow-lg lg:h-full lg:min-h-[28rem] lg:aspect-auto">
                     <Image
                       src={progressionImage}
                       alt={progressionImageAlt}
@@ -359,7 +361,10 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                   </div>
                 </motion.div>
                 {/* Content */}
-                <motion.div variants={fadeUpVariants} className="lg:col-span-5">
+                <motion.div
+                  variants={fadeUpVariants}
+                  className="lg:col-span-5 lg:flex lg:flex-col lg:justify-center lg:rounded-xl lg:border lg:border-border/70 lg:bg-muted/60 lg:p-8 xl:p-10"
+                >
                   <p className="font-body text-sm leading-relaxed text-brand-dark/80 sm:text-base">
                     {progressionBody}
                   </p>
@@ -391,24 +396,39 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
       {/* ── Đối tượng phù hợp ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
               <motion.div variants={fadeUpVariants} className="mb-12 text-center">
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{audienceTitle}</h2>
                 <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
               </motion.div>
-              <div className="mx-auto max-w-5xl">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="mx-auto max-w-5xl lg:max-w-none">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
                   {audienceItems.map((item, i) => {
                     const isHero = i === 0
+                    const total = audienceItems.length
+                    const desktopSpan =
+                      total === 2
+                        ? "lg:col-span-3"
+                        : total === 3
+                          ? "lg:col-span-2"
+                          : total === 4
+                            ? "lg:col-span-3"
+                            : total === 5
+                              ? i < 2
+                                ? "lg:col-span-3"
+                                : "lg:col-span-2"
+                              : "lg:col-span-2"
                     return (
                       <motion.div
                         key={i}
                         variants={fadeUpVariants}
                         className={cn(
-                          "group relative flex gap-5 rounded-xl border border-l-2 border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out",
-                          "hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-lg hover:border-l-brand-gold",
+                          "group relative flex gap-5 rounded-xl border border-l-2 border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out lg:min-h-40 lg:p-7",
+                          "hover:-translate-y-1 hover:border-brand-blue/25 hover:border-l-brand-gold hover:shadow-lg",
                           isHero && "sm:col-span-2",
+                          desktopSpan,
                         )}
                       >
                         <div className="flex items-start gap-4">
@@ -430,6 +450,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                 </div>
               </div>
             </motion.div>
+            </div>
           </div>
         </Container>
       </section>
@@ -442,7 +463,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{formatTitle}</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="mx-auto max-w-5xl">
+            <div className="w-full">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
                 {formatItems.map((item, i) => {
                   const Icon = item.icon
@@ -495,7 +516,8 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
       {/* ── Lợi ích ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
               <motion.div variants={fadeUpVariants} className="mb-10 text-center">
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{benefitsTitle}</h2>
@@ -538,6 +560,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                 </div>
               </div>
             </motion.div>
+            </div>
           </div>
         </Container>
       </section>
@@ -550,25 +573,41 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
               <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{processTitle}</h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="mx-auto max-w-2xl">
+            <div className="mx-auto max-w-2xl lg:max-w-none">
               <div className="relative">
-                <div aria-hidden="true" className="absolute top-0 bottom-0 left-8 w-px bg-brand-blue-mid/[0.12] sm:left-10" />
-                <div className="flex flex-col gap-0">
+                {/* Mobile vertical connector */}
+                <div
+                  aria-hidden="true"
+                  className="absolute bottom-0 left-8 top-0 w-px bg-brand-blue-mid/[0.12] sm:left-10 lg:hidden"
+                />
+                {/* Desktop horizontal connector */}
+                <div
+                  aria-hidden="true"
+                  className="absolute left-[8%] right-[8%] top-10 hidden h-px bg-brand-blue-mid/[0.14] lg:block"
+                />
+                <div className="flex flex-col gap-0 lg:flex-row lg:items-start lg:gap-5">
                   {processSteps.map((step, i) => {
-                    const isLast = i === STEPS.length - 1
+                    const isLast = i === processSteps.length - 1
                     return (
-                      <motion.div key={i} variants={fadeUpVariants} className="group relative flex gap-6 pb-10 last:pb-0 sm:gap-8">
-                        <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white shadow-[0_4px_20px_rgba(2,14,80,0.08)] ring-1 ring-brand-blue-mid/10 transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,14,80,0.14)] group-hover:ring-brand-gold/40 sm:h-20 sm:w-20">
+                      <motion.div
+                        key={i}
+                        variants={fadeUpVariants}
+                        className="group relative flex gap-6 pb-10 last:pb-0 sm:gap-8 lg:flex-1 lg:flex-col lg:items-center lg:gap-5 lg:pb-0 lg:text-center"
+                      >
+                        <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white shadow-[0_4px_20px_rgba(2,14,80,0.08)] ring-1 ring-brand-blue-mid/10 transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_8px_30px_rgba(2,14,80,0.14)] group-hover:ring-brand-gold/40 sm:h-20 sm:w-20">
                           <span className="font-heading text-2xl font-extrabold text-brand-blue-mid transition-colors duration-500 group-hover:text-brand-blue sm:text-3xl">
                             {String(i + 1).padStart(2, "0")}
                           </span>
                         </div>
-                        <div className="flex-1 pt-1 sm:pt-2">
+                        <div className="flex-1 pt-1 sm:pt-2 lg:max-w-56 lg:pt-0">
                           <h3 className="font-heading text-lg font-bold text-brand-blue">{step.title}</h3>
                           <p className="mt-1.5 font-body text-sm leading-relaxed text-brand-dark/70">{step.desc}</p>
                         </div>
                         {!isLast && (
-                          <div aria-hidden="true" className="absolute left-[26.5px] top-[78px] z-10 h-3 w-3 rounded-full border-2 border-brand-blue-mid/20 bg-white sm:left-[34.5px] sm:top-[94px]" />
+                          <div
+                            aria-hidden="true"
+                            className="absolute left-[26.5px] top-[78px] z-10 h-3 w-3 rounded-full border-2 border-brand-blue-mid/20 bg-white sm:left-[34.5px] sm:top-[94px] lg:hidden"
+                          />
                         )}
                       </motion.div>
                     )
@@ -583,7 +622,8 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
       {/* ── Các chương trình QUALIFI ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
             <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
               <motion.div variants={fadeUpVariants} className="mb-10 text-center">
                 <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{programsTitle}</h2>
@@ -707,6 +747,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                 })}
               </div>
             </motion.div>
+            </div>
           </div>
         </Container>
       </section>

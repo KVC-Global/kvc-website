@@ -22,10 +22,12 @@ export function UniMasterStudyAbroadDetails({
         <UniMasterIntro content={content?.intro} />
       </Container>
 
-      {/* 2. Why - Wrapped in a rounded-lg bg-muted card */}
+      {/* 2. Why - Wide background with content aligned to default container */}
       <Container className="mt-16 max-w-none px-4 sm:px-5 md:mt-24 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <UniMasterWhy className="mt-0 md:mt-0" content={content?.why} />
+        <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+            <UniMasterWhy className="mt-0 md:mt-0" content={content?.why} />
+          </div>
         </div>
       </Container>
 
@@ -34,10 +36,15 @@ export function UniMasterStudyAbroadDetails({
         <UniMasterAudience content={content?.audience} />
       </Container>
 
-      {/* 4. Commitment - Wrapped in a rounded-lg bg-muted card */}
+      {/* 4. Commitment - Wide background with content aligned to default container */}
       <Container className="mt-16 max-w-none px-4 sm:px-5 md:mt-24 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          <UniMasterCommitment className="mt-0 md:mt-0" content={content?.commitment} />
+        <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+          <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+            <UniMasterCommitment
+              className="mt-0 md:mt-0"
+              content={content?.commitment}
+            />
+          </div>
         </div>
       </Container>
 
