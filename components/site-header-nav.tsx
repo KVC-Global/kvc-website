@@ -273,27 +273,45 @@ export function SiteHeaderMobileMenu({
                     key={key}
                     className="border-b border-brand-blue-mid/10 last:border-b-0"
                   >
-                    <button
-                      type="button"
-                      aria-expanded={isExpanded}
-                      onClick={() => setExpandedKey(isExpanded ? null : key)}
+                    <div
                       className={cn(
-                        "group flex w-full items-center justify-between gap-3 px-1 py-4 text-left transition-colors duration-200 hover:bg-muted/50 focus-visible:bg-muted/50 focus-visible:outline-none sm:px-2",
+                        "flex items-center gap-3 px-1 transition-colors duration-200 sm:px-2",
                         (active || isExpanded) && "bg-muted/70 text-brand-gold"
                       )}
                     >
-                      <span className="min-w-0 truncate font-heading text-[17px] font-semibold">
-                        {link.label}
-                      </span>
-                      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid/5">
+                      <Link
+                        href={href}
+                        aria-current={active ? "page" : undefined}
+                        onClick={onClose}
+                        className="min-w-0 flex-1 py-4 text-left font-heading text-[17px] font-semibold hover:text-brand-gold focus-visible:outline-none"
+                      >
+                        <span className="block truncate">{link.label}</span>
+                      </Link>
+                      <button
+                        type="button"
+                        aria-label={
+                          isExpanded
+                            ? locale === "en"
+                              ? `Collapse ${link.label}`
+                              : `Thu gọn ${link.label}`
+                            : locale === "en"
+                              ? `Expand ${link.label}`
+                              : `Mở rộng ${link.label}`
+                        }
+                        aria-expanded={isExpanded}
+                        onClick={() =>
+                          setExpandedKey(isExpanded ? null : key)
+                        }
+                        className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blue-mid/5 hover:bg-brand-blue-mid/10 focus-visible:outline-none"
+                      >
                         <ChevronDown
                           className={cn(
                             "h-4 w-4 text-muted-foreground transition-transform duration-300",
                             isExpanded && "rotate-180 text-brand-gold"
                           )}
                         />
-                      </span>
-                    </button>
+                      </button>
+                    </div>
 
                     <div
                       className={cn(

@@ -141,7 +141,7 @@ export function PrivateStudyAbroadSchools({ content }: { content?: PrivateStudyS
   const activeSchool = schools.find((s) => s.id === currentActiveId) || schools[0]
 
   return (
-    <section className="mt-20 md:mt-28 w-full max-w-5xl mx-auto">
+    <section className="mt-20 w-full md:mt-28">
       <div className="text-center mb-10">
         <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
           {content?.title || (isEn ? "Top International Schools in Singapore" : "Các trường quốc tế hàng đầu tại Singapore")}

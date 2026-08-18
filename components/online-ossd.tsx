@@ -509,8 +509,9 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
       {/* ── Vì sao chọn OSSD? ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-            <motion.div
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+              <motion.div
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
@@ -550,7 +551,8 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                   )
                 })}
               </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </Container>
       </section>
@@ -601,8 +603,9 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
       {/* ── Các môn học & Đối tượng phù hợp ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-            <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+              <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
               {/* Các môn học */}
               <motion.div
                 variants={staggerContainer}
@@ -724,6 +727,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                   })}
                 </ul>
               </motion.div>
+              </div>
             </div>
           </div>
         </Container>
@@ -800,8 +804,9 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
       {/* ── Lợi ích khi học OSSD tại KVC Global ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-            <motion.div
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+              <motion.div
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
@@ -859,7 +864,8 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                 </div>
               </div>
               </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </Container>
       </section>
@@ -930,8 +936,9 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
       {/* ── Vì sao phụ huynh chọn KVC? ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-            <motion.div
+          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
+            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
+              <motion.div
               variants={staggerContainer}
               initial="hidden"
               whileInView="visible"
@@ -964,7 +971,8 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                   ))}
                 </ul>
               </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </Container>
       </section>

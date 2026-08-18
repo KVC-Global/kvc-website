@@ -97,6 +97,38 @@ const CLIENT_REVIEWS = [
       "Tôi đánh giá cao cách KVC giải thích các lựa chọn và rủi ro trước khi cùng khách hàng ra quyết định.",
     image: "/images/singapore-student.jpeg",
   },
+  {
+    name: "Ngọc Hà",
+    rating: 5,
+    role: "Phụ huynh học sinh",
+    quote:
+      "KVC tư vấn rất kỹ từ việc chọn trường đến chuẩn bị hồ sơ. Gia đình tôi luôn nhận được câu trả lời nhanh và rõ ràng.",
+    image: "/images/student-avatar-1.jpg",
+  },
+  {
+    name: "Đức Anh",
+    rating: 5,
+    role: "Du học sinh tại Singapore",
+    quote:
+      "Nhờ KVC, tôi hiểu rõ từng bước trong lộ trình du học và không còn lo lắng trước những thủ tục phức tạp.",
+    image: "/images/student-avatar-2.jpg",
+  },
+  {
+    name: "Thùy Dương",
+    rating: 5,
+    role: "Khách hàng Work Pass",
+    quote:
+      "Đội ngũ làm việc chuyên nghiệp, chủ động cập nhật tiến độ và hỗ trợ tôi xử lý hồ sơ đúng thời hạn.",
+    image: "/images/student-avatar-3.jpg",
+  },
+  {
+    name: "Gia Hưng",
+    rating: 5,
+    role: "Khách hàng doanh nghiệp",
+    quote:
+      "KVC giúp doanh nghiệp của tôi có hướng đi cụ thể và giải thích các yêu cầu pháp lý theo cách rất dễ hiểu.",
+    image: "/images/student-avatar-4.jpg",
+  },
 ] as const
 
 const OFFICES = [

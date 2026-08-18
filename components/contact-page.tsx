@@ -536,6 +536,35 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
                   })}
                 </ul>
               </div>
+
+              {/* Map */}
+              <div className="mt-8">
+                <h3 className="font-heading text-sm font-bold tracking-wide text-brand-dark uppercase">
+                  Vị trí:
+                </h3>
+                <div className="relative mt-3 h-64 overflow-hidden rounded-lg border border-border bg-white shadow-sm">
+                  <iframe
+                    src={`https://www.google.com/maps?q=${offices[0].mapQ}&output=embed&z=15`}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title={`Bản đồ ${offices[0].role}`}
+                    className="absolute inset-0 h-full w-full"
+                  />
+                  <a
+                    href={offices[0].mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group absolute right-3 bottom-3 inline-flex items-center gap-1.5 rounded-sm bg-white px-4 py-2.5 text-xs font-semibold text-brand-blue shadow-md ring-1 ring-black/5 transition-colors hover:text-brand-gold"
+                  >
+                    Mở Google Maps
+                    <ChevronRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </a>
+                </div>
+              </div>
             </div>
 
             {/* ── Right column: inquiry form ── */}
@@ -560,41 +589,7 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
         </Container>
       </section>
 
-      {/* ═══════════ Section 2: Offices + Maps ═══════════ */}
-      <section
-        aria-labelledby="offices-heading"
-        className="w-full bg-white py-10 sm:py-12 lg:py-16"
-      >
-        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-            <div className="flex flex-col items-center text-center">
-              <p className="text-sm font-semibold tracking-[0.24em] text-brand-gold uppercase">
-                {content?.offices?.eyebrow || "Văn phòng"}
-              </p>
-              <h2
-                id="offices-heading"
-                className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
-              >
-                {content?.offices?.title || "Gần bạn hơn ở mỗi điểm đến"}
-              </h2>
-              <span
-                aria-hidden="true"
-                className="mt-4 h-1 w-12 rounded-sm bg-brand-gold"
-              />
-            </div>
 
-            <div className="mt-12 space-y-8 lg:mt-14">
-              {offices.map((office, index) => (
-                <OfficeCard
-                  key={office.country}
-                  office={office}
-                  reverse={index % 2 !== 0}
-                />
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
     </div>
   )
 }

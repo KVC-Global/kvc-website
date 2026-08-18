@@ -6,7 +6,6 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
-  ArrowUpRight,
   ChevronDown,
   Mail,
   MapPin,
@@ -219,7 +218,7 @@ function CtaBanner({
             >
               <MessageCircle className="h-4 w-4" strokeWidth={2.25} />
               {cta?.secondaryButton?.label || t.footer.cta.chat}
-              <ArrowUpRight
+              <ArrowRight
                 className="h-4 w-4 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 strokeWidth={2.5}
               />
@@ -256,7 +255,7 @@ function CollapsibleFooterSection({
       onToggle={(event) => setOpen((event.target as HTMLDetailsElement).open)}
       className={cn("group", className)}
     >
-      <summary className="relative -mx-2 flex cursor-pointer list-none items-center justify-between gap-3 px-2 pt-2 pb-3 transition-colors duration-200 ease-out after:absolute after:bottom-0 after:left-2 after:h-px after:w-[calc(100%-1rem)] after:bg-brand-blue-mid/15 hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:hover:bg-transparent lg:after:w-1/2 [&::-webkit-details-marker]:hidden">
+      <summary className="relative -mx-2 flex cursor-pointer list-none items-center justify-between gap-3 px-2 pt-2 pb-3 transition-colors duration-200 ease-out after:absolute after:bottom-0 after:left-2 after:h-px after:w-[calc(100%-1rem)] after:bg-brand-blue-mid/15 hover:bg-foreground/[0.03] lg:pointer-events-none lg:cursor-default lg:after:w-1/2 lg:hover:bg-transparent [&::-webkit-details-marker]:hidden">
         <ColumnHeading>{heading}</ColumnHeading>
         <ChevronDown
           aria-hidden="true"
@@ -284,8 +283,12 @@ export function SiteFooter({
   const locale = useLocale()
   const fallback = fallbackSiteSettings(locale)
   const isMismatched = !!serverLocale && locale !== serverLocale
-  const footer = isMismatched ? fallback.footer : (settings?.footer || fallback.footer)
-  const company = isMismatched ? fallback.company : (settings?.company || fallback.company)
+  const footer = isMismatched
+    ? fallback.footer
+    : settings?.footer || fallback.footer
+  const company = isMismatched
+    ? fallback.company
+    : settings?.company || fallback.company
   const columns = [
     footer?.servicesColumn,
     footer?.aboutColumn,
