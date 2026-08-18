@@ -158,6 +158,9 @@ export const DICH_VU_PAGE_QUERY = defineQuery(`
       pillars[]{_key, icon, label},
       paragraph1, paragraph2
     },
+    videoSection{
+      eyebrow, title, videoId
+    },
     serviceCategories{eyebrow, title},
     accordionSections{
       sections[]{

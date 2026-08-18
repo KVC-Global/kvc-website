@@ -78,6 +78,14 @@ export type DichVuIntro = {
   paragraph2?: string;
 };
 
+// --- Dich Vu Video ---
+
+export type DichVuVideoSection = {
+  eyebrow?: string;
+  title?: string;
+  videoId?: string;
+};
+
 // --- Dich Vu Service Accordion ---
 
 export type DichVuServiceChecklistGroup = {
@@ -272,6 +280,7 @@ export type OnlineWolverhamptonPageData = {
 export type DichVuPageData = {
   heroSection?: DichVuHero;
   introSection?: DichVuIntro;
+  videoSection?: DichVuVideoSection;
   serviceCategories?: DichVuServiceCategories;
   accordionSections?: DichVuServiceAccordion;
   seo?: PageSeo;
