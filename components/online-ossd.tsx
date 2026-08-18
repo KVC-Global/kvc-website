@@ -760,7 +760,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
               </h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="mx-auto max-w-5xl">
+            <div className="w-full">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
                 {formatItems.map((item, i) => {
                   const Icon = item.icon
@@ -897,30 +897,35 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
               </h2>
               <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
             </motion.div>
-            <div className="mx-auto max-w-2xl">
+            <div className="mx-auto max-w-2xl lg:max-w-none">
               <div className="relative">
-                {/* Vertical connecting line */}
+                {/* Mobile vertical connector */}
                 <div
                   aria-hidden="true"
-                  className="absolute top-0 bottom-0 left-8 w-px bg-brand-blue-mid/[0.12] sm:left-10"
+                  className="absolute bottom-0 left-8 top-0 w-px bg-brand-blue-mid/[0.12] sm:left-10 lg:hidden"
                 />
-                <div className="flex flex-col gap-0">
+                {/* Desktop horizontal connector */}
+                <div
+                  aria-hidden="true"
+                  className="absolute left-[8%] right-[8%] top-10 hidden h-px bg-brand-blue-mid/[0.14] lg:block"
+                />
+                <div className="flex flex-col gap-0 lg:flex-row lg:items-start lg:gap-5">
                   {processSteps.map((step: { title: string; desc: string }, i: number) => {
                     const isLast = i === processSteps.length - 1
                     return (
                       <motion.div
                         key={i}
                         variants={fadeUpVariants}
-                        className="group relative flex gap-6 pb-10 last:pb-0 sm:gap-8"
+                        className="group relative flex gap-6 pb-10 last:pb-0 sm:gap-8 lg:flex-1 lg:flex-col lg:items-center lg:gap-5 lg:pb-0 lg:text-center"
                       >
                         {/* Number badge */}
-                        <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white shadow-[0_4px_20px_rgba(2,14,80,0.08)] ring-1 ring-brand-blue-mid/10 transition-all duration-500 group-hover:shadow-[0_8px_30px_rgba(2,14,80,0.14)] group-hover:ring-brand-gold/40 sm:h-20 sm:w-20">
+                        <div className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white shadow-[0_4px_20px_rgba(2,14,80,0.08)] ring-1 ring-brand-blue-mid/10 transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_8px_30px_rgba(2,14,80,0.14)] group-hover:ring-brand-gold/40 sm:h-20 sm:w-20">
                           <span className="font-heading text-2xl font-extrabold text-brand-blue-mid transition-colors duration-500 group-hover:text-brand-blue sm:text-3xl">
                             {String(i + 1).padStart(2, "0")}
                           </span>
                         </div>
                         {/* Content */}
-                        <div className="flex-1 pt-1 sm:pt-2">
+                        <div className="flex-1 pt-1 sm:pt-2 lg:max-w-56 lg:pt-0">
                           <h3 className="font-heading text-lg font-bold text-brand-blue">
                             {step.title}
                           </h3>
@@ -928,11 +933,11 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                             {step.desc}
                           </p>
                         </div>
-                        {/* Connecting dot (except last) */}
+                        {/* Mobile connecting dot (except last) */}
                         {!isLast && (
                           <div
                             aria-hidden="true"
-                            className="absolute left-[26.5px] top-[78px] z-10 h-3 w-3 rounded-full border-2 border-brand-blue-mid/20 bg-white sm:left-[34.5px] sm:top-[94px]"
+                            className="absolute left-[26.5px] top-[78px] z-10 h-3 w-3 rounded-full border-2 border-brand-blue-mid/20 bg-white sm:left-[34.5px] sm:top-[94px] lg:hidden"
                           />
                         )}
                       </motion.div>
@@ -956,27 +961,40 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
             >
-              <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                  {supportTitle}
-                </h2>
-                <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
-              </motion.div>
-              <div className="mx-auto max-w-3xl">
-                <ul className="space-y-4">
+              <div className="mx-auto max-w-3xl lg:grid lg:max-w-none lg:grid-cols-[minmax(260px,0.7fr)_minmax(0,1.8fr)] lg:items-start lg:gap-14 xl:gap-20">
+                <motion.div
+                  variants={fadeUpVariants}
+                  className="mb-12 text-center lg:mb-0 lg:pt-2 lg:text-left"
+                >
+                  <h2 className="text-balance font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl lg:text-4xl lg:leading-tight">
+                    {supportTitle}
+                  </h2>
+                  <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold lg:mx-0 lg:mt-4" />
+                  <p className="mt-5 hidden max-w-sm font-body text-sm leading-relaxed text-brand-dark/65 lg:block">
+                    Đồng hành cùng gia đình từ bước xây dựng lộ trình đến khi học
+                    sinh hoàn thiện mục tiêu học tập và hồ sơ du học.
+                  </p>
+                </motion.div>
+
+                <ul className="space-y-4 lg:grid lg:grid-cols-2 lg:gap-4 lg:space-y-0">
                   {supportItems.map((item: string, i: number) => (
                     <motion.li
                       key={i}
                       variants={fadeUpVariants}
-                      className="flex items-start gap-4 rounded-lg border border-border bg-white p-5 shadow-sm"
+                      className={cn(
+                        "flex items-start gap-4 rounded-lg border border-border bg-white p-5 shadow-sm transition-all duration-300 lg:min-h-32 lg:p-6 lg:hover:-translate-y-0.5 lg:hover:border-brand-gold/30 lg:hover:shadow-md",
+                        supportItems.length % 2 === 1 && i === supportItems.length - 1
+                          ? "lg:col-span-2"
+                          : "",
+                      )}
                     >
-                      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
+                      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold/10 lg:h-9 lg:w-9">
                         <Check
-                          className="h-4 w-4 text-brand-gold"
+                          className="h-4 w-4 text-brand-gold lg:h-[18px] lg:w-[18px]"
                           strokeWidth={3}
                         />
                       </div>
-                      <span className="font-body text-sm text-brand-dark/85 sm:text-base">
+                      <span className="font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
                         {item}
                       </span>
                     </motion.li>
