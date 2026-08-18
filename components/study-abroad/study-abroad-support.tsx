@@ -27,73 +27,70 @@ const SUPPORT_STEPS = [
   },
 ] as const
 
-export function StudyAbroadSupport({ content }: { content?: StudyAbroadSupportContent }) {
-  const steps = content?.steps?.length
-    ? content.steps
-    : SUPPORT_STEPS
+export function StudyAbroadSupport({
+  content,
+}: {
+  content?: StudyAbroadSupportContent
+}) {
+  const steps = content?.steps?.length ? content.steps : SUPPORT_STEPS
 
   return (
     <section
       aria-labelledby="journey-heading"
-      className="bg-white border border-border rounded-lg p-6 md:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] flex flex-col lg:col-span-7"
+      className="flex flex-col rounded-lg border border-border bg-white p-6 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] md:p-8 lg:col-span-7"
     >
-      <div className="text-center mb-8">
+      <div className="mb-8">
         <h2
           id="journey-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
           {content?.title || "KVC Global đồng hành cùng bạn"}
         </h2>
-        <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-secondary" />
+        <span
+          aria-hidden="true"
+          className="mt-3 block h-[3px] w-16 rounded-full bg-brand-gold"
+        />
       </div>
 
-      <div className="flex flex-col lg:flex-row items-stretch justify-between gap-2 mt-4">
+      <ol className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {steps.map((step, idx) => {
           const iconName = step.icon
           const Icon = iconName ? studyAbroadIcons[iconName] : undefined
           const isLast = idx === steps.length - 1
-          
+
           return (
-            <div key={idx} className="flex flex-col lg:flex-row items-center w-full min-w-0 lg:w-auto flex-1">
-              <div className="flex flex-col items-center border border-border/60 bg-white hover:bg-brand-light/40 rounded-md p-4 text-center transition-all duration-300 hover:shadow-xs group min-h-[160px] w-full min-w-0 flex-1 justify-center">
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-brand-light group-hover:bg-white transition-colors shrink-0">
-                  {Icon ? (
-                    <Icon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
-                  ) : (
-                    <DefaultIcon className="h-5 w-5 text-brand-blue" strokeWidth={1.75} />
-                  )}
-                </div>
-                <span className="font-body text-[12px] md:text-[13px] font-bold text-brand-blue leading-normal">
-                  {step.text}
-                </span>
+            <li
+              key={`${step.text}-${idx}`}
+              className={`group flex min-h-24 items-center gap-4 rounded-md border border-border/60 bg-white p-4 transition-colors duration-200 hover:bg-brand-light/60 ${isLast ? "sm:col-span-2" : ""}`}
+            >
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-brand-light transition-colors group-hover:bg-white">
+                {Icon ? (
+                  <Icon
+                    className="h-5 w-5 text-brand-blue"
+                    strokeWidth={1.75}
+                  />
+                ) : (
+                  <DefaultIcon
+                    className="h-5 w-5 text-brand-blue"
+                    strokeWidth={1.75}
+                  />
+                )}
               </div>
 
-              {!isLast && (
-                <div className="my-2 lg:my-0 lg:mx-2 shrink-0 self-center">
-                  <svg
-                    className="h-5 w-5 text-muted-foreground/60 block lg:hidden animate-pulse"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                  <svg
-                    className="h-5 w-5 text-muted-foreground/60 hidden lg:block"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </div>
-              )}
-            </div>
+              <p className="min-w-0 flex-1 font-body text-[13px] leading-relaxed font-bold text-brand-blue md:text-sm">
+                {step.text}
+              </p>
+
+              <span
+                aria-hidden="true"
+                className="self-start font-display text-xs font-bold text-secondary/80 tabular-nums"
+              >
+                {String(idx + 1).padStart(2, "0")}
+              </span>
+            </li>
           )
         })}
-      </div>
+      </ol>
     </section>
   )
 }
