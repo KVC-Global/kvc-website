@@ -603,130 +603,142 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
       {/* ── Các môn học & Đối tượng phù hợp ── */}
       <section className="py-16 md:py-24">
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
-            <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
-              <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
-              {/* Các môn học */}
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-              >
+          <div className="rounded-lg bg-muted px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
+            <div className="mx-auto w-full xl:max-w-[1376px] 2xl:max-w-[1536px]">
+              <div className="grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+                {/* Các môn học */}
                 <motion.div
-                  variants={fadeUpVariants}
-                  className="mb-8 text-center lg:text-left"
+                  variants={staggerContainer}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="flex h-full flex-col overflow-hidden rounded-xl border border-border/70 bg-white shadow-sm"
                 >
-                  <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                    {subjectsTitle}
-                  </h2>
-                  <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold lg:mx-0" />
-                  <p className="mt-3 font-body text-sm text-brand-dark/75">
-                    Học sinh có thể lựa chọn nhiều môn học thuộc các nhóm. Việc
-                    lựa chọn môn học sẽ được tư vấn dựa trên định hướng ngành
-                    nghề và trường đại học mong muốn.
-                  </p>
-                </motion.div>
-                <div className="relative">
-                  <div className="group relative aspect-video sm:aspect-4/3 overflow-hidden rounded-lg shadow-md">
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={currentSubject % (subjectsList.length || 1)}
-                        initial={{ opacity: 0, x: 40 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -40 }}
-                        transition={{ duration: 0.35, ease: "easeInOut" }}
-                        className="absolute inset-0"
-                      >
-                        <Image
-                          src={subjectsList[currentSubject % (subjectsList.length || 1)]?.image || SUBJECTS[0].image}
-                          alt={subjectsList[currentSubject % (subjectsList.length || 1)]?.name || "Subject"}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 1024px) 100vw, 42vw"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/70 via-transparent to-transparent" />
-                        <div className="absolute right-0 bottom-0 left-0 p-5">
-                          <span className="font-heading text-lg font-bold text-white sm:text-xl">
-                            {subjectsList[currentSubject % (subjectsList.length || 1)]?.name}
-                          </span>
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                    {/* Arrows */}
-                    <button
-                      onClick={prevSubject}
-                      className="absolute top-1/2 left-3 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-brand-blue opacity-0 shadow-md transition-all duration-300 group-hover:opacity-100 hover:bg-white hover:shadow-lg"
-                      aria-label="Previous subject"
-                    >
-                      <ChevronLeft className="h-5 w-5" strokeWidth={2} />
-                    </button>
-                    <button
-                      onClick={nextSubject}
-                      className="absolute top-1/2 right-3 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-brand-blue opacity-0 shadow-md transition-all duration-300 group-hover:opacity-100 hover:bg-white hover:shadow-lg"
-                      aria-label="Next subject"
-                    >
-                      <ChevronRight className="h-5 w-5" strokeWidth={2} />
-                    </button>
-                  </div>
-                  {/* Dots */}
-                  <div className="mt-4 flex items-center justify-center gap-2">
-                    {subjectsList.map((_, i) => (
-                      <button
-                        key={i}
-                        onClick={() => setCurrentSubject(i)}
-                        className={cn(
-                          "h-2 rounded-full transition-all duration-300",
-                          i === (currentSubject % (subjectsList.length || 1))
-                            ? "w-6 bg-brand-gold"
-                            : "w-2 bg-brand-blue-mid/30 hover:bg-brand-blue-mid/50"
-                        )}
-                        aria-label={`Go to subject ${i + 1}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
+                  <motion.div
+                    variants={fadeUpVariants}
+                    className="px-6 pb-6 pt-7 text-center sm:px-8 sm:pt-8 lg:min-h-44 lg:text-left"
+                  >
+                    <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
+                      {subjectsTitle}
+                    </h2>
+                    <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold lg:mx-0" />
+                    <p className="mt-3 text-pretty font-body text-sm leading-relaxed text-brand-dark/75">
+                      Học sinh có thể lựa chọn nhiều môn học thuộc các nhóm. Việc
+                      lựa chọn môn học sẽ được tư vấn dựa trên định hướng ngành
+                      nghề và trường đại học mong muốn.
+                    </p>
+                  </motion.div>
 
-              {/* Đối tượng phù hợp */}
-              <motion.div
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-              >
-                <motion.div
-                  variants={fadeUpVariants}
-                  className="mb-8 text-center lg:text-left"
-                >
-                  <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
-                    {audienceTitle}
-                  </h2>
-                  <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold lg:mx-0" />
-                </motion.div>
-                <ul className="space-y-4">
-                  {audienceItems.map((item, i) => {
-                    const Icon = item.icon
-                    return (
-                      <motion.li
-                        key={i}
-                        variants={fadeUpVariants}
-                        className="flex items-start gap-4 rounded-lg border border-border bg-white p-5 shadow-sm"
-                      >
-                        <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-gold/10">
-                          <Icon
-                            className="h-4 w-4 text-brand-gold"
-                            strokeWidth={2.5}
+                  <div className="flex flex-1 flex-col px-4 pb-5 sm:px-6 sm:pb-6">
+                    <div className="group relative aspect-video min-h-72 flex-1 overflow-hidden rounded-lg shadow-md sm:aspect-4/3 lg:aspect-auto lg:min-h-96">
+                      <AnimatePresence mode="wait">
+                        <motion.div
+                          key={currentSubject % (subjectsList.length || 1)}
+                          initial={{ opacity: 0, x: 40 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -40 }}
+                          transition={{ duration: 0.35, ease: "easeInOut" }}
+                          className="absolute inset-0"
+                        >
+                          <Image
+                            src={subjectsList[currentSubject % (subjectsList.length || 1)]?.image || SUBJECTS[0].image}
+                            alt={subjectsList[currentSubject % (subjectsList.length || 1)]?.name || "Subject"}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 1024px) 100vw, 46vw"
                           />
-                        </div>
-                        <span className="font-body text-sm text-brand-dark/85 sm:text-base">
-                          {item.title}
-                        </span>
-                      </motion.li>
-                    )
-                  })}
-                </ul>
-              </motion.div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/75 via-brand-blue/5 to-transparent" />
+                          <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                            <span className="font-heading text-lg font-bold text-white sm:text-xl">
+                              {subjectsList[currentSubject % (subjectsList.length || 1)]?.name}
+                            </span>
+                          </div>
+                        </motion.div>
+                      </AnimatePresence>
+
+                      <button
+                        type="button"
+                        onClick={prevSubject}
+                        className="absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-brand-blue opacity-100 shadow-md transition-all duration-300 hover:bg-white hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100"
+                        aria-label="Previous subject"
+                      >
+                        <ChevronLeft className="h-5 w-5" strokeWidth={2} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={nextSubject}
+                        className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-brand-blue opacity-100 shadow-md transition-all duration-300 hover:bg-white hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2 lg:opacity-0 lg:group-hover:opacity-100 lg:group-focus-within:opacity-100"
+                        aria-label="Next subject"
+                      >
+                        <ChevronRight className="h-5 w-5" strokeWidth={2} />
+                      </button>
+                    </div>
+
+                    <div className="mt-4 flex min-h-6 items-center justify-center gap-2">
+                      {subjectsList.map((_, i) => (
+                        <button
+                          type="button"
+                          key={i}
+                          onClick={() => setCurrentSubject(i)}
+                          className={cn(
+                            "h-2 rounded-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-gold focus-visible:ring-offset-2",
+                            i === (currentSubject % (subjectsList.length || 1))
+                              ? "w-6 bg-brand-gold"
+                              : "w-2 bg-brand-blue-mid/30 hover:bg-brand-blue-mid/50",
+                          )}
+                          aria-label={`Go to subject ${i + 1}`}
+                          aria-current={i === (currentSubject % (subjectsList.length || 1)) ? "true" : undefined}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Đối tượng phù hợp */}
+                <motion.div
+                  variants={staggerContainer}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="flex h-full flex-col overflow-hidden rounded-xl border border-border/70 bg-white shadow-sm"
+                >
+                  <motion.div
+                    variants={fadeUpVariants}
+                    className="px-6 pb-6 pt-7 text-center sm:px-8 sm:pt-8 lg:min-h-44 lg:text-left"
+                  >
+                    <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">
+                      {audienceTitle}
+                    </h2>
+                    <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold lg:mx-0" />
+                    <p className="mt-3 text-pretty font-body text-sm leading-relaxed text-brand-dark/75">
+                      Lộ trình được thiết kế linh hoạt theo nền tảng học tập,
+                      mục tiêu đại học và kế hoạch phát triển của từng học sinh.
+                    </p>
+                  </motion.div>
+
+                  <ul className="mx-4 mb-5 grid flex-1 auto-rows-fr overflow-hidden rounded-lg border border-border/70 bg-brand-blue/[0.025] sm:mx-6 sm:mb-6">
+                    {audienceItems.map((item, i) => {
+                      const Icon = item.icon
+                      return (
+                        <motion.li
+                          key={i}
+                          variants={fadeUpVariants}
+                          className="flex items-center gap-4 border-b border-border/70 p-5 last:border-b-0 sm:p-6"
+                        >
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-gold/10">
+                            <Icon
+                              className="h-5 w-5 text-brand-gold"
+                              strokeWidth={2.25}
+                            />
+                          </div>
+                          <span className="text-pretty font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
+                            {item.title}
+                          </span>
+                        </motion.li>
+                      )
+                    })}
+                  </ul>
+                </motion.div>
               </div>
             </div>
           </div>
