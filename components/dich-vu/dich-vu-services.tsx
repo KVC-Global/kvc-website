@@ -446,7 +446,8 @@ function AccordionPanel({
     <motion.div
       variants={fadeUp}
       className={cn(
-        "overflow-hidden rounded-lg border border-border/80 bg-white shadow-xs transition-all duration-300 dark:border-border/10 dark:bg-card",
+        "overflow-hidden rounded-lg border border-border/80 shadow-xs transition-all duration-300 dark:border-border/10 dark:bg-card",
+        section.background || "bg-white",
         open && "shadow-md border-brand-gold/40"
       )}
     >
@@ -456,7 +457,7 @@ function AccordionPanel({
         className="flex w-full items-center gap-4 px-5 py-5 text-left transition-colors duration-200 hover:bg-muted/30 sm:gap-5 sm:px-8 sm:py-6"
         aria-expanded={open}
       >
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-brand-light sm:h-14 sm:w-14">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-muted sm:h-14 sm:w-14">
           <Icon className="h-6 w-6 text-brand-gold" strokeWidth={2} />
         </div>
 
@@ -609,7 +610,7 @@ export function DichVuServices({
             tag: sec.tag ?? "",
             heading: sec.heading ?? "",
             headingAccent: sec.headingAccent ?? "",
-            background: idx % 2 === 0 ? "bg-white" : "bg-brand-light",
+            background: "bg-white",
             intro: sec.intro ?? [],
             services: (sec.services ?? []).map((s) => ({
               title: s.title ?? "",
@@ -650,16 +651,17 @@ export function DichVuServices({
       : ACCORDION_SECTIONS
 
   return (
-    <>
-      {/* ─── Section header ─── */}
-      <section className="w-full bg-white pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 dark:bg-background">
-        <Container>
+    <section className="w-full bg-white pt-10 pb-16 md:pt-12 md:pb-24 dark:bg-background">
+      <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+          
+          {/* ─── Section header ─── */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             whileInView="visible"
             viewport={inView}
-            className="flex flex-col items-center text-center"
+            className="flex flex-col items-center text-center mb-10 sm:mb-12 md:mb-16"
           >
             <span className="mb-3 block text-center font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
               {sectionEyebrow}
@@ -669,12 +671,8 @@ export function DichVuServices({
             </h2>
             <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
           </motion.div>
-        </Container>
-      </section>
 
-      {/* ─── Accordion cards ─── */}
-      <section className="w-full bg-white pb-20 sm:pb-24 md:pb-28 dark:bg-background">
-        <Container>
+          {/* ─── Accordion cards ─── */}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -692,8 +690,9 @@ export function DichVuServices({
               />
             ))}
           </motion.div>
-        </Container>
-      </section>
-    </>
+
+        </div>
+      </Container>
+    </section>
   )
 }
