@@ -6,6 +6,7 @@ import { ChevronRight, Clock, Mail, MapPin, Phone } from "lucide-react"
 
 import { ContactForm } from "@/components/contact-form"
 import { Container } from "@/components/ui/container"
+import { Globe, type GlobeLabel } from "@/components/ui/globe"
 import { useLocale, useDictionary } from "@/lib/i18n-client"
 import { sanitizeHref } from "@/lib/site-settings"
 import type { ContactPageData } from "@/sanity/content-pages"
@@ -109,6 +110,75 @@ const OFFICES = [
   //   image: "/images/singapore1-5221.jpg",
   // },
 ] as const
+
+const CONTACT_COUNTRIES = [
+  {
+    name: "Vietnam",
+    lat: 14.0583,
+    lng: 108.2772,
+    flag: "🇻🇳",
+    offset: [-10, -55],
+  },
+  {
+    name: "Myanmar",
+    lat: 21.9162,
+    lng: 95.956,
+    flag: "🇲🇲",
+    offset: [-105, -20],
+  },
+  {
+    name: "Malaysia",
+    lat: 4.2105,
+    lng: 101.9758,
+    flag: "🇲🇾",
+    offset: [-62, 18],
+  },
+  {
+    name: "Singapore",
+    lat: 1.3521,
+    lng: 103.8198,
+    flag: "🇸🇬",
+    offset: [64, -4],
+  },
+  {
+    name: "Philippines",
+    lat: 12.8797,
+    lng: 121.774,
+    flag: "🇵🇭",
+    offset: [70, -28],
+  },
+  {
+    name: "Timor-Leste",
+    lat: -8.8742,
+    lng: 125.7275,
+    flag: "🇹🇱",
+    offset: [66, 28],
+  },
+] as const satisfies ReadonlyArray<GlobeLabel>
+
+const VIETNAM_ISLAND_MARKERS = [
+  {
+    name: "Hoàng Sa",
+    lat: 16.667,
+    lng: 112.333,
+    size: 0.018,
+    color: [29 / 255, 66 / 255, 124 / 255],
+    kind: "territory",
+  },
+  {
+    name: "Trường Sa",
+    lat: 10,
+    lng: 114,
+    size: 0.018,
+    color: [29 / 255, 66 / 255, 124 / 255],
+    kind: "territory",
+  },
+] as const satisfies ReadonlyArray<GlobeLabel>
+
+const CONTACT_GLOBE_LABELS = [
+  ...CONTACT_COUNTRIES,
+  ...VIETNAM_ISLAND_MARKERS,
+] satisfies ReadonlyArray<GlobeLabel>
 
 /* ───────────────── Contact info card ───────────────── */
 function OfficeInfoCard({
@@ -589,7 +659,67 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
         </Container>
       </section>
 
+      {/* ═══════════ Section 2: Regional presence ═══════════ */}
+      <section
+        aria-labelledby="regional-presence-heading"
+        className="w-full overflow-hidden bg-white py-10 sm:py-14 md:py-20"
+      >
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
+          <div className="grid items-center gap-10 rounded-lg border border-[#E6E9EE] bg-brand-light px-6 py-12 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-10 sm:py-14 lg:grid-cols-12 lg:gap-16 lg:px-16 lg:py-16 xl:px-24">
+            <div className="lg:col-span-5">
+              <p className="font-heading text-xs font-bold tracking-[0.18em] text-brand-gold uppercase">
+                {locale === "vi" ? "Mạng lưới khu vực" : "Regional network"}
+              </p>
+              <h2
+                id="regional-presence-heading"
+                className="mt-3 font-heading text-3xl font-extrabold tracking-tight text-brand-blue sm:text-4xl"
+              >
+                {locale === "vi"
+                  ? "Kết nối khắp Đông Nam Á"
+                  : "Connected across Southeast Asia"}
+              </h2>
+              <p className="mt-4 max-w-lg font-body text-sm leading-relaxed text-brand-dark/70 sm:text-base">
+                {locale === "vi"
+                  ? "KVC Global kết nối khách hàng và đối tác tại sáu thị trường trọng điểm trong khu vực. Kéo quả địa cầu để khám phá mạng lưới của chúng tôi."
+                  : "KVC Global connects clients and partners across six key markets in the region. Drag the globe to explore our network."}
+              </p>
 
+              <ul
+                aria-label={
+                  locale === "vi"
+                    ? "Các quốc gia trong mạng lưới KVC Global"
+                    : "Countries in the KVC Global network"
+                }
+                className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3"
+              >
+                {CONTACT_COUNTRIES.map((country) => (
+                  <li
+                    key={country.name}
+                    className="flex items-center gap-2.5 font-heading text-sm font-semibold text-brand-blue"
+                  >
+                    <span className="text-lg" aria-hidden="true">
+                      {country.flag}
+                    </span>
+                    {country.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="relative h-[390px] sm:h-[480px] lg:col-span-7 lg:h-[560px]">
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-[12%] bottom-[8%] h-[14%] rounded-full bg-brand-blue/10 blur-3xl"
+              />
+              <Globe
+                className="max-w-[560px]"
+                labels={CONTACT_GLOBE_LABELS}
+                initialPhi={2.8}
+              />
+            </div>
+          </div>
+        </Container>
+      </section>
     </div>
   )
 }
