@@ -63,10 +63,10 @@ export function DichVuHero({
   const displayStats =
     data?.stats && data.stats.length > 0
       ? data.stats.map((s) => ({
-          icon: getIcon(s.icon, Building2),
-          value: s.value ?? "",
-          label: s.label ?? "",
-        }))
+        icon: getIcon(s.icon, Building2),
+        value: s.value ?? "",
+        label: s.label ?? "",
+      }))
       : [...STATS]
 
   return (
@@ -153,7 +153,7 @@ export function DichVuHero({
           >
             <Link
               href={primaryButtonHref}
-              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
+              className="group inline-flex items-center justify-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue"
             >
               {primaryButtonLabel}
               <svg

@@ -557,7 +557,7 @@ function AccordionPanel({
               </div>
 
               {/* Image column */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg shadow-[0_24px_60px_-24px_rgba(15,27,45,0.18)] sm:aspect-[3/2]">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg shadow-[0_24px_60px_-24px_rgba(15,27,45,0.18)] sm:aspect-[3/2] md:mt-8 md:h-[65%] md:self-start md:aspect-auto">
                 <Image
                   src={section.image}
                   alt={section.imageAlt}
