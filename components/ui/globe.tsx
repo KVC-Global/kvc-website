@@ -86,11 +86,13 @@ export function Globe({
   config = GLOBE_CONFIG,
   labels = EMPTY_GLOBE_LABELS,
   initialPhi = config.phi,
+  autoRotate = true,
 }: {
   className?: string
   config?: COBEOptions
   labels?: ReadonlyArray<GlobeLabel>
   initialPhi?: number
+  autoRotate?: boolean
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const labelRefs = useRef<Array<HTMLDivElement | null>>([])
@@ -147,6 +149,7 @@ export function Globe({
       height: widthRef.current * 2,
       onRender: (state) => {
         if (
+          autoRotate &&
           pointerInteracting.current === null &&
           shouldReduceMotion !== true
         ) {
@@ -178,7 +181,7 @@ export function Globe({
       globe.destroy()
       window.removeEventListener("resize", onResize)
     }
-  }, [rs, config, labels, shouldReduceMotion])
+  }, [rs, config, labels, shouldReduceMotion, autoRotate])
 
   return (
     <div
