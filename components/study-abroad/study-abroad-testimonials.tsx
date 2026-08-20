@@ -2,10 +2,14 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight, Star } from "lucide-react"
+import { ChevronLeft, ChevronRight, Play, Star } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { urlFor } from "@/sanity/image"
 import type { StudyAbroadTestimonialsContent } from "@/sanity/study-abroad-page"
+
+// Replace with a YouTube or Vimeo embed URL when final video is available.
+// Example: https://www.youtube-nocookie.com/embed/VIDEO_ID
+const TESTIMONIAL_VIDEO_EMBED_URL = ""
 
 const TESTIMONIALS = [
   {
@@ -154,6 +158,44 @@ export function StudyAbroadTestimonials({
           aria-hidden="true"
           className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold"
         />
+      </div>
+
+      <div className="mx-auto mb-10 max-w-5xl md:mb-14">
+        <div className="relative aspect-video overflow-hidden rounded-lg border border-border/60 bg-brand-blue shadow-[0_24px_60px_-32px_rgba(13,49,94,0.45)]">
+          {TESTIMONIAL_VIDEO_EMBED_URL ? (
+            <iframe
+              src={TESTIMONIAL_VIDEO_EMBED_URL}
+              title="Video chia sẻ từ học viên KVC Global"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full"
+            />
+          ) : (
+            <div className="absolute inset-0">
+              <Image
+                src="/images/student-portrait.jpg"
+                alt="Học viên KVC Global chia sẻ trải nghiệm du học"
+                fill
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                className="object-cover object-center opacity-75"
+              />
+              <div className="absolute inset-0 bg-brand-blue/45" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center text-white">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-sm sm:h-20 sm:w-20">
+                  <Play
+                    aria-hidden="true"
+                    className="ml-1 h-6 w-6 fill-current sm:h-8 sm:w-8"
+                    strokeWidth={1.75}
+                  />
+                </span>
+                <p className="max-w-md font-heading text-base font-bold sm:text-xl">
+                  Câu chuyện du học từ học viên KVC Global
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="group/nav relative px-0 md:px-8">
