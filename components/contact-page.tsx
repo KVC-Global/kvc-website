@@ -715,6 +715,7 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
                 className="max-w-[560px]"
                 labels={CONTACT_GLOBE_LABELS}
                 initialPhi={2.8}
+                autoRotate={false}
               />
             </div>
           </div>
