@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import Image from "next/image"
 import { Play } from "lucide-react"
 import { useState } from "react"
 
@@ -9,71 +9,98 @@ import type { DichVuVideoSection } from "@/sanity/service-pages"
 import { Container } from "@/components/ui/container"
 import { cn } from "@/lib/utils"
 
-export function DichVuVideo({ className, data }: { className?: string; data?: DichVuVideoSection }) {
+export function DichVuVideo({
+  className,
+  data,
+}: {
+  className?: string
+  data?: DichVuVideoSection
+}) {
   const [isPlaying, setIsPlaying] = useState(false)
 
   const eyebrow = data?.eyebrow ?? "Khám Phá KVC Global"
   const title = data?.title ?? "Giải pháp toàn diện của chúng tôi"
-  const videoUrl = data?.videoUrl ?? "/videos/fallback.mp4"
+  const videoUrl = data?.videoUrl
 
   return (
-    <section className={cn("w-full bg-white py-16 md:py-24 dark:bg-background", className)}>
+    <section
+      aria-labelledby="dich-vu-video-heading"
+      className={cn(
+        "w-full bg-white py-16 md:py-24 dark:bg-background",
+        className
+      )}
+    >
       <Container>
-        <div className="mx-auto max-w-4xl text-center">
-          <motion.div
-            initial={{ y: 20 }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6 }}
+        <div className="mb-10 text-center">
+          <span className="mb-3 block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
+            {eyebrow}
+          </span>
+          <h2
+            id="dich-vu-video-heading"
+            className="font-heading text-xl font-bold text-brand-blue sm:text-2xl dark:text-foreground"
           >
-            <span className="mb-3 block font-heading text-xs font-bold tracking-wider text-brand-gold uppercase sm:text-sm">
-              {eyebrow}
-            </span>
-            <h2 className="mb-8 font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl dark:text-foreground">
-              {title}
-            </h2>
-          </motion.div>
+            {title}
+          </h2>
+          <span
+            aria-hidden="true"
+            className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold"
+          />
+        </div>
 
-          <motion.div
-            initial={{ y: 20 }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-xl border border-border/50 dark:border-border/10"
-          >
-            {!isPlaying ? (
-              <div 
-                className="absolute inset-0 flex items-center justify-center cursor-pointer group bg-brand-dark/10"
-                onClick={() => setIsPlaying(true)}
-              >
-                {/* Fallback placeholder cover */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue to-brand-blue-mid opacity-95" />
-                
-                {/* Custom pattern overlay for aesthetics */}
-                <div 
-                  className="absolute inset-0 opacity-10" 
-                  style={{
-                    backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)",
-                    backgroundSize: "24px 24px"
-                  }}
-                />
-
-                <div className="relative z-10 flex h-20 w-20 items-center justify-center rounded-full bg-white/10 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-brand-blue shadow-[0_0_40px_rgba(255,255,255,0.4)]">
-                    <Play className="h-6 w-6 ml-1" fill="currentColor" />
-                  </div>
-                </div>
-              </div>
-            ) : (
+        <div className="mx-auto max-w-5xl">
+          <div className="relative aspect-video overflow-hidden rounded-lg border border-border/60 bg-brand-blue shadow-[0_24px_60px_-32px_rgba(13,49,94,0.45)]">
+            {isPlaying && videoUrl ? (
               <video
+                aria-label={title}
                 className="absolute inset-0 h-full w-full object-cover"
                 src={videoUrl}
                 autoPlay
                 controls
                 playsInline
-              />
+                preload="none"
+              >
+                Trình duyệt của bạn không hỗ trợ phát video.
+              </video>
+            ) : (
+              <div className="absolute inset-0">
+                <Image
+                  src="/images/thumb-sharing.png"
+                  alt="KVC Global tại Singapore"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 1024px"
+                  className="object-cover object-center opacity-75"
+                />
+                <div className="absolute inset-0 bg-brand-blue/45" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center text-white">
+                  {videoUrl ? (
+                    <button
+                      type="button"
+                      onClick={() => setIsPlaying(true)}
+                      aria-label={`Phát video: ${title}`}
+                      className="group flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-sm transition-transform duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:h-20 sm:w-20"
+                    >
+                      <Play
+                        aria-hidden="true"
+                        className="ml-1 h-6 w-6 fill-current sm:h-8 sm:w-8"
+                        strokeWidth={1.75}
+                      />
+                    </button>
+                  ) : (
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-sm sm:h-20 sm:w-20">
+                      <Play
+                        aria-hidden="true"
+                        className="ml-1 h-6 w-6 fill-current sm:h-8 sm:w-8"
+                        strokeWidth={1.75}
+                      />
+                    </span>
+                  )}
+                  <p className="max-w-md font-heading text-base font-bold sm:text-xl">
+                    Khám phá KVC Global qua video
+                  </p>
+                </div>
+              </div>
             )}
-          </motion.div>
+          </div>
         </div>
       </Container>
     </section>
