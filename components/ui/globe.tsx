@@ -206,30 +206,52 @@ export function Globe({
           e.touches[0] && updateMovement(e.touches[0].clientX)
         }
       />
-      {labels.map((label, index) =>
-        label.kind === "territory" ? null : (
+      {labels.map((label, index) => {
+        if (label.kind === "territory") return null
+
+        const offsetX = label.offset?.[0] ?? 0
+        const offsetY = label.offset?.[1] ?? -24
+
+        return (
           <div
             key={label.name}
             ref={(node) => {
               labelRefs.current[index] = node
             }}
             aria-hidden="true"
-            className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-200"
+            className="pointer-events-none absolute z-10 h-0 w-0 opacity-0 transition-opacity duration-200"
           >
-            <span
-              className="hidden items-center gap-1.5 rounded-full border border-brand-blue/10 bg-white/95 px-2.5 py-1 font-heading text-[11px] font-semibold whitespace-nowrap text-brand-blue shadow-sm backdrop-blur-sm sm:inline-flex sm:text-xs"
-              style={{
-                transform: `translate(${label.offset?.[0] ?? 0}px, ${label.offset?.[1] ?? -24}px)`,
-              }}
+            <svg
+              aria-hidden="true"
+              width="1"
+              height="1"
+              className="absolute hidden overflow-visible sm:block"
             >
-              <span className="text-sm" aria-hidden="true">
-                {label.flag}
+              <line
+                x1="0"
+                y1="0"
+                x2={offsetX}
+                y2={offsetY}
+                stroke="currentColor"
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
+                className="text-brand-blue/25"
+              />
+            </svg>
+            <span
+              className="absolute top-0 left-0 hidden sm:block"
+              style={{ transform: `translate(${offsetX}px, ${offsetY}px)` }}
+            >
+              <span className="inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full border border-brand-blue/10 bg-white/95 px-2.5 py-1 font-heading text-[11px] font-semibold whitespace-nowrap text-brand-blue shadow-sm backdrop-blur-sm sm:text-xs">
+                <span className="text-sm" aria-hidden="true">
+                  {label.flag}
+                </span>
+                {label.name}
               </span>
-              {label.name}
             </span>
           </div>
         )
-      )}
+      })}
     </div>
   )
 }
