@@ -643,6 +643,9 @@ export const PUBLIC_STUDY_PAGE_QUERY = defineQuery(`
     },
     "why": whySection {
       title,
+      videoTitle,
+      videoPoster,
+      "videoUrl": video.asset->url,
       items[]{_key, icon, title, description}
     },
     "pathways": pathwaysSection {

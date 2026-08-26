@@ -35,6 +35,9 @@ export interface PublicStudyWhyItem {
 
 export interface PublicStudyWhyContent {
   title?: string
+  videoUrl?: string
+  videoTitle?: string
+  videoPoster?: SanityImage
   items?: PublicStudyWhyItem[]
 }
 
