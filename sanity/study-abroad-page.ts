@@ -88,6 +88,9 @@ export type StudyAbroadTestimonialItem = {
 
 export type StudyAbroadTestimonialsContent = {
   title?: string
+  videoEmbedUrl?: string
+  videoTitle?: string
+  videoPoster?: SanityImage
   testimonials?: StudyAbroadTestimonialItem[]
 }
 
