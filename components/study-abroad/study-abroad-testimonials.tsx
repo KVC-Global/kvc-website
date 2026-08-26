@@ -60,30 +60,6 @@ const TESTIMONIALS = [
   },
 ] as const
 
-function getSafeVideoEmbedUrl(value?: string) {
-  if (!value) return null
-
-  try {
-    const url = new URL(value)
-    const isYouTubeEmbed =
-      ["www.youtube.com", "www.youtube-nocookie.com"].includes(url.hostname) &&
-      url.pathname.startsWith("/embed/")
-    const isVimeoEmbed =
-      url.hostname === "player.vimeo.com" && url.pathname.startsWith("/video/")
-    const isTikTokEmbed =
-      url.hostname === "www.tiktok.com" &&
-      (url.pathname.startsWith("/embed/") ||
-        url.pathname.startsWith("/player/"))
-
-    return url.protocol === "https:" &&
-      (isYouTubeEmbed || isVimeoEmbed || isTikTokEmbed)
-      ? url.toString()
-      : null
-  } catch {
-    return null
-  }
-}
-
 export function StudyAbroadTestimonials({
   content,
 }: {
@@ -92,7 +68,11 @@ export function StudyAbroadTestimonials({
   const testimonials = content?.testimonials?.length
     ? content.testimonials
     : TESTIMONIALS
-  const videoEmbedUrl = getSafeVideoEmbedUrl(content?.videoEmbedUrl)
+  const videoUrl = content?.videoUrl
+  const posterUrl = content?.videoPoster
+    ? urlFor(content.videoPoster).url()
+    : "/images/student-portrait.jpg"
+  const [isPlaying, setIsPlaying] = useState(false)
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const isPausedRef = useRef(false)
@@ -203,43 +183,61 @@ export function StudyAbroadTestimonials({
         <div className="lg:sticky lg:top-8 lg:self-start">
           <div className="relative mx-auto w-full max-w-[30rem] overflow-hidden rounded-lg border border-border/60 bg-brand-blue shadow-[0_24px_60px_-32px_rgba(13,49,94,0.45)]">
             <div className="relative aspect-[9/16]">
-              {videoEmbedUrl ? (
-                <iframe
-                  src={videoEmbedUrl}
-                  title={
+              {isPlaying && videoUrl ? (
+                <video
+                  aria-label={
                     content?.videoTitle ||
-                    "Video chia sẻ từ học viên KVC Global"
+                    "Học viên KVC Global chia sẻ trải nghiệm du học"
                   }
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                  className="absolute inset-0 h-full w-full"
-                />
+                  className="absolute inset-0 h-full w-full object-cover"
+                  src={videoUrl}
+                  poster={posterUrl}
+                  autoPlay
+                  controls
+                  playsInline
+                  preload="none"
+                >
+                  Trình duyệt của bạn không hỗ trợ phát video.
+                </video>
               ) : (
                 <div className="absolute inset-0">
                   <Image
-                    src={
-                      content?.videoPoster
-                        ? urlFor(content.videoPoster).url()
-                        : "/images/student-portrait.jpg"
-                    }
+                    src={posterUrl}
                     alt={
                       content?.videoTitle ||
                       "Học viên KVC Global chia sẻ trải nghiệm du học"
                     }
                     fill
-                    sizes="(max-width: 640px) 90vw, 432px"
+                    sizes="(max-width: 640px) 90vw, 480px"
                     className="object-cover object-center opacity-75"
                   />
                   <div className="absolute inset-0 bg-brand-blue/45" />
                   <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center text-white">
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-sm sm:h-20 sm:w-20">
-                      <Play
-                        aria-hidden="true"
-                        className="ml-1 h-6 w-6 fill-current sm:h-8 sm:w-8"
-                        strokeWidth={1.75}
-                      />
-                    </span>
+                    {videoUrl ? (
+                      <button
+                        type="button"
+                        onClick={() => setIsPlaying(true)}
+                        aria-label={`Phát video: ${
+                          content?.videoTitle ||
+                          "Câu chuyện du học từ học viên KVC Global"
+                        }`}
+                        className="group flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-sm transition-transform duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:h-20 sm:w-20"
+                      >
+                        <Play
+                          aria-hidden="true"
+                          className="ml-1 h-6 w-6 fill-current sm:h-8 sm:w-8"
+                          strokeWidth={1.75}
+                        />
+                      </button>
+                    ) : (
+                      <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-sm sm:h-20 sm:w-20">
+                        <Play
+                          aria-hidden="true"
+                          className="ml-1 h-6 w-6 fill-current sm:h-8 sm:w-8"
+                          strokeWidth={1.75}
+                        />
+                      </span>
+                    )}
                     <p className="max-w-[16rem] font-heading text-base font-bold sm:text-xl">
                       {content?.videoTitle ||
                         "Câu chuyện du học từ học viên KVC Global"}

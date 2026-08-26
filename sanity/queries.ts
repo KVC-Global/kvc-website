@@ -456,9 +456,9 @@ export const STUDY_ABROAD_PAGE_QUERY = defineQuery(`
     },
     "testimonials": testimonialsSection {
       title,
-      videoEmbedUrl,
       videoTitle,
       videoPoster,
+      "videoUrl": video.asset->url,
       testimonials[]{_key, name, role, avatar, rating, quote}
     },
     "faqs": faqsSection {
