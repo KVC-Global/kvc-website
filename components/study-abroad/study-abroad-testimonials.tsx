@@ -97,6 +97,36 @@ export function StudyAbroadTestimonials({
   const scrollRef = useRef<HTMLDivElement>(null)
   const isPausedRef = useRef(false)
   const [activeIdx, setActiveIdx] = useState(0)
+  const [maxScrollIdx, setMaxScrollIdx] = useState(0)
+
+  // Compute the last card index that can actually reach the top of the viewport
+  useEffect(() => {
+    const container = scrollRef.current
+    if (!container) return
+
+    const compute = () => {
+      const maxScroll = container.scrollHeight - container.clientHeight
+      if (maxScroll <= 1) {
+        setMaxScrollIdx(0)
+        return
+      }
+      const cards = Array.from(container.children) as HTMLElement[]
+      let lastValid = 0
+      for (let i = 0; i < cards.length; i++) {
+        if (cards[i].offsetTop <= maxScroll) {
+          lastValid = i
+        } else {
+          break
+        }
+      }
+      setMaxScrollIdx(lastValid)
+    }
+
+    compute()
+    const resizeObserver = new ResizeObserver(compute)
+    resizeObserver.observe(container)
+    return () => resizeObserver.disconnect()
+  }, [testimonials.length])
 
   // Auto-scroll: advance one card every AUTO_SCROLL_DELAY, loop at end
   useEffect(() => {
@@ -168,7 +198,7 @@ export function StudyAbroadTestimonials({
         />
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,27rem)_minmax(0,1fr)] lg:gap-12">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,27rem)_minmax(0,1fr)] lg:items-center lg:gap-12">
         {/* Left: vertical video — sticky on desktop */}
         <div className="lg:sticky lg:top-8 lg:self-start">
           <div className="relative mx-auto w-full max-w-[27rem] overflow-hidden rounded-lg border border-border/60 bg-brand-blue shadow-[0_24px_60px_-32px_rgba(13,49,94,0.45)]">
@@ -287,7 +317,7 @@ export function StudyAbroadTestimonials({
                           (_, i) => (
                             <Star
                               key={i}
-                              className="h-3.5 w-3.5 fill-current text-[#F8BC62]"
+                              className="h-3.5 w-3.5 fill-current text-brand-gold-light"
                               strokeWidth={0}
                             />
                           )
@@ -313,14 +343,14 @@ export function StudyAbroadTestimonials({
             })}
           </div>
 
-          {/* Progress dots — only when scrolling is needed */}
-          {testimonials.length > 3 ? (
+          {/* Progress dots — only for reachable scroll positions */}
+          {maxScrollIdx > 0 ? (
             <div
               className="mt-5 flex justify-center gap-1.5"
               role="group"
               aria-label="Điều hướng đánh giá"
             >
-              {testimonials.map((_, idx) => (
+              {Array.from({ length: maxScrollIdx + 1 }).map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
@@ -329,7 +359,7 @@ export function StudyAbroadTestimonials({
                     "h-2 cursor-pointer rounded-full transition-all duration-300",
                     activeIdx === idx
                       ? "w-6 bg-brand-gold"
-                      : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                      : "w-2 bg-brand-blue/30 hover:bg-brand-blue/50"
                   )}
                   aria-label={`Đi đến đánh giá ${idx + 1}`}
                   aria-current={activeIdx === idx ? "true" : undefined}
