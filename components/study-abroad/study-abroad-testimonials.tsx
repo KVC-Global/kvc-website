@@ -198,10 +198,10 @@ export function StudyAbroadTestimonials({
         />
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,27rem)_minmax(0,1fr)] lg:items-center lg:gap-12">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,30rem)_minmax(0,1fr)] lg:items-center lg:gap-16">
         {/* Left: vertical video — sticky on desktop */}
         <div className="lg:sticky lg:top-8 lg:self-start">
-          <div className="relative mx-auto w-full max-w-[27rem] overflow-hidden rounded-lg border border-border/60 bg-brand-blue shadow-[0_24px_60px_-32px_rgba(13,49,94,0.45)]">
+          <div className="relative mx-auto w-full max-w-[30rem] overflow-hidden rounded-lg border border-border/60 bg-brand-blue shadow-[0_24px_60px_-32px_rgba(13,49,94,0.45)]">
             <div className="relative aspect-[9/16]">
               {videoEmbedUrl ? (
                 <iframe
@@ -253,7 +253,6 @@ export function StudyAbroadTestimonials({
 
         {/* Right: auto-scrolling testimonial list */}
         <div
-          className="relative"
           onMouseEnter={() => {
             isPausedRef.current = true
           }}
@@ -267,6 +266,7 @@ export function StudyAbroadTestimonials({
             isPausedRef.current = false
           }}
         >
+          <div className="relative">
           {/* Top & bottom fade gradients */}
           <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-8 bg-gradient-to-b from-white to-transparent" />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-8 bg-gradient-to-t from-white to-transparent" />
@@ -342,6 +342,7 @@ export function StudyAbroadTestimonials({
               )
             })}
           </div>
+          </div>
 
           {/* Progress dots — only for reachable scroll positions */}
           {maxScrollIdx > 0 ? (
@@ -359,7 +360,7 @@ export function StudyAbroadTestimonials({
                     "h-2 cursor-pointer rounded-full transition-all duration-300",
                     activeIdx === idx
                       ? "w-6 bg-brand-gold"
-                      : "w-2 bg-brand-blue/30 hover:bg-brand-blue/50"
+                      : "w-2 bg-brand-blue-mid hover:bg-brand-blue"
                   )}
                   aria-label={`Đi đến đánh giá ${idx + 1}`}
                   aria-current={activeIdx === idx ? "true" : undefined}
