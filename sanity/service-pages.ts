@@ -81,9 +81,9 @@ export type DichVuIntro = {
 // --- Dich Vu Video ---
 
 export type DichVuVideoSection = {
-  eyebrow?: string;
-  title?: string;
   videoUrl?: string;
+  videoTitle?: string;
+  videoPoster?: SanityImage;
 };
 
 // --- Dich Vu Service Accordion ---

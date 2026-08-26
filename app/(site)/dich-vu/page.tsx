@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 
 import { DichVuHero } from "@/components/dich-vu/dich-vu-hero";
 import { DichVuIntro } from "@/components/dich-vu/dich-vu-intro";
-import { DichVuVideo } from "@/components/dich-vu/dich-vu-video";
 import { DichVuServices } from "@/components/dich-vu/dich-vu-services";
 import { getLocale } from "@/lib/i18n-server";
 import type { DichVuPageData } from "@/sanity/service-pages";
@@ -65,8 +64,7 @@ export default async function DichVuPage() {
   return (
     <>
       <DichVuHero data={page?.heroSection} />
-      <DichVuIntro data={page?.introSection} />
-      <DichVuVideo data={page?.videoSection} />
+      <DichVuIntro data={page?.introSection} videoData={page?.videoSection} />
       <DichVuServices data={page?.serviceCategories} accordionData={page?.accordionSections} />
     </>
   );
