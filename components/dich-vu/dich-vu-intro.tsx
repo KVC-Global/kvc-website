@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+import Image from "next/image"
 import { motion, Variants } from "framer-motion"
 import * as LucideIcons from "lucide-react"
 import {
@@ -9,11 +11,17 @@ import {
   Scale,
   Users,
   Briefcase,
+  Play,
 } from "lucide-react"
 
-import type { DichVuIntro as DichVuIntroData } from "@/sanity/service-pages"
+import type {
+  DichVuIntro as DichVuIntroData,
+  DichVuVideoSection,
+} from "@/sanity/service-pages"
+import { urlFor } from "@/sanity/image"
 
 import { Container } from "@/components/ui/container"
+import { cn } from "@/lib/utils"
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -28,8 +36,6 @@ const stagger: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 }
-
-import { cn } from "@/lib/utils"
 
 function getIcon(iconName?: string) {
   if (!iconName) return null
@@ -52,12 +58,21 @@ const FALLBACK_PARAGRAPH_2 = `Với mạng lưới đối tác chiến lược t
 export function DichVuIntro({
   className,
   data,
+  videoData,
 }: {
   className?: string
   data?: DichVuIntroData
+  videoData?: DichVuVideoSection
 }) {
+  const [isPlaying, setIsPlaying] = useState(false)
   const eyebrow = data?.eyebrow ?? "DỊCH VỤ CỐT LÕI"
   const title = data?.title ?? "Giải pháp toàn diện cho doanh nghiệp"
+  const videoUrl = videoData?.videoUrl
+  const videoCaption = videoData?.videoTitle ?? "Khám phá KVC Global qua video"
+  const videoPosterUrl = videoData?.videoPoster
+    ? urlFor(videoData.videoPoster).url()
+    : "/images/thumb-sharing.png"
+  const hasVideo = Boolean(videoUrl || videoData?.videoPoster)
   const displayPillars =
     data?.pillars && data.pillars.length > 0
       ? data.pillars.map((p) => ({
@@ -74,13 +89,13 @@ export function DichVuIntro({
       className={cn("w-full bg-white pt-10 pb-16 md:pt-12 md:pb-24 dark:bg-background", className)}
     >
       <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-        <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
+        <div className="px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
           <motion.div
             variants={stagger}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
-            className="mx-auto max-w-5xl"
+            className="mx-auto max-w-7xl"
           >
             {/* ── Section label & Header ── */}
             <motion.div variants={fadeUp} className="text-center">
@@ -93,72 +108,150 @@ export function DichVuIntro({
               <span aria-hidden="true" className="mx-auto mt-3 block h-[3px] w-16 rounded-full bg-brand-gold" />
             </motion.div>
 
-            {/* ── 5 Pillar cards ── */}
-            <motion.div
-              variants={fadeUp}
-              className="relative mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5"
+            {/* ── Body: all content (left) + optional sticky video (right) ── */}
+            <div
+              className={cn(
+                "mt-12 grid gap-8 lg:gap-16",
+                hasVideo && "lg:grid-cols-[minmax(0,1fr)_minmax(0,30rem)]"
+              )}
             >
-              {/* Connecting line on desktop */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute left-[10%] right-[10%] top-8 hidden h-0.5 bg-gradient-to-r from-transparent via-brand-gold/25 to-transparent md:block"
-              />
+              <motion.div variants={stagger} className="flex flex-col">
+                {/* ── Pillar cards ── */}
+                <motion.div
+                  variants={fadeUp}
+                  className="flex flex-wrap justify-center gap-4"
+                >
+                  {displayPillars.map((pillar) => {
+                    const Icon = pillar.icon
+                    return (
+                      <div
+                        key={pillar.label}
+                        className={cn(
+                          "group relative flex w-[calc(50%-0.5rem)] shrink-0 flex-col items-center gap-3 rounded-lg border border-border/60 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-gold/30 hover:shadow-md dark:border-border/10 dark:bg-card sm:w-[calc(33.333%-0.667rem)]",
+                          !hasVideo && "md:w-[calc(20%-0.8rem)]"
+                        )}
+                      >
+                        <div className="flex h-12 w-12 items-center justify-center rounded-md bg-brand-light group-hover:bg-brand-blue/5 transition-colors">
+                          <Icon className="h-6 w-6 text-brand-gold" strokeWidth={2} />
+                        </div>
+                        <span className="text-center font-heading text-[14px] font-bold leading-tight text-brand-blue dark:text-foreground mt-2">
+                          {pillar.label}
+                        </span>
+                      </div>
+                    )
+                  })}
+                </motion.div>
 
-              {displayPillars.map((pillar) => {
-                const Icon = pillar.icon
-                return (
+                {/* ── Paragraph 1 ── */}
+                <motion.div
+                  variants={fadeUp}
+                  className={cn(
+                    "mt-12",
+                    hasVideo ? "text-left" : "text-center max-w-4xl mx-auto"
+                  )}
+                >
+                  <p className="font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
+                    {paragraph1}
+                  </p>
+                </motion.div>
+
+                {/* ── Divider ── */}
+                <motion.div variants={fadeUp} className="mt-12 flex items-center gap-4">
+                  <span className="h-px flex-1 bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
+                  <Briefcase className="h-5 w-5 shrink-0 text-brand-gold" strokeWidth={1.75} />
+                  <span className="h-px flex-1 bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
+                </motion.div>
+
+                {/* ── Paragraph 2 — highlighted card ── */}
+                <motion.div
+                  variants={fadeUp}
+                  className="relative mt-12 overflow-hidden rounded-lg bg-brand-blue p-6 shadow-lg sm:p-8 md:p-10 dark:bg-card"
+                >
+                  {/* Decorative glow */}
                   <div
-                    key={pillar.label}
-                    className="group relative flex flex-col items-center gap-3 rounded-lg border border-border/60 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-gold/30 hover:shadow-md dark:border-border/10 dark:bg-card"
-                  >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-md bg-brand-light group-hover:bg-brand-blue/5 transition-colors">
-                      <Icon className="h-6 w-6 text-brand-gold" strokeWidth={2} />
-                    </div>
-                    <span className="text-center font-heading text-[14px] font-bold leading-tight text-brand-blue dark:text-foreground mt-2">
-                      {pillar.label}
-                    </span>
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-brand-gold/15 blur-3xl"
+                  />
+
+                  <div className="relative z-10 text-center max-w-3xl mx-auto">
+                    <p className="font-body text-sm leading-relaxed text-white/90 sm:text-base dark:text-foreground">
+                      {paragraph2}
+                    </p>
                   </div>
-                )
-              })}
-            </motion.div>
 
-            {/* ── Paragraph 1 ── */}
-            <motion.div variants={fadeUp} className="mt-12 text-center max-w-4xl mx-auto">
-              <p className="font-body text-sm leading-relaxed text-brand-dark/85 sm:text-base">
-                {paragraph1}
-              </p>
-            </motion.div>
+                  {/* Bottom accent line */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute bottom-0 left-6 right-6 h-0.5 rounded-full bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent sm:left-8 sm:right-8"
+                  />
+                </motion.div>
+              </motion.div>
 
-            {/* ── Divider ── */}
-            <motion.div variants={fadeUp} className="mt-12 flex items-center gap-4">
-              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
-              <Briefcase className="h-5 w-5 shrink-0 text-brand-gold" strokeWidth={1.75} />
-              <span className="h-px flex-1 bg-gradient-to-r from-transparent via-brand-gold/30 to-transparent" />
-            </motion.div>
-
-            {/* ── Paragraph 2 — highlighted card ── */}
-            <motion.div
-              variants={fadeUp}
-              className="relative mt-12 overflow-hidden rounded-lg bg-brand-blue p-6 shadow-lg sm:p-8 md:p-10 dark:bg-card"
-            >
-              {/* Decorative glow */}
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-brand-gold/15 blur-3xl"
-              />
-
-              <div className="relative z-10 text-center max-w-3xl mx-auto">
-                <p className="font-body text-sm leading-relaxed text-white/90 sm:text-base dark:text-foreground">
-                  {paragraph2}
-                </p>
-              </div>
-
-              {/* Bottom accent line */}
-              <div
-                aria-hidden="true"
-                className="absolute bottom-0 left-6 right-6 h-0.5 rounded-full bg-gradient-to-r from-transparent via-brand-gold/60 to-transparent sm:left-8 sm:right-8"
-              />
-            </motion.div>
+              {/* ── Sticky portrait video (right) ── */}
+              {hasVideo ? (
+                <motion.div
+                  variants={fadeUp}
+                  className="lg:sticky lg:top-8 lg:self-start"
+                >
+                  <div className="relative mx-auto w-full max-w-[26rem] overflow-hidden rounded-lg border border-border/60 bg-brand-blue shadow-[0_24px_60px_-32px_rgba(13,49,94,0.45)]">
+                    <div className="relative aspect-[9/16]">
+                      {isPlaying && videoUrl ? (
+                        <video
+                          aria-label={videoCaption}
+                          className="absolute inset-0 h-full w-full object-cover"
+                          src={videoUrl}
+                          poster={videoPosterUrl}
+                          autoPlay
+                          controls
+                          playsInline
+                          preload="none"
+                        >
+                          Trình duyệt của bạn không hỗ trợ phát video.
+                        </video>
+                      ) : (
+                        <div className="absolute inset-0">
+                          <Image
+                            src={videoPosterUrl}
+                            alt={videoCaption}
+                            fill
+                            sizes="(max-width: 640px) 90vw, 416px"
+                            className="object-cover object-center opacity-75"
+                          />
+                          <div className="absolute inset-0 bg-brand-blue/45" />
+                          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center text-white">
+                            {videoUrl ? (
+                              <button
+                                type="button"
+                                onClick={() => setIsPlaying(true)}
+                                aria-label={`Phát video: ${videoCaption}`}
+                                className="group flex h-16 w-16 cursor-pointer items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-sm transition-transform duration-300 hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white sm:h-20 sm:w-20"
+                              >
+                                <Play
+                                  aria-hidden="true"
+                                  className="ml-1 h-6 w-6 fill-current sm:h-8 sm:w-8"
+                                  strokeWidth={1.75}
+                                />
+                              </button>
+                            ) : (
+                              <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-sm sm:h-20 sm:w-20">
+                                <Play
+                                  aria-hidden="true"
+                                  className="ml-1 h-6 w-6 fill-current sm:h-8 sm:w-8"
+                                  strokeWidth={1.75}
+                                />
+                              </span>
+                            )}
+                            <p className="max-w-[16rem] font-heading text-base font-bold sm:text-xl">
+                              {videoCaption}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ) : null}
+            </div>
           </motion.div>
         </div>
       </Container>

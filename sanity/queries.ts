@@ -159,7 +159,7 @@ export const DICH_VU_PAGE_QUERY = defineQuery(`
       paragraph1, paragraph2
     },
     videoSection{
-      eyebrow, title, 
+      videoTitle, videoPoster,
       "videoUrl": video.asset->url
     },
     serviceCategories{eyebrow, title},
@@ -456,6 +456,9 @@ export const STUDY_ABROAD_PAGE_QUERY = defineQuery(`
     },
     "testimonials": testimonialsSection {
       title,
+      videoTitle,
+      videoPoster,
+      "videoUrl": video.asset->url,
       testimonials[]{_key, name, role, avatar, rating, quote}
     },
     "faqs": faqsSection {
@@ -640,6 +643,9 @@ export const PUBLIC_STUDY_PAGE_QUERY = defineQuery(`
     },
     "why": whySection {
       title,
+      videoTitle,
+      videoPoster,
+      "videoUrl": video.asset->url,
       items[]{_key, icon, title, description}
     },
     "pathways": pathwaysSection {

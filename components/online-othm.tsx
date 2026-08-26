@@ -584,8 +584,8 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
             </motion.div>
 
             {/* Desktop: Tabs + Detail */}
-            <div className="hidden lg:grid grid-cols-12 gap-8 items-start">
-              <div className="col-span-4 flex flex-col gap-2">
+            <div className="hidden lg:grid grid-cols-12 gap-8 items-stretch">
+              <div className="col-span-4 grid h-full auto-rows-fr gap-3">
                 {programsItems.map((program, i) => {
                   const isActive = i === activeProgramId
                   return (
@@ -594,17 +594,17 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
                       type="button"
                       onClick={() => setActiveProgramId(i)}
                       className={cn(
-                        "flex items-center justify-between rounded-lg border p-4 text-left font-heading text-[15px] font-bold transition-all duration-300",
+                        "flex items-center justify-between rounded-lg border px-4 py-3 text-left font-heading text-sm font-bold leading-snug transition-all duration-300",
                         isActive
                           ? "border-brand-blue bg-brand-blue text-white shadow-md"
                           : "border-border bg-white text-brand-blue hover:bg-brand-light",
                       )}
                     >
-                      <span className="flex items-center gap-3">
-                        <BookOpen className={cn("h-5 w-5 shrink-0", isActive ? "text-brand-gold-light" : "text-brand-gold")} />
+                      <span className="flex min-w-0 items-center gap-2.5">
+                        <BookOpen className={cn("h-4.5 w-4.5 shrink-0", isActive ? "text-brand-gold-light" : "text-brand-gold")} />
                         {program.name}
                       </span>
-                      <ChevronRight className={cn("h-4 w-4 transition-transform", isActive && "translate-x-1")} />
+                      <ChevronRight className={cn("h-3.5 w-3.5 shrink-0 transition-transform", isActive && "translate-x-1")} />
                     </button>
                   )
                 })}
@@ -620,7 +620,7 @@ export function OnlineOthm({ className, data }: { className?: string; data?: Onl
                   </span>
                 </div>
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-5">
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-lg sm:col-span-2">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-lg sm:col-span-2">
                     <Image src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format&fit=crop" alt={activeProgram.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 200px" />
                   </div>
                   <div className="sm:col-span-3">

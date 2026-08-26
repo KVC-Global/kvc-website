@@ -114,22 +114,22 @@ const OFFICES = [
 const CONTACT_COUNTRIES = [
   {
     name: "Vietnam",
-    lat: 14.0583,
-    lng: 108.2772,
+    lat: 10.8231,
+    lng: 106.6297,
     flag: "🇻🇳",
     offset: [-10, -55],
   },
   {
     name: "Myanmar",
-    lat: 21.9162,
-    lng: 95.956,
+    lat: 16.8409,
+    lng: 96.1735,
     flag: "🇲🇲",
     offset: [-105, -20],
   },
   {
     name: "Malaysia",
-    lat: 4.2105,
-    lng: 101.9758,
+    lat: 3.139,
+    lng: 101.6869,
     flag: "🇲🇾",
     offset: [-62, 18],
   },
@@ -142,15 +142,15 @@ const CONTACT_COUNTRIES = [
   },
   {
     name: "Philippines",
-    lat: 12.8797,
-    lng: 121.774,
+    lat: 14.5995,
+    lng: 120.9842,
     flag: "🇵🇭",
     offset: [70, -28],
   },
   {
     name: "Timor-Leste",
-    lat: -8.8742,
-    lng: 125.7275,
+    lat: -8.5569,
+    lng: 125.5603,
     flag: "🇹🇱",
     offset: [66, 28],
   },
@@ -406,20 +406,20 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
   })
   const offices = content?.offices?.offices?.length
     ? content.offices.offices.map((office) => ({
-        country: office.country || "",
-        role: office.role || "",
-        address: office.address || "",
-        phone: office.phone || "",
-        email: office.email || "",
-        hours: office.hours || "",
-        mapUrl: office.mapUrl || "#",
-        mapQ: office.mapQuery || "",
-        image: office.image
-          ? urlFor(office.image).width(1200).url()
-          : "/images/dat-nuoc-singapore-01.jpg",
-        description: office.description,
-        imageAlt: office.imageAlt,
-      }))
+      country: office.country || "",
+      role: office.role || "",
+      address: office.address || "",
+      phone: office.phone || "",
+      email: office.email || "",
+      hours: office.hours || "",
+      mapUrl: office.mapUrl || "#",
+      mapQ: office.mapQuery || "",
+      image: office.image
+        ? urlFor(office.image).width(1200).url()
+        : "/images/dat-nuoc-singapore-01.jpg",
+      description: office.description,
+      imageAlt: office.imageAlt,
+    }))
     : OFFICES
   return (
     <div>
@@ -569,7 +569,7 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
                     {locale === "vi"
                       ? info?.weekdayHours || "Thứ 2 - Thứ 6, 8:00 - 17:00"
                       : info?.weekdayHours ||
-                        "Monday - Friday, 8:00 AM - 5:00 PM"}
+                      "Monday - Friday, 8:00 AM - 5:00 PM"}
                   </p>
                   <p className="font-body text-sm text-brand-dark/80">
                     {locale === "vi"
@@ -680,8 +680,8 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
               </h2>
               <p className="mt-4 max-w-lg font-body text-sm leading-relaxed text-brand-dark/70 sm:text-base">
                 {locale === "vi"
-                  ? "KVC Global kết nối khách hàng và đối tác tại sáu thị trường trọng điểm trong khu vực. Kéo quả địa cầu để khám phá mạng lưới của chúng tôi."
-                  : "KVC Global connects clients and partners across six key markets in the region. Drag the globe to explore our network."}
+                  ? "KVC Global kết nối khách hàng và đối tác tại sáu thị trường trọng điểm trong khu vực."
+                  : "KVC Global connects clients and partners across six key markets in the region."}
               </p>
 
               <ul

@@ -155,25 +155,25 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
   const introParagraphs = intro?.paragraphs?.length
     ? intro.paragraphs
     : [
-        "QUALIFI là tổ chức cấp bằng (Awarding Organisation) được quản lý bởi Ofqual tại Vương quốc Anh. Các văn bằng QUALIFI được công nhận rộng rãi bởi doanh nghiệp, các tổ chức giáo dục và nhiều trường đại học trên thế giới.",
-        "Thông qua chương trình của QUALIFI, người học có thể:",
-      ]
+      "QUALIFI là tổ chức cấp bằng (Awarding Organisation) được quản lý bởi Ofqual tại Vương quốc Anh. Các văn bằng QUALIFI được công nhận rộng rãi bởi doanh nghiệp, các tổ chức giáo dục và nhiều trường đại học trên thế giới.",
+      "Thông qua chương trình của QUALIFI, người học có thể:",
+    ]
   const introHighlights = intro?.highlights?.length
     ? intro.highlights
     : [
-        "Nhận bằng cấp theo tiêu chuẩn Anh Quốc.",
-        "Học hoàn toàn trực tuyến.",
-        "Chuyển tiếp lên chương trình Cử nhân hoặc Thạc sĩ tại nhiều trường đại học đối tác.",
-        "Phát triển năng lực nghề nghiệp theo chuẩn quốc tế.",
-      ]
+      "Nhận bằng cấp theo tiêu chuẩn Anh Quốc.",
+      "Học hoàn toàn trực tuyến.",
+      "Chuyển tiếp lên chương trình Cử nhân hoặc Thạc sĩ tại nhiều trường đại học đối tác.",
+      "Phát triển năng lực nghề nghiệp theo chuẩn quốc tế.",
+    ]
 
   const whyTitle = data?.whySection?.title ?? "Vì sao chọn KVC Global?"
   const whyItems = data?.whySection?.items?.length
     ? data!.whySection!.items!.map((c, idx: number) => ({
-        icon: getIcon(c.icon, WHY_ITEMS[idx]?.icon || Globe),
-        title: c.title ?? "",
-        desc: c.description ?? "",
-      }))
+      icon: getIcon(c.icon, WHY_ITEMS[idx]?.icon || Globe),
+      title: c.title ?? "",
+      desc: c.description ?? "",
+    }))
     : WHY_ITEMS
 
   const progression = data?.progressionSection
@@ -189,29 +189,29 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
   const formatTitle = formatSection?.title ?? "Hình thức học"
   const formatItems = formatSection?.items?.length
     ? formatSection.items.map((c, idx: number) => ({
-        icon: getIcon(c.icon, LEARNING_FORMATS[idx]?.icon || Globe),
-        title: c.title ?? "",
-        desc: c.description ?? "",
-      }))
+      icon: getIcon(c.icon, LEARNING_FORMATS[idx]?.icon || Globe),
+      title: c.title ?? "",
+      desc: c.description ?? "",
+    }))
     : LEARNING_FORMATS
 
   const audienceSection = (data as OnlineQualifiPageData)?.targetAudienceSection || (data as OnlineProgramPageData)?.audienceSection
   const audienceTitle = audienceSection?.title ?? "Đối tượng phù hợp"
   const audienceItems = audienceSection?.items?.length
     ? audienceSection.items.map((c, idx: number) => ({
-        icon: getIcon(c.icon, TARGET_AUDIENCE[idx]?.icon || GraduationCap),
-        title: c.title ?? "",
-        desc: c.description ?? "",
-      }))
+      icon: getIcon(c.icon, TARGET_AUDIENCE[idx]?.icon || GraduationCap),
+      title: c.title ?? "",
+      desc: c.description ?? "",
+    }))
     : TARGET_AUDIENCE
 
   const benefitsTitle = data?.benefitsSection?.title ?? "Lợi ích khi học QUALIFI"
   const benefitsItems = data?.benefitsSection?.items?.length
     ? data!.benefitsSection!.items!.map((b, idx: number) => ({
-        title: b.title ?? "",
-        desc: b.description ?? "",
-        image: (b.image && b.image.trim()) ? b.image : (BENEFITS[idx]?.image ?? BENEFITS[0]?.image),
-      }))
+      title: b.title ?? "",
+      desc: b.description ?? "",
+      image: (b.image && b.image.trim()) ? b.image : (BENEFITS[idx]?.image ?? BENEFITS[0]?.image),
+    }))
     : BENEFITS
 
   const processTitle = data?.processSection?.title ?? "Quy trình đăng ký"
@@ -221,12 +221,12 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
 
   const programsItems = data?.programsSection?.items?.length
     ? data!.programsSection!.items!.map<TimelineProgram>((p) => ({
-        name: p.name ?? "",
-        duration: p.duration ?? "",
-        start: p.startDates ?? "",
-        subjects: p.subjects ?? [],
-        entry: p.entryRequirements ?? "",
-      }))
+      name: p.name ?? "",
+      duration: p.duration ?? "",
+      start: p.startDates ?? "",
+      subjects: p.subjects ?? [],
+      entry: p.entryRequirements ?? "",
+    }))
     : PROGRAMS
   const programsTitle = data?.programsSection?.title ?? "Các chương trình QUALIFI"
 
@@ -313,26 +313,26 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
           <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
             <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
-          <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-            <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-              <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{whyTitle}</h2>
-              <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
-            </motion.div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {whyItems.map((item, i) => {
-                const Icon = item.icon
-                return (
-                  <motion.div key={i} variants={fadeUpVariants} className="flex flex-col items-center rounded-lg border border-border bg-white p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-brand-blue-mid">
-                      <Icon className="h-7 w-7 text-brand-gold-light" strokeWidth={1.75} />
-                    </div>
-                    <h3 className="font-heading text-[16px] font-bold text-brand-blue">{item.title}</h3>
-                    <p className="mt-3 font-body text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.desc}</p>
-                  </motion.div>
-                )
-              })}
-            </div>
-          </motion.div>
+              <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+                  <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{whyTitle}</h2>
+                  <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+                </motion.div>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                  {whyItems.map((item, i) => {
+                    const Icon = item.icon
+                    return (
+                      <motion.div key={i} variants={fadeUpVariants} className="flex flex-col items-center rounded-lg border border-border bg-white p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                        <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-brand-blue-mid">
+                          <Icon className="h-7 w-7 text-brand-gold-light" strokeWidth={1.75} />
+                        </div>
+                        <h3 className="font-heading text-[16px] font-bold text-brand-blue">{item.title}</h3>
+                        <p className="mt-3 font-body text-xs leading-relaxed text-muted-foreground sm:text-sm">{item.desc}</p>
+                      </motion.div>
+                    )
+                  })}
+                </div>
+              </motion.div>
             </div>
           </div>
         </Container>
@@ -398,58 +398,58 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
           <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
             <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
-            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-              <motion.div variants={fadeUpVariants} className="mb-12 text-center">
-                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{audienceTitle}</h2>
-                <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
-              </motion.div>
-              <div className="mx-auto max-w-5xl lg:max-w-none">
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
-                  {audienceItems.map((item, i) => {
-                    const isHero = i === 0
-                    const total = audienceItems.length
-                    const desktopSpan =
-                      total === 2
-                        ? "lg:col-span-3"
-                        : total === 3
-                          ? "lg:col-span-2"
-                          : total === 4
-                            ? "lg:col-span-3"
-                            : total === 5
-                              ? i < 2
-                                ? "lg:col-span-3"
+              <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                <motion.div variants={fadeUpVariants} className="mb-12 text-center">
+                  <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{audienceTitle}</h2>
+                  <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+                </motion.div>
+                <div className="mx-auto max-w-5xl lg:max-w-none">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-6">
+                    {audienceItems.map((item, i) => {
+                      const isHero = i === 0
+                      const total = audienceItems.length
+                      const desktopSpan =
+                        total === 2
+                          ? "lg:col-span-3"
+                          : total === 3
+                            ? "lg:col-span-2"
+                            : total === 4
+                              ? "lg:col-span-3"
+                              : total === 5
+                                ? i < 2
+                                  ? "lg:col-span-3"
+                                  : "lg:col-span-2"
                                 : "lg:col-span-2"
-                              : "lg:col-span-2"
-                    return (
-                      <motion.div
-                        key={i}
-                        variants={fadeUpVariants}
-                        className={cn(
-                          "group relative flex gap-5 rounded-xl border border-l-2 border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out lg:min-h-40 lg:p-7",
-                          "hover:-translate-y-1 hover:border-brand-blue/25 hover:border-l-brand-gold hover:shadow-lg",
-                          isHero && "sm:col-span-2",
-                          desktopSpan,
-                        )}
-                      >
-                        <div className="flex items-start gap-4">
-                          <span className="font-heading text-3xl font-extrabold text-brand-gold/15 leading-none select-none sm:text-4xl">
-                            {String(i + 1).padStart(2, "0")}
-                          </span>
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
-                            {item.title}
-                          </h3>
-                          <p className="mt-1.5 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
-                            {item.desc}
-                          </p>
-                        </div>
-                      </motion.div>
-                    )
-                  })}
+                      return (
+                        <motion.div
+                          key={i}
+                          variants={fadeUpVariants}
+                          className={cn(
+                            "group relative flex gap-5 rounded-xl border border-l-2 border-border/60 bg-white p-6 shadow-sm transition-all duration-500 ease-out lg:min-h-40 lg:p-7",
+                            "hover:-translate-y-1 hover:border-brand-blue/25 hover:border-l-brand-gold hover:shadow-lg",
+                            isHero && "sm:col-span-2",
+                            desktopSpan,
+                          )}
+                        >
+                          <div className="flex items-start gap-4">
+                            <span className="font-heading text-3xl font-extrabold text-brand-gold/15 leading-none select-none sm:text-4xl">
+                              {String(i + 1).padStart(2, "0")}
+                            </span>
+                          </div>
+                          <div className="flex-1">
+                            <h3 className="font-heading text-[15px] font-bold text-brand-blue transition-colors duration-500 group-hover:text-brand-blue-mid">
+                              {item.title}
+                            </h3>
+                            <p className="mt-1.5 font-body text-xs leading-relaxed text-brand-dark/70 sm:text-sm">
+                              {item.desc}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
             </div>
           </div>
         </Container>
@@ -472,14 +472,14 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                     total === 2
                       ? "lg:col-span-3"
                       : total === 3
-                      ? "lg:col-span-2"
-                      : total === 4
-                      ? "lg:col-span-3"
-                      : total === 5
-                      ? i < 2
-                        ? "lg:col-span-3"
-                        : "lg:col-span-2"
-                      : "lg:col-span-2"
+                        ? "lg:col-span-2"
+                        : total === 4
+                          ? "lg:col-span-3"
+                          : total === 5
+                            ? i < 2
+                              ? "lg:col-span-3"
+                              : "lg:col-span-2"
+                            : "lg:col-span-2"
                   return (
                     <motion.div
                       key={i}
@@ -518,48 +518,48 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
           <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
             <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
-            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-              <motion.div variants={fadeUpVariants} className="mb-10 text-center">
-                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{benefitsTitle}</h2>
-                <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+              <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                <motion.div variants={fadeUpVariants} className="mb-10 text-center">
+                  <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{benefitsTitle}</h2>
+                  <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+                </motion.div>
+                <div className="relative group/scroll">
+                  <button type="button" onClick={() => scrollBenefits("left")} className="absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100" aria-label="Previous">
+                    <ChevronLeft className="h-5 w-5" strokeWidth={2} />
+                  </button>
+                  <button type="button" onClick={() => scrollBenefits("right")} className="absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100" aria-label="Next">
+                    <ChevronRight className="h-5 w-5" strokeWidth={2} />
+                  </button>
+                  <div ref={benefitsRef} className="overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"><div className="flex gap-6 w-max mx-auto px-2">
+                    {benefitsItems.map((item, i) => (
+                      <motion.div
+                        key={i}
+                        variants={fadeUpVariants}
+                        className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:w-[300px] xl:w-[350px]"
+                      >
+                        <div className="relative aspect-video overflow-hidden">
+                          <Image
+                            src={item.image}
+                            alt={item.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            sizes="300px"
+                          />
+                        </div>
+                        <div className="p-5">
+                          <h3 className="font-heading text-base font-bold text-brand-blue">
+                            {item.title}
+                          </h3>
+                          <p className="mt-2 font-body text-sm leading-relaxed text-brand-dark/75">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                  </div>
+                </div>
               </motion.div>
-              <div className="relative group/scroll">
-                <button type="button" onClick={() => scrollBenefits("left")} className="absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100" aria-label="Previous">
-                  <ChevronLeft className="h-5 w-5" strokeWidth={2} />
-                </button>
-                <button type="button" onClick={() => scrollBenefits("right")} className="absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border/60 bg-white text-brand-blue shadow-md opacity-0 transition-all duration-300 hover:shadow-lg group-hover/scroll:opacity-100" aria-label="Next">
-                  <ChevronRight className="h-5 w-5" strokeWidth={2} />
-                </button>
-                <div ref={benefitsRef} className="overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide"><div className="flex gap-6 w-max mx-auto px-2">
-                  {benefitsItems.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    variants={fadeUpVariants}
-                    className="group w-[280px] shrink-0 snap-start overflow-hidden rounded-lg border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:w-[300px] xl:w-[350px]"
-                  >
-                    <div className="relative aspect-video overflow-hidden">
-                      <Image
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="300px"
-                      />
-                    </div>
-                    <div className="p-5">
-                      <h3 className="font-heading text-base font-bold text-brand-blue">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 font-body text-sm leading-relaxed text-brand-dark/75">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
-                </div>
-                </div>
-              </div>
-            </motion.div>
             </div>
           </div>
         </Container>
@@ -624,129 +624,129 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
         <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
           <div className="rounded-lg bg-muted py-12 sm:py-16 lg:py-20">
             <div className="mx-auto w-full px-1 sm:px-1 md:px-2 lg:px-2 xl:max-w-[1376px] 2xl:max-w-[1536px]">
-            <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
-              <motion.div variants={fadeUpVariants} className="mb-10 text-center">
-                <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{programsTitle}</h2>
-                <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
-              </motion.div>
+              <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}>
+                <motion.div variants={fadeUpVariants} className="mb-10 text-center">
+                  <h2 className="font-heading text-2xl font-extrabold text-brand-blue sm:text-3xl">{programsTitle}</h2>
+                  <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold" />
+                </motion.div>
 
-              {/* Desktop: Tabs + Detail */}
-              <div className="hidden lg:grid grid-cols-12 gap-8 items-start">
-                <div className="col-span-4 flex flex-col gap-2">
-                  {programsItems.map((program, i) => {
-                    const isActive = i === activeProgramId
-                    return (
-                      <button
-                        key={i}
-                        type="button"
-                        onClick={() => setActiveProgramId(i)}
-                        className={cn(
-                          "flex items-center justify-between rounded-lg border p-4 text-left font-heading text-[15px] font-bold transition-all duration-300",
-                          isActive
-                            ? "border-brand-blue bg-brand-blue text-white shadow-md"
-                            : "border-border bg-white text-brand-blue hover:bg-brand-light",
-                        )}
-                      >
-                        <span className="flex items-center gap-3">
-                          <BookOpen className={cn("h-5 w-5 shrink-0", isActive ? "text-brand-gold-light" : "text-brand-gold")} />
-                          {program.name}
-                        </span>
-                        <ChevronRight className={cn("h-4 w-4 transition-transform", isActive && "translate-x-1")} />
-                      </button>
-                    )
-                  })}
-                </div>
-                <div className="col-span-8 rounded-lg border border-border/60 bg-white p-6 shadow-sm">
-                  <h3 className="font-heading text-xl font-bold text-brand-blue mb-3">{activeProgram.name}</h3>
-                  <div className="flex flex-wrap gap-3 mb-5">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 font-body text-sm font-medium text-brand-blue-mid">
-                      <Clock className="h-3.5 w-3.5 text-brand-gold" />{activeProgram.duration}
-                    </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 font-body text-sm font-medium text-brand-blue-mid">
-                      <Calendar className="h-3.5 w-3.5 text-brand-gold" />{activeProgram.start}
-                    </span>
+                {/* Desktop: Tabs + Detail */}
+                <div className="hidden lg:grid grid-cols-12 gap-8 items-stretch">
+                  <div className="col-span-4 grid h-full auto-rows-fr gap-3">
+                    {programsItems.map((program, i) => {
+                      const isActive = i === activeProgramId
+                      return (
+                        <button
+                          key={i}
+                          type="button"
+                          onClick={() => setActiveProgramId(i)}
+                          className={cn(
+                            "flex items-center justify-between rounded-lg border px-4 py-3 text-left font-heading text-sm font-bold leading-snug transition-all duration-300",
+                            isActive
+                              ? "border-brand-blue bg-brand-blue text-white shadow-md"
+                              : "border-border bg-white text-brand-blue hover:bg-brand-light",
+                          )}
+                        >
+                          <span className="flex min-w-0 items-center gap-2.5">
+                            <BookOpen className={cn("h-4.5 w-4.5 shrink-0", isActive ? "text-brand-gold-light" : "text-brand-gold")} />
+                            {program.name}
+                          </span>
+                          <ChevronRight className={cn("h-3.5 w-3.5 shrink-0 transition-transform", isActive && "translate-x-1")} />
+                        </button>
+                      )
+                    })}
                   </div>
-                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-5">
-                    <div className="relative aspect-[4/5] overflow-hidden rounded-lg sm:col-span-2">
-                      <Image src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&auto=format&fit=crop" alt={activeProgram.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 200px" />
+                  <div className="col-span-8 rounded-lg border border-border/60 bg-white p-6 shadow-sm">
+                    <h3 className="font-heading text-xl font-bold text-brand-blue mb-3">{activeProgram.name}</h3>
+                    <div className="flex flex-wrap gap-3 mb-5">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 font-body text-sm font-medium text-brand-blue-mid">
+                        <Clock className="h-3.5 w-3.5 text-brand-gold" />{activeProgram.duration}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 font-body text-sm font-medium text-brand-blue-mid">
+                        <Calendar className="h-3.5 w-3.5 text-brand-gold" />{activeProgram.start}
+                      </span>
                     </div>
-                    <div className="sm:col-span-3">
-                      <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-2">
-                        <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Môn học
-                      </h4>
-                      <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 mb-4">
-                        {activeProgram.subjects.map((s, j) => (
-                          <li key={j} className="flex items-start gap-2 text-sm text-brand-dark/70">
-                            <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />{s}
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-4">
-                        <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-1.5">
-                          <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-5">
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-lg sm:col-span-2">
+                        <Image src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&auto=format&fit=crop" alt={activeProgram.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, 200px" />
+                      </div>
+                      <div className="sm:col-span-3">
+                        <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-2">
+                          <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Môn học
                         </h4>
-                        <p className="text-sm leading-relaxed text-brand-dark/75">{activeProgram.entry}</p>
+                        <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 mb-4">
+                          {activeProgram.subjects.map((s, j) => (
+                            <li key={j} className="flex items-start gap-2 text-sm text-brand-dark/70">
+                              <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />{s}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-4">
+                          <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-1.5">
+                            <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                          </h4>
+                          <p className="text-sm leading-relaxed text-brand-dark/75">{activeProgram.entry}</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Mobile: Accordion */}
-              <div className="lg:hidden flex flex-col gap-4">
-                {PROGRAMS.map((program, i) => {
-                  const isOpen = i === activeProgramId
-                  return (
-                    <div key={i} className="overflow-hidden rounded-lg border border-border bg-white shadow-sm">
-                      <button
-                        type="button"
-                        onClick={() => setActiveProgramId(isOpen ? -1 : i)}
-                        className={cn(
-                          "flex w-full items-center justify-between p-4 text-left font-heading text-sm font-bold transition-colors",
-                          isOpen ? "bg-brand-blue text-white" : "text-brand-blue",
-                        )}
-                      >
-                        <span className="flex items-center gap-3">
-                          <BookOpen className={cn("h-5 w-5", isOpen ? "text-brand-gold-light" : "text-brand-gold")} />
-                          {program.name}
-                        </span>
-                        <ChevronRight className={cn("h-4 w-4 transition-transform", isOpen ? "rotate-90" : "")} />
-                      </button>
-                      <div className={cn("grid transition-all duration-300", isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}>
-                        <div className="overflow-hidden">
-                          <div className="border-t border-border/60 p-4">
-                            <div className="flex flex-wrap gap-2 mb-4">
-                              <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 text-xs font-medium text-brand-blue-mid">
-                                <Clock className="h-3 w-3 text-brand-gold" />{program.duration}
-                              </span>
-                              <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 text-xs font-medium text-brand-blue-mid">
-                                <Calendar className="h-3 w-3 text-brand-gold" />{program.start}
-                              </span>
-                            </div>
-                            <h4 className="flex items-center gap-2 font-heading text-xs font-semibold text-brand-blue mb-2">
-                              <ListChecks className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />Môn học
-                            </h4>
-                            <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2 mb-4 text-xs">
-                              {program.subjects.map((s, j) => (
-                                <li key={j} className="flex items-start gap-2 text-brand-dark/70">
-                                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />{s}
-                                </li>
-                              ))}
-                            </ul>
-                            <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-3">
-                              <h4 className="flex items-center gap-2 font-heading text-xs font-semibold text-brand-blue mb-1">
-                                <UserCheck className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                {/* Mobile: Accordion */}
+                <div className="lg:hidden flex flex-col gap-4">
+                  {PROGRAMS.map((program, i) => {
+                    const isOpen = i === activeProgramId
+                    return (
+                      <div key={i} className="overflow-hidden rounded-lg border border-border bg-white shadow-sm">
+                        <button
+                          type="button"
+                          onClick={() => setActiveProgramId(isOpen ? -1 : i)}
+                          className={cn(
+                            "flex w-full items-center justify-between p-4 text-left font-heading text-sm font-bold transition-colors",
+                            isOpen ? "bg-brand-blue text-white" : "text-brand-blue",
+                          )}
+                        >
+                          <span className="flex items-center gap-3">
+                            <BookOpen className={cn("h-5 w-5", isOpen ? "text-brand-gold-light" : "text-brand-gold")} />
+                            {program.name}
+                          </span>
+                          <ChevronRight className={cn("h-4 w-4 transition-transform", isOpen ? "rotate-90" : "")} />
+                        </button>
+                        <div className={cn("grid transition-all duration-300", isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0")}>
+                          <div className="overflow-hidden">
+                            <div className="border-t border-border/60 p-4">
+                              <div className="flex flex-wrap gap-2 mb-4">
+                                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 text-xs font-medium text-brand-blue-mid">
+                                  <Clock className="h-3 w-3 text-brand-gold" />{program.duration}
+                                </span>
+                                <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-blue-mid/10 px-3 py-1.5 text-xs font-medium text-brand-blue-mid">
+                                  <Calendar className="h-3 w-3 text-brand-gold" />{program.start}
+                                </span>
+                              </div>
+                              <h4 className="flex items-center gap-2 font-heading text-xs font-semibold text-brand-blue mb-2">
+                                <ListChecks className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />Môn học
                               </h4>
-                              <p className="text-xs leading-relaxed text-brand-dark/75">{program.entry}</p>
+                              <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2 mb-4 text-xs">
+                                {program.subjects.map((s, j) => (
+                                  <li key={j} className="flex items-start gap-2 text-brand-dark/70">
+                                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-brand-gold" />{s}
+                                  </li>
+                                ))}
+                              </ul>
+                              <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-3">
+                                <h4 className="flex items-center gap-2 font-heading text-xs font-semibold text-brand-blue mb-1">
+                                  <UserCheck className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                                </h4>
+                                <p className="text-xs leading-relaxed text-brand-dark/75">{program.entry}</p>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </motion.div>
+                    )
+                  })}
+                </div>
+              </motion.div>
             </div>
           </div>
         </Container>
