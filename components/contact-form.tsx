@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { CheckCircle2, Send } from "lucide-react"
+import { sendGAEvent } from "@next/third-parties/google"
 import type { ContactPageData } from "@/sanity/content-pages"
 
 const SERVICES = [
@@ -66,6 +67,18 @@ export function ContactForm({
       services.find((item) => item.value === serviceValue)?.label ?? "Khác"
     const message = (data.get("message") as string).trim()
 
+    const utmParams = new URLSearchParams(window.location.search)
+    const utmSource = utmParams.get("utm_source")
+    const utmMedium = utmParams.get("utm_medium")
+    const utmCampaign = utmParams.get("utm_campaign")
+    const referrer = document.referrer ? new URL(document.referrer).hostname : ""
+    const sourceLine = [
+      utmSource && `Nguồn: utm_source=${utmSource}${utmMedium ? ` (medium: ${utmMedium})` : ""}${utmCampaign ? ` - ${utmCampaign}` : ""}`,
+      !utmSource && referrer && `Nguồn tham chiếu: ${referrer}`,
+    ]
+      .filter(Boolean)
+      .join("\n")
+
     const subject = encodeURIComponent(
       `[Liên hệ KVC Global] ${name} - ${service}`
     )
@@ -75,10 +88,13 @@ export function ContactForm({
         `Email: ${email}`,
         `Số điện thoại: ${phone}`,
         `Dịch vụ quan tâm: ${service}`,
+        sourceLine,
         ``,
         `Tin nhắn:`,
         `${message}`,
-      ].join("\n")
+      ]
+        .filter((line) => line !== "")
+        .join("\n")
     )
 
     return `mailto:${recipientEmail}?subject=${subject}&body=${body}`
@@ -93,6 +109,10 @@ export function ContactForm({
       return
     }
 
+    sendGAEvent("event", "generate_lead", {
+      form: "lien-he",
+      page_path: window.location.pathname,
+    })
     const mailtoHref = buildMailto(form)
     window.location.href = mailtoHref
     setState("submitted")

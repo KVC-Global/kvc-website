@@ -5,6 +5,7 @@ import { sanityFetch } from "@/sanity/live"
 import { UNI_MASTER_PAGE_QUERY } from "@/sanity/queries"
 import type { UniMasterPageContent } from "@/sanity/uni-master-page"
 import { urlFor } from "@/sanity/image"
+import { localizedAlternates } from "@/lib/seo"
 import { getLocale } from "@/lib/i18n-server"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -35,6 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
+    alternates: localizedAlternates("/du-hoc/dai-hoc-thac-si", locale),
     openGraph: {
       title,
       description,

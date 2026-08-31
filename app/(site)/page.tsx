@@ -20,6 +20,7 @@ import type {
   SERVICES_QUERY_RESULT,
   TESTIMONIALS_QUERY_RESULT,
 } from "@/sanity.types"
+import { localizedAlternates } from "@/lib/seo"
 import { getLocale } from "@/lib/i18n-server"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -49,6 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
+    alternates: localizedAlternates("/", locale),
     openGraph: {
       title,
       description,
