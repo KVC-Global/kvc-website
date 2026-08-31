@@ -5,6 +5,7 @@ import { sanityFetch } from "@/sanity/live"
 import { WORK_PASS_PAGE_QUERY } from "@/sanity/queries"
 import type { WorkPassPageData } from "@/sanity/work-pass-page"
 import { urlFor } from "@/sanity/image"
+import { localizedAlternates } from "@/lib/seo"
 import { getLocale } from "@/lib/i18n-server"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -35,6 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
+    alternates: localizedAlternates("/work-pass", locale),
     openGraph: {
       title,
       description,

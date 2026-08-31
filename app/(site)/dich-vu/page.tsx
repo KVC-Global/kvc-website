@@ -6,6 +6,7 @@ import { DichVuServices } from "@/components/dich-vu/dich-vu-services";
 import { getLocale } from "@/lib/i18n-server";
 import type { DichVuPageData } from "@/sanity/service-pages";
 import { sanityFetch } from "@/sanity/live";
+import { localizedAlternates } from "@/lib/seo";
 import { DICH_VU_PAGE_QUERY } from "@/sanity/queries";
 
 const fallbackMetadata: Metadata = {
@@ -39,12 +40,14 @@ async function getDichVuPage() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
   const page = await getDichVuPage();
   const title = page?.seo?.title || fallbackMetadata.title;
   const description = page?.seo?.description || fallbackMetadata.description;
   return {
     title,
     description,
+    alternates: localizedAlternates("/dich-vu", locale),
     openGraph: {
       title: title || undefined,
       description: description || undefined,

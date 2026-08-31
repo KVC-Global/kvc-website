@@ -4,6 +4,7 @@ import { getLocale } from "@/lib/i18n-server"
 import { sanityFetch } from "@/sanity/live"
 import { ONLINE_OSSD_PAGE_QUERY, ONLINE_PROGRAM_PAGE_QUERY } from "@/sanity/queries"
 import type { OnlineOssdPageData, OnlineProgramPageData } from "@/sanity/service-pages"
+import { localizedAlternates } from "@/lib/seo"
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale()
@@ -13,6 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: page?.seo?.title || "OSSD Ontario | KVC Global",
     description: page?.seo?.description || "OSSD Canada — Bằng Tốt nghiệp Trung học Phổ thông Ontario. Chương trình được công nhận quốc tế.",
+    alternates: localizedAlternates("/khoa-hoc-online/ossd", locale),
     openGraph: {
       title: page?.seo?.title || "OSSD Ontario | KVC Global",
       description: page?.seo?.description || "OSSD Canada — Bằng Tốt nghiệp Trung học Phổ thông Ontario.",

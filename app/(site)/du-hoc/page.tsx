@@ -5,6 +5,7 @@ import { sanityFetch } from "@/sanity/live"
 import { STUDY_ABROAD_PAGE_QUERY } from "@/sanity/queries"
 import type { StudyAbroadPageContent } from "@/sanity/study-abroad-page"
 import { urlFor } from "@/sanity/image"
+import { localizedAlternates } from "@/lib/seo"
 import { getLocale } from "@/lib/i18n-server"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -35,6 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
+    alternates: localizedAlternates("/du-hoc", locale),
     openGraph: {
       title,
       description,

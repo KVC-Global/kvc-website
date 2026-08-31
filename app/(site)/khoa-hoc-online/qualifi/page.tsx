@@ -4,6 +4,7 @@ import { getLocale } from "@/lib/i18n-server"
 import { sanityFetch } from "@/sanity/live"
 import { ONLINE_QUALIFI_PAGE_QUERY, ONLINE_PROGRAM_PAGE_QUERY } from "@/sanity/queries"
 import type { OnlineQualifiPageData, OnlineProgramPageData } from "@/sanity/service-pages"
+import { localizedAlternates } from "@/lib/seo"
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale()
@@ -13,6 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: page?.seo?.title || "QUALIFI | KVC Global",
     description: page?.seo?.description || "Học Chứng chỉ QUALIFI Anh Quốc trực tuyến cùng KVC Global.",
+    alternates: localizedAlternates("/khoa-hoc-online/qualifi", locale),
     openGraph: {
       title: page?.seo?.title || "QUALIFI | KVC Global",
       description: page?.seo?.description || "",

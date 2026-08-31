@@ -5,6 +5,7 @@ import {
   JetBrains_Mono,
   Montserrat,
 } from "next/font/google"
+import { GoogleAnalytics } from "@next/third-parties/google"
 
 import "../globals.css"
 import { SiteFooter } from "@/components/site-footer"
@@ -102,6 +103,9 @@ export default async function SiteLayout({
           <SanityLive />
         </ThemeProvider>
       </body>
+      {process.env.NEXT_PUBLIC_GA_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      )}
     </html>
   )
 }

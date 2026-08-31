@@ -5,6 +5,7 @@ import {getLocale} from "@/lib/i18n-server"
 import type {ContactPageData} from "@/sanity/content-pages"
 import {sanityFetch} from "@/sanity/live"
 import {CONTACT_PAGE_QUERY} from "@/sanity/queries"
+import { localizedAlternates } from "@/lib/seo"
 
 const fallbackMetadata: Metadata = {
   title: "Liên hệ - KVC Global",
@@ -18,10 +19,12 @@ async function getContactPage() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
   const page = await getContactPage()
   return {
     title: page?.seo?.title || fallbackMetadata.title,
     description: page?.seo?.description || fallbackMetadata.description,
+    alternates: localizedAlternates("/lien-he", locale),
     openGraph: {
       title: page?.seo?.title || fallbackMetadata.title || undefined,
       description: page?.seo?.description || fallbackMetadata.description || undefined,

@@ -4,6 +4,7 @@ import { getLocale } from "@/lib/i18n-server"
 import { sanityFetch } from "@/sanity/live"
 import { ONLINE_WOLVERHAMPTON_PAGE_QUERY, ONLINE_PROGRAM_PAGE_QUERY } from "@/sanity/queries"
 import type { OnlineWolverhamptonPageData, OnlineProgramPageData } from "@/sanity/service-pages"
+import { localizedAlternates } from "@/lib/seo"
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale()
@@ -13,6 +14,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: page?.seo?.title || "University of Wolverhampton | KVC Global",
     description: page?.seo?.description || "Học Đại học và Thạc sĩ Anh Quốc 100% Online cùng University of Wolverhampton.",
+    alternates: localizedAlternates("/khoa-hoc-online/wolverhampton", locale),
     openGraph: {
       title: page?.seo?.title || "University of Wolverhampton | KVC Global",
       description: page?.seo?.description || "",

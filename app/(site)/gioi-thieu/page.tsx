@@ -5,6 +5,7 @@ import { getLocale } from "@/lib/i18n-server"
 import type { AboutPageData } from "@/sanity/content-pages"
 import { urlFor } from "@/sanity/image"
 import { sanityFetch } from "@/sanity/live"
+import { localizedAlternates } from "@/lib/seo"
 import { ABOUT_PAGE_QUERY } from "@/sanity/queries"
 
 const fallbackMetadata: Metadata = {
@@ -23,6 +24,7 @@ async function getAboutPage() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale()
   const page = await getAboutPage()
   const title = page?.seo?.title || fallbackMetadata.title
   const description = page?.seo?.description || fallbackMetadata.description
@@ -33,6 +35,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
+    alternates: localizedAlternates("/gioi-thieu", locale),
     openGraph: {
       title: title || undefined,
       description: description || undefined,
