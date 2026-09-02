@@ -136,6 +136,7 @@ export async function SiteAbout({
                   alt={content?.imageAlt || t.about.altImage1}
                   width={536}
                   height={732}
+                  quality={100}
                   className={styles.mainImage}
                 />
               </div>

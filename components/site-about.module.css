@@ -1,7 +1,7 @@
 .aboutGrid {
   display: grid;
   row-gap: 5rem;
-  column-gap: clamp(3rem, 4vw, 4.5rem);
+  column-gap: clamp(3.5rem, 5vw, 6rem);
 }
 
 .mainImage {
@@ -13,7 +13,7 @@
 
 @media (min-width: 48rem) {
   .aboutGrid {
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    grid-template-columns: minmax(0, 2.25fr) minmax(0, 2fr);
     align-items: start;
     row-gap: 4rem;
   }
