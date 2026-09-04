@@ -36,21 +36,21 @@ export function StudyAbroadIntro({ content }: { content?: StudyAbroadIntroConten
 
   const isEmbedVideo = Boolean(
     videoUrl &&
-      (videoUrl.includes("/embed/") || videoUrl.includes("player.vimeo.com"))
+    (videoUrl.includes("/embed/") || videoUrl.includes("player.vimeo.com"))
   )
   const bullets = content?.bullets?.length
     ? content.bullets
     : [
-        "6 tháng học lý thuyết tại trường",
-        "6 tháng thực tập hưởng lương tại các doanh nghiệp uy tín ở Singapore",
-      ]
+      "6 tháng học lý thuyết tại trường",
+      "6 tháng thực tập hưởng lương tại các doanh nghiệp uy tín ở Singapore",
+    ]
 
   const paragraphs = content?.paragraphs?.length
     ? content.paragraphs
     : [
-        "Sau khi hoàn thành, học viên nhận bằng Diploma quốc tế, tương đương bằng Cao đẳng tại Việt Nam, được công nhận và có giá trị liên thông lên Cử nhân tại Singapore và nhiều quốc gia khác.",
-        "Đây là lộ trình được nhiều bạn trẻ Việt Nam lựa chọn vì thời gian học ngắn, chi phí hợp lý và có cơ hội tạo thu nhập ngay trong quá trình học.",
-      ]
+      "Sau khi hoàn thành, học viên nhận bằng Diploma quốc tế, tương đương bằng Cao đẳng tại Việt Nam, được công nhận và có giá trị liên thông lên Cử nhân tại Singapore và nhiều quốc gia khác.",
+      "Đây là lộ trình được nhiều bạn trẻ Việt Nam lựa chọn vì thời gian học ngắn, chi phí hợp lý và có cơ hội tạo thu nhập ngay trong quá trình học.",
+    ]
 
   return (
     <section
