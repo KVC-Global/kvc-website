@@ -51,7 +51,7 @@ export function WorkPassFaqs({ content }: { content?: WorkPassFaqsContent }) {
           id="faqs-heading"
           className="font-heading text-xl font-bold text-brand-blue sm:text-2xl"
         >
-          {content?.title || "5. Câu hỏi thường gặp"}
+          {content?.title || "4. Câu hỏi thường gặp"}
         </h2>
         <span
           aria-hidden="true"
