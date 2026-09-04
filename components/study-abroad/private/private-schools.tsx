@@ -140,6 +140,24 @@ export function PrivateStudyAbroadSchools({ content }: { content?: PrivateStudyS
   const currentActiveId = activeSchoolId || schools[0]?.id || ""
   const activeSchool = schools.find((s) => s.id === currentActiveId) || schools[0]
 
+  const noteBox = (
+    <div className="bg-brand-light border border-border/60 rounded-md p-4 flex gap-3 items-start dark:border-border/10 dark:bg-muted/40 lg:px-3 lg:py-2 lg:gap-2.5">
+      <Info className="h-5 w-5 text-brand-gold shrink-0 mt-0.5 lg:h-4 lg:w-4 lg:mt-px" strokeWidth={2} />
+      <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal lg:leading-snug">
+        {content?.tipText ? (
+          content.tipText
+        ) : (
+          <>
+            <strong>{isEn ? "Note:" : "Lưu ý:"}</strong>{" "}
+            {isEn
+              ? "Tuition fees and programs of international schools are for reference at the latest intake. KVC Global will update the exact costs during direct consultation."
+              : "Thông tin học phí và chương trình của các trường quốc tế mang tính chất tham khảo tại thời điểm tuyển sinh mới nhất. KVC Global sẽ cập nhật chi phí chính xác trong quá trình tư vấn trực tiếp."}
+          </>
+        )}
+      </p>
+    </div>
+  )
+
   return (
     <section className="mt-20 w-full md:mt-28">
       <div className="text-center mb-10">
@@ -151,32 +169,35 @@ export function PrivateStudyAbroadSchools({ content }: { content?: PrivateStudyS
 
       {activeSchool && (
         <div className="hidden lg:grid grid-cols-12 gap-8 items-start">
-          {/* Left Side: School Selection Tabs */}
-          <div className="col-span-4 flex flex-col gap-2 bg-brand-light/30 border border-border/50 rounded-lg p-3">
-            {schools.map((school) => {
-              const isSelected = school.id === currentActiveId
-              return (
-                <button
-                  key={school.id}
-                  onClick={() => setActiveSchoolId(school.id || "")}
-                  type="button"
-                  className={cn(
-                    "w-full text-left px-4 py-3.5 rounded-md font-heading text-sm font-bold transition-all flex items-center gap-3 cursor-pointer",
-                    isSelected
-                      ? "bg-brand-blue text-white shadow-md scale-[1.02]"
-                      : "text-brand-blue/80 hover:bg-brand-light hover:text-brand-blue"
-                  )}
-                >
-                  <Building2
+          {/* Left Side: School Selection Tabs & Note */}
+          <div className="col-span-4 flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2 bg-brand-light/30 border border-border/50 rounded-lg p-3">
+              {schools.map((school) => {
+                const isSelected = school.id === currentActiveId
+                return (
+                  <button
+                    key={school.id}
+                    onClick={() => setActiveSchoolId(school.id || "")}
+                    type="button"
                     className={cn(
-                      "h-4 w-4 shrink-0",
-                      isSelected ? "text-brand-gold-light" : "text-brand-gold"
+                      "w-full text-left px-4 py-3.5 rounded-md font-heading text-sm font-bold transition-all flex items-center gap-3 cursor-pointer",
+                      isSelected
+                        ? "bg-brand-blue text-white shadow-md scale-[1.02]"
+                        : "text-brand-blue/80 hover:bg-brand-light hover:text-brand-blue"
                     )}
-                  />
-                  <span className="truncate">{school.name}</span>
-                </button>
-              )
-            })}
+                  >
+                    <Building2
+                      className={cn(
+                        "h-4 w-4 shrink-0",
+                        isSelected ? "text-brand-gold-light" : "text-brand-gold"
+                      )}
+                    />
+                    <span className="truncate">{school.name}</span>
+                  </button>
+                )
+              })}
+            </div>
+            {noteBox}
           </div>
 
           {/* Right Side: Details & Fees Table */}
@@ -272,22 +293,7 @@ export function PrivateStudyAbroadSchools({ content }: { content?: PrivateStudyS
             </div>
           )
         })}
-      </div>
-
-      <div className="bg-brand-light border border-border/60 rounded-md p-4 flex gap-3 items-start mt-8 max-w-3xl mx-auto dark:border-border/10 dark:bg-muted/40">
-        <Info className="h-5 w-5 text-brand-gold shrink-0 mt-0.5" strokeWidth={2} />
-        <p className="font-body text-xs md:text-sm text-brand-blue/90 leading-normal">
-          {content?.tipText ? (
-            content.tipText
-          ) : (
-            <>
-              <strong>{isEn ? "Note:" : "Lưu ý:"}</strong>{" "}
-              {isEn
-                ? "Tuition fees and programs of international schools are for reference at the latest intake. KVC Global will update the exact costs during direct consultation."
-                : "Thông tin học phí và chương trình của các trường quốc tế mang tính chất tham khảo tại thời điểm tuyển sinh mới nhất. KVC Global sẽ cập nhật chi phí chính xác trong quá trình tư vấn trực tiếp."}
-            </>
-          )}
-        </p>
+        <div className="mt-2">{noteBox}</div>
       </div>
     </section>
   )
