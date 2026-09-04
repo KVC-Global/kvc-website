@@ -23,7 +23,6 @@ export function WorkPassDetails({
         <WorkPassTarget content={content?.target} />
         <WorkPassProcess content={content?.process} />
         <WorkPassRequirements content={content?.requirements} />
-        <WorkPassFees content={content?.fees} />
         <WorkPassReview content={content?.review} />
         <WorkPassFaqs content={content?.faqs} />
         <WorkPassServices content={content?.relatedServices} />

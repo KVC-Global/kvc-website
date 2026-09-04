@@ -86,7 +86,7 @@ export function PrivateStudyAbroadSupport({ content }: { content?: PrivateStudyS
                     {num}
                   </span>
                 </div>
-                <h3 className="mt-4 font-heading text-[15px] font-bold text-brand-blue leading-snug dark:text-foreground">
+                <h3 className="mt-4 flex min-h-[2.75rem] items-center font-heading text-[15px] font-bold text-brand-blue leading-snug line-clamp-2 dark:text-foreground">
                   {step.title}
                 </h3>
                 <p className="mt-2 font-body text-xs md:text-sm leading-relaxed text-muted-foreground">

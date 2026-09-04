@@ -26,6 +26,9 @@ export type StudyAbroadIntroContent = {
   paragraphs?: string[]
   image?: SanityImage
   imageAlt?: string
+  videoUrl?: string
+  videoTitle?: string
+  videoPoster?: SanityImage
 }
 
 export type StudyAbroadWhyItem = {

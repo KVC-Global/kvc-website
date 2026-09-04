@@ -505,7 +505,7 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
         aria-labelledby="contact-form-heading"
         className="w-full bg-white"
       >
-        <Container className="py-16 sm:py-20 lg:py-24">
+        <Container className="pt-16 pb-8 sm:pt-20 sm:pb-10 lg:pt-24 lg:pb-12">
           {/* Grid: contact info (left) + form (right) */}
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             {/* ── Left column: contact info ── */}
@@ -662,10 +662,10 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
       {/* ═══════════ Section 2: Regional presence ═══════════ */}
       <section
         aria-labelledby="regional-presence-heading"
-        className="w-full overflow-hidden bg-white py-10 sm:py-14 md:py-20"
+        className="w-full overflow-hidden bg-white pt-5 pb-10 sm:pt-7 sm:pb-14 md:pt-8 md:pb-20"
       >
-        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
-          <div className="grid items-center gap-10 rounded-lg border border-[#E6E9EE] bg-brand-light px-6 py-12 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-10 sm:py-14 lg:grid-cols-12 lg:gap-16 lg:px-16 lg:py-16 xl:px-24">
+        <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-12 xl:max-w-none 2xl:max-w-none">
+          <div className="grid items-center gap-10 rounded-lg border border-[#E6E9EE] bg-brand-light px-6 py-14 shadow-[0_20px_50px_-25px_rgba(15,27,45,0.18)] sm:px-10 sm:py-16 lg:grid-cols-12 lg:gap-10 lg:px-16 lg:py-20 xl:px-24">
             <div className="lg:col-span-5">
               <p className="font-heading text-xs font-bold tracking-[0.18em] text-brand-gold uppercase">
                 {locale === "vi" ? "Mạng lưới khu vực" : "Regional network"}

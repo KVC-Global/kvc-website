@@ -465,7 +465,7 @@ function AccordionPanel({
           <p className="text-xs font-semibold tracking-[0.2em] text-brand-gold uppercase sm:text-sm">
             {section.tag}
           </p>
-          <h3 className="mt-0.5 font-heading text-lg font-extrabold tracking-tight text-brand-blue sm:text-xl md:text-2xl">
+          <h3 className="mt-0.5 font-heading text-lg font-extrabold tracking-tight text-brand-blue sm:text-xl">
             {section.heading}{" "}
             <span className="text-brand-gold">{section.headingAccent}</span>
           </h3>
@@ -557,7 +557,7 @@ function AccordionPanel({
               </div>
 
               {/* Image column */}
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg shadow-[0_24px_60px_-24px_rgba(15,27,45,0.18)] sm:aspect-[3/2] md:mt-8 md:h-[65%] md:self-start md:aspect-auto">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg shadow-[0_24px_60px_-24px_rgba(15,27,45,0.18)] sm:aspect-[3/2] md:h-[65%] md:self-start md:aspect-auto">
                 <Image
                   src={section.image}
                   alt={section.imageAlt}
@@ -654,7 +654,7 @@ export function DichVuServices({
     <section className="w-full bg-white pt-10 pb-16 md:pt-12 md:pb-24 dark:bg-background">
       <Container className="max-w-none px-4 sm:px-5 md:px-6 lg:px-8 xl:max-w-none 2xl:max-w-none">
         <div className="rounded-lg bg-muted px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
-          
+
           {/* ─── Section header ─── */}
           <motion.div
             variants={fadeUp}

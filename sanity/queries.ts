@@ -427,7 +427,10 @@ export const STUDY_ABROAD_PAGE_QUERY = defineQuery(`
       bullets,
       paragraphs,
       image,
-      imageAlt
+      imageAlt,
+      videoTitle,
+      videoPoster,
+      "videoUrl": coalesce(video.asset->url, videoUrl, videoEmbedUrl)
     },
     "why": whySection {
       title,
@@ -458,7 +461,7 @@ export const STUDY_ABROAD_PAGE_QUERY = defineQuery(`
       title,
       videoTitle,
       videoPoster,
-      "videoUrl": video.asset->url,
+      "videoUrl": coalesce(video.asset->url, videoUrl, videoEmbedUrl),
       testimonials[]{_key, name, role, avatar, rating, quote}
     },
     "faqs": faqsSection {
