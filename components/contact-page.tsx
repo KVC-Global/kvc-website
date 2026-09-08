@@ -651,7 +651,7 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
                     "Điền thông tin bên dưới, chúng tôi sẽ liên hệ lại trong thời gian sớm nhất."}
                 </p>
                 <div className="mt-6">
-                  <ContactForm content={content?.form} email={info?.email} />
+                  <ContactForm content={content?.form} />
                 </div>
               </div>
             </div>
