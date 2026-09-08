@@ -1,0 +1,198 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "workPass": "Work Pass & Employment",
+    "studyAbroad": "Study Abroad",
+    "studyAbroadDestinations": {
+      "diplomaSingapore": "Diploma 6 + 6 in Singapore",
+      "diplomaSingaporeDesc": "Study and paid internship opportunities in Singapore.",
+      "uniMasterSingapore": "Bachelor & Master's Programs in Singapore",
+      "uniMasterSingaporeDesc": "International degrees from prestigious universities.",
+      "privateAllAges": "Private Schools - All Ages",
+      "privateAllAgesDesc": "Diverse and flexible study pathways in private schools.",
+      "publicAllAges": "Public Schools - All Ages",
+      "publicAllAgesDesc": "Opportunities to study in top-tier public schools.",
+      "malaysia": "Study in Malaysia",
+      "malaysiaDesc": "Affordable cost, international standard education.",
+      "taiwan": "Study in Taiwan",
+      "taiwanDesc": "Attractive scholarships, wide job and career opportunities.",
+      "comingSoon": "Coming Soon"
+    },
+    "onlineCourses": "Online Courses",
+    "ossd": "OSSD Ontario",
+    "othm": "OTHM",
+    "qualifi": "Qualifi",
+    "wolverhampton": "University of Wolverhampton",
+    "enterprise": "Enterprise Services",
+    "contact": "Contact"
+  },
+  "header": {
+    "freeConsultation": "Free Consultation",
+    "selectLanguage": "Select language"
+  },
+  "hero": {
+    "title1": "BEGIN SOMETHING",
+    "title2": "GREATER.",
+    "description": "Embark on your journey to settle, work, and do business in Singapore with a leading immigration consulting partner. We turn your global dreams into sustainable reality.",
+    "btnStudyWork": "Study & Work in Singapore",
+    "btnIncorporate": "Incorporate Company in Singapore"
+  },
+  "stats": {
+    "ariaLabel": "Key Statistics",
+    "clients": "Trusted Clients",
+    "successRate": "Success Rate",
+    "partners": "Strategic Partners",
+    "experience": "Years Experience"
+  },
+  "partners": {
+    "title": "Leading Partners & Affiliated Schools",
+    "ariaLabel": "Partners & affiliated schools"
+  },
+  "about": {
+    "altImage1": "Merlion and Marina Bay Sands at sunset in Singapore",
+    "altImage2": "KVC Global consulting team working",
+    "tagline": "About company",
+    "title": "Welcome to KVC Global",
+    "description": "KVC Global is your trusted partner in providing comprehensive solutions for studying, working, business, and settling in Singapore.",
+    "statStrategy": "Application success rate",
+    "statNetwork": "Reviewed to ICA Due Diligence standards",
+    "statsTitle": "Proven capabilities in numbers",
+    "expValue": "13+ Years",
+    "expSub": "Hands-on experience",
+    "clientsValue": "10,000+",
+    "clientsSub": "Trusted clients",
+    "partnersValue": "150+",
+    "partnersSub": "Strategic partners",
+    "ratingValue": "4.8 Google rating",
+    "ratingSub": "Based on 600+ reviews",
+    "btn": "About Us"
+  },
+  "services": {
+    "tagline": "Our Services",
+    "title": "Comprehensive Solutions for Your Future",
+    "cardLearnMore": "Learn more",
+    "cardRegister": "Register now",
+    "businessDesc": "Accompanying entrepreneurs in their business expansion and settlement journey in Singapore with comprehensive solutions.",
+    "businessAlt": "Entrepreneurs shaking hands to collaborate at office",
+    "studentDesc": "Supporting international students to enroll in top Singapore schools and processing visas quickly and safely.",
+    "studentAlt": "International students during graduation ceremony in Singapore",
+    "workDesc": "Professional work visa solutions for employees in Singapore along with long-term settlement support.",
+    "workAlt": "Professional working with laptop in modern workspace",
+    "touristDesc": "Simple and fast tourist visa procedures for you and your family to explore Singapore at any time.",
+    "touristAlt": "Tourists exploring modern Singapore neighborhood"
+  },
+  "testimonials": {
+    "tagline": "Success Stories",
+    "title": "Our clients' pride is our success.",
+    "btnMore": "See all stories",
+    "ariaLabel": "Select testimonial page",
+    "pageLabel": "Page",
+    "google": {
+      "tagline": "Google Reviews",
+      "rating": "Based on 328 reviews",
+      "btn": "See all Google reviews",
+      "reviews": {
+        "review1": {
+          "name": "Hong Nhung",
+          "text": "Very professional service, enthusiastic consulting team. Very prompt support. Thank you, KVC Global!"
+        },
+        "review2": {
+          "name": "Minh Kha",
+          "text": "Thanks to KVC, I successfully achieved my dream of studying abroad in Singapore. Everything was clear and reliable."
+        },
+        "review3": {
+          "name": "Bich Ngoc",
+          "text": "Clear and careful guidance, helping my child get the NUS scholarship. Thank you to the KVC team!"
+        }
+      }
+    }
+  },
+  "whyProcess": {
+    "whyTagline": "Why Choose KVC Global?",
+    "whyTitle": "A Trusted Partner for Your Journey",
+    "cta": "Explore more",
+    "reasons": {
+      "transparency": {
+        "title": "Transparency",
+        "description": "Clear processes, transparent costs, and a commitment to no hidden fees."
+      },
+      "expertise": {
+        "title": "High Expertise",
+        "description": "A team of highly experienced professionals who deeply understand Singapore & Vietnam systems."
+      },
+      "partners": {
+        "title": "Global Partners",
+        "description": "A prestigious network of global schools, institutions, and corporate partners."
+      },
+      "commitment": {
+        "title": "Long-term Commitment",
+        "description": "Comprehensive support before, during, and after your relocation, setup, or study journey."
+      }
+    },
+    "processTagline": "Cooperation Process",
+    "processTitle": "5 Simple Steps – A Solid Journey",
+    "processAriaLabel": "5-step cooperation process",
+    "steps": {
+      "step1": {
+        "title": "Consultation & Assessment",
+        "description": "Understand your needs, assess your background, and advise on optimal solutions."
+      },
+      "step2": {
+        "title": "Personalized Roadmap",
+        "description": "Build a customized path tailored to your specific goals."
+      },
+      "step3": {
+        "title": "Document Preparation",
+        "description": "Support in compiling and finalizing a complete, meticulous application file."
+      },
+      "step4": {
+        "title": "Submission & Tracking",
+        "description": "Submit applications and monitor processing progress throughout the journey."
+      },
+      "step5": {
+        "title": "Result & Post-arrival Support",
+        "description": "Deliver final results and provide guidance to help you settle in and thrive."
+      }
+    }
+  },
+  "footer": {
+    "bio": "KVC Global — Accompanying you on your journey of studying, working, business, and settling in Singapore and other countries.",
+    "servicesHeading": "Services",
+    "aboutHeading": "About Us",
+    "supportHeading": "Support",
+    "contactHeading": "Contact",
+    "services": {
+      "studyConsulting": "Study Abroad Consulting",
+      "internship": "Singapore Internship",
+      "incorporation": "Business Incorporation",
+      "immigration": "Migration & Residency Consulting"
+    },
+    "about": {
+      "intro": "About Us",
+      "team": "Our Team",
+      "partners": "Partners",
+      "values": "Core Values",
+      "process": "Our Process"
+    },
+    "support": {
+      "faq": "FAQs",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use"
+    },
+    "cta": {
+      "title": "Start your journey?",
+      "description": "Embark on your journey to settle, work, and do business in Singapore with a leading immigration consulting partner. We turn your global dreams into sustainable reality.",
+      "book": "Book a consultation now",
+      "chat": "Chat with specialist"
+    },
+    "addressVN": "6th Floor, 65 Le Loi, Ben Nghe Ward, District 1, Ho Chi Minh City, Vietnam"
+  },
+  "contact": {
+    "getInTouch": "Get in Touch With Us",
+    "description": "Have a question or need assistance? We're here to help! Reach out to our team using the contact information below.",
+    "officeHours": "Office Hours",
+    "connectWithUs": "Connect With Us",
+    "socialDescription": "Stay updated on the latest news and immigration updates by following us on social media."
+  }
+}

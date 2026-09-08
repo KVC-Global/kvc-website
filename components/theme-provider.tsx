@@ -33,8 +33,8 @@ function applyTheme(resolved: ResolvedTheme, disableTransition: boolean) {
     const style = document.createElement("style")
     style.appendChild(
       document.createTextNode(
-        "*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}",
-      ),
+        "*,*::before,*::after{-webkit-transition:none!important;-moz-transition:none!important;-o-transition:none!important;-ms-transition:none!important;transition:none!important}"
+      )
     )
     document.head.appendChild(style)
     // force reflow so the no-transition rule takes effect
@@ -47,7 +47,9 @@ function applyTheme(resolved: ResolvedTheme, disableTransition: boolean) {
   root.style.colorScheme = resolved
 }
 
-const ThemeContext = React.createContext<ThemeContextValue | undefined>(undefined)
+const ThemeContext = React.createContext<ThemeContextValue | undefined>(
+  undefined
+)
 
 function useTheme() {
   const ctx = React.useContext(ThemeContext)
@@ -68,7 +70,7 @@ interface ThemeProviderProps {
 
 function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "light",
   enableSystem: _enableSystem = true,
   storageKey = DEFAULT_STORAGE_KEY,
   attribute: _attribute = "class",
@@ -153,67 +155,19 @@ function ThemeProvider({
         return resolved
       })
     },
-    [storageKey, disableTransitionOnChange],
+    [storageKey, disableTransitionOnChange]
   )
 
   const value = React.useMemo<ThemeContextValue>(
     () => ({ theme, resolvedTheme, systemTheme, setTheme }),
-    [theme, resolvedTheme, systemTheme, setTheme],
+    [theme, resolvedTheme, systemTheme, setTheme]
   )
 
   return (
     <ThemeContext.Provider value={value}>
-      <ThemeHotkey />
       {children}
     </ThemeContext.Provider>
   )
-}
-
-function isTypingTarget(target: EventTarget | null) {
-  if (!(target instanceof HTMLElement)) {
-    return false
-  }
-
-  return (
-    target.isContentEditable ||
-    target.tagName === "INPUT" ||
-    target.tagName === "TEXTAREA" ||
-    target.tagName === "SELECT"
-  )
-}
-
-function ThemeHotkey() {
-  const { resolvedTheme, setTheme } = useTheme()
-
-  React.useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.defaultPrevented || event.repeat) {
-        return
-      }
-
-      if (event.metaKey || event.ctrlKey || event.altKey) {
-        return
-      }
-
-      if (event.key.toLowerCase() !== "d") {
-        return
-      }
-
-      if (isTypingTarget(event.target)) {
-        return
-      }
-
-      setTheme(resolvedTheme === "dark" ? "light" : "dark")
-    }
-
-    window.addEventListener("keydown", onKeyDown)
-
-    return () => {
-      window.removeEventListener("keydown", onKeyDown)
-    }
-  }, [resolvedTheme, setTheme])
-
-  return null
 }
 
 export { ThemeProvider, useTheme }

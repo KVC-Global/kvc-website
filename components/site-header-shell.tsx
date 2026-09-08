@@ -9,24 +9,46 @@ import {
   SiteHeaderNav,
 } from "@/components/site-header-nav"
 import { SiteHeaderMobileToggle } from "@/components/site-header-mobile-toggle"
+import { useLocale } from "@/lib/i18n-client"
+import { fallbackSiteSettings, type SiteSettings } from "@/lib/site-settings"
 import { cn } from "@/lib/utils"
 
-export function SiteHeaderShell({ className }: { className?: string }) {
+export function SiteHeaderShell({
+  className,
+  settings,
+  locale: serverLocale,
+}: {
+  className?: string
+  settings?: SiteSettings
+  locale?: string
+}) {
   const [open, setOpen] = React.useState(false)
+  const clientLocale = useLocale()
+  const isMismatched = !!serverLocale && clientLocale !== serverLocale
+  const header = isMismatched ? fallbackSiteSettings(clientLocale).header : settings?.header
 
   return (
     <div className={cn("w-full", className)}>
-      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-        <div className="flex h-24 w-full items-center justify-between gap-6 md:px-8">
+      <header className="absolute top-0 left-0 z-50 w-full bg-transparent">
+        <div className="flex h-15 w-full items-center justify-between gap-6 px-3 md:h-24 md:px-8">
           <SiteHeaderLogo />
-          <div className="flex gap-7">
-            <SiteHeaderNav className="hidden lg:flex" />
-            <SiteHeaderActions />
+          <div className="flex gap-2 md:gap-7">
+            <SiteHeaderNav
+              className="hidden xl:flex"
+              items={header?.navItems}
+              comingSoonLabel={header?.comingSoonLabel}
+            />
+            <SiteHeaderActions cta={header?.cta} />
             <SiteHeaderMobileToggle onOpen={() => setOpen(true)} />
           </div>
         </div>
       </header>
-      <SiteHeaderMobileMenu open={open} onClose={() => setOpen(false)} />
+      <SiteHeaderMobileMenu
+        open={open}
+        onClose={() => setOpen(false)}
+        items={header?.navItems}
+        comingSoonLabel={header?.comingSoonLabel}
+      />
     </div>
   )
 }

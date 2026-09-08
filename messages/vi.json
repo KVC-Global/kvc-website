@@ -1,0 +1,220 @@
+{
+  "nav": {
+    "home": "Trang chủ",
+    "about": "Giới thiệu",
+    "workPass": "Work pass & việc làm",
+    "studyAbroad": "Du học",
+    "studyAbroadDestinations": {
+      "diplomaSingapore": "Diploma 6 + 6 tại Singapore",
+      "diplomaSingaporeDesc": "Vừa học vừa thực tập hưởng lương tại Singapore.",
+      "uniMasterSingapore": "Chương trình Đại học - Thạc sĩ tại Singapore",
+      "uniMasterSingaporeDesc": "Bằng cấp quốc tế từ các trường Đại học danh tiếng.",
+      "privateAllAges": "Du học tư thục - mọi độ tuổi",
+      "privateAllAgesDesc": "Lộ trình học tập đa dạng, linh hoạt tại hệ thống trường tư thục.",
+      "publicAllAges": "Du học công lập - mọi độ tuổi",
+      "publicAllAgesDesc": "Cơ hội học tập tại các trường công lập chất lượng hàng đầu.",
+      "malaysia": "Du học Malaysia",
+      "malaysiaDesc": "Chi phí hợp lý, chất lượng giáo dục chuẩn quốc tế.",
+      "taiwan": "Du học Đài Loan",
+      "taiwanDesc": "Học bổng hấp dẫn, cơ hội việc làm và phát triển rộng mở.",
+      "comingSoon": "Sắp ra mắt"
+    },
+    "onlineCourses": "Khóa học Online",
+    "ossd": "OSSD Ontario",
+    "othm": "OTHM",
+    "qualifi": "Qualifi",
+    "wolverhampton": "University of Wolverhampton",
+    "enterprise": "Dịch vụ doanh nghiệp",
+    "contact": "Liên hệ"
+  },
+  "header": {
+    "freeConsultation": "Tư vấn miễn phí",
+    "selectLanguage": "Chọn ngôn ngữ"
+  },
+  "hero": {
+    "title1": "BEGIN SOMETHING",
+    "title2": "GREATER.",
+    "description": "Khởi đầu hành trình định cư, làm việc và kinh doanh tại Singapore cùng đối tác tư vấn di trú hàng đầu. Chúng tôi biến giấc mơ toàn cầu của bạn thành hiện thực bền vững.",
+    "btnStudyWork": "Du học & Việc làm Singapore",
+    "btnIncorporate": "Mở công ty tại Singapore"
+  },
+  "stats": {
+    "ariaLabel": "Thống kê nổi bật",
+    "clients": "Khách hàng tin tưởng",
+    "successRate": "Tỷ lệ thành công",
+    "partners": "Đối tác chiến lược",
+    "experience": "Năm kinh nghiệm"
+  },
+  "partners": {
+    "title": "Đối tác & Trường liên kết hàng đầu",
+    "ariaLabel": "Đối tác & trường liên kết"
+  },
+  "about": {
+    "altImage1": "Tượng Merlion và Marina Bay Sands lúc hoàng hôn tại Singapore",
+    "altImage2": "Đội ngũ tư vấn KVC Global đang làm việc",
+    "tagline": "Về công ty",
+    "title": "Chào mừng đến với KVC Global",
+    "description": "KVC Global là đối tác đáng tin cậy của bạn trong việc cung cấp các giải pháp toàn diện về học tập, làm việc, kinh doanh và định cư tại Singapore.",
+    "statStrategy": "Tỷ lệ hồ sơ thành công",
+    "statNetwork": "Rà soát theo chuẩn ICA Due Diligence",
+    "statsTitle": "Những con số chứng minh năng lực",
+    "expValue": "13+ Năm",
+    "expSub": "Kinh nghiệm thực chiến",
+    "clientsValue": "10,000+",
+    "clientsSub": "Khách hàng tin tưởng",
+    "partnersValue": "150+",
+    "partnersSub": "Đối tác chiến lược",
+    "ratingValue": "4.8 Đánh giá trên Google",
+    "ratingSub": "Dựa trên 600+ reviews",
+    "btn": "Về chúng tôi"
+  },
+  "services": {
+    "tagline": "Dịch vụ của chúng tôi",
+    "title": "Giải pháp toàn diện cho tương lai của bạn",
+    "cardLearnMore": "Tìm hiểu thêm",
+    "cardRegister": "Đăng kí ngay",
+    "businessDesc": "Đồng hành cùng doanh nhân trong hành trình mở rộng kinh doanh và định cư Singapore với giải pháp toàn diện.",
+    "businessAlt": "Doanh nhân bắt tay hợp tác kinh doanh tại văn phòng",
+    "studentDesc": "Hỗ trợ sinh viên quốc tế nhập học tại các trường hàng đầu Singapore và xử lý visa nhanh chóng, an toàn.",
+    "studentAlt": "Sinh viên quốc tế trong lễ tốt nghiệp tại Singapore",
+    "workDesc": "Giải pháp visa lao động chuyên nghiệp cho người đi làm việc tại Singapore cùng hỗ trợ định cư lâu dài.",
+    "workAlt": "Chuyên gia làm việc với laptop tại không gian làm việc hiện đại",
+    "touristDesc": "Thủ tục visa du lịch đơn giản, nhanh gọn để bạn và gia đình khám phá Singapore bất cứ lúc nào.",
+    "touristAlt": "Du khách khám phá khu phố Singapore hiện đại"
+  },
+  "testimonials": {
+    "tagline": "Câu chuyện thành công",
+    "title": "Sự thành công của khách hàng là niềm tự hào của chúng tôi.",
+    "btnMore": "Xem tất cả câu chuyện",
+    "ariaLabel": "Chọn trang cảm nhận",
+    "pageLabel": "Trang",
+    "google": {
+      "tagline": "Đánh giá trên Google",
+      "rating": "Dựa trên 328 đánh giá",
+      "btn": "Xem tất cả đánh giá",
+      "reviews": {
+        "review1": {
+          "name": "Hồng Nhung",
+          "text": "Dịch vụ rất chuyên nghiệp, đội ngũ tư vấn nhiệt tình. Hỗ trợ rất nhanh chóng. Cảm ơn KVC Global!"
+        },
+        "review2": {
+          "name": "Minh Kha",
+          "text": "Nhờ KVC mà tôi đã hoàn thành tốt ước mơ du học Singapore. Mọi thứ đều rõ ràng và đáng tin cậy."
+        },
+        "review3": {
+          "name": "Bích Ngọc",
+          "text": "Tư vấn rõ ràng, cẩn thận, giúp con tôi đạt học bổng NUS. Cảm ơn đội ngũ KVC!"
+        }
+      }
+    }
+  },
+  "whyProcess": {
+    "whyTagline": "Vì sao chọn KVC Global?",
+    "whyTitle": "Đối tác đáng tin cậy cho hành trình của bạn",
+    "cta": "Khám phá thêm",
+    "reasons": {
+      "transparency": {
+        "title": "Minh bạch",
+        "description": "Quy trình rõ ràng, chi phí minh bạch, cam kết không phát sinh chi phí ẩn."
+      },
+      "expertise": {
+        "title": "Chuyên môn",
+        "description": "15 năm kinh nghiệm, hàng nghìn hồ sơ thành công, hiểu rõ mọi khía cạnh."
+      },
+      "partners": {
+        "title": "Đối tác đáng tin cậy",
+        "description": "Mạng lưới đối tác chiến lược toàn cầu hỗ trợ bạn trên mọi lộ trình."
+      },
+      "commitment": {
+        "title": "Cam kết chất lượng",
+        "description": "Từ tư vấn đến hoàn tất, chúng tôi bên bạn từ bước đầu tiên đến cuối cùng."
+      }
+    },
+    "processTagline": "Quy trình của chúng tôi",
+    "processTitle": "5 bước hỗ trợ bạn đạt thành công",
+    "processAriaLabel": "Chọn bước",
+    "steps": {
+      "step1": {
+        "title": "Tư vấn & Đánh giá",
+        "description": "Nhân viên tư vấn chuyên quản lý một đối một cùng bạn để hiểu rõ mục tiêu."
+      },
+      "step2": {
+        "title": "Chuẩn bị hồ sơ",
+        "description": "Chuẩn bị hồ sơ chặt chẽ, kiểm soát chất lượng đầu vào cao."
+      },
+      "step3": {
+        "title": "Nộp & Theo dõi",
+        "description": "Nộp hồ sơ đúng kỳ hạn, cập nhật tình trạng mỗi bước."
+      },
+      "step4": {
+        "title": "Nhận kết quả & hỗ trợ sau",
+        "description": "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài."
+      },
+      "step5": {
+        "title": "Đạt thành công",
+        "description": "Bạn đã bắt đầu cuộc sống mới tại Singapore."
+      }
+    }
+  },
+  "process": {
+    "tagline": "Quy trình của chúng tôi",
+    "title": "4 bước đơn giản để bắt đầu hành trình",
+    "steps": {
+      "step1": {
+        "title": "Tư vấn & Đánh giá",
+        "description": "Nhân viên tư vấn chuyên quản lý một đối một cùng bạn để hiểu rõ mục tiêu."
+      },
+      "step2": {
+        "title": "Chuẩn bị hồ sơ",
+        "description": "Chuẩn bị hồ sơ chặt chẽ, kiểm soát chất lượng đầu vào cao."
+      },
+      "step3": {
+        "title": "Nộp & Theo dõi",
+        "description": "Nộp hồ sơ đúng kỳ hạn, cập nhật tình trạng mỗi bước."
+      },
+      "step4": {
+        "title": "Nhận kết quả & hỗ trợ sau",
+        "description": "Nhận kết quả và hỗ trợ bạn ổn định, phát triển lâu dài."
+      }
+    }
+  },
+  "footer": {
+    "bio": "KVC Global — Đồng hành cùng bạn trên hành trình học tập, làm việc, kinh doanh và định cư tại Singapore và nhiều quốc gia khác.",
+    "servicesHeading": "Dịch vụ",
+    "aboutHeading": "Về chúng tôi",
+    "supportHeading": "Hỗ trợ",
+    "contactHeading": "Liên hệ",
+    "services": {
+      "studyConsulting": "Tư vấn du học",
+      "internship": "Thực tập Singapore",
+      "incorporation": "Thành lập doanh nghiệp",
+      "immigration": "Tư vấn di trú & định cư"
+    },
+    "about": {
+      "intro": "Giới thiệu",
+      "team": "Đội ngũ",
+      "partners": "Đối tác",
+      "values": "Giá trị cốt lõi",
+      "process": "Quy trình làm việc"
+    },
+    "support": {
+      "faq": "Câu hỏi thường gặp",
+      "privacy": "Chính sách bảo mật",
+      "terms": "Điều khoản sử dụng"
+    },
+    "cta": {
+      "title": "Bắt đầu hành trình của bạn?",
+      "description": "Khởi đầu hành trình định cư, làm việc và kinh doanh tại Singapore cùng đối tác tư vấn di trú hàng đầu. Chúng tôi biến giấc mơ toàn cầu của bạn thành hiện thực bền vững.",
+      "book": "Đặt lịch tư vấn ngay",
+      "chat": "Chat với chuyên viên"
+    },
+    "addressVN": "456 Xô Viết Nghệ Tĩnh, Thạnh Mỹ Tây, Hồ Chí Minh, Việt Nam"
+  },
+  "contact": {
+    "getInTouch": "Liên hệ với chúng tôi",
+    "description": "Có câu hỏi hoặc cần hỗ trợ? Chúng tôi luôn sẵn sàng giúp bạn! Hãy liên hệ với đội ngũ của chúng tôi thông qua thông tin dưới đây.",
+    "officeHours": "Giờ làm việc",
+    "connectWithUs": "Kết nối với chúng tôi",
+    "socialDescription": "Cập nhật những tin tức mới nhất và thông tin du học bằng cách theo dõi chúng tôi trên mạng xã hội."
+  }
+}

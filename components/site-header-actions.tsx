@@ -1,9 +1,12 @@
 "use client"
 
 import * as React from "react"
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import { ChevronDown, Globe } from "lucide-react"
 
 import { cn } from "@/lib/utils"
+import { useLocale, useDictionary } from "@/lib/i18n-client"
+import { resolveSiteHref, type SiteCtaButton } from "@/lib/site-settings"
 
 const LANGUAGES = [
   { code: "VI", label: "Tiếng Việt", flag: "vn" },
@@ -46,12 +49,20 @@ function FlagIcon({ code }: { code: (typeof LANGUAGES)[number]["flag"] }) {
   )
 }
 
-export function SiteHeaderActions() {
+export function SiteHeaderActions({ cta }: { cta?: SiteCtaButton }) {
+  const router = useRouter()
+  const pathname = usePathname() ?? "/"
+  const searchParams = useSearchParams()
+  const locale = useLocale()
+  const t = useDictionary()
+  const ctaLabel = cta?.label || t.header.freeConsultation
+  const ctaHref = resolveSiteHref(cta || { href: "/lien-he" }, locale)
+
   const [open, setOpen] = React.useState(false)
-  const [current, setCurrent] = React.useState<(typeof LANGUAGES)[number]>(
-    LANGUAGES[0]
-  )
   const ref = React.useRef<HTMLDivElement | null>(null)
+
+  const current =
+    LANGUAGES.find((lang) => lang.code.toLowerCase() === locale) || LANGUAGES[0]
 
   React.useEffect(() => {
     if (!open) {
@@ -74,6 +85,29 @@ export function SiteHeaderActions() {
       document.removeEventListener("keydown", onKey)
     }
   }, [open])
+
+  const handleLanguageChange = (langCode: "EN" | "VI") => {
+    const targetLocale = langCode.toLowerCase()
+
+    // Extract base path (without /en or /vi prefix)
+    let basePath = pathname
+    if (pathname.startsWith("/en/") || pathname === "/en") {
+      basePath = pathname === "/en" ? "/" : pathname.slice(3)
+    } else if (pathname.startsWith("/vi/") || pathname === "/vi") {
+      basePath = pathname === "/vi" ? "/" : pathname.slice(3)
+    }
+
+    // Prepend target locale prefix
+    const targetPath =
+      basePath === "/" ? `/${targetLocale}` : `/${targetLocale}${basePath}`
+
+    // Preserve query parameters if any
+    const paramsStr = searchParams?.toString()
+    const query = paramsStr ? `?${paramsStr}` : ""
+
+    router.push(`${targetPath}${query}`)
+    setOpen(false)
+  }
 
   return (
     <div className="flex items-center gap-7">
@@ -103,10 +137,7 @@ export function SiteHeaderActions() {
                 <li key={lang.code} role="option" aria-selected={selected}>
                   <button
                     type="button"
-                    onClick={() => {
-                      setCurrent(lang)
-                      setOpen(false)
-                    }}
+                    onClick={() => handleLanguageChange(lang.code)}
                     className={cn(
                       "flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors hover:bg-muted",
                       selected && "font-semibold text-foreground"
@@ -123,8 +154,8 @@ export function SiteHeaderActions() {
       </div>
 
       <a
-        href="#tu-van"
-        className="hidden items-center gap-2 rounded-sm bg-primary px-5 py-2.5 font-body text-[15px] font-semibold whitespace-nowrap text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:inline-flex"
+        href={ctaHref}
+        className="hidden items-center gap-2 rounded-sm bg-brand-blue-mid px-5 py-2.5 font-body text-[15px] font-semibold whitespace-nowrap text-primary-foreground shadow-sm transition-colors hover:bg-brand-blue-mid/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:inline-flex"
       >
         <svg
           viewBox="0 0 24 24"
@@ -139,13 +170,13 @@ export function SiteHeaderActions() {
           <rect x="3" y="4" width="18" height="18" rx="2" />
           <path d="M16 2v4M8 2v4M3 10h18" />
         </svg>
-        Tư vấn miễn phí
+        {ctaLabel}
       </a>
 
       <button
         type="button"
-        aria-label="Chọn ngôn ngữ"
-        className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground hover:bg-muted md:hidden"
+        aria-label={t.header.selectLanguage}
+        className="inline-flex h-9 w-9 items-center justify-center rounded-md text-foreground hover:bg-muted md:hidden"
         onClick={() => setOpen((value) => !value)}
       >
         <Globe className="h-5 w-5" />
