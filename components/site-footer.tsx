@@ -37,6 +37,8 @@ type SocialLink = {
   label: string
   href: string
   icon: (props: SocialIconProps) => React.ReactElement
+  /** Optical size compensation, e.g. circles read smaller than squares. */
+  iconClassName?: string
 }
 
 const SOCIAL_LINKS: ReadonlyArray<SocialLink & { network: string }> = [
@@ -44,9 +46,10 @@ const SOCIAL_LINKS: ReadonlyArray<SocialLink & { network: string }> = [
     network: "facebook",
     label: "Facebook",
     href: "https://facebook.com/kvcglobal",
+    iconClassName: "h-[25px] w-[25px]",
     icon: ({ className, "aria-hidden": ariaHidden }: SocialIconProps) => (
       <svg
-        viewBox="0 0 24 24"
+        viewBox="2 2 20 20"
         className={className}
         aria-hidden={ariaHidden}
         fill="currentColor"
@@ -344,7 +347,7 @@ export function SiteFooter({
                       aria-label={socialConfig.label}
                       className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue-mid/10 text-primary transition-all duration-200 ease-out hover:-translate-y-0.5 hover:text-primary focus-visible:-translate-y-0.5 focus-visible:text-primary focus-visible:outline-none"
                     >
-                      <Icon className="h-5 w-5" aria-hidden="true" />
+                      <Icon className={cn("h-5 w-5", socialConfig.iconClassName)} aria-hidden="true" />
                     </a>
                   </li>
                 )
