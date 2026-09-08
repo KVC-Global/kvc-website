@@ -46,7 +46,7 @@ const SOCIAL_LINKS: ReadonlyArray<SocialLink & { network: string }> = [
     network: "facebook",
     label: "Facebook",
     href: "https://facebook.com/kvcglobal",
-    iconClassName: "h-[23px] w-[23px]",
+    iconClassName: "h-[25px] w-[25px]",
     icon: ({ className, "aria-hidden": ariaHidden }: SocialIconProps) => (
       <svg
         viewBox="2 2 20 20"
