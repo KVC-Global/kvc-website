@@ -77,7 +77,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
     "hero": heroSection,
     "stats": statsSection.items[]{_key, icon, value, label},
     "story": storySection,
-    "values": valuesSection{eyebrow, title, description, items[]{_key, icon, title, description}},
+    "values": valuesSection{eyebrow, titleLine1, titleLine2, paragraph1, paragraph2, ctaLabel, ctaHref, image, imageAlt},
     "testimonials": testimonialsSection{
       eyebrow, title, description,
       reviews[]{_key, name, role, quote, image, rating}
