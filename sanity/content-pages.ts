@@ -64,14 +64,14 @@ export type AboutPageData = {
   }
   values?: {
     eyebrow?: string
-    title?: string
-    description?: string
-    items?: Array<{
-      _key?: string
-      icon?: string
-      title?: string
-      description?: string
-    }>
+    titleLine1?: string
+    titleLine2?: string
+    paragraph1?: string
+    paragraph2?: string
+    ctaLabel?: string
+    ctaHref?: string
+    image?: SanityImage
+    imageAlt?: string
   }
   testimonials?: {
     eyebrow?: string
