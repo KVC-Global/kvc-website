@@ -44,7 +44,10 @@ export const HOME_PAGE_QUERY = defineQuery(`
     },
     "stats": statsSection.items[]{_key, value, label, icon},
     "about": aboutSection{
-      eyebrow, title, description, image, imageAlt, ctaLabel, ctaHref
+      eyebrow, title, description, image, imageAlt, ctaLabel, ctaHref,
+      statsTitle,
+      progressStats[]{_key, value, label, color},
+      iconStats[]{_key, value, sub, icon, tone}
     },
     "partnersContent": partnersSection{eyebrow, title},
     "servicesContent": servicesSection{eyebrow, title, description},
