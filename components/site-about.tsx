@@ -82,41 +82,59 @@ export async function SiteAbout({
   const locale = await getLocale()
   const image = content?.image ? urlFor(content.image).url() : MAIN_IMAGE
 
-  const stats: Stat[] = [
-    { value: "98%", label: t.about.statStrategy, color: "#F8BC62" },
-    { value: "100%", label: t.about.statNetwork, color: "#F8BC62" },
-  ]
+  const stats: Stat[] = content?.progressStats?.length
+    ? content.progressStats.map((stat) => ({
+        value: stat.value || "",
+        label: stat.label || "",
+        color: stat.color?.hex,
+      }))
+    : [
+        { value: "98%", label: t.about.statStrategy, color: "#F8BC62" },
+        { value: "100%", label: t.about.statNetwork, color: "#F8BC62" },
+      ]
 
-  const iconStats = [
-    {
-      id: "experience",
-      icon: Handshake,
-      value: t.about.expValue,
-      sub: t.about.expSub,
-      tone: "blue" as const,
-    },
-    {
-      id: "clients",
-      icon: Award,
-      value: t.about.clientsValue,
-      sub: t.about.clientsSub,
-      tone: "gold" as const,
-    },
-    {
-      id: "partners",
-      icon: Handshake,
-      value: t.about.partnersValue,
-      sub: t.about.partnersSub,
-      tone: "blue" as const,
-    },
-    {
-      id: "google-rating",
-      icon: Award,
-      value: t.about.ratingValue,
-      sub: t.about.ratingSub,
-      tone: "gold" as const,
-    },
-  ] as const
+  const iconMap = { handshake: Handshake, award: Award } as const
+
+  const iconStats = content?.iconStats?.length
+    ? content.iconStats.map((item, i) => ({
+        id: item._key || `stat-${i}`,
+        icon: item.icon && item.icon in iconMap
+          ? iconMap[item.icon as keyof typeof iconMap]
+          : Award,
+        value: item.value || "",
+        sub: item.sub || "",
+        tone: item.tone === "gold" ? ("gold" as const) : ("blue" as const),
+      }))
+    : [
+        {
+          id: "experience",
+          icon: Handshake,
+          value: t.about.expValue,
+          sub: t.about.expSub,
+          tone: "blue" as const,
+        },
+        {
+          id: "clients",
+          icon: Award,
+          value: t.about.clientsValue,
+          sub: t.about.clientsSub,
+          tone: "gold" as const,
+        },
+        {
+          id: "partners",
+          icon: Handshake,
+          value: t.about.partnersValue,
+          sub: t.about.partnersSub,
+          tone: "blue" as const,
+        },
+        {
+          id: "google-rating",
+          icon: Award,
+          value: t.about.ratingValue,
+          sub: t.about.ratingSub,
+          tone: "gold" as const,
+        },
+      ]
 
   return (
     <section
@@ -186,7 +204,7 @@ export async function SiteAbout({
               <div className="mt-10">
                 <div>
                   <h3 className="font-sans text-[13px] font-bold tracking-[0.24em] text-brand-gold uppercase">
-                    {t.about.statsTitle}
+                    {content?.statsTitle || t.about.statsTitle}
                   </h3>
                   <span
                     aria-hidden="true"
