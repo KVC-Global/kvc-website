@@ -25,11 +25,29 @@
     "qualifi": "Qualifi",
     "wolverhampton": "University of Wolverhampton",
     "enterprise": "Enterprise Services",
+    "blog": "Blog",
     "contact": "Contact"
   },
   "header": {
     "freeConsultation": "Free Consultation",
     "selectLanguage": "Select language"
+  },
+  "blog": {
+    "heroEyebrow": "News & Insights",
+    "heroTitle": "Knowledge & Global Journeys, Updated",
+    "heroDescription": "Study-abroad, work pass and relocation insights for Singapore, Malaysia and Taiwan from the KVC Global advisory team.",
+    "readMore": "Read article",
+    "emptyTitle": "No posts yet",
+    "emptyDescription": "New articles are coming soon. Check back later!",
+    "relatedTitle": "Related articles",
+    "backToBlog": "Back to all articles",
+    "seoTitle": "Blog - KVC Global",
+    "seoDescription": "Study abroad, work pass and relocation insights from KVC Global."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has been moved.",
+    "cta": "Back to home"
   },
   "hero": {
     "title1": "BEGIN SOMETHING",
