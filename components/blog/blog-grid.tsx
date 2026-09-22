@@ -1,6 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import { motion, Variants } from "framer-motion"
+import { ChevronDown } from "lucide-react"
 
 import type { BlogPostCard as BlogPostCardData } from "@/sanity/blog"
 import { useDictionary } from "@/lib/i18n-client"
@@ -13,6 +15,9 @@ const stagger: Variants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 }
 
+/** Posts shown before the "view more" toggle kicks in (2 rows × 3 cols on desktop). */
+const VISIBLE_COUNT = 6
+
 export function BlogGrid({
   posts,
   className,
@@ -21,6 +26,10 @@ export function BlogGrid({
   className?: string
 }) {
   const t = useDictionary()
+  const [expanded, setExpanded] = useState(false)
+
+  const hasOverflow = posts.length > VISIBLE_COUNT
+  const visiblePosts = expanded ? posts : posts.slice(0, VISIBLE_COUNT)
 
   if (posts.length === 0) {
     return (
@@ -56,10 +65,22 @@ export function BlogGrid({
             variants={stagger}
             className="mx-auto grid max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
-            {posts.map((post) => (
+            {visiblePosts.map((post) => (
               <BlogCard key={post._id || post.slug?.current} post={post} />
             ))}
           </motion.div>
+          {hasOverflow && !expanded && (
+            <div className="mt-10 text-center">
+              <button
+                type="button"
+                onClick={() => setExpanded(true)}
+                className="inline-flex items-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-md"
+              >
+                {t.blog.viewMore}
+                <ChevronDown className="h-4 w-4" />
+              </button>
+            </div>
+          )}
         </div>
       </Container>
     </section>
