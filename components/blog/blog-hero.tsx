@@ -28,7 +28,7 @@ export function BlogHero({ className }: { className?: string }) {
     <section
       aria-labelledby="blog-hero-heading"
       className={cn(
-        "w-full border-b border-border/60 bg-white pb-14 pt-28 sm:pb-16 sm:pt-32 md:pb-20 md:pt-36",
+        "w-full bg-white pb-14 pt-28 sm:pb-16 sm:pt-32 md:pb-20 md:pt-36",
         className
       )}
     >
