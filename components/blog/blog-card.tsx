@@ -39,6 +39,9 @@ export function BlogCard({
 
   return (
     <motion.article
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-40px" }}
       variants={fadeUp}
       className={cn(
         "group overflow-hidden rounded-lg border border-border/60 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-gold/40 hover:shadow-lg",
