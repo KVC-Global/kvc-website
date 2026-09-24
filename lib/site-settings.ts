@@ -121,6 +121,7 @@ const destinationHrefs: Record<string, string> = {
   qualifi: "/khoa-hoc-online/qualifi",
   wolverhampton: "/khoa-hoc-online/wolverhampton",
   enterprise: "/dich-vu",
+  dichVu: "/dich-vu",
   contact: "/lien-he",
   comingSoon: "/coming-soon",
 }
