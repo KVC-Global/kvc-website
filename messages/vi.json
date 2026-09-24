@@ -25,11 +25,30 @@
     "qualifi": "Qualifi",
     "wolverhampton": "University of Wolverhampton",
     "enterprise": "Dịch vụ doanh nghiệp",
+    "blog": "Tin tức",
     "contact": "Liên hệ"
   },
   "header": {
     "freeConsultation": "Tư vấn miễn phí",
     "selectLanguage": "Chọn ngôn ngữ"
+  },
+  "blog": {
+    "heroEyebrow": "Tin tức & chia sẻ",
+    "heroTitle": "Cập nhật kiến thức & hành trình toàn cầu",
+    "heroDescription": "Chia sẻ kinh nghiệm du học, việc làm và định cư Singapore, Malaysia, Đài Loan cùng đội ngũ tư vấn KVC Global.",
+    "readMore": "Đọc bài viết",
+    "viewMore": "Xem thêm bài viết",
+    "emptyTitle": "Chưa có bài viết",
+    "emptyDescription": "Các bài viết mới sẽ sớm được cập nhật. Hãy quay lại sau!",
+    "relatedTitle": "Bài viết liên quan",
+    "backToBlog": "Về danh sách tin tức",
+    "seoTitle": "Tin tức - KVC Global",
+    "seoDescription": "Tin tức, kiến thức du học Singapore, work pass và định cư từ KVC Global."
+  },
+  "notFound": {
+    "title": "Không tìm thấy trang",
+    "description": "Trang bạn tìm kiếm không tồn tại hoặc đã được di chuyển.",
+    "cta": "Về trang chủ"
   },
   "hero": {
     "title1": "BEGIN SOMETHING",

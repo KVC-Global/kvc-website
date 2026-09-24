@@ -15,6 +15,1826 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type Why = {
+  eyebrow?: string;
+  title?: string;
+  cta?: string;
+  reasons?: Array<{
+    _key: string;
+  } & HomepageReason>;
+};
+
+export type Process = {
+  eyebrow?: string;
+  title?: string;
+  ariaLabel?: string;
+  steps?: Array<{
+    _key: string;
+  } & HomepageProcessStep>;
+};
+
+export type GoogleReviews = {
+  rating?: number;
+  reviewCount?: number;
+  reviewUrl?: string;
+  reviews?: Array<{
+    _key: string;
+  } & HomepageGoogleReview>;
+};
+
+export type Lead = {
+  _id: string;
+  _type: "lead";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name: string;
+  email: string;
+  phone: string;
+  service?: string;
+  serviceLabel?: string;
+  message?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  referrer?: string;
+  submittedAt?: string;
+};
+
+export type CompanySocialLink = {
+  _type: "companySocialLink";
+  network: "facebook" | "linkedin" | "youtube" | "instagram";
+  url: string;
+};
+
+export type CompanyPhone = {
+  _type: "companyPhone";
+  label?: string;
+  number: string;
+};
+
+export type CompanyInfo = {
+  _id: string;
+  _type: "companyInfo";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  phones?: Array<{
+    _key: string;
+  } & CompanyPhone>;
+  email?: string;
+  addressVi?: string;
+  addressEn?: string;
+  mapUrl?: string;
+  socialLinks?: Array<{
+    _key: string;
+  } & CompanySocialLink>;
+};
+
+export type SiteCtaButton = {
+  _type: "siteCtaButton";
+  label: string;
+  link: SiteLink;
+};
+
+export type SiteFooterColumn = {
+  _type: "siteFooterColumn";
+  heading: string;
+  links?: Array<{
+    _key: string;
+  } & SiteFooterLink>;
+};
+
+export type SiteFooterLink = {
+  _type: "siteFooterLink";
+  label: string;
+  link: SiteLink;
+};
+
+export type SiteNavItem = {
+  _type: "siteNavItem";
+  label: string;
+  link: SiteLink;
+  children?: Array<{
+    _key: string;
+  } & SiteNavChild>;
+};
+
+export type SiteNavChild = {
+  _type: "siteNavChild";
+  label: string;
+  link: SiteLink;
+  description?: string;
+  isComingSoon?: boolean;
+};
+
+export type SiteLink = {
+  _type: "siteLink";
+  destination: "home" | "about" | "workPass" | "studyAbroad" | "uniMaster" | "privateStudy" | "publicStudy" | "onlineCourses" | "ossd" | "othm" | "qualifi" | "wolverhampton" | "blog" | "contact" | "malaysiaStudy" | "taiwanStudy" | "comingSoon" | "custom";
+  customHref?: string;
+};
+
+export type SiteSettings = {
+  _id: string;
+  _type: "siteSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  header?: {
+    comingSoonLabel?: string;
+    navItems: Array<{
+      _key: string;
+    } & SiteNavItem>;
+    cta?: SiteCtaButton;
+  };
+  footer?: {
+    bio?: string;
+    cta?: {
+      enabled?: boolean;
+      title?: string;
+      description?: string;
+      primaryButton?: SiteCtaButton;
+      secondaryButton?: SiteCtaButton;
+    };
+    servicesColumn?: SiteFooterColumn;
+    aboutColumn?: SiteFooterColumn;
+    supportColumn?: SiteFooterColumn;
+    contactHeading?: string;
+    legalLinks?: Array<{
+      _key: string;
+    } & SiteFooterLink>;
+    copyrightNotice?: string;
+  };
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type PublicStudySeo = {
+  _type: "publicStudySeo";
+  title?: string;
+  description?: string;
+  shareImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type RelatedServiceReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "relatedService";
+};
+
+export type PublicStudyServices = {
+  _type: "publicStudyServices";
+  title?: string;
+  services?: Array<{
+    _key: string;
+  } & RelatedServiceReference | {
+    _key: string;
+  } & PublicStudyServiceItem>;
+};
+
+export type PublicStudyServiceItem = {
+  _type: "publicStudyServiceItem";
+  title?: string;
+  ctaText?: string;
+  icon?: string;
+  href?: string;
+};
+
+export type PublicStudyFaqs = {
+  _type: "publicStudyFaqs";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & PublicStudyFaqItem>;
+};
+
+export type PublicStudyFaqItem = {
+  _type: "publicStudyFaqItem";
+  question?: string;
+  answer?: string;
+};
+
+export type PublicStudySupport = {
+  _type: "publicStudySupport";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & PublicStudySupportStep>;
+};
+
+export type PublicStudySupportStep = {
+  _type: "publicStudySupportStep";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type PublicStudyWorkRules = {
+  _type: "publicStudyWorkRules";
+  title?: string;
+  sectionTitle1?: string;
+  sectionDesc1?: string;
+  conditions1?: Array<string>;
+  sectionTitle2?: string;
+  conditions2?: Array<string>;
+  warningText?: string;
+};
+
+export type PublicStudyRequirements = {
+  _type: "publicStudyRequirements";
+  title1?: string;
+  title2?: string;
+  conditions?: Array<{
+    _key: string;
+  } & PublicStudyRequirementCheck>;
+  tipText1?: string;
+  costs?: Array<{
+    _key: string;
+  } & PublicStudyCostItem>;
+  tipText2?: string;
+  scholarshipEyebrow?: string;
+  scholarshipTitle?: string;
+  scholarship1?: PublicStudyScholarshipItem;
+  scholarship2?: PublicStudyScholarshipItem;
+};
+
+export type PublicStudyScholarshipItem = {
+  _type: "publicStudyScholarshipItem";
+  title?: string;
+  target?: string;
+  benefit?: string;
+  duration?: string;
+  standard?: string;
+};
+
+export type PublicStudyCostItem = {
+  _type: "publicStudyCostItem";
+  item?: string;
+  fee?: string;
+};
+
+export type PublicStudyRequirementCheck = {
+  _type: "publicStudyRequirementCheck";
+  title?: string;
+  description?: string;
+};
+
+export type PublicStudyPathways = {
+  _type: "publicStudyPathways";
+  title?: string;
+  cards?: Array<{
+    _key: string;
+  } & PublicStudyPathwayCard>;
+  compareTitle?: string;
+  compareCard1?: PublicStudyCompareCard;
+  compareCard2?: PublicStudyCompareCard;
+};
+
+export type PublicStudyCompareCard = {
+  _type: "publicStudyCompareCard";
+  title?: string;
+  duration?: string;
+  objective?: string;
+  criteria?: string;
+  feeReference?: string;
+};
+
+export type PublicStudyPathwayCard = {
+  _type: "publicStudyPathwayCard";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  conditions?: Array<{
+    _key: string;
+  } & PublicStudyPathwayCondition>;
+};
+
+export type PublicStudyPathwayCondition = {
+  _type: "publicStudyPathwayCondition";
+  icon?: string;
+  boldText?: string;
+  normalText?: string;
+};
+
+export type SanityFileAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+};
+
+export type PublicStudyWhy = {
+  _type: "publicStudyWhy";
+  title?: string;
+  video?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  videoTitle?: string;
+  videoPoster?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  items?: Array<{
+    _key: string;
+  } & PublicStudyWhyItem>;
+};
+
+export type PublicStudyWhyItem = {
+  _type: "publicStudyWhyItem";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type PublicStudyIntro = {
+  _type: "publicStudyIntro";
+  title?: string;
+  paragraph1?: string;
+  paragraph2?: string;
+  paragraph3?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type PublicStudyHero = {
+  _type: "publicStudyHero";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonHref?: string;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  stats?: Array<{
+    _key: string;
+  } & PublicStudyStat>;
+};
+
+export type PublicStudyStat = {
+  _type: "publicStudyStat";
+  value?: string;
+  label?: string;
+  icon?: string;
+};
+
+export type PrivateStudySeo = {
+  _type: "privateStudySeo";
+  title?: string;
+  description?: string;
+  shareImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type PrivateStudyServices = {
+  _type: "privateStudyServices";
+  title?: string;
+  services?: Array<{
+    _key: string;
+  } & RelatedServiceReference | {
+    _key: string;
+  } & PrivateStudyServiceItem>;
+};
+
+export type PrivateStudyServiceItem = {
+  _type: "privateStudyServiceItem";
+  title?: string;
+  ctaText?: string;
+  icon?: string;
+  href?: string;
+};
+
+export type PrivateStudyFaqs = {
+  _type: "privateStudyFaqs";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & PrivateStudyFaqItem>;
+};
+
+export type PrivateStudyFaqItem = {
+  _type: "privateStudyFaqItem";
+  question?: string;
+  answer?: string;
+};
+
+export type PrivateStudySupport = {
+  _type: "privateStudySupport";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & PrivateStudySupportStep>;
+};
+
+export type PrivateStudySupportStep = {
+  _type: "privateStudySupportStep";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type PrivateStudyRequirements = {
+  _type: "privateStudyRequirements";
+  title1?: string;
+  title2?: string;
+  ageTitle?: string;
+  ageDesc?: string;
+  academicTitle?: string;
+  academicDesc?: string;
+  entryTitle?: string;
+  entryDesc?: string;
+  conditions?: Array<string>;
+  tipText?: string;
+};
+
+export type PrivateStudySchools = {
+  _type: "privateStudySchools";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & PrivateStudySchoolItem>;
+  tipText?: string;
+};
+
+export type PrivateStudySchoolItem = {
+  _type: "privateStudySchoolItem";
+  id?: string;
+  name?: string;
+  desc?: string;
+  levels?: Array<{
+    _key: string;
+  } & PrivateStudySchoolLevel>;
+};
+
+export type PrivateStudySchoolLevel = {
+  _type: "privateStudySchoolLevel";
+  grade?: string;
+  age?: string;
+  fee?: string;
+};
+
+export type PrivateStudyWhy = {
+  _type: "privateStudyWhy";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & PrivateStudyWhyItem>;
+};
+
+export type PrivateStudyWhyItem = {
+  _type: "privateStudyWhyItem";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type PrivateStudyIntro = {
+  _type: "privateStudyIntro";
+  title?: string;
+  paragraph1?: string;
+  paragraph2?: string;
+  paragraph3?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type PrivateStudyHero = {
+  _type: "privateStudyHero";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonHref?: string;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  stats?: Array<{
+    _key: string;
+  } & PrivateStudyStat>;
+};
+
+export type PrivateStudyStat = {
+  _type: "privateStudyStat";
+  value?: string;
+  label?: string;
+  icon?: string;
+};
+
+export type UniMasterSeo = {
+  _type: "uniMasterSeo";
+  title?: string;
+  description?: string;
+  shareImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type UniMasterServices = {
+  _type: "uniMasterServices";
+  title?: string;
+  services?: Array<{
+    _key: string;
+  } & RelatedServiceReference | {
+    _key: string;
+  } & UniMasterServiceItem>;
+};
+
+export type UniMasterServiceItem = {
+  _type: "uniMasterServiceItem";
+  title?: string;
+  ctaText?: string;
+  icon?: string;
+  href?: string;
+};
+
+export type UniMasterCommitment = {
+  _type: "uniMasterCommitment";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & UniMasterCommitmentItem>;
+};
+
+export type UniMasterCommitmentItem = {
+  _type: "uniMasterCommitmentItem";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type UniMasterAudience = {
+  _type: "uniMasterAudience";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & UniMasterAudienceItem>;
+};
+
+export type UniMasterAudienceItem = {
+  _type: "uniMasterAudienceItem";
+  icon?: string;
+  title?: string;
+  desc?: string;
+};
+
+export type UniMasterWhy = {
+  _type: "uniMasterWhy";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & UniMasterWhyItem>;
+};
+
+export type UniMasterWhyItem = {
+  _type: "uniMasterWhyItem";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type UniMasterIntro = {
+  _type: "uniMasterIntro";
+  title?: string;
+  highlightText?: string;
+  criteria?: Array<string>;
+  remainingText?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type UniMasterHero = {
+  _type: "uniMasterHero";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonHref?: string;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  stats?: Array<{
+    _key: string;
+  } & UniMasterStat>;
+};
+
+export type UniMasterStat = {
+  _type: "uniMasterStat";
+  value?: string;
+  label?: string;
+  icon?: string;
+};
+
+export type StudyAbroadSeo = {
+  _type: "studyAbroadSeo";
+  title?: string;
+  description?: string;
+  shareImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type StudyAbroadServices = {
+  _type: "studyAbroadServices";
+  title?: string;
+  services?: Array<{
+    _key: string;
+  } & RelatedServiceReference | {
+    _key: string;
+  } & StudyAbroadServiceItem>;
+};
+
+export type StudyAbroadServiceItem = {
+  _type: "studyAbroadServiceItem";
+  title?: string;
+  ctaText?: string;
+  icon?: string;
+  href?: string;
+};
+
+export type StudyAbroadFaqs = {
+  _type: "studyAbroadFaqs";
+  title?: string;
+  faqs?: Array<{
+    _key: string;
+  } & StudyAbroadFaqItem>;
+};
+
+export type StudyAbroadFaqItem = {
+  _type: "studyAbroadFaqItem";
+  question?: string;
+  answer?: string;
+};
+
+export type StudyAbroadTestimonials = {
+  _type: "studyAbroadTestimonials";
+  title?: string;
+  video?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  videoEmbedUrl?: string;
+  videoTitle?: string;
+  videoPoster?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  testimonials?: Array<{
+    _key: string;
+  } & StudyAbroadTestimonialItem>;
+};
+
+export type StudyAbroadTestimonialItem = {
+  _type: "studyAbroadTestimonialItem";
+  name?: string;
+  role?: string;
+  avatar?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  rating?: number;
+  quote?: string;
+};
+
+export type StudyAbroadSupport = {
+  _type: "studyAbroadSupport";
+  title?: string;
+  steps?: Array<{
+    _key: string;
+  } & StudyAbroadSupportStep>;
+};
+
+export type StudyAbroadSupportStep = {
+  _type: "studyAbroadSupportStep";
+  icon?: string;
+  text?: string;
+};
+
+export type StudyAbroadProspects = {
+  _type: "studyAbroadProspects";
+  title?: string;
+  opportunities?: Array<string>;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type StudyAbroadRequirements = {
+  _type: "studyAbroadRequirements";
+  title?: string;
+  conditions?: Array<string>;
+  tipText?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type StudyAbroadMajors = {
+  _type: "studyAbroadMajors";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & StudyAbroadMajorItem>;
+};
+
+export type StudyAbroadMajorItem = {
+  _type: "studyAbroadMajorItem";
+  icon?: string;
+  name?: string;
+};
+
+export type StudyAbroadWhy = {
+  _type: "studyAbroadWhy";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & StudyAbroadWhyItem>;
+};
+
+export type StudyAbroadWhyItem = {
+  _type: "studyAbroadWhyItem";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type StudyAbroadIntro = {
+  _type: "studyAbroadIntro";
+  title?: string;
+  highlightText?: string;
+  bullets?: Array<string>;
+  paragraphs?: Array<string>;
+  video?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  videoUrl?: string;
+  videoTitle?: string;
+  videoPoster?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type StudyAbroadHero = {
+  _type: "studyAbroadHero";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonHref?: string;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  stats?: Array<{
+    _key: string;
+  } & StudyAbroadStat>;
+};
+
+export type StudyAbroadStat = {
+  _type: "studyAbroadStat";
+  value?: string;
+  label?: string;
+  icon?: string;
+};
+
+export type WorkPassSeo = {
+  _type: "workPassSeo";
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type WorkPassServices = {
+  _type: "workPassServices";
+  title?: string;
+  services?: Array<{
+    _key: string;
+  } & RelatedServiceReference | {
+    _key: string;
+  } & WorkPassServiceItem>;
+};
+
+export type WorkPassServiceItem = {
+  _type: "workPassServiceItem";
+  icon?: string;
+  title?: string;
+  cta?: string;
+  href?: string;
+};
+
+export type WorkPassFaqs = {
+  _type: "workPassFaqs";
+  title?: string;
+  faqs?: Array<{
+    _key: string;
+  } & WorkPassFaqItem>;
+};
+
+export type WorkPassFaqItem = {
+  _type: "workPassFaqItem";
+  question?: string;
+  answer?: string;
+};
+
+export type WorkPassReview = {
+  _type: "workPassReview";
+  testimonial?: WorkPassTestimonial;
+  caseStudy?: WorkPassCaseStudy;
+};
+
+export type WorkPassCaseStudy = {
+  _type: "workPassCaseStudy";
+  tagline?: string;
+  description?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type WorkPassTestimonial = {
+  _type: "workPassTestimonial";
+  name?: string;
+  role?: string;
+  quote?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  rating?: number;
+};
+
+export type WorkPassFees = {
+  _type: "workPassFees";
+  title?: string;
+  feesTitle?: string;
+  feesCategoryHeader?: string;
+  feesCostHeader?: string;
+  feesList?: Array<{
+    _key: string;
+  } & WorkPassFeeItem>;
+  feesNote?: string;
+  processingTitle?: string;
+  processingItems?: Array<{
+    _key: string;
+  } & WorkPassProcessingItem>;
+};
+
+export type WorkPassProcessingItem = {
+  _type: "workPassProcessingItem";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type WorkPassFeeItem = {
+  _type: "workPassFeeItem";
+  category?: string;
+  cost?: string;
+};
+
+export type WorkPassRequirements = {
+  _type: "workPassRequirements";
+  title?: string;
+  conditionsTitle?: string;
+  conditions?: Array<string>;
+  documentsTitle?: string;
+  documents?: Array<string>;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type WorkPassProcess = {
+  _type: "workPassProcess";
+  title?: string;
+  steps?: Array<{
+    _key: string;
+  } & WorkPassProcessStep>;
+};
+
+export type WorkPassProcessStep = {
+  _type: "workPassProcessStep";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type WorkPassTarget = {
+  _type: "workPassTarget";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & WorkPassTargetItem>;
+};
+
+export type WorkPassTargetItem = {
+  _type: "workPassTargetItem";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type WorkPassHero = {
+  _type: "workPassHero";
+  title?: string;
+  description?: string;
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonHref?: string;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  stats?: Array<{
+    _key: string;
+  } & WorkPassStat>;
+  googleReviewValue?: string;
+  googleReviewLabel?: string;
+};
+
+export type WorkPassStat = {
+  _type: "workPassStat";
+  value?: string;
+  label?: string;
+  icon?: string;
+};
+
+export type DichVuServiceAccordion = {
+  _type: "dichVuServiceAccordion";
+  sections?: Array<{
+    _key: string;
+  } & DichVuServiceAccordionSection>;
+};
+
+export type DichVuServiceAccordionSection = {
+  _type: "dichVuServiceAccordionSection";
+  tag?: string;
+  heading?: string;
+  headingAccent?: string;
+  intro?: Array<string>;
+  services?: Array<{
+    _key: string;
+  } & DichVuServiceChecklistGroup>;
+  audience?: DichVuTagList;
+  benefits?: DichVuTagList;
+  singaporeSubTabs?: Array<{
+    _key: string;
+  } & DichVuSingaporeSubTab>;
+  ctaLabel?: string;
+  ctaHref?: string;
+  ctaIcon?: string;
+  crossLinkText?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type DichVuSingaporeSubTab = {
+  _type: "dichVuSingaporeSubTab";
+  label?: string;
+  icon?: string;
+  intro?: Array<string>;
+  services?: Array<{
+    _key: string;
+  } & DichVuServiceChecklistGroup>;
+  audience?: DichVuTagList;
+  benefits?: DichVuTagList;
+};
+
+export type DichVuTagList = {
+  _type: "dichVuTagList";
+  label?: string;
+  items?: Array<string>;
+};
+
+export type DichVuServiceChecklistGroup = {
+  _type: "dichVuServiceChecklistGroup";
+  title?: string;
+  items?: Array<string>;
+};
+
+export type DichVuServiceCategories = {
+  _type: "dichVuServiceCategories";
+  eyebrow?: string;
+  title?: string;
+};
+
+export type DichVuVideoSection = {
+  _type: "dichVuVideoSection";
+  videoTitle?: string;
+  videoPoster?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  video?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+};
+
+export type DichVuIntro = {
+  _type: "dichVuIntro";
+  eyebrow?: string;
+  title?: string;
+  pillars?: Array<{
+    _key: string;
+  } & DichVuIntroPillar>;
+  paragraph1?: string;
+  paragraph2?: string;
+};
+
+export type DichVuIntroPillar = {
+  _type: "dichVuIntroPillar";
+  icon?: string;
+  label?: string;
+};
+
+export type DichVuHero = {
+  _type: "dichVuHero";
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  backgroundImageAlt?: string;
+  eyebrow?: string;
+  title?: string;
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonHref?: string;
+  stats?: Array<{
+    _key: string;
+  } & DichVuStat>;
+};
+
+export type DichVuStat = {
+  _type: "dichVuStat";
+  icon?: string;
+  value?: string;
+  label?: string;
+};
+
+export type SharedSeo = {
+  _type: "sharedSeo";
+  title?: string;
+  description?: string;
+};
+
+export type PageSeo = {
+  _type: "pageSeo";
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type ContactPageOffices = {
+  _type: "contactPageOffices";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  offices?: Array<{
+    _key: string;
+  } & PageOffice>;
+};
+
+export type ContactPageForm = {
+  _type: "contactPageForm";
+  title?: string;
+  description?: string;
+  nameLabel?: string;
+  emailLabel?: string;
+  phoneLabel?: string;
+  serviceLabel?: string;
+  messageLabel?: string;
+  consentLabel?: string;
+  submitLabel?: string;
+  serviceOptions?: Array<{
+    _key: string;
+  } & ContactPageServiceOption>;
+};
+
+export type ContactPageInfo = {
+  _type: "contactPageInfo";
+  title?: string;
+  description?: string;
+  phone?: string;
+  email?: string;
+  address?: string;
+  officeHoursTitle?: string;
+  weekdayHours?: string;
+  weekendHours?: string;
+  socialTitle?: string;
+  socialDescription?: string;
+  socialLinks?: Array<{
+    _key: string;
+  } & ContactPageSocialLink>;
+};
+
+export type ContactPageHero = {
+  _type: "contactPageHero";
+  breadcrumbHome?: string;
+  breadcrumbCurrent?: string;
+  eyebrow?: string;
+  titleLine1?: string;
+  titleLine2?: string;
+  description?: string;
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  backgroundImageAlt?: string;
+};
+
+export type AboutPageOffices = {
+  _type: "aboutPageOffices";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  offices?: Array<{
+    _key: string;
+  } & PageOffice>;
+};
+
+export type PartnerReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "partner";
+};
+
+export type AboutPagePartners = {
+  _type: "aboutPagePartners";
+  eyebrow?: string;
+  title?: string;
+  partners?: Array<{
+    _key: string;
+  } & PartnerReference>;
+};
+
+export type AboutPageTestimonials = {
+  _type: "aboutPageTestimonials";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  reviews?: Array<{
+    _key: string;
+  } & AboutPageReview>;
+};
+
+export type AboutPageValues = {
+  _type: "aboutPageValues";
+  eyebrow?: string;
+  titleLine1?: string;
+  titleLine2?: string;
+  paragraph1?: string;
+  paragraph2?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type AboutPageStory = {
+  _type: "aboutPageStory";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+  visionTitle?: string;
+  visionDescription?: string;
+  missionTitle?: string;
+  missionDescription?: string;
+};
+
+export type AboutPageStats = {
+  _type: "aboutPageStats";
+  items?: Array<{
+    _key: string;
+  } & AboutPageStat>;
+};
+
+export type AboutPageHero = {
+  _type: "aboutPageHero";
+  breadcrumbHome?: string;
+  breadcrumbCurrent?: string;
+  eyebrow?: string;
+  titleLine1?: string;
+  titleLine2?: string;
+  description?: string;
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonHref?: string;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  backgroundImageAlt?: string;
+};
+
+export type ContactPageServiceOption = {
+  _type: "contactPageServiceOption";
+  label?: string;
+  value?: string;
+};
+
+export type ContactPageSocialLink = {
+  _type: "contactPageSocialLink";
+  label?: string;
+  url?: string;
+  network?: string;
+};
+
+export type AboutPageReview = {
+  _type: "aboutPageReview";
+  name?: string;
+  role?: string;
+  quote?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  rating?: number;
+};
+
+export type AboutPageStat = {
+  _type: "aboutPageStat";
+  icon?: string;
+  value?: string;
+  label?: string;
+};
+
+export type PageOffice = {
+  _type: "pageOffice";
+  country?: string;
+  role?: string;
+  description?: string;
+  address?: string;
+  phone?: string;
+  email?: string;
+  hours?: string;
+  mapUrl?: string;
+  mapQuery?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type OnlineProgramWolverIntro = {
+  _type: "onlineProgramWolverIntro";
+  title?: string;
+  paragraphs?: Array<string>;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type OnlineProgramPrograms = {
+  _type: "onlineProgramPrograms";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & OnlineProgramCard>;
+};
+
+export type OnlineProgramCard = {
+  _type: "onlineProgramCard";
+  name?: string;
+  duration?: string;
+  startDates?: string;
+  subjects?: Array<string>;
+  entryRequirements?: string;
+};
+
+export type OnlineProgramCta = {
+  _type: "onlineProgramCta";
+  title?: string;
+  body?: string;
+  buttonLabel?: string;
+  buttonHref?: string;
+};
+
+export type OnlineProgramProcess = {
+  _type: "onlineProgramProcess";
+  title?: string;
+  steps?: Array<{
+    _key: string;
+  } & OnlineProgramStep>;
+};
+
+export type OnlineProgramStep = {
+  _type: "onlineProgramStep";
+  title?: string;
+  description?: string;
+};
+
+export type OnlineProgramBenefits = {
+  _type: "onlineProgramBenefits";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & OnlineProgramBenefitCard>;
+};
+
+export type OnlineProgramBenefitCard = {
+  _type: "onlineProgramBenefitCard";
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type OnlineProgramAudience = {
+  _type: "onlineProgramAudience";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & OnlineProgramAudienceCard>;
+};
+
+export type OnlineProgramAudienceCard = {
+  _type: "onlineProgramAudienceCard";
+  title?: string;
+  description?: string;
+};
+
+export type OnlineProgramAudienceOssd = {
+  _type: "onlineProgramAudienceOssd";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & OnlineProgramAudienceCardTitleOnly>;
+};
+
+export type OnlineProgramAudienceCardTitleOnly = {
+  _type: "onlineProgramAudienceCardTitleOnly";
+  icon?: string;
+  title?: string;
+};
+
+export type OnlineProgramProgression = {
+  _type: "onlineProgramProgression";
+  title?: string;
+  body?: string;
+  tags?: Array<string>;
+  noteTitle?: string;
+  noteBody?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type OnlineProgramFormat = {
+  _type: "onlineProgramFormat";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & OnlineProgramIconCard>;
+};
+
+export type OnlineProgramSupport = {
+  _type: "onlineProgramSupport";
+  title?: string;
+  items?: Array<string>;
+};
+
+export type OnlineProgramWhy = {
+  _type: "onlineProgramWhy";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & OnlineProgramIconCard>;
+};
+
+export type OnlineProgramIconCard = {
+  _type: "onlineProgramIconCard";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type OnlineProgramParentReasons = {
+  _type: "onlineProgramParentReasons";
+  title?: string;
+  items?: Array<string>;
+};
+
+export type OnlineProgramSubjects = {
+  _type: "onlineProgramSubjects";
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & OnlineProgramSubject>;
+};
+
+export type OnlineProgramSubject = {
+  _type: "onlineProgramSubject";
+  name?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type OnlineProgramStructure = {
+  _type: "onlineProgramStructure";
+  title?: string;
+  subtitle?: string;
+  items?: Array<{
+    _key: string;
+  } & OnlineProgramStructureItem>;
+};
+
+export type OnlineProgramStructureItem = {
+  _type: "onlineProgramStructureItem";
+  title?: string;
+  description?: string;
+};
+
+export type OnlineProgramIntro = {
+  _type: "onlineProgramIntro";
+  title?: string;
+  paragraphs?: Array<string>;
+  highlights?: Array<string>;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+};
+
+export type OnlineProgramHero = {
+  _type: "onlineProgramHero";
+  parentBreadcrumb?: string;
+  breadcrumb?: string;
+  tagline?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type HomepageSeo = {
+  _type: "homepageSeo";
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+};
+
+export type TestimonialReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "testimonial";
+};
+
+export type HomepageTestimonials = {
+  _type: "homepageTestimonials";
+  eyebrow?: string;
+  title?: string;
+  testimonials?: Array<{
+    _key: string;
+  } & TestimonialReference>;
+  googleReviews?: GoogleReviews;
+};
+
+export type HomepageWhyProcess = {
+  _type: "homepageWhyProcess";
+  why?: Why;
+  process?: Process;
+};
+
+export type ServiceReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "service";
+};
+
+export type HomepageServices = {
+  _type: "homepageServices";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  services?: Array<{
+    _key: string;
+  } & ServiceReference>;
+};
+
+export type HomepagePartners = {
+  _type: "homepagePartners";
+  eyebrow?: string;
+  title?: string;
+  partners?: Array<{
+    _key: string;
+  } & PartnerReference>;
+};
+
+export type HomepageAbout = {
+  _type: "homepageAbout";
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  imageAlt?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  progressStats?: Array<{
+    _key: string;
+  } & HomepageProgressStat>;
+  statsTitle?: string;
+  iconStats?: Array<{
+    _key: string;
+  } & HomepageIconStat>;
+};
+
+export type HomepageStats = {
+  _type: "homepageStats";
+  eyebrow?: string;
+  title?: string;
+  items?: Array<{
+    _key: string;
+  } & HomepageStat>;
+};
+
+export type HomepageHero = {
+  _type: "homepageHero";
+  eyebrow?: string;
+  titleLine1?: string;
+  titleLine2?: string;
+  description?: string;
+  primaryButtonLabel?: string;
+  primaryButtonHref?: string;
+  secondaryButtonLabel?: string;
+  secondaryButtonHref?: string;
+  backgroundImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  backgroundImageAlt?: string;
+};
+
+export type HomepageGoogleReview = {
+  _type: "homepageGoogleReview";
+  name?: string;
+  initial?: string;
+  color?: string;
+  text?: string;
+};
+
+export type HomepageProcessStep = {
+  _type: "homepageProcessStep";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type HomepageReason = {
+  _type: "homepageReason";
+  icon?: string;
+  title?: string;
+  description?: string;
+};
+
+export type HomepageIconStat = {
+  _type: "homepageIconStat";
+  value?: string;
+  sub?: string;
+  icon?: "handshake" | "award";
+  tone?: "blue" | "gold";
+};
+
+export type HomepageProgressStat = {
+  _type: "homepageProgressStat";
+  value?: string;
+  label?: string;
+  color?: Color;
+};
+
+export type HomepageStat = {
+  _type: "homepageStat";
+  value?: string;
+  label?: string;
+  icon?: string;
+};
+
 export type TranslationMetadata = {
   _id: string;
   _type: "translation.metadata";
@@ -29,25 +1849,116 @@ export type InternationalizedArrayReference = Array<{
   _key: string;
 } & InternationalizedArrayReferenceValue>;
 
-export type ServiceReference = {
+export type HomePageReference = {
   _ref: string;
   _type: "reference";
   _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "service";
+  [internalGroqTypeReferenceTo]?: "homePage";
 };
 
-export type PartnerReference = {
+export type WorkPassPageReference = {
   _ref: string;
   _type: "reference";
   _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "partner";
+  [internalGroqTypeReferenceTo]?: "workPassPage";
 };
 
-export type TestimonialReference = {
+export type StudyAbroadPageReference = {
   _ref: string;
   _type: "reference";
   _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "testimonial";
+  [internalGroqTypeReferenceTo]?: "studyAbroadPage";
+};
+
+export type UniMasterPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "uniMasterPage";
+};
+
+export type PrivateStudyPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "privateStudyPage";
+};
+
+export type PublicStudyPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "publicStudyPage";
+};
+
+export type MalaysiaStudyPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "malaysiaStudyPage";
+};
+
+export type TaiwanStudyPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "taiwanStudyPage";
+};
+
+export type AboutPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "aboutPage";
+};
+
+export type ContactPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "contactPage";
+};
+
+export type DichVuPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "dichVuPage";
+};
+
+export type OnlineProgramPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "onlineProgramPage";
+};
+
+export type OnlineOssdPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "onlineOssdPage";
+};
+
+export type OnlineOthmPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "onlineOthmPage";
+};
+
+export type OnlineQualifiPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "onlineQualifiPage";
+};
+
+export type OnlineWolverhamptonPageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "onlineWolverhamptonPage";
 };
 
 export type FaqReference = {
@@ -57,10 +1968,88 @@ export type FaqReference = {
   [internalGroqTypeReferenceTo]?: "faq";
 };
 
+export type PostReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "post";
+};
+
 export type InternationalizedArrayReferenceValue = {
   _type: "internationalizedArrayReferenceValue";
-  value?: ServiceReference | PartnerReference | TestimonialReference | FaqReference;
+  value?: HomePageReference | WorkPassPageReference | StudyAbroadPageReference | UniMasterPageReference | PrivateStudyPageReference | PublicStudyPageReference | MalaysiaStudyPageReference | TaiwanStudyPageReference | AboutPageReference | ContactPageReference | DichVuPageReference | OnlineProgramPageReference | OnlineOssdPageReference | OnlineOthmPageReference | OnlineQualifiPageReference | OnlineWolverhamptonPageReference | ServiceReference | RelatedServiceReference | PartnerReference | TestimonialReference | FaqReference | PostReference;
   language: string;
+};
+
+export type Post = {
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  title: string;
+  slug: Slug;
+  mainImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  mainImageAlt?: string;
+  excerpt: string;
+  authorName?: string;
+  publishedAt: string;
+  body?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
+  seo?: SharedSeo;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top: number;
+  bottom: number;
+  left: number;
+  right: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x: number;
+  y: number;
+  height: number;
+  width: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current: string;
+  source?: string;
 };
 
 export type Faq = {
@@ -74,13 +2063,6 @@ export type Faq = {
   answer: string;
   category: "general" | "study-abroad" | "online-course" | "work-pass";
   order?: number;
-};
-
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
 export type Testimonial = {
@@ -104,22 +2086,6 @@ export type Testimonial = {
   rating?: number;
 };
 
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
-};
-
 export type Partner = {
   _id: string;
   _type: "partner";
@@ -136,6 +2102,19 @@ export type Partner = {
     _type: "image";
   };
   website?: string;
+};
+
+export type RelatedService = {
+  _id: string;
+  _type: "relatedService";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  title: string;
+  ctaText?: string;
+  icon?: string;
+  href?: string;
 };
 
 export type Service = {
@@ -177,10 +2156,309 @@ export type Service = {
   }>;
 };
 
-export type Slug = {
-  _type: "slug";
-  current: string;
-  source?: string;
+export type OnlineWolverhamptonPage = {
+  _id: string;
+  _type: "onlineWolverhamptonPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: OnlineProgramHero;
+  introSection?: OnlineProgramWolverIntro;
+  whySection?: OnlineProgramWhy;
+  kvcSupportSection?: OnlineProgramSupport;
+  learningFormatsSection?: OnlineProgramFormat;
+  targetAudienceSection?: OnlineProgramAudience;
+  benefitsSection?: OnlineProgramBenefits;
+  stepsSection?: OnlineProgramProcess;
+  programsSection?: OnlineProgramPrograms;
+  seo?: SharedSeo;
+};
+
+export type OnlineQualifiPage = {
+  _id: string;
+  _type: "onlineQualifiPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: OnlineProgramHero;
+  introSection?: OnlineProgramIntro;
+  whySection?: OnlineProgramWhy;
+  progressionSection?: OnlineProgramProgression;
+  targetAudienceSection?: OnlineProgramAudience;
+  learningFormatsSection?: OnlineProgramFormat;
+  benefitsSection?: OnlineProgramBenefits;
+  stepsSection?: OnlineProgramProcess;
+  programsSection?: OnlineProgramPrograms;
+  seo?: SharedSeo;
+};
+
+export type OnlineOthmPage = {
+  _id: string;
+  _type: "onlineOthmPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: OnlineProgramHero;
+  introSection?: OnlineProgramIntro;
+  whySection?: OnlineProgramWhy;
+  learningFormatsSection?: OnlineProgramFormat;
+  targetAudienceSection?: OnlineProgramAudience;
+  benefitsSection?: OnlineProgramBenefits;
+  stepsSection?: OnlineProgramProcess;
+  programsSection?: OnlineProgramPrograms;
+  seo?: SharedSeo;
+};
+
+export type OnlineOssdPage = {
+  _id: string;
+  _type: "onlineOssdPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: OnlineProgramHero;
+  introSection?: OnlineProgramIntro;
+  whySection?: OnlineProgramWhy;
+  structureSection?: OnlineProgramStructure;
+  subjectsSection?: OnlineProgramSubjects;
+  targetAudienceSection?: OnlineProgramAudienceOssd;
+  learningFormatsSection?: OnlineProgramFormat;
+  benefitsSection?: OnlineProgramBenefits;
+  stepsSection?: OnlineProgramProcess;
+  parentReasonsSection?: OnlineProgramParentReasons;
+  seo?: SharedSeo;
+};
+
+export type OnlineProgramPage = {
+  _id: string;
+  _type: "onlineProgramPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  slug: string;
+  heroSection?: OnlineProgramHero;
+  introSection?: OnlineProgramIntro;
+  structureSection?: OnlineProgramStructure;
+  whySection?: OnlineProgramWhy;
+  supportSection?: OnlineProgramSupport;
+  formatSection?: OnlineProgramFormat;
+  audienceSection?: OnlineProgramAudience;
+  progressionSection?: OnlineProgramProgression;
+  benefitsSection?: OnlineProgramBenefits;
+  processSection?: OnlineProgramProcess;
+  ctaSection?: OnlineProgramCta;
+  programsSection?: OnlineProgramPrograms;
+  seo?: SharedSeo;
+};
+
+export type DichVuPage = {
+  _id: string;
+  _type: "dichVuPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: DichVuHero;
+  introSection?: DichVuIntro;
+  videoSection?: DichVuVideoSection;
+  serviceCategories?: DichVuServiceCategories;
+  accordionSections?: DichVuServiceAccordion;
+  seo?: SharedSeo;
+};
+
+export type ContactPage = {
+  _id: string;
+  _type: "contactPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: ContactPageHero;
+  infoSection?: ContactPageInfo;
+  formSection?: ContactPageForm;
+  officesSection?: ContactPageOffices;
+  seo?: PageSeo;
+};
+
+export type AboutPage = {
+  _id: string;
+  _type: "aboutPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: AboutPageHero;
+  statsSection?: AboutPageStats;
+  storySection?: AboutPageStory;
+  valuesSection?: AboutPageValues;
+  testimonialsSection?: AboutPageTestimonials;
+  partnersSection?: AboutPagePartners;
+  officesSection?: AboutPageOffices;
+  seo?: PageSeo;
+};
+
+export type TaiwanStudyPage = {
+  _id: string;
+  _type: "taiwanStudyPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: StudyAbroadHero;
+  introSection?: StudyAbroadIntro;
+  whySection?: StudyAbroadWhy;
+  majorsSection?: StudyAbroadMajors;
+  requirementsSection?: StudyAbroadRequirements;
+  prospectsSection?: StudyAbroadProspects;
+  supportSection?: StudyAbroadSupport;
+  testimonialsSection?: StudyAbroadTestimonials;
+  faqsSection?: StudyAbroadFaqs;
+  servicesSection?: StudyAbroadServices;
+  seo?: StudyAbroadSeo;
+};
+
+export type MalaysiaStudyPage = {
+  _id: string;
+  _type: "malaysiaStudyPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: StudyAbroadHero;
+  introSection?: StudyAbroadIntro;
+  whySection?: StudyAbroadWhy;
+  majorsSection?: StudyAbroadMajors;
+  requirementsSection?: StudyAbroadRequirements;
+  prospectsSection?: StudyAbroadProspects;
+  supportSection?: StudyAbroadSupport;
+  testimonialsSection?: StudyAbroadTestimonials;
+  faqsSection?: StudyAbroadFaqs;
+  servicesSection?: StudyAbroadServices;
+  seo?: StudyAbroadSeo;
+};
+
+export type PublicStudyPage = {
+  _id: string;
+  _type: "publicStudyPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: PublicStudyHero;
+  introSection?: PublicStudyIntro;
+  whySection?: PublicStudyWhy;
+  pathwaysSection?: PublicStudyPathways;
+  requirementsSection?: PublicStudyRequirements;
+  workRulesSection?: PublicStudyWorkRules;
+  supportSection?: PublicStudySupport;
+  faqsSection?: PublicStudyFaqs;
+  servicesSection?: PublicStudyServices;
+  seo?: PublicStudySeo;
+};
+
+export type PrivateStudyPage = {
+  _id: string;
+  _type: "privateStudyPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: PrivateStudyHero;
+  introSection?: PrivateStudyIntro;
+  whySection?: PrivateStudyWhy;
+  schoolsSection?: PrivateStudySchools;
+  requirementsSection?: PrivateStudyRequirements;
+  supportSection?: PrivateStudySupport;
+  faqsSection?: PrivateStudyFaqs;
+  servicesSection?: PrivateStudyServices;
+  seo?: PrivateStudySeo;
+};
+
+export type UniMasterPage = {
+  _id: string;
+  _type: "uniMasterPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: UniMasterHero;
+  introSection?: UniMasterIntro;
+  whySection?: UniMasterWhy;
+  audienceSection?: UniMasterAudience;
+  commitmentSection?: UniMasterCommitment;
+  servicesSection?: UniMasterServices;
+  seo?: UniMasterSeo;
+};
+
+export type StudyAbroadPage = {
+  _id: string;
+  _type: "studyAbroadPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: StudyAbroadHero;
+  introSection?: StudyAbroadIntro;
+  whySection?: StudyAbroadWhy;
+  majorsSection?: StudyAbroadMajors;
+  requirementsSection?: StudyAbroadRequirements;
+  prospectsSection?: StudyAbroadProspects;
+  supportSection?: StudyAbroadSupport;
+  testimonialsSection?: StudyAbroadTestimonials;
+  faqsSection?: StudyAbroadFaqs;
+  servicesSection?: StudyAbroadServices;
+  seo?: StudyAbroadSeo;
+};
+
+export type WorkPassPage = {
+  _id: string;
+  _type: "workPassPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: WorkPassHero;
+  targetSection?: WorkPassTarget;
+  processSection?: WorkPassProcess;
+  requirementsSection?: WorkPassRequirements;
+  feesSection?: WorkPassFees;
+  reviewSection?: WorkPassReview;
+  faqsSection?: WorkPassFaqs;
+  servicesSection?: WorkPassServices;
+  seo?: WorkPassSeo;
+};
+
+export type HomePage = {
+  _id: string;
+  _type: "homePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  language?: string;
+  heroSection?: HomepageHero;
+  statsSection?: HomepageStats;
+  aboutSection?: HomepageAbout;
+  partnersSection?: HomepagePartners;
+  servicesSection?: HomepageServices;
+  whyProcessSection?: HomepageWhyProcess;
+  testimonialsSection?: HomepageTestimonials;
+  seo?: HomepageSeo;
+};
+
+export type Color = {
+  _type: "color";
+  hex?: string;
+  rgba?: string;
+  hsl?: string;
+  oklch?: string;
+  isGradient?: boolean;
+  hex2?: string;
+  angle?: number;
+  css?: string;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -280,11 +2558,482 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = TranslationMetadata | InternationalizedArrayReference | ServiceReference | PartnerReference | TestimonialReference | FaqReference | InternationalizedArrayReferenceValue | Faq | SanityImageAssetReference | Testimonial | SanityImageCrop | SanityImageHotspot | Partner | Service | Slug | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Why | Process | GoogleReviews | Lead | CompanySocialLink | CompanyPhone | CompanyInfo | SiteCtaButton | SiteFooterColumn | SiteFooterLink | SiteNavItem | SiteNavChild | SiteLink | SiteSettings | SanityImageAssetReference | PublicStudySeo | RelatedServiceReference | PublicStudyServices | PublicStudyServiceItem | PublicStudyFaqs | PublicStudyFaqItem | PublicStudySupport | PublicStudySupportStep | PublicStudyWorkRules | PublicStudyRequirements | PublicStudyScholarshipItem | PublicStudyCostItem | PublicStudyRequirementCheck | PublicStudyPathways | PublicStudyCompareCard | PublicStudyPathwayCard | PublicStudyPathwayCondition | SanityFileAssetReference | PublicStudyWhy | PublicStudyWhyItem | PublicStudyIntro | PublicStudyHero | PublicStudyStat | PrivateStudySeo | PrivateStudyServices | PrivateStudyServiceItem | PrivateStudyFaqs | PrivateStudyFaqItem | PrivateStudySupport | PrivateStudySupportStep | PrivateStudyRequirements | PrivateStudySchools | PrivateStudySchoolItem | PrivateStudySchoolLevel | PrivateStudyWhy | PrivateStudyWhyItem | PrivateStudyIntro | PrivateStudyHero | PrivateStudyStat | UniMasterSeo | UniMasterServices | UniMasterServiceItem | UniMasterCommitment | UniMasterCommitmentItem | UniMasterAudience | UniMasterAudienceItem | UniMasterWhy | UniMasterWhyItem | UniMasterIntro | UniMasterHero | UniMasterStat | StudyAbroadSeo | StudyAbroadServices | StudyAbroadServiceItem | StudyAbroadFaqs | StudyAbroadFaqItem | StudyAbroadTestimonials | StudyAbroadTestimonialItem | StudyAbroadSupport | StudyAbroadSupportStep | StudyAbroadProspects | StudyAbroadRequirements | StudyAbroadMajors | StudyAbroadMajorItem | StudyAbroadWhy | StudyAbroadWhyItem | StudyAbroadIntro | StudyAbroadHero | StudyAbroadStat | WorkPassSeo | WorkPassServices | WorkPassServiceItem | WorkPassFaqs | WorkPassFaqItem | WorkPassReview | WorkPassCaseStudy | WorkPassTestimonial | WorkPassFees | WorkPassProcessingItem | WorkPassFeeItem | WorkPassRequirements | WorkPassProcess | WorkPassProcessStep | WorkPassTarget | WorkPassTargetItem | WorkPassHero | WorkPassStat | DichVuServiceAccordion | DichVuServiceAccordionSection | DichVuSingaporeSubTab | DichVuTagList | DichVuServiceChecklistGroup | DichVuServiceCategories | DichVuVideoSection | DichVuIntro | DichVuIntroPillar | DichVuHero | DichVuStat | SharedSeo | PageSeo | ContactPageOffices | ContactPageForm | ContactPageInfo | ContactPageHero | AboutPageOffices | PartnerReference | AboutPagePartners | AboutPageTestimonials | AboutPageValues | AboutPageStory | AboutPageStats | AboutPageHero | ContactPageServiceOption | ContactPageSocialLink | AboutPageReview | AboutPageStat | PageOffice | OnlineProgramWolverIntro | OnlineProgramPrograms | OnlineProgramCard | OnlineProgramCta | OnlineProgramProcess | OnlineProgramStep | OnlineProgramBenefits | OnlineProgramBenefitCard | OnlineProgramAudience | OnlineProgramAudienceCard | OnlineProgramAudienceOssd | OnlineProgramAudienceCardTitleOnly | OnlineProgramProgression | OnlineProgramFormat | OnlineProgramSupport | OnlineProgramWhy | OnlineProgramIconCard | OnlineProgramParentReasons | OnlineProgramSubjects | OnlineProgramSubject | OnlineProgramStructure | OnlineProgramStructureItem | OnlineProgramIntro | OnlineProgramHero | HomepageSeo | TestimonialReference | HomepageTestimonials | HomepageWhyProcess | ServiceReference | HomepageServices | HomepagePartners | HomepageAbout | HomepageStats | HomepageHero | HomepageGoogleReview | HomepageProcessStep | HomepageReason | HomepageIconStat | HomepageProgressStat | HomepageStat | TranslationMetadata | InternationalizedArrayReference | HomePageReference | WorkPassPageReference | StudyAbroadPageReference | UniMasterPageReference | PrivateStudyPageReference | PublicStudyPageReference | MalaysiaStudyPageReference | TaiwanStudyPageReference | AboutPageReference | ContactPageReference | DichVuPageReference | OnlineProgramPageReference | OnlineOssdPageReference | OnlineOthmPageReference | OnlineQualifiPageReference | OnlineWolverhamptonPageReference | FaqReference | PostReference | InternationalizedArrayReferenceValue | Post | SanityImageCrop | SanityImageHotspot | Slug | Faq | Testimonial | Partner | RelatedService | Service | OnlineWolverhamptonPage | OnlineQualifiPage | OnlineOthmPage | OnlineOssdPage | OnlineProgramPage | DichVuPage | ContactPage | AboutPage | TaiwanStudyPage | MalaysiaStudyPage | PublicStudyPage | PrivateStudyPage | UniMasterPage | StudyAbroadPage | WorkPassPage | HomePage | Color | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: SITE_SETTINGS_QUERY
+// Query: *[_type == "siteSettings" && language == $lang][0]{    header{      comingSoonLabel,      navItems[]{        _key, label, link{destination, customHref},        children[]{_key, label, description, isComingSoon, link{destination, customHref}}      },      cta{label, link{destination, customHref}}    },    footer{      bio,      cta{        enabled, title, description,        primaryButton{label, link{destination, customHref}},        secondaryButton{label, link{destination, customHref}}      },      servicesColumn{heading, links[]{_key, label, link{destination, customHref}}},      aboutColumn{heading, links[]{_key, label, link{destination, customHref}}},      supportColumn{heading, links[]{_key, label, link{destination, customHref}}},      contactHeading,      legalLinks[]{_key, label, link{destination, customHref}},      copyrightNotice    },    "company": *[_id == "company-info"][0]{      phones[]{_key, label, number},      email,      "address": select($lang == "en" => addressEn, addressVi),      mapUrl,      socialLinks[]{_key, network, url}    }  }
+export type SITE_SETTINGS_QUERY_RESULT = {
+  header: {
+    comingSoonLabel: string | null;
+    navItems: Array<{
+      _key: string;
+      label: string;
+      link: {
+        destination: "about" | "blog" | "comingSoon" | "contact" | "custom" | "home" | "malaysiaStudy" | "onlineCourses" | "ossd" | "othm" | "privateStudy" | "publicStudy" | "qualifi" | "studyAbroad" | "taiwanStudy" | "uniMaster" | "wolverhampton" | "workPass";
+        customHref: string | null;
+      };
+      children: Array<{
+        _key: string;
+        label: string;
+        description: string | null;
+        isComingSoon: boolean | null;
+        link: {
+          destination: "about" | "blog" | "comingSoon" | "contact" | "custom" | "home" | "malaysiaStudy" | "onlineCourses" | "ossd" | "othm" | "privateStudy" | "publicStudy" | "qualifi" | "studyAbroad" | "taiwanStudy" | "uniMaster" | "wolverhampton" | "workPass";
+          customHref: string | null;
+        };
+      }> | null;
+    }>;
+    cta: {
+      label: string;
+      link: {
+        destination: "about" | "blog" | "comingSoon" | "contact" | "custom" | "home" | "malaysiaStudy" | "onlineCourses" | "ossd" | "othm" | "privateStudy" | "publicStudy" | "qualifi" | "studyAbroad" | "taiwanStudy" | "uniMaster" | "wolverhampton" | "workPass";
+        customHref: string | null;
+      };
+    } | null;
+  } | null;
+  footer: {
+    bio: string | null;
+    cta: {
+      enabled: boolean | null;
+      title: string | null;
+      description: string | null;
+      primaryButton: {
+        label: string;
+        link: {
+          destination: "about" | "blog" | "comingSoon" | "contact" | "custom" | "home" | "malaysiaStudy" | "onlineCourses" | "ossd" | "othm" | "privateStudy" | "publicStudy" | "qualifi" | "studyAbroad" | "taiwanStudy" | "uniMaster" | "wolverhampton" | "workPass";
+          customHref: string | null;
+        };
+      } | null;
+      secondaryButton: {
+        label: string;
+        link: {
+          destination: "about" | "blog" | "comingSoon" | "contact" | "custom" | "home" | "malaysiaStudy" | "onlineCourses" | "ossd" | "othm" | "privateStudy" | "publicStudy" | "qualifi" | "studyAbroad" | "taiwanStudy" | "uniMaster" | "wolverhampton" | "workPass";
+          customHref: string | null;
+        };
+      } | null;
+    } | null;
+    servicesColumn: {
+      heading: string;
+      links: Array<{
+        _key: string;
+        label: string;
+        link: {
+          destination: "about" | "blog" | "comingSoon" | "contact" | "custom" | "home" | "malaysiaStudy" | "onlineCourses" | "ossd" | "othm" | "privateStudy" | "publicStudy" | "qualifi" | "studyAbroad" | "taiwanStudy" | "uniMaster" | "wolverhampton" | "workPass";
+          customHref: string | null;
+        };
+      }> | null;
+    } | null;
+    aboutColumn: {
+      heading: string;
+      links: Array<{
+        _key: string;
+        label: string;
+        link: {
+          destination: "about" | "blog" | "comingSoon" | "contact" | "custom" | "home" | "malaysiaStudy" | "onlineCourses" | "ossd" | "othm" | "privateStudy" | "publicStudy" | "qualifi" | "studyAbroad" | "taiwanStudy" | "uniMaster" | "wolverhampton" | "workPass";
+          customHref: string | null;
+        };
+      }> | null;
+    } | null;
+    supportColumn: {
+      heading: string;
+      links: Array<{
+        _key: string;
+        label: string;
+        link: {
+          destination: "about" | "blog" | "comingSoon" | "contact" | "custom" | "home" | "malaysiaStudy" | "onlineCourses" | "ossd" | "othm" | "privateStudy" | "publicStudy" | "qualifi" | "studyAbroad" | "taiwanStudy" | "uniMaster" | "wolverhampton" | "workPass";
+          customHref: string | null;
+        };
+      }> | null;
+    } | null;
+    contactHeading: string | null;
+    legalLinks: Array<{
+      _key: string;
+      label: string;
+      link: {
+        destination: "about" | "blog" | "comingSoon" | "contact" | "custom" | "home" | "malaysiaStudy" | "onlineCourses" | "ossd" | "othm" | "privateStudy" | "publicStudy" | "qualifi" | "studyAbroad" | "taiwanStudy" | "uniMaster" | "wolverhampton" | "workPass";
+        customHref: string | null;
+      };
+    }> | null;
+    copyrightNotice: string | null;
+  } | null;
+  company: {
+    phones: null;
+    email: null;
+    address: null;
+    mapUrl: null;
+    socialLinks: null;
+  } | {
+    phones: null;
+    email: string;
+    address: null;
+    mapUrl: null;
+    socialLinks: null;
+  } | {
+    phones: Array<{
+      _key: string;
+      label: string | null;
+      number: string;
+    }> | null;
+    email: string | null;
+    address: string | null;
+    mapUrl: string | null;
+    socialLinks: Array<{
+      _key: string;
+      network: "facebook" | "instagram" | "linkedin" | "youtube";
+      url: string;
+    }> | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: HOME_PAGE_QUERY
+// Query: *[_type == "homePage" && language == $lang][0]{    "hero": heroSection{      eyebrow, titleLine1, titleLine2, description,      primaryButtonLabel, primaryButtonHref,      secondaryButtonLabel, secondaryButtonHref,      backgroundImage, backgroundImageAlt    },    "stats": statsSection.items[]{_key, value, label, icon},    "about": aboutSection{      eyebrow, title, description, image, imageAlt, ctaLabel, ctaHref,      statsTitle,      progressStats[]{_key, value, label, color},      iconStats[]{_key, value, sub, icon, tone}    },    "partnersContent": partnersSection{eyebrow, title},    "servicesContent": servicesSection{eyebrow, title, description},    "whyProcessContent": whyProcessSection{      why{eyebrow, title, cta},      process{eyebrow, title, ariaLabel}    },    "testimonialsContent": testimonialsSection{eyebrow, title},    "whyReasons": whyProcessSection.why.reasons[]{_key, icon, title, description},    "processSteps": whyProcessSection.process.steps[]{_key, icon, title, description},    "googleReviews": testimonialsSection.googleReviews{      rating, reviewCount, reviewUrl,      reviews[]{_key, name, initial, color, text}    },    seo{title, description, image},    "featuredServices": servicesSection.services[]->{      _id, title, description, slug, icon, image, alt    },    "featuredPartners": partnersSection.partners[]->{      _id, name, logo, website    },    "featuredTestimonials": testimonialsSection.testimonials[]->{      _id, name, role, company, quote, image, rating    }  }
+export type HOME_PAGE_QUERY_RESULT = {
+  hero: {
+    eyebrow: string | null;
+    titleLine1: string | null;
+    titleLine2: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    backgroundImageAlt: string | null;
+  } | null;
+  stats: Array<{
+    _key: string;
+    value: string | null;
+    label: string | null;
+    icon: string | null;
+  }> | null;
+  about: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+    ctaLabel: string | null;
+    ctaHref: string | null;
+    statsTitle: string | null;
+    progressStats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      color: Color | null;
+    }> | null;
+    iconStats: Array<{
+      _key: string;
+      value: string | null;
+      sub: string | null;
+      icon: "award" | "handshake" | null;
+      tone: "blue" | "gold" | null;
+    }> | null;
+  } | null;
+  partnersContent: {
+    eyebrow: string | null;
+    title: string | null;
+  } | null;
+  servicesContent: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+  } | null;
+  whyProcessContent: {
+    why: {
+      eyebrow: string | null;
+      title: string | null;
+      cta: string | null;
+    } | null;
+    process: {
+      eyebrow: string | null;
+      title: string | null;
+      ariaLabel: string | null;
+    } | null;
+  } | null;
+  testimonialsContent: {
+    eyebrow: string | null;
+    title: string | null;
+  } | null;
+  whyReasons: Array<{
+    _key: string;
+    icon: string | null;
+    title: string | null;
+    description: string | null;
+  }> | null;
+  processSteps: Array<{
+    _key: string;
+    icon: string | null;
+    title: string | null;
+    description: string | null;
+  }> | null;
+  googleReviews: {
+    rating: number | null;
+    reviewCount: number | null;
+    reviewUrl: string | null;
+    reviews: Array<{
+      _key: string;
+      name: string | null;
+      initial: string | null;
+      color: string | null;
+      text: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+  featuredServices: Array<{
+    _id: string;
+    title: string;
+    description: string;
+    slug: Slug;
+    icon: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    alt: string | null;
+  }> | null;
+  featuredPartners: Array<{
+    _id: string;
+    name: string;
+    logo: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    website: string | null;
+  }> | null;
+  featuredTestimonials: Array<{
+    _id: string;
+    name: string;
+    role: string | null;
+    company: string | null;
+    quote: string;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    rating: number | null;
+  }> | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: ABOUT_PAGE_QUERY
+// Query: *[_type == "aboutPage" && language == $lang][0]{    "hero": heroSection,    "stats": statsSection.items[]{_key, icon, value, label},    "story": storySection,    "values": valuesSection{eyebrow, titleLine1, titleLine2, paragraph1, paragraph2, ctaLabel, ctaHref, image, imageAlt},    "testimonials": testimonialsSection{      eyebrow, title, description,      reviews[]{_key, name, role, quote, image, rating}    },    "partners": {      "eyebrow": partnersSection.eyebrow,      "title": partnersSection.title,      "partners": select(        count(partnersSection.partners) > 0 => partnersSection.partners[]->{_id, name, logo, website},        *[_type == "partner"] | order(name asc){_id, name, logo, website}      )    },    "offices": officesSection{      eyebrow, title, description,      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}    },    seo{title, description, image}  }
+export type ABOUT_PAGE_QUERY_RESULT = {
+  hero: AboutPageHero | null;
+  stats: Array<{
+    _key: string;
+    icon: string | null;
+    value: string | null;
+    label: string | null;
+  }> | null;
+  story: AboutPageStory | null;
+  values: {
+    eyebrow: string | null;
+    titleLine1: string | null;
+    titleLine2: string | null;
+    paragraph1: string | null;
+    paragraph2: string | null;
+    ctaLabel: string | null;
+    ctaHref: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+  } | null;
+  testimonials: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    reviews: Array<{
+      _key: string;
+      name: string | null;
+      role: string | null;
+      quote: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      rating: number | null;
+    }> | null;
+  } | null;
+  partners: {
+    eyebrow: string | null;
+    title: string | null;
+    partners: Array<{
+      _id: string;
+      name: string;
+      logo: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      website: string | null;
+    }> | null;
+  };
+  offices: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    offices: Array<{
+      _key: string;
+      country: string | null;
+      role: string | null;
+      description: string | null;
+      address: string | null;
+      phone: string | null;
+      email: string | null;
+      hours: string | null;
+      mapUrl: string | null;
+      mapQuery: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      imageAlt: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: CONTACT_PAGE_QUERY
+// Query: *[_type == "contactPage" && language == $lang][0]{    "hero": heroSection,    "info": infoSection{      title, description, officeHoursTitle, weekdayHours, weekendHours,      socialTitle, socialDescription,      "phone": coalesce(*[_id == "company-info"][0].phones[0].number, phone),      "email": coalesce(*[_id == "company-info"][0].email, email),      "address": coalesce(        select($lang == "en" => *[_id == "company-info"][0].addressEn),        *[_id == "company-info"][0].addressVi,        address      ),      "socialLinks": coalesce(        *[_id == "company-info"][0].socialLinks[]{_key, "label": network, url, network},        socialLinks[]{_key, label, url, network}      )    },    "form": formSection{      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, messageLabel,      consentLabel, submitLabel, serviceOptions[]{_key, label, value}    },    "offices": officesSection{      eyebrow, title, description,      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}    },    seo{title, description, image}  }
+export type CONTACT_PAGE_QUERY_RESULT = {
+  hero: ContactPageHero | null;
+  info: {
+    title: string | null;
+    description: string | null;
+    officeHoursTitle: string | null;
+    weekdayHours: string | null;
+    weekendHours: string | null;
+    socialTitle: string | null;
+    socialDescription: string | null;
+    phone: string | null;
+    email: string | null;
+    address: string | null;
+    socialLinks: Array<{
+      _key: string;
+      label: string | null;
+      url: string | null;
+      network: string | null;
+    }> | Array<{
+      _key: string;
+      label: "facebook" | "instagram" | "linkedin" | "youtube";
+      url: string;
+      network: "facebook" | "instagram" | "linkedin" | "youtube";
+    }> | null;
+  } | null;
+  form: {
+    title: string | null;
+    description: string | null;
+    nameLabel: string | null;
+    emailLabel: string | null;
+    phoneLabel: string | null;
+    serviceLabel: string | null;
+    messageLabel: string | null;
+    consentLabel: string | null;
+    submitLabel: string | null;
+    serviceOptions: Array<{
+      _key: string;
+      label: string | null;
+      value: string | null;
+    }> | null;
+  } | null;
+  offices: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    offices: Array<{
+      _key: string;
+      country: string | null;
+      role: string | null;
+      description: string | null;
+      address: string | null;
+      phone: string | null;
+      email: string | null;
+      hours: string | null;
+      mapUrl: string | null;
+      mapQuery: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      imageAlt: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | null;
 
 // Source: ../kvc-website/sanity/queries.ts
 // Variable: TESTIMONIALS_QUERY
-// Query: *[_type == "testimonial"] | order(name asc)
+// Query: *[_type == "testimonial" && (!defined(language) || language == $lang)] | order(name asc)
 export type TESTIMONIALS_QUERY_RESULT = Array<{
   _id: string;
   _type: "testimonial";
@@ -385,14 +3134,2344 @@ export type FAQS_QUERY_RESULT = Array<{
   order?: number;
 }>;
 
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: DICH_VU_PAGE_QUERY
+// Query: *[_type == "dichVuPage" && language == $lang][0]{    heroSection{      backgroundImage, backgroundImageAlt,      eyebrow, title,      primaryButtonLabel, primaryButtonHref,      secondaryButtonLabel, secondaryButtonHref,      stats[]{_key, icon, value, label}    },    introSection{      eyebrow, title,      pillars[]{_key, icon, label},      paragraph1, paragraph2    },    videoSection{      videoTitle, videoPoster,      "videoUrl": video.asset->url    },    serviceCategories{eyebrow, title},    accordionSections{      sections[]{        _key, tag, heading, headingAccent,        intro, image, imageAlt,        services[]{title, items},        audience{label, items},        benefits{label, items},        singaporeSubTabs[]{label, icon, intro, services[]{title, items}, audience{label, items}, benefits{label, items}},        ctaLabel, ctaHref, ctaIcon, crossLinkText      }    },    seo{title, description}  }
+export type DICH_VU_PAGE_QUERY_RESULT = {
+  heroSection: {
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    backgroundImageAlt: string | null;
+    eyebrow: string | null;
+    title: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    stats: Array<{
+      _key: string;
+      icon: string | null;
+      value: string | null;
+      label: string | null;
+    }> | null;
+  } | null;
+  introSection: {
+    eyebrow: string | null;
+    title: string | null;
+    pillars: Array<{
+      _key: string;
+      icon: string | null;
+      label: string | null;
+    }> | null;
+    paragraph1: string | null;
+    paragraph2: string | null;
+  } | null;
+  videoSection: {
+    videoTitle: string | null;
+    videoPoster: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    videoUrl: string | null;
+  } | null;
+  serviceCategories: {
+    eyebrow: string | null;
+    title: string | null;
+  } | null;
+  accordionSections: {
+    sections: Array<{
+      _key: string;
+      tag: string | null;
+      heading: string | null;
+      headingAccent: string | null;
+      intro: Array<string> | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      imageAlt: string | null;
+      services: Array<{
+        title: string | null;
+        items: Array<string> | null;
+      }> | null;
+      audience: {
+        label: string | null;
+        items: Array<string> | null;
+      } | null;
+      benefits: {
+        label: string | null;
+        items: Array<string> | null;
+      } | null;
+      singaporeSubTabs: Array<{
+        label: string | null;
+        icon: string | null;
+        intro: Array<string> | null;
+        services: Array<{
+          title: string | null;
+          items: Array<string> | null;
+        }> | null;
+        audience: {
+          label: string | null;
+          items: Array<string> | null;
+        } | null;
+        benefits: {
+          label: string | null;
+          items: Array<string> | null;
+        } | null;
+      }> | null;
+      ctaLabel: string | null;
+      ctaHref: string | null;
+      ctaIcon: string | null;
+      crossLinkText: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: ONLINE_PROGRAM_PAGE_QUERY
+// Query: *[_type == "onlineProgramPage" && language == $lang && slug == $slug][0]{    heroSection{      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,      primaryButtonLabel, primaryButtonHref,      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))    },    introSection{      title, paragraphs, highlights, imageAlt,      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))    },    structureSection{title, subtitle, items[]{title, description}},    whySection{title, items[]{icon, title, description}},    supportSection{title, items},    formatSection{title, items[]{icon, title, description}, checklist},    audienceSection{title, items[]{icon, title, description}},    progressionSection{      title, body, tags, noteTitle, noteBody, imageAlt,      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))    },    benefitsSection{      title,      items[]{        title, description,        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))      }    },    processSection{title, steps[]{title, description}},    ctaSection{title, body, buttonLabel, buttonHref},    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},    seo{title, description}  }
+export type ONLINE_PROGRAM_PAGE_QUERY_RESULT = {
+  heroSection: {
+    parentBreadcrumb: string | null;
+    tagline: string | null;
+    title: string | null;
+    subtitle: string | null;
+    description: string | null;
+    breadcrumb: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  introSection: {
+    title: string | null;
+    paragraphs: Array<string> | null;
+    highlights: Array<string> | null;
+    imageAlt: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  structureSection: {
+    title: string | null;
+    subtitle: string | null;
+    items: Array<{
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  whySection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  supportSection: {
+    title: string | null;
+    items: Array<string> | null;
+  } | null;
+  formatSection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+    checklist: null;
+  } | null;
+  audienceSection: {
+    title: string | null;
+    items: Array<{
+      icon: null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  progressionSection: {
+    title: string | null;
+    body: string | null;
+    tags: Array<string> | null;
+    noteTitle: string | null;
+    noteBody: string | null;
+    imageAlt: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  benefitsSection: {
+    title: string | null;
+    items: Array<{
+      title: string | null;
+      description: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | string | null;
+    }> | null;
+  } | null;
+  processSection: {
+    title: string | null;
+    steps: Array<{
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  ctaSection: {
+    title: string | null;
+    body: string | null;
+    buttonLabel: string | null;
+    buttonHref: string | null;
+  } | null;
+  programsSection: {
+    title: string | null;
+    items: Array<{
+      name: string | null;
+      duration: string | null;
+      startDates: string | null;
+      subjects: Array<string> | null;
+      entryRequirements: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: ONLINE_OSSD_PAGE_QUERY
+// Query: *[_type == "onlineOssdPage" && language == $lang][0]{    heroSection{      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,      primaryButtonLabel, primaryButtonHref,      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))    },    introSection{      title, paragraphs, highlights, imageAlt,      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))    },    whySection{title, items[]{icon, title, description}},    structureSection{title, subtitle, items[]{title, description}},    subjectsSection{      title,      items[]{        name,        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))      }    },    targetAudienceSection{title, items[]{icon, title, description}},    benefitsSection{      title,      items[]{        title, description,        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))      }    },    learningFormatsSection{title, items[]{icon, title, description}},    stepsSection{title, steps[]{title, description}},    parentReasonsSection{title, items},    seo{title, description}  }
+export type ONLINE_OSSD_PAGE_QUERY_RESULT = {
+  heroSection: {
+    parentBreadcrumb: string | null;
+    tagline: string | null;
+    title: string | null;
+    subtitle: string | null;
+    description: string | null;
+    breadcrumb: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  introSection: {
+    title: string | null;
+    paragraphs: Array<string> | null;
+    highlights: Array<string> | null;
+    imageAlt: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  whySection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  structureSection: {
+    title: string | null;
+    subtitle: string | null;
+    items: Array<{
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  subjectsSection: {
+    title: string | null;
+    items: Array<{
+      name: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | string | null;
+    }> | null;
+  } | null;
+  targetAudienceSection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: null;
+    }> | null;
+  } | null;
+  benefitsSection: {
+    title: string | null;
+    items: Array<{
+      title: string | null;
+      description: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | string | null;
+    }> | null;
+  } | null;
+  learningFormatsSection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  stepsSection: {
+    title: string | null;
+    steps: Array<{
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  parentReasonsSection: {
+    title: string | null;
+    items: Array<string> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: ONLINE_OTHM_PAGE_QUERY
+// Query: *[_type == "onlineOthmPage" && language == $lang][0]{    heroSection{      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,      primaryButtonLabel, primaryButtonHref,      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))    },    introSection{      title, paragraphs, highlights, imageAlt,      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))    },    whySection{title, items[]{icon, title, description}},    learningFormatsSection{title, items[]{icon, title, description}},    targetAudienceSection{title, items[]{icon, title, description}},    benefitsSection{      title,      items[]{        title, description,        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))      }    },    stepsSection{title, steps[]{title, description}},    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},    seo{title, description}  }
+export type ONLINE_OTHM_PAGE_QUERY_RESULT = {
+  heroSection: {
+    parentBreadcrumb: string | null;
+    tagline: string | null;
+    title: string | null;
+    subtitle: string | null;
+    description: string | null;
+    breadcrumb: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  introSection: {
+    title: string | null;
+    paragraphs: Array<string> | null;
+    highlights: Array<string> | null;
+    imageAlt: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  whySection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  learningFormatsSection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  targetAudienceSection: {
+    title: string | null;
+    items: Array<{
+      icon: null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  benefitsSection: {
+    title: string | null;
+    items: Array<{
+      title: string | null;
+      description: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | string | null;
+    }> | null;
+  } | null;
+  stepsSection: {
+    title: string | null;
+    steps: Array<{
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  programsSection: {
+    title: string | null;
+    items: Array<{
+      name: string | null;
+      duration: string | null;
+      startDates: string | null;
+      subjects: Array<string> | null;
+      entryRequirements: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: ONLINE_QUALIFI_PAGE_QUERY
+// Query: *[_type == "onlineQualifiPage" && language == $lang][0]{    heroSection{      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,      primaryButtonLabel, primaryButtonHref,      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))    },    introSection{      title, paragraphs, highlights, imageAlt,      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))    },    whySection{title, items[]{icon, title, description}},    learningFormatsSection{title, items[]{icon, title, description}},    targetAudienceSection{title, items[]{icon, title, description}},    benefitsSection{      title,      items[]{        title, description,        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))      }    },    stepsSection{title, steps[]{title, description}},    progressionSection{      title, body, tags, noteTitle, noteBody, imageAlt,      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))    },    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},    seo{title, description}  }
+export type ONLINE_QUALIFI_PAGE_QUERY_RESULT = {
+  heroSection: {
+    parentBreadcrumb: string | null;
+    tagline: string | null;
+    title: string | null;
+    subtitle: string | null;
+    description: string | null;
+    breadcrumb: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  introSection: {
+    title: string | null;
+    paragraphs: Array<string> | null;
+    highlights: Array<string> | null;
+    imageAlt: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  whySection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  learningFormatsSection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  targetAudienceSection: {
+    title: string | null;
+    items: Array<{
+      icon: null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  benefitsSection: {
+    title: string | null;
+    items: Array<{
+      title: string | null;
+      description: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | string | null;
+    }> | null;
+  } | null;
+  stepsSection: {
+    title: string | null;
+    steps: Array<{
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  progressionSection: {
+    title: string | null;
+    body: string | null;
+    tags: Array<string> | null;
+    noteTitle: string | null;
+    noteBody: string | null;
+    imageAlt: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  programsSection: {
+    title: string | null;
+    items: Array<{
+      name: string | null;
+      duration: string | null;
+      startDates: string | null;
+      subjects: Array<string> | null;
+      entryRequirements: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: ONLINE_WOLVERHAMPTON_PAGE_QUERY
+// Query: *[_type == "onlineWolverhamptonPage" && language == $lang][0]{    heroSection{      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,      primaryButtonLabel, primaryButtonHref,      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))    },    introSection{      title, paragraphs, highlights, imageAlt,      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))    },    whySection{title, items[]{icon, title, description}},    kvcSupportSection{title, items},    learningFormatsSection{title, items[]{icon, title, description}},    targetAudienceSection{title, items[]{icon, title, description}},    benefitsSection{      title,      items[]{        title, description,        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))      }    },    stepsSection{title, steps[]{title, description}},    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},    seo{title, description}  }
+export type ONLINE_WOLVERHAMPTON_PAGE_QUERY_RESULT = {
+  heroSection: {
+    parentBreadcrumb: string | null;
+    tagline: string | null;
+    title: string | null;
+    subtitle: string | null;
+    description: string | null;
+    breadcrumb: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  introSection: {
+    title: string | null;
+    paragraphs: Array<string> | null;
+    highlights: null;
+    imageAlt: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | string | null;
+  } | null;
+  whySection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  kvcSupportSection: {
+    title: string | null;
+    items: Array<string> | null;
+  } | null;
+  learningFormatsSection: {
+    title: string | null;
+    items: Array<{
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  targetAudienceSection: {
+    title: string | null;
+    items: Array<{
+      icon: null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  benefitsSection: {
+    title: string | null;
+    items: Array<{
+      title: string | null;
+      description: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | string | null;
+    }> | null;
+  } | null;
+  stepsSection: {
+    title: string | null;
+    steps: Array<{
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  programsSection: {
+    title: string | null;
+    items: Array<{
+      name: string | null;
+      duration: string | null;
+      startDates: string | null;
+      subjects: Array<string> | null;
+      entryRequirements: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: WORK_PASS_PAGE_QUERY
+// Query: *[_type == "workPassPage" && language == $lang][0]{    "hero": heroSection{      title, description,      primaryButtonLabel, primaryButtonHref,      secondaryButtonLabel, secondaryButtonHref,      backgroundImage,      stats[]{_key, value, label, icon},      googleReviewValue, googleReviewLabel    },    "target": targetSection{      title,      items[]{_key, icon, title, description}    },    "process": processSection{      title,      steps[]{_key, icon, title, description}    },    "requirements": requirementsSection{      title,      conditionsTitle,      conditions,      documentsTitle,      documents,      image,      imageAlt    },    "fees": feesSection{      title,      feesTitle,      feesCategoryHeader,      feesCostHeader,      feesList[]{_key, category, cost},      feesNote,      processingTitle,      processingItems[]{_key, icon, title, description}    },    "review": reviewSection{      testimonial{        name, role, quote, image, rating      },      caseStudy{        tagline, description, ctaLabel, ctaHref, image      }    },    "faqs": faqsSection{      title,      faqs[]{_key, question, answer}    },    "relatedServices": servicesSection{      title,      services[]{        _type == "reference" => @->{          _id,          title,          ctaText,          icon,          href        },        _type != "reference" => {          title,          ctaText,          icon,          href        }      }    },    seo{title, description, image}  }
+export type WORK_PASS_PAGE_QUERY_RESULT = {
+  hero: {
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+    googleReviewValue: string | null;
+    googleReviewLabel: string | null;
+  } | null;
+  target: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  process: {
+    title: string | null;
+    steps: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  requirements: {
+    title: string | null;
+    conditionsTitle: string | null;
+    conditions: Array<string> | null;
+    documentsTitle: string | null;
+    documents: Array<string> | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+  } | null;
+  fees: {
+    title: string | null;
+    feesTitle: string | null;
+    feesCategoryHeader: string | null;
+    feesCostHeader: string | null;
+    feesList: Array<{
+      _key: string;
+      category: string | null;
+      cost: string | null;
+    }> | null;
+    feesNote: string | null;
+    processingTitle: string | null;
+    processingItems: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  review: {
+    testimonial: {
+      name: string | null;
+      role: string | null;
+      quote: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      rating: number | null;
+    } | null;
+    caseStudy: {
+      tagline: string | null;
+      description: string | null;
+      ctaLabel: string | null;
+      ctaHref: string | null;
+      image: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+    } | null;
+  } | null;
+  faqs: {
+    title: string | null;
+    faqs: Array<{
+      _key: string;
+      question: string | null;
+      answer: string | null;
+    }> | null;
+  } | null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    } | {
+      title: string | null;
+      ctaText: null;
+      icon: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: STUDY_ABROAD_PAGE_QUERY
+// Query: *[_type == "studyAbroadPage" && language == $lang][0] {    _id,    language,    "hero": heroSection {      eyebrow,      title,      description,      primaryButtonLabel,      primaryButtonHref,      secondaryButtonLabel,      secondaryButtonHref,      backgroundImage,      stats[]{_key, value, label, icon}    },    "intro": introSection {      title,      highlightText,      bullets,      paragraphs,      image,      imageAlt,      videoTitle,      videoPoster,      "videoUrl": coalesce(video.asset->url, videoUrl, videoEmbedUrl)    },    "why": whySection {      title,      items[]{_key, icon, title, description}    },    "majors": majorsSection {      title,      items[]{_key, icon, name}    },    "requirements": requirementsSection {      title,      conditions,      tipText,      image,      imageAlt    },    "prospects": prospectsSection {      title,      opportunities,      image,      imageAlt    },    "support": supportSection {      title,      steps[]{_key, icon, text}    },    "testimonials": testimonialsSection {      title,      videoTitle,      videoPoster,      "videoUrl": coalesce(video.asset->url, videoUrl, videoEmbedUrl),      testimonials[]{_key, name, role, avatar, rating, quote}    },    "faqs": faqsSection {      title,      faqs[]{_key, question, answer}    },    "relatedServices": servicesSection {      title,      services[]{        _type == "reference" => @->{          _id,          title,          ctaText,          icon,          href        },        _type != "reference" => {          title,          ctaText,          icon,          href        }      }    },    seo{title, description, shareImage}  }
+export type STUDY_ABROAD_PAGE_QUERY_RESULT = {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+  } | null;
+  intro: {
+    title: string | null;
+    highlightText: string | null;
+    bullets: Array<string> | null;
+    paragraphs: Array<string> | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+    videoTitle: string | null;
+    videoPoster: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    videoUrl: string | null;
+  } | null;
+  why: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  majors: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      name: string | null;
+    }> | null;
+  } | null;
+  requirements: {
+    title: string | null;
+    conditions: Array<string> | null;
+    tipText: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+  } | null;
+  prospects: {
+    title: string | null;
+    opportunities: Array<string> | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+  } | null;
+  support: {
+    title: string | null;
+    steps: Array<{
+      _key: string;
+      icon: string | null;
+      text: string | null;
+    }> | null;
+  } | null;
+  testimonials: {
+    title: string | null;
+    videoTitle: string | null;
+    videoPoster: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    videoUrl: string | null;
+    testimonials: Array<{
+      _key: string;
+      name: string | null;
+      role: string | null;
+      avatar: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      rating: number | null;
+      quote: string | null;
+    }> | null;
+  } | null;
+  faqs: {
+    title: string | null;
+    faqs: Array<{
+      _key: string;
+      question: string | null;
+      answer: string | null;
+    }> | null;
+  } | null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    } | {
+      title: string | null;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: STUDY_COUNTRY_PAGE_QUERY
+// Query: *[_type == $type && language == $lang][0] {    _id,    language,    "hero": heroSection {      eyebrow,      title,      description,      primaryButtonLabel,      primaryButtonHref,      secondaryButtonLabel,      secondaryButtonHref,      backgroundImage,      stats[]{_key, value, label, icon}    },    "intro": introSection {      title,      highlightText,      bullets,      paragraphs,      image,      imageAlt,      videoTitle,      videoPoster,      "videoUrl": coalesce(video.asset->url, videoUrl, videoEmbedUrl)    },    "why": whySection {      title,      items[]{_key, icon, title, description}    },    "majors": majorsSection {      title,      items[]{_key, icon, name}    },    "requirements": requirementsSection {      title,      conditions,      tipText,      image,      imageAlt    },    "prospects": prospectsSection {      title,      opportunities,      image,      imageAlt    },    "support": supportSection {      title,      steps[]{_key, icon, text}    },    "testimonials": testimonialsSection {      title,      videoTitle,      videoPoster,      "videoUrl": coalesce(video.asset->url, videoUrl, videoEmbedUrl),      testimonials[]{_key, name, role, avatar, rating, quote}    },    "faqs": faqsSection {      title,      faqs[]{_key, question, answer}    },    "relatedServices": servicesSection {      title,      services[]{        _type == "reference" => @->{          _id,          title,          ctaText,          icon,          href        },        _type != "reference" => {          title,          ctaText,          icon,          href        }      }    },    seo{title, description, shareImage}  }
+export type STUDY_COUNTRY_PAGE_QUERY_RESULT = {
+  _id: string;
+  language: null;
+  hero: null;
+  intro: null;
+  why: null;
+  majors: null;
+  requirements: null;
+  prospects: null;
+  support: null;
+  testimonials: null;
+  faqs: null;
+  relatedServices: null;
+  seo: null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: null;
+  intro: null;
+  why: null;
+  majors: null;
+  requirements: null;
+  prospects: null;
+  support: null;
+  testimonials: null;
+  faqs: null;
+  relatedServices: null;
+  seo: null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: null;
+  intro: null;
+  why: null;
+  majors: null;
+  requirements: null;
+  prospects: null;
+  support: null;
+  testimonials: null;
+  faqs: null;
+  relatedServices: null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    description: null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+  } | null;
+  intro: {
+    title: string | null;
+    highlightText: null;
+    bullets: null;
+    paragraphs: null;
+    image: null;
+    imageAlt: null;
+    videoTitle: null;
+    videoPoster: null;
+    videoUrl: null;
+  } | null;
+  why: null;
+  majors: null;
+  requirements: null;
+  prospects: null;
+  support: null;
+  testimonials: null;
+  faqs: null;
+  relatedServices: null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: null;
+    secondaryButtonHref: null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: null;
+  } | null;
+  intro: {
+    title: string | null;
+    highlightText: null;
+    bullets: null;
+    paragraphs: Array<string> | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+    videoTitle: null;
+    videoPoster: null;
+    videoUrl: null;
+  } | null;
+  why: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  majors: null;
+  requirements: null;
+  prospects: null;
+  support: null;
+  testimonials: null;
+  faqs: null;
+  relatedServices: null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: null;
+    secondaryButtonHref: null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: null;
+  } | null;
+  intro: {
+    title: string | null;
+    highlightText: null;
+    bullets: null;
+    paragraphs: Array<string> | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+    videoTitle: null;
+    videoPoster: null;
+    videoUrl: null;
+  } | null;
+  why: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  majors: null;
+  requirements: null;
+  prospects: null;
+  support: {
+    title: string | null;
+    steps: null;
+  } | null;
+  testimonials: null;
+  faqs: null;
+  relatedServices: null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: null;
+    secondaryButtonHref: null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: null;
+  } | null;
+  intro: null;
+  why: null;
+  majors: null;
+  requirements: null;
+  prospects: null;
+  support: null;
+  testimonials: null;
+  faqs: null;
+  relatedServices: null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: null;
+  } | null;
+  intro: null;
+  why: null;
+  majors: null;
+  requirements: null;
+  prospects: null;
+  support: null;
+  testimonials: {
+    title: string | null;
+    videoTitle: null;
+    videoPoster: null;
+    videoUrl: null;
+    testimonials: null;
+  } | null;
+  faqs: null;
+  relatedServices: null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: null;
+  } | null;
+  intro: null;
+  why: null;
+  majors: null;
+  requirements: null;
+  prospects: null;
+  support: null;
+  testimonials: {
+    title: string | null;
+    videoTitle: null;
+    videoPoster: null;
+    videoUrl: null;
+    testimonials: Array<{
+      _key: string;
+      name: null;
+      role: null;
+      avatar: null;
+      rating: null;
+      quote: null;
+    }> | null;
+  } | null;
+  faqs: null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: null;
+      icon: string | null;
+      href: null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+  } | null;
+  intro: {
+    title: string | null;
+    highlightText: string | null;
+    bullets: null;
+    paragraphs: null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+    videoTitle: null;
+    videoPoster: null;
+    videoUrl: null;
+  } | null;
+  why: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  majors: null;
+  requirements: null;
+  prospects: null;
+  support: null;
+  testimonials: null;
+  faqs: null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    } | {
+      title: string | null;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+  } | null;
+  intro: {
+    title: string | null;
+    highlightText: null;
+    bullets: null;
+    paragraphs: null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+    videoTitle: null;
+    videoPoster: null;
+    videoUrl: null;
+  } | null;
+  why: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  majors: null;
+  requirements: {
+    title: null;
+    conditions: Array<{
+      _key: string;
+    } & PublicStudyRequirementCheck> | null;
+    tipText: null;
+    image: null;
+    imageAlt: null;
+  } | null;
+  prospects: null;
+  support: {
+    title: string | null;
+    steps: null;
+  } | null;
+  testimonials: null;
+  faqs: {
+    title: string | null;
+    faqs: null;
+  } | null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    } | {
+      title: string | null;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+  } | null;
+  intro: {
+    title: string | null;
+    highlightText: null;
+    bullets: null;
+    paragraphs: null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+    videoTitle: null;
+    videoPoster: null;
+    videoUrl: null;
+  } | null;
+  why: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  majors: null;
+  requirements: {
+    title: null;
+    conditions: Array<string> | null;
+    tipText: string | null;
+    image: null;
+    imageAlt: null;
+  } | null;
+  prospects: null;
+  support: {
+    title: string | null;
+    steps: null;
+  } | null;
+  testimonials: null;
+  faqs: {
+    title: string | null;
+    faqs: null;
+  } | null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    } | {
+      title: string | null;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+  } | null;
+  intro: null;
+  why: null;
+  majors: null;
+  requirements: {
+    title: string | null;
+    conditions: Array<string> | null;
+    tipText: null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+  } | null;
+  prospects: null;
+  support: null;
+  testimonials: null;
+  faqs: {
+    title: string | null;
+    faqs: Array<{
+      _key: string;
+      question: string | null;
+      answer: string | null;
+    }> | null;
+  } | null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    } | {
+      title: string | null;
+      ctaText: null;
+      icon: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: null;
+  } | null;
+} | {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+  } | null;
+  intro: {
+    title: string | null;
+    highlightText: string | null;
+    bullets: Array<string> | null;
+    paragraphs: Array<string> | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+    videoTitle: string | null;
+    videoPoster: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    videoUrl: string | null;
+  } | null;
+  why: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  majors: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      name: string | null;
+    }> | null;
+  } | null;
+  requirements: {
+    title: string | null;
+    conditions: Array<string> | null;
+    tipText: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+  } | null;
+  prospects: {
+    title: string | null;
+    opportunities: Array<string> | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+  } | null;
+  support: {
+    title: string | null;
+    steps: Array<{
+      _key: string;
+      icon: string | null;
+      text: string | null;
+    }> | null;
+  } | null;
+  testimonials: {
+    title: string | null;
+    videoTitle: string | null;
+    videoPoster: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    videoUrl: string | null;
+    testimonials: Array<{
+      _key: string;
+      name: string | null;
+      role: string | null;
+      avatar: {
+        asset?: SanityImageAssetReference;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      } | null;
+      rating: number | null;
+      quote: string | null;
+    }> | null;
+  } | null;
+  faqs: {
+    title: string | null;
+    faqs: Array<{
+      _key: string;
+      question: string | null;
+      answer: string | null;
+    }> | null;
+  } | null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    } | {
+      title: string | null;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: UNI_MASTER_PAGE_QUERY
+// Query: *[_type == "uniMasterPage" && language == $lang][0] {    _id,    language,    "hero": heroSection {      eyebrow,      title,      description,      primaryButtonLabel,      primaryButtonHref,      secondaryButtonLabel,      secondaryButtonHref,      backgroundImage,      stats[]{_key, value, label, icon}    },    "intro": introSection {      title,      highlightText,      criteria,      remainingText,      image,      imageAlt    },    "why": whySection {      title,      items[]{_key, icon, title, description}    },    "audience": audienceSection {      title,      items[]{_key, icon, title, desc}    },    "commitment": commitmentSection {      title,      items[]{_key, icon, title, description}    },    "relatedServices": servicesSection {      title,      services[]{        _type == "reference" => @->{          _id,          title,          ctaText,          icon,          href        },        _type != "reference" => {          title,          ctaText,          icon,          href        }      }    },    seo{title, description, shareImage}  }
+export type UNI_MASTER_PAGE_QUERY_RESULT = {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+  } | null;
+  intro: {
+    title: string | null;
+    highlightText: string | null;
+    criteria: Array<string> | null;
+    remainingText: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+  } | null;
+  why: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  audience: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      desc: string | null;
+    }> | null;
+  } | null;
+  commitment: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    } | {
+      title: string | null;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: PRIVATE_STUDY_PAGE_QUERY
+// Query: *[_type == "privateStudyPage" && language == $lang][0] {    _id,    language,    "hero": heroSection {      eyebrow,      title,      description,      primaryButtonLabel,      primaryButtonHref,      secondaryButtonLabel,      secondaryButtonHref,      backgroundImage,      stats[]{_key, value, label, icon}    },    "intro": introSection {      title,      paragraph1,      paragraph2,      paragraph3,      image,      imageAlt    },    "why": whySection {      title,      items[]{_key, icon, title, description}    },    "schools": schoolsSection {      title,      items[]{_key, id, name, desc, levels[]{_key, grade, age, fee}},      tipText    },    "requirements": requirementsSection {      title1,      title2,      ageTitle,      ageDesc,      academicTitle,      academicDesc,      entryTitle,      entryDesc,      conditions,      tipText    },    "support": supportSection {      title,      items[]{_key, icon, title, description}    },    "faqs": faqsSection {      title,      items[]{_key, question, answer}    },    "relatedServices": servicesSection {      title,      services[]{        _type == "reference" => @->{          _id,          title,          ctaText,          icon,          href        },        _type != "reference" => {          title,          ctaText,          icon,          href        }      }    },    seo{title, description, shareImage}  }
+export type PRIVATE_STUDY_PAGE_QUERY_RESULT = {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+  } | null;
+  intro: {
+    title: string | null;
+    paragraph1: string | null;
+    paragraph2: string | null;
+    paragraph3: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+  } | null;
+  why: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  schools: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      id: string | null;
+      name: string | null;
+      desc: string | null;
+      levels: Array<{
+        _key: string;
+        grade: string | null;
+        age: string | null;
+        fee: string | null;
+      }> | null;
+    }> | null;
+    tipText: string | null;
+  } | null;
+  requirements: {
+    title1: string | null;
+    title2: string | null;
+    ageTitle: string | null;
+    ageDesc: string | null;
+    academicTitle: string | null;
+    academicDesc: string | null;
+    entryTitle: string | null;
+    entryDesc: string | null;
+    conditions: Array<string> | null;
+    tipText: string | null;
+  } | null;
+  support: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  faqs: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      question: string | null;
+      answer: string | null;
+    }> | null;
+  } | null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    } | {
+      title: string | null;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: PUBLIC_STUDY_PAGE_QUERY
+// Query: *[_type == "publicStudyPage" && language == $lang][0] {    _id,    language,    "hero": heroSection {      eyebrow,      title,      description,      primaryButtonLabel,      primaryButtonHref,      secondaryButtonLabel,      secondaryButtonHref,      backgroundImage,      stats[]{_key, value, label, icon}    },    "intro": introSection {      title,      paragraph1,      paragraph2,      paragraph3,      image,      imageAlt    },    "why": whySection {      title,      videoTitle,      videoPoster,      "videoUrl": video.asset->url,      items[]{_key, icon, title, description}    },    "pathways": pathwaysSection {      title,      cards[]{_key, eyebrow, title, description, conditions[]{_key, icon, boldText, normalText}},      compareTitle,      compareCard1{title, duration, objective, criteria, feeReference},      compareCard2{title, duration, objective, criteria, feeReference}    },    "requirements": requirementsSection {      title1,      title2,      conditions[]{_key, title, description},      tipText1,      costs[]{_key, item, fee},      tipText2,      scholarshipEyebrow,      scholarshipTitle,      scholarship1{title, target, benefit, duration, standard},      scholarship2{title, target, benefit, duration, standard}    },    "workRules": workRulesSection {      title,      sectionTitle1,      sectionDesc1,      conditions1,      sectionTitle2,      conditions2,      warningText    },    "support": supportSection {      title,      items[]{_key, icon, title, description}    },    "faqs": faqsSection {      title,      items[]{_key, question, answer}    },    "relatedServices": servicesSection {      title,      services[]{        _type == "reference" => @->{          _id,          title,          ctaText,          icon,          href        },        _type != "reference" => {          title,          ctaText,          icon,          href        }      }    },    seo{title, description, shareImage}  }
+export type PUBLIC_STUDY_PAGE_QUERY_RESULT = {
+  _id: string;
+  language: string | null;
+  hero: {
+    eyebrow: string | null;
+    title: string | null;
+    description: string | null;
+    primaryButtonLabel: string | null;
+    primaryButtonHref: string | null;
+    secondaryButtonLabel: string | null;
+    secondaryButtonHref: string | null;
+    backgroundImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    stats: Array<{
+      _key: string;
+      value: string | null;
+      label: string | null;
+      icon: string | null;
+    }> | null;
+  } | null;
+  intro: {
+    title: string | null;
+    paragraph1: string | null;
+    paragraph2: string | null;
+    paragraph3: string | null;
+    image: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    imageAlt: string | null;
+  } | null;
+  why: {
+    title: string | null;
+    videoTitle: string | null;
+    videoPoster: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+    videoUrl: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  pathways: {
+    title: string | null;
+    cards: Array<{
+      _key: string;
+      eyebrow: string | null;
+      title: string | null;
+      description: string | null;
+      conditions: Array<{
+        _key: string;
+        icon: string | null;
+        boldText: string | null;
+        normalText: string | null;
+      }> | null;
+    }> | null;
+    compareTitle: string | null;
+    compareCard1: {
+      title: string | null;
+      duration: string | null;
+      objective: string | null;
+      criteria: string | null;
+      feeReference: string | null;
+    } | null;
+    compareCard2: {
+      title: string | null;
+      duration: string | null;
+      objective: string | null;
+      criteria: string | null;
+      feeReference: string | null;
+    } | null;
+  } | null;
+  requirements: {
+    title1: string | null;
+    title2: string | null;
+    conditions: Array<{
+      _key: string;
+      title: string | null;
+      description: string | null;
+    }> | null;
+    tipText1: string | null;
+    costs: Array<{
+      _key: string;
+      item: string | null;
+      fee: string | null;
+    }> | null;
+    tipText2: string | null;
+    scholarshipEyebrow: string | null;
+    scholarshipTitle: string | null;
+    scholarship1: {
+      title: string | null;
+      target: string | null;
+      benefit: string | null;
+      duration: string | null;
+      standard: string | null;
+    } | null;
+    scholarship2: {
+      title: string | null;
+      target: string | null;
+      benefit: string | null;
+      duration: string | null;
+      standard: string | null;
+    } | null;
+  } | null;
+  workRules: {
+    title: string | null;
+    sectionTitle1: string | null;
+    sectionDesc1: string | null;
+    conditions1: Array<string> | null;
+    sectionTitle2: string | null;
+    conditions2: Array<string> | null;
+    warningText: string | null;
+  } | null;
+  support: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      icon: string | null;
+      title: string | null;
+      description: string | null;
+    }> | null;
+  } | null;
+  faqs: {
+    title: string | null;
+    items: Array<{
+      _key: string;
+      question: string | null;
+      answer: string | null;
+    }> | null;
+  } | null;
+  relatedServices: {
+    title: string | null;
+    services: Array<{
+      _id: string;
+      title: string;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    } | {
+      title: string | null;
+      ctaText: string | null;
+      icon: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    shareImage: {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: BLOG_POSTS_QUERY
+// Query: *[_type == "post" && language == $lang && defined(slug.current)] | order(publishedAt desc){    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName  }
+export type BLOG_POSTS_QUERY_RESULT = Array<{
+  _id: string;
+  title: string;
+  slug: Slug;
+  mainImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  mainImageAlt: string | null;
+  excerpt: string;
+  publishedAt: string;
+  authorName: string | null;
+}>;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: BLOG_POST_QUERY
+// Query: *[_type == "post" && language == $lang && slug.current == $slug][0]{    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, body,    seo{title, description}  }
+export type BLOG_POST_QUERY_RESULT = {
+  _id: string;
+  title: string;
+  slug: Slug;
+  mainImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  mainImageAlt: string | null;
+  excerpt: string;
+  publishedAt: string;
+  authorName: string | null;
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }> | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+  } | null;
+} | null;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: BLOG_RELATED_POSTS_QUERY
+// Query: *[_type == "post" && language == $lang && slug.current != $slug] | order(publishedAt desc)[0...3]{    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName  }
+export type BLOG_RELATED_POSTS_QUERY_RESULT = Array<{
+  _id: string;
+  title: string;
+  slug: Slug;
+  mainImage: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+  mainImageAlt: string | null;
+  excerpt: string;
+  publishedAt: string;
+  authorName: string | null;
+}>;
+
+// Source: ../kvc-website/sanity/queries.ts
+// Variable: BLOG_SITEMAP_QUERY
+// Query: *[_type == "post" && defined(slug.current)]{language, _updatedAt, "slug": slug.current}
+export type BLOG_SITEMAP_QUERY_RESULT = Array<{
+  language: string | null;
+  _updatedAt: string;
+  slug: string;
+}>;
+
 // Query TypeMap
-import "@sanity/client";
-declare module "@sanity/client" {
+declare global {
   interface SanityQueries {
-    "*[_type == \"testimonial\"] | order(name asc)": TESTIMONIALS_QUERY_RESULT;
+    "\n  *[_type == \"siteSettings\" && language == $lang][0]{\n    header{\n      comingSoonLabel,\n      navItems[]{\n        _key, label, link{destination, customHref},\n        children[]{_key, label, description, isComingSoon, link{destination, customHref}}\n      },\n      cta{label, link{destination, customHref}}\n    },\n    footer{\n      bio,\n      cta{\n        enabled, title, description,\n        primaryButton{label, link{destination, customHref}},\n        secondaryButton{label, link{destination, customHref}}\n      },\n      servicesColumn{heading, links[]{_key, label, link{destination, customHref}}},\n      aboutColumn{heading, links[]{_key, label, link{destination, customHref}}},\n      supportColumn{heading, links[]{_key, label, link{destination, customHref}}},\n      contactHeading,\n      legalLinks[]{_key, label, link{destination, customHref}},\n      copyrightNotice\n    },\n    \"company\": *[_id == \"company-info\"][0]{\n      phones[]{_key, label, number},\n      email,\n      \"address\": select($lang == \"en\" => addressEn, addressVi),\n      mapUrl,\n      socialLinks[]{_key, network, url}\n    }\n  }\n": SITE_SETTINGS_QUERY_RESULT;
+    "\n  *[_type == \"homePage\" && language == $lang][0]{\n    \"hero\": heroSection{\n      eyebrow, titleLine1, titleLine2, description,\n      primaryButtonLabel, primaryButtonHref,\n      secondaryButtonLabel, secondaryButtonHref,\n      backgroundImage, backgroundImageAlt\n    },\n    \"stats\": statsSection.items[]{_key, value, label, icon},\n    \"about\": aboutSection{\n      eyebrow, title, description, image, imageAlt, ctaLabel, ctaHref,\n      statsTitle,\n      progressStats[]{_key, value, label, color},\n      iconStats[]{_key, value, sub, icon, tone}\n    },\n    \"partnersContent\": partnersSection{eyebrow, title},\n    \"servicesContent\": servicesSection{eyebrow, title, description},\n    \"whyProcessContent\": whyProcessSection{\n      why{eyebrow, title, cta},\n      process{eyebrow, title, ariaLabel}\n    },\n    \"testimonialsContent\": testimonialsSection{eyebrow, title},\n    \"whyReasons\": whyProcessSection.why.reasons[]{_key, icon, title, description},\n    \"processSteps\": whyProcessSection.process.steps[]{_key, icon, title, description},\n    \"googleReviews\": testimonialsSection.googleReviews{\n      rating, reviewCount, reviewUrl,\n      reviews[]{_key, name, initial, color, text}\n    },\n    seo{title, description, image},\n    \"featuredServices\": servicesSection.services[]->{\n      _id, title, description, slug, icon, image, alt\n    },\n    \"featuredPartners\": partnersSection.partners[]->{\n      _id, name, logo, website\n    },\n    \"featuredTestimonials\": testimonialsSection.testimonials[]->{\n      _id, name, role, company, quote, image, rating\n    }\n  }\n": HOME_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"aboutPage\" && language == $lang][0]{\n    \"hero\": heroSection,\n    \"stats\": statsSection.items[]{_key, icon, value, label},\n    \"story\": storySection,\n    \"values\": valuesSection{eyebrow, titleLine1, titleLine2, paragraph1, paragraph2, ctaLabel, ctaHref, image, imageAlt},\n    \"testimonials\": testimonialsSection{\n      eyebrow, title, description,\n      reviews[]{_key, name, role, quote, image, rating}\n    },\n    \"partners\": {\n      \"eyebrow\": partnersSection.eyebrow,\n      \"title\": partnersSection.title,\n      \"partners\": select(\n        count(partnersSection.partners) > 0 => partnersSection.partners[]->{_id, name, logo, website},\n        *[_type == \"partner\"] | order(name asc){_id, name, logo, website}\n      )\n    },\n    \"offices\": officesSection{\n      eyebrow, title, description,\n      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}\n    },\n    seo{title, description, image}\n  }\n": ABOUT_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"contactPage\" && language == $lang][0]{\n    \"hero\": heroSection,\n    \"info\": infoSection{\n      title, description, officeHoursTitle, weekdayHours, weekendHours,\n      socialTitle, socialDescription,\n      \"phone\": coalesce(*[_id == \"company-info\"][0].phones[0].number, phone),\n      \"email\": coalesce(*[_id == \"company-info\"][0].email, email),\n      \"address\": coalesce(\n        select($lang == \"en\" => *[_id == \"company-info\"][0].addressEn),\n        *[_id == \"company-info\"][0].addressVi,\n        address\n      ),\n      \"socialLinks\": coalesce(\n        *[_id == \"company-info\"][0].socialLinks[]{_key, \"label\": network, url, network},\n        socialLinks[]{_key, label, url, network}\n      )\n    },\n    \"form\": formSection{\n      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, messageLabel,\n      consentLabel, submitLabel, serviceOptions[]{_key, label, value}\n    },\n    \"offices\": officesSection{\n      eyebrow, title, description,\n      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}\n    },\n    seo{title, description, image}\n  }\n": CONTACT_PAGE_QUERY_RESULT;
+    "*[_type == \"testimonial\" && (!defined(language) || language == $lang)] | order(name asc)": TESTIMONIALS_QUERY_RESULT;
     "*[_type == \"partner\" && (!defined(language) || language == $lang)] | order(name asc)": PARTNERS_QUERY_RESULT;
     "*[_type == \"service\" && (!defined(language) || language == $lang)] | order(title asc)": SERVICES_QUERY_RESULT;
     "*[_type == \"faq\"] | order(order asc)": FAQS_QUERY_RESULT;
+    "\n  *[_type == \"dichVuPage\" && language == $lang][0]{\n    heroSection{\n      backgroundImage, backgroundImageAlt,\n      eyebrow, title,\n      primaryButtonLabel, primaryButtonHref,\n      secondaryButtonLabel, secondaryButtonHref,\n      stats[]{_key, icon, value, label}\n    },\n    introSection{\n      eyebrow, title,\n      pillars[]{_key, icon, label},\n      paragraph1, paragraph2\n    },\n    videoSection{\n      videoTitle, videoPoster,\n      \"videoUrl\": video.asset->url\n    },\n    serviceCategories{eyebrow, title},\n    accordionSections{\n      sections[]{\n        _key, tag, heading, headingAccent,\n        intro, image, imageAlt,\n        services[]{title, items},\n        audience{label, items},\n        benefits{label, items},\n        singaporeSubTabs[]{label, icon, intro, services[]{title, items}, audience{label, items}, benefits{label, items}},\n        ctaLabel, ctaHref, ctaIcon, crossLinkText\n      }\n    },\n    seo{title, description}\n  }\n": DICH_VU_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"onlineProgramPage\" && language == $lang && slug == $slug][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      \"backgroundImage\": coalesce(backgroundImage.asset->url, select(backgroundImage._type == \"image\" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n    },\n    structureSection{title, subtitle, items[]{title, description}},\n    whySection{title, items[]{icon, title, description}},\n    supportSection{title, items},\n    formatSection{title, items[]{icon, title, description}, checklist},\n    audienceSection{title, items[]{icon, title, description}},\n    progressionSection{\n      title, body, tags, noteTitle, noteBody, imageAlt,\n      \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n    },\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n      }\n    },\n    processSection{title, steps[]{title, description}},\n    ctaSection{title, body, buttonLabel, buttonHref},\n    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},\n    seo{title, description}\n  }\n": ONLINE_PROGRAM_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"onlineOssdPage\" && language == $lang][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      \"backgroundImage\": coalesce(backgroundImage.asset->url, select(backgroundImage._type == \"image\" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n    },\n    whySection{title, items[]{icon, title, description}},\n    structureSection{title, subtitle, items[]{title, description}},\n    subjectsSection{\n      title,\n      items[]{\n        name,\n        \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n      }\n    },\n    targetAudienceSection{title, items[]{icon, title, description}},\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n      }\n    },\n    learningFormatsSection{title, items[]{icon, title, description}},\n    stepsSection{title, steps[]{title, description}},\n    parentReasonsSection{title, items},\n    seo{title, description}\n  }\n": ONLINE_OSSD_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"onlineOthmPage\" && language == $lang][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      \"backgroundImage\": coalesce(backgroundImage.asset->url, select(backgroundImage._type == \"image\" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n    },\n    whySection{title, items[]{icon, title, description}},\n    learningFormatsSection{title, items[]{icon, title, description}},\n    targetAudienceSection{title, items[]{icon, title, description}},\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n      }\n    },\n    stepsSection{title, steps[]{title, description}},\n    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},\n    seo{title, description}\n  }\n": ONLINE_OTHM_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"onlineQualifiPage\" && language == $lang][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      \"backgroundImage\": coalesce(backgroundImage.asset->url, select(backgroundImage._type == \"image\" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n    },\n    whySection{title, items[]{icon, title, description}},\n    learningFormatsSection{title, items[]{icon, title, description}},\n    targetAudienceSection{title, items[]{icon, title, description}},\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n      }\n    },\n    stepsSection{title, steps[]{title, description}},\n    progressionSection{\n      title, body, tags, noteTitle, noteBody, imageAlt,\n      \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n    },\n    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},\n    seo{title, description}\n  }\n": ONLINE_QUALIFI_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"onlineWolverhamptonPage\" && language == $lang][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      \"backgroundImage\": coalesce(backgroundImage.asset->url, select(backgroundImage._type == \"image\" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n    },\n    whySection{title, items[]{icon, title, description}},\n    kvcSupportSection{title, items},\n    learningFormatsSection{title, items[]{icon, title, description}},\n    targetAudienceSection{title, items[]{icon, title, description}},\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        \"image\": coalesce(image.asset->url, select(image._type == \"image\" => null, image))\n      }\n    },\n    stepsSection{title, steps[]{title, description}},\n    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},\n    seo{title, description}\n  }\n": ONLINE_WOLVERHAMPTON_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"workPassPage\" && language == $lang][0]{\n    \"hero\": heroSection{\n      title, description,\n      primaryButtonLabel, primaryButtonHref,\n      secondaryButtonLabel, secondaryButtonHref,\n      backgroundImage,\n      stats[]{_key, value, label, icon},\n      googleReviewValue, googleReviewLabel\n    },\n    \"target\": targetSection{\n      title,\n      items[]{_key, icon, title, description}\n    },\n    \"process\": processSection{\n      title,\n      steps[]{_key, icon, title, description}\n    },\n    \"requirements\": requirementsSection{\n      title,\n      conditionsTitle,\n      conditions,\n      documentsTitle,\n      documents,\n      image,\n      imageAlt\n    },\n    \"fees\": feesSection{\n      title,\n      feesTitle,\n      feesCategoryHeader,\n      feesCostHeader,\n      feesList[]{_key, category, cost},\n      feesNote,\n      processingTitle,\n      processingItems[]{_key, icon, title, description}\n    },\n    \"review\": reviewSection{\n      testimonial{\n        name, role, quote, image, rating\n      },\n      caseStudy{\n        tagline, description, ctaLabel, ctaHref, image\n      }\n    },\n    \"faqs\": faqsSection{\n      title,\n      faqs[]{_key, question, answer}\n    },\n    \"relatedServices\": servicesSection{\n      title,\n      services[]{\n        _type == \"reference\" => @->{\n          _id,\n          title,\n          ctaText,\n          icon,\n          href\n        },\n        _type != \"reference\" => {\n          title,\n          ctaText,\n          icon,\n          href\n        }\n      }\n    },\n    seo{title, description, image}\n  }\n": WORK_PASS_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"studyAbroadPage\" && language == $lang][0] {\n    _id,\n    language,\n    \"hero\": heroSection {\n      eyebrow,\n      title,\n      description,\n      primaryButtonLabel,\n      primaryButtonHref,\n      secondaryButtonLabel,\n      secondaryButtonHref,\n      backgroundImage,\n      stats[]{_key, value, label, icon}\n    },\n    \"intro\": introSection {\n      title,\n      highlightText,\n      bullets,\n      paragraphs,\n      image,\n      imageAlt,\n      videoTitle,\n      videoPoster,\n      \"videoUrl\": coalesce(video.asset->url, videoUrl, videoEmbedUrl)\n    },\n    \"why\": whySection {\n      title,\n      items[]{_key, icon, title, description}\n    },\n    \"majors\": majorsSection {\n      title,\n      items[]{_key, icon, name}\n    },\n    \"requirements\": requirementsSection {\n      title,\n      conditions,\n      tipText,\n      image,\n      imageAlt\n    },\n    \"prospects\": prospectsSection {\n      title,\n      opportunities,\n      image,\n      imageAlt\n    },\n    \"support\": supportSection {\n      title,\n      steps[]{_key, icon, text}\n    },\n    \"testimonials\": testimonialsSection {\n      title,\n      videoTitle,\n      videoPoster,\n      \"videoUrl\": coalesce(video.asset->url, videoUrl, videoEmbedUrl),\n      testimonials[]{_key, name, role, avatar, rating, quote}\n    },\n    \"faqs\": faqsSection {\n      title,\n      faqs[]{_key, question, answer}\n    },\n    \"relatedServices\": servicesSection {\n      title,\n      services[]{\n        _type == \"reference\" => @->{\n          _id,\n          title,\n          ctaText,\n          icon,\n          href\n        },\n        _type != \"reference\" => {\n          title,\n          ctaText,\n          icon,\n          href\n        }\n      }\n    },\n    seo{title, description, shareImage}\n  }\n": STUDY_ABROAD_PAGE_QUERY_RESULT;
+    "\n  *[_type == $type && language == $lang][0] {\n    _id,\n    language,\n    \"hero\": heroSection {\n      eyebrow,\n      title,\n      description,\n      primaryButtonLabel,\n      primaryButtonHref,\n      secondaryButtonLabel,\n      secondaryButtonHref,\n      backgroundImage,\n      stats[]{_key, value, label, icon}\n    },\n    \"intro\": introSection {\n      title,\n      highlightText,\n      bullets,\n      paragraphs,\n      image,\n      imageAlt,\n      videoTitle,\n      videoPoster,\n      \"videoUrl\": coalesce(video.asset->url, videoUrl, videoEmbedUrl)\n    },\n    \"why\": whySection {\n      title,\n      items[]{_key, icon, title, description}\n    },\n    \"majors\": majorsSection {\n      title,\n      items[]{_key, icon, name}\n    },\n    \"requirements\": requirementsSection {\n      title,\n      conditions,\n      tipText,\n      image,\n      imageAlt\n    },\n    \"prospects\": prospectsSection {\n      title,\n      opportunities,\n      image,\n      imageAlt\n    },\n    \"support\": supportSection {\n      title,\n      steps[]{_key, icon, text}\n    },\n    \"testimonials\": testimonialsSection {\n      title,\n      videoTitle,\n      videoPoster,\n      \"videoUrl\": coalesce(video.asset->url, videoUrl, videoEmbedUrl),\n      testimonials[]{_key, name, role, avatar, rating, quote}\n    },\n    \"faqs\": faqsSection {\n      title,\n      faqs[]{_key, question, answer}\n    },\n    \"relatedServices\": servicesSection {\n      title,\n      services[]{\n        _type == \"reference\" => @->{\n          _id,\n          title,\n          ctaText,\n          icon,\n          href\n        },\n        _type != \"reference\" => {\n          title,\n          ctaText,\n          icon,\n          href\n        }\n      }\n    },\n    seo{title, description, shareImage}\n  }\n": STUDY_COUNTRY_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"uniMasterPage\" && language == $lang][0] {\n    _id,\n    language,\n    \"hero\": heroSection {\n      eyebrow,\n      title,\n      description,\n      primaryButtonLabel,\n      primaryButtonHref,\n      secondaryButtonLabel,\n      secondaryButtonHref,\n      backgroundImage,\n      stats[]{_key, value, label, icon}\n    },\n    \"intro\": introSection {\n      title,\n      highlightText,\n      criteria,\n      remainingText,\n      image,\n      imageAlt\n    },\n    \"why\": whySection {\n      title,\n      items[]{_key, icon, title, description}\n    },\n    \"audience\": audienceSection {\n      title,\n      items[]{_key, icon, title, desc}\n    },\n    \"commitment\": commitmentSection {\n      title,\n      items[]{_key, icon, title, description}\n    },\n    \"relatedServices\": servicesSection {\n      title,\n      services[]{\n        _type == \"reference\" => @->{\n          _id,\n          title,\n          ctaText,\n          icon,\n          href\n        },\n        _type != \"reference\" => {\n          title,\n          ctaText,\n          icon,\n          href\n        }\n      }\n    },\n    seo{title, description, shareImage}\n  }\n": UNI_MASTER_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"privateStudyPage\" && language == $lang][0] {\n    _id,\n    language,\n    \"hero\": heroSection {\n      eyebrow,\n      title,\n      description,\n      primaryButtonLabel,\n      primaryButtonHref,\n      secondaryButtonLabel,\n      secondaryButtonHref,\n      backgroundImage,\n      stats[]{_key, value, label, icon}\n    },\n    \"intro\": introSection {\n      title,\n      paragraph1,\n      paragraph2,\n      paragraph3,\n      image,\n      imageAlt\n    },\n    \"why\": whySection {\n      title,\n      items[]{_key, icon, title, description}\n    },\n    \"schools\": schoolsSection {\n      title,\n      items[]{_key, id, name, desc, levels[]{_key, grade, age, fee}},\n      tipText\n    },\n    \"requirements\": requirementsSection {\n      title1,\n      title2,\n      ageTitle,\n      ageDesc,\n      academicTitle,\n      academicDesc,\n      entryTitle,\n      entryDesc,\n      conditions,\n      tipText\n    },\n    \"support\": supportSection {\n      title,\n      items[]{_key, icon, title, description}\n    },\n    \"faqs\": faqsSection {\n      title,\n      items[]{_key, question, answer}\n    },\n    \"relatedServices\": servicesSection {\n      title,\n      services[]{\n        _type == \"reference\" => @->{\n          _id,\n          title,\n          ctaText,\n          icon,\n          href\n        },\n        _type != \"reference\" => {\n          title,\n          ctaText,\n          icon,\n          href\n        }\n      }\n    },\n    seo{title, description, shareImage}\n  }\n": PRIVATE_STUDY_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"publicStudyPage\" && language == $lang][0] {\n    _id,\n    language,\n    \"hero\": heroSection {\n      eyebrow,\n      title,\n      description,\n      primaryButtonLabel,\n      primaryButtonHref,\n      secondaryButtonLabel,\n      secondaryButtonHref,\n      backgroundImage,\n      stats[]{_key, value, label, icon}\n    },\n    \"intro\": introSection {\n      title,\n      paragraph1,\n      paragraph2,\n      paragraph3,\n      image,\n      imageAlt\n    },\n    \"why\": whySection {\n      title,\n      videoTitle,\n      videoPoster,\n      \"videoUrl\": video.asset->url,\n      items[]{_key, icon, title, description}\n    },\n    \"pathways\": pathwaysSection {\n      title,\n      cards[]{_key, eyebrow, title, description, conditions[]{_key, icon, boldText, normalText}},\n      compareTitle,\n      compareCard1{title, duration, objective, criteria, feeReference},\n      compareCard2{title, duration, objective, criteria, feeReference}\n    },\n    \"requirements\": requirementsSection {\n      title1,\n      title2,\n      conditions[]{_key, title, description},\n      tipText1,\n      costs[]{_key, item, fee},\n      tipText2,\n      scholarshipEyebrow,\n      scholarshipTitle,\n      scholarship1{title, target, benefit, duration, standard},\n      scholarship2{title, target, benefit, duration, standard}\n    },\n    \"workRules\": workRulesSection {\n      title,\n      sectionTitle1,\n      sectionDesc1,\n      conditions1,\n      sectionTitle2,\n      conditions2,\n      warningText\n    },\n    \"support\": supportSection {\n      title,\n      items[]{_key, icon, title, description}\n    },\n    \"faqs\": faqsSection {\n      title,\n      items[]{_key, question, answer}\n    },\n    \"relatedServices\": servicesSection {\n      title,\n      services[]{\n        _type == \"reference\" => @->{\n          _id,\n          title,\n          ctaText,\n          icon,\n          href\n        },\n        _type != \"reference\" => {\n          title,\n          ctaText,\n          icon,\n          href\n        }\n      }\n    },\n    seo{title, description, shareImage}\n  }\n": PUBLIC_STUDY_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"post\" && language == $lang && defined(slug.current)] | order(publishedAt desc){\n    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName\n  }\n": BLOG_POSTS_QUERY_RESULT;
+    "\n  *[_type == \"post\" && language == $lang && slug.current == $slug][0]{\n    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, body,\n    seo{title, description}\n  }\n": BLOG_POST_QUERY_RESULT;
+    "\n  *[_type == \"post\" && language == $lang && slug.current != $slug] | order(publishedAt desc)[0...3]{\n    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName\n  }\n": BLOG_RELATED_POSTS_QUERY_RESULT;
+    "*[_type == \"post\" && defined(slug.current)]{language, _updatedAt, \"slug\": slug.current}": BLOG_SITEMAP_QUERY_RESULT;
   }
+}
+// Lets @sanity/client releases that predate the global registry read it too
+declare module "@sanity/client" {
+  interface SanityQueries extends globalThis.SanityQueries {}
 }
 

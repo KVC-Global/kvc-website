@@ -122,6 +122,7 @@ const destinationHrefs: Record<string, string> = {
   wolverhampton: "/khoa-hoc-online/wolverhampton",
   enterprise: "/dich-vu",
   dichVu: "/dich-vu",
+  blog: "/tin-tuc",
   contact: "/lien-he",
   comingSoon: "/coming-soon",
 }
@@ -209,6 +210,7 @@ export function fallbackSiteSettings(locale: Locale): SiteSettings {
           ],
         },
         { label: t.nav.enterprise, href: "/dich-vu" },
+        { label: t.nav.blog, href: "/tin-tuc" },
         { label: t.nav.contact, href: "/lien-he" },
       ],
       cta: { label: t.header.freeConsultation, href: "/lien-he" },
@@ -239,6 +241,7 @@ export function fallbackSiteSettings(locale: Locale): SiteSettings {
           { label: t.footer.about.partners, href: "/gioi-thieu" },
           { label: t.footer.about.values, href: "/gioi-thieu" },
           { label: t.footer.about.process, href: "/gioi-thieu" },
+          { label: t.nav.blog, href: "/tin-tuc" },
         ],
       },
       supportColumn: {
