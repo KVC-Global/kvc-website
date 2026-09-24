@@ -1,5 +1,12 @@
 export type SanityImage = Record<string, unknown>
 
+export type SanityColor = {
+  hex?: string
+  rgba?: string
+  hsl?: string
+  css?: string
+}
+
 export type HomepageStat = {
   _key?: string
   value?: string
@@ -20,6 +27,21 @@ export type HomepageHero = {
   backgroundImageAlt?: string
 }
 
+export type HomepageProgressStat = {
+  _key?: string
+  value?: string
+  label?: string
+  color?: SanityColor
+}
+
+export type HomepageIconStat = {
+  _key?: string
+  value?: string
+  sub?: string
+  icon?: string
+  tone?: string
+}
+
 export type HomepageAbout = {
   eyebrow?: string
   title?: string
@@ -28,6 +50,9 @@ export type HomepageAbout = {
   imageAlt?: string
   ctaLabel?: string
   ctaHref?: string
+  statsTitle?: string
+  progressStats?: HomepageProgressStat[]
+  iconStats?: HomepageIconStat[]
 }
 
 export type HomepageReason = {

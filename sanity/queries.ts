@@ -44,7 +44,10 @@ export const HOME_PAGE_QUERY = defineQuery(`
     },
     "stats": statsSection.items[]{_key, value, label, icon},
     "about": aboutSection{
-      eyebrow, title, description, image, imageAlt, ctaLabel, ctaHref
+      eyebrow, title, description, image, imageAlt, ctaLabel, ctaHref,
+      statsTitle,
+      progressStats[]{_key, value, label, color},
+      iconStats[]{_key, value, sub, icon, tone}
     },
     "partnersContent": partnersSection{eyebrow, title},
     "servicesContent": servicesSection{eyebrow, title, description},
@@ -792,3 +795,28 @@ export const PUBLIC_STUDY_PAGE_QUERY = defineQuery(`
     seo{title, description, shareImage}
   }
 `)
+
+// --- Blog ---
+
+export const BLOG_POSTS_QUERY = defineQuery(`
+  *[_type == "post" && language == $lang && defined(slug.current)] | order(publishedAt desc){
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName
+  }
+`)
+
+export const BLOG_POST_QUERY = defineQuery(`
+  *[_type == "post" && language == $lang && slug.current == $slug][0]{
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, body,
+    seo{title, description}
+  }
+`)
+
+export const BLOG_RELATED_POSTS_QUERY = defineQuery(`
+  *[_type == "post" && language == $lang && slug.current != $slug] | order(publishedAt desc)[0...3]{
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName
+  }
+`)
+
+export const BLOG_SITEMAP_QUERY = defineQuery(
+  `*[_type == "post" && defined(slug.current)]{language, _updatedAt, "slug": slug.current}`
+)
