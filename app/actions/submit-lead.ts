@@ -1,7 +1,13 @@
 "use server"
 import {headers} from "next/headers"
+import {after} from "next/server"
 import {writeClient} from "@/sanity/write-client"
-
+import {
+  createMisaContact,
+  isMisaConfigured,
+  type MisaContactPayload,
+} from "@/lib/misa-crm"
+import {resolveMisaOwner} from "@/lib/misa-owner"
 
 const SERVICES = [
   {value: "du-hoc", label: "Du học Singapore"},
@@ -144,8 +150,31 @@ export async function submitLead(
   const serviceLabel =
     SERVICES.find((s) => s.value === service)?.label ?? service
 
+  const description = [
+    `Dịch vụ: ${serviceLabel}`,
+    message ? `Tin nhắn: ${message}` : "",
+    utmSource ? `UTM: ${utmSource} / ${utmMedium} / ${utmCampaign}` : "",
+    referrer ? `Referrer: ${referrer}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n")
+
+  // Convention: utm_source="<channel>/<staff code>", e.g. facebook/NV01.
+  const staffCode = utmSource.includes("/") ? utmSource.split("/")[1] : ""
+  const channel = utmSource.split("/")[0]
+  const ownerName = resolveMisaOwner(staffCode)
+
+  const misaContact: MisaContactPayload = {
+    contact_name: name,
+    email,
+    mobile: phone,
+    description,
+    lead_source: channel ? `Website (${channel})` : "Website",
+    ...(ownerName ? {owner_name: ownerName} : {}),
+  }
+
   try {
-    await writeClient.create({
+    const lead = await writeClient.create({
       _type: "lead",
       name,
       email,
@@ -159,6 +188,21 @@ export async function submitLead(
       referrer: referrer || undefined,
       submittedAt: new Date().toISOString(),
     })
+
+    // Fire-and-forget CRM push: runs after the success response is sent.
+    // ponytail: log-and-loss on Misa failure; add a retry queue if lead volume justifies it.
+    if (isMisaConfigured()) {
+      after(async () => {
+        try {
+          await createMisaContact({
+            ...misaContact,
+            contact_code: lead._id,
+          })
+        } catch (error) {
+          console.error(`[submitLead] MISA push failed for lead ${lead._id}:`, error)
+        }
+      })
+    }
     return {status: "success"}
   } catch (error) {
     console.error("[submitLead] failed to persist lead:", error)
