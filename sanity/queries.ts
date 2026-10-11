@@ -800,7 +800,7 @@ export const PUBLIC_STUDY_PAGE_QUERY = defineQuery(`
 
 export const BLOG_POSTS_QUERY = defineQuery(`
   *[_type == "post" && language == $lang && defined(slug.current)] | order(publishedAt desc){
-    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, category, readingTime
   }
 `)
 
@@ -813,7 +813,7 @@ export const BLOG_POST_QUERY = defineQuery(`
 
 export const BLOG_RELATED_POSTS_QUERY = defineQuery(`
   *[_type == "post" && language == $lang && slug.current != $slug] | order(publishedAt desc)[0...3]{
-    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, category, readingTime
   }
 `)
 
