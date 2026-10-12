@@ -54,7 +54,7 @@ function FeaturedPost({
   const readingTime = getBlogReadingTime(post, locale)
 
   return (
-    <article className="mx-auto grid w-full max-w-[1376px] gap-8 bg-white pt-8 pb-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-10">
+    <article className="grid w-full max-w-[1376px] gap-8 bg-white pt-8 pb-6 lg:grid-cols-[1.08fr_0.92fr] lg:items-center lg:gap-10">
       <Link
         href={href}
         className="group relative aspect-[16/9] overflow-hidden rounded-[10px]"
