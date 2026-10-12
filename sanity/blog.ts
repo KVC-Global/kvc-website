@@ -11,9 +11,14 @@ export type BlogPostCard = {
   excerpt?: string
   publishedAt?: string
   authorName?: string
+  category?: string
+  readingTime?: number
 }
 
 export type BlogPost = BlogPostCard & {
+  authorRole?: string
+  authorImage?: SanityImage
+  keyTakeaways?: string[]
   body?: PortableTextBlock[]
   seo?: {
     title?: string

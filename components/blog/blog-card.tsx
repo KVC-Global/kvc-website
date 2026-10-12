@@ -3,14 +3,18 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight, Newspaper } from "lucide-react"
+import { Newspaper } from "lucide-react"
 import type { Variants } from "framer-motion"
 
 import type { BlogPostCard as BlogPostCardData } from "@/sanity/blog"
 import { useLocale } from "@/lib/i18n-client"
-import { blogPostHref, formatPostDate } from "@/lib/blog"
+import {
+  blogPostHref,
+  formatPostDate,
+  getBlogCategoryLabel,
+  getBlogReadingTime,
+} from "@/lib/blog"
 import { urlFor } from "@/sanity/image"
-import { useDictionary } from "@/lib/i18n-client"
 import { cn } from "@/lib/utils"
 
 const fadeUp: Variants = {
@@ -30,12 +34,13 @@ export function BlogCard({
   className?: string
 }) {
   const locale = useLocale()
-  const t = useDictionary()
   const href = blogPostHref(post.slug?.current, locale)
   const imageUrl = post.mainImage
     ? urlFor(post.mainImage).width(600).height(400).url()
     : null
   const date = formatPostDate(post.publishedAt, locale)
+  const categoryLabel = getBlogCategoryLabel(post, locale)
+  const readingTime = getBlogReadingTime(post, locale)
 
   return (
     <motion.article
@@ -44,7 +49,7 @@ export function BlogCard({
       viewport={{ once: true, margin: "-40px" }}
       variants={fadeUp}
       className={cn(
-        "group overflow-hidden rounded-lg border border-border/60 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-gold/40 hover:shadow-lg",
+        "group overflow-hidden rounded-[10px] border border-border/60 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-gold/40 hover:shadow-lg",
         className
       )}
     >
@@ -68,38 +73,25 @@ export function BlogCard({
             </div>
           )}
         </div>
-        <div className="flex flex-1 flex-col p-5 sm:p-6">
-          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs font-medium text-muted-foreground">
-            {date && (
-              <time
-                dateTime={post.publishedAt}
-                className="rounded-full bg-muted px-2.5 py-1 text-brand-blue-mid"
-              >
-                {date}
-              </time>
-            )}
-            {post.authorName && (
-              <span className="text-brand-dark/60">
-                {locale === "en" ? `By ${post.authorName}` : `Bởi ${post.authorName}`}
-              </span>
-            )}
+        <div className="flex flex-1 flex-col p-4 sm:p-5">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-medium text-muted-foreground">
+            <span className="rounded-full bg-brand-gold-light/60 px-2 py-1 font-heading font-bold tracking-wide text-brand-blue uppercase">
+              {categoryLabel}
+            </span>
+            {date && <time dateTime={post.publishedAt}>{date}</time>}
+            <span aria-hidden="true">|</span>
+            <span>{readingTime}</span>
           </div>
           {post.title && (
-            <h3 className="mt-3 font-heading text-lg font-bold leading-snug text-brand-blue transition-colors group-hover:text-brand-blue-mid">
+            <h3 className="mt-3 line-clamp-2 font-heading text-lg leading-snug font-bold text-brand-blue transition-colors group-hover:text-brand-blue-mid">
               {post.title}
             </h3>
           )}
           {post.excerpt && (
-            <p className="mt-2.5 line-clamp-3 text-sm leading-relaxed text-brand-dark/70">
+            <p className="mt-2.5 line-clamp-2 text-sm leading-relaxed text-brand-dark/70">
               {post.excerpt}
             </p>
           )}
-          <span className="mt-auto pt-5">
-            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-gold">
-              {t.blog.readMore}
-              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-            </span>
-          </span>
         </div>
       </Link>
     </motion.article>

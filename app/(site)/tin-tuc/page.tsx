@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 
-import { BlogHero } from "@/components/blog/blog-hero"
-import { BlogGrid } from "@/components/blog/blog-grid"
+import { BlogListing } from "@/components/blog/blog-listing"
 import { getDictionaryServer, getLocale } from "@/lib/i18n-server"
 import type { BlogPostCard } from "@/sanity/blog"
 import { sanityFetch } from "@/sanity/live"
@@ -45,10 +44,5 @@ export default async function BlogPage() {
   })
   const posts = (data as BlogPostCard[] | null) ?? []
 
-  return (
-    <>
-      <BlogHero />
-      <BlogGrid posts={posts} />
-    </>
-  )
+  return <BlogListing posts={posts} />
 }
