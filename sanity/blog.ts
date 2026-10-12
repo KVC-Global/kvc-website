@@ -16,6 +16,9 @@ export type BlogPostCard = {
 }
 
 export type BlogPost = BlogPostCard & {
+  authorRole?: string
+  authorImage?: SanityImage
+  keyTakeaways?: string[]
   body?: PortableTextBlock[]
   seo?: {
     title?: string

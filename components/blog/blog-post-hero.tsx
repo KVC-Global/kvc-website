@@ -53,10 +53,12 @@ export function BlogPostHero({
   const encodedTitle = encodeURIComponent(title)
   const homeHref = locale === "en" ? "/en" : "/"
   const blogHref = `/${locale}/tin-tuc`
-  const authorRole = t.blog.authorRole
-  const authorInitial = (post.authorName || "KVC Global")
-    .charAt(0)
-    .toLocaleUpperCase(locale)
+  const authorName = post.authorName || "KVC Global"
+  const authorRole = post.authorRole || t.blog.authorRole
+  const authorImageUrl = post.authorImage
+    ? urlFor(post.authorImage).width(96).height(96).fit("crop").url()
+    : null
+  const authorInitial = authorName.charAt(0).toLocaleUpperCase(locale)
   const copyLabel = locale === "en" ? "Copy link" : "Sao chép liên kết"
   const shareLabel = locale === "en" ? "Share" : "Chia sẻ"
 
@@ -153,12 +155,22 @@ export function BlogPostHero({
             className="mt-7 flex flex-wrap items-center justify-between gap-5"
           >
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-blue font-heading text-sm font-bold text-white">
-                {authorInitial}
-              </div>
+              {authorImageUrl ? (
+                <Image
+                  src={authorImageUrl}
+                  alt={authorName}
+                  width={44}
+                  height={44}
+                  className="h-11 w-11 shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand-blue font-heading text-sm font-bold text-white">
+                  {authorInitial}
+                </div>
+              )}
               <div>
                 <p className="font-heading text-sm font-bold text-brand-blue">
-                  {post.authorName || "KVC Global"}
+                  {authorName}
                 </p>
                 <p className="text-xs text-brand-dark/60 sm:text-sm">
                   {authorRole}
