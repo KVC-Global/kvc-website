@@ -2,11 +2,9 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
 import { motion, Variants } from "framer-motion"
 import {
   ArrowRight,
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Newspaper,
@@ -31,7 +29,6 @@ const stagger: Variants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 }
 
-/** Posts shown in the latest grid before the "view more" toggle. */
 const VISIBLE_COUNT = 6
 
 function FeaturedPost({
@@ -138,31 +135,26 @@ function FeaturedPost({
 export function BlogGrid({
   posts,
   className,
-  isFiltered = false,
 }: {
   posts: BlogPostCardData[]
   className?: string
-  isFiltered?: boolean
 }) {
   const locale = useLocale()
   const t = useDictionary()
-  const [expanded, setExpanded] = useState(false)
 
   if (posts.length === 0) {
     return (
       <section
-        aria-label={isFiltered ? t.blog.noResultsTitle : t.blog.emptyTitle}
+        aria-label={t.blog.emptyTitle}
         className={cn("w-full bg-white py-10 sm:py-12 lg:py-16", className)}
       >
         <Container>
           <div className="rounded-[10px] bg-brand-light px-5 py-16 text-center sm:px-8 sm:py-20">
             <h2 className="font-heading text-xl font-bold text-brand-blue">
-              {isFiltered ? t.blog.noResultsTitle : t.blog.emptyTitle}
+              {t.blog.emptyTitle}
             </h2>
             <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-brand-dark/80">
-              {isFiltered
-                ? t.blog.noResultsDescription
-                : t.blog.emptyDescription}
+              {t.blog.emptyDescription}
             </p>
           </div>
         </Container>
@@ -172,10 +164,7 @@ export function BlogGrid({
 
   const featuredPost = posts[0]
   const latestPosts = posts.slice(1)
-  const visiblePosts = expanded
-    ? latestPosts
-    : latestPosts.slice(0, VISIBLE_COUNT)
-  const hasOverflow = latestPosts.length > VISIBLE_COUNT
+  const visiblePosts = latestPosts.slice(0, VISIBLE_COUNT)
 
   return (
     <section
@@ -204,7 +193,7 @@ export function BlogGrid({
                 {t.blog.latestTitle}
               </h2>
               <Link
-                href="#blog-latest-heading"
+                href={`/${locale}/tin-tuc/tat-ca`}
                 className="hidden items-center gap-1.5 pb-1 text-sm font-semibold text-brand-blue-mid transition-colors hover:text-brand-gold sm:inline-flex"
               >
                 {t.blog.viewAll}
@@ -223,19 +212,6 @@ export function BlogGrid({
                 <BlogCard key={post._id || post.slug?.current} post={post} />
               ))}
             </motion.div>
-
-            {hasOverflow && !expanded && (
-              <div className="mt-10 text-center">
-                <button
-                  type="button"
-                  onClick={() => setExpanded(true)}
-                  className="inline-flex items-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid"
-                >
-                  {t.blog.viewMore}
-                  <ChevronDown className="h-4 w-4" />
-                </button>
-              </div>
-            )}
           </>
         )}
       </Container>

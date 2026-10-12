@@ -65,6 +65,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       },
     },
+    {
+      url: `${SITE_URL}/vi/tin-tuc/tat-ca`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.5,
+      alternates: {
+        languages: {
+          vi: `${SITE_URL}/vi/tin-tuc/tat-ca`,
+          en: `${SITE_URL}/en/tin-tuc/tat-ca`,
+        },
+      },
+    },
     ...postRoutes,
   ]
 }
