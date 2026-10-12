@@ -47,6 +47,9 @@
     "emptyTitle": "No posts yet",
     "emptyDescription": "New articles are coming soon. Check back later!",
     "relatedTitle": "Related articles",
+    "tocTitle": "In this article",
+    "tocLabel": "Article contents",
+    "authorRole": "Consultant",
     "backToBlog": "Back to all articles",
     "seoTitle": "Blog - KVC Global",
     "seoDescription": "Study abroad, work pass and relocation insights from KVC Global."
