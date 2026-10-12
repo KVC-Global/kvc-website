@@ -6,9 +6,9 @@ import { Check } from "lucide-react"
 import {
   PortableText,
   toPlainText,
+  type PortableTextBlock,
   type PortableTextComponents,
 } from "next-sanity"
-import type { PortableTextBlock } from "@portabletext/types"
 
 import type { BlogPost } from "@/sanity/blog"
 import { urlFor } from "@/sanity/image"
