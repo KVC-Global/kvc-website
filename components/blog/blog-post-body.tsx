@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { Check } from "lucide-react"
 import {
   PortableText,
   toPlainText,
@@ -104,6 +105,33 @@ export function BlogPostBody({
           )}
 
           <article className="max-w-[880px] min-w-0">
+            {post.keyTakeaways?.length ? (
+              <div className="mb-10 rounded-lg border border-brand-blue/10 bg-brand-light p-5 sm:p-6">
+                <h2 className="font-heading text-lg font-bold text-brand-blue">
+                  {t.blog.keyTakeawaysTitle}
+                </h2>
+                <ul className="mt-4 space-y-3">
+                  {post.keyTakeaways.map((takeaway, index) => (
+                    <li
+                      key={`${takeaway}-${index}`}
+                      className="flex items-start gap-3"
+                    >
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-gold/10 text-brand-gold">
+                        <Check
+                          className="h-3 w-3"
+                          strokeWidth={3}
+                          aria-hidden="true"
+                        />
+                      </span>
+                      <span className="text-sm leading-relaxed text-brand-dark/80 sm:text-base">
+                        {takeaway}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
             <div className="prose prose-base max-w-none prose-p:leading-relaxed prose-p:text-brand-dark/80 prose-a:font-semibold prose-a:text-brand-blue hover:prose-a:text-brand-blue-mid prose-blockquote:my-6 prose-blockquote:rounded-md prose-blockquote:border-l-4 prose-blockquote:border-brand-gold prose-blockquote:bg-muted/60 prose-blockquote:px-5 prose-blockquote:py-3 prose-blockquote:text-brand-dark/80 prose-blockquote:not-italic prose-strong:text-brand-dark prose-li:text-brand-dark/80 prose-li:marker:text-brand-gold/60">
               {post.body.map((block) => {
                 if (
