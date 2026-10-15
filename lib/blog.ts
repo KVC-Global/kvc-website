@@ -120,3 +120,41 @@ export function formatPostDate(date: string | undefined, locale: "vi" | "en") {
 export function blogPostHref(slug: string | undefined, locale: "vi" | "en") {
   return slug ? `/${locale}/tin-tuc/${slug}` : "#"
 }
+
+export type BlogFilterTab = {
+  id: BlogCategoryId
+  label: { vi: string; en: string }
+}
+
+export const BLOG_FILTER_TABS: BlogFilterTab[] = [
+  { id: "all", label: { vi: "Tất cả", en: "All" } },
+  { id: "study-abroad", label: { vi: "Du học", en: "Study Abroad" } },
+  { id: "work", label: { vi: "Work Pass & Việc làm", en: "Work & Career" } },
+  { id: "scholarship", label: { vi: "Học bổng", en: "Scholarships" } },
+  { id: "residency", label: { vi: "Định cư & Đời sống", en: "Residency" } },
+  { id: "experience", label: { vi: "Kinh nghiệm", en: "Insights" } },
+]
+
+export type BlogQuickTag = {
+  id: string
+  label: string
+  query: string
+}
+
+export const BLOG_QUICK_TAGS: BlogQuickTag[] = [
+  { id: "singapore", label: "#Singapore", query: "Singapore" },
+  { id: "work-pass", label: "#WorkPass", query: "work pass" },
+  { id: "dai-hoc", label: "#ĐạiHọc", query: "đại học" },
+  { id: "hoc-bong", label: "#HọcBổng", query: "học bổng" },
+  { id: "chi-phi", label: "#ChiPhí", query: "chi phí" },
+  { id: "ossd", label: "#OSSD", query: "ossd" },
+]
+
+export function matchPostSearch(post: BlogPostCard, query: string): boolean {
+  const q = query.trim().toLowerCase()
+  if (!q) return true
+  const title = (post.title || "").toLowerCase()
+  const excerpt = (post.excerpt || "").toLowerCase()
+  const category = (post.category || "").toLowerCase()
+  return title.includes(q) || excerpt.includes(q) || category.includes(q)
+}

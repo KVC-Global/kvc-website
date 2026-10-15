@@ -807,7 +807,7 @@ export const BLOG_POSTS_QUERY = defineQuery(`
 export const BLOG_POST_QUERY = defineQuery(`
   *[_type == "post" && language == $lang && slug.current == $slug][0]{
     _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt,
-    authorName, authorRole, authorImage, keyTakeaways,
+    authorName, authorRole, authorImage, keyTakeaways, category, readingTime,
     body, seo{title, description}
   }
 `)
