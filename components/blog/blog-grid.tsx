@@ -105,7 +105,7 @@ function FeaturedPost({
         )}
         <Link
           href={href}
-          className="group mt-6 inline-flex min-w-[210px] self-start items-center justify-center gap-2 rounded-[8px] bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-brand-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid"
+          className="group mt-6 inline-flex min-w-[210px] items-center justify-center gap-2 self-start rounded-[8px] bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-brand-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid"
         >
           {readMore}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
