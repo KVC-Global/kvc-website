@@ -800,20 +800,21 @@ export const PUBLIC_STUDY_PAGE_QUERY = defineQuery(`
 
 export const BLOG_POSTS_QUERY = defineQuery(`
   *[_type == "post" && language == $lang && defined(slug.current)] | order(publishedAt desc){
-    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, category, readingTime
   }
 `)
 
 export const BLOG_POST_QUERY = defineQuery(`
   *[_type == "post" && language == $lang && slug.current == $slug][0]{
-    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, body,
-    seo{title, description}
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt,
+    authorName, authorRole, authorImage, keyTakeaways, category, readingTime,
+    body, seo{title, description}
   }
 `)
 
 export const BLOG_RELATED_POSTS_QUERY = defineQuery(`
   *[_type == "post" && language == $lang && slug.current != $slug] | order(publishedAt desc)[0...3]{
-    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, category, readingTime
   }
 `)
 
