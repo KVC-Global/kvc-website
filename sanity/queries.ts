@@ -82,7 +82,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
     "story": storySection,
     "values": valuesSection{eyebrow, titleLine1, titleLine2, paragraph1, paragraph2, ctaLabel, ctaHref, image, imageAlt},
     "testimonials": testimonialsSection{
-      eyebrow, title, description,
+      eyebrow, title, titleLine2, description,
       reviews[]{_key, name, role, quote, image, rating}
     },
     "partners": {
@@ -120,8 +120,9 @@ export const CONTACT_PAGE_QUERY = defineQuery(`
       )
     },
     "form": formSection{
-      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, messageLabel,
-      consentLabel, submitLabel, serviceOptions[]{_key, label, value}
+      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, servicePlaceholder,
+      messageLabel, messagePlaceholder, consentLabel, privacyLabel, consentSuffix,
+      submitLabel, pendingLabel, responseNote, serviceOptions[]{_key, label, value}
     },
     "offices": officesSection{
       eyebrow, title, description,

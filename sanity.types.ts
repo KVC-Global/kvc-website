@@ -1249,9 +1249,15 @@ export type ContactPageForm = {
   emailLabel?: string;
   phoneLabel?: string;
   serviceLabel?: string;
+  servicePlaceholder?: string;
   messageLabel?: string;
+  messagePlaceholder?: string;
   consentLabel?: string;
+  privacyLabel?: string;
+  consentSuffix?: string;
   submitLabel?: string;
+  pendingLabel?: string;
+  responseNote?: string;
   serviceOptions?: Array<{
     _key: string;
   } & ContactPageServiceOption>;
@@ -1324,6 +1330,7 @@ export type AboutPageTestimonials = {
   _type: "aboutPageTestimonials";
   eyebrow?: string;
   title?: string;
+  titleLine2?: string;
   description?: string;
   reviews?: Array<{
     _key: string;
@@ -2849,7 +2856,7 @@ export type HOME_PAGE_QUERY_RESULT = {
 
 // Source: ../kvc-website/sanity/queries.ts
 // Variable: ABOUT_PAGE_QUERY
-// Query: *[_type == "aboutPage" && language == $lang][0]{    "hero": heroSection,    "stats": statsSection.items[]{_key, icon, value, label},    "story": storySection,    "values": valuesSection{eyebrow, titleLine1, titleLine2, paragraph1, paragraph2, ctaLabel, ctaHref, image, imageAlt},    "testimonials": testimonialsSection{      eyebrow, title, description,      reviews[]{_key, name, role, quote, image, rating}    },    "partners": {      "eyebrow": partnersSection.eyebrow,      "title": partnersSection.title,      "partners": select(        count(partnersSection.partners) > 0 => partnersSection.partners[]->{_id, name, logo, website},        *[_type == "partner"] | order(name asc){_id, name, logo, website}      )    },    "offices": officesSection{      eyebrow, title, description,      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}    },    seo{title, description, image}  }
+// Query: *[_type == "aboutPage" && language == $lang][0]{    "hero": heroSection,    "stats": statsSection.items[]{_key, icon, value, label},    "story": storySection,    "values": valuesSection{eyebrow, titleLine1, titleLine2, paragraph1, paragraph2, ctaLabel, ctaHref, image, imageAlt},    "testimonials": testimonialsSection{      eyebrow, title, titleLine2, description,      reviews[]{_key, name, role, quote, image, rating}    },    "partners": {      "eyebrow": partnersSection.eyebrow,      "title": partnersSection.title,      "partners": select(        count(partnersSection.partners) > 0 => partnersSection.partners[]->{_id, name, logo, website},        *[_type == "partner"] | order(name asc){_id, name, logo, website}      )    },    "offices": officesSection{      eyebrow, title, description,      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}    },    seo{title, description, image}  }
 export type ABOUT_PAGE_QUERY_RESULT = {
   hero: AboutPageHero | null;
   stats: Array<{
@@ -2879,6 +2886,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
   testimonials: {
     eyebrow: string | null;
     title: string | null;
+    titleLine2: string | null;
     description: string | null;
     reviews: Array<{
       _key: string;
@@ -2900,14 +2908,14 @@ export type ABOUT_PAGE_QUERY_RESULT = {
     title: string | null;
     partners: Array<{
       _id: string;
-      name: string;
+      name: string | null;
       logo: {
         asset?: SanityImageAssetReference;
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         _type: "image";
-      };
+      } | null;
       website: string | null;
     }> | null;
   };
@@ -2951,7 +2959,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
 
 // Source: ../kvc-website/sanity/queries.ts
 // Variable: CONTACT_PAGE_QUERY
-// Query: *[_type == "contactPage" && language == $lang][0]{    "hero": heroSection,    "info": infoSection{      title, description, officeHoursTitle, weekdayHours, weekendHours,      socialTitle, socialDescription,      "phone": coalesce(*[_id == "company-info"][0].phones[0].number, phone),      "email": coalesce(*[_id == "company-info"][0].email, email),      "address": coalesce(        select($lang == "en" => *[_id == "company-info"][0].addressEn),        *[_id == "company-info"][0].addressVi,        address      ),      "socialLinks": coalesce(        *[_id == "company-info"][0].socialLinks[]{_key, "label": network, url, network},        socialLinks[]{_key, label, url, network}      )    },    "form": formSection{      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, messageLabel,      consentLabel, submitLabel, serviceOptions[]{_key, label, value}    },    "offices": officesSection{      eyebrow, title, description,      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}    },    seo{title, description, image}  }
+// Query: *[_type == "contactPage" && language == $lang][0]{    "hero": heroSection,    "info": infoSection{      title, description, officeHoursTitle, weekdayHours, weekendHours,      socialTitle, socialDescription,      "phone": coalesce(*[_id == "company-info"][0].phones[0].number, phone),      "email": coalesce(*[_id == "company-info"][0].email, email),      "address": coalesce(        select($lang == "en" => *[_id == "company-info"][0].addressEn),        *[_id == "company-info"][0].addressVi,        address      ),      "socialLinks": coalesce(        *[_id == "company-info"][0].socialLinks[]{_key, "label": network, url, network},        socialLinks[]{_key, label, url, network}      )    },    "form": formSection{      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, servicePlaceholder,      messageLabel, messagePlaceholder, consentLabel, privacyLabel, consentSuffix,      submitLabel, pendingLabel, responseNote, serviceOptions[]{_key, label, value}    },    "offices": officesSection{      eyebrow, title, description,      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}    },    seo{title, description, image}  }
 export type CONTACT_PAGE_QUERY_RESULT = {
   hero: ContactPageHero | null;
   info: {
@@ -2972,9 +2980,9 @@ export type CONTACT_PAGE_QUERY_RESULT = {
       network: string | null;
     }> | Array<{
       _key: string;
-      label: "facebook" | "instagram" | "linkedin" | "youtube";
-      url: string;
-      network: "facebook" | "instagram" | "linkedin" | "youtube";
+      label: "facebook" | "instagram" | "linkedin" | "youtube" | null;
+      url: string | null;
+      network: "facebook" | "instagram" | "linkedin" | "youtube" | null;
     }> | null;
   } | null;
   form: {
@@ -2984,9 +2992,15 @@ export type CONTACT_PAGE_QUERY_RESULT = {
     emailLabel: string | null;
     phoneLabel: string | null;
     serviceLabel: string | null;
+    servicePlaceholder: string | null;
     messageLabel: string | null;
+    messagePlaceholder: string | null;
     consentLabel: string | null;
+    privacyLabel: string | null;
+    consentSuffix: string | null;
     submitLabel: string | null;
+    pendingLabel: string | null;
+    responseNote: string | null;
     serviceOptions: Array<{
       _key: string;
       label: string | null;
@@ -5446,8 +5460,8 @@ declare global {
   interface SanityQueries {
     "\n  *[_type == \"siteSettings\" && language == $lang][0]{\n    header{\n      comingSoonLabel,\n      navItems[]{\n        _key, label, link{destination, customHref},\n        children[]{_key, label, description, isComingSoon, link{destination, customHref}}\n      },\n      cta{label, link{destination, customHref}}\n    },\n    footer{\n      bio,\n      cta{\n        enabled, title, description,\n        primaryButton{label, link{destination, customHref}},\n        secondaryButton{label, link{destination, customHref}}\n      },\n      servicesColumn{heading, links[]{_key, label, link{destination, customHref}}},\n      aboutColumn{heading, links[]{_key, label, link{destination, customHref}}},\n      supportColumn{heading, links[]{_key, label, link{destination, customHref}}},\n      contactHeading,\n      legalLinks[]{_key, label, link{destination, customHref}},\n      copyrightNotice\n    },\n    \"company\": *[_id == \"company-info\"][0]{\n      phones[]{_key, label, number},\n      email,\n      \"address\": select($lang == \"en\" => addressEn, addressVi),\n      mapUrl,\n      socialLinks[]{_key, network, url}\n    }\n  }\n": SITE_SETTINGS_QUERY_RESULT;
     "\n  *[_type == \"homePage\" && language == $lang][0]{\n    \"hero\": heroSection{\n      eyebrow, titleLine1, titleLine2, description,\n      primaryButtonLabel, primaryButtonHref,\n      secondaryButtonLabel, secondaryButtonHref,\n      backgroundImage, backgroundImageAlt\n    },\n    \"stats\": statsSection.items[]{_key, value, label, icon},\n    \"about\": aboutSection{\n      eyebrow, title, description, image, imageAlt, ctaLabel, ctaHref,\n      statsTitle,\n      progressStats[]{_key, value, label, color},\n      iconStats[]{_key, value, sub, icon, tone}\n    },\n    \"partnersContent\": partnersSection{eyebrow, title},\n    \"servicesContent\": servicesSection{eyebrow, title, description},\n    \"whyProcessContent\": whyProcessSection{\n      why{eyebrow, title, cta},\n      process{eyebrow, title, ariaLabel}\n    },\n    \"testimonialsContent\": testimonialsSection{eyebrow, title},\n    \"whyReasons\": whyProcessSection.why.reasons[]{_key, icon, title, description},\n    \"processSteps\": whyProcessSection.process.steps[]{_key, icon, title, description},\n    \"googleReviews\": testimonialsSection.googleReviews{\n      rating, reviewCount, reviewUrl,\n      reviews[]{_key, name, initial, color, text}\n    },\n    seo{title, description, image},\n    \"featuredServices\": servicesSection.services[]->{\n      _id, title, description, slug, icon, image, alt\n    },\n    \"featuredPartners\": partnersSection.partners[]->{\n      _id, name, logo, website\n    },\n    \"featuredTestimonials\": testimonialsSection.testimonials[]->{\n      _id, name, role, company, quote, image, rating\n    }\n  }\n": HOME_PAGE_QUERY_RESULT;
-    "\n  *[_type == \"aboutPage\" && language == $lang][0]{\n    \"hero\": heroSection,\n    \"stats\": statsSection.items[]{_key, icon, value, label},\n    \"story\": storySection,\n    \"values\": valuesSection{eyebrow, titleLine1, titleLine2, paragraph1, paragraph2, ctaLabel, ctaHref, image, imageAlt},\n    \"testimonials\": testimonialsSection{\n      eyebrow, title, description,\n      reviews[]{_key, name, role, quote, image, rating}\n    },\n    \"partners\": {\n      \"eyebrow\": partnersSection.eyebrow,\n      \"title\": partnersSection.title,\n      \"partners\": select(\n        count(partnersSection.partners) > 0 => partnersSection.partners[]->{_id, name, logo, website},\n        *[_type == \"partner\"] | order(name asc){_id, name, logo, website}\n      )\n    },\n    \"offices\": officesSection{\n      eyebrow, title, description,\n      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}\n    },\n    seo{title, description, image}\n  }\n": ABOUT_PAGE_QUERY_RESULT;
-    "\n  *[_type == \"contactPage\" && language == $lang][0]{\n    \"hero\": heroSection,\n    \"info\": infoSection{\n      title, description, officeHoursTitle, weekdayHours, weekendHours,\n      socialTitle, socialDescription,\n      \"phone\": coalesce(*[_id == \"company-info\"][0].phones[0].number, phone),\n      \"email\": coalesce(*[_id == \"company-info\"][0].email, email),\n      \"address\": coalesce(\n        select($lang == \"en\" => *[_id == \"company-info\"][0].addressEn),\n        *[_id == \"company-info\"][0].addressVi,\n        address\n      ),\n      \"socialLinks\": coalesce(\n        *[_id == \"company-info\"][0].socialLinks[]{_key, \"label\": network, url, network},\n        socialLinks[]{_key, label, url, network}\n      )\n    },\n    \"form\": formSection{\n      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, messageLabel,\n      consentLabel, submitLabel, serviceOptions[]{_key, label, value}\n    },\n    \"offices\": officesSection{\n      eyebrow, title, description,\n      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}\n    },\n    seo{title, description, image}\n  }\n": CONTACT_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"aboutPage\" && language == $lang][0]{\n    \"hero\": heroSection,\n    \"stats\": statsSection.items[]{_key, icon, value, label},\n    \"story\": storySection,\n    \"values\": valuesSection{eyebrow, titleLine1, titleLine2, paragraph1, paragraph2, ctaLabel, ctaHref, image, imageAlt},\n    \"testimonials\": testimonialsSection{\n      eyebrow, title, titleLine2, description,\n      reviews[]{_key, name, role, quote, image, rating}\n    },\n    \"partners\": {\n      \"eyebrow\": partnersSection.eyebrow,\n      \"title\": partnersSection.title,\n      \"partners\": select(\n        count(partnersSection.partners) > 0 => partnersSection.partners[]->{_id, name, logo, website},\n        *[_type == \"partner\"] | order(name asc){_id, name, logo, website}\n      )\n    },\n    \"offices\": officesSection{\n      eyebrow, title, description,\n      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}\n    },\n    seo{title, description, image}\n  }\n": ABOUT_PAGE_QUERY_RESULT;
+    "\n  *[_type == \"contactPage\" && language == $lang][0]{\n    \"hero\": heroSection,\n    \"info\": infoSection{\n      title, description, officeHoursTitle, weekdayHours, weekendHours,\n      socialTitle, socialDescription,\n      \"phone\": coalesce(*[_id == \"company-info\"][0].phones[0].number, phone),\n      \"email\": coalesce(*[_id == \"company-info\"][0].email, email),\n      \"address\": coalesce(\n        select($lang == \"en\" => *[_id == \"company-info\"][0].addressEn),\n        *[_id == \"company-info\"][0].addressVi,\n        address\n      ),\n      \"socialLinks\": coalesce(\n        *[_id == \"company-info\"][0].socialLinks[]{_key, \"label\": network, url, network},\n        socialLinks[]{_key, label, url, network}\n      )\n    },\n    \"form\": formSection{\n      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, servicePlaceholder,\n      messageLabel, messagePlaceholder, consentLabel, privacyLabel, consentSuffix,\n      submitLabel, pendingLabel, responseNote, serviceOptions[]{_key, label, value}\n    },\n    \"offices\": officesSection{\n      eyebrow, title, description,\n      offices[]{_key, country, role, description, address, phone, email, hours, mapUrl, mapQuery, image, imageAlt}\n    },\n    seo{title, description, image}\n  }\n": CONTACT_PAGE_QUERY_RESULT;
     "*[_type == \"testimonial\" && (!defined(language) || language == $lang)] | order(name asc)": TESTIMONIALS_QUERY_RESULT;
     "*[_type == \"partner\" && (!defined(language) || language == $lang)] | order(name asc)": PARTNERS_QUERY_RESULT;
     "*[_type == \"service\" && (!defined(language) || language == $lang)] | order(title asc)": SERVICES_QUERY_RESULT;

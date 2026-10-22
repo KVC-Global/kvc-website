@@ -997,14 +997,16 @@ export function AboutPage({ content }: { content?: AboutPageData }) {
               {content?.testimonials?.title ? (
                 content.testimonials.title
               ) : (
-                <>
-                  <span className="sm:whitespace-nowrap">
-                    Khách hàng luôn ở trung tâm
-                  </span>
-                  <span className="block text-brand-gold sm:whitespace-nowrap">
-                    trong mọi điều chúng tôi làm
-                  </span>
-                </>
+                <span className="sm:whitespace-nowrap">
+                  Khách hàng luôn ở trung tâm
+                </span>
+              )}
+              {(content?.testimonials?.titleLine2 ||
+                !content?.testimonials?.title) && (
+                <span className="block text-brand-gold">
+                  {content?.testimonials?.titleLine2 ||
+                    "trong mọi điều chúng tôi làm"}
+                </span>
               )}
             </h2>
             <p className="mx-auto mt-5 max-w-md font-body text-sm leading-relaxed text-brand-dark/65 sm:text-base">

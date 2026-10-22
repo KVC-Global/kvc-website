@@ -76,6 +76,7 @@ export type AboutPageData = {
   testimonials?: {
     eyebrow?: string
     title?: string
+    titleLine2?: string
     description?: string
     reviews?: Array<{
       _key?: string
@@ -123,9 +124,15 @@ export type ContactPageData = {
     emailLabel?: string
     phoneLabel?: string
     serviceLabel?: string
+    servicePlaceholder?: string
     messageLabel?: string
+    messagePlaceholder?: string
     consentLabel?: string
+    privacyLabel?: string
+    consentSuffix?: string
     submitLabel?: string
+    pendingLabel?: string
+    responseNote?: string
     serviceOptions?: Array<{ _key?: string; label?: string; value?: string }>
   }
   offices?: {

@@ -1,19 +1,19 @@
 "use client"
 
 import * as React from "react"
-import {CheckCircle2, Loader2, Send} from "lucide-react"
-import {sendGAEvent} from "@next/third-parties/google"
-import {submitLead} from "@/app/actions/submit-lead"
-import {initialLeadFormState} from "@/lib/lead-form-state"
-import type {ContactPageData} from "@/sanity/content-pages"
+import { CheckCircle2, Loader2, Send } from "lucide-react"
+import { sendGAEvent } from "@next/third-parties/google"
+import { submitLead } from "@/app/actions/submit-lead"
+import { initialLeadFormState } from "@/lib/lead-form-state"
+import type { ContactPageData } from "@/sanity/content-pages"
 
 const SERVICES = [
-  {value: "", label: "Chọn dịch vụ bạn quan tâm *"},
-  {value: "du-hoc", label: "Du học Singapore"},
-  {value: "khoa-hoc-online", label: "Khóa học Online Quốc tế"},
-  {value: "work-pass", label: "Training Employment Pass (TEP)"},
-  {value: "dinh-cu", label: "Định cư & Doanh nghiệp Singapore"},
-  {value: "khac", label: "Khác"},
+  { value: "", label: "Chọn dịch vụ bạn quan tâm *" },
+  { value: "du-hoc", label: "Du học Singapore" },
+  { value: "khoa-hoc-online", label: "Khóa học Online Quốc tế" },
+  { value: "work-pass", label: "Training Employment Pass (TEP)" },
+  { value: "dinh-cu", label: "Định cư & Doanh nghiệp Singapore" },
+  { value: "khac", label: "Khác" },
 ] as const
 
 function Field({
@@ -55,7 +55,15 @@ function Field({
 const inputBase =
   "w-full rounded-sm border border-input bg-white px-4 py-3 font-body text-sm text-foreground placeholder:text-muted-foreground/60 transition-all focus:border-brand-blue focus:outline-none focus:ring-2 focus:ring-brand-blue/20 aria-[invalid=true]:border-destructive"
 
-function SubmitButton({pending}: {pending: boolean}) {
+function SubmitButton({
+  pending,
+  label,
+  pendingLabel,
+}: {
+  pending: boolean
+  label?: string
+  pendingLabel?: string
+}) {
   return (
     <button
       type="submit"
@@ -67,7 +75,7 @@ function SubmitButton({pending}: {pending: boolean}) {
       ) : (
         <Send className="h-4 w-4" strokeWidth={2} />
       )}
-      {pending ? "Đang gửi..." : "Gửi yêu cầu tư vấn"}
+      {pending ? pendingLabel || "Đang gửi..." : label || "Gửi yêu cầu tư vấn"}
     </button>
   )
 }
@@ -77,10 +85,12 @@ export function ContactForm({
 }: {
   content?: ContactPageData["form"]
 }) {
-  const services = content?.serviceOptions?.length ? content.serviceOptions : SERVICES
+  const services = content?.serviceOptions?.length
+    ? content.serviceOptions
+    : SERVICES
   const [state, formAction, pending] = React.useActionState(
     submitLead,
-    initialLeadFormState,
+    initialLeadFormState
   )
 
   // Lead source captured at submit time (client-only data, no state needed).
@@ -91,7 +101,7 @@ export function ContactForm({
     formData.set("utm_campaign", utmParams.get("utm_campaign") ?? "")
     formData.set(
       "referrer",
-      document.referrer ? new URL(document.referrer).hostname : "",
+      document.referrer ? new URL(document.referrer).hostname : ""
     )
     return formAction(formData)
   }
@@ -221,18 +231,27 @@ export function ContactForm({
           required
           defaultValue=""
           aria-invalid={errors?.service ? true : undefined}
-          aria-describedby={errors?.service ? "contact-service-error" : undefined}
+          aria-describedby={
+            errors?.service ? "contact-service-error" : undefined
+          }
           className={inputBase + " appearance-none"}
         >
-          {services.map((svc) => (
-            <option
-              key={svc.value}
-              value={svc.value}
-              disabled={svc.value === ""}
-            >
-              {svc.label}
-            </option>
-          ))}
+          <option value="" disabled>
+            {content?.servicePlaceholder ||
+              services.find((svc) => svc.value === "")?.label ||
+              "Chọn dịch vụ bạn quan tâm *"}
+          </option>
+          {services
+            .filter((svc) => svc.value !== "")
+            .map((svc) => (
+              <option
+                key={svc.value}
+                value={svc.value}
+                disabled={svc.value === ""}
+              >
+                {svc.label}
+              </option>
+            ))}
         </select>
       </Field>
 
@@ -246,9 +265,13 @@ export function ContactForm({
           name="message"
           rows={4}
           maxLength={2000}
-          placeholder="Nội dung bạn muốn tư vấn..."
+          placeholder={
+            content?.messagePlaceholder || "Nội dung bạn muốn tư vấn..."
+          }
           aria-invalid={errors?.message ? true : undefined}
-          aria-describedby={errors?.message ? "contact-message-error" : undefined}
+          aria-describedby={
+            errors?.message ? "contact-message-error" : undefined
+          }
           className={inputBase + " resize-y"}
         />
       </Field>
@@ -261,26 +284,32 @@ export function ContactForm({
           type="checkbox"
           required
           aria-invalid={errors?.consent ? true : undefined}
-          aria-describedby={errors?.consent ? "contact-consent-error" : undefined}
+          aria-describedby={
+            errors?.consent ? "contact-consent-error" : undefined
+          }
           className="mt-1 h-4 w-4 shrink-0 rounded-sm border-border text-brand-blue focus:ring-brand-blue/30"
         />
         <label
           htmlFor="contact-consent"
           className="font-body text-xs leading-relaxed text-muted-foreground"
         >
-          Tôi đồng ý với{" "}
+          {content?.consentLabel || "Tôi đồng ý với"}{" "}
           <a
             href="/chinh-sach-bao-mat"
             className="text-brand-blue underline underline-offset-2 transition-colors hover:text-brand-gold"
           >
-            Chính sách bảo mật
+            {content?.privacyLabel || "Chính sách bảo mật"}
           </a>{" "}
-          và cho phép KVC Global liên hệ lại qua thông tin đã cung cấp.{" "}
+          {content?.consentSuffix ||
+            "và cho phép KVC Global liên hệ lại qua thông tin đã cung cấp."}{" "}
           <span className="text-destructive">*</span>
         </label>
       </div>
       {errors?.consent && (
-        <p id="contact-consent-error" className="font-body text-xs text-destructive">
+        <p
+          id="contact-consent-error"
+          className="font-body text-xs text-destructive"
+        >
           {errors.consent}
         </p>
       )}
@@ -291,10 +320,15 @@ export function ContactForm({
         </p>
       )}
 
-      <SubmitButton pending={pending} />
+      <SubmitButton
+        pending={pending}
+        label={content?.submitLabel}
+        pendingLabel={content?.pendingLabel}
+      />
 
       <p className="text-center font-body text-xs text-muted-foreground">
-        Sau khi bạn gửi, chúng tôi sẽ phản hồi trong vòng 24 giờ làm việc.
+        {content?.responseNote ||
+          "Sau khi bạn gửi, chúng tôi sẽ phản hồi trong vòng 24 giờ làm việc."}
       </p>
     </form>
   )
