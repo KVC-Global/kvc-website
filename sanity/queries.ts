@@ -82,7 +82,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
     "story": storySection,
     "values": valuesSection{eyebrow, titleLine1, titleLine2, paragraph1, paragraph2, ctaLabel, ctaHref, image, imageAlt},
     "testimonials": testimonialsSection{
-      eyebrow, title, description,
+      eyebrow, title, titleLine2, description,
       reviews[]{_key, name, role, quote, image, rating}
     },
     "partners": {
@@ -120,8 +120,9 @@ export const CONTACT_PAGE_QUERY = defineQuery(`
       )
     },
     "form": formSection{
-      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, messageLabel,
-      consentLabel, submitLabel, serviceOptions[]{_key, label, value}
+      title, description, nameLabel, emailLabel, phoneLabel, serviceLabel, servicePlaceholder,
+      messageLabel, messagePlaceholder, consentLabel, privacyLabel, consentSuffix,
+      submitLabel, pendingLabel, responseNote, serviceOptions[]{_key, label, value}
     },
     "offices": officesSection{
       eyebrow, title, description,
@@ -800,20 +801,21 @@ export const PUBLIC_STUDY_PAGE_QUERY = defineQuery(`
 
 export const BLOG_POSTS_QUERY = defineQuery(`
   *[_type == "post" && language == $lang && defined(slug.current)] | order(publishedAt desc){
-    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, category, readingTime
   }
 `)
 
 export const BLOG_POST_QUERY = defineQuery(`
   *[_type == "post" && language == $lang && slug.current == $slug][0]{
-    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, body,
-    seo{title, description}
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt,
+    authorName, authorRole, authorImage, keyTakeaways, category, readingTime,
+    body, seo{title, description}
   }
 `)
 
 export const BLOG_RELATED_POSTS_QUERY = defineQuery(`
   *[_type == "post" && language == $lang && slug.current != $slug] | order(publishedAt desc)[0...3]{
-    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName
+    _id, title, slug, mainImage, mainImageAlt, excerpt, publishedAt, authorName, category, readingTime
   }
 `)
 
