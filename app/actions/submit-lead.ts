@@ -1,23 +1,29 @@
 "use server"
-import {headers} from "next/headers"
-import {after} from "next/server"
-import {writeClient} from "@/sanity/write-client"
-import {
-  createMisaContact,
-  isMisaConfigured,
-  type MisaContactPayload,
-} from "@/lib/misa-crm"
-import {resolveMisaOwner} from "@/lib/misa-owner"
+import { headers } from "next/headers"
+import { submitMisaWebform } from "@/lib/misa-webforms"
+import { resolveStaffCode } from "@/lib/misa-attribution"
 
 const SERVICES = [
-  {value: "du-hoc", label: "Du học Singapore"},
-  {value: "khoa-hoc-online", label: "Khóa học Online Quốc tế"},
-  {value: "work-pass", label: "Training Employment Pass (TEP)"},
-  {value: "dinh-cu", label: "Định cư & Doanh nghiệp Singapore"},
-  {value: "khac", label: "Khác"},
+  { value: "du-hoc", label: "Du học Singapore", misaValue: "2" },
+  {
+    value: "khoa-hoc-online",
+    label: "Khóa học Online Quốc tế",
+    misaValue: "3",
+  },
+  {
+    value: "work-pass",
+    label: "Training Employment Pass (TEP)",
+    misaValue: "1",
+  },
+  {
+    value: "dinh-cu",
+    label: "Định cư & Doanh nghiệp Singapore",
+    misaValue: "4",
+  },
+  { value: "khac", label: "Khác", misaValue: "5" },
 ] as const
 
-import type {LeadFormState} from "@/lib/lead-form-state"
+import type { LeadFormState } from "@/lib/lead-form-state"
 
 // Simple per-IP rate limit: max 5 submissions / hour. In-memory, best-effort.
 const RATE_LIMIT_MAX = 5
@@ -27,7 +33,7 @@ const submissions = new Map<string, number[]>()
 function isRateLimited(ip: string): boolean {
   const now = Date.now()
   const recent = (submissions.get(ip) ?? []).filter(
-    (ts) => now - ts < RATE_LIMIT_WINDOW_MS,
+    (ts) => now - ts < RATE_LIMIT_WINDOW_MS
   )
   if (recent.length >= RATE_LIMIT_MAX) {
     submissions.set(ip, recent)
@@ -75,17 +81,19 @@ const SPAM_PATTERNS = [
 
 export async function submitLead(
   _prev: LeadFormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<LeadFormState> {
   const get = (key: string) => String(formData.get(key) ?? "").trim()
 
   // Honeypot: real users never see this field. Pretend success for bots.
   if (get("website")) {
-    return {status: "success"}
+    return { status: "submitted" }
   }
   // Rate limit by IP (x-forwarded-for, e.g. set by Vercel).
-  const forwardedFor =
-    (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim()
+  const forwardedFor = (await headers())
+    .get("x-forwarded-for")
+    ?.split(",")[0]
+    ?.trim()
   if (isRateLimited(forwardedFor || "unknown")) {
     return {
       status: "error",
@@ -98,14 +106,13 @@ export async function submitLead(
   const phone = get("phone")
   const service = get("service")
   const message = get("message")
-  const consent = formData.get("consent") !== null
+  const consent = formData.get("consent") === "on"
 
   // Hidden UTM / referrer context captured on the client.
   const utmSource = get("utm_source")
   const utmMedium = get("utm_medium")
   const utmCampaign = get("utm_campaign")
   const referrer = get("referrer")
-
 
   // Server-side validation — client validation is UX only.
   const fieldErrors: LeadFormState["fieldErrors"] = {}
@@ -128,7 +135,8 @@ export async function submitLead(
   } else if (!isValidVietnamPhone(phone)) {
     fieldErrors.phone = "Số điện thoại không hợp lệ."
   }
-  if (!service || !SERVICES.some((s) => s.value === service)) {
+  const selectedService = SERVICES.find((s) => s.value === service)
+  if (!selectedService) {
     fieldErrors.service = "Vui lòng chọn dịch vụ bạn quan tâm."
   }
   if (message && message.length > 2000) {
@@ -138,20 +146,20 @@ export async function submitLead(
     fieldErrors.consent = "Vui lòng đồng ý với chính sách bảo mật."
   }
 
-  if (Object.keys(fieldErrors).length > 0) {
-    return {status: "error", fieldErrors}
+  if (Object.keys(fieldErrors).length > 0 || !selectedService) {
+    return { status: "error", fieldErrors }
   }
 
   if (isSpamText(message) || isSpamText(name)) {
-    // Silently accept spam-looking content but don't persist.
-    return {status: "success"}
+    // Silently discard spam-looking submissions.
+    return { status: "submitted" }
   }
 
-  const serviceLabel =
-    SERVICES.find((s) => s.value === service)?.label ?? service
+  const staffCode = resolveStaffCode(get("staff_code"), utmSource)
 
   const description = [
-    `Dịch vụ: ${serviceLabel}`,
+    `Dịch vụ: ${selectedService.label}`,
+    `Nhân viên phụ trách theo link: ${staffCode}`,
     message ? `Tin nhắn: ${message}` : "",
     utmSource ? `UTM: ${utmSource} / ${utmMedium} / ${utmCampaign}` : "",
     referrer ? `Referrer: ${referrer}` : "",
@@ -159,57 +167,21 @@ export async function submitLead(
     .filter(Boolean)
     .join("\n")
 
-  // Convention: utm_source="<channel>/<staff code>", e.g. facebook/NV01.
-  const staffCode = utmSource.includes("/") ? utmSource.split("/")[1] : ""
-  const channel = utmSource.split("/")[0]
-  const ownerName = resolveMisaOwner(staffCode)
-
-  const misaContact: MisaContactPayload = {
-    contact_name: name,
-    email,
-    mobile: phone,
-    description,
-    lead_source: channel ? `Website (${channel})` : "Website",
-    ...(ownerName ? {owner_name: ownerName} : {}),
-  }
-
   try {
-    const lead = await writeClient.create({
-      _type: "lead",
+    await submitMisaWebform(staffCode, {
       name,
       email,
       phone,
-      service,
-      serviceLabel,
-      message: message || undefined,
-      utmSource: utmSource || undefined,
-      utmMedium: utmMedium || undefined,
-      utmCampaign: utmCampaign || undefined,
-      referrer: referrer || undefined,
-      submittedAt: new Date().toISOString(),
+      service: selectedService.misaValue,
+      description,
     })
-
-    // Fire-and-forget CRM push: runs after the success response is sent.
-    // ponytail: log-and-loss on Misa failure; add a retry queue if lead volume justifies it.
-    if (isMisaConfigured()) {
-      after(async () => {
-        try {
-          await createMisaContact({
-            ...misaContact,
-            contact_code: lead._id,
-          })
-        } catch (error) {
-          console.error(`[submitLead] MISA push failed for lead ${lead._id}:`, error)
-        }
-      })
-    }
-    return {status: "success"}
+    return { status: "submitted" }
   } catch (error) {
-    console.error("[submitLead] failed to persist lead:", error)
+    console.error("[submitLead] MISA Webform forwarding failed:", error)
     return {
       status: "error",
-      formError: "Không thể gửi yêu cầu lúc này. Vui lòng thử lại hoặc liên hệ trực tiếp qua hotline.",
+      formError:
+        "Không thể gửi yêu cầu lúc này. Vui lòng thử lại hoặc liên hệ trực tiếp qua hotline.",
     }
   }
 }
-
