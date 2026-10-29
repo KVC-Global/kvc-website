@@ -5,7 +5,7 @@ import { CheckCircle2, Loader2, Send } from "lucide-react"
 import { submitLead } from "@/app/actions/submit-lead"
 import { initialLeadFormState } from "@/lib/lead-form-state"
 import type { ContactPageData } from "@/sanity/content-pages"
-import { useMisaStaffCode } from "@/components/misa-attribution-provider"
+import { useMisaAttribution } from "@/components/misa-attribution-provider"
 
 const SERVICES = [
   { value: "", label: "Chọn dịch vụ bạn quan tâm *" },
@@ -90,23 +90,17 @@ export function ContactForm({
   const services = content?.serviceOptions?.length
     ? content.serviceOptions
     : SERVICES
-  const staffCode = useMisaStaffCode()
+  const attribution = useMisaAttribution()
   const [state, formAction, pending] = React.useActionState(
     submitLead,
     initialLeadFormState
   )
 
-  // Lead source captured at submit time (client-only data, no state needed).
+  // Retained attribution, not the current URL: the referral may have been
+  // captured on an earlier page in this tab.
   const handleAction = (formData: FormData) => {
-    const utmParams = new URLSearchParams(window.location.search)
-    formData.set("utm_source", utmParams.get("utm_source") ?? "")
-    formData.set("utm_medium", utmParams.get("utm_medium") ?? "")
-    formData.set("utm_campaign", utmParams.get("utm_campaign") ?? "")
-    formData.set("staff_code", staffCode ?? "")
-    formData.set(
-      "referrer",
-      document.referrer ? new URL(document.referrer).hostname : ""
-    )
+    formData.set("utm_source", attribution?.utmSource ?? "")
+    formData.set("staff_code", attribution?.staffCode ?? "")
     return formAction(formData)
   }
 
@@ -319,7 +313,7 @@ export function ContactForm({
 
       <SubmitButton
         pending={pending}
-        disabled={staffCode === null}
+        disabled={attribution === null}
         label={content?.submitLabel}
         pendingLabel={content?.pendingLabel}
       />

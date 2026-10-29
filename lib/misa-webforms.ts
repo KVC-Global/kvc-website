@@ -66,25 +66,30 @@ export async function submitMisaWebform(
     phone: string
     service: string
     description: string
+    sourceId: string | null
   }
 ): Promise<void> {
   const form = FORMS[staffCode]
+  const body = new URLSearchParams({
+    ID: form.id,
+    Companycode: COMPANY_CODE,
+    AllowURL: SITE_ORIGIN,
+    FormKey: form.key,
+    RedirectURL: form.redirectUrl,
+    LastName: lead.name,
+    Email: lead.email,
+    Mobile: lead.phone,
+    CustomField13: lead.service,
+    Description: lead.description,
+    privacyTool: "on",
+  })
+  // Only send a source the server resolved from an allowlisted channel.
+  if (lead.sourceId) body.set("LeadSourceID", lead.sourceId)
+
   const response = await fetch(FORM_ENDPOINT, {
     method: "POST",
     headers: { Origin: SITE_ORIGIN, Referer: SITE_ORIGIN + "/" },
-    body: new URLSearchParams({
-      ID: form.id,
-      Companycode: COMPANY_CODE,
-      AllowURL: SITE_ORIGIN,
-      FormKey: form.key,
-      RedirectURL: form.redirectUrl,
-      LastName: lead.name,
-      Email: lead.email,
-      Mobile: lead.phone,
-      CustomField13: lead.service,
-      Description: lead.description,
-      privacyTool: "on",
-    }),
+    body,
     redirect: "manual",
     cache: "no-store",
     signal: AbortSignal.timeout(15000),

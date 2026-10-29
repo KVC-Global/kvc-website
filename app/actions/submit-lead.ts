@@ -1,26 +1,23 @@
 "use server"
 import { headers } from "next/headers"
 import { submitMisaWebform } from "@/lib/misa-webforms"
-import { resolveStaffCode } from "@/lib/misa-attribution"
+import { resolveMisaAttribution } from "@/lib/misa-attribution"
 
 const SERVICES = [
-  { value: "du-hoc", label: "Du học Singapore", misaValue: "2" },
+  { value: "du-hoc", misaValue: "2" },
   {
     value: "khoa-hoc-online",
-    label: "Khóa học Online Quốc tế",
     misaValue: "3",
   },
   {
     value: "work-pass",
-    label: "Training Employment Pass (TEP)",
-    misaValue: "1",
+    misaValue: "7",
   },
   {
     value: "dinh-cu",
-    label: "Định cư & Doanh nghiệp Singapore",
-    misaValue: "4",
+    misaValue: "6",
   },
-  { value: "khac", label: "Khác", misaValue: "5" },
+  { value: "khac", misaValue: "5" },
 ] as const
 
 import type { LeadFormState } from "@/lib/lead-form-state"
@@ -108,12 +105,6 @@ export async function submitLead(
   const message = get("message")
   const consent = formData.get("consent") === "on"
 
-  // Hidden UTM / referrer context captured on the client.
-  const utmSource = get("utm_source")
-  const utmMedium = get("utm_medium")
-  const utmCampaign = get("utm_campaign")
-  const referrer = get("referrer")
-
   // Server-side validation — client validation is UX only.
   const fieldErrors: LeadFormState["fieldErrors"] = {}
   if (!name) {
@@ -155,17 +146,13 @@ export async function submitLead(
     return { status: "submitted" }
   }
 
-  const staffCode = resolveStaffCode(get("staff_code"), utmSource)
-
-  const description = [
-    `Dịch vụ: ${selectedService.label}`,
-    `Nhân viên phụ trách theo link: ${staffCode}`,
-    message ? `Tin nhắn: ${message}` : "",
-    utmSource ? `UTM: ${utmSource} / ${utmMedium} / ${utmCampaign}` : "",
-    referrer ? `Referrer: ${referrer}` : "",
-  ]
-    .filter(Boolean)
-    .join("\n")
+  // The client sends its retained pair; the server revalidates both and derives
+  // the CRM source ID from the allowlisted channel. No client numeric ID is trusted.
+  const attribution = resolveMisaAttribution(
+    { staffCode: get("staff_code") },
+    get("utm_source")
+  )
+  const staffCode = attribution.staffCode
 
   try {
     await submitMisaWebform(staffCode, {
@@ -173,7 +160,8 @@ export async function submitLead(
       email,
       phone,
       service: selectedService.misaValue,
-      description,
+      description: message,
+      sourceId: attribution.sourceId,
     })
     return { status: "submitted" }
   } catch (error) {
