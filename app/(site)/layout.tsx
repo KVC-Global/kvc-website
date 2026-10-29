@@ -8,6 +8,7 @@ import {
 import { GoogleAnalytics } from "@next/third-parties/google"
 
 import "../globals.css"
+import { MisaAttributionProvider } from "@/components/misa-attribution-provider"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -96,12 +97,14 @@ export default async function SiteLayout({
       )}
     >
       <body className="flex min-h-svh flex-col bg-background text-foreground">
-        <ThemeProvider>
-          <SiteHeader settings={siteSettings} locale={locale} />
-          <main className="flex-1">{children}</main>
-          <SiteFooter settings={siteSettings} locale={locale} />
-          <SanityLive />
-        </ThemeProvider>
+        <MisaAttributionProvider>
+          <ThemeProvider>
+            <SiteHeader settings={siteSettings} locale={locale} />
+            <main className="flex-1">{children}</main>
+            <SiteFooter settings={siteSettings} locale={locale} />
+            <SanityLive />
+          </ThemeProvider>
+        </MisaAttributionProvider>
       </body>
       {process.env.NEXT_PUBLIC_GA_ID && (
         <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
