@@ -1,9 +1,10 @@
-export type LeadFormField = "name" | "email" | "phone" | "service" | "message" | "consent"
+export type LeadFormField =
+  "name" | "email" | "phone" | "service" | "message" | "consent"
 
 export type LeadFormState = {
-  status: "idle" | "success" | "error"
+  status: "idle" | "submitted" | "error"
   fieldErrors?: Partial<Record<LeadFormField, string>>
   formError?: string
 }
 
-export const initialLeadFormState: LeadFormState = {status: "idle"}
+export const initialLeadFormState: LeadFormState = { status: "idle" }

@@ -2,10 +2,10 @@
 
 import * as React from "react"
 import { CheckCircle2, Loader2, Send } from "lucide-react"
-import { sendGAEvent } from "@next/third-parties/google"
 import { submitLead } from "@/app/actions/submit-lead"
 import { initialLeadFormState } from "@/lib/lead-form-state"
 import type { ContactPageData } from "@/sanity/content-pages"
+import { useMisaStaffCode } from "@/components/misa-attribution-provider"
 
 const SERVICES = [
   { value: "", label: "Chọn dịch vụ bạn quan tâm *" },
@@ -59,15 +59,17 @@ function SubmitButton({
   pending,
   label,
   pendingLabel,
+  disabled = false,
 }: {
   pending: boolean
   label?: string
   pendingLabel?: string
+  disabled?: boolean
 }) {
   return (
     <button
       type="submit"
-      disabled={pending}
+      disabled={pending || disabled}
       className="group inline-flex w-full items-center justify-center gap-2 rounded-sm bg-brand-blue-mid px-6 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-brand-blue-mid/90 hover:shadow-lg focus-visible:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue-mid disabled:pointer-events-none disabled:opacity-60"
     >
       {pending ? (
@@ -88,6 +90,7 @@ export function ContactForm({
   const services = content?.serviceOptions?.length
     ? content.serviceOptions
     : SERVICES
+  const staffCode = useMisaStaffCode()
   const [state, formAction, pending] = React.useActionState(
     submitLead,
     initialLeadFormState
@@ -99,22 +102,15 @@ export function ContactForm({
     formData.set("utm_source", utmParams.get("utm_source") ?? "")
     formData.set("utm_medium", utmParams.get("utm_medium") ?? "")
     formData.set("utm_campaign", utmParams.get("utm_campaign") ?? "")
+    formData.set("staff_code", staffCode ?? "")
     formData.set(
       "referrer",
       document.referrer ? new URL(document.referrer).hostname : ""
     )
     return formAction(formData)
   }
-  React.useEffect(() => {
-    if (state.status === "success") {
-      sendGAEvent("event", "generate_lead", {
-        form: "lien-he",
-        page_path: window.location.pathname,
-      })
-    }
-  }, [state.status])
 
-  if (state.status === "success") {
+  if (state.status === "submitted") {
     return (
       <div
         role="status"
@@ -122,11 +118,12 @@ export function ContactForm({
       >
         <CheckCircle2 className="h-12 w-12 text-brand-gold" strokeWidth={1.5} />
         <h3 className="mt-4 font-heading text-xl font-bold text-brand-blue">
-          Yêu cầu đã được gửi!
+          Đã chuyển yêu cầu — chờ xác nhận
         </h3>
         <p className="mt-2 max-w-sm font-body text-sm text-brand-dark/70">
-          Cảm ơn bạn đã liên hệ KVC Global. Chúng tôi sẽ phản hồi trong vòng 24
-          giờ làm việc.
+          Thông tin đã được chuyển tới cổng tiếp nhận MISA. Cổng này chưa cung
+          cấp xác nhận đã lưu trên CRM. Nếu chưa nhận phản hồi trong vòng 24 giờ
+          làm việc, vui lòng liên hệ hotline KVC Global.
         </p>
         <button
           type="button"
@@ -322,6 +319,7 @@ export function ContactForm({
 
       <SubmitButton
         pending={pending}
+        disabled={staffCode === null}
         label={content?.submitLabel}
         pendingLabel={content?.pendingLabel}
       />

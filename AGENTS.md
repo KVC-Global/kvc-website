@@ -7,7 +7,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Repository Guidelines
 
-Bilingual (vi default / en) marketing site for **KVC Global** — Singapore study-abroad, work-pass, and online-degree consultancy. Next.js 16 App Router + React 19 + Tailwind v4 + shadcn (base-nova) + Sanity v5 (via `next-sanity`). Production: `https://kvcglobal.com`.
+Bilingual (vi default / en) marketing site for **KVC Global** — Singapore study-abroad, work-pass, and online-degree consultancy. Next.js 16 App Router + React 19 + Tailwind v4 + shadcn (base-nova) + Sanity v5 (via `next-sanity`). Production: `https://kvcglobal.vn` (redirects to `https://www.kvcglobal.vn`).
 
 > `README.md` is stale (describes an unrelated "lazyssh" project) — ignore it. `ARCHITECTURE.md` predates the Sanity CMS integration (claims "no backend"); its layout/motion conventions below are still authoritative. `DESIGN.md` is the authoritative brand spec.
 
@@ -35,7 +35,7 @@ app/(site)/{route}/page.tsx (RSC)
 - Site settings: `getSiteSettings(locale)` deep-merges CMS over `fallbackSiteSettings(locale)` (`lib/site-settings.ts`); consumed once in `app/(site)/layout.tsx`.
 - `generateMetadata()` duplicates the page's fetch (no de-dup abstraction); SEO fallback ladder: `page.seo.title` → inline `locale === 'en' ? ... : ...` → fallback const; OG image via `urlFor(seo.image)` (`sanity/image.ts`) else `/images/thumb-sharing.png`.
 
-**Writes go through exactly one server action**: `app/actions/submit-lead.ts` — `submitLead(prev, formData)` for React 19 `useActionState`. Contract: honeypot field, per-IP in-memory rate limit (5/hr), server-side Vietnamese validation → `{status:'error', fieldErrors}`, spam patterns silently fake-succeed, persists via `sanity/write-client.ts` (`SANITY_API_WRITE_TOKEN`; server-actions only — never import from client components). **Never throws — always returns a `LeadFormState`** (`lib/lead-form-state.ts`). Consumed by `components/contact-form.tsx`.
+**Lead capture uses one server action**: `app/actions/submit-lead.ts` — `submitLead(prev, formData)` for React 19 `useActionState`. It retains server validation, consent, honeypot, spam checks and the per-IP in-memory limit (5/hr), then forwards to native MISA Webforms through server-only `lib/misa-webforms.ts`; new leads are not written to Sanity. It returns `LeadFormState` (`lib/lead-form-state.ts`); `submitted` means forwarded, not confirmed CRM persistence. **When changing lead capture, staff attribution or MISA configuration, read `docs/misa-webforms.md` and `docs/adr/0001-misa-native-webforms.md` first.**
 
 ## Key Directories
 
@@ -44,8 +44,8 @@ app/(site)/{route}/page.tsx (RSC)
 | `app/(site)/` | All public pages (route group, site chrome). Vietnamese slugs: `/du-hoc` family, `/khoa-hoc-online/{ossd,othm,qualifi,wolverhampton}`, `/dich-vu`, `/work-pass`, `/gioi-thieu`, `/lien-he` |
 | `app/actions/` | Server actions (only `submit-lead.ts`) |
 | `components/` | Page sections — `site-*` (home), `study-abroad/`, `work-pass/`, `dich-vu/`, `online-*`, `about-page.tsx`, `contact-page.tsx`; `ui/` primitives |
-| `sanity/` | Client (`client.ts`), live fetch (`live.ts`), write client, GROQ queries, hand-written result types |
-| `lib/` | i18n, site-settings fallbacks + href resolution, seo, icons, lead-form-state, `utils.ts` (`cn`) |
+| `sanity/` | Read client (`client.ts`), live fetch (`live.ts`), GROQ queries, hand-written result types |
+| `lib/` | i18n, site-settings, seo, icons, lead-form-state, MISA attribution and server-only native Webform transport |
 | `messages/` | vi/en static dictionaries |
 | `hooks/` | Empty — no custom hooks; state lives inline in components |
 
@@ -60,7 +60,7 @@ pnpm format     # prettier --write "**/*.{ts,tsx}"  (ts/tsx only)
 pnpm typecheck  # tsc --noEmit (strict)
 ```
 
-Env vars (`.env.example`): `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `SANITY_API_READ_TOKEN`, `SANITY_API_WRITE_TOKEN`, `NEXT_PUBLIC_GA_ID` (empty = analytics off), `NEXT_PUBLIC_SITE_URL`.
+Env vars (`.env.example`): `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `SANITY_API_READ_TOKEN`, `NEXT_PUBLIC_GA_ID` (empty = analytics off), `NEXT_PUBLIC_SITE_URL`. Lead capture does not use Sanity write tokens or MISA OpenAPI credentials.
 
 ## Code Conventions & Common Patterns
 
@@ -72,7 +72,7 @@ Env vars (`.env.example`): `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_
 - **Icons from CMS strings**: `lib/icons.ts getIcon(name, fallback)` or per-page `{page}-icons.ts` maps (`Record<string, LucideIcon>`).
 - **CMS links**: `lib/site-settings.ts` `resolveSiteHref` maps `destination` enum → route; `sanitizeHref` allowlists `/`, `#`, `https`, `mailto`, `tel`; `prefixHref` adds the locale prefix.
 - **Naming**: kebab-case files, named PascalCase exports. Page sections: `{page}-hero/-intro/-why/-requirements/-faqs/-details.tsx`. Props: `content?: XPageContent` (or `data?:`), `className?`, `cn()` on root.
-- **Forms**: server-authoritative validation, `noValidate`, `useActionState` + `pending`, inline `Field`/`SubmitButton` helpers, success state replaces the form.
+- **Forms**: server-authoritative validation, `noValidate`, `useActionState` + `pending`, inline `Field`/`SubmitButton` helpers. The forwarded (`submitted`) state replaces the form without claiming a CRM delivery receipt.
 - **Prettier**: no semicolons, double quotes, printWidth 80, trailing comma es5, `prettier-plugin-tailwindcss` (sorts classes inside `cn()`/`cva()`). Some legacy files deviate — match file-local style when touching them, run `pnpm format` on new files.
 - **shadcn**: `components.json` style `base-nova`, aliases `@/components`, `@/lib`, `@/components/ui`, `@/hooks`; extra registry `@magicui`. Tailwind v4 is CSS-first — no `tailwind.config.js`; tokens live in `app/globals.css`.
 - Path alias: `@/* → ./*` (root-level, no `src/`).
@@ -103,7 +103,7 @@ Env vars (`.env.example`): `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_
 
 ## Testing & QA
 
-**No test suite exists** — no test files, frameworks, CI workflows, or git hooks. The verification loop is:
+Attribution boundary tests use Node's built-in runner: `node --test tests/misa-attribution.test.mjs`. The verification loop is:
 
 1. `pnpm typecheck` (strict `tsc --noEmit`)
 2. `pnpm lint`
