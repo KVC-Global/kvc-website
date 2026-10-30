@@ -60,6 +60,8 @@ Composed by `app/(site)/page.tsx`:
 
 ### 3. Khóa học Online — `components/online-*`
 `app/(site)/khoa-hoc-online/page.tsx` → `OnlineHero` + `OnlineDirectory` + `OnlineDetails`. `online-directory.tsx` is the most logic-rich component (see *Key Execution Flow* below); `online-details.tsx` owns the testimonials slider.
+- **OTHM / QUALIFI / Wolverhampton registration:** each program route fetches its locale-specific Sanity document (`onlineOthmPage`, `onlineQualifiPage`, or `onlineWolverhamptonPage`). The corresponding component renders `stepsSection.title` and the ordered `stepsSection.steps`. The generic `onlineProgramPage` fallback uses `processSection`; missing step lists retain the component's built-in steps. Regression: `node --test tests/online-registration.test.mjs`.
+- **QUALIFI program details:** desktop tabs and mobile accordions share `programsSection.items` from the locale-specific Sanity document (with built-in programs only when absent). `Subjects` and `Entry requirements` labels follow `useLocale()`; Vietnamese routes retain their Vietnamese labels.
 
 ### 4. Training Employment Pass — `components/work-pass/*`
 `app/(site)/work-pass/page.tsx` → `WorkPassHero` + `WorkPassDetails`. Mirrors the study-abroad structure: `details` composes `services`, `target`, `process`, `requirements`, `fees`, `faqs`, `review`.

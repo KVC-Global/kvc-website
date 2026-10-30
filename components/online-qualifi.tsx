@@ -9,6 +9,7 @@ import { Check, GraduationCap, Globe, Star, Users, ArrowRight, TrendingUp, Monit
 
 import { getIcon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/i18n-client"
 import { Container } from "@/components/ui/container"
 import type { TimelineProgram } from "@/components/online-timeline"
 
@@ -133,7 +134,10 @@ const PROGRAMS: TimelineProgram[] = [
   },
 ]
 
-export function OnlineQualifi({ className, data }: { className?: string; data?: OnlineProgramPageData }) {
+export function OnlineQualifi({ className, data }: { className?: string; data?: OnlineQualifiPageData & OnlineProgramPageData }) {
+  const isEn = useLocale() === "en"
+  const subjectsLabel = isEn ? "Subjects" : "Môn học"
+  const entryRequirementsLabel = isEn ? "Entry requirements" : "Điều kiện đầu vào"
   const [activeProgramId, setActiveProgramId] = React.useState(0)
 
   // ── CMS data with hardcoded fallback ──
@@ -214,9 +218,10 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
     }))
     : BENEFITS
 
-  const processTitle = data?.processSection?.title ?? "Quy trình đăng ký"
-  const processSteps = data?.processSection?.steps?.length
-    ? data!.processSection!.steps!.map((s) => ({ title: s.title ?? "", desc: s.description ?? "" }))
+  const processSection = data?.stepsSection ?? data?.processSection
+  const processTitle = processSection?.title ?? "Quy trình đăng ký"
+  const processSteps = processSection?.steps?.length
+    ? processSection.steps.map((s) => ({ title: s.title ?? "", desc: s.description ?? "" }))
     : STEPS
 
   const programsItems = data?.programsSection?.items?.length
@@ -672,7 +677,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                       </div>
                       <div className="sm:col-span-3">
                         <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-2">
-                          <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Môn học
+                          <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />{subjectsLabel}
                         </h4>
                         <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 mb-4">
                           {activeProgram.subjects.map((s, j) => (
@@ -683,7 +688,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                         </ul>
                         <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-4">
                           <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-1.5">
-                            <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                            <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />{entryRequirementsLabel}
                           </h4>
                           <p className="text-sm leading-relaxed text-brand-dark/75">{activeProgram.entry}</p>
                         </div>
@@ -694,7 +699,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
 
                 {/* Mobile: Accordion */}
                 <div className="lg:hidden flex flex-col gap-4">
-                  {PROGRAMS.map((program, i) => {
+                  {programsItems.map((program, i) => {
                     const isOpen = i === activeProgramId
                     return (
                       <div key={i} className="overflow-hidden rounded-lg border border-border bg-white shadow-sm">
@@ -724,7 +729,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                                 </span>
                               </div>
                               <h4 className="flex items-center gap-2 font-heading text-xs font-semibold text-brand-blue mb-2">
-                                <ListChecks className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />Môn học
+                                <ListChecks className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />{subjectsLabel}
                               </h4>
                               <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2 mb-4 text-xs">
                                 {program.subjects.map((s, j) => (
@@ -735,7 +740,7 @@ export function OnlineQualifi({ className, data }: { className?: string; data?: 
                               </ul>
                               <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-3">
                                 <h4 className="flex items-center gap-2 font-heading text-xs font-semibold text-brand-blue mb-1">
-                                  <UserCheck className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                                  <UserCheck className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />{entryRequirementsLabel}
                                 </h4>
                                 <p className="text-xs leading-relaxed text-brand-dark/75">{program.entry}</p>
                               </div>

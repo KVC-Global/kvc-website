@@ -137,7 +137,7 @@ const PROGRAMS: TimelineProgram[] = [
   },
 ]
 
-export function OnlineWolverhampton({ className, data }: { className?: string; data?: OnlineProgramPageData }) {
+export function OnlineWolverhampton({ className, data }: { className?: string; data?: OnlineWolverhamptonPageData & OnlineProgramPageData }) {
   const [activeProgramId, setActiveProgramId] = React.useState(0)
 
   // ── CMS data with hardcoded fallback ──
@@ -208,9 +208,10 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
       }))
     : BENEFITS
 
-  const processTitle = data?.processSection?.title ?? "Quy trình đăng ký"
-  const processSteps = data?.processSection?.steps?.length
-    ? data!.processSection!.steps!.map((s) => ({ title: s.title ?? "", desc: s.description ?? "" }))
+  const processSection = data?.stepsSection ?? data?.processSection
+  const processTitle = processSection?.title ?? "Quy trình đăng ký"
+  const processSteps = processSection?.steps?.length
+    ? processSection.steps.map((s) => ({ title: s.title ?? "", desc: s.description ?? "" }))
     : STEPS
 
   const programsItems = data?.programsSection?.items?.length
