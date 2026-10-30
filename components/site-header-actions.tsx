@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useRouter, usePathname, useSearchParams } from "next/navigation"
+import { usePathname, useSearchParams } from "next/navigation"
 import { ChevronDown, Globe } from "lucide-react"
 
 import { cn } from "@/lib/utils"
@@ -50,7 +50,6 @@ function FlagIcon({ code }: { code: (typeof LANGUAGES)[number]["flag"] }) {
 }
 
 export function SiteHeaderActions({ cta }: { cta?: SiteCtaButton }) {
-  const router = useRouter()
   const pathname = usePathname() ?? "/"
   const searchParams = useSearchParams()
   const locale = useLocale()
@@ -105,7 +104,8 @@ export function SiteHeaderActions({ cta }: { cta?: SiteCtaButton }) {
     const paramsStr = searchParams?.toString()
     const query = paramsStr ? `?${paramsStr}` : ""
 
-    router.push(`${targetPath}${query}`)
+    // shortcut: reload shared locale layouts; use locale route segments for SPA switching.
+    window.location.assign(`${targetPath}${query}`)
     setOpen(false)
   }
 
