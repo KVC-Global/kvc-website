@@ -227,6 +227,9 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
 
   const subjectsSection = ossdData?.subjectsSection
   const subjectsTitle = subjectsSection?.title ?? "Các môn học"
+  const subjectsSubtitle =
+    subjectsSection?.subtitle ??
+    "Học sinh có thể lựa chọn nhiều môn học thuộc các nhóm. Việc lựa chọn môn học sẽ được tư vấn dựa trên định hướng ngành nghề và trường đại học mong muốn."
   const subjectsList = subjectsSection?.items?.length
     ? subjectsSection.items.map((item, idx: number) => ({
         name: item.name ?? "",
@@ -321,6 +324,9 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
 
   const targetAudience = (data as OnlineOssdPageData)?.targetAudienceSection || (data as OnlineProgramPageData)?.audienceSection
   const audienceTitle = targetAudience?.title ?? "Đối tượng phù hợp"
+  const audienceSubtitle =
+    ossdData?.targetAudienceSection?.subtitle ??
+    "Lộ trình được thiết kế linh hoạt theo nền tảng học tập, mục tiêu đại học và kế hoạch phát triển của từng học sinh."
   const audienceItems = targetAudience?.items?.length
     ? targetAudience.items.map((a: any, idx: number) => ({
         icon: getIcon(typeof a === "object" ? a.icon : undefined, TARGET_AUDIENCE[idx]?.icon || GraduationCap),
@@ -355,6 +361,9 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
 
   const parentReasons = (data as OnlineOssdPageData)?.parentReasonsSection || (data as OnlineProgramPageData)?.supportSection
   const supportTitle = parentReasons?.title ?? "Vì sao phụ huynh lựa chọn KVC Global?"
+  const supportSubtitle =
+    ossdData?.parentReasonsSection?.subtitle ??
+    "Đồng hành cùng gia đình từ bước xây dựng lộ trình đến khi học sinh hoàn thiện mục tiêu học tập và hồ sơ du học."
   const supportItems = parentReasons?.items?.length
     ? parentReasons.items
     : PARENT_REASONS
@@ -623,9 +632,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                     </h2>
                     <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold lg:mx-0" />
                     <p className="mt-3 text-pretty font-body text-sm leading-relaxed text-brand-dark/75">
-                      Học sinh có thể lựa chọn nhiều môn học thuộc các nhóm. Việc
-                      lựa chọn môn học sẽ được tư vấn dựa trên định hướng ngành
-                      nghề và trường đại học mong muốn.
+                      {subjectsSubtitle}
                     </p>
                   </motion.div>
 
@@ -711,8 +718,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                     </h2>
                     <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold lg:mx-0" />
                     <p className="mt-3 text-pretty font-body text-sm leading-relaxed text-brand-dark/75">
-                      Lộ trình được thiết kế linh hoạt theo nền tảng học tập,
-                      mục tiêu đại học và kế hoạch phát triển của từng học sinh.
+                      {audienceSubtitle}
                     </p>
                   </motion.div>
 
@@ -971,8 +977,7 @@ export function OnlineOssd({ className, data }: { className?: string; data?: Onl
                   </h2>
                   <div className="mx-auto mt-2.5 h-0.5 w-12 rounded-full bg-brand-gold lg:mx-0 lg:mt-4" />
                   <p className="mt-5 hidden max-w-sm font-body text-sm leading-relaxed text-brand-dark/65 lg:block">
-                    Đồng hành cùng gia đình từ bước xây dựng lộ trình đến khi học
-                    sinh hoàn thiện mục tiêu học tập và hồ sơ du học.
+                    {supportSubtitle}
                   </p>
                 </motion.div>
 

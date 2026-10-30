@@ -210,9 +210,9 @@ export type OnlineProgramPrograms = {
 };
 
 export type OnlineProgramSubjectItem = { name?: string; image?: string };
-export type OnlineProgramSubjects = { title?: string; items?: OnlineProgramSubjectItem[] };
+export type OnlineProgramSubjects = { title?: string; subtitle?: string; items?: OnlineProgramSubjectItem[] };
 
-export type OnlineProgramParentReasons = { title?: string; items?: string[] };
+export type OnlineProgramParentReasons = { title?: string; subtitle?: string; items?: string[] };
 
 export type OnlineProgramPageData = {
   heroSection?: OnlineProgramHero;
@@ -236,7 +236,7 @@ export type OnlineOssdPageData = {
   whySection?: OnlineProgramWhy;
   structureSection?: OnlineProgramStructure;
   subjectsSection?: OnlineProgramSubjects;
-  targetAudienceSection?: OnlineProgramAudience;
+  targetAudienceSection?: OnlineProgramAudience & { subtitle?: string };
   benefitsSection?: OnlineProgramBenefits;
   learningFormatsSection?: OnlineProgramFormat;
   stepsSection?: OnlineProgramProcess;

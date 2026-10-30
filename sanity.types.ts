@@ -1699,6 +1699,7 @@ export type OnlineProgramAudienceCard = {
 export type OnlineProgramAudienceOssd = {
   _type: "onlineProgramAudienceOssd"
   title?: string
+  subtitle?: string
   items?: Array<
     {
       _key: string
@@ -1765,12 +1766,14 @@ export type OnlineProgramIconCard = {
 export type OnlineProgramParentReasons = {
   _type: "onlineProgramParentReasons"
   title?: string
+  subtitle?: string
   items?: Array<string>
 }
 
 export type OnlineProgramSubjects = {
   _type: "onlineProgramSubjects"
   title?: string
+  subtitle?: string
   items?: Array<
     {
       _key: string
@@ -4013,7 +4016,7 @@ export type ONLINE_PROGRAM_PAGE_QUERY_RESULT = {
 
 // Source: ../kvc-website/sanity/queries.ts
 // Variable: ONLINE_OSSD_PAGE_QUERY
-// Query: *[_type == "onlineOssdPage" && language == $lang][0]{    heroSection{      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,      primaryButtonLabel, primaryButtonHref,      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))    },    introSection{      title, paragraphs, highlights, imageAlt,      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))    },    whySection{title, items[]{icon, title, description}},    structureSection{title, subtitle, items[]{title, description}},    subjectsSection{      title,      items[]{        name,        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))      }    },    targetAudienceSection{title, items[]{icon, title, description}},    benefitsSection{      title,      items[]{        title, description,        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))      }    },    learningFormatsSection{title, items[]{icon, title, description}},    stepsSection{title, steps[]{title, description}},    parentReasonsSection{title, items},    seo{title, description}  }
+// Query: *[_type == "onlineOssdPage" && language == $lang][0]{    heroSection{      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,      primaryButtonLabel, primaryButtonHref,      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))    },    introSection{      title, paragraphs, highlights, imageAlt,      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))    },    whySection{title, items[]{icon, title, description}},    structureSection{title, subtitle, items[]{title, description}},    subjectsSection{      title, subtitle,      items[]{        name,        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))      }    },    targetAudienceSection{title, subtitle, items[]{icon, title, description}},    benefitsSection{      title,      items[]{        title, description,        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))      }    },    learningFormatsSection{title, items[]{icon, title, description}},    stepsSection{title, steps[]{title, description}},    parentReasonsSection{title, subtitle, items},    seo{title, description}  }
 export type ONLINE_OSSD_PAGE_QUERY_RESULT = {
   heroSection: {
     parentBreadcrumb: string | null
@@ -4069,6 +4072,7 @@ export type ONLINE_OSSD_PAGE_QUERY_RESULT = {
   } | null
   subjectsSection: {
     title: string | null
+    subtitle: string | null
     items: Array<{
       name: string | null
       image:
@@ -4085,6 +4089,7 @@ export type ONLINE_OSSD_PAGE_QUERY_RESULT = {
   } | null
   targetAudienceSection: {
     title: string | null
+    subtitle: string | null
     items: Array<{
       icon: string | null
       title: string | null
@@ -4125,6 +4130,7 @@ export type ONLINE_OSSD_PAGE_QUERY_RESULT = {
   } | null
   parentReasonsSection: {
     title: string | null
+    subtitle: string | null
     items: Array<string> | null
   } | null
   seo: {
@@ -6208,7 +6214,7 @@ declare global {
     '*[_type == "faq"] | order(order asc)': FAQS_QUERY_RESULT
     '\n  *[_type == "dichVuPage" && language == $lang][0]{\n    heroSection{\n      backgroundImage, backgroundImageAlt,\n      eyebrow, title,\n      primaryButtonLabel, primaryButtonHref,\n      secondaryButtonLabel, secondaryButtonHref,\n      stats[]{_key, icon, value, label}\n    },\n    introSection{\n      eyebrow, title,\n      pillars[]{_key, icon, label},\n      paragraph1, paragraph2\n    },\n    videoSection{\n      videoTitle, videoPoster,\n      "videoUrl": video.asset->url\n    },\n    serviceCategories{eyebrow, title},\n    accordionSections{\n      sections[]{\n        _key, tag, heading, headingAccent,\n        intro, image, imageAlt,\n        services[]{title, items},\n        audience{label, items},\n        benefits{label, items},\n        singaporeSubTabs[]{label, icon, intro, services[]{title, items}, audience{label, items}, benefits{label, items}},\n        ctaLabel, ctaHref, ctaIcon, crossLinkText\n      }\n    },\n    seo{title, description}\n  }\n': DICH_VU_PAGE_QUERY_RESULT
     '\n  *[_type == "onlineProgramPage" && language == $lang && slug == $slug][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n    },\n    structureSection{title, subtitle, items[]{title, description}},\n    whySection{title, items[]{icon, title, description}},\n    supportSection{title, items},\n    formatSection{title, items[]{icon, title, description}, checklist},\n    audienceSection{title, items[]{icon, title, description}},\n    progressionSection{\n      title, body, tags, noteTitle, noteBody, imageAlt,\n      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n    },\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n      }\n    },\n    processSection{title, steps[]{title, description}},\n    ctaSection{title, body, buttonLabel, buttonHref},\n    programsSection{title, subjectsLabel, entryRequirementsLabel, items[]{name, duration, startDates, subjects, entryRequirements}},\n    seo{title, description}\n  }\n': ONLINE_PROGRAM_PAGE_QUERY_RESULT
-    '\n  *[_type == "onlineOssdPage" && language == $lang][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n    },\n    whySection{title, items[]{icon, title, description}},\n    structureSection{title, subtitle, items[]{title, description}},\n    subjectsSection{\n      title,\n      items[]{\n        name,\n        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n      }\n    },\n    targetAudienceSection{title, items[]{icon, title, description}},\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n      }\n    },\n    learningFormatsSection{title, items[]{icon, title, description}},\n    stepsSection{title, steps[]{title, description}},\n    parentReasonsSection{title, items},\n    seo{title, description}\n  }\n': ONLINE_OSSD_PAGE_QUERY_RESULT
+    '\n  *[_type == "onlineOssdPage" && language == $lang][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n    },\n    whySection{title, items[]{icon, title, description}},\n    structureSection{title, subtitle, items[]{title, description}},\n    subjectsSection{\n      title, subtitle,\n      items[]{\n        name,\n        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n      }\n    },\n    targetAudienceSection{title, subtitle, items[]{icon, title, description}},\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n      }\n    },\n    learningFormatsSection{title, items[]{icon, title, description}},\n    stepsSection{title, steps[]{title, description}},\n    parentReasonsSection{title, subtitle, items},\n    seo{title, description}\n  }\n': ONLINE_OSSD_PAGE_QUERY_RESULT
     '\n  *[_type == "onlineOthmPage" && language == $lang][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n    },\n    whySection{title, items[]{icon, title, description}},\n    learningFormatsSection{title, items[]{icon, title, description}},\n    targetAudienceSection{title, items[]{icon, title, description}},\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n      }\n    },\n    stepsSection{title, steps[]{title, description}},\n    programsSection{title, subjectsLabel, entryRequirementsLabel, items[]{name, duration, startDates, subjects, entryRequirements}},\n    seo{title, description}\n  }\n': ONLINE_OTHM_PAGE_QUERY_RESULT
     '\n  *[_type == "onlineQualifiPage" && language == $lang][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n    },\n    whySection{title, items[]{icon, title, description}},\n    learningFormatsSection{title, items[]{icon, title, description}},\n    targetAudienceSection{title, items[]{icon, title, description}},\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n      }\n    },\n    stepsSection{title, steps[]{title, description}},\n    progressionSection{\n      title, body, tags, noteTitle, noteBody, imageAlt,\n      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n    },\n    programsSection{title, subjectsLabel, entryRequirementsLabel, items[]{name, duration, startDates, subjects, entryRequirements}},\n    seo{title, description}\n  }\n': ONLINE_QUALIFI_PAGE_QUERY_RESULT
     '\n  *[_type == "onlineWolverhamptonPage" && language == $lang][0]{\n    heroSection{\n      parentBreadcrumb, tagline, title, subtitle, description, breadcrumb,\n      primaryButtonLabel, primaryButtonHref,\n      "backgroundImage": coalesce(backgroundImage.asset->url, select(backgroundImage._type == "image" => null, backgroundImage))\n    },\n    introSection{\n      title, paragraphs, highlights, imageAlt,\n      "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n    },\n    whySection{title, items[]{icon, title, description}},\n    kvcSupportSection{title, items},\n    learningFormatsSection{title, items[]{icon, title, description}},\n    targetAudienceSection{title, items[]{icon, title, description}},\n    benefitsSection{\n      title,\n      items[]{\n        title, description,\n        "image": coalesce(image.asset->url, select(image._type == "image" => null, image))\n      }\n    },\n    stepsSection{title, steps[]{title, description}},\n    programsSection{title, subjectsLabel, entryRequirementsLabel, items[]{name, duration, startDates, subjects, entryRequirements}},\n    seo{title, description}\n  }\n': ONLINE_WOLVERHAMPTON_PAGE_QUERY_RESULT
