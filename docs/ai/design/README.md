@@ -50,6 +50,18 @@ description: Define the technical architecture, components, and data models
 - Alternatives considered
 - Patterns and principles applied
 
+### Contact regional presence
+
+- Country flags in the contact list and globe labels use local SVG assets from
+  `public/images/flags/`, not Unicode emoji, so rendering does not depend on the
+  visitor's emoji fonts. The six SVGs come from
+  [flag-icons](https://github.com/lipis/flag-icons); its MIT license is retained
+  beside the assets.
+- `CONTACT_COUNTRIES` supplies the same flag paths to both render locations.
+  Flags are decorative (`alt=""`) because country names are already visible.
+- Globe labels remain hidden below the `sm` breakpoint; the country list keeps
+  all six flags visible on mobile.
+
 ## Non-Functional Requirements
 **How should the system perform?**
 
