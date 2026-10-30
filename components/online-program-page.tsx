@@ -6,6 +6,7 @@ import { motion, Variants } from "framer-motion";
 import { ArrowRight, Check, Clock, GraduationCap } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import type { OnlineProgramPageData } from "@/sanity/service-pages";
+import { useLocale } from "@/lib/i18n-client";
 
 const HERO_BG = "/images/study-abroad-hero.jpg";
 
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export function OnlineProgramPage({ data, defaultBreadcrumb }: Props) {
+  const isEn = useLocale() === "en";
   const hero = data?.heroSection;
   const intro = data?.introSection;
   const why = data?.whySection;
@@ -34,6 +36,8 @@ export function OnlineProgramPage({ data, defaultBreadcrumb }: Props) {
   const process = data?.processSection;
   const cta = data?.ctaSection;
   const programs = data?.programsSection;
+  const subjectsLabel = programs?.subjectsLabel || (isEn ? "Subjects" : "Môn học");
+  const entryRequirementsLabel = programs?.entryRequirementsLabel || (isEn ? "Entry requirements" : "Điều kiện:");
 
   return (
     <>
@@ -167,7 +171,7 @@ export function OnlineProgramPage({ data, defaultBreadcrumb }: Props) {
                   </div>
                   {prog.subjects?.length ? (
                     <div className="mt-4">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold">Môn học</p>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-brand-gold">{subjectsLabel}</p>
                       <ul className="mt-2 grid grid-cols-1 gap-1.5 sm:grid-cols-2">
                         {prog.subjects.map((s) => (
                           <li key={s} className="flex items-start gap-2 text-sm text-brand-dark/80"><Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-gold" strokeWidth={2} />{s}</li>
@@ -175,7 +179,7 @@ export function OnlineProgramPage({ data, defaultBreadcrumb }: Props) {
                       </ul>
                     </div>
                   ) : null}
-                  {prog.entryRequirements && <p className="mt-4 text-xs text-muted-foreground"><strong>Điều kiện:</strong> {prog.entryRequirements}</p>}
+                  {prog.entryRequirements && <p className="mt-4 text-xs text-muted-foreground"><strong>{entryRequirementsLabel}</strong> {prog.entryRequirements}</p>}
                 </motion.div>
               ))}
             </div>

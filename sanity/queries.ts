@@ -213,7 +213,7 @@ export const ONLINE_PROGRAM_PAGE_QUERY = defineQuery(`
     },
     processSection{title, steps[]{title, description}},
     ctaSection{title, body, buttonLabel, buttonHref},
-    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},
+    programsSection{title, subjectsLabel, entryRequirementsLabel, items[]{name, duration, startDates, subjects, entryRequirements}},
     seo{title, description}
   }
 `)
@@ -275,7 +275,7 @@ export const ONLINE_OTHM_PAGE_QUERY = defineQuery(`
       }
     },
     stepsSection{title, steps[]{title, description}},
-    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},
+    programsSection{title, subjectsLabel, entryRequirementsLabel, items[]{name, duration, startDates, subjects, entryRequirements}},
     seo{title, description}
   }
 `)
@@ -306,7 +306,7 @@ export const ONLINE_QUALIFI_PAGE_QUERY = defineQuery(`
       title, body, tags, noteTitle, noteBody, imageAlt,
       "image": coalesce(image.asset->url, select(image._type == "image" => null, image))
     },
-    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},
+    programsSection{title, subjectsLabel, entryRequirementsLabel, items[]{name, duration, startDates, subjects, entryRequirements}},
     seo{title, description}
   }
 `)
@@ -334,7 +334,7 @@ export const ONLINE_WOLVERHAMPTON_PAGE_QUERY = defineQuery(`
       }
     },
     stepsSection{title, steps[]{title, description}},
-    programsSection{title, items[]{name, duration, startDates, subjects, entryRequirements}},
+    programsSection{title, subjectsLabel, entryRequirementsLabel, items[]{name, duration, startDates, subjects, entryRequirements}},
     seo{title, description}
   }
 `)
