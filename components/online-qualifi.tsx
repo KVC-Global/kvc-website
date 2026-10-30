@@ -136,8 +136,8 @@ const PROGRAMS: TimelineProgram[] = [
 
 export function OnlineQualifi({ className, data }: { className?: string; data?: OnlineQualifiPageData & OnlineProgramPageData }) {
   const isEn = useLocale() === "en"
-  const subjectsLabel = isEn ? "Subjects" : "Môn học"
-  const entryRequirementsLabel = isEn ? "Entry requirements" : "Điều kiện đầu vào"
+  const subjectsLabel = data?.programsSection?.subjectsLabel || (isEn ? "Subjects" : "Môn học")
+  const entryRequirementsLabel = data?.programsSection?.entryRequirementsLabel || (isEn ? "Entry requirements" : "Điều kiện đầu vào")
   const [activeProgramId, setActiveProgramId] = React.useState(0)
 
   // ── CMS data with hardcoded fallback ──

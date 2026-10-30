@@ -11,8 +11,8 @@ export type BlogPostCard = {
   excerpt?: string
   publishedAt?: string
   authorName?: string
-  category?: string
-  readingTime?: number
+  category?: string | null
+  readingTime?: number | null
 }
 
 export type BlogPost = BlogPostCard & {

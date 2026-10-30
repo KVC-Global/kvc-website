@@ -9,6 +9,7 @@ import { Check, GraduationCap, Clock, Globe, Star, Users, ArrowRight, Building2,
 
 import { getIcon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/lib/i18n-client"
 import { Container } from "@/components/ui/container"
 import type { TimelineProgram } from "@/components/online-timeline"
 
@@ -138,6 +139,9 @@ const PROGRAMS: TimelineProgram[] = [
 ]
 
 export function OnlineWolverhampton({ className, data }: { className?: string; data?: OnlineWolverhamptonPageData & OnlineProgramPageData }) {
+  const isEn = useLocale() === "en"
+  const subjectsLabel = data?.programsSection?.subjectsLabel || (isEn ? "Subjects" : "Môn học")
+  const entryRequirementsLabel = data?.programsSection?.entryRequirementsLabel || (isEn ? "Entry requirements" : "Điều kiện đầu vào")
   const [activeProgramId, setActiveProgramId] = React.useState(0)
 
   // ── CMS data with hardcoded fallback ──
@@ -635,7 +639,7 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
                     </div>
                     <div className="sm:col-span-3">
                       <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-2">
-                        <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Môn học
+                        <ListChecks className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />{subjectsLabel}
                       </h4>
                       <ul className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 mb-4">
                         {activeProgram.subjects.map((s, j) => (
@@ -646,7 +650,7 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
                       </ul>
                       <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-4">
                         <h4 className="flex items-center gap-2 font-heading text-sm font-semibold text-brand-blue mb-1.5">
-                          <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                          <UserCheck className="h-4 w-4 text-brand-gold" strokeWidth={1.75} />{entryRequirementsLabel}
                         </h4>
                         <p className="text-sm leading-relaxed text-brand-dark/75">{activeProgram.entry}</p>
                       </div>
@@ -687,7 +691,7 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
                               </span>
                             </div>
                             <h4 className="flex items-center gap-2 font-heading text-xs font-semibold text-brand-blue mb-2">
-                              <ListChecks className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />Môn học
+                              <ListChecks className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />{subjectsLabel}
                             </h4>
                             <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2 mb-4 text-xs">
                               {program.subjects.map((s, j) => (
@@ -698,7 +702,7 @@ export function OnlineWolverhampton({ className, data }: { className?: string; d
                             </ul>
                             <div className="rounded-lg border border-brand-gold/20 bg-brand-gold/[0.04] p-3">
                               <h4 className="flex items-center gap-2 font-heading text-xs font-semibold text-brand-blue mb-1">
-                                <UserCheck className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />Điều kiện đầu vào
+                                <UserCheck className="h-3.5 w-3.5 text-brand-gold" strokeWidth={1.75} />{entryRequirementsLabel}
                               </h4>
                               <p className="text-xs leading-relaxed text-brand-dark/75">{program.entry}</p>
                             </div>
