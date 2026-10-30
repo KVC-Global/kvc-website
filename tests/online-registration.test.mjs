@@ -43,6 +43,7 @@ function loadTs(relativePath) {
 const { OnlineOthm } = loadTs("../components/online-othm.tsx")
 const { OnlineQualifi } = loadTs("../components/online-qualifi.tsx")
 const { OnlineWolverhampton } = loadTs("../components/online-wolverhampton.tsx")
+const { OnlineProgramPage } = loadTs("../components/online-program-page.tsx")
 const { default: nextConfig } = loadTs("../next.config.ts")
 const legacy = {
   title: "Legacy registration",
@@ -101,43 +102,107 @@ for (const Component of [OnlineOthm, OnlineQualifi, OnlineWolverhampton]) {
   })
 }
 
-for (const [locale, subjects, entry] of [
-  ["en", "Subjects", "Entry requirements"],
-  ["vi", "Môn học", "Điều kiện đầu vào"],
+for (const [Component, slug] of [
+  [OnlineOthm, "othm"],
+  [OnlineQualifi, "qualifi"],
+  [OnlineWolverhampton, "wolverhampton"],
 ]) {
-  test(`QUALIFI: ${locale} program labels and CMS content reach desktop and mobile`, () => {
+  for (const [locale, subjects, entry] of [
+    ["en", "Subjects", "Entry requirements"],
+    ["vi", "Môn học", "Điều kiện đầu vào"],
+  ]) {
+    test(`${Component.name}: ${locale} program labels and CMS content reach desktop and mobile`, () => {
+      const html = renderPage(
+        Component,
+        {
+          programsSection: {
+            title: "CMS Programs",
+            items: [
+              {
+                name: "CMS qualification",
+                duration: "8 months",
+                startDates: "September",
+                subjects: ["CMS subject"],
+                entryRequirements: "CMS admission requirement",
+              },
+            ],
+          },
+        },
+        `/${locale}/khoa-hoc-online/${slug}`
+      )
+      const section = [...html.matchAll(/<section\b[\s\S]*?<\/section>/g)]
+        .map(([section]) => section)
+        .find((section) => section.includes("CMS Programs"))
+      const labels = [...section.matchAll(/<h4[^>]*>([\s\S]*?)<\/h4>/g)].map(
+        ([, content]) => content.replace(/<[^>]*>/g, "")
+      )
+      assert.deepEqual(labels, [subjects, entry, subjects, entry])
+      for (const content of [
+        "CMS subject",
+        "CMS admission requirement",
+        "8 months",
+        "September",
+      ]) {
+        assert.equal(section.split(content).length - 1, 2)
+      }
+    })
+  }
+
+  test(`${Component.name}: CMS section labels override locale defaults on desktop and mobile`, () => {
     const html = renderPage(
-      OnlineQualifi,
+      Component,
       {
         programsSection: {
-          title: "QUALIFI Programs",
+          title: "CMS Programs",
+          subjectsLabel: "Course modules from Studio",
+          entryRequirementsLabel: "Admissions from Studio",
           items: [
             {
               name: "CMS qualification",
-              duration: "8 months",
-              startDates: "September",
-              subjects: ["CMS subject"],
-              entryRequirements: "CMS admission requirement",
+              subjects: ["Module A"],
+              entryRequirements: "Diploma required",
             },
           ],
         },
       },
-      `/${locale}/khoa-hoc-online/qualifi`
+      `/en/khoa-hoc-online/${slug}`
     )
     const section = [...html.matchAll(/<section\b[\s\S]*?<\/section>/g)]
       .map(([section]) => section)
-      .find((section) => section.includes("QUALIFI Programs"))
+      .find((section) => section.includes("CMS Programs"))
     const labels = [...section.matchAll(/<h4[^>]*>([\s\S]*?)<\/h4>/g)].map(
       ([, content]) => content.replace(/<[^>]*>/g, "")
     )
-    assert.deepEqual(labels, [subjects, entry, subjects, entry])
-    for (const content of [
-      "CMS subject",
-      "CMS admission requirement",
-      "8 months",
-      "September",
-    ]) {
-      assert.equal(section.split(content).length - 1, 2)
-    }
+    assert.deepEqual(labels, [
+      "Course modules from Studio",
+      "Admissions from Studio",
+      "Course modules from Studio",
+      "Admissions from Studio",
+    ])
   })
 }
+
+test("generic program content preserves CMS heading overrides", () => {
+  const html = renderPage(
+    OnlineProgramPage,
+    {
+      programsSection: {
+        title: "CMS Programs",
+        subjectsLabel: "Study modules",
+        entryRequirementsLabel: "Admission criteria",
+        items: [
+          {
+            name: "CMS qualification",
+            subjects: ["Module A"],
+            entryRequirements: "Diploma required",
+          },
+        ],
+      },
+    },
+    "/en/khoa-hoc-online/wolverhampton"
+  )
+  assert.match(html, />Study modules<\/p>/)
+  assert.match(html, /<strong>Admission criteria<\/strong>/)
+  assert.ok(html.includes("Module A"))
+  assert.ok(html.includes("Diploma required"))
+})

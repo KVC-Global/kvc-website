@@ -202,7 +202,12 @@ export type OnlineProgramCard = {
   subjects?: string[]; entryRequirements?: string;
 };
 
-export type OnlineProgramPrograms = { title?: string; items?: OnlineProgramCard[] };
+export type OnlineProgramPrograms = {
+  title?: string;
+  subjectsLabel?: string;
+  entryRequirementsLabel?: string;
+  items?: OnlineProgramCard[];
+};
 
 export type OnlineProgramSubjectItem = { name?: string; image?: string };
 export type OnlineProgramSubjects = { title?: string; items?: OnlineProgramSubjectItem[] };
