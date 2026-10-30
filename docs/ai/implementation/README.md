@@ -28,6 +28,18 @@ description: Technical implementation notes, patterns, and code guidelines
 - Feature 2: Implementation approach
 - Feature 3: Implementation approach
 
+### Locale switching
+
+- `SiteHeaderActions` uses document navigation for language changes, preserving
+  the current page path and query parameters.
+- `/vi` and `/en` rewrite to the same internal route. Client-side navigation can
+  retain the previous locale's server-rendered content and shared layout.
+  Document navigation loads the requested locale together, without a manual reload.
+- This resets unsaved client state. SPA-only language switching requires
+  locale-specific route segments rather than reusing the same layout.
+- Smoke check: switch VI → EN → VI on the home and contact pages; verify the
+  content, navigation labels, document language, and query parameters after each click.
+
 ### Contact form CMS
 
 - Edit each language under **Contact page → Form section** in Sanity Studio.
