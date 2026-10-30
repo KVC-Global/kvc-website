@@ -116,42 +116,42 @@ const CONTACT_COUNTRIES = [
     name: "Vietnam",
     lat: 10.8231,
     lng: 106.6297,
-    flag: "🇻🇳",
+    flag: "/images/flags/vn.svg",
     offset: [-10, -55],
   },
   {
     name: "Myanmar",
     lat: 16.8409,
     lng: 96.1735,
-    flag: "🇲🇲",
+    flag: "/images/flags/mm.svg",
     offset: [-105, -20],
   },
   {
     name: "Malaysia",
     lat: 3.139,
     lng: 101.6869,
-    flag: "🇲🇾",
+    flag: "/images/flags/my.svg",
     offset: [-62, 18],
   },
   {
     name: "Singapore",
     lat: 1.3521,
     lng: 103.8198,
-    flag: "🇸🇬",
+    flag: "/images/flags/sg.svg",
     offset: [64, -4],
   },
   {
     name: "Philippines",
     lat: 14.5995,
     lng: 120.9842,
-    flag: "🇵🇭",
+    flag: "/images/flags/ph.svg",
     offset: [70, -28],
   },
   {
     name: "Timor-Leste",
     lat: -8.5569,
     lng: 125.5603,
-    flag: "🇹🇱",
+    flag: "/images/flags/tl.svg",
     offset: [66, 28],
   },
 ] as const satisfies ReadonlyArray<GlobeLabel>
@@ -697,9 +697,13 @@ export function ContactPage({ content }: { content?: ContactPageData }) {
                     key={country.name}
                     className="flex items-center gap-2.5 font-heading text-sm font-semibold text-brand-blue"
                   >
-                    <span className="text-lg" aria-hidden="true">
-                      {country.flag}
-                    </span>
+                    <Image
+                      src={country.flag}
+                      alt=""
+                      width={24}
+                      height={18}
+                      className="h-[18px] w-6 shrink-0 rounded-[1px]"
+                    />
                     {country.name}
                   </li>
                 ))}

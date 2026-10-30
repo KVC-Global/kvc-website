@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { useEffect, useRef } from "react"
 import createGlobe, { type COBEOptions } from "cobe"
 import { useMotionValue, useReducedMotion, useSpring } from "motion/react"
@@ -243,9 +244,15 @@ export function Globe({
               style={{ transform: `translate(${offsetX}px, ${offsetY}px)` }}
             >
               <span className="inline-flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 rounded-full border border-brand-blue/10 bg-white/95 px-2.5 py-1 font-heading text-[11px] font-semibold whitespace-nowrap text-brand-blue shadow-sm backdrop-blur-sm sm:text-xs">
-                <span className="text-sm" aria-hidden="true">
-                  {label.flag}
-                </span>
+                {label.flag && (
+                  <Image
+                    src={label.flag}
+                    alt=""
+                    width={16}
+                    height={12}
+                    className="h-3 w-4 shrink-0 rounded-[1px]"
+                  />
+                )}
                 {label.name}
               </span>
             </span>
