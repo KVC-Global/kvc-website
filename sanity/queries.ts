@@ -232,13 +232,13 @@ export const ONLINE_OSSD_PAGE_QUERY = defineQuery(`
     whySection{title, items[]{icon, title, description}},
     structureSection{title, subtitle, items[]{title, description}},
     subjectsSection{
-      title,
+      title, subtitle,
       items[]{
         name,
         "image": coalesce(image.asset->url, select(image._type == "image" => null, image))
       }
     },
-    targetAudienceSection{title, items[]{icon, title, description}},
+    targetAudienceSection{title, subtitle, items[]{icon, title, description}},
     benefitsSection{
       title,
       items[]{
@@ -248,7 +248,7 @@ export const ONLINE_OSSD_PAGE_QUERY = defineQuery(`
     },
     learningFormatsSection{title, items[]{icon, title, description}},
     stepsSection{title, steps[]{title, description}},
-    parentReasonsSection{title, items},
+    parentReasonsSection{title, subtitle, items},
     seo{title, description}
   }
 `)
