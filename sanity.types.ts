@@ -2243,6 +2243,11 @@ export type Post = {
         _type: "image"
         _key: string
       }
+    | {
+        markdown: string
+        _type: "markdownTable"
+        _key: string
+      }
   >
   seo?: SharedSeo
 }
@@ -6161,6 +6166,11 @@ export type BLOG_POST_QUERY_RESULT = {
         crop?: SanityImageCrop
         alt?: string
         _type: "image"
+        _key: string
+      }
+    | {
+        markdown: string
+        _type: "markdownTable"
         _key: string
       }
   > | null
