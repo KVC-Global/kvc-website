@@ -53,7 +53,7 @@ const ptComponents: PortableTextComponents = {
             skipHtml
             components={{
               table: ({ children }) => (
-                <table className="m-0 w-full min-w-lg">{children}</table>
+                <table className="m-0! w-full min-w-lg">{children}</table>
               ),
               th: ({ children, style }) => (
                 <th
