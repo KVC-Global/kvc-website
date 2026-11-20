@@ -15,8 +15,11 @@ import {
   Share2,
   Sparkles,
 } from "lucide-react"
+import Markdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 import {
   PortableText,
+  stegaClean,
   toPlainText,
   type PortableTextBlock,
   type PortableTextComponents,
@@ -37,6 +40,41 @@ type PortableImageValue = {
 
 const ptComponents: PortableTextComponents = {
   types: {
+    markdownTable: ({ value }) =>
+      typeof value.markdown === "string" ? (
+        <div
+          role="region"
+          aria-label="Markdown table"
+          tabIndex={0}
+          className="my-8 overflow-x-auto rounded-xl border border-border"
+        >
+          <Markdown
+            remarkPlugins={[remarkGfm]}
+            skipHtml
+            components={{
+              table: ({ children }) => (
+                <table className="m-0 w-full min-w-lg">{children}</table>
+              ),
+              th: ({ children, style }) => (
+                <th
+                  scope="col"
+                  style={style}
+                  className="bg-brand-blue-mid px-4 py-3 align-top font-bold text-white! [&_a]:text-inherit! [&_strong]:text-inherit!"
+                >
+                  {children}
+                </th>
+              ),
+              td: ({ children, style }) => (
+                <td style={style} className="px-4 py-3 align-top">
+                  {children}
+                </td>
+              ),
+            }}
+          >
+            {stegaClean(value.markdown)}
+          </Markdown>
+        </div>
+      ) : null,
     image: ({ value }) => {
       const image = value as PortableImageValue
       if (!image.asset?._ref) return null
